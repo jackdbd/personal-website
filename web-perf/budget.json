@@ -1,0 +1,161 @@
+[
+    {
+        "path": "/",
+        "resourceCounts": [
+            {
+                "resourceType": "third-party",
+                "budget": 10
+            }
+        ],
+        "resourceSizes": [
+            {
+                "resourceType": "document",
+                "budget": 10
+            },
+            {
+                "resourceType": "stylesheet",
+                "budget": 20
+            },
+            {
+                "resourceType": "font",
+                "budget": 20
+            },
+            {
+                "resourceType": "image",
+                "budget": 50
+            },
+            {
+                "resourceType": "script",
+                "budget": 250
+            },
+            {
+                "resourceType": "total",
+                "budget": 300
+            }
+        ],
+        "timings": [
+            {
+                "metric": "cumulative-layout-shift",
+                "budget": 500
+            },
+            {
+                "metric": "interactive",
+                "budget": 3000
+            },
+            {
+                "metric": "largest-contentful-paint",
+                "budget": 3000
+            },
+            {
+                "metric": "max-potential-fid",
+                "budget": 50
+            }
+        ]
+    },
+    {
+        "path": "/blog",
+        "resourceCounts": [
+            {
+                "resourceType": "third-party",
+                "budget": 10
+            }
+        ],
+        "resourceSizes": [
+            {
+                "resourceType": "document",
+                "budget": 10
+            },
+            {
+                "resourceType": "stylesheet",
+                "budget": 20
+            },
+            {
+                "resourceType": "font",
+                "budget": 20
+            },
+            {
+                "resourceType": "image",
+                "budget": 50
+            },
+            {
+                "resourceType": "script",
+                "budget": 250
+            },
+            {
+                "resourceType": "total",
+                "budget": 300
+            }
+        ],
+        "timings": [
+            {
+                "metric": "cumulative-layout-shift",
+                "budget": 500
+            },
+            {
+                "metric": "interactive",
+                "budget": 3000
+            },
+            {
+                "metric": "largest-contentful-paint",
+                "budget": 3000
+            },
+            {
+                "metric": "max-potential-fid",
+                "budget": 50
+            }
+        ]
+    },
+    {
+        "path": "/projects",
+        "resourceCounts": [
+            {
+                "resourceType": "third-party",
+                "budget": 10
+            }
+        ],
+        "resourceSizes": [
+            {
+                "resourceType": "document",
+                "budget": 10
+            },
+            {
+                "resourceType": "stylesheet",
+                "budget": 20
+            },
+            {
+                "resourceType": "font",
+                "budget": 20
+            },
+            {
+                "resourceType": "image",
+                "budget": 50
+            },
+            {
+                "resourceType": "script",
+                "budget": 250
+            },
+            {
+                "resourceType": "total",
+                "budget": 300
+            }
+        ],
+        "timings": [
+            {
+                "metric": "cumulative-layout-shift",
+                "budget": 500
+            },
+            {
+                "metric": "interactive",
+                "budget": 3000
+            },
+            {
+                "metric": "largest-contentful-paint",
+                "budget": 3000
+            },
+            {
+                "metric": "max-potential-fid",
+                "budget": 50
+            }
+        ]
+    }
+]

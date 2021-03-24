@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": false,
+  "editor.rulers": [80, 120],
+  "files.exclude": {
+    "node_modules/": true
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true,
+  },
+}

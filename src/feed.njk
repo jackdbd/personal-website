@@ -1,0 +1,33 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ metadata.title }}</title>
+  <subtitle>{{ metadata.description }}</subtitle>
+  <link href="{{ metadata.url }}/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="{{ metadata.url }}" rel="alternate" type="text/html"/>
+  {% if collections.post %}
+    <updated>{{ collections.post | rssLastUpdatedDate }}</updated>
+  {% endif %}
+  <id>{{ metadata.url }}/</id>
+  <author>
+    <name>{{ metadata.author.name }}</name>
+    <email>{{ metadata.author.email }}</email>
+  </author>
+  {% for post in collections.post | reverse %}
+    {% set absolutePostUrl %}
+    {{ post.url | url | absoluteUrl(metadata.url) }}
+    {% endset %}
+    <entry>
+      <title>{{ post.data.title }}</title>
+      <link href="{{ absolutePostUrl }}"/>
+      <updated>{{ post.date | rssDate }}</updated>
+      <id>{{ absolutePostUrl }}</id>
+      <content type="html">
+        <![CDATA[{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) | safe }}]]>
+      </content>
+    </entry>
+  {% endfor %}
+</feed>

@@ -1,0 +1,10 @@
+{
+  "layout": "post.njk",
+  "ogp": {
+    "type": "article"
+  },
+  "permalink": "posts/{{ title | slug }}/index.html",
+  "tags": [
+    "post"
+  ]
+}

@@ -1,0 +1,34 @@
+<header class="bg-gray-900 sm:flex sm:justify-between">
+  <div class="flex items-center justify-between px-4 py-3">
+    <div>
+      <a class="uppercase font-bold" href="{{ '/' | url }}">
+      <span class="text-gray-500">{{ metadata.title }}</span>
+    </a>
+    </div>
+    <div class="flex items-center sm:hidden">
+      <button
+      type="button"
+      aria-label="Toggle Navbar"
+      class="text-gray-500 hover:text-white focus:text-white focus:outline-none"
+      onclick="toggleNavbar('navbar-menu', 'open-menu-icon', 'close-menu-icon')">
+        <svg class="h-8 w-8 fill-current" viewBox="0 0 20 20">
+          {# https://github.com/adamwathan/entypo-optimized/tree/master/dist/icons #}
+          <path id="open-menu-icon" d="M16.4 9H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zm0 4H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zM3.6 7h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1z"/>
+          <path id="close-menu-icon" class="hidden" d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <ul id="navbar-menu" class="px-2 pt-2 pb-4 hidden sm:flex">
+    {% set navPages = collections.all | eleventyNavigation %}
+    {% for entry in navPages %}
+      <li class="font-semibold rounded mt-1 px-2 py-1 text-white hover:bg-gray-800">
+        <a
+        class="block"
+        href="{{ entry.url | url }}"{% if entry.url == page.url %} data-current="current item"{% endif %}>
+          {{ entry.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</header>

@@ -1,0 +1,50 @@
+/* CSS that will be inlined in the <head>
+ *
+ * This file should contain only CSS on the critical path, and should not exceed
+ * 1-2 KB once minified.
+ * @see https://www.11ty.dev/docs/quicktips/inline-css/
+ */
+
+@font-face {
+  font-family: 'Lobster';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: local('Lobster-Regular'),
+    url('/assets/fonts/lobster.woff2') format('woff2'),
+    url('/assets/fonts/lobster.woff') format('woff');
+}
+
+/* These CSS variables are referenced also in tailwind.config.js because they
+are used to configure @tailwindcss/typography. */
+:root {
+  /* --font-family-headline: 'Arvo', serif; */
+  /* --font-family-headline: 'Lobster', cursive; */
+  --font-family-headline: 'Nunito', serif;
+  --font-family-body: 'Lato', sans-serif;
+  --font-family-code: 'Source Code Pro', monospace;
+}
+
+.heading-anchor {
+  text-decoration: none !important;
+}
+
+/* https://every-layout.dev/layouts/cluster/ */
+.cluster {
+  --space: 1rem;
+  /* ↓ Suppress horizontal scrolling caused by
+  the negative margin in some circumstances */
+  overflow: hidden;
+}
+
+.cluster > * {
+  display: flex;
+  flex-wrap: wrap;
+  /* ↓ multiply by -1 to negate the halved value */
+  margin: calc(var(--space) / 2 * -1);
+}
+
+.cluster > * > * {
+  /* ↓ half the value, because of the 'doubling up' */
+  margin: calc(var(--space) / 2);
+}

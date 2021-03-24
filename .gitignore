@@ -1,0 +1,19 @@
+# 11ty output directory
+_site/
+
+# dependencies
+node_modules/
+
+# Environment variables
+.envrc
+
+# Local Netlify folder
+.netlify
+
+# Lighthouse and Lighthouse CI web performance reports
+web-perf/lighthouse-report.html
+web-perf/lighthouse-report.json
+.lighthouseci/
+
+# Webhint HTML reports
+hint-report/

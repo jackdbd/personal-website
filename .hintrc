@@ -1,0 +1,6 @@
+{
+  "extends": ["web-recommended"],
+  "hints": {
+    "sri": "warning"
+  }
+}

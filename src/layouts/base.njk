@@ -1,0 +1,19 @@
+<!doctype html>
+<html {% if section %} data-current="{{ section }}"{% endif %} lang="en">
+  {% include "components/head.njk" %}
+  <body class="antialiased site">
+    {% include "components/nav.njk" %}
+    <main class="site-content container mx-auto px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64">
+      {% block content %}
+        {{ content | safe }}
+      {% endblock content %}
+    </main>
+    {% include "components/footer.njk" %}
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/service-worker.js");
+      }
+    </script>
+    <script>{% include "assets/js/instantpage.min.js" %}</script>
+  </body>
+</html>

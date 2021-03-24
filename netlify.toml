@@ -1,0 +1,67 @@
+[build]
+  command = "npm run build"
+  functions = "src/functions"
+  publish = "_site"
+
+[[plugins]]
+package = "netlify-plugin-a11y"
+  [plugins.inputs]
+  checkPaths = [
+    '/',
+    '/blog/',
+    '/projects/',
+    '/about/',
+    '/contact/',
+  ]
+
+[[plugins]]
+package = "netlify-plugin-debug-cache"
+
+[[plugins]]
+package = "netlify-plugin-html-validate"
+  [plugins.inputs]
+    ext = "html"
+    config = ".htmlvalidate.json"
+
+[[plugins]]
+package = "netlify-plugin-is-website-vulnerable"
+
+[context.production]
+  command = "npm run build"
+
+[context.deploy-preview]
+  command = "npm run build"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Permissions-Policy = "geolocation=(), microphone=(), vibrate=()"
+    Referrer-Policy = "no-referrer"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+
+# Some HTTP headers do not make sense to be sent for non-HTML resources, as
+# sending them does not provide any value to users and contributes to header bloat.
+# https://webhint.io/docs/user-guide/hints/hint-no-html-only-headers/
+[[headers]]
+  for = "*.html"
+  [headers.values]
+  Content-Security-Policy = '''
+    default-src 'none';
+    base-uri 'self';
+    connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
+    font-src 'self' *.cloudinary.com;
+    img-src 'self' *.cloudinary.com;
+    manifest-src 'self';
+    media-src 'self' *.cloudinary.com;
+    report-uri https://giacomodebidda.report-uri.com;
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css;
+    frame-ancestors 'none';
+    upgrade-insecure-requests'''
+  X-XSS-Protection = "1; mode=block"
+
+[[redirects]]
+  from = "*"
+  to = "/404"
+  status = 404

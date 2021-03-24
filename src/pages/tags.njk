@@ -1,0 +1,11 @@
+---
+date: 2020-09-01
+permalink: /tags/index.html
+title: Tags
+---
+<section>
+  {% set tags = collections.tagList | sort %}
+  {% include "components/tags.njk" %}
+</section>
+<hr>
+<p class="prose lg:prose-xl">Back to <a href="{{ '/blog/' | url }}">blog</a>.</p>

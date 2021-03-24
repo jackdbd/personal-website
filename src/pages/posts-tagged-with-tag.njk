@@ -1,0 +1,20 @@
+---
+date: 2020-09-01
+eleventyComputed:
+  title: Articles tagged with “{{ tag }}”
+pagination:
+  addAllPagesToCollections: true
+  alias: tag
+  data: collections
+  filter:
+    - all
+    - nav
+    - post
+    - posts
+    - tagList
+  size: 1
+permalink: /tags/{{ tag }}/
+---
+{% set postslist = collections[ tag ] %}
+{% include "components/postslist.njk" %}
+<p class="prose lg:prose-xl">See <a href="{{ '/tags/' | url }}">all tags</a>.</p>

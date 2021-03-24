@@ -1,0 +1,42 @@
+/**
+ * Inject Tailwind's base styles and any base styles registered by plugins.
+ */
+@tailwind base;
+
+/**
+ * Extend Tailwind CSS preflight styles with my custom base styles.
+ * https://tailwindcss.com/docs/preflight#extending-preflight
+ */
+@layer base {
+  /* h1 {
+    @apply text-5xl font-bold text-gray-800;
+  } */
+}
+
+/**
+ * Inject Tailwind's component classes and any component classes registered by
+ * plugins.
+ */
+@tailwind components;
+
+/**
+ * Extend Tailwind CSS components with my custom components.
+ * https://tailwindcss.com/docs/extracting-components
+ */
+@layer components {
+  .site {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .site-content {
+    flex: 1;
+  }
+}
+
+/**
+ * Inject Tailwind's utility classes and any utility classes registered by
+ * plugins.
+ */
+@tailwind utilities;

@@ -1,0 +1,33 @@
+<section>
+  <ol class="postslist">
+  {% for post in postslist | reverse %}
+    <li>
+    <article class="prose sm:prose-sm lg:prose-lg xl:prose-xl"
+      {% if post.url == url %} data-current="current item"{% endif %}
+    >
+      <h2>
+        <a href="{{ post.url | url }}">
+          {% if post.data.title %}
+            {{ post.data.title }}
+          {% else %}
+            Untitled
+          {% endif %}
+        </a>
+      </h2>
+      <p>
+        <small>
+          <time datetime="{{ post.date | machineDateJS }}">{{ post.date | humanDateJS }}</time>
+          <span>|</span>
+          <span>{{ post | readingTime }} reading time</span>
+        </small>
+      </p>
+      {% if post.data.tags %}
+        {% set tags = post.data.tags %}
+        {% include "components/tags.njk" %}
+      {% endif %}
+      <hr>
+    </article>
+    </li>
+  {% endfor %}
+  </ol>
+</section>

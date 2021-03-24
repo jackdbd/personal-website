@@ -1,0 +1,73 @@
+<head>
+  {% set absolutePageUrl %}
+    {{ page.url | url | absoluteUrl(metadata.url) }}
+  {% endset %}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or metadata.description }}">
+  <title>{{ title or metadata.title }}</title>
+
+  <link rel="preconnect" href="https://fonts.google.com/" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.google.com/">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com/">
+
+  {# OGP meta Tags for Facebook #}
+  {# https://ogp.me/ #}
+  {# TODO: think about autogenerating og:image if the blog post has an image.
+     The alternative would be to write ogp.image in the frontmatter manually #}
+  <meta property="og:title" content="{{ title or metadata.title }}">
+  <meta property="og:description" content="{{ description or metadata.description }}">
+  <meta property="og:type" content="{{ ogp.type or metadata.ogp.type }}">
+  <meta property="og:image" content="{{ metadata.profilePic }}" />
+  <meta property="og:url" content="{{ absolutePageUrl }}">
+
+  {# TODO: add images for sharing the content on Twitter #}
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ absolutePageUrl }}">
+  <meta property="twitter:title" content="{{ title or metadata.title }}">
+  <meta property="twitter:description" content="{{ description or metadata.description }}">
+  <meta property="twitter:image" content="{{ metadata.profilePic }}">
+
+  {# Favicons for each device #}
+  <link rel="shortcut icon" href="/assets/img/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/img/favicon/favicon-32x32.png' | url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/img/favicon/favicon-16x16.png' | url }}">
+  <meta name="theme-color" content="#1a1a1a">
+
+  {# Web app manifest for PWA installation #}
+  <link rel="manifest" href="/manifest.webmanifest">
+
+  {# Inline CSS (critical CSS) #}
+  {% set css %}
+    {% include "assets/css/inline.css" %}
+  {% endset %}
+  <style>{{ css | cssmin | safe }}</style>
+
+  {# Non-inlined CSS #}
+  {# I am not sure if can/should preload Google fonts #}
+  <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Nunito:wght@800&family=Source+Code+Pro&display=swap&display=swap" rel="stylesheet">
+
+  {# This stylesheet is render-blocking, but I don't think it's feasible to preload it without causing layout shifts,
+  since it defines the entire website layout #}
+  <link rel="stylesheet" href="/assets/css/style.css?v={% version %}">
+
+  {# Preload Prism.js okaidia theme, so this stylesheet is not render-blocking #}
+  <link rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css"></noscript>
+
+  {# RSS Feed #}
+  <link rel="alternate" href="{{ metadata.url }}/feed.xml" title="{{ metadata.title }}" type="application/atom+xml">
+
+  {# Inline JS #}
+  {% set js %}
+    {% include "assets/js/inline.js" %}
+  {% endset %}
+  <script>{{ js | jsmin | safe }}</script>
+
+  {# Non-inlined JS: use async or defer #}
+</head>

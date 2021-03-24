@@ -1,0 +1,14 @@
+{
+  "extends": ["htmlvalidate:recommended"],
+  "rules": {
+    "attribute-allowed-values": "warn",
+    "attribute-boolean-style": "off",
+    "attribute-empty-style": "off",
+    "element-permitted-content": "off",
+    "element-required-attributes": "off",
+    "no-deprecated-attr": "warn",
+    "no-inline-style": "off",
+    "no-raw-characters": "off",
+    "svg-focusable": "off"
+  }
+}

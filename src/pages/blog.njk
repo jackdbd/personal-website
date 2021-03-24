@@ -1,0 +1,15 @@
+---
+date: 2020-09-01
+description: Giacomo Debidda's blog
+eleventyNavigation:
+  key: Blog
+  order: 0
+ogp:
+  title: Blog
+permalink: /blog/index.html
+section: blog
+title: Blog
+---
+{{ content | safe }}
+{% set postslist = collections.post %}
+{% include "components/postslist.njk" %}
