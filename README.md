@@ -1,5 +1,7 @@
 # My personal website
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0842fe55-a9cb-484a-82d0-6a5c08b62d62/deploy-status)](https://app.netlify.com/sites/epic-benz-a3f006/deploys)
+
 My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Tailwind CSS](https://tailwindcss.com/), hosted on [Netlify](https://www.netlify.com/).
 
 ## Installation
