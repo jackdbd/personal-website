@@ -7,7 +7,7 @@ const markdownItClass = require('@toycode/markdown-it-class');
 const blogTools = require('eleventy-plugin-blog-tools');
 const helmet = require('eleventy-plugin-helmet');
 const navigation = require('@11ty/eleventy-navigation');
-const pwa = require('eleventy-plugin-pwa');
+// const pwa = require('eleventy-plugin-pwa');
 const rss = require('@11ty/eleventy-plugin-rss');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const readingTime = require('eleventy-plugin-reading-time');
@@ -24,7 +24,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(blogTools);
   eleventyConfig.addPlugin(helmet);
   eleventyConfig.addPlugin(navigation);
-  eleventyConfig.addPlugin(pwa);
+  // eleventyConfig.addPlugin(pwa);
   eleventyConfig.addPlugin(readingTime);
   eleventyConfig.addPlugin(rss);
   eleventyConfig.addPlugin(syntaxHighlight);
