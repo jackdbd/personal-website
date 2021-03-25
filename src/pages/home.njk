@@ -5,7 +5,8 @@ section: home
 title: Home
 ---
 <p>This is my personal website. Currently under construction.</p>
-{% set n = 5 %}
+{% set n = 3 %}
 {% set postslist = collections.post | reverse | limit(n) | reverse %}
 <h2>Recent articles</h2>
 {% include "components/postslist.njk" %}
+{% include "components/gallery.njk" %}
