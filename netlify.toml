@@ -53,9 +53,10 @@ package = "netlify-plugin-is-website-vulnerable"
     font-src 'self' fonts.gstatic.com;
     frame-ancestors 'none';
     frame-src https://www.youtube.com/embed/* https://player.vimeo.com/video/*;
-    img-src 'self' *.cloudinary.com;
+    img-src 'self' https://res.cloudinary.com/jackdbd/image/upload/*;
     manifest-src 'self';
     media-src 'self' *.cloudinary.com;
+    prefetch-src 'self';
     report-uri https://giacomodebidda.report-uri.com;
     script-src 'self' 'unsafe-inline';
     style-src 'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css;
