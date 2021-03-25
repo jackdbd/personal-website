@@ -47,17 +47,18 @@ package = "netlify-plugin-is-website-vulnerable"
   for = "*.html"
   [headers.values]
   Content-Security-Policy = '''
-    default-src 'none';
     base-uri 'self';
     connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
-    font-src 'self' *.cloudinary.com;
+    default-src 'none';
+    font-src 'self' fonts.gstatic.com;
+    frame-ancestors 'none';
+    frame-src https://www.youtube.com/embed/* https://player.vimeo.com/video/*;
     img-src 'self' *.cloudinary.com;
     manifest-src 'self';
     media-src 'self' *.cloudinary.com;
     report-uri https://giacomodebidda.report-uri.com;
     script-src 'self' 'unsafe-inline';
     style-src 'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css;
-    frame-ancestors 'none';
     upgrade-insecure-requests'''
   X-XSS-Protection = "1; mode=block"
 

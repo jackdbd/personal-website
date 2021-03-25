@@ -236,3 +236,6 @@ This blog post was fairly short and introductive, but I hope it taught you a cou
 - [Clojure's Solutions to the Expression Problem](https://www.infoq.com/presentations/Clojure-Expression-Problem/)
 - [Solving the expression problem in Clojure](https://max.computer/blog/solving-the-expression-problem-in-clojure/)
 - [Solving the Expression Problem with Clojure 1.2](https://www.ibm.com/developerworks/library/j-clojure-protocols/)
+
+<div style="padding:100% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/502540945" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+<p><a href="https://vimeo.com/502540945">Between two &amp; three - An Exploration About Motion</a> from <a href="https://vimeo.com/user74131126">Hitabarity 3D (Marcel Hita Bar</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
