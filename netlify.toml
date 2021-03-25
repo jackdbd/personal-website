@@ -52,7 +52,7 @@ package = "netlify-plugin-is-website-vulnerable"
     default-src 'none';
     font-src 'self' fonts.gstatic.com;
     frame-ancestors 'none';
-    frame-src https://www.youtube.com/embed/* https://player.vimeo.com/video/*;
+    frame-src https://www.youtube.com/ https://www.youtube.com/embed/* https://player.vimeo.com/video/*;
     img-src 'self' https://res.cloudinary.com/jackdbd/image/upload/*;
     manifest-src 'self';
     media-src 'self' *.cloudinary.com;
