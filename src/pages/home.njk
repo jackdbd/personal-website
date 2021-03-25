@@ -11,6 +11,7 @@ title: Home
 {% include "components/postslist.njk" %}
 
 <form class="contact-form" name="Home data-netlify" data-netlify="true" method="POST" action="/success.html">
+  <input type="hidden" name="form-name" value="Home data-netlify" />
   <div class="flex flex-col bg-gray-600 p-4 rounded-lg">
     <div class="mt-4 mb-2">
       <label class="font-semibold uppercase" for="message0">Message</label>
