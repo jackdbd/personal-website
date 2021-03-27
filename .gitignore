@@ -1,5 +1,6 @@
 # 11ty output directory
-_site/
+_site/*
+!_site/README.md
 
 # dependencies
 node_modules/
