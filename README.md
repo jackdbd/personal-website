@@ -33,13 +33,15 @@ npm install netlify-cli -g
 
 ## Development
 
-Launch [Netlify Dev](https://docs.netlify.com/cli/get-started/#netlify-dev), recompile Nunjucks templates, JS/CSS assets watch workbox configuration, reload the browser and share a live development server with a single command:
+Launch [Netlify Dev](https://docs.netlify.com/cli/get-started/#netlify-dev), recompile Nunjucks templates, JS/CSS assets, watch workbox configuration, reload the browser and share a live development server with a single command:
 
 ```sh
 npm run netlify:dev
 ```
 
-*Note*: with Netlify Dev you can test your Netlify Functions, but I don't think it can handle Netlify Forms submissions (yet).
+*Note 1*: with Netlify Dev you can test your Netlify Functions, but I don't think it can handle Netlify Forms submissions (yet).
+
+*Note 2*: since all npm `dev:*` scripts run in parallel with `npm-run-all`, most likely the first time the service worker is generated you will get this message: `One of the glob patterns doesn't match any files. Please remove or fix...`. This occurs because workbox-cli finished generating the service worker before eleventy (or tailwindcss) had the time to build all the assets. Since this never occurr in production because I explicitly build the service worker *after* eleventy and tailwindcss - and also stop occurring indevelopment whenever I modify the `workbox-config.js` and reload it with chokidar-cli - I don't think it makes sense to worry about it.
 
 ## Production
 
