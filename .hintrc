@@ -1,6 +1,25 @@
 {
   "extends": ["web-recommended"],
   "hints": {
+    // https://webhint.io/docs/user-guide/hints/hint-axe/
+    "axe/aria": "error",
+    "axe/color": "warning",
+    "axe/forms": "error",
+
+    // This website is hosted on Netlify, which sets the caching headers in an
+    // "unconventional way". For instance, Netlify sets the Cache-Control
+    // directives max-age=0 and must-revalidate. By default webhint would signal
+    // such occurrences as errors. Since I know that the site is hosted on
+    // Netlify (and hopefully I know how the Netlify CDN cache works), these
+    // errors would be false positives.
+    // See:
+    // https://www.netlify.com/blog/2015/09/11/instant-cache-invalidation/
+    // https://www.netlify.com/blog/2017/02/23/better-living-through-caching/
+    // https://answers.netlify.com/t/support-guide-making-the-most-of-netlifys-cdn-cache/127
+    // https://webhint.io/docs/user-guide/hints/hint-http-cache/
+    "http-cache": "warning",
+
+    // https://webhint.io/docs/user-guide/hints/hint-sri/
     "sri": "warning"
   }
 }

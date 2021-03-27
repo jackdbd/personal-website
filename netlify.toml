@@ -68,6 +68,9 @@ package = "netlify-plugin-is-website-vulnerable"
     upgrade-insecure-requests'''
   X-XSS-Protection = "1; mode=block"
 
+# TODO: Add Strict-Transport-Security header, eventually. READ THIS FIRST!
+# https://docs.netlify.com/domains-https/https-ssl/#hsts-preload
+
 [[redirects]]
   from = "*"
   to = "/404"
