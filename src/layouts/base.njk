@@ -11,7 +11,7 @@
     {% include "components/footer.njk" %}
     <script>
       if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("/service-worker.js");
+        navigator.serviceWorker.register("/sw.js");
       }
     </script>
     <script>{% include "assets/js/instantpage.min.js" %}</script>
