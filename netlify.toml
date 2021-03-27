@@ -40,15 +40,18 @@ package = "netlify-plugin-is-website-vulnerable"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     X-Content-Type-Options = "nosniff"
 
-# Some HTTP headers do not make sense to be sent for non-HTML resources, as
-# sending them does not provide any value to users and contributes to header bloat.
+# Include Content-Security-Policy header only for HTML resources. It doesn't
+# make sense to include CSP for non-HTML resources, it would just be header bloat.
 # https://webhint.io/docs/user-guide/hints/hint-no-html-only-headers/
+# font-src: allow only fonts hosted on this origin or on Google Fonts
+# frame-src: allow iframes only from YouTube and Vimeo
+# img-src: allow only images hosted on my Cloudinary media library
 [[headers]]
   for = "*.html"
   [headers.values]
   Content-Security-Policy = '''
     base-uri 'self';
-    connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
+    connect-src 'self';
     default-src 'self';
     font-src 'self' fonts.gstatic.com;
     form-action 'self';
@@ -56,7 +59,7 @@ package = "netlify-plugin-is-website-vulnerable"
     frame-src https://www.youtube.com/embed/ https://player.vimeo.com/video/;
     img-src 'self' https://res.cloudinary.com/jackdbd/image/upload/;
     manifest-src 'self';
-    media-src 'self' *.cloudinary.com;
+    media-src 'self' https://res.cloudinary.com/jackdbd/;
     object-src 'none';
     prefetch-src 'self';
     report-uri https://giacomodebidda.report-uri.com;
