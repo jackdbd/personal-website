@@ -46,12 +46,14 @@ package = "netlify-plugin-is-website-vulnerable"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     X-Content-Type-Options = "nosniff"
 
-# Security reporting headers
+# Security headers
 # Permissions-Policy is only partially supported in Chrome https://caniuse.com/?search=Permissions-Policy
 [[headers]]
   for = "/*"
   [headers.values]
     Permissions-Policy = "geolocation=(), microphone=(), vibrate=()"
+    Report-To = "{\"group\":\"default\",\"max_age\":31536000,\"endpoints\":[{\"url\":\"https:\/\/giacomodebidda.report-uri.com\/a\/d\/g\"}],\"include_subdomains\":true}"
+    X-XSS-Protection = "1; mode=block"
 
 # Include Content-Security-Policy header only for HTML resources. It doesn't
 # make sense to include CSP for non-HTML resources, it would be header bloat.
@@ -88,7 +90,6 @@ package = "netlify-plugin-is-website-vulnerable"
     style-src 'self';
     upgrade-insecure-requests;
     worker-src: 'self';'''
-  X-XSS-Protection = "1; mode=block"
 
 [[redirects]]
   from = "*"
