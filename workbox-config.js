@@ -29,34 +29,33 @@ module.exports = {
   runtimeCaching: [
     // Google fonts
     {
-      handler: 'StaleWhileRevalidate',
       urlPattern: /^https?:\/\/fonts\.googleapis\.com/,
-      plugins: [
-        new ExpirationPlugin({
+      handler: 'StaleWhileRevalidate',
+      options: {
+        expiration: {
           maxAgeSeconds: 10 // just for testing
-        })
-      ]
+        }
+      }
     },
     // Google fonts (again)
     {
-      handler: 'StaleWhileRevalidate',
       urlPattern: /^https?:\/\/fonts\.gstatic\.com/,
-      plugins: [
-        new ExpirationPlugin({
+      handler: 'StaleWhileRevalidate',
+      options: {
+        expiration: {
           maxAgeSeconds: 10 // just for testing
-        })
-      ]
+        }
+      }
     },
     // images and media hosted on Cloudinary
     {
-      handler: 'StaleWhileRevalidate',
       urlPattern: /^https?:\/\/res\.cloudinary\.com/,
-      plugins: [
-        new ExpirationPlugin({
-          maxEntries: 20,
+      handler: 'StaleWhileRevalidate',
+      options: {
+        expiration: {
           maxAgeSeconds: 1 * 24 * 60 * 60 // 1 Day
-        })
-      ]
+        }
+      }
     }
   ],
   // skipWaiting: true,
