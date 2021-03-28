@@ -32,6 +32,7 @@ module.exports = {
       urlPattern: /^https?:\/\/fonts\.googleapis\.com/,
       handler: 'StaleWhileRevalidate',
       options: {
+        cacheName: 'fonts',
         expiration: {
           maxAgeSeconds: 10 // just for testing
         }
@@ -42,6 +43,7 @@ module.exports = {
       urlPattern: /^https?:\/\/fonts\.gstatic\.com/,
       handler: 'StaleWhileRevalidate',
       options: {
+        cacheName: 'fonts',
         expiration: {
           maxAgeSeconds: 10 // just for testing
         }
@@ -52,6 +54,7 @@ module.exports = {
       urlPattern: /^https?:\/\/res\.cloudinary\.com/,
       handler: 'StaleWhileRevalidate',
       options: {
+        cacheName: 'images',
         expiration: {
           maxAgeSeconds: 1 * 24 * 60 * 60 // 1 Day
         }
