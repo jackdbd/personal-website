@@ -1,7 +1,10 @@
+const cacheId = 'giacomodebidda.com';
+
 // https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.generateSW
 module.exports = {
-  cacheId: 'giacomodebidda.com',
+  cacheId,
   cleanupOutdatedCaches: true,
+  clientsClaim: true,
   globDirectory: '_site/',
   globPatterns: [
     // precache all the main pages
@@ -30,20 +33,20 @@ module.exports = {
     // Google fonts
     {
       urlPattern: /^https?:\/\/fonts\.googleapis\.com/,
-      handler: 'StaleWhileRevalidate',
-      options: {
-        cacheName: 'fonts',
-        expiration: {
-          maxAgeSeconds: 10 // just for testing
-        }
-      }
+      handler: 'StaleWhileRevalidate'
+      // options: {
+      //   cacheName: `${cacheId}-runtime-fonts`,
+      //   expiration: {
+      //     maxAgeSeconds: 10 // just for testing
+      //   }
+      // }
     },
     // Google fonts (again)
     {
       urlPattern: /^https?:\/\/fonts\.gstatic\.com/,
       handler: 'StaleWhileRevalidate',
       options: {
-        cacheName: 'fonts',
+        cacheName: `${cacheId}-runtime-fonts`,
         expiration: {
           maxAgeSeconds: 10 // just for testing
         }
@@ -54,7 +57,7 @@ module.exports = {
       urlPattern: /^https?:\/\/res\.cloudinary\.com/,
       handler: 'StaleWhileRevalidate',
       options: {
-        cacheName: 'images',
+        cacheName: `${cacheId}-runtime-images`,
         expiration: {
           maxAgeSeconds: 1 * 24 * 60 * 60 // 1 Day
         }
