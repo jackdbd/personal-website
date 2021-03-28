@@ -68,7 +68,7 @@ package = "netlify-plugin-is-website-vulnerable"
 # img-src: allow only images hosted on my Cloudinary media library
 
 # prefetch-src: still not supported by any browser
-https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/prefetch-src
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/prefetch-src
 
 # worker-src: this should be supported by Chrome and Firefox.
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/worker-src
