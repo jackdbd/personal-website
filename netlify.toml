@@ -33,8 +33,11 @@ package = "netlify-plugin-is-website-vulnerable"
   command = "npm run build"
 
 
-# HSTS preload: read here https://docs.netlify.com/domains-https/https-ssl/#hsts-preload
-# then check here https://hstspreload.org/
+# HSTS preload: READ THIS CAREFULLY!
+# here https://docs.netlify.com/domains-https/https-ssl/#hsts-preload
+# https://hstspreload.org/#deployment-recommendations
+# Check preload status:
+# https://hstspreload.org/
 
 [[headers]]
   for = "/*"
