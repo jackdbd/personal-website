@@ -48,7 +48,6 @@ package = "netlify-plugin-is-website-vulnerable"
 [[headers]]
   for = "/*"
   [headers.values]
-    NEL = "{\"report_to\":\"default\",\"max_age\":31536000,\"include_subdomains\":true}"
     Permissions-Policy = "geolocation=(), microphone=(), vibrate=()"
 
 # Include Content-Security-Policy header only for HTML resources. It doesn't
