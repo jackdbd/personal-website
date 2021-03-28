@@ -5,8 +5,8 @@ module.exports = {
   globDirectory: '_site/',
   globPatterns: [
     // precache all the main pages
-    // '{404,index,success}.html',
-    // '{blog,contact,projects,tags}/index.html',
+    '{404,index,success}.html',
+    '{blog,contact,projects,tags}/index.html',
     // precaching all blog posts is probably too much. Maybe precache only the most popular blog posts? Or the most recent ones?
     // '**/posts/*/index.html'
     // precache local JS files
