@@ -18,7 +18,6 @@
 /* These CSS variables are referenced also in tailwind.config.js because they
 are used to configure @tailwindcss/typography. */
 :root {
-  /* --font-family-headline: 'Arvo', serif; */
   /* --font-family-headline: 'Lobster', cursive; */
   --font-family-headline: 'Nunito', serif;
   --font-family-body: 'Lato', sans-serif;

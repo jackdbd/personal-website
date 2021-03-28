@@ -7,19 +7,25 @@
   <meta name="description" content="{{ description or metadata.description }}">
   <title>{{ title or metadata.title }}</title>
 
-  <link rel="preconnect" href="https://fonts.google.com/" crossorigin>
-  <link rel="dns-prefetch" href="https://fonts.google.com/">
+  {# Here I use dns-prefetch to resolve some domain names before resources get
+  requested, and preconnect to establish a connection with those servers. See:
+  https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch#best_practices
+  #}
 
+  {# Google Fonts stylesheets #}
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  {# Google Fonts font files (e.g. woff, woff2) #}
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com/">
-
-  <link rel="preconnect" href="https://res.cloudinary.com/" crossorigin>
-  <link rel="dns-prefetch" href="https://res.cloudinary.com/">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  {# Cloudinary (CDN where I host all my images and media) #}
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+  <link rel="dns-prefetch" href="https://res.cloudinary.com">
 
   {# OGP meta Tags for Facebook #}
   {# https://ogp.me/ #}
   {# TODO: think about autogenerating og:image if the blog post has an image.
-     The alternative would be to write ogp.image in the frontmatter manually #}
+  The alternative would be to write ogp.image in the frontmatter manually. #}
   <meta property="og:title" content="{{ title or metadata.title }}">
   <meta property="og:description" content="{{ description or metadata.description }}">
   <meta property="og:type" content="{{ ogp.type or metadata.ogp.type }}">
@@ -50,8 +56,6 @@
   <style>{{ css | cssmin | safe }}</style>
 
   {# Non-inlined CSS #}
-  {# I am not sure if can/should preload Google fonts #}
-  <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato&family=Nunito:wght@800&family=Source+Code+Pro&display=swap&display=swap" rel="stylesheet" crossorigin>
 
   {# This stylesheet is render-blocking, but I don't think it's feasible to preload it without causing layout shifts,
