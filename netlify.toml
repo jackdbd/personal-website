@@ -32,28 +32,32 @@ package = "netlify-plugin-is-website-vulnerable"
 [context.deploy-preview]
   command = "npm run build"
 
+# ---------------- #
+# Security headers #
+# ---------------- #
+
+# Permissions-Policy is only partially supported in Chrome
+# https://caniuse.com/?search=Permissions-Policy
 
 # HSTS preload: READ THIS CAREFULLY!
-# here https://docs.netlify.com/domains-https/https-ssl/#hsts-preload
+# https://docs.netlify.com/domains-https/https-ssl/#hsts-preload
 # https://hstspreload.org/#deployment-recommendations
-# Check preload status:
+# Check HSTS preload status here:
 # https://hstspreload.org/
 
 [[headers]]
   for = "/*"
   [headers.values]
-    Referrer-Policy = "no-referrer"
+    NEL = {report_to = "default", max_age = 31536000, include_subdomains = true}
+    Permissions-Policy = "geolocation=(), microphone=(), vibrate=()"
+    Referrer-Policy = "no-referrer, strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     X-Content-Type-Options = "nosniff"
-
-# Security headers
-# Permissions-Policy is only partially supported in Chrome https://caniuse.com/?search=Permissions-Policy
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Permissions-Policy = "geolocation=(), microphone=(), vibrate=()"
-    Report-To = "{\"group\":\"default\",\"max_age\":31536000,\"endpoints\":[{\"url\":\"https:\/\/giacomodebidda.report-uri.com\/a\/d\/g\"}],\"include_subdomains\":true}"
     X-XSS-Protection = "1; mode=block"
+
+# ------------------------------------------------ #
+# Content-Security-Policy (it's a security header) #
+# ------------------------------------------------ #
 
 # Include Content-Security-Policy header only for HTML resources. It doesn't
 # make sense to include CSP for non-HTML resources, it would be header bloat.
@@ -63,6 +67,15 @@ package = "netlify-plugin-is-website-vulnerable"
 # frame-src: allow iframes only from YouTube and Vimeo
 # img-src: allow only images hosted on my Cloudinary media library
 
+# prefetch-src: still not supported by any browser
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/prefetch-src
+
+# worker-src: this should be supported by Chrome and Firefox.
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/worker-src
+
+# trusted-types and require-trusted-types-for?
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/trusted-types
+
 # report-uri: send CSP violations to reporting service
 # Note: report-uri is a deprecated CSP directive, but I include it here because
 # Firefox does not yet support the report-to CSP directive, nor the Report-To header.
@@ -71,7 +84,7 @@ package = "netlify-plugin-is-website-vulnerable"
 [[headers]]
   for = "/*.html"
   [headers.values]
-  Content-Security-Policy = '''
+    Content-Security-Policy-Report-Only = '''
     base-uri 'self';
     connect-src 'self';
     default-src 'self';
@@ -89,7 +102,8 @@ package = "netlify-plugin-is-website-vulnerable"
     script-src 'self' 'unsafe-inline';
     style-src 'self';
     upgrade-insecure-requests;
-    worker-src: 'self';'''
+    worker-src: 'self';
+    '''
 
 [[redirects]]
   from = "*"
