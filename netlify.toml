@@ -33,17 +33,24 @@ package = "netlify-plugin-is-website-vulnerable"
   command = "npm run build"
 
 
-# Permissions-Policy is only partially supported in Chrome https://caniuse.com/?search=Permissions-Policy
 # HSTS preload: read here https://docs.netlify.com/domains-https/https-ssl/#hsts-preload
 # then check here https://hstspreload.org/
 
 [[headers]]
   for = "/*"
   [headers.values]
-    Permissions-Policy = "geolocation=(), microphone=(), vibrate=()"
     Referrer-Policy = "no-referrer"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     X-Content-Type-Options = "nosniff"
+
+# Security reporting headers
+# Permissions-Policy is only partially supported in Chrome https://caniuse.com/?search=Permissions-Policy
+[[headers]]
+  for = "/*"
+  [headers.values]
+    NEL = "{\"report_to\":\"default\",\"max_age\":31536000,\"include_subdomains\":true}"
+    Permissions-Policy = "geolocation=(), microphone=(), vibrate=()"
+    Report-To = "{'group':'default','max_age':31536000,'endpoints':[{'url':'https://giacomodebidda.report-uri.com/a/d/g'}],'include_subdomains':true}"
 
 # Include Content-Security-Policy header only for HTML resources. It doesn't
 # make sense to include CSP for non-HTML resources, it would be header bloat.
