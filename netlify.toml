@@ -44,7 +44,6 @@ package = "netlify-plugin-is-website-vulnerable"
     Referrer-Policy = "no-referrer"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     X-Content-Type-Options = "nosniff"
-    Report-To = "{\"group\":\"default\",\"max_age\":31536000,\"endpoints\":[{\"url\":\"https:\/\/giacomodebidda.report-uri.com\/a\/d\/g\"}],\"include_subdomains\":true}"
 
 # Include Content-Security-Policy header only for HTML resources. It doesn't
 # make sense to include CSP for non-HTML resources, it would be header bloat.
@@ -62,6 +61,7 @@ package = "netlify-plugin-is-website-vulnerable"
 [[headers]]
   for = "*.html"
   [headers.values]
+  Report-To = "{'group':'default','max_age':31536000,'endpoints':[{'url':'https:\/\/giacomodebidda.report-uri.com\/a\/d\/g'}],'include_subdomains':true}"
   Content-Security-Policy = '''
     base-uri 'self';
     connect-src 'self';
