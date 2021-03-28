@@ -85,7 +85,8 @@ package = "netlify-plugin-is-website-vulnerable"
     report-uri https://giacomodebidda.report-uri.com;
     script-src 'self' 'unsafe-inline';
     style-src 'self';
-    upgrade-insecure-requests'''
+    upgrade-insecure-requests;
+    worker-src: 'self';'''
   X-XSS-Protection = "1; mode=block"
 
 [[redirects]]
