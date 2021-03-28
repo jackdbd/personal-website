@@ -32,6 +32,11 @@ package = "netlify-plugin-is-website-vulnerable"
 [context.deploy-preview]
   command = "npm run build"
 
+
+# Permissions-Policy is only partially supported in Chrome https://caniuse.com/?search=Permissions-Policy
+# HSTS preload: read here https://docs.netlify.com/domains-https/https-ssl/#hsts-preload
+# then check here https://hstspreload.org/
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -39,13 +44,28 @@ package = "netlify-plugin-is-website-vulnerable"
     Referrer-Policy = "no-referrer"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     X-Content-Type-Options = "nosniff"
+    Report-To = {
+      "group": "default",
+      "max_age": 31536000,
+      "endpoints": [
+        {"url": "https://giacomodebidda.report-uri.com/a/d/g"}
+      ],
+      "include_subdomains":true
+    }
 
 # Include Content-Security-Policy header only for HTML resources. It doesn't
-# make sense to include CSP for non-HTML resources, it would just be header bloat.
+# make sense to include CSP for non-HTML resources, it would be header bloat.
 # https://webhint.io/docs/user-guide/hints/hint-no-html-only-headers/
+
 # font-src: allow only fonts hosted on this origin or on Google Fonts
 # frame-src: allow iframes only from YouTube and Vimeo
 # img-src: allow only images hosted on my Cloudinary media library
+
+# report-uri: send CSP violations to reporting service
+# Note: report-uri is a deprecated CSP directive, but I include it here because
+# Firefox does not yet support the report-to CSP directive, nor the Report-To header.
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri
+# report-to: indicate a groupname that matches one of the groups defined in the Report-To header.
 [[headers]]
   for = "*.html"
   [headers.values]
@@ -62,14 +82,12 @@ package = "netlify-plugin-is-website-vulnerable"
     media-src 'self' https://res.cloudinary.com/jackdbd/;
     object-src 'none';
     prefetch-src 'self';
+    report-to default;
     report-uri https://giacomodebidda.report-uri.com;
     script-src 'self' 'unsafe-inline';
     style-src 'self' 'unsafe-inline' fonts.googleapis.com fonts.gstatic.com https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css;
     upgrade-insecure-requests'''
   X-XSS-Protection = "1; mode=block"
-
-# TODO: Add Strict-Transport-Security header, eventually. READ THIS FIRST!
-# https://docs.netlify.com/domains-https/https-ssl/#hsts-preload
 
 [[redirects]]
   from = "*"
