@@ -3,28 +3,32 @@
   functions = "src/functions"
   publish = "_site"
 
+# ------------- #
+# Build plugins #
+# ------------- #
+
 [[plugins]]
 package = "netlify-plugin-a11y"
   [plugins.inputs]
   checkPaths = [
     '/',
-    '/blog/',
-    '/projects/',
     '/about/',
+    '/blog/',
     '/contact/',
+    '/projects/',
   ]
 
 [[plugins]]
 package = "netlify-plugin-debug-cache"
 
-[[plugins]]
-package = "netlify-plugin-html-validate"
-  [plugins.inputs]
-    ext = "html"
-    config = ".htmlvalidate.json"
+# [[plugins]]
+# package = "netlify-plugin-html-validate"
+#   [plugins.inputs]
+#   ext = "html"
+#   config = ".htmlvalidate.json"
 
-[[plugins]]
-package = "netlify-plugin-is-website-vulnerable"
+# [[plugins]]
+# package = "netlify-plugin-is-website-vulnerable"
 
 [context.production]
   command = "npm run build"
@@ -46,7 +50,7 @@ package = "netlify-plugin-is-website-vulnerable"
 # https://hstspreload.org/
 
 [[headers]]
-  for = "/*"
+  for = "*"
   [headers.values]
     NEL = '{"report_to":"default","max_age":31536000,"include_subdomains":true}'
     Permissions-Policy = "geolocation=(), microphone=(), vibrate=()"
@@ -83,7 +87,7 @@ package = "netlify-plugin-is-website-vulnerable"
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri
 # report-to: indicate a groupname that matches one of the groups defined in the Report-To header.
 [[headers]]
-  for = "/*.html"
+  for = "*.html"
   [headers.values]
     Content-Security-Policy = '''
     base-uri 'self';
