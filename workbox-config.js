@@ -30,17 +30,33 @@ module.exports = {
     // Google fonts
     {
       handler: 'StaleWhileRevalidate',
-      urlPattern: /^https?:\/\/fonts\.googleapis\.com/
+      urlPattern: /^https?:\/\/fonts\.googleapis\.com/,
+      plugins: [
+        new ExpirationPlugin({
+          maxAgeSeconds: 10 // just for testing
+        })
+      ]
     },
     // Google fonts (again)
     {
       handler: 'StaleWhileRevalidate',
-      urlPattern: /^https?:\/\/fonts\.gstatic\.com/
+      urlPattern: /^https?:\/\/fonts\.gstatic\.com/,
+      plugins: [
+        new ExpirationPlugin({
+          maxAgeSeconds: 10 // just for testing
+        })
+      ]
     },
     // images and media hosted on Cloudinary
     {
       handler: 'StaleWhileRevalidate',
-      urlPattern: /^https?:\/\/res\.cloudinary\.com/
+      urlPattern: /^https?:\/\/res\.cloudinary\.com/,
+      plugins: [
+        new ExpirationPlugin({
+          maxEntries: 20,
+          maxAgeSeconds: 1 * 24 * 60 * 60 // 1 Day
+        })
+      ]
     }
   ],
   // skipWaiting: true,
