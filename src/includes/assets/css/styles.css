@@ -1,29 +1,18 @@
-/**
- * Inject Tailwind's base styles and any base styles registered by plugins.
- */
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /**
  * Extend Tailwind CSS preflight styles with my custom base styles.
  * https://tailwindcss.com/docs/preflight#extending-preflight
  */
-@layer base {
-  a {
-    @apply text-yellow-600 underline;
-  }
-}
-
-/**
- * Inject Tailwind's component classes and any component classes registered by
- * plugins.
- */
-@tailwind components;
+ @layer base {}
 
 /**
  * Extend Tailwind CSS components with my custom components.
  * https://tailwindcss.com/docs/extracting-components
  */
-@layer components {
+ @layer components {
   .site {
     display: flex;
     flex-direction: column;
@@ -33,10 +22,12 @@
   .site-content {
     flex: 1;
   }
-}
 
-/**
- * Inject Tailwind's utility classes and any utility classes registered by
- * plugins.
- */
-@tailwind utilities;
+  .fancy-button {
+    @apply bg-gradient-to-r from-green-400 to-blue-500 hover:from-indigo-500 hover:to-yellow-300;
+  }
+
+  .form-button {
+    @apply w-full bg-gray-900 text-white font-semibold uppercase py-2 rounded;
+  }
+}
