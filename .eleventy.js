@@ -7,16 +7,15 @@ const markdownItClass = require('@toycode/markdown-it-class');
 const blogTools = require('eleventy-plugin-blog-tools');
 const helmet = require('eleventy-plugin-helmet');
 const navigation = require('@11ty/eleventy-navigation');
-// const pwa = require('eleventy-plugin-pwa');
 const rss = require('@11ty/eleventy-plugin-rss');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const readingTime = require('eleventy-plugin-reading-time');
 const toc = require('eleventy-plugin-toc');
 
-const collections = require('./utils/collections');
-const filters = require('./utils/filters');
-const shortcodes = require('./utils/shortcodes');
-const transforms = require('./utils/transforms.js');
+const collections = require('./_11ty/collections');
+const filters = require('./_11ty/filters');
+const shortcodes = require('./_11ty/shortcodes');
+const transforms = require('./_11ty/transforms.js');
 
 module.exports = function (eleventyConfig) {
   // --- 11ty plugins ------------------------------------------------------- //
@@ -24,7 +23,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(blogTools);
   eleventyConfig.addPlugin(helmet);
   eleventyConfig.addPlugin(navigation);
-  // eleventyConfig.addPlugin(pwa);
   eleventyConfig.addPlugin(readingTime);
   eleventyConfig.addPlugin(rss);
   eleventyConfig.addPlugin(syntaxHighlight);
