@@ -1,6 +1,9 @@
 ---
 title: Easy terminal multiplexing with Byobu
 date: "2019-03-20"
+ogp:
+  image: https://res.cloudinary.com/jackdbd/image/upload/v1599302017/byobu-screenshot_sbkhm6.png
+  video: "https://youtu.be/NawuGmcvKus"
 tags:
   - CLI
 ---

@@ -5,10 +5,14 @@
 
 const htmlmin = require('html-minifier');
 
+// minify HTML files when in production (environment defined in src/_data/project.js)
 const shouldTransformHTML = (outputPath) =>
-  outputPath && outputPath.endsWith('.html') && process.env.ELEVENTY_PRODUCTION;
+  outputPath &&
+  outputPath.endsWith('.html') &&
+  process.env.ELEVENTY_ENV === 'production';
 
 module.exports = {
+  // https://github.com/kangax/html-minifier#options-quick-reference
   htmlmin: function (content, outputPath) {
     if (shouldTransformHTML(outputPath)) {
       return htmlmin.minify(content, {

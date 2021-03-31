@@ -5,26 +5,22 @@ const markdownItAnchor = require('markdown-it-anchor');
 const markdownItClass = require('@toycode/markdown-it-class');
 
 const blogTools = require('eleventy-plugin-blog-tools');
-const helmet = require('eleventy-plugin-helmet');
 const navigation = require('@11ty/eleventy-navigation');
-// const pwa = require('eleventy-plugin-pwa');
 const rss = require('@11ty/eleventy-plugin-rss');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const readingTime = require('eleventy-plugin-reading-time');
 const toc = require('eleventy-plugin-toc');
 
-const collections = require('./utils/collections');
-const filters = require('./utils/filters');
-const shortcodes = require('./utils/shortcodes');
-const transforms = require('./utils/transforms.js');
+const collections = require('./_11ty/collections');
+const filters = require('./_11ty/filters');
+const shortcodes = require('./_11ty/shortcodes');
+const transforms = require('./_11ty/transforms.js');
 
 module.exports = function (eleventyConfig) {
   // --- 11ty plugins ------------------------------------------------------- //
 
   eleventyConfig.addPlugin(blogTools);
-  eleventyConfig.addPlugin(helmet);
   eleventyConfig.addPlugin(navigation);
-  // eleventyConfig.addPlugin(pwa);
   eleventyConfig.addPlugin(readingTime);
   eleventyConfig.addPlugin(rss);
   eleventyConfig.addPlugin(syntaxHighlight);
@@ -51,8 +47,11 @@ module.exports = function (eleventyConfig) {
   // - JS: all non third-party JS is inlined in the <head>, but that's managed
   //   by a 11ty filter.
   eleventyConfig.addPassthroughCopy({
+    // TODO: use subfont for fonts
     'src/includes/assets/fonts': 'assets/fonts',
-    'src/includes/assets/img': 'assets/img'
+    // TODO: optimize local images
+    'src/includes/assets/img': 'assets/img',
+    'src/includes/assets/js/instantpage.min.js': 'assets/js/instantpage.min.js'
   });
 
   // 11ty shortcodes
@@ -77,17 +76,24 @@ module.exports = function (eleventyConfig) {
 
   // --- markdown-it (markdown parser) configuration ------------------------ //
 
+  // https://markdown-it.github.io/markdown-it/#MarkdownIt.new
+  // TODO: try not to set html: true. It's not safe (XSS). Use markdown-it
+  // plugins instead!
   const md = markdownIt({
     breaks: true,
     html: true,
-    linkify: true
+    linkify: true,
+    typographer: true
   });
+
   md.use(markdownItAnchor, {
     permalink: true,
     permalinkBefore: true,
     permalinkClass: 'heading-anchor',
     permalinkSymbol: '#'
   });
+
+  // https://github.com/HiroshiOkada/markdown-it-class
   md.use(markdownItClass, {
     // ol: ['list-decimal', 'ml-6'],
     // ul: ['list-disc', 'ml-6']

@@ -1,4 +1,4 @@
-# Utils
+# 11ty collections, filters, shortcodes and transforms
 
 This directory contains:
 

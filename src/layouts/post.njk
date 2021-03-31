@@ -3,14 +3,7 @@ layout: base.njk
 section: post
 ---
 {% block content %}
-<article class="prose sm:prose-sm lg:prose-lg xl:prose-xl">
-  {#
-    eleventy-plugin-helmet allows to write tags here (or anywhere in the <body>
-    and move it to the <head> at build time. However, what it does can be also
-    achieved by defining things in the frontmatter, so I'm not sure I really
-    need this plugin.
-  #}
-  {# <meta name="description" content="{{ description }}" data-helmet /> #}
+<article>
   <h1>{{ title }}</h1>
     <small>
       <time datetime="{{ date | machineDate }}">{{ date | humanDate }}</time>

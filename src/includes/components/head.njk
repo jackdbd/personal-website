@@ -26,11 +26,17 @@
   {# https://ogp.me/ #}
   {# TODO: think about autogenerating og:image if the blog post has an image.
   The alternative would be to write ogp.image in the frontmatter manually. #}
+  {# required OGP meta tags #}
   <meta property="og:title" content="{{ title or metadata.title }}">
-  <meta property="og:description" content="{{ description or metadata.description }}">
   <meta property="og:type" content="{{ ogp.type or metadata.ogp.type }}">
-  <meta property="og:image" content="{{ metadata.profilePic }}" />
+  <meta property="og:image" content="{{ ogp.image or metadata.profilePic }}" />
   <meta property="og:url" content="{{ absolutePageUrl }}">
+  {# not required OGP meta tags #}
+  <meta property="og:description" content="{{ description or metadata.description }}">
+  <meta property="og:locale" content="en_US">
+  {% if ogp.video %}
+    <meta property="og:video" content="{{ ogp.video }}">
+  {% endif %}
 
   {# TODO: add images for sharing the content on Twitter #}
   <meta property="twitter:card" content="summary_large_image">
@@ -40,6 +46,7 @@
   <meta property="twitter:image" content="{{ metadata.profilePic }}">
 
   {# Favicons for each device #}
+  {# TODO: minify them! Use a plugin/shortcode to add them #}
   <link rel="shortcut icon" href="/assets/img/favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/img/favicon/favicon-32x32.png' | url }}">
@@ -60,7 +67,12 @@
 
   {# This stylesheet is render-blocking, but I don't think it's feasible to preload it without causing layout shifts,
   since it defines the entire website layout #}
-  <link rel="stylesheet" href="/assets/css/style.css">
+  {# see in src/_data/project.js #}
+  {% if project.environment == "production" %}
+    <link rel="stylesheet" href="/assets/css/style.minified.css">
+  {% else %}
+    <link rel="stylesheet" href="/assets/css/style.css">
+  {% endif %}
 
   {# Preload Prism.js okaidia theme, so this stylesheet is not render-blocking #}
   <link rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -76,4 +88,5 @@
   <script>{{ js | jsmin | safe }}</script>
 
   {# Non-inlined JS: use async or defer #}
+  <script defer src="/assets/js/instantpage.min.js"></script>
 </head>

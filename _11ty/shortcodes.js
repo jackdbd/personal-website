@@ -7,6 +7,12 @@ const version = () => {
   return String(Date.now());
 };
 
+const copyright = (name) => {
+  const startYear = 2020;
+  const stopYear = new Date().toISOString().slice(0, 4);
+  return `Copyright © ${startYear} – ${stopYear} ${name} – All rights reserved`;
+};
+
 const cloudinaryRespImage = (src, alt, width, height, shouldLazyLoad) => {
   const splits = src.split('/');
   let [imgName, imgFormat] = splits[splits.length - 1].split('.');
@@ -49,5 +55,6 @@ const cloudinaryRespImage = (src, alt, width, height, shouldLazyLoad) => {
 
 module.exports = {
   cloudinaryRespImage,
+  copyright,
   version
 };
