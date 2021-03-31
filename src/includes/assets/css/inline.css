@@ -5,7 +5,7 @@
  * @see https://www.11ty.dev/docs/quicktips/inline-css/
  */
 
-@font-face {
+/* @font-face {
   font-family: 'Lobster';
   font-style: normal;
   font-display: swap;
@@ -13,7 +13,7 @@
   src: local('Lobster-Regular'),
     url('/assets/fonts/lobster.woff2') format('woff2'),
     url('/assets/fonts/lobster.woff') format('woff');
-}
+} */
 
 /* These CSS variables are referenced also in tailwind.config.js because they
 are used to configure @tailwindcss/typography. */

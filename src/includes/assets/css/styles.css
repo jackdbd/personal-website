@@ -8,9 +8,9 @@
  * https://tailwindcss.com/docs/preflight#extending-preflight
  */
 @layer base {
-  /* h1 {
-    @apply text-5xl font-bold text-gray-800;
-  } */
+  a {
+    @apply text-yellow-600 underline;
+  }
 }
 
 /**
