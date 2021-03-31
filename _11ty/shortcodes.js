@@ -10,7 +10,7 @@ const version = () => {
 const copyright = (name) => {
   const startYear = 2020;
   const stopYear = new Date().toISOString().slice(0, 4);
-  return `Copyright © ${startYear}-${stopYear} ${name}`;
+  return `Copyright © ${startYear} – ${stopYear} ${name} – All rights reserved`;
 };
 
 const cloudinaryRespImage = (src, alt, width, height, shouldLazyLoad) => {

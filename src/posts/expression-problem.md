@@ -1,6 +1,10 @@
 ---
 title: 3 ways to solve the expression problem
 date: "2020-09-10T12:00:00.000Z"
+ogp:
+  # 320x180 image from Youtube video, generated here: https://y-image.net/
+  image: https://i.ytimg.com/vi/lC39ifspIf4/mqdefault.jpg
+  video: https://youtu.be/lC39ifspIf4
 tags:
   - clojure
   - julia

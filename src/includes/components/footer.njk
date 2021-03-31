@@ -9,14 +9,13 @@
   <div class="container mx-auto px-4">
     
     <div>
-      <h2 class="text-2xl font-bold">Let's keep in touch!</h2>
-      <h3 class="text-xl">Find me on these platforms</h3>
+      <h2 class="text-2xl font-bold">Follow me on:</h2>
       {# Socials style 1 #}
       <ul>
         {% for entry in metadata.socials %}
-          <li class="font-semibold rounded mt-1 px-2 py-1 text-gray-800 hover:text-white">
+          <li class="font-semibold rounded mt-1 px-2 py-1 text-gray-800">
             <a
-              class="block"
+              class="hover:text-white"
               href="{{ entry.url | url }}"
               rel="noopener noreferrer"
               target="_blank" >
@@ -47,7 +46,10 @@
     <hr class="my-6 border-gray-400"/>
     <div class="flex flex-wrap items-center md:justify-between justify-center">
       <div class="px-4 mx-auto text-center">
-        <span class="text-sm text-gray-800 font-semibold py-1">{% copyright metadata.author.name %}</span>
+        <span class="prose text-sm py-1">I built this website with <a href="https://www.11ty.dev/" rel="noopener noreferrer" target="_blank">11ty</a> and <a href="https://tailwindcss.com/" rel="noopener noreferrer" target="_blank">Tailwind CSS</a> — It's hosted on <a href="https://www.netlify.com/" rel="noopener noreferrer" target="_blank">Netlify</a></span>
+      </div>
+      <div class="px-4 mx-auto text-center">
+        <span class="prose text-sm text-gray-800 font-semibold py-1">{% copyright metadata.author.name %}</span>
       </div>
     </div>
 

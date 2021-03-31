@@ -1,13 +1,17 @@
 <!doctype html>
 <html {% if section %} data-current="{{ section }}" {% endif %} lang="en">
   {% include "components/head.njk" %}
-  <body class="antialiased site">
+  <body class="antialiased">
     {% include "components/nav.njk" %}
-    <main class="site-content container mx-auto px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64">
-      {% block content %}
-        {{ content | safe }}
-      {% endblock content %}
-    </main>
+    <div class="sm:px-6 sm:py-12 lg:max-w-4xl lg:py-16 lg:px-8 xl:max-w-6xl">
+      <div>
+        <div class="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto">
+        {% block content %}
+          {{ content | safe }}
+        {% endblock content %}
+        </div>
+      </div>
+    </div>
     {% include "components/footer.njk" %}
     <script>
       if ("serviceWorker" in navigator) {
