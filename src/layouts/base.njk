@@ -1,5 +1,5 @@
 <!doctype html>
-<html {% if section %} data-current="{{ section }}"{% endif %} lang="en">
+<html {% if section %} data-current="{{ section }}" {% endif %} lang="en">
   {% include "components/head.njk" %}
   <body class="antialiased site">
     {% include "components/nav.njk" %}
@@ -14,6 +14,5 @@
         navigator.serviceWorker.register("/sw.js");
       }
     </script>
-    <script>{% include "assets/js/instantpage.min.js" %}</script>
   </body>
 </html>

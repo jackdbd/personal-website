@@ -50,7 +50,8 @@ module.exports = function (eleventyConfig) {
     // TODO: use subfont for fonts
     'src/includes/assets/fonts': 'assets/fonts',
     // TODO: optimize local images
-    'src/includes/assets/img': 'assets/img'
+    'src/includes/assets/img': 'assets/img',
+    'src/includes/assets/js/instantpage.min.js': 'assets/js/instantpage.min.js'
   });
 
   // 11ty shortcodes
