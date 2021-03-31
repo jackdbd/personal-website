@@ -5,7 +5,6 @@ const markdownItAnchor = require('markdown-it-anchor');
 const markdownItClass = require('@toycode/markdown-it-class');
 
 const blogTools = require('eleventy-plugin-blog-tools');
-const helmet = require('eleventy-plugin-helmet');
 const navigation = require('@11ty/eleventy-navigation');
 const rss = require('@11ty/eleventy-plugin-rss');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
@@ -21,7 +20,6 @@ module.exports = function (eleventyConfig) {
   // --- 11ty plugins ------------------------------------------------------- //
 
   eleventyConfig.addPlugin(blogTools);
-  eleventyConfig.addPlugin(helmet);
   eleventyConfig.addPlugin(navigation);
   eleventyConfig.addPlugin(readingTime);
   eleventyConfig.addPlugin(rss);
@@ -49,7 +47,9 @@ module.exports = function (eleventyConfig) {
   // - JS: all non third-party JS is inlined in the <head>, but that's managed
   //   by a 11ty filter.
   eleventyConfig.addPassthroughCopy({
+    // TODO: use subfont for fonts
     'src/includes/assets/fonts': 'assets/fonts',
+    // TODO: optimize local images
     'src/includes/assets/img': 'assets/img'
   });
 
@@ -75,17 +75,24 @@ module.exports = function (eleventyConfig) {
 
   // --- markdown-it (markdown parser) configuration ------------------------ //
 
+  // https://markdown-it.github.io/markdown-it/#MarkdownIt.new
+  // TODO: try not to set html: true. It's not safe (XSS). Use markdown-it
+  // plugins instead!
   const md = markdownIt({
     breaks: true,
     html: true,
-    linkify: true
+    linkify: true,
+    typographer: true
   });
+
   md.use(markdownItAnchor, {
     permalink: true,
     permalinkBefore: true,
     permalinkClass: 'heading-anchor',
     permalinkSymbol: '#'
   });
+
+  // https://github.com/HiroshiOkada/markdown-it-class
   md.use(markdownItClass, {
     // ol: ['list-decimal', 'ml-6'],
     // ul: ['list-disc', 'ml-6']
