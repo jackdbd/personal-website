@@ -1,4 +1,4 @@
-<form class="contact-form" name="Contact" netlify method="POST" data-netlify-honeypot="bot-field" action="/success.html">
+<form class="contact-form" name="Contact" netlify method="POST" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true" action="/success.html">
   <div class="flex flex-col">
     <p class="hidden">
       <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
@@ -12,16 +12,6 @@
         required
         title="Please enter your name"
         type="text">
-    </div>
-    <div class="mt-4">
-      <label for="password">Password</label>
-      <input
-        autocomplete="password"
-        id="password"
-        name="password"
-        required
-        title="Please enter your password"
-        type="password">
     </div>
     <div class="mt-4">
       <label for="email">Email</label>
@@ -56,6 +46,7 @@
       <a href="#"> Terms</a> and <a href="#">Privacy Policy</a>.
       </label>
     </div>
+    <div class="mt-4" data-netlify-recaptcha="true"></div>
     <button
       class="form-button"
       name="submit"
