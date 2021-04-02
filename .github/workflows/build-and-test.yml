@@ -1,12 +1,12 @@
-name: Build project and run Lighthouse CI
+name: Build website and run tests
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 jobs:
-  lhci:
-    name: Lighthouse CI
+  build:
+    name: Build website
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -18,9 +18,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: |
-          npm install && npm install -g @lhci/cli@0.7.x
+        run: npm install
       - name: Build website
         run: npm run build
-      - name: Run Lighthouse CI
-        run: lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
+      - name: Test (TODO)
+        run: npm run test

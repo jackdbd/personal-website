@@ -12,8 +12,8 @@ node_modules/
 .netlify
 
 # Lighthouse and Lighthouse CI web performance reports
-web-perf/lighthouse-report.html
-web-perf/lighthouse-report.json
+lighthouse/reports/*
+!lighthouse/reports/README.md
 .lighthouseci/
 
 # Webhint HTML reports

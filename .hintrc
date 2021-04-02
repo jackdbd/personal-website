@@ -1,10 +1,20 @@
 {
+  // https://webhint.io/docs/user-guide/concepts/hints/#hint-configuration
+
+  // https://webhint.io/docs/user-guide/configurations/configuration-web-recommended/
+  // https://github.com/webhintio/hint/blob/main/packages/configuration-web-recommended/index.json
   "extends": ["web-recommended"],
   "hints": {
-    // https://webhint.io/docs/user-guide/hints/hint-axe/
+    // https://webhint.io/docs/user-guide/hints/hint-axe/#can-the-hint-be-configured
     "axe/aria": "error",
     "axe/color": "warning",
     "axe/forms": "error",
+
+    // https://webhint.io/docs/user-guide/hints/hint-compat-api/css/#can-the-hint-be-configured
+    "compat-api/css": "warning",
+
+    // https://webhint.io/docs/user-guide/hints/hint-compat-api/html/#can-the-hint-be-configured
+    // "compat-api/html": "warning",
 
     // This website is hosted on Netlify, which sets the caching headers in an
     // "unconventional way". For instance, Netlify sets the Cache-Control
@@ -16,10 +26,22 @@
     // https://www.netlify.com/blog/2015/09/11/instant-cache-invalidation/
     // https://www.netlify.com/blog/2017/02/23/better-living-through-caching/
     // https://answers.netlify.com/t/support-guide-making-the-most-of-netlifys-cdn-cache/127
-    // https://webhint.io/docs/user-guide/hints/hint-http-cache/
+    // https://webhint.io/docs/user-guide/hints/hint-http-cache/#can-the-hint-be-configured
     "http-cache": "warning",
 
-    // https://webhint.io/docs/user-guide/hints/hint-sri/
-    "sri": "warning"
+    // https://webhint.io/docs/user-guide/hints/hint-http-compression/#can-the-hint-be-configured
+    "http-compression": "warning",
+
+    // https://webhint.io/docs/user-guide/hints/hint-performance-budget/#can-the-hint-be-configured
+    "performance-budget": ["error", {
+      "connectionType": "3GFast",
+      "loadTime": 5
+    }],
+
+    // https://webhint.io/docs/user-guide/hints/hint-sri/#can-the-hint-be-configured
+    "sri": "warning",
+
+    // https://webhint.io/docs/user-guide/hints/hint-strict-transport-security/#can-the-hint-be-configured
+    "strict-transport-security": "warning"
   }
 }
