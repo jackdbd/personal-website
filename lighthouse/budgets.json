@@ -10,7 +10,7 @@
         "resourceSizes": [
             {
                 "resourceType": "document",
-                "budget": 4
+                "budget": 6
             },
             {
                 "resourceType": "stylesheet",
@@ -130,7 +130,7 @@
             },
             {
                 "metric": "max-potential-fid",
-                "budget": 50
+                "budget": 400
             }
         ]
     },

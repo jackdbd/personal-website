@@ -34,8 +34,9 @@ jobs:
         uses: treosh/lighthouse-ci-action@v7
         with:
           urls: |
-            https://epic-benz-a3f006.netlify.app/
+            ${{ steps.netlify.outputs.url }}/
             ${{ steps.netlify.outputs.url }}/blog/
-          budgetPath: 'lighthouse/budgets.json'
+            ${{ steps.netlify.outputs.url }}/contact/
+          configPath: lighthouserc-mobile.js
           uploadArtifacts: true
           temporaryPublicStorage: true
