@@ -26,7 +26,7 @@ jobs:
         run: npm run test
       - name: Wait for a successfull Deploy Preview on Netlify
         uses: jakepartusch/wait-for-netlify-action@v1
-        id: waitForNetlify
+        id: netlify
         with:
           site_name: 'epic-benz-a3f006'
           max_timeout: 60
@@ -34,8 +34,8 @@ jobs:
         uses: treosh/lighthouse-ci-action@v7
         with:
           urls: |
-            ${{ steps.waitForNetlify.outputs.url }}
-            ${{ steps.waitForNetlify.outputs.url }}/blog/
-          budgetPath: ./lighthouse/budgets.json
+            https://epic-benz-a3f006.netlify.app/
+            ${{ steps.netlify.outputs.url }}/blog/
+          budgetPath: 'lighthouse/budgets.json'
           uploadArtifacts: true
-          temporaryPublicStorage: true  
+          temporaryPublicStorage: true
