@@ -43,7 +43,7 @@
     "lh:projects:desktop": "lighthouse $DOMAIN/projects/ --config-path ./lighthouse/config/desktop.js --budget-path=./lighthouse/budgets/all-desktop.json --output-path=./lighthouse/reports/projects-desktop.html --quiet",
     "lh:projects:mobile": "lighthouse $DOMAIN/projects/ --config-path ./lighthouse/config/mobile.js --budget-path=./lighthouse/budgets/all-mobile.json --output-path=./lighthouse/reports/projects-mobile.html --quiet",
     "lh:reports": "python -m webbrowser lighthouse/reports/",
-    "lhci": "lhci autorun --config lighthouserc-local.js",
+    "lhci": "lhci autorun --config lighthouse/lighthouserc-local.js",
     "netlify:admin": "netlify open --admin",
     "netlify:deploy-preview": "netlify deploy -m 'Deploy from Netlify CLI' --debug --open",
     "netlify:dev": "netlify dev --command 'npm run dev' --live",

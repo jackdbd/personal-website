@@ -1,7 +1,7 @@
-const budget = 'lighthouse/budgets/all-desktop.json';
-const configPath = 'lighthouse/config/desktop.js';
-// const budget = 'lighthouse/budgets/all-mobile.json';
-// const configPath = 'lighthouse/config/mobile.js';
+// const budget = 'lighthouse/budgets/all-desktop.json';
+// const configPath = 'lighthouse/config/desktop.js';
+const budget = 'lighthouse/budgets/all-mobile.json';
+const configPath = 'lighthouse/config/mobile.js';
 
 // https://github.com/GoogleChrome/lighthouse-ci/blob/v0.4.1/docs/configuration.md#assert
 // either use preset + assertions, or budgetsFile (performance budgets)

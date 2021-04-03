@@ -35,7 +35,7 @@ jobs:
         with:
           urls: |
             ${{ steps.netlify.outputs.url }}/contact/
-          configPath: lighthouserc-contact-mobile.js
+          configPath: lighthouse/lighthouserc-contact-mobile.js
           uploadArtifacts: true
           temporaryPublicStorage: true
       - name: Audit contact page with Lighthouse CI (desktop)
@@ -43,7 +43,7 @@ jobs:
         with:
           urls: |
             ${{ steps.netlify.outputs.url }}/contact/
-          configPath: lighthouserc-contact-desktop.js
+          configPath: lighthouse/lighthouserc-contact-desktop.js
           uploadArtifacts: true
           temporaryPublicStorage: true
       - name: Audit home, blog, project page with Lighthouse CI (desktop)
@@ -53,7 +53,7 @@ jobs:
             ${{ steps.netlify.outputs.url }}/
             ${{ steps.netlify.outputs.url }}/blog/
             ${{ steps.netlify.outputs.url }}/projects/
-          configPath: lighthouserc-all-desktop.js
+          configPath: lighthouse/lighthouserc-all-desktop.js
           uploadArtifacts: true
           temporaryPublicStorage: true
 
