@@ -33,6 +33,11 @@ jobs:
           site_name: 'epic-benz-a3f006'
           max_timeout: 60
       - name: Audit URLs using Lighthouse CI (mobile)
-        run: npm run lhci:mobile
-      - name: Audit URLs using Lighthouse CI (desktop)
-        run: npm run lhci:desktop
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          urls: |
+            ${{ steps.netlify.outputs.url }}
+            ${{ steps.netlify.outputs.url }}/blog/
+          budgetPath: ./lighthouse/budgets.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true  
