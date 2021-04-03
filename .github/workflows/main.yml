@@ -31,7 +31,6 @@ jobs:
           site_name: 'epic-benz-a3f006'
           max_timeout: 60
       - name: Audit URLs using Lighthouse CI (mobile)
-        uses: treosh/lighthouse-ci-action@v7
-        with:
-          configPath: ./lighthouserc-mobile.json
-          uploadArtifacts: true
+        run: |
+          npm install -g @lhci/cli
+          npm run lhci
