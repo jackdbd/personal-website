@@ -11,9 +11,9 @@
       },
       "staticDistDir": "./_site",
       "url": [
-          "${{ steps.waitForNetlify.outputs.url }}",
-          "${{ steps.waitForNetlify.outputs.url }}/blog",
-          "${{ steps.waitForNetlify.outputs.url }}/contact"
+          "https://epic-benz-a3f006.netlify.app/",
+          "https://epic-benz-a3f006.netlify.app/blog",
+          "https://epic-benz-a3f006.netlify.app/contact"
         ]
     },
     "upload": {
