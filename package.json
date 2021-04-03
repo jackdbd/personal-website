@@ -45,7 +45,7 @@
     "lhci": "npm run lhci:collect && npm run lhci:assert",
     "lhci:assert": "lhci assert --budgetsFile ./lighthouse/budgets.json",
     "lhci:autorun": "lhci autorun",
-    "lhci:collect": "lhci collect --config .lighthouserc-mobile.js",
+    "lhci:collect": "lhci collect --config lighthouserc-mobile.js",
     "netlify:admin": "netlify open --admin",
     "netlify:deploy-preview": "netlify deploy -m 'Deploy from Netlify CLI' --debug --open",
     "netlify:dev": "netlify dev --command 'npm run dev' --live",
