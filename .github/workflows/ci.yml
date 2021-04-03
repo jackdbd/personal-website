@@ -25,8 +25,11 @@ jobs:
       - name: Build website
         run: npm run build
   analytics:
-    name: Get most popular blog posts from Ackee
-    run: echo "TODO get 3-5 most popular blog posts"
+    name: Build website, run tests, deploy to Netlify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get most popular blog posts from Ackee
+        run: echo "TODO get 3-5 most popular blog posts"
   audit:
     name: Audit deployed website with Lighthouse CI
     needs: [build, analytics]
