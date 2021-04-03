@@ -1,4 +1,4 @@
-name: Build, deploy, audit
+name: CI/CD & audit
 on:
   push:
     branches: [ main ]
@@ -25,16 +25,19 @@ jobs:
       - name: Build website
         run: npm run build
   analytics:
-    name: Build website, run tests, deploy to Netlify
+    name: Fetch analytics from Ackee
     runs-on: ubuntu-latest
     steps:
-      - name: Get most popular blog posts from Ackee
+      - name: Get most popular blog posts
         run: echo "TODO get 3-5 most popular blog posts"
+      - name: Get total visitors
+        run: echo "TODO get total visitors"
   audit:
-    name: Audit deployed website with Lighthouse CI
+    name: Audit website with Lighthouse CI
     needs: [build, analytics]
     env:
       ARTICLE_SLUG: 12-years-of-fires-in-sardinia
+      SITE_NAME: epic-benz-a3f006
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -43,7 +46,7 @@ jobs:
         uses: jakepartusch/wait-for-netlify-action@v1
         id: netlify
         with:
-          site_name: 'epic-benz-a3f006'
+          site_name: ${{ env.SITE_NAME }}
           max_timeout: 60
       - name: Audit contact page with Lighthouse CI (mobile)
         uses: treosh/lighthouse-ci-action@v7
