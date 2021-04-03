@@ -24,6 +24,8 @@ jobs:
         run: npm run build
       - name: Run tests
         run: npm run test
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli
       - name: Wait for a successfull Deploy Preview on Netlify
         uses: jakepartusch/wait-for-netlify-action@v1
         id: waitForNetlify
@@ -31,6 +33,6 @@ jobs:
           site_name: 'epic-benz-a3f006'
           max_timeout: 60
       - name: Audit URLs using Lighthouse CI (mobile)
-        run: |
-          npm install -g @lhci/cli
-          npm run lhci
+        run: npm run lhci:mobile
+      - name: Audit URLs using Lighthouse CI (dektop)
+        run: npm run lhci:desktop
