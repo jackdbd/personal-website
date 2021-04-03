@@ -24,8 +24,6 @@ jobs:
         run: npm run build
       - name: Run tests
         run: npm run test
-      - name: Install Lighthouse CI
-        run: npm install -g @lhci/cli
       - name: Wait for a successfull Deploy Preview on Netlify
         uses: jakepartusch/wait-for-netlify-action@v1
         id: waitForNetlify
@@ -36,8 +34,8 @@ jobs:
         uses: treosh/lighthouse-ci-action@v7
         with:
           urls: |
-            ${{ steps.netlify.outputs.url }}
-            ${{ steps.netlify.outputs.url }}/blog/
+            ${{ steps.waitForNetlify.outputs.url }}
+            ${{ steps.waitForNetlify.outputs.url }}/blog/
           budgetPath: ./lighthouse/budgets.json
           uploadArtifacts: true
           temporaryPublicStorage: true  
