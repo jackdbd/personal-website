@@ -9,7 +9,7 @@ const config = {
       settings: {
         budgetsPath: 'lighthouse/budgets.json',
         configPath: 'lighthouse/config/mobile.js',
-        plugins: ['lighthouse-plugin-field-performance']
+        plugins: []
       }
     }
   }
