@@ -24,17 +24,18 @@ jobs:
         run: npm run test
       - name: Build website
         run: npm run build
+  analytics:
+    name: Get most popular blog posts from Ackee
+    run: echo "TODO get 3-5 most popular blog posts"
   audit:
     name: Audit deployed website with Lighthouse CI
-    needs: build
+    needs: [build, analytics]
+    env:
+      ARTICLE_SLUG: 12-years-of-fires-in-sardinia
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
       - name: Wait for a successfull Deploy Preview on Netlify
         uses: jakepartusch/wait-for-netlify-action@v1
         id: netlify
@@ -63,6 +64,7 @@ jobs:
           urls: |
             ${{ steps.netlify.outputs.url }}/
             ${{ steps.netlify.outputs.url }}/blog/
+            ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
             ${{ steps.netlify.outputs.url }}/projects/
           configPath: lighthouse/lighthouserc-all-desktop.js
           uploadArtifacts: true
