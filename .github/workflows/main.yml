@@ -30,13 +30,30 @@ jobs:
         with:
           site_name: 'epic-benz-a3f006'
           max_timeout: 60
-      - name: Audit URLs using Lighthouse CI (mobile)
+      - name: Audit contact page with Lighthouse CI (mobile)
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          urls: |
+            ${{ steps.netlify.outputs.url }}/contact/
+          configPath: lighthouserc-contact-mobile.js
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+      - name: Audit contact page with Lighthouse CI (desktop)
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          urls: |
+            ${{ steps.netlify.outputs.url }}/contact/
+          configPath: lighthouserc-contact-desktop.js
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+      - name: Audit home, blog, project page with Lighthouse CI (desktop)
         uses: treosh/lighthouse-ci-action@v7
         with:
           urls: |
             ${{ steps.netlify.outputs.url }}/
             ${{ steps.netlify.outputs.url }}/blog/
-            ${{ steps.netlify.outputs.url }}/contact/
-          configPath: lighthouserc-mobile.js
+            ${{ steps.netlify.outputs.url }}/projects/
+          configPath: lighthouserc-all-desktop.js
           uploadArtifacts: true
           temporaryPublicStorage: true
+
