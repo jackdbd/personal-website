@@ -1,0 +1,23 @@
+{
+  "ci": {
+    "assert": {
+      "budgetsFile": "./lighthouse/budgets.json"
+    },
+    "collect": {
+      "numberOfRuns": 1,
+      "settings": {
+        "budgetsPath": "./lighthouse/budgets.json",
+        "configPath": "./lighthouse/config/mobile.js"
+      },
+      "staticDistDir": "./_site",
+      "url": [
+          "${{ steps.waitForNetlify.outputs.url }}",
+          "${{ steps.waitForNetlify.outputs.url }}/blog",
+          "${{ steps.waitForNetlify.outputs.url }}/contact"
+        ]
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}
