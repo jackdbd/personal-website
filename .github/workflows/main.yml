@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 jobs:
   build:
-    name: Build website, deploy to Netlify, audit with Lighthouse
+    name: Build website, run tests, deploy to Netlify
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -14,16 +14,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: npm install
-      - name: Build website
-        run: npm run build
+        run: npm ci
       - name: Run tests
         run: npm run test
+      - name: Build website
+        run: npm run build
+  audit:
+    name: Audit deployed website with Lighthouse CI
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
       - name: Wait for a successfull Deploy Preview on Netlify
         uses: jakepartusch/wait-for-netlify-action@v1
         id: netlify
@@ -56,4 +67,3 @@ jobs:
           configPath: lighthouse/lighthouserc-all-desktop.js
           uploadArtifacts: true
           temporaryPublicStorage: true
-
