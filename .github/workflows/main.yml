@@ -1,0 +1,44 @@
+name: Build, deploy, audit
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    name: Build website, deploy to Netlify, audit with Lighthouse
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: Build website
+        run: npm run build
+      - name: Run tests
+        run: npm run test
+      - name: Wait for a successfull Deploy Preview on Netlify
+        uses: jakepartusch/wait-for-netlify-action@v1
+        id: waitForNetlify
+        with:
+          site_name: 'epic-benz-a3f006'
+          max_timeout: 60
+      - name: Audit URLs using Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          urls: |
+            ${{ steps.waitForNetlify.outputs.url }}
+            ${{ steps.waitForNetlify.outputs.url }}/blog
+            ${{ steps.waitForNetlify.outputs.url }}/contact
+            ${{ steps.waitForNetlify.outputs.url }}/projects
+          budgetPath: ./lighthouse/budgets.json
+          runs: 1
+          temporaryPublicStorage: true
+          uploadArtifacts: true
