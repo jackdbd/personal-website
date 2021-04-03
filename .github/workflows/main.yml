@@ -34,5 +34,5 @@ jobs:
           max_timeout: 60
       - name: Audit URLs using Lighthouse CI (mobile)
         run: npm run lhci:mobile
-      - name: Audit URLs using Lighthouse CI (dektop)
+      - name: Audit URLs using Lighthouse CI (desktop)
         run: npm run lhci:desktop
