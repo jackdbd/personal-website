@@ -1,6 +1,6 @@
 [
     {
-        "path": "/",
+        "path": "/*",
         "resourceCounts": [
             {
                 "resourceType": "third-party",
@@ -14,7 +14,7 @@
             },
             {
                 "resourceType": "stylesheet",
-                "budget": 8
+                "budget": 9
             },
             {
                 "resourceType": "font",
@@ -90,7 +90,7 @@
         ]
     },
     {
-        "path": "/contact",
+        "path": "/contact$",
         "resourceCounts": [
             {
                 "resourceType": "third-party",
@@ -139,7 +139,7 @@
         "resourceCounts": [
             {
                 "resourceType": "third-party",
-                "budget": 5
+                "budget": 6
             }
         ],
         "resourceSizes": [
@@ -194,7 +194,7 @@
             },
             {
                 "resourceType": "stylesheet",
-                "budget": 8
+                "budget": 9
             },
             {
                 "resourceType": "font",
