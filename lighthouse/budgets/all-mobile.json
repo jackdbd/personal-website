@@ -1,10 +1,55 @@
 [
     {
-        "path": "/",
+        "path": "/$",
         "resourceCounts": [
             {
                 "resourceType": "third-party",
-                "budget": 10
+                "budget": 5
+            }
+        ],
+        "resourceSizes": [
+            {
+                "resourceType": "document",
+                "budget": 6
+            },
+            {
+                "resourceType": "stylesheet",
+                "budget": 9
+            },
+            {
+                "resourceType": "font",
+                "budget": 30
+            },
+            {
+                "resourceType": "image",
+                "budget": 0
+            },
+            {
+                "resourceType": "script",
+                "budget": 3
+            }
+        ],
+        "timings": [
+            {
+                "metric": "cumulative-layout-shift",
+                "budget": 500
+            },
+            {
+                "metric": "largest-contentful-paint",
+                "budget": 3000
+            },
+            {
+                "metric": "max-potential-fid",
+                "budget": 750
+            }
+        ]
+    },
+    {
+        "path": "/blog$",
+        "resourceCounts": [
+            {
+                "resourceType": "third-party",
+                "budget": 5
             }
         ],
         "resourceSizes": [
@@ -14,33 +59,25 @@
             },
             {
                 "resourceType": "stylesheet",
-                "budget": 20
+                "budget": 8
             },
             {
                 "resourceType": "font",
-                "budget": 20
+                "budget": 30
             },
             {
                 "resourceType": "image",
-                "budget": 50
+                "budget": 150
             },
             {
                 "resourceType": "script",
-                "budget": 250
-            },
-            {
-                "resourceType": "total",
-                "budget": 300
+                "budget": 3
             }
         ],
         "timings": [
             {
                 "metric": "cumulative-layout-shift",
                 "budget": 500
-            },
-            {
-                "metric": "interactive",
-                "budget": 3000
             },
             {
                 "metric": "largest-contentful-paint",
@@ -53,11 +90,11 @@
         ]
     },
     {
-        "path": "/blog",
+        "path": "/posts/*",
         "resourceCounts": [
             {
                 "resourceType": "third-party",
-                "budget": 10
+                "budget": 6
             }
         ],
         "resourceSizes": [
@@ -67,23 +104,19 @@
             },
             {
                 "resourceType": "stylesheet",
-                "budget": 20
+                "budget": 8
             },
             {
                 "resourceType": "font",
-                "budget": 20
+                "budget": 30
             },
             {
                 "resourceType": "image",
-                "budget": 50
+                "budget": 150
             },
             {
                 "resourceType": "script",
-                "budget": 250
-            },
-            {
-                "resourceType": "total",
-                "budget": 300
+                "budget": 3
             }
         ],
         "timings": [
@@ -92,12 +125,8 @@
                 "budget": 500
             },
             {
-                "metric": "interactive",
-                "budget": 3000
-            },
-            {
                 "metric": "largest-contentful-paint",
-                "budget": 3000
+                "budget": 2500
             },
             {
                 "metric": "max-potential-fid",
@@ -106,11 +135,11 @@
         ]
     },
     {
-        "path": "/projects",
+        "path": "/projects$",
         "resourceCounts": [
             {
                 "resourceType": "third-party",
-                "budget": 10
+                "budget": 5
             }
         ],
         "resourceSizes": [
@@ -120,33 +149,25 @@
             },
             {
                 "resourceType": "stylesheet",
-                "budget": 20
+                "budget": 9
             },
             {
                 "resourceType": "font",
-                "budget": 20
+                "budget": 30
             },
             {
                 "resourceType": "image",
-                "budget": 50
+                "budget": 150
             },
             {
                 "resourceType": "script",
-                "budget": 250
-            },
-            {
-                "resourceType": "total",
-                "budget": 300
+                "budget": 3
             }
         ],
         "timings": [
             {
                 "metric": "cumulative-layout-shift",
                 "budget": 500
-            },
-            {
-                "metric": "interactive",
-                "budget": 3000
             },
             {
                 "metric": "largest-contentful-paint",

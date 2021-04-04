@@ -1,0 +1,77 @@
+name: CI/CD & audit
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    name: Build website, run tests, deploy to Netlify
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm run test
+      - name: Build website
+        run: npm run build
+  analytics:
+    name: Fetch analytics from Ackee
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get most popular blog posts
+        run: echo "TODO get 3-5 most popular blog posts"
+      - name: Get total visitors
+        run: echo "TODO get total visitors"
+  audit:
+    name: Audit website with Lighthouse CI
+    needs: [build, analytics]
+    env:
+      ARTICLE_SLUG: 12-years-of-fires-in-sardinia
+      SITE_NAME: ${{ secrets.SITE_NAME }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Wait for a successfull Deploy Preview on Netlify
+        uses: jakepartusch/wait-for-netlify-action@v1
+        id: netlify
+        with:
+          site_name: ${{ env.SITE_NAME }}
+          max_timeout: 60
+      - name: Audit contact page with Lighthouse CI (mobile)
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          urls: |
+            ${{ steps.netlify.outputs.url }}/contact/
+          configPath: lighthouse/lighthouserc-contact-mobile.js
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+      - name: Audit contact page with Lighthouse CI (desktop)
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          urls: |
+            ${{ steps.netlify.outputs.url }}/contact/
+          configPath: lighthouse/lighthouserc-contact-desktop.js
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+      - name: Audit home, blog, project page with Lighthouse CI (desktop)
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          urls: |
+            ${{ steps.netlify.outputs.url }}/
+            ${{ steps.netlify.outputs.url }}/blog/
+            ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
+            ${{ steps.netlify.outputs.url }}/projects/
+          configPath: lighthouse/lighthouserc-all-desktop.js
+          uploadArtifacts: true
+          temporaryPublicStorage: true
