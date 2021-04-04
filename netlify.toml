@@ -37,6 +37,17 @@ package = "netlify-plugin-is-website-vulnerable"
   command = "npm run build"
 
 # ---------------------------------------------------------------------------- #
+# Cache headers                                                                #
+# ---------------------------------------------------------------------------- #
+
+# Be sure to never store the service worker in any cache (no-store), and clear
+# any existing cache responses (max-age=0)
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    cache-control = "no-store,max-age=0"
+
+# ---------------------------------------------------------------------------- #
 # Security headers                                                             #
 # ---------------------------------------------------------------------------- #
 
