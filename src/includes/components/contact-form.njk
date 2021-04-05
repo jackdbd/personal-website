@@ -3,13 +3,13 @@
     <p class="hidden">
       <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
     </p>
+    {# TODO: decide whether to show placeholders or not #}
     <div class="mt-4">
-      <label for="name">Name</label>
+      <label for="name">Name (optional)</label>
       <input
         autocomplete="name"
         id="name"
         name="name"
-        required
         title="Please enter your name"
         type="text">
     </div>
@@ -24,7 +24,7 @@
         title="The domain portion of the email address is invalid (the portion after the @)."
         type="email">
     </div>
-    <div class="mt-4">
+    {# <div class="mt-4">
       <label for="services">What do you need?</label>
       <select name="services" id="services">
         <option value="mvp">Minimum viable product</option>
@@ -32,7 +32,7 @@
         <option value="automation">Business process automation</option>
         <option value="advice">Brief advice on architecture and/or technologies</option>
       </select>
-    </div>
+    </div> #}
     <div class="mt-4 mb-2">
       <label for="message">Message</label>
       <textarea name="message" id="message" placeholder="Your message here" rows="7" required></textarea>
@@ -47,10 +47,7 @@
       </label>
     </div>
     <div class="mt-4" data-netlify-recaptcha="true"></div>
-    <button
-      class="form-button"
-      name="submit"
-      type="submit">
+    <button name="submit" type="submit">
       Send Message
     </button>
   </div>

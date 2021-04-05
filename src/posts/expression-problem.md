@@ -10,9 +10,7 @@ tags:
   - julia
   - polymorphism
 ---
-<!-- excerpt start -->
 The expression problem—also known as the extensibility problem—is about adding new capabilities to existing code without modifying it.
-<!-- excerpt end -->
 
 The term was coined by Philip Wadler at Bell Labs in the late 90s. As he put it:
 

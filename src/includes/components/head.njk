@@ -1,11 +1,11 @@
 <head>
-  {% set absolutePageUrl %}
-    {{ page.url | url | absoluteUrl(metadata.url) }}
-  {% endset %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{{ description or metadata.description }}">
   <title>{{ title or metadata.title }}</title>
+  {% set absolutePageUrl %}
+    {{ page.url | url | absoluteUrl(metadata.url) }}
+  {% endset %}
 
   {# Here I use dns-prefetch to resolve some domain names before resources get
   requested, and preconnect to establish a connection with those servers. See:
@@ -45,13 +45,14 @@
   <meta property="twitter:description" content="{{ description or metadata.description }}">
   <meta property="twitter:image" content="{{ metadata.profilePic }}">
 
+  <meta name="theme-color" content="#1a1a1a">
+
   {# Favicons for each device #}
   {# TODO: minify them! Use a plugin/shortcode to add them #}
   <link rel="shortcut icon" href="/assets/img/favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/img/favicon/favicon-32x32.png' | url }}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/img/favicon/favicon-16x16.png' | url }}">
-  <meta name="theme-color" content="#1a1a1a">
 
   {# Web app manifest for PWA installation #}
   <link rel="manifest" href="/manifest.webmanifest">

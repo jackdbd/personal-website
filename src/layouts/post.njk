@@ -3,21 +3,20 @@ layout: base.njk
 section: post
 ---
 {% block content %}
-<article>
+<article class="site-prose">
   <h1>{{ title }}</h1>
-    <small>
-      <time datetime="{{ date | machineDate }}">{{ date | humanDate }}</time>
-      <span>|</span>
-      <span>{{ content | readingTime }} reading time</span>
-    </small>
+  <small>
+    <time datetime="{{ date | machineDate }}">{{ date | humanDate }}</time>
+    <span>|</span>
+    <span>{{ content | readingTime }} reading time</span>
+  </small>
   {% if tags %}
-    {% include "components/tags.njk" %}
+  {% include "components/tags.njk" %}
   {% endif %}
   {{ content | safe }}
   {% if tags %}
-    {% include "components/tags.njk" %}
+  {% include "components/tags.njk" %}
   {% endif %}
-  <hr>
-  <p class="prose lg:prose-xl">Back to <a href="{{ '/blog/' | url }}">blog</a>.</p>
 </article>
+{% include "components/back-to-top.njk" %}
 {% endblock content %}

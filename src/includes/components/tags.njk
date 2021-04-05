@@ -3,9 +3,7 @@
     {% for tag in tags %}
       {% if tag != "post" %}
         {% set tagUrl %}/tags/{{ tag }}/{% endset %}
-        <div class="border border-black px-2">
-          <a href="{{ tagUrl | url }}" rel="tag">{{ tag }}</a>
-        </div>
+        {% include "components/tag.njk" %}
       {% endif %}
     {% endfor %}
   </div>

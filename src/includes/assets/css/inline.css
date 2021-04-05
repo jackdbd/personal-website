@@ -5,7 +5,7 @@
  * @see https://www.11ty.dev/docs/quicktips/inline-css/
  */
 
-/* @font-face {
+@font-face {
   font-family: 'Lobster';
   font-style: normal;
   font-display: swap;
@@ -13,37 +13,90 @@
   src: local('Lobster-Regular'),
     url('/assets/fonts/lobster.woff2') format('woff2'),
     url('/assets/fonts/lobster.woff') format('woff');
-} */
+}
 
-/* These CSS variables are referenced also in tailwind.config.js because they
-are used to configure @tailwindcss/typography. */
+/* https://www.happyhues.co/palettes/17 */
 :root {
-  /* --font-family-headline: 'Lobster', cursive; */
-  --font-family-headline: 'Nunito', serif;
-  --font-family-body: 'Lato', sans-serif;
-  --font-family-code: 'Source Code Pro', monospace;
+  --theme-color-background: #fef6e4;
+  --theme-color-button: #f582ae;
+  --theme-color-button-text: #001858;
+  --theme-color-headline: #001858;
+  --theme-color-highlight: #fef6e4;
+  --theme-color-main: #f3d2c1;
+  --theme-color-paragraph: #172c66;
+  --theme-color-secondary: #8bd3dd;
+  --theme-color-stroke: #001858;
+  --theme-color-tertiary: #f582ae;
 }
 
-.heading-anchor {
-  text-decoration: none !important;
+
+@media(prefers-color-scheme: dark) {
+  :root {
+    --theme-color-background: #0f0e17;
+    --theme-color-button: #ff8906;
+    --theme-color-button-text: #fffffe;
+    --theme-color-headline: #fffffe;
+    --theme-color-highlight: #ff8906;
+    --theme-color-main: #fffffe;
+    --theme-color-paragraph: #bebebe;
+    --theme-color-secondary: #f25f4c;
+    --theme-color-stroke: black;
+    --theme-color-tertiary: #e53170;
+  }
 }
 
-/* https://every-layout.dev/layouts/cluster/ */
-.cluster {
-  --space: 1rem;
-  /* ↓ Suppress horizontal scrolling caused by
-  the negative margin in some circumstances */
-  overflow: hidden;
+/* https://www.happyhues.co/palettes/1 */
+[data-theme='teal-purple'] {
+  --theme-color-background: #fffffe;
+  --theme-color-button: #4fc4cf;
+  --theme-color-button-text: #181818;
+  --theme-color-headline: #181818;
+  --theme-color-highlight: #4fc4cf;
+  --theme-color-main: #f2eef5;
+  --theme-color-paragraph: #2e2e2e;
+  --theme-color-secondary: #994ff3;
+  --theme-color-stroke: #181818;
+  --theme-color-tertiary: #fbdd74;
 }
 
-.cluster > * {
-  display: flex;
-  flex-wrap: wrap;
-  /* ↓ multiply by -1 to negate the halved value */
-  margin: calc(var(--space) / 2 * -1);
+/* https://www.happyhues.co/palettes/13 */
+[data-theme='dark'] {
+  --theme-color-background: #0f0e17;
+  --theme-color-button: #ff8906;
+  --theme-color-button-text: #fffffe;
+  --theme-color-headline: #fffffe;
+  --theme-color-highlight: #ff8906;
+  --theme-color-main: #fffffe;
+  --theme-color-paragraph: #bebebe;
+  --theme-color-secondary: #f25f4c;
+  --theme-color-stroke: black;
+  --theme-color-tertiary: #e53170;
 }
 
-.cluster > * > * {
-  /* ↓ half the value, because of the 'doubling up' */
-  margin: calc(var(--space) / 2);
+/* https://www.happyhues.co/palettes/16 */
+[data-theme='choco'] {
+  --theme-color-background: #55423d;
+  --theme-color-button: #ffc0ad;
+  --theme-color-button-text: #271c19;
+  --theme-color-headline: #fffffe;
+  --theme-color-highlight: #e78fb3;
+  --theme-color-main: #fff3ec;
+  --theme-color-paragraph: #fff3ec;
+  --theme-color-secondary: #ff8906;
+  --theme-color-stroke: #140d0b;
+  --theme-color-tertiary: #9656a1;
+}
+
+/* https://www.happyhues.co/palettes/17 */
+[data-theme='default'] {
+  --theme-color-background: #fef6e4;
+  --theme-color-button: #f582ae;
+  --theme-color-button-text: #001858;
+  --theme-color-headline: #001858;
+  --theme-color-highlight: #fef6e4;
+  --theme-color-main: #f3d2c1;
+  --theme-color-paragraph: #172c66;
+  --theme-color-secondary: #8bd3dd;
+  --theme-color-stroke: #001858;
+  --theme-color-tertiary: #f582ae;
 }

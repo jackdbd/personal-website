@@ -6,6 +6,6 @@ title: Home
 ---
 <p>Hi there! I'm Giacomo Debidda, also known as <a href="https://twitter.com/jackdbd" rel="noopener noreferrer" target="_blank">@jackdbd</a> on the Internet.</p>
 {% set n = 3 %}
-{% set postslist = collections.post | reverse | limit(n) | reverse %}
+{% set posts = collections.post | reverse | limit(n) | reverse %}
 <h2>Recent articles</h2>
 {% include "components/postslist.njk" %}

@@ -10,5 +10,5 @@ section: blog
 title: Blog
 ---
 {{ content | safe }}
-{% set postslist = collections.post %}
+{% set posts = collections.post %}
 {% include "components/postslist.njk" %}
