@@ -8,9 +8,7 @@ tags:
   - data visualization
   - geospatial
 ---
-<!-- excerpt start -->
 This summer I was looking for some data visualization challenges and I came across [this cool project](https://mauromelis.gitlab.io/sardinia-on-fire/) by Mauro Melis. Mauro created it for a contest organized by [Open Data Sardegna](http://contest.formez.it/), and the jury found it so cool that he won the first prize in the data visualization category.
-<!-- excerpt end -->
 
 It's basically a [scrollytelling](https://flowingdata.com/tag/scrollytelling/) visualization, a type of visualization popularized - among others - by [The New York Times](https://www.nytimes.com/interactive/2016/12/07/world/asia/rodrigo-duterte-philippines-drugs-killings.html) and the guys at [The Pudding](https://pudding.cool/).
 

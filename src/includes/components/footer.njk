@@ -1,58 +1,22 @@
-<footer class="relative bg-gray-300 pt-8 pb-6">
-
-  {# <div class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20" style="height: 80px; transform: translateZ(0px);">
-    <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-      <polygon class="text-gray-300 fill-current" points="2560 0 2560 100 0 100"></polygon>
-    </svg>
-  </div> #}
-
-  <div class="container mx-auto px-4">
-    
-    <div>
-      <h2 class="text-2xl font-bold">Follow me on:</h2>
-      {# Socials style 1 #}
-      <ul>
-        {% for entry in metadata.socials %}
-          <li class="font-semibold rounded mt-1 px-2 py-1 text-gray-800">
-            <a
-              class="hover:text-white"
-              href="{{ entry.url | url }}"
-              rel="noopener noreferrer"
-              target="_blank" >
-              {{ entry.name }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-      {# Socials style 2 #}
-      {# <ul>
-        {% for entry in metadata.socials %}
-          <li class="inline-block bg-white shadow-lg rounded-full mr-2 mt-2 p-1">
-            <a
-              aria-label="Link to {{ entry.name }}"
-              href="{{ entry.url }}"
-              rel="noopener noreferrer"
-              target="_blank">
-              <svg class="h-10 w-10 fill-current" viewBox="0 0 20 20">
-                <path d="{{ entry.d }}"/>
-              </svg>
-            </a>
-          </li>
-        {% endfor %}
-      </ul> #}
+<footer class="site-footer stack">
+  <ul class="flex justify-center flex-wrap mx-auto">
+    {% for entry in metadata.socials %}
+    <li class="">
+      <a href="{{ entry.url | url }}" rel="noopener noreferrer" target="_blank">
+        {{ entry.name }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  <div class="">
+    <div class="px-2 mx-auto text-center">
+      <span class="text-sm py-1">I built this website with <a href="https://www.11ty.dev/" rel="noopener noreferrer"
+          target="_blank">11ty</a> and <a href="https://tailwindcss.com/" rel="noopener noreferrer"
+          target="_blank">Tailwind CSS</a> — It's hosted on <a href="https://www.netlify.com/" rel="noopener noreferrer"
+          target="_blank">Netlify</a></span>
     </div>
-
-    {# Separator and copyright notice #}
-    <hr class="my-6 border-gray-400"/>
-    <div class="flex flex-wrap items-center md:justify-between justify-center">
-      <div class="px-4 mx-auto text-center">
-        <span class="prose text-sm py-1">I built this website with <a href="https://www.11ty.dev/" rel="noopener noreferrer" target="_blank">11ty</a> and <a href="https://tailwindcss.com/" rel="noopener noreferrer" target="_blank">Tailwind CSS</a> — It's hosted on <a href="https://www.netlify.com/" rel="noopener noreferrer" target="_blank">Netlify</a></span>
-      </div>
-      <div class="px-4 mx-auto text-center">
-        <span class="prose text-sm text-gray-800 font-semibold py-1">{% copyright metadata.author.name %}</span>
-      </div>
+    <div class="px-2 mx-auto text-center">
+      <span class="text-sm font-semibold py-1">{% copyright metadata.author.name %}</span>
     </div>
-
   </div>
-
 </footer>

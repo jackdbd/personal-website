@@ -6,12 +6,10 @@ tags:
   - clojure
   - polymorphism
 ---
-<!-- excerpt start -->
 Polymorphism is a generic concept that means providing many implementations while retaining a single interface.
 
 There are many kinds of polymorphism in computer science. There is static polymorphism, where the implementation is chosen at compile time, and then there is with dynamic polymorphism, where it is chosen at run time.
 This article will only discuss the latter.
-<!-- excerpt end -->
 
 The mechanism used by dynamic polymorphism to select the function/method to invoke at run time is called [dynamic dispatch](https://en.wikipedia.org/wiki/Dynamic_dispatch), or simply dispatch.
 
@@ -180,6 +178,6 @@ When our users try to draw some triangles, here is what they would get:
 
 ## Conclusion
 
-Multimethods allow us to extend a system without modyfying existing code (if we don't have to touch the dispatch function). With their multiple dispatch mechanism, they offer us the highest degree of runtime polymorphism. This article showed only a couple of examples, but if you want to master the subject I recommend Eli Bendersky's series of blog posts [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/tag/multiple-dispatch).
+Multimethods allow us to extend a system without modifying existing code (if we don't have to touch the dispatch function). With their multiple dispatch mechanism, they offer us the highest degree of runtime polymorphism. This article showed only a couple of examples, but if you want to master the subject I recommend Eli Bendersky's series of blog posts [A polyglot's guide to multiple dispatch](https://eli.thegreenplace.net/tag/multiple-dispatch).
 
 The "problem" with multiple dispatch is that we often don't need this flexibility in our code. For most use-case single dispatch is enough. In that case we are better off using another Clojure feature: protocols.

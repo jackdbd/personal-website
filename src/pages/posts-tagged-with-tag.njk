@@ -14,6 +14,6 @@ pagination:
   size: 1
 permalink: /tags/{{ tag }}/
 ---
-{% set postslist = collections[ tag ] %}
+{% set posts = collections[ tag ] %}
 {% include "components/postslist.njk" %}
 <p class="prose lg:prose-xl">See <a href="{{ '/tags/' | url }}">all tags</a>.</p>

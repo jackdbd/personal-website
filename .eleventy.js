@@ -86,6 +86,7 @@ module.exports = function (eleventyConfig) {
     typographer: true
   });
 
+  // https://github.com/valeriangalliat/markdown-it-anchor
   md.use(markdownItAnchor, {
     permalink: true,
     permalinkBefore: true,
@@ -93,11 +94,12 @@ module.exports = function (eleventyConfig) {
     permalinkSymbol: '#'
   });
 
+  // TODO: this plugin doesn't seem to work
   // https://github.com/HiroshiOkada/markdown-it-class
-  md.use(markdownItClass, {
-    // ol: ['list-decimal', 'ml-6'],
-    // ul: ['list-disc', 'ml-6']
-  });
+  // md.use(markdownItClass, {
+  // pre: ['list-decimal', 'ml-6']
+  // ul: ['list-disc', 'ml-6']
+  // });
   eleventyConfig.setLibrary('md', md);
 
   // --- Browsersync configuration ------------------------------------------ //

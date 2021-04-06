@@ -6,9 +6,7 @@ tags:
   - microservices
   - domain-driven design
 ---
-<!-- excerpt start -->
 The first time I've heard about Event Storming was when I watched the excellent talk [Designing event-first microservices](https://www.infoq.com/presentations/microservices-events-first-design/) by Jonas Bonér, creator of the [Akka](https://github.com/akka/akka) project.
-<!-- excerpt end -->
 
 Event Storming is a workshop-based method that you can employ when designing a new system or product. You run this workshop before developing any feature. You gather engineers, domain experts and decision makers, and you make them write post-it notes where they write **domain events**.
 A domain event is something meaningful that **happened** in the domain. The emphasys on happened is because domain events must be expressed with the **past tense**.

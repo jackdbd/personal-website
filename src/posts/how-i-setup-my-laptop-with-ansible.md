@@ -6,11 +6,9 @@ tags:
   - ansible
   - devops
 ---
-<!-- excerpt start -->
 I've recently started using Ansible to configure my laptop. Having a development machine setup with a couple of command is pretty great, but there are still some manual steps I need to take care in the process.
 
 Here is what I do every time I (re)configure my laptop.
-<!-- excerpt end -->
 
 ## Preliminary operations
 

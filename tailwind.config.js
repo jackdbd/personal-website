@@ -1,147 +1,42 @@
-const { red } = require('tailwindcss/colors');
-const colors = require('tailwindcss/colors');
+const twColors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
 
-// https://github.com/tailwindlabs/tailwindcss-typography#customization
-const typography = (theme) => {
-  return {
-    DEFAULT: {
-      css: {
-        color: theme('colors.primary'),
-        a: {
-          color: theme('colors.hyperlink'),
-          'font-weight': 'bold',
-          '&:hover': {
-            'background-color': colors.white,
-            // color: theme('colors[twitter-blue]')
-            color: theme('colors.highlighted')
-          }
-        },
-        // I don't like the default style for inline code done by
-        // @tailwindcss/typography, so I override it.
-        // Note: block of codes are styled by a Prism.js theme.
-        code: {
-          border: `1px solid ${theme('colors.inlineCodeBorder')}`,
-          'border-radius': '.25rem',
-          padding: '2px 4px',
-          margin: '0 2px'
-        },
-        // I don't like the quotations this plugin adds to the inline code
-        'code::after': {
-          content: '""'
-        },
-        'code::before': {
-          content: '""'
-        },
-        // headings do not inherit `color`, so I use currentColor
-        h1: {
-          color: theme('colors.current'),
-          'font-family': 'var(--font-family-headline)',
-          'margin-bottom': '0.15em',
-          'margin-top': '0.75em !important'
-        },
-        h2: {
-          color: theme('colors.current'),
-          'font-family': 'var(--font-family-headline)'
-        },
-        h3: {
-          color: theme('colors.current'),
-          'font-family': 'var(--font-family-headline)'
-        },
-        // try not to use h4, h5 or h6
-        h4: {
-          color: theme('colors.current'),
-          'font-family': 'var(--font-family-headline)'
-        },
-        h5: {
-          color: theme('colors.current'),
-          'font-family': 'var(--font-family-headline)'
-        },
-        h6: {
-          color: theme('colors.current'),
-          'font-family': 'var(--font-family-headline)'
-        },
-        'ol.postslist > li': {
-          'padding-left': 0
-        },
-        'ol.postslist > li::before': {
-          content: "''"
-        },
-        'ol.postslist > li h2': {
-          'margin-bottom': 0
-        },
-        'ol.postslist > li p': {
-          'margin-bottom': 0
-        }
-      }
-    }
-  };
+// theme colors are defined in inline.css
+const colors = {
+  background: 'var(--theme-color-background)',
+  button: 'var(--theme-color-button)',
+  buttonText: 'var(--theme-color-button-text)',
+  headline: 'var(--theme-color-headline)',
+  highlight: 'var(--theme-color-highlight)',
+  hyperlink: twColors.amber[600],
+  main: 'var(--theme-color-main)',
+  paragraph: 'var(--theme-color-paragraph)',
+  secondary: 'var(--theme-color-secondary)',
+  stroke: 'var(--theme-color-stroke)',
+  tertiary: 'var(--theme-color-tertiary)',
+  'twitter-blue': '#1da1f2'
 };
 
-// I know I can override the @tailwindcss/form defaults by extending @layer base,
-// but I can't get it to work. And this override seems much more flexible anyway.
-const patchTailwindFormPlugin = ({ addBase, theme }) => {
-  const borderColor = colors.coolGray[300];
-  const ringColor = theme('colors.secondary');
-  const ring1 = `var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) ${ringColor};`;
-  const ring2 = `var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) ${ringColor};`;
+// perform all @tailwindcss/typography overrides in tailwind.css, not here!
+// https://github.com/tailwindlabs/tailwindcss-typography#customization
+const typography = (theme) => {
+  // console.log('=== SPACING ===', theme('spacing'));
 
-  const inputOverride = {
-    borderColor,
-    borderRadius: theme('borderRadius.lg'),
-    fontSize: theme('fontSize.2xl'),
-    width: '100%',
-    '&:focus': {
-      'border-color': ringColor,
-      boxShadow: ring2
+  return {
+    DEFAULT: {
+      css: {}
     }
   };
-
-  const checkboxOverride = {
-    borderColor,
-    borderRadius: theme('borderRadius.md'),
-    color: theme('colors.highlighted'),
-    '&:focus': {
-      'border-color': ringColor,
-      boxShadow: ring1
-    }
-  };
-
-  const labelOverride = {
-    fontWeight: 600,
-    textTransform: 'uppercase'
-  };
-
-  // reference for selectors
-  // https://github.com/tailwindlabs/tailwindcss-forms/blob/master/src/index.js
-  addBase({
-    "[type='date']": inputOverride,
-    "[type='datetime-local']": inputOverride,
-    "[type='email']": inputOverride,
-    "[type='month']": inputOverride,
-    "[type='number']": inputOverride,
-    "[type='password']": inputOverride,
-    "[type='search']": inputOverride,
-    "[type='tel']": inputOverride,
-    "[type='text']": inputOverride,
-    "[type='time']": inputOverride,
-    "[type='url']": inputOverride,
-    "[type='week']": inputOverride,
-    '[multiple]': inputOverride,
-    select: inputOverride,
-    textarea: inputOverride,
-    "[type='checkbox']": checkboxOverride,
-    "[type='radio']": checkboxOverride,
-    'form label': labelOverride
-  });
 };
 
 module.exports = {
   darkMode: 'class', // false, 'media' or 'class'
+  mode: 'jit',
   plugins: [
+    // see @tailwindcss/forms overrides in tailwind.css
     require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-    plugin(patchTailwindFormPlugin)
+    // see @tailwindcss/typography overrides in tailwind.css
+    require('@tailwindcss/typography')
   ],
   // purge works only when NODE_ENV=production (is this still true with @tailwindcss/jit?)
   // https://github.com/tailwindlabs/tailwindcss/pull/1639
@@ -151,31 +46,32 @@ module.exports = {
     './src/posts/*.md',
     './.eleventy.js'
   ],
+  // https://tailwindcss.com/docs/theme#configuration-reference
   theme: {
     extend: {
       // https://tailwindcss.com/docs/customizing-colors
-      colors: {
-        // blue: colors.lightBlue,
-        current: 'currentColor',
-        // gray: colors.coolGray,
-        // gray: colors.warmGray,
-        highlighted: colors.indigo[700],
-        hyperlink: colors.amber[600],
-        inlineCodeBorder: colors.lime[700],
-        primary: colors.warmGray[700],
-        secondary: colors.red[800],
-        transparent: 'transparent',
-        'twitter-blue': '#1da1f2'
-      },
+      colors,
       screens: {
         '3xl': '1920px'
       },
       typography
     },
+    // Tailwind does not automatically escape font names
     fontFamily: {
+      mono: ['Source Code Pro', 'monospace'],
       sans: ['Lato', 'sans-serif'],
       serif: ['Nunito', 'serif']
+      // this should be the Tailwind default serif stack
+      // serif: [
+      //   'ui-serif',
+      //   'Georgia',
+      //   'Cambria',
+      //   'Times New Roman',
+      //   'Times',
+      //   'serif'
+      // ]
     }
   }
   // it should no longer be necessary to specify `variants` when using @tailwind/jit
+  // https://tailwindcss.com/docs/just-in-time-mode
 };

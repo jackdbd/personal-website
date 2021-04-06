@@ -1,9 +1,11 @@
 <section>
-  <ol class="postslist">
-  {% for post in postslist | reverse %}
-    <li>
-    <article class="prose sm:prose-sm lg:prose-lg xl:prose-xl"
-      {% if post.url == url %} data-current="current item"{% endif %}
+  <ol class="postslist divide-y-2 divide-secondary divide-dashed">
+  {% for post in posts | reverse %}
+    <li class="py-4">
+    <article class="site-prose"
+      {% if post.url == url %}
+        data-current="current item"
+      {% endif %}
     >
       <h2>
         <a href="{{ post.url | url }}">
@@ -25,7 +27,6 @@
         {% set tags = post.data.tags %}
         {% include "components/tags.njk" %}
       {% endif %}
-      <hr>
     </article>
     </li>
   {% endfor %}
