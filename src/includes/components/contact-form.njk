@@ -1,15 +1,15 @@
-<form class="contact-form" name="Contact" netlify method="POST" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true" action="/success.html">
+<form name="Contact" netlify method="POST" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true" action="/success.html">
   <div class="flex flex-col">
     <p class="hidden">
       <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
     </p>
-    {# TODO: decide whether to show placeholders or not #}
     <div class="mt-4">
       <label for="name">Name (optional)</label>
       <input
         autocomplete="name"
         id="name"
         name="name"
+        placeholder="John Smith"
         title="Please enter your name"
         type="text">
     </div>
@@ -20,22 +20,14 @@
         id="email"
         name="email"
         pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$"
+        placeholder="john.smith@example.com"
         required
         title="The domain portion of the email address is invalid (the portion after the @)."
         type="email">
     </div>
-    {# <div class="mt-4">
-      <label for="services">What do you need?</label>
-      <select name="services" id="services">
-        <option value="mvp">Minimum viable product</option>
-        <option value="complete-solution">Complete solution</option>
-        <option value="automation">Business process automation</option>
-        <option value="advice">Brief advice on architecture and/or technologies</option>
-      </select>
-    </div> #}
     <div class="mt-4 mb-2">
       <label for="message">Message</label>
-      <textarea name="message" id="message" placeholder="Your message here" rows="7" required></textarea>
+      <textarea name="message" id="message" placeholder="Your message here…" rows="7" required></textarea>
     </div>
     <div class="flex items-center">
       <input

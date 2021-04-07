@@ -3,7 +3,7 @@
     {% for tag in tags %}
       {% if tag != "post" %}
         {% set tagUrl %}/tags/{{ tag }}/{% endset %}
-        {% include "components/tag.njk" %}
+        {% include "components/pill.njk" %}
       {% endif %}
     {% endfor %}
   </div>

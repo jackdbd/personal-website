@@ -27,6 +27,7 @@ const machineDateJS = (dateObj) => {
 };
 
 // Minify CSS (used for inlined CSS. Non-inlined CSS is managed by PostCSS)
+// TODO: replace with cssnano (it's already used in the postcss pipeline for Tailwind CSS)
 const cssmin = (code) => {
   return new CleanCSS({
     compatibility: '*',

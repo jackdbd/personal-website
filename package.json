@@ -17,7 +17,7 @@
     "prebuild": "npm run clean",
     "build": "npm-run-all --parallel build:* --serial build-sw",
     "build:11ty": "ELEVENTY_ENV=production eleventy",
-    "build:css": "NODE_ENV=production postcss src/includes/assets/css/tailwind.css -o _site/assets/css/style.css --verbose && node minify-css.js",
+    "build:css": "NODE_ENV=production postcss src/includes/assets/css/tailwind.css -o _site/assets/css/style.css --verbose",
     "build-sw": "workbox generateSW workbox-config.js",
     "postbuild": "ls --size --human-readable _site/ | head -n 1",
     "clean": "find _site/* -not -name 'README.md' -delete",
@@ -81,6 +81,7 @@
     "autoprefixer": "10.2.5",
     "chokidar-cli": "2.1.0",
     "clean-css": "5.1.2",
+    "cssnano": "^4.1.11",
     "eleventy-plugin-blog-tools": "0.3.1",
     "eleventy-plugin-reading-time": "0.0.1",
     "eleventy-plugin-toc": "1.1.0",
@@ -96,7 +97,7 @@
     "postcss": "8.2.9",
     "postcss-cli": "8.3.1",
     "prettier": "2.2.1",
-    "tailwindcss": "2.1.1",
+    "tailwindcss": "^2.1.1",
     "uglify-es": "3.3.9",
     "workbox-cli": "6.1.2"
   }

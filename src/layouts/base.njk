@@ -3,11 +3,13 @@
 {% include "components/head.njk" %}
 
 <body>
-  <div class="stack">
-    {% include "components/nav.njk" %}
-    {% block content %}
-    {{ content | safe }}
-    {% endblock content %}
+  <div id="wrapper-for-sticky-footer">
+    {% include "components/header.njk" %}
+    <main class="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl px-2 mx-auto">
+      {% block content %}
+      {{ content | safe }}
+      {% endblock content %}
+    </main>
     {% include "components/footer.njk" %}
   </div>
   <script>

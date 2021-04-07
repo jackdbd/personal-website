@@ -5,9 +5,7 @@
     "christian-kohler.npm-intellisense",
     "davidanson.vscode-markdownlint",
     "eg2.vscode-npm-script",
-    "okitavera.vscode-nunjucks-formatter",
     "pflannery.vscode-versionlens",
-    "pranaygp.vscode-css-peek",
     "webhint.vscode-webhint"
   ]
 }

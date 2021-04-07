@@ -2,8 +2,6 @@
 layout: base.njk
 ---
 {% block content %}
-<main class="site-prose">
-  <h1>{{ title }}</h1>
-  {{ content | safe }}
-</main>
+<h1>{{ title }}</h1>
+{{ content | safe }}
 {% endblock content %}

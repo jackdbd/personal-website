@@ -1,14 +1,14 @@
 <section>
   <ol class="postslist divide-y-2 divide-secondary divide-dashed">
   {% for post in posts | reverse %}
-    <li class="py-4">
-    <article class="site-prose"
+    <li class="py-4 !pl-0">
+    <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl px-2 mx-auto"
       {% if post.url == url %}
         data-current="current item"
       {% endif %}
     >
-      <h2>
-        <a href="{{ post.url | url }}">
+      <h2 class="focus-within:fancy-outline">
+        <a class="!no-underline !text-headline focus:outline-none" href="{{ post.url | url }}">
           {% if post.data.title %}
             {{ post.data.title }}
           {% else %}

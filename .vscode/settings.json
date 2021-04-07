@@ -1,9 +1,11 @@
 {
+  "css.validate": false,
   "editor.formatOnSave": false,
   "editor.rulers": [80, 120],
   "files.exclude": {
     "node_modules/": true
   },
+  "tailwindCSS.emmetCompletions": true,
   "[javascript]": {
     "editor.formatOnSave": true,
   },

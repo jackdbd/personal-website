@@ -3,7 +3,7 @@ layout: base.njk
 section: post
 ---
 {% block content %}
-<article class="site-prose">
+<article>
   <h1>{{ title }}</h1>
   <small>
     <time datetime="{{ date | machineDate }}">{{ date | humanDate }}</time>
@@ -11,11 +11,11 @@ section: post
     <span>{{ content | readingTime }} reading time</span>
   </small>
   {% if tags %}
-  {% include "components/tags.njk" %}
+    {% include "components/tags.njk" %}
   {% endif %}
   {{ content | safe }}
   {% if tags %}
-  {% include "components/tags.njk" %}
+    {% include "components/tags.njk" %}
   {% endif %}
 </article>
 {% include "components/back-to-top.njk" %}
