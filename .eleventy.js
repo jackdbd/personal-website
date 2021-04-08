@@ -16,7 +16,17 @@ const filters = require('./_11ty/filters');
 const shortcodes = require('./_11ty/shortcodes');
 const transforms = require('./_11ty/transforms.js');
 
+const buildSW = require('./build-sw');
+
 module.exports = function (eleventyConfig) {
+  eleventyConfig.on('beforeBuild', () => {
+    console.log('beforeBuild HOOK - TODO: maybe run linters & formatters here');
+  });
+
+  eleventyConfig.on('afterBuild', () => {
+    buildSW();
+  });
+
   // --- 11ty plugins ------------------------------------------------------- //
 
   eleventyConfig.addPlugin(blogTools);

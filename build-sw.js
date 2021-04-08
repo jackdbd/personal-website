@@ -1,7 +1,9 @@
-const cacheId = 'giacomodebidda.com';
+const { generateSW } = require('workbox-build');
 
-// https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.generateSW
-module.exports = {
+const cacheId = 'giacomodebidda.com';
+const swDest = '_site/sw.js';
+
+const workboxConfig = {
   cacheId,
   cleanupOutdatedCaches: true,
   clientsClaim: true,
@@ -64,7 +66,27 @@ module.exports = {
       }
     }
   ],
+
+  // TODO: read this and comment
+  // https://stackoverflow.com/questions/49482680/workbox-the-danger-of-self-skipwaiting
   // skipWaiting: true,
+
+  // always ship the source map, in production too. Here is why.
+  // https://m.signalvnoise.com/paying-tribute-to-the-web-with-view-source/
   sourcemap: true,
-  swDest: '_site/sw.js'
+  swDest
 };
+
+const buildSW = () => {
+  // https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.generateSW
+  generateSW(workboxConfig).then((value) => {
+    const { count, filePaths, size, warnings } = value;
+    console.log(
+      `Generated ${swDest}, which will precache ${count} files, totaling ${size} bytes.`
+    );
+    console.log(`Generated ${filePaths.length} files`, filePaths);
+    console.warn('warnings', warnings);
+  });
+};
+
+module.exports = buildSW;

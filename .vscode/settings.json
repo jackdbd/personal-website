@@ -8,5 +8,5 @@
   "tailwindCSS.emmetCompletions": true,
   "[javascript]": {
     "editor.formatOnSave": true,
-  },
+  }
 }
