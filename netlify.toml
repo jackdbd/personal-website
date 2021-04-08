@@ -103,7 +103,7 @@ package = "netlify-plugin-is-website-vulnerable"
 # allow only font files hosted on this origin (self-hosted) or on Google Fonts.
 
 # frame-src
-# allow iframes from YouTube, Vimeo, and Google (for the reCAPTCHA).
+# allow iframes from YouTube, Vimeo.
 
 # img-src
 # allow images hosted on this origin or on my Cloudinary media library.
@@ -138,20 +138,18 @@ package = "netlify-plugin-is-website-vulnerable"
     Content-Security-Policy = '''
     base-uri 'self';
     connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://res.cloudinary.com;
-    default-src 'self';
+    default-src 'none';
     font-src 'self' https://fonts.gstatic.com;
     form-action 'self';
     frame-ancestors 'none';
-    frame-src https://www.youtube.com/embed/ https://player.vimeo.com/video/ https://www.google.com/;
+    frame-src https://www.youtube.com/embed/ https://player.vimeo.com/video/;
     img-src 'self' https://res.cloudinary.com/jackdbd/image/upload/;
     manifest-src 'self';
     media-src 'self' https://res.cloudinary.com/jackdbd/image/upload/;
     object-src 'none';
-    prefetch-src 'self';
     report-to default;
     report-uri https://giacomodebidda.report-uri.com;
-    script-src 'self' 'unsafe-inline';
-    script-src-elem 'self' 'unsafe-inline' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/releases/;
+    script-src 'self';
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css;
     upgrade-insecure-requests;
     worker-src 'self';
