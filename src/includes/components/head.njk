@@ -7,6 +7,13 @@
     {{ page.url | url | absoluteUrl(metadata.url) }}
   {% endset %}
 
+  {# TODO: how to get the base URL? The website base URL is dynamic, because the
+  website could be running locally (either with eleventy --serve or netlify dev),
+  or it could be deployed on netlify (either with a deploy preview or a with a
+  production deploy). If I use <base> with a wrong URL all requests are
+  considered cross-origin, so the browser refuse both sw.js and the webmanifest. #}
+  {# <base href="{{ project.domain }}">  #}
+
   {# Here I use dns-prefetch to resolve some domain names before resources get
   requested, and preconnect to establish a connection with those servers. See:
   https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch#best_practices
