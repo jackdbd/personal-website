@@ -42,12 +42,6 @@ const shadowSm = {
     'var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)'
 };
 
-// https://tailwindcss.com/docs/font-size#class-reference
-const text2xl = {
-  'font-size': '1.5rem',
-  'line-height': '2rem'
-};
-
 // Use this plugin after all others
 const baseOverridesPlugin = plugin(function ({ addBase, theme }) {
   const twFormOverride = (selector) => {
@@ -55,10 +49,8 @@ const baseOverridesPlugin = plugin(function ({ addBase, theme }) {
       [selector]: {
         '--tw-ring-color': theme('colors.tertiary'),
         'border-color': theme('colors.tertiary'),
-        width: '100%',
         'border-radius': theme('borderRadius.lg'),
-        ...shadowSm,
-        ...text2xl
+        ...shadowSm
       },
       [`${selector}:focus`]: {
         '--tw-ring-color': theme('colors.secondary'),
@@ -114,7 +106,9 @@ const baseOverridesPlugin = plugin(function ({ addBase, theme }) {
       'border-radius': theme('borderRadius.lg'),
       color: theme('colors.buttonText'),
       'font-weight': theme('fontWeight.semibold'),
-      padding: theme('padding.2'),
+      padding: `${theme('padding.2')} ${theme('padding.3')}`
+    },
+    'form button[type="submit"]': {
       'text-transform': 'uppercase'
     },
     'form button:focus': {
@@ -124,9 +118,6 @@ const baseOverridesPlugin = plugin(function ({ addBase, theme }) {
     },
     'form button:hover': {
       ...ring4
-    },
-    'form label': {
-      'font-weight': theme('fontWeight.semibold')
     }
   };
 
@@ -149,6 +140,9 @@ const baseOverridesPlugin = plugin(function ({ addBase, theme }) {
     ...twFormOverride('textarea'),
     ...twFormCheckboxOverride("[type='checkbox']"),
     ...twFormCheckboxOverride("[type='radio']"),
+    'form label': {
+      'font-weight': theme('fontWeight.semibold')
+    },
     ...formButtonOverrides
   });
 });

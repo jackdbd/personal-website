@@ -19,4 +19,12 @@ section: post
   {% endif %}
 </article>
 {% include "components/back-to-top.njk" %}
+
+{# CSS assets that will be injected in <head> with eleventy-plugin-helmet #}
+{# Preload Prism.js okaidia theme, so this stylesheet is not render-blocking #}
+<link data-helmet rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript data-helmet><link rel="stylesheet" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" crossorigin></noscript>
+
+{# JS assets that will be injected in <head> with eleventy-plugin-helmet #}
+<script defer src="/assets/js/scroll.js" data-helmet></script>
 {% endblock content %}

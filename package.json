@@ -14,7 +14,7 @@
     "workbox"
   ],
   "scripts": {
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean && node prebuild.js",
     "build": "npm-run-all --parallel build:*",
     "build:11ty": "ELEVENTY_ENV=production eleventy",
     "build:css": "NODE_ENV=production postcss src/includes/assets/css/tailwind.css -o _site/assets/css/style.css --verbose",
@@ -46,7 +46,7 @@
     "netlify:admin": "netlify open --admin",
     "netlify:deploy-preview": "netlify deploy -m 'Deploy from Netlify CLI' --debug --open",
     "netlify:dev": "netlify dev --command 'npm run dev' --live",
-    "predev": "npm run clean",
+    "predev": "npm run clean && node prebuild.js",
     "dev": "npm-run-all --parallel dev:*",
     "dev:11ty": "ELEVENTY_ENV=development eleventy --serve --quiet",
     "dev:css": "NODE_ENV=development postcss src/includes/assets/css/tailwind.css -o _site/assets/css/style.css --watch --verbose",
@@ -79,9 +79,13 @@
     "autoprefixer": "10.2.5",
     "clean-css": "5.1.2",
     "cssnano": "^4.1.11",
-    "eleventy-plugin-blog-tools": "0.3.1",
+    "eleventy-plugin-embed-twitter": "^1.3.0",
+    "eleventy-plugin-emoji": "^1.1.0",
+    "eleventy-plugin-helmet": "^0.2.2",
     "eleventy-plugin-reading-time": "0.0.1",
     "eleventy-plugin-toc": "1.1.0",
+    "eleventy-plugin-vimeo-embed": "^1.3.0",
+    "eleventy-plugin-youtube-embed": "^1.5.0",
     "hint": "6.1.3",
     "html-minifier": "4.0.0",
     "lighthouse": "7.3.0",
@@ -96,6 +100,7 @@
     "prettier": "2.2.1",
     "tailwindcss": "^2.1.1",
     "uglify-es": "3.3.9",
+    "uuid": "^3.3.2",
     "workbox-build": "^6.1.2"
   }
 }

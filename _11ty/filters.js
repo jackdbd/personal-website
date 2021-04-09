@@ -17,6 +17,10 @@ const humanDateJS = (dateObj) => {
   return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('dd LLL yyyy');
 };
 
+const limit = (array, n) => {
+  return array.slice(0, n);
+};
+
 // Date formatting (machine readable)
 const machineDate = (isoString) => {
   return DateTime.fromISO(isoString, { zone: 'utc' }).toFormat('yyyy-MM-dd');
@@ -54,6 +58,7 @@ const jsmin = (code) => {
 module.exports = {
   humanDate,
   humanDateJS,
+  limit,
   machineDate,
   machineDateJS,
   cssmin,

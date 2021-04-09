@@ -12,7 +12,7 @@
   or it could be deployed on netlify (either with a deploy preview or a with a
   production deploy). If I use <base> with a wrong URL all requests are
   considered cross-origin, so the browser refuse both sw.js and the webmanifest. #}
-  {# <base href="{{ project.domain }}">  #}
+  {# <base href="{{ env.domain }}">  #}
 
   {# Here I use dns-prefetch to resolve some domain names before resources get
   requested, and preconnect to establish a connection with those servers. See:
@@ -68,7 +68,7 @@
   {% set css %}
     {% include "assets/css/inline.css" %}
   {% endset %}
-  <style>{{ css | cssmin | safe }}</style>
+  <style nonce="{{ env.nonce_inline_css }}">{{ css | cssmin | safe }}</style>
 
   {# Non-inlined CSS #}
   <link href="https://fonts.googleapis.com/css2?family=Lato&family=Nunito:wght@800&family=Source+Code+Pro&display=swap&display=swap" rel="stylesheet" crossorigin>
@@ -88,7 +88,7 @@
   {% set js %}
     {% include "assets/js/inline.js" %}
   {% endset %}
-  <script>{{ js | jsmin | safe }}</script>
+  <script nonce="{{ env.nonce_inline_js }}">{{ js | jsmin | safe }}</script>
 
   {# Non-inlined JS: use async or defer #}
   <script defer src="/assets/js/instantpage.min.js"></script>
