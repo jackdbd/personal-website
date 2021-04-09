@@ -161,8 +161,8 @@ package = "netlify-plugin-is-website-vulnerable"
     object-src 'none';
     report-to default;
     report-uri https://giacomodebidda.report-uri.com;
-    script-src 'self' 'NONCE_INLINE_JS';
-    style-src 'self' 'NONCE_INLINE_CSS' https://fonts.googleapis.com https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css;
+    script-src 'self' 'nonce-NONCE_INLINE_JS';
+    style-src 'self' 'nonce-NONCE_INLINE_CSS' https://fonts.googleapis.com https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css;
     upgrade-insecure-requests;
     worker-src 'self';
     '''
