@@ -12,7 +12,7 @@
     </main>
     {% include "components/footer.njk" %}
   </div>
-  <script>
+  <script nonce="{{ env.nonce_sw }}">
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js");
     }

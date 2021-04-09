@@ -77,10 +77,6 @@
   since it defines the entire website layout #}
   <link rel="stylesheet" href="/assets/css/style.css">
 
-  {# Preload Prism.js okaidia theme, so this stylesheet is not render-blocking #}
-  <link rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" crossorigin></noscript>
-
   {# RSS Feed #}
   <link rel="alternate" href="{{ metadata.url }}/feed.xml" title="{{ metadata.title }}" type="application/atom+xml">
 

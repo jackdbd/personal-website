@@ -162,8 +162,10 @@ package = "netlify-plugin-is-website-vulnerable"
     object-src 'none';
     report-to default;
     report-uri https://giacomodebidda.report-uri.com;
-    script-src 'self' 'nonce-8deb3422-dff1-491c-bb9e-4443e7d5b2ef';
-    style-src 'self' 'nonce-ff4f1b11-0dec-4261-9425-f9711ccf816d' https://fonts.googleapis.com https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css;
+    script-src 'self' 'nonce-da3d88c5-a7fa-48c5-8512-3cf323cc14f0';
+    script-src-attr 'self' 'unsafe-inline';
+    script-src-elem 'nonce-cf87fe94-daaa-4eda-b2aa-ac2ccc039691';
+    style-src 'self' 'nonce-674ca2f5-12c5-4ef8-aacc-6815f3feb9cb' https://fonts.googleapis.com https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css;
     upgrade-insecure-requests;
     worker-src 'self';
     '''
