@@ -72,7 +72,7 @@ package = "netlify-plugin-is-website-vulnerable"
   for = "*"
   [headers.values]
     NEL = '{"report_to":"default","max_age":31536000,"include_subdomains":true}'
-    Permissions-Policy = "geolocation=(), microphone=(), vibrate=()"
+    Permissions-Policy = "geolocation=(), microphone=()"
     Referrer-Policy = "no-referrer, strict-origin-when-cross-origin"
     Report-To = '''
     {
