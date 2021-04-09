@@ -19,13 +19,6 @@ lighthouse/reports/*
 # Webhint HTML reports
 hint-report/
 
-# I am generating nonces for my inline CSS and JS, so I can avoid 'unsafe inline'
-# in the script-src and style-src directives of my Content-Security-Policy. As
-# far as I know, the only way to have dynamic values in the netlify.toml is to
-# use placeholders and replace them at build time. That's why I keep a
-# netlify.template.toml file and generate the netlify.toml from it.
-# netlify.toml
-
 # My head.njk component require some dynamic values that are generated with my
 # prepush.js script. That's why I generate the src/_data/env.js at build time.
 src/_data/env.js

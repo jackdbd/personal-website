@@ -14,7 +14,7 @@
     "workbox"
   ],
   "scripts": {
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean && node prebuild.js",
     "build": "npm-run-all --parallel build:*",
     "build:11ty": "ELEVENTY_ENV=production eleventy",
     "build:css": "NODE_ENV=production postcss src/includes/assets/css/tailwind.css -o _site/assets/css/style.css --verbose",
@@ -54,7 +54,6 @@
     "ncuu": "ncu --doctor --upgrade",
     "netlify:dev": "netlify dev --command 'npm run dev' --live",
     "prepare": "husky install",
-    "prepush": "node prepush.js",
     "test": "echo TODO tests with puppeteer, playwright, taiko, or cypress",
     "versions": "eleventy --version && postcss --version && tailwindcss --version && netlify --version",
     "webhint:blog": "hint $DOMAIN/blog/",
