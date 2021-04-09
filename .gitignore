@@ -27,7 +27,5 @@ hint-report/
 netlify.toml
 
 # My head.njk component require some dynamic values that are generated with my
-# prebuild.js script. That's why I generate the src/_data/env.js at build time.
-# I tried to use the 11ty beforeBuild hook but it didn't work.
-# https://www.11ty.dev/docs/data-js/#example-exposing-environment-variables
+# prepush.js script. That's why I generate the src/_data/env.js at build time.
 src/_data/env.js

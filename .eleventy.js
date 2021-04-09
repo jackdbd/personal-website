@@ -24,11 +24,6 @@ const transforms = require('./_11ty/transforms.js');
 const buildSW = require('./build-sw');
 
 module.exports = function (eleventyConfig) {
-  // I need to generate nonces and inject them in src/_data/env.js
-  // Unfortunately Eleventy seems to read that file before my variables are set,
-  // so this beforeBuild event fires too late for me. That's why I created a
-  // env.template.js file, run my prebuild.js script and generate the env.js
-  // file before anything else.
   eleventyConfig.on('beforeBuild', () => {});
 
   eleventyConfig.on('afterBuild', () => {
