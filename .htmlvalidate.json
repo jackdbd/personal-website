@@ -9,6 +9,7 @@
     "no-deprecated-attr": "warn",
     "no-inline-style": "off",
     "no-raw-characters": "off",
-    "svg-focusable": "off"
+    "svg-focusable": "off",
+    "wcag/h30": "warn"
   }
 }
