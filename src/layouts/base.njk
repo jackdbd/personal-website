@@ -12,11 +12,10 @@
     </main>
     {% include "components/footer.njk" %}
   </div>
-  <script nonce="{{ env.nonce_sw }}">
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js");
-    }
-  </script>
+  {% set js %}
+    {% include "assets/js/sw_registration.js" %}
+  {% endset %}
+  <script integrity="{{ env.sha_sw_registration_js }}">{{ js | safe | jsmin }}</script>
 </body>
 
 </html>

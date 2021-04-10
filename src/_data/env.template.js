@@ -3,7 +3,7 @@ module.exports = {
   // 11ty transforms, shortcodes, filters, and collections.
   domain: process.env.DOMAIN,
   environment: process.env.ELEVENTY_ENV,
-  nonce_inline_css: 'INLINE_CSS',
-  nonce_inline_js: 'INLINE_JS',
-  nonce_sw: 'SW_REGISTRATION'
+  sha_inline_css: 'INLINE_CSS',
+  sha_inline_js: 'INLINE_JS',
+  sha_sw_registration_js: 'SW_REGISTRATION_JS'
 };

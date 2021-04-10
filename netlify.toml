@@ -90,6 +90,8 @@ package = "netlify-plugin-is-website-vulnerable"
 
 # ---------------------------------------------------------------------------- #
 # Content-Security-Policy (it's a security header)                             #
+# The CSP for this website is generated automatically at build time.           #
+# See prebuild.js                                                              #
 # ---------------------------------------------------------------------------- #
 
 # The Content-Security-Policy header should only be sent for HTML resources, but
@@ -97,78 +99,10 @@ package = "netlify-plugin-is-website-vulnerable"
 # redirect DOMAIN/blog to DOMAIN/blog/index.html ?)
 # https://webhint.io/docs/user-guide/hints/hint-no-html-only-headers/
 
-# connect-src
-# I need to download web fonts from Google Fonts, and images from Cloudinary
-
-# default-src
-# I would like to use default-src: 'none', but prefetch-src is currently not
-# supported in any browser, so I have no choice. I cannot use default-src: 'none'
-# because it would prevent prefetching resources from this origin (which I am
-# doing with instant.page.js).
-# https://caniuse.com/?search=prefetch-src
-
-# font-src
-# allow only font files hosted on this origin (self-hosted) or on Google Fonts.
-
-# frame-src
-# allow iframes from YouTube, Vimeo.
-
-# img-src
-# allow images hosted on this origin or on my Cloudinary media library.
-
-# prefetch-src
-# still not supported by any browser
-# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/prefetch-src
-
-# trusted-types and require-trusted-types-for?
-# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/trusted-types
-
-# report-uri
-# send CSP violations to reporting service
-# Note: report-uri is a deprecated CSP directive, but I include it here because
-# Firefox does not yet support the report-to CSP directive, nor the Report-To header.
-# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri
-# report-to: indicate a groupname that matches one of the groups defined in the Report-To header.
-
-# script-src, style-src
-# This website has some CSS and JS inlined in the <head> for performance reasons
-# (critical CSS and JS). The CSP allows inline scripts and stylesheets only when
-# either 'unsafe-inline', a SHA or a nonce are used. It's better to avoid
-# 'unsafe-inline' altogether, so I generate all nonces and write the netlify.toml
-# at build time. That's why the lines with the CSP directives that have a nonce
-# will change at every commit.
-# https://docs.netlify.com/configure-builds/file-based-configuration/#inject-environment-variable-values
-# https://content-security-policy.com/nonce/
-# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#unsafe_inline_script
-
-# worker-src
-# this should be supported by Chrome and Firefox.
-# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/worker-src
-
 [[headers]]
   for = "*"
   [headers.values]
-    Content-Security-Policy = '''
-    base-uri 'self';
-    connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://res.cloudinary.com;
-    default-src 'self';
-    font-src 'self' https://fonts.gstatic.com;
-    form-action 'self';
-    frame-ancestors 'none';
-    frame-src https://www.youtube.com/embed/ https://player.vimeo.com/video/;
-    img-src 'self' https://res.cloudinary.com/jackdbd/image/upload/;
-    manifest-src 'self';
-    media-src 'self' https://res.cloudinary.com/jackdbd/image/upload/;
-    object-src 'none';
-    report-to default;
-    report-uri https://giacomodebidda.report-uri.com;
-    script-src 'self';
-    script-src-attr 'self' 'unsafe-inline';
-    script-src-elem 'self' 'nonce-2fd78924-360e-4fee-be97-69e450063dd7' 'nonce-65358503-c5ed-4942-bd15-3d55b30fdbf3';
-    style-src 'self' 'nonce-60f67300-adc3-4d11-9ce3-71d194a8a903' https://fonts.googleapis.com https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css;
-    upgrade-insecure-requests;
-    worker-src 'self';
-    '''
+    Content-Security-Policy = "base-uri 'self'; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://res.cloudinary.com; default-src 'self'; font-src 'self' https://fonts.gstatic.com; form-action 'self'; frame-ancestors 'none'; frame-src https://www.youtube.com/embed/ https://player.vimeo.com/video/; img-src 'self' https://res.cloudinary.com/jackdbd/image/upload/; manifest-src 'self'; media-src 'self https://res.cloudinary.com/jackdbd/image/upload/; object-src 'none'; report-to default; report-uri 'https://giacomodebidda.report-uri.com'; script-src 'self'; script-src-attr 'self' 'unsafe-inline'; script-src-elem 'self' 'sha256-b08187c49334e57292e58f4f5a0eedf1e9a895a415e68eb479d29a364dfa491c' 'sha256-72c1843740cd30a868123132fc3b2b6fe6d84eb8d952ed80d3fb71148922520a'; style-src 'self' 'sha256-69ce753f5fb8cf39c6c09e90baa98b4673fad787a206b947256b8ea1bc69539d' https://fonts.googleapis.com https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css; upgrade-insecure-requests; worker-src 'self'"
 
 # ---------------------------------------------------------------------------- #
 # Redirects                                                                    #
