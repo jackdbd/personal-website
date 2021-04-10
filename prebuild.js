@@ -81,8 +81,8 @@ const makeCsp = (assets) => {
   // Report-To header.
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri
 
-  // script-src-attr: 'none'
-  // Disallow inline event handlers (even for this origin)
+  // script-src-attr
+  // Allow inline event handlers only for this origin.
 
   // script-src-elem, style-src
   // This website has some CSS inlined in the <head> for performance reasons
@@ -121,7 +121,7 @@ const makeCsp = (assets) => {
       'object-src': ["'none'"],
       'report-to': 'default',
       'report-uri': reportUri,
-      'script-src-attr': ["'none'"],
+      'script-src-attr': ["'self'"],
       'script-src-elem': ["'self'", ...allowedScriptElements],
       'style-src': [
         "'self'",
