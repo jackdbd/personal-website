@@ -96,10 +96,6 @@ const makeCsp = (shasMap) => {
   // write the netlify.toml at build time.
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#unsafe_inline_script
 
-  // worker-src
-  // this should be supported by Chrome and Firefox.
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/worker-src
-
   return cspBuilder({
     directives: {
       'base-uri': ["'self'"],
@@ -120,14 +116,14 @@ const makeCsp = (shasMap) => {
       'img-src': ["'self'", 'https://res.cloudinary.com/jackdbd/image/upload/'],
       'manifest-src': ["'self'"],
       'media-src': [
-        "'self",
+        "'self'",
         'https://res.cloudinary.com/jackdbd/image/upload/'
       ],
       'object-src': ["'none'"],
       'report-to': 'default',
       'report-uri': reportUri,
       'script-src': ["'self'"],
-      'script-src-attr': ["'self'", "'unsafe-inline'"],
+      'script-src-attr': ["'self'"],
       'script-src-elem': [
         "'self'",
         sha256_inline_js,
@@ -139,8 +135,7 @@ const makeCsp = (shasMap) => {
         'https://fonts.googleapis.com',
         'https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css'
       ],
-      'upgrade-insecure-requests': true,
-      'worker-src': ["'self'"]
+      'upgrade-insecure-requests': true
     }
   });
 };
