@@ -22,6 +22,17 @@ package = "netlify-plugin-a11y"
 package = "netlify-plugin-debug-cache"
 
 [[plugins]]
+package = "netlify-plugin-subfont"
+
+  [plugins.inputs]
+  entryPoints = [
+    "*.html",
+  ]
+  
+  # Follow your links across all pages to optimize the fonts across the entire site
+  recursive = true
+
+[[plugins]]
 package = "netlify-plugin-html-validate"
   [plugins.inputs]
   ext = "html"
