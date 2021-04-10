@@ -13,5 +13,5 @@
     selector.rel = 'stylesheet';
   }
 
-  // document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
+  document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
 })();

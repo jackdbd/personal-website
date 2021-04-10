@@ -110,6 +110,7 @@ const makeCsp = (assets) => {
       'frame-ancestors': ["'none'"],
       'frame-src': [
         'https://www.youtube.com/embed/',
+        'https://www.youtube-nocookie.com/',
         'https://player.vimeo.com/video/'
       ],
       'img-src': ["'self'", 'https://res.cloudinary.com/jackdbd/image/upload/'],
@@ -128,6 +129,11 @@ const makeCsp = (assets) => {
         ...allowedStyleSources,
         'https://fonts.googleapis.com',
         'https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css'
+      ],
+      'style-src-attr': [
+        "'self'",
+        "'unsafe-inline'",
+        'https://www.youtube-nocookie.com/'
       ],
       'upgrade-insecure-requests': true
     }

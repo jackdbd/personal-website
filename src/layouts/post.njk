@@ -22,7 +22,8 @@ section: post
 
 {# CSS assets that will be injected in <head> with eleventy-plugin-helmet #}
 {# Preload Prism.js okaidia theme, so this stylesheet is not render-blocking #}
-<link id="prism-stylesheet" data-helmet rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+{# <link id="prism-stylesheet" data-helmet rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" as="style" onload="this.onload=null;this.rel='stylesheet'"> #}
+<link id="prism-stylesheet" data-helmet rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" as="style">
 <noscript data-helmet><link rel="stylesheet" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" crossorigin></noscript>
 
 {# JS assets that will be injected in <head> with eleventy-plugin-helmet #}
