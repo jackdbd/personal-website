@@ -27,12 +27,23 @@ const makeCsp = (resources) => {
 
   const sha256 = (res) => res.sha256;
 
-  const scriptSrcAttributes = resources.filter(isScriptSrcAttr).map(sha256);
-  const scriptSrcElements = resources.filter(isScriptSrcElem).map(sha256);
+  const scriptSrcAttributes = [
+    "'self'",
+    ...resources.filter(isScriptSrcAttr).map(sha256)
+  ];
 
-  const styleSrcAttributes = [...resources.filter(isStyleSrcAttr).map(sha256)];
+  const scriptSrcElements = [
+    "'self'",
+    ...resources.filter(isScriptSrcElem).map(sha256)
+  ];
+
+  // I don't know why, but this does not work. The hashes seem fine and event
+  // Chrome suggests THESE hashes.
+  // resources.filter(isStyleSrcAttr).map(sha256)
+  const styleSrcAttributes = ["'self'", "'unsafe-inline'"];
 
   const styleSrcElements = [
+    "'self'",
     ...resources.filter(isStyleSrcElem).map(sha256),
     'https://fonts.googleapis.com',
     'https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css'
@@ -117,10 +128,10 @@ const makeCsp = (resources) => {
       'object-src': ["'none'"],
       'report-to': 'default',
       'report-uri': reportUri,
-      'script-src-attr': ["'self'", ...scriptSrcAttributes],
-      'script-src-elem': ["'self'", ...scriptSrcElements],
-      'style-src-attr': [...styleSrcAttributes],
-      'style-src-elem': ["'self'", ...styleSrcElements],
+      'script-src-attr': scriptSrcAttributes,
+      'script-src-elem': scriptSrcElements,
+      'style-src-attr': styleSrcAttributes,
+      'style-src-elem': styleSrcElements,
       'upgrade-insecure-requests': true
     }
   });
