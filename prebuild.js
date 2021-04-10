@@ -4,23 +4,6 @@ const path = require('path');
 const cspBuilder = require('content-security-policy-builder');
 const { cssmin, jsmin } = require('./_11ty/filters');
 
-const hash = (filepath) => {
-  const sha256Hasher = crypto.createHash('sha256');
-  console.log(`Generating hash for ${filepath}`);
-  const ext = path.extname(filepath);
-  try {
-    let str = fs.readFileSync(filepath, 'utf8');
-    // console.log('BEFORE MINIFY', str);
-    str = ext === '.css' ? cssmin(str) : jsmin(str);
-    // console.log('AFTER MINIFY', str);
-    const sha256 = sha256Hasher.update(str, 'utf-8').digest('base64');
-    // console.log(filepath, '=>', sha256);
-    return { ext: ext, sha256: `'sha256-${sha256}'` };
-  } catch (err) {
-    console.error(err);
-  }
-};
-
 const writeNetlifyToml = (csp_value) => {
   const NETLIFY_TOML_PATH = 'netlify.toml';
   console.log(`Injecting Content-Security-Policy in ${NETLIFY_TOML_PATH}`);
@@ -35,14 +18,29 @@ const writeNetlifyToml = (csp_value) => {
   }
 };
 
-const makeCsp = (assets) => {
-  const isCss = (asset) => asset.ext === '.css';
-  const isJs = (asset) => asset.ext === '.js';
-  const sha256 = (asset) => asset.sha256;
-  const allowedStyleSources = assets.filter(isCss).map(sha256);
-  const allowedScriptElements = assets.filter(isJs).map(sha256);
-  // console.log('allowedStyleSources', allowedStyleSources);
-  // console.log('allowedScriptElements', allowedScriptElements);
+const makeCsp = (resources) => {
+  const isStyleSrcAttr = (res) => res.csp_directive === 'style-src-attr';
+  const isStyleSrcElem = (res) => res.csp_directive === 'style-src-elem';
+  const isScriptSrcAttr = (res) => res.csp_directive === 'script-src-attr';
+  const isScriptSrcElem = (res) => res.csp_directive === 'script-src-elem';
+
+  const sha256 = (res) => res.sha256;
+
+  const styleSrcAttributes = [
+    ...resources.filter(isStyleSrcAttr).map(sha256),
+    'https://www.youtube-nocookie.com/'
+  ];
+
+  const styleSrcElements = [
+    ...resources.filter(isStyleSrcElem).map(sha256),
+    'https://fonts.googleapis.com',
+    'https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css'
+  ];
+
+  const scriptSrcAttributes = resources.filter(isScriptSrcAttr).map(sha256);
+
+  const scriptSrcElements = resources.filter(isScriptSrcElem).map(sha256);
+
   console.log(`Generating Content-Security-Policy and injecting SHAs`);
 
   const reportUri = 'https://giacomodebidda.report-uri.com';
@@ -122,40 +120,72 @@ const makeCsp = (assets) => {
       'object-src': ["'none'"],
       'report-to': 'default',
       'report-uri': reportUri,
-      'script-src-attr': ["'self'"],
-      'script-src-elem': ["'self'", ...allowedScriptElements],
-      'style-src': [
-        "'self'",
-        ...allowedStyleSources,
-        'https://fonts.googleapis.com',
-        'https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css'
-      ],
-      'style-src-attr': [
-        "'self'",
-        "'unsafe-inline'",
-        'https://www.youtube-nocookie.com/'
-      ],
+      'script-src-attr': ["'self'", ...scriptSrcAttributes],
+      'script-src-elem': ["'self'", ...scriptSrcElements],
+      'style-src-attr': ["'self'", ...styleSrcAttributes],
+      'style-src-elem': ["'self'", ...styleSrcElements],
       'upgrade-insecure-requests': true
     }
   });
 };
 
-const hashes = (assets) => {
-  return assets.map(hash);
+const hashFromString = (str) => {
+  const sha256Hasher = crypto.createHash('sha256');
+  console.log(`Generating hash for ${str}`);
+  const sha256 = sha256Hasher.update(str, 'utf-8').digest('base64');
+  return `'sha256-${sha256}'`;
+};
+
+const hashFromFilepath = (filepath) => {
+  const sha256Hasher = crypto.createHash('sha256');
+  console.log(`Generating hash for ${filepath}`);
+  const ext = path.extname(filepath);
+  try {
+    let str = fs.readFileSync(filepath, 'utf8');
+    // console.log('BEFORE MINIFY', str);
+    str = ext === '.css' ? cssmin(str) : jsmin(str);
+    // console.log('AFTER MINIFY', str);
+    const sha256 = sha256Hasher.update(str, 'utf-8').digest('base64');
+    // console.log(filepath, '=>', sha256);
+    return `'sha256-${sha256}'`;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const prebuild = () => {
-  const csp = makeCsp(
-    hashes([
-      'src/includes/assets/css/inline.css',
-      'src/includes/assets/js/back-to-top.js',
-      'src/includes/assets/js/inline.js',
-      'src/includes/assets/js/sw-registration.js',
-      'src/includes/assets/js/theme-switcher.js'
-    ])
-  );
-  // console.log('CSP', csp);
+  const YOUTUBE_IFRAME_INLINE_STYLE =
+    'position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;';
+  const resources = [
+    {
+      csp_directive: 'style-src-attr',
+      sha256: hashFromString(YOUTUBE_IFRAME_INLINE_STYLE)
+    },
+    {
+      csp_directive: 'style-src-elem',
+      sha256: hashFromFilepath('src/includes/assets/css/inline.css')
+    },
+    {
+      csp_directive: 'script-src-elem',
+      sha256: hashFromFilepath('src/includes/assets/js/back-to-top.js')
+    },
+    {
+      csp_directive: 'script-src-elem',
+      sha256: hashFromFilepath('src/includes/assets/js/inline.js')
+    },
+    {
+      csp_directive: 'script-src-elem',
+      sha256: hashFromFilepath('src/includes/assets/js/sw-registration.js')
+    },
+    {
+      csp_directive: 'script-src-elem',
+      sha256: hashFromFilepath('src/includes/assets/js/theme-switcher.js')
+    }
+  ];
+
+  const csp = makeCsp(resources);
   writeNetlifyToml(csp);
 };
 
+// prebuild();
 module.exports = prebuild;
