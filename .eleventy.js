@@ -23,6 +23,7 @@ const transforms = require('./_11ty/transforms.js');
 
 const prebuild = require('./prebuild');
 const buildSW = require('./build-sw');
+const optimizeFonts = require('./optimize-fonts');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.on('beforeBuild', () => {
@@ -31,8 +32,9 @@ module.exports = function (eleventyConfig) {
     prebuild();
   });
 
-  eleventyConfig.on('afterBuild', () => {
+  eleventyConfig.on('afterBuild', async () => {
     buildSW();
+    await optimizeFonts();
   });
 
   // --- 11ty plugins ------------------------------------------------------- //
