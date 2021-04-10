@@ -13,7 +13,6 @@
   };
 
   document.addEventListener('DOMContentLoaded', function (event) {
-    console.log('🚀 DOMContentLoaded theme switcher', event);
     const selector = document.getElementById(ELEMENT_ID);
 
     const setTheme = (theme) => {

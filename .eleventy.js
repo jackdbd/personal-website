@@ -21,10 +21,15 @@ const filters = require('./_11ty/filters');
 const shortcodes = require('./_11ty/shortcodes');
 const transforms = require('./_11ty/transforms.js');
 
+const prebuild = require('./prebuild');
 const buildSW = require('./build-sw');
 
 module.exports = function (eleventyConfig) {
-  eleventyConfig.on('beforeBuild', () => {});
+  eleventyConfig.on('beforeBuild', () => {
+    // TODO: maybe read all files in src/includes/assets/css and
+    // src/includes/assets/js and pass them to prebuild()
+    prebuild();
+  });
 
   eleventyConfig.on('afterBuild', () => {
     buildSW();

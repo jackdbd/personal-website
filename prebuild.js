@@ -147,4 +147,4 @@ const prebuild = () => {
   writeNetlifyToml(csp);
 };
 
-prebuild();
+module.exports = prebuild;
