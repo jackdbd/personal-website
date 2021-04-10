@@ -139,7 +139,7 @@ const prebuild = () => {
       'src/includes/assets/css/inline.css',
       'src/includes/assets/js/back-to-top.js',
       'src/includes/assets/js/inline.js',
-      'src/includes/assets/js/sw_registration.js',
+      'src/includes/assets/js/sw-registration.js',
       'src/includes/assets/js/theme-switcher.js'
     ])
   );

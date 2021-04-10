@@ -13,7 +13,11 @@
     {% include "components/footer.njk" %}
   </div>
   {% set js %}
-    {% include "assets/js/sw_registration.js" %}
+    {% include "assets/js/sw-registration.js" %}
+  {% endset %}
+  <script>{{ js | jsmin | safe }}</script>
+  {% set js %}
+    {% include "assets/js/theme-switcher.js" %}
   {% endset %}
   <script>{{ js | jsmin | safe }}</script>
 </body>
