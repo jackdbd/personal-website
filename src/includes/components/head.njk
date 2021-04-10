@@ -68,7 +68,7 @@
   {% set css %}
     {% include "assets/css/inline.css" %}
   {% endset %}
-  <style integrity="{{ env.sha_inline_css }}">{{ css | cssmin | safe }}</style>
+  <style>{{ css | cssmin | safe }}</style>
 
   {# Non-inlined CSS #}
   <link href="https://fonts.googleapis.com/css2?family=Lato&family=Nunito:wght@800&family=Source+Code+Pro&display=swap&display=swap" rel="stylesheet" crossorigin>
@@ -84,7 +84,7 @@
   {% set js %}
     {% include "assets/js/inline.js" %}
   {% endset %}
-  <script integrity="{{ env.sha_inline_js }}">{{ js | jsmin | safe }}</script>
+  <script>{{ js | jsmin | safe }}</script>
 
   {# Non-inlined JS: use async or defer #}
   <script defer src="/assets/js/instantpage.min.js"></script>
