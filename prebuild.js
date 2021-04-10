@@ -19,17 +19,18 @@ const writeNetlifyToml = (csp_value) => {
 };
 
 const makeCsp = (resources) => {
-  const isStyleSrcAttr = (res) => res.csp_directive === 'style-src-attr';
-  const isStyleSrcElem = (res) => res.csp_directive === 'style-src-elem';
   const isScriptSrcAttr = (res) => res.csp_directive === 'script-src-attr';
   const isScriptSrcElem = (res) => res.csp_directive === 'script-src-elem';
 
+  const isStyleSrcAttr = (res) => res.csp_directive === 'style-src-attr';
+  const isStyleSrcElem = (res) => res.csp_directive === 'style-src-elem';
+
   const sha256 = (res) => res.sha256;
 
-  const styleSrcAttributes = [
-    ...resources.filter(isStyleSrcAttr).map(sha256),
-    'https://www.youtube-nocookie.com/'
-  ];
+  const scriptSrcAttributes = resources.filter(isScriptSrcAttr).map(sha256);
+  const scriptSrcElements = resources.filter(isScriptSrcElem).map(sha256);
+
+  const styleSrcAttributes = [...resources.filter(isStyleSrcAttr).map(sha256)];
 
   const styleSrcElements = [
     ...resources.filter(isStyleSrcElem).map(sha256),
@@ -37,13 +38,9 @@ const makeCsp = (resources) => {
     'https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css'
   ];
 
-  const scriptSrcAttributes = resources.filter(isScriptSrcAttr).map(sha256);
-
-  const scriptSrcElements = resources.filter(isScriptSrcElem).map(sha256);
+  const reportUri = 'https://giacomodebidda.report-uri.com';
 
   console.log(`Generating Content-Security-Policy and injecting SHAs`);
-
-  const reportUri = 'https://giacomodebidda.report-uri.com';
 
   // connect-src
   // I need to download web fonts from Google Fonts, and images from Cloudinary
@@ -122,7 +119,7 @@ const makeCsp = (resources) => {
       'report-uri': reportUri,
       'script-src-attr': ["'self'", ...scriptSrcAttributes],
       'script-src-elem': ["'self'", ...scriptSrcElements],
-      'style-src-attr': ["'self'", ...styleSrcAttributes],
+      'style-src-attr': [...styleSrcAttributes],
       'style-src-elem': ["'self'", ...styleSrcElements],
       'upgrade-insecure-requests': true
     }
