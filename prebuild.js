@@ -45,7 +45,7 @@ const makeCsp = (assets) => {
   // console.log('allowedScriptElements', allowedScriptElements);
   console.log(`Generating Content-Security-Policy and injecting SHAs`);
 
-  const reportUri = `'${'https://giacomodebidda.report-uri.com'}'`;
+  const reportUri = 'https://giacomodebidda.report-uri.com';
 
   // connect-src
   // I need to download web fonts from Google Fonts, and images from Cloudinary
@@ -81,12 +81,18 @@ const makeCsp = (assets) => {
   // Report-To header.
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri
 
-  // script-src, script-src-attr, script-src-elem, style-src
-  // This website has some CSS and JS inlined in the <head> for performance
-  // reasons (critical CSS and JS). The CSP allows inline scripts and
-  // stylesheets only when either 'unsafe-inline', a SHA or a nonce are used.
-  // It's better to avoid 'unsafe-inline' altogether, so I generate all SHAs and
-  // write the netlify.toml at build time.
+  // script-src-attr: 'none'
+  // Disallow inline event handlers (even for this origin)
+
+  // script-src-elem, style-src
+  // This website has some CSS inlined in the <head> for performance reasons
+  // (critical CSS). The CSP allows inline styles only when either
+  // 'unsafe-inline', a nonce or a base64 SHA are used. It's better to avoid
+  // 'unsafe-inline' altogether, and since this is a static website hosted on
+  // Netlify (i.e. there isn't a web server under my control) the only secure
+  // option available is to generate all SHAs at build time and inject them in
+  // the netlify.toml.
+  // This website has some JS assets. I generate SHAs for them too.
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#unsafe_inline_script
 
   return cspBuilder({
@@ -115,8 +121,7 @@ const makeCsp = (assets) => {
       'object-src': ["'none'"],
       'report-to': 'default',
       'report-uri': reportUri,
-      'script-src': ["'self'"],
-      'script-src-attr': ["'self'"],
+      'script-src-attr': ["'none'"],
       'script-src-elem': ["'self'", ...allowedScriptElements],
       'style-src': [
         "'self'",
