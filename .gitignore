@@ -18,7 +18,3 @@ lighthouse/reports/*
 
 # Webhint HTML reports
 hint-report/
-
-# My head.njk component require some dynamic values that are generated with my
-# prepush.js script. That's why I generate the src/_data/env.js at build time.
-src/_data/env.js
