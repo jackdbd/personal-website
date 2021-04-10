@@ -12,11 +12,14 @@
     </main>
     {% include "components/footer.njk" %}
   </div>
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js");
-    }
-  </script>
+  {% set js %}
+    {% include "assets/js/sw-registration.js" %}
+  {% endset %}
+  <script>{{ js | jsmin | safe }}</script>
+  {% set js %}
+    {% include "assets/js/theme-switcher.js" %}
+  {% endset %}
+  <script>{{ js | jsmin | safe }}</script>
 </body>
 
 </html>

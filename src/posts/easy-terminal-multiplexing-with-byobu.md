@@ -33,7 +33,7 @@ Byobu is a script that launches either tmux (default) or GNU screen. You can ins
 
 If you want to see Byobu in action and learn a few basic commands, I think your best option is to watch the 10-minute tutorial by its author:
 
-{% youtube "NawuGmcvKus" %}
+https://www.youtube.com/watch?v=NawuGmcvKus&ab_channel=DustinKirkland
 
 ## Keybindings I use all the time
 

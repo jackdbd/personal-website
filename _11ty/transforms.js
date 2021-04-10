@@ -5,7 +5,7 @@
 
 const htmlmin = require('html-minifier');
 
-// minify HTML files when in production (environment defined in src/_data/project.js)
+// minify HTML files when in production (environment defined in src/_data/env.js)
 const shouldTransformHTML = (outputPath) =>
   outputPath &&
   outputPath.endsWith('.html') &&

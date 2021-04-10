@@ -114,7 +114,7 @@ JavaScript is based on prototypes rather than classes, so monkey patching involv
 
 Keep in mind that the problem here is that these native Javascript objects have a [global scope](https://softwareengineering.stackexchange.com/questions/287827/whats-wrong-about-extending-a-class-with-prototype-methods). ClojureScript is able to bypass this issue and extend native objects prototypes safely because it extends the JS prototypes per namespace (if you want to know more about it, watch the talk "ClojureScript Anatomy" at around 19'25").
 
-{% youtube "lC39ifspIf4?t=1164" %}
+https://www.youtube.com/watch?v=lC39ifspIf4&ab_channel=ZhangJian
 
 So, monkey patching can solve the expression problem. It's convenient and easy to understand. It has several problems though. First of all, only dynamic languages can use it. Second, it's easy to make a mess and forget what code we monkey patched and why. There are some ways to mitigate these issues. For example, in Ruby we can [scope our monkey patches in a module](https://www.justinweiss.com/articles/3-ways-to-monkey-patch-without-making-a-mess/) or use [Ruby refinements](https://blog.alex-miller.co/ruby/2017/07/22/scope-the-monkey.html).
 

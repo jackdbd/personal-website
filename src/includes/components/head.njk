@@ -12,7 +12,7 @@
   or it could be deployed on netlify (either with a deploy preview or a with a
   production deploy). If I use <base> with a wrong URL all requests are
   considered cross-origin, so the browser refuse both sw.js and the webmanifest. #}
-  {# <base href="{{ project.domain }}">  #}
+  {# <base href="{{ env.domain }}">  #}
 
   {# Here I use dns-prefetch to resolve some domain names before resources get
   requested, and preconnect to establish a connection with those servers. See:
@@ -76,10 +76,6 @@
   {# This stylesheet is render-blocking, but I don't think it's feasible to preload it without causing layout shifts,
   since it defines the entire website layout #}
   <link rel="stylesheet" href="/assets/css/style.css">
-
-  {# Preload Prism.js okaidia theme, so this stylesheet is not render-blocking #}
-  <link rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" crossorigin></noscript>
 
   {# RSS Feed #}
   <link rel="alternate" href="{{ metadata.url }}/feed.xml" title="{{ metadata.title }}" type="application/atom+xml">

@@ -9,7 +9,7 @@ tags:
 ---
 I have been doing some geospatial analysis in the last few months, and since I came back from [GeoPython](http://2018.geopython.net/) in Basel (really good conference by the way, definitely recommended) I kept playing around with several Python libraries.
 
-<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Here is the code for my presentation &quot;Approaching geovisualization and remote sensing with <a href="https://twitter.com/hashtag/GeoViews?src=hash&amp;ref_src=twsrc%5Etfw">#GeoViews</a>&quot; <a href="https://twitter.com/GeoPythonConf?ref_src=twsrc%5Etfw">@GeoPythonConf</a> 2018.<a href="https://t.co/DZoaR9uo59">https://t.co/DZoaR9uo59</a> <a href="https://t.co/qn4VhEvYCI">pic.twitter.com/qn4VhEvYCI</a></p>&mdash; Giacomo Debidda (@jackdbd) <a href="https://twitter.com/jackdbd/status/994548711664570369?ref_src=twsrc%5Etfw">May 10, 2018</a></blockquote>
+https://twitter.com/jackdbd/status/994548711664570369
 
 One of my favourite talks at the conference was by [John A Stevenson](http://all-geo.org/volcan01010/), a Scottish volcanologist.
 

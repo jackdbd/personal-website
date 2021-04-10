@@ -4,10 +4,15 @@ const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 const markdownItClass = require('@toycode/markdown-it-class');
 
-const blogTools = require('eleventy-plugin-blog-tools');
 const navigation = require('@11ty/eleventy-navigation');
 const rss = require('@11ty/eleventy-plugin-rss');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
+
+const embedTwitter = require('eleventy-plugin-embed-twitter');
+const embedVimeo = require('eleventy-plugin-vimeo-embed');
+const embedYouTube = require('eleventy-plugin-youtube-embed');
+const emoji = require('eleventy-plugin-emoji');
+const helmet = require('eleventy-plugin-helmet');
 const readingTime = require('eleventy-plugin-reading-time');
 const toc = require('eleventy-plugin-toc');
 
@@ -16,11 +21,14 @@ const filters = require('./_11ty/filters');
 const shortcodes = require('./_11ty/shortcodes');
 const transforms = require('./_11ty/transforms.js');
 
+const prebuild = require('./prebuild');
 const buildSW = require('./build-sw');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.on('beforeBuild', () => {
-    console.log('beforeBuild HOOK - TODO: maybe run linters & formatters here');
+    // TODO: maybe read all files in src/includes/assets/css and
+    // src/includes/assets/js and pass them to prebuild()
+    prebuild();
   });
 
   eleventyConfig.on('afterBuild', () => {
@@ -29,7 +37,12 @@ module.exports = function (eleventyConfig) {
 
   // --- 11ty plugins ------------------------------------------------------- //
 
-  eleventyConfig.addPlugin(blogTools);
+  // https://github.com/gfscott/eleventy-plugin-embed-twitter#configure
+  eleventyConfig.addPlugin(embedTwitter, { align: 'center', doNotTrack: true });
+  eleventyConfig.addPlugin(embedVimeo, { dnt: true });
+  eleventyConfig.addPlugin(embedYouTube, { lazy: true, noCookie: true });
+  eleventyConfig.addPlugin(emoji);
+  eleventyConfig.addPlugin(helmet);
   eleventyConfig.addPlugin(navigation);
   eleventyConfig.addPlugin(readingTime);
   eleventyConfig.addPlugin(rss);
@@ -49,19 +62,19 @@ module.exports = function (eleventyConfig) {
   // https://www.11ty.dev/docs/copy/
 
   // Static assets
-  // - Images: don't process them. Just copy them.
+  // - CSS: nothing to do here. CSS is either inlined in the <head> with a 11ty
+  //   filter (critical CSS) or processed by PostCSS with Tailwind CSS.
   // - Fonts: don't process them. Just copy them.
-  // - CSS: don't process it. Let Tailwind CLI take care of building all but the
-  //   inlined CSS. Other CSS is inlined in the <head>, but that's managed by a
-  //   11ty filter.
-  // - JS: all non third-party JS is inlined in the <head>, but that's managed
-  //   by a 11ty filter.
+  //   TODO: maybe subset self-hosted fonts with https://github.com/Munter/subfont
+  // - Images: don't process them. Just copy them.
+  //   TODO: optimise local images with eleventy-img
+  // - JS: it's either inlined in the <head> with a 11ty filter (critical JS) or
+  //   loaded asynchronously with <script defer> (it's written in a template or
+  //   markdown file, and eleventy-plugin-helmet move it to the <head>).
   eleventyConfig.addPassthroughCopy({
-    // TODO: use subfont for fonts
     'src/includes/assets/fonts': 'assets/fonts',
-    // TODO: optimize local images
     'src/includes/assets/img': 'assets/img',
-    'src/includes/assets/js/instantpage.min.js': 'assets/js/instantpage.min.js'
+    'src/includes/assets/js': 'assets/js'
   });
 
   // 11ty shortcodes
