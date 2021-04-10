@@ -154,12 +154,20 @@ const hashFromFilepath = (filepath) => {
 };
 
 const prebuild = () => {
-  const YOUTUBE_IFRAME_INLINE_STYLE =
+  // https://github.com/gfscott/eleventy-plugin-youtube-embed/blob/c5d2b025e288fa409e9bae85f91da2654ecc4cd1/lib/buildEmbed.js#L36
+  const YOUTUBE_EMBED_DIV_INLINE_STYLE =
+    'position:relative;width:100%;padding-top: 56.25%;';
+  const YOUTUBE_EMBED_IFRAME_INLINE_STYLE =
     'position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;';
+
   const resources = [
     {
       csp_directive: 'style-src-attr',
-      sha256: hashFromString(YOUTUBE_IFRAME_INLINE_STYLE)
+      sha256: hashFromString(YOUTUBE_EMBED_DIV_INLINE_STYLE)
+    },
+    {
+      csp_directive: 'style-src-attr',
+      sha256: hashFromString(YOUTUBE_EMBED_IFRAME_INLINE_STYLE)
     },
     {
       csp_directive: 'style-src-elem',
