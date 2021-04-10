@@ -15,7 +15,7 @@
   {% set js %}
     {% include "assets/js/sw_registration.js" %}
   {% endset %}
-  <script integrity="{{ env.sha_sw_registration_js }}">{{ js | safe | jsmin }}</script>
+  <script integrity="{{ env.sha_sw_registration_js }}">{{ js | jsmin | safe }}</script>
 </body>
 
 </html>

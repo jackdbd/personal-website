@@ -21,7 +21,7 @@
     "postbuild": "ls --size --human-readable _site/ | head -n 1",
     "clean": "find _site/* -not -name 'README.md' -delete",
     "debug": "DEBUG=* eleventy",
-    "predev": "npm run clean",
+    "predev": "npm run clean && node prebuild.js",
     "dev": "npm-run-all --parallel dev:*",
     "dev:11ty": "ELEVENTY_ENV=development eleventy --serve --quiet",
     "dev:css": "NODE_ENV=development postcss src/includes/assets/css/tailwind.css -o _site/assets/css/style.css --watch --verbose",

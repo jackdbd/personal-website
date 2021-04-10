@@ -164,7 +164,7 @@ const writeEleventyDataEnv = (shasMap) => {
   try {
     string = fs.readFileSync(input, 'utf8');
     Object.entries(shasMap).forEach(([placeholder, sha256]) => {
-      string = string.replace(placeholder, sha256);
+      string = string.replace(placeholder, `sha256-${sha256}`);
     });
   } catch (err) {
     console.error(err);

@@ -1,5 +1,5 @@
 (function iife() {
-  console.log('IIFE inline.js');
+  // console.log('IIFE inline.js');
   const DATA_ATTRIBUTE = 'data-theme';
   const LOCAL_STORAGE_THEME_KEY = 'theme';
   const DEFAULT_THEME = 'default';
