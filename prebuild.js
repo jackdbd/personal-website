@@ -1,13 +1,8 @@
-require('dotenv').config();
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const cspBuilder = require('content-security-policy-builder');
 const { cssmin, jsmin } = require('./_11ty/filters');
-
-if (process.env.SHA_SECRET === undefined) {
-  throw new Error('Environment variable SHA_SECRET not set');
-}
 
 // Placeholders defined in src/_data/env.template.js
 const PLACEHOLDER_MAP = {
@@ -17,7 +12,7 @@ const PLACEHOLDER_MAP = {
 };
 
 const hash = (filepath) => {
-  const sha256Hasher = crypto.createHmac('sha256', process.env.SHA_SECRET);
+  const sha256Hasher = crypto.createHash('sha256');
   console.log(`Generating hash for ${filepath}`);
   const ext = path.extname(filepath);
   try {
@@ -25,7 +20,7 @@ const hash = (filepath) => {
     // console.log('BEFORE MINIFY', str);
     str = ext === '.css' ? cssmin(str) : jsmin(str);
     // console.log('AFTER MINIFY', str);
-    return sha256Hasher.update(str).digest('hex');
+    return sha256Hasher.update(str, 'utf-8').digest('base64');
   } catch (err) {
     console.error(err);
   }
@@ -173,20 +168,23 @@ const writeEleventyDataEnv = (shasMap) => {
   }
 };
 
-const m = hashesMap([
-  {
-    filepath: 'src/includes/assets/css/inline.css',
-    placeholder: PLACEHOLDER_MAP.INLINE_CSS
-  },
-  {
-    filepath: 'src/includes/assets/js/inline.js',
-    placeholder: PLACEHOLDER_MAP.INLINE_JS
-  },
-  {
-    filepath: 'src/includes/assets/js/sw_registration.js',
-    placeholder: PLACEHOLDER_MAP.SW_REGISTRATION_JS
-  }
-]);
+const prebuild = () => {
+  const m = hashesMap([
+    {
+      filepath: 'src/includes/assets/css/inline.css',
+      placeholder: PLACEHOLDER_MAP.INLINE_CSS
+    },
+    {
+      filepath: 'src/includes/assets/js/inline.js',
+      placeholder: PLACEHOLDER_MAP.INLINE_JS
+    },
+    {
+      filepath: 'src/includes/assets/js/sw_registration.js',
+      placeholder: PLACEHOLDER_MAP.SW_REGISTRATION_JS
+    }
+  ]);
+  writeNetlifyToml(makeCsp(m));
+  writeEleventyDataEnv(m);
+};
 
-writeNetlifyToml(makeCsp(m));
-writeEleventyDataEnv(m);
+prebuild();
