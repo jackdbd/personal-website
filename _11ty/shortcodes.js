@@ -28,7 +28,7 @@ const cloudinaryRespImage = (src, alt, width, height, shouldLazyLoad) => {
   // https://cloudinary.com/blog/reduce_size_of_animated_gifs_automatically_convert_to_webm_and_mp4
   imgFormat = imgFormat === 'gif' ? 'mp4' : imgFormat;
 
-  // Cloudinary allow a maximum of 50 megapixels as the total number of pixels
+  // Cloudinary allows a maximum of 50 megapixels as the total number of pixels
   // in all frames/pages, otherwise a HTTP 400 is returned with some details
   // about the error in the x-cld-error response header.
   // Videos and animated GIFs have more than one frame, so the megapixels add
