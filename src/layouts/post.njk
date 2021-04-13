@@ -3,19 +3,26 @@ layout: base.njk
 section: post
 ---
 {% block content %}
-<article>
+<article class="">
   <h1>{{ title }}</h1>
-  <small>
-    <time datetime="{{ date | machineDate }}">{{ date | humanDate }}</time>
-    <span>|</span>
-    <span>{{ content | readingTime }} reading time</span>
-  </small>
-  {% if tags %}
+
+  <div class="stack">
+    {% set humanDate = date | humanDate %}
+    {% set machineDate = date | machineDate %}
+    {% set readingTime = content | readingTime %}
+    {% include "components/post-info.njk" %}
+
+    {% if tags %}
     {% include "components/tags.njk" %}
-  {% endif %}
+    {% endif %}
+
+    {{ content | toc | safe }}
+  </div>
+
   {{ content | safe }}
+
   {% if tags %}
-    {% include "components/tags.njk" %}
+  {% include "components/tags.njk" %}
   {% endif %}
 </article>
 {% include "components/back-to-top.njk" %}
@@ -23,8 +30,10 @@ section: post
 {# CSS assets that will be injected in <head> with eleventy-plugin-helmet #}
 {# Preload Prism.js okaidia theme, so this stylesheet is not render-blocking #}
 {# <link id="prism-stylesheet" data-helmet rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" as="style" onload="this.onload=null;this.rel='stylesheet'"> #}
-<link id="prism-stylesheet" data-helmet rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" as="style">
-<noscript data-helmet><link rel="stylesheet" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" crossorigin></noscript>
+<link id="prism-stylesheet" data-helmet rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css"
+  as="style">
+<noscript data-helmet>
+  <link rel="stylesheet" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" crossorigin></noscript>
 
 {# JS assets that will be injected in <head> with eleventy-plugin-helmet #}
 <script defer src="/assets/js/back-to-top.js" data-helmet></script>

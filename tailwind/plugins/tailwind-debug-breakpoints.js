@@ -40,7 +40,7 @@ const debugBreakpointsPlugin = plugin.withOptions(function (options) {
       return {
         [`@media(min-width: ${minWidth})`]: {
           [`.${pre}-screen::after`]: {
-            content: `"screen: ${screen}"`,
+            content: `"screen: ${screen}" !important`,
             'font-weight': theme('fontWeight.semibold'),
             position: 'absolute',
             right: '0.25em',

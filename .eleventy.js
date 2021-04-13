@@ -2,7 +2,6 @@ const fs = require('fs');
 
 const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
-const markdownItClass = require('@toycode/markdown-it-class');
 
 const navigation = require('@11ty/eleventy-navigation');
 const rss = require('@11ty/eleventy-plugin-rss');
@@ -16,10 +15,10 @@ const helmet = require('eleventy-plugin-helmet');
 const readingTime = require('eleventy-plugin-reading-time');
 const toc = require('eleventy-plugin-toc');
 
-const collections = require('./_11ty/collections');
-const filters = require('./_11ty/filters');
-const shortcodes = require('./_11ty/shortcodes');
-const transforms = require('./_11ty/transforms.js');
+const collections = require('./11ty/collections');
+const filters = require('./11ty/filters');
+const shortcodes = require('./11ty/shortcodes');
+const transforms = require('./11ty/transforms.js');
 
 const prebuild = require('./prebuild');
 const buildSW = require('./build-sw');
@@ -31,7 +30,7 @@ module.exports = function (eleventyConfig) {
     prebuild();
   });
 
-  eleventyConfig.on('afterBuild', () => {
+  eleventyConfig.on('afterBuild', (eleventyConfig) => {
     buildSW();
   });
 
@@ -48,7 +47,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(rss);
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(toc, {
-    tags: ['h2', 'h3']
+    tags: ['h2', 'h3'],
+    wrapperClass: 'toc'
   });
 
   // --- 11ty data cascade -------------------------------------------------- //
@@ -116,13 +116,6 @@ module.exports = function (eleventyConfig) {
     permalinkClass: 'heading-anchor',
     permalinkSymbol: '#'
   });
-
-  // TODO: this plugin doesn't seem to work
-  // https://github.com/HiroshiOkada/markdown-it-class
-  // md.use(markdownItClass, {
-  // pre: ['list-decimal', 'ml-6']
-  // ul: ['list-disc', 'ml-6']
-  // });
   eleventyConfig.setLibrary('md', md);
 
   // --- Browsersync configuration ------------------------------------------ //

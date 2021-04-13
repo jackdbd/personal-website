@@ -1,10 +1,11 @@
 <div class="cluster">
-  <div class="cluster-children-wrapper">
+  <ul class="cluster-children-wrapper">
     {% for tag in tags %}
       {% if tag != "post" %}
-        {% set tagUrl %}/tags/{{ tag }}/{% endset %}
-        {% include "components/pill.njk" %}
+        {% set text = tag %}
+        {% set href %}/tags/{{ text }}/{% endset %}
+        <li>{% include "components/pill.njk" %}</li>
       {% endif %}
     {% endfor %}
-  </div>
+  </ul>
 </div>

@@ -1,9 +1,10 @@
-<div
-  class="border-2 border-tertiary rounded-md py-0 px-2 group hover:bg-tertiary focus-within:bg-tertiary">
-  <a
-    class="!no-underline !font-semibold focus:outline-none focus:text-background group-hover:text-background"
-    href="{{ tagUrl | url }}"
-    rel="tag">
-    {{ tag }}
+{% if href %}
+<span class="inline-flex px-2 border-2 rounded-md border-tertiary group hover:bg-tertiary focus-within:bg-tertiary">
+  <a class="font-semibold focus:outline-none focus:text-background group-hover:text-background"
+    href="{{ href | url }}" rel="tag">
+    {{ text }}
   </a>
-</div>
+</span>
+{% else %}
+<span class="inline-flex px-2 border-2 rounded-md border-tertiary">{{ text }}</span>
+{% endif %}

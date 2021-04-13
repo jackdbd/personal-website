@@ -1,4 +1,5 @@
 ---
+date: 2020-04-13
 description: Giacomo Debidda's about page
 eleventyNavigation:
   key: About

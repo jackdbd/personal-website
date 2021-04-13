@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const cspBuilder = require('content-security-policy-builder');
-const { cssmin, jsmin } = require('./_11ty/filters');
+const { cssmin, jsmin } = require('./11ty/filters');
 
 const writeNetlifyToml = (csp_value) => {
   const NETLIFY_TOML_PATH = 'netlify.toml';

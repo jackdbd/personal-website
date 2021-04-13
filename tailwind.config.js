@@ -25,106 +25,40 @@ const textDecoration = {
   'text-decoration-thickness': '0.25rem'
 };
 
-// https://tailwindcss.com/docs/ring-width
-const ring2 = {
-  'box-shadow':
-    'var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);'
-};
-const ring4 = {
-  'box-shadow':
-    'var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color)'
-};
-
-// https://tailwindcss.com/docs/box-shadow#class-reference
-const shadowSm = {
-  '--tw-shadow': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-  'box-shadow':
-    'var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)'
-};
-
-// Use this plugin after all others
-const baseOverridesPlugin = plugin(function ({ addBase, theme }) {
-  const twFormOverride = (selector) => {
-    return {
-      [selector]: {
-        '--tw-ring-color': theme('colors.tertiary'),
-        'border-color': theme('colors.tertiary'),
-        'border-radius': theme('borderRadius.lg'),
-        ...shadowSm
-      },
-      [`${selector}:focus`]: {
-        '--tw-ring-color': theme('colors.secondary'),
-        'border-color': theme('colors.secondary'),
-        ...ring4
-      },
-      [`${selector}:hover`]: {
-        ...ring4
-      }
-    };
+const basePlugin = plugin(function ({ addBase, theme }) {
+  const headings = {
+    color: theme('colors.headline'),
+    'font-family': theme('fontFamily.serif')
   };
-
-  const twFormCheckboxOverride = (selector) => {
-    return {
-      [selector]: {
-        '--tw-ring-color': theme('colors.tertiary'),
-        'border-color': theme('colors.tertiary'),
-        'border-radius': theme('borderRadius.sm'),
-        color: theme('colors.tertiary')
-      },
-      [`${selector}:focus`]: {
-        '--tw-ring-color': theme('colors.secondary'),
-        'border-color': theme('colors.secondary'),
-        ...ring2
-      },
-      [`${selector}:hover`]: {
-        ...ring2
-      }
-    };
-  };
-
-  const formInputsOverrides = Object.assign(
-    ...[
-      "[type='date']",
-      "[type='datetime-local']",
-      "[type='email']",
-      "[type='month']",
-      "[type='number']",
-      "[type='password']",
-      "[type='search']",
-      "[type='tel']",
-      "[type='text']",
-      "[type='time']",
-      "[type='url']",
-      "[type='week']"
-    ].map(twFormOverride)
-  );
-
-  const formButtonOverrides = {
-    'form button': {
-      '--tw-ring-color': theme('colors.secondary'),
-      'background-color': theme('colors.button'),
-      'border-radius': theme('borderRadius.lg'),
-      color: theme('colors.buttonText'),
-      'font-weight': theme('fontWeight.semibold'),
-      padding: `${theme('padding.2')} ${theme('padding.3')}`
-    },
-    'form button[type="submit"]': {
-      'text-transform': 'uppercase'
-    },
-    'form button:focus': {
-      'border-color': theme('colors.secondary'),
-      outline: 'none',
-      ...ring4
-    },
-    'form button:hover': {
-      ...ring4
-    }
-  };
-
   addBase({
     body: {
       'background-color': theme('colors.background'),
-      'font-family': theme('fontFamily.sans')
+      'font-family': theme('fontFamily.sans'),
+      'font-size': '20px'
+    },
+    h1: {
+      ...headings,
+      'font-size': '4rem'
+    },
+    h2: {
+      ...headings,
+      'font-size': '2.5rem'
+    },
+    h3: {
+      ...headings,
+      'font-size': '1.5rem'
+    },
+    h4: {
+      ...headings,
+      'font-size': '1.5rem'
+    },
+    h5: {
+      ...headings,
+      'font-size': '1.5rem'
+    },
+    h6: {
+      ...headings,
+      'font-size': '1.5rem'
     },
     'a:focus': {
       outline: `${theme('spacing.1')} dashed ${theme('colors.tertiary')}`
@@ -133,39 +67,20 @@ const baseOverridesPlugin = plugin(function ({ addBase, theme }) {
       'text-decoration-color': theme('colors.tertiary'),
       ...textDecoration
     },
-    // overrides for tailwindcss/forms
-    ...formInputsOverrides,
-    ...twFormOverride('select'),
-    ...twFormOverride('select[multiple]'),
-    ...twFormOverride('textarea'),
-    ...twFormCheckboxOverride("[type='checkbox']"),
-    ...twFormCheckboxOverride("[type='radio']"),
-    'form label': {
-      'font-weight': theme('fontWeight.semibold')
-    },
-    ...formButtonOverrides
+    '.toc': {
+      // 'background-color': theme('colors.secondary'),
+      outline: `${theme('spacing.1')} dashed ${theme('colors.headline')}`,
+      padding: `${theme('padding.2')} ${theme('padding.2')}`
+    }
+    // pre: {
+    //   'background-color': theme('colors.secondary'),
+    //   overflow: 'scroll'
+    // }
   });
 });
 
-const customComponentsPlugin = plugin(function ({ addComponents, theme }) {
+const componentsPlugin = plugin(function ({ addComponents, theme }) {
   addComponents({
-    // https://every-layout.dev/layouts/cluster/
-    '.cluster': {
-      '--space': theme('spacing.3'),
-      // ↓ Suppress horizontal scrolling caused by the negative margin in some circumstances
-      overflow: 'hidden'
-    },
-    '.cluster > *': {
-      display: 'flex',
-      'flex-wrap': 'wrap',
-      // ↓ multiply by -1 to negate the halved value
-      margin: 'calc(var(--space) / 2 * -1)'
-    },
-    '.cluster > * > *': {
-      // ↓ half the value, because of the 'doubling up'
-      margin: 'calc(var(--space) / 2)'
-    },
-
     '#wrapper-for-sticky-footer': {
       display: 'flex',
       'flex-direction': 'column',
@@ -177,85 +92,34 @@ const customComponentsPlugin = plugin(function ({ addComponents, theme }) {
   });
 });
 
-const customUtilitiesPlugin = plugin(function ({ addUtilities, theme }) {
+const utilitiesPlugin = plugin(function ({ addUtilities, theme }) {
   addUtilities({
     '.fancy-outline': {
       outline: `${theme('spacing.1')} dashed ${theme('colors.tertiary')}`
+    },
+    '.full-bleed': {
+      width: '100vw',
+      'margin-left': '50%',
+      transform: 'translateX(-50%)'
     }
   });
 });
 
-// perform all @tailwindcss/typography overrides in tailwind.css, not here!
-// https://github.com/tailwindlabs/tailwindcss-typography#customization
-const typography = (theme) => {
-  // console.log('=== SPACING ===', theme('spacing'));
-  const headingOverrides = {
-    color: theme('colors.headline'),
-    'font-family': theme('fontFamily.serif').join(',')
-  };
-
-  // https://tailwindcss.com/docs/ring-width
-  // https://tailwindcss.com/docs/ring-offset-width
-  const ring4 =
-    'var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color)';
-
-  return {
-    DEFAULT: {
-      css: {
-        h1: headingOverrides,
-        h2: headingOverrides,
-        h3: headingOverrides,
-        h4: headingOverrides,
-        h5: headingOverrides,
-        h6: headingOverrides,
-        // I don't like the quotations this plugin adds to the inline code
-        'code::before': {
-          content: '""'
-        },
-        'code::after': {
-          content: '""'
-        },
-        a: {
-          color: theme('colors.buttonText'),
-          'font-weight': theme('fontWeight.semibold')
-        },
-        'a:hover': {
-          'text-decoration-color': theme('colors.tertiary'),
-          ...textDecoration
-        },
-        // override Prism.js blocks of code
-        "pre[class^='language-']:hover": {
-          '--tw-ring-color': theme('colors.tertiary'),
-          ...ring4
-        },
-        // The heading-anchor class is outputted by markdown-it-anchor.
-        '.heading-anchor': {
-          'text-decoration': 'none'
-        },
-        // At the moment Tailwind does not have ::before and ::after classes, so
-        // either I make this override here, or I add a new Tailwind plugin that
-        // will allow me to use ::before and ::after pseudo-element variants in
-        // the markup.
-        // https://github.com/tailwindlabs/tailwindcss/discussions/2119
-        // https://github.com/sgrowe/tailwind-pseudo-elements
-        '.postslist > li::before': {
-          content: '""'
-        }
-      }
-    }
-  };
-};
-
 module.exports = {
   darkMode: 'class', // false, 'media' or 'class'
+  // I would like to keep tailwind.config.js in the tailwind directory, but at
+  // the moment is not possible to do it with mode: 'jit'
+  // https://github.com/tailwindlabs/tailwindcss/issues/4059
   mode: 'jit',
   plugins: [
     require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-    require('./tailwind-debug-breakpoints'),
-    baseOverridesPlugin,
-    customComponentsPlugin,
-    customUtilitiesPlugin
+    require('./tailwind/plugins/tailwind-forms-overrides'),
+    require('./tailwind/plugins/tailwind-layout-primitives'),
+    // require('@tailwindcss/typography'),
+    require('./tailwind/plugins/tailwind-debug-breakpoints'),
+    basePlugin,
+    componentsPlugin,
+    utilitiesPlugin
   ],
   // purge works only when NODE_ENV=production (is this still true with @tailwindcss/jit?)
   // https://github.com/tailwindlabs/tailwindcss/pull/1639
@@ -272,8 +136,8 @@ module.exports = {
       colors,
       screens: {
         '3xl': '1920px'
-      },
-      typography
+      }
+      // typography
     },
     // Tailwind does not automatically escape font names
     fontFamily: {

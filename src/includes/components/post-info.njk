@@ -1,0 +1,12 @@
+<span>
+    <time datetime="{{ machineDate }}">
+        <span>{{ humanDate }}</span>
+    </time>
+    <span>|</span>
+    <span>{{ readingTime }} reading time</span>
+    <span>|</span>
+    {% set twitter = metadata.socials[1].url %}
+    <a href="{{ twitter | url }}" rel="noopener noreferrer" target="_blank">
+      @jackdbd
+    </a>
+</span>

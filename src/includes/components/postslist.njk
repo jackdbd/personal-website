@@ -1,8 +1,8 @@
 <section>
-  <ol class="postslist divide-y-2 divide-secondary divide-dashed">
+  <ol class="divide-y-2 postslist divide-secondary divide-dashed">
   {% for post in posts | reverse %}
     <li class="py-4 !pl-0">
-    <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-2xl px-2 mx-auto"
+    <article class=""
       {% if post.url == url %}
         data-current="current item"
       {% endif %}
@@ -16,21 +16,20 @@
           {% endif %}
         </a>
       </h2>
-      <p>
-        <small>
-          <time datetime="{{ post.date | machineDateJS }}">{{ post.date | humanDateJS }}</time>
-          <span>|</span>
-          <span>{{ post | readingTime }} reading time</span>
-        </small>
-      </p>
-      {% if post.data.tags %}
-        {% set tags = post.data.tags %}
-        {% include "components/tags.njk" %}
-      {% endif %}
+      <div class="divide-y-8 divide-background">
+        {% set humanDate = post.data.date | humanDate %}
+        {% set machineDate = post.data.date | machineDate %}
+        {% set readingTime = post | readingTime %}
+        {% include "components/post-info.njk" %}
+        {% if post.data.tags %}
+          {% set tags = post.data.tags %}
+          {% include "components/tags.njk" %}
+        {% endif %}
+      </div>
     </article>
     </li>
   {% endfor %}
   </ol>
 </section>
-{% include "components/back-to-top.njk" %}
-<script defer src="/assets/js/back-to-top.js" data-helmet></script>
+{# {% include "components/back-to-top.njk" %} #}
+{# <script defer src="/assets/js/back-to-top.js" data-helmet></script> #}
