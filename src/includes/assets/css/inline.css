@@ -18,6 +18,16 @@
 
 /* https://www.happyhues.co/palettes/17 */
 :root {
+  /* https://every-layout.dev/rudiments/modular-scale/ */
+  --ratio: 1.5;
+  --s-3: calc(var(--s-2) / var(--ratio));
+  --s-2: calc(var(--s-1) / var(--ratio));
+  --s-1: calc(var(--s0) / var(--ratio));
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--ratio));
+  --s2: calc(var(--s1) * var(--ratio));
+  --s3: calc(var(--s2) * var(--ratio));
+
   --theme-color-background: #fef6e4;
   --theme-color-button: #f582ae;
   --theme-color-button-text: #001858;

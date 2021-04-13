@@ -1,0 +1,7 @@
+.set-space\:2rem {
+  --space: 2rem !important;
+}
+
+.justify-content\:space-between {
+  justify-content: space-between !important;
+}

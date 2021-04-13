@@ -1,34 +1,31 @@
 <section>
-  <ol class="divide-y-2 postslist divide-secondary divide-dashed">
-  {% for post in posts | reverse %}
-    <li class="py-4 !pl-0">
-    <article class=""
-      {% if post.url == url %}
-        data-current="current item"
-      {% endif %}
-    >
-      <h2 class="focus-within:fancy-outline">
-        <a class="!no-underline !text-headline focus:outline-none" href="{{ post.url | url }}">
-          {% if post.data.title %}
+  <ol class="stack">
+    {% for post in posts | reverse %}
+    <li class="">
+      <article class="stack" {% if post.url == url %} data-current="current item" {% endif %}>
+
+        <h2 class="focus-within:fancy-outline">
+          <a class="!no-underline !text-headline focus:outline-none" href="{{ post.url | url }}">
+            {% if post.data.title %}
             {{ post.data.title }}
-          {% else %}
+            {% else %}
             Untitled
-          {% endif %}
-        </a>
-      </h2>
-      <div class="divide-y-8 divide-background">
+            {% endif %}
+          </a>
+        </h2>
+
         {% set humanDate = post.data.date | humanDate %}
         {% set machineDate = post.data.date | machineDate %}
         {% set readingTime = post | readingTime %}
         {% include "components/post-info.njk" %}
+
         {% if post.data.tags %}
-          {% set tags = post.data.tags %}
-          {% include "components/tags.njk" %}
+        {% set tags = post.data.tags %}
+        {% include "components/tags.njk" %}
         {% endif %}
-      </div>
-    </article>
+      </article>
     </li>
-  {% endfor %}
+    {% endfor %}
   </ol>
 </section>
 {# {% include "components/back-to-top.njk" %} #}

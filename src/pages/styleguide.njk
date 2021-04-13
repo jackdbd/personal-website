@@ -15,7 +15,7 @@ permalink: /styleguide/index.html
 <div class="stack">
   <section>
     <h2>Layout primitives</h2>
-    <ul class="stack">
+    <ul class="stack set-space:2rem">
       <li class="{{ liClass }}">
         <h3>Center</h3>
         <p>
@@ -145,6 +145,15 @@ permalink: /styleguide/index.html
           {% set machineDate = "2021-03-14 20:00" %}
           {% set readingTime = "123 min" %}
           {% include "components/post-info.njk" %}
+        </div>
+      </li>
+      <li class="{{ liClass }}">
+        <h3>Recent posts</h3>
+        <p>Some explanation</p>
+        <div class="{{ componentWrapperClass }}">
+          {% set n = 3 %}
+          {% set posts = collections.post | reverse | limit(n) | reverse %}
+          {% include "components/postslist.njk" %}
         </div>
       </li>
       <li class="{{ liClass }}">

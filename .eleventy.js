@@ -72,6 +72,7 @@ module.exports = function (eleventyConfig) {
   //   loaded asynchronously with <script defer> (it's written in a template or
   //   markdown file, and eleventy-plugin-helmet move it to the <head>).
   eleventyConfig.addPassthroughCopy({
+    // 'src/includes/assets/css/utilities.css': 'assets/css/utilities.css',
     'src/includes/assets/fonts': 'assets/fonts',
     'src/includes/assets/img': 'assets/img',
     'src/includes/assets/js': 'assets/js'

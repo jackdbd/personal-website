@@ -67,6 +67,7 @@
   {# Inline CSS (critical CSS) #}
   {% set css %}
     {% include "assets/css/inline.css" %}
+    {% include "assets/css/utilities.css" %}
   {% endset %}
   <style>{{ css | cssmin | safe }}</style>
 
@@ -76,6 +77,7 @@
   {# This stylesheet is render-blocking, but I don't think it's feasible to preload it without causing layout shifts,
   since it defines the entire website layout #}
   <link rel="stylesheet" href="/assets/css/style.css">
+
 
   {# RSS Feed #}
   <link rel="alternate" href="{{ metadata.url }}/feed.xml" title="{{ metadata.title }}" type="application/atom+xml">

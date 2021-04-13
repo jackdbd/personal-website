@@ -26,6 +26,7 @@ const textDecoration = {
 };
 
 const basePlugin = plugin(function ({ addBase, theme }) {
+  // console.log('theme', theme('fontSize'));
   const headings = {
     color: theme('colors.headline'),
     'font-family': theme('fontFamily.serif')
@@ -34,15 +35,15 @@ const basePlugin = plugin(function ({ addBase, theme }) {
     body: {
       'background-color': theme('colors.background'),
       'font-family': theme('fontFamily.sans'),
-      'font-size': '20px'
+      'font-size': 'pow(var(--ratio), 2)'
     },
     h1: {
       ...headings,
-      'font-size': '4rem'
+      'font-size': '2.5rem'
     },
     h2: {
       ...headings,
-      'font-size': '2.5rem'
+      'font-size': '1.75rem'
     },
     h3: {
       ...headings,
@@ -92,7 +93,7 @@ const componentsPlugin = plugin(function ({ addComponents, theme }) {
   });
 });
 
-const utilitiesPlugin = plugin(function ({ addUtilities, theme }) {
+const utilitiesPlugin = plugin(function ({ addUtilities, e, theme }) {
   addUtilities({
     '.fancy-outline': {
       outline: `${theme('spacing.1')} dashed ${theme('colors.tertiary')}`
