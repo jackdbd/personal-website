@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-display: swap;
+  font-weight: 400;
+  src: local('JetBrains Mono Regular'),
+    url('/assets/fonts/jetbrains-mono-v6-latin-regular.woff2') format('woff2'),
+    url('/assets/fonts/jetbrains-mono-v6-latin-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-display: swap;
+  font-weight: 400;
+  src: local('Lato-Regular'),
+    url('/assets/fonts/lato-v17-latin-regular.woff2') format('woff2'),
+    url('/assets/fonts/lato-v17-latin-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Lobster';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: local('Lobster-Regular'),
+    url('/assets/fonts/lobster.woff2') format('woff2'),
+    url('/assets/fonts/lobster.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-display: swap;
+  font-weight: 400;
+  src: local('Nunito-Regular'),
+    url('/assets/fonts/nunito-v16-latin-regular.woff2') format('woff2'),
+    url('/assets/fonts/nunito-v16-latin-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Recursive';
+  font-display: swap;
+  font-weight: 400;
+  src: local('Recursive Regular'),
+    url('/assets/fonts/recursive-v23-latin-regular.woff2') format('woff2'),
+    url('/assets/fonts/recursive-v23-latin-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Recursive';
+  font-display: swap;
+  font-weight: 800;
+  src: local('Recursive Extra-bold'),
+    url('/assets/fonts/recursive-v23-latin-800.woff2') format('woff2'),
+    url('/assets/fonts/recursive-v23-latin-800.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-display: swap;
+  font-weight: 400;
+  src: local('Source Sans Pro'),
+    url('/assets/fonts/source-sans-pro-v14-latin-regular.woff2') format('woff2'),
+    url('/assets/fonts/source-sans-pro-v14-latin-regular.woff') format('woff');
+}
