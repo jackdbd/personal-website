@@ -67,7 +67,9 @@
   {# Inline CSS (critical CSS) #}
   {% set css %}
     {% include "assets/css/inline.css" %}
-    {% include "assets/css/utilities.css" %}
+    {% include "assets/css/modular-scale.css" %}
+    {% include "assets/css/typography.css" %}
+    {% include "assets/css/layout.css" %}
   {% endset %}
   <style>{{ css | cssmin | safe }}</style>
 

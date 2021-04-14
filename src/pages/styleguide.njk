@@ -4,172 +4,219 @@ eleventyExcludeFromCollections: true
 layout: bare-minimum.njk
 permalink: /styleguide/index.html
 ---
-<h1>Style Guide</h1>
-<p>TODO: write some visual regression tests for this page with Puppeteer.</p>
+<main role="main" class="prose wrap">
+  <h1>Style Guide</h1>
+  <p>TODO: write some visual regression tests for this page with Puppeteer.</p>
 
-{% set liClass = "outline-black" %}
-{# {% set liClass = "" %} #}
-{# {% set componentWrapperClass = "debug-bg" %} #}
-{% set componentWrapperClass = "" %}
+  {% set liClass = "outline-black" %}
+  {# {% set liClass = "" %} #}
+  {# {% set componentWrapperClass = "debug-bg" %} #}
+  {% set componentWrapperClass = "" %}
 
-<div class="stack">
-  <section>
-    <h2>Layout primitives</h2>
-    <ul class="stack set-space:2rem">
-      <li class="{{ liClass }}">
-        <h3>Center</h3>
-        <p>
-          <span>A center layout primitive. Uses ch as CSS unit.</span>
-          <br>
-          <span>Here <code>max-width</code> is set to 10, 20, and 30 (with </span><code>word-break:break-all</code><span>).</span>
-        </p>
-        <div class="center" style="max-width: 10ch;word-break:break-all;">
-          <div class="bg-red-500">000000000000000000000000000000</div>
-        </div>
-        <div class="center" style="max-width: 20ch;word-break:break-all;">
-          <div class="bg-green-500">000000000000000000000000000000</div>
-        </div>
-        <div class="center" style="max-width: 30ch;word-break:break-all;">
-          <div class="bg-blue-500">000000000000000000000000000000</div>
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Cluster</h3>
-        <p>A cluster layout primitive.</p>
-        <div class="cluster">
-          <ul class="cluster cluster-children-wrapper">
-            <li class="bg-red-500">child01</li>
-            <li class="bg-green-500">child02</li>
-            <li class="bg-blue-500">child03</li>
-            <li class="bg-red-500">child04</li>
-            <li class="bg-green-500">child05</li>
-            <li class="bg-blue-500">child06</li>
-            <li class="bg-red-500">child07</li>
-            <li class="bg-green-500">child08</li>
-            <li class="bg-blue-500">child09</li>
-            <li class="bg-red-500">child10</li>
-            <li class="bg-green-500">child11</li>
-            <li class="bg-blue-500">child12</li>
-          </ul>
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Stack</h3>
-        <p>A stack layout primitive.</p>
-        <div class="stack">
-          <div class="bg-red-500">child</div>
-          <div class="bg-green-500">child</div>
-          <div class="bg-blue-500">child</div>
-        </div>
-      </li>
-    </ul>
-  </section>
+  <div class="stack">
+    <section>
+      <h2>Layout primitives</h2>
+      <ul class="stack set-space:2rem">
+        <li class="{{ liClass }}">
+          <h3>Center</h3>
+          <p>
+            <span>A center layout primitive. Uses ch as CSS unit.</span>
+            <br>
+            <span>Here <code>max-width</code> is set to 10, 20, and 30 (with
+            </span><code>word-break:break-all</code><span>).</span>
+          </p>
+          <div class="center" style="max-width: 10ch;word-break:break-all;">
+            <div class="bg-red-500">000000000000000000000000000000</div>
+          </div>
+          <div class="center" style="max-width: 20ch;word-break:break-all;">
+            <div class="bg-green-500">000000000000000000000000000000</div>
+          </div>
+          <div class="center" style="max-width: 30ch;word-break:break-all;">
+            <div class="bg-blue-500">000000000000000000000000000000</div>
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Cluster</h3>
+          <p>A cluster layout primitive.</p>
+          <div class="cluster">
+            <ul class="cluster cluster-children-wrapper">
+              <li class="bg-red-500">child01</li>
+              <li class="bg-green-500">child02</li>
+              <li class="bg-blue-500">child03</li>
+              <li class="bg-red-500">child04</li>
+              <li class="bg-green-500">child05</li>
+              <li class="bg-blue-500">child06</li>
+              <li class="bg-red-500">child07</li>
+              <li class="bg-green-500">child08</li>
+              <li class="bg-blue-500">child09</li>
+              <li class="bg-red-500">child10</li>
+              <li class="bg-green-500">child11</li>
+              <li class="bg-blue-500">child12</li>
+            </ul>
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Stack</h3>
+          <p>A stack layout primitive.</p>
+          <div class="stack">
+            <div class="bg-red-500">child</div>
+            <div class="bg-green-500">child</div>
+            <div class="bg-blue-500">child</div>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-  <section>
-    <h2>Components</h2>
-    <ul class="stack">
-      <li class="{{ liClass }}">
-        <h3>Pill (text)</h3>
-        <p>Some explanation</p>
-        <div class="{{ componentWrapperClass }}">
-          {% set text = "Some text" %}
-          {% include "components/pill.njk" %}
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Pill (link)</h3>
-        <p>Some explanation</p>
-        <div class="{{ componentWrapperClass }}">
-          {% set text = "Some link" %}
-          {% set href = "https://www.google.com/" %}
-          {% include "components/pill.njk" %}
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Socials</h3>
-        <p>Links to my social accounts</p>
-        <div class="{{ componentWrapperClass }}">
-          {% include "components/socials.njk" %}
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Tags (with links)</h3>
-        <p>A cluster of tags. Each tag link to a collection of blog posts tagged with such tag.</p>
-        <div class="{{ componentWrapperClass }}">
-          {% set tags = ["ansible", "git", "python", "webgl", "frontend", "backend", "d3", "microservices", "javascript", "zig", "clojure", "devops", "rust", "webassembly"] %}
-          {% include "components/tags.njk" %}
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Header</h3>
-        <p>The header on all pages</p>
-        <div class="{{ componentWrapperClass }}">
-          {% include "components/header.njk" %}
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Footer</h3>
-        <p>The footer on all pages</p>
-        <div class="{{ componentWrapperClass }}">
-          {% include "components/footer.njk" %}
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Theme switcher</h3>
-        <p>Some explanation</p>
-        <div class="{{ componentWrapperClass }}">
-          <span>Click this button</span>
-          {% include "components/theme-switcher.njk" %}
-          <span>and it will change theme</span>
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Menu icon</h3>
-        <p>Some explanation</p>
-        <div class="{{ componentWrapperClass }}">
-          {% include "components/menu-icon.njk" %}
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Tech stack</h3>
-        <p>Some explanation</p>
-        <div class="{{ componentWrapperClass }}">
-          {% include "components/tech-stack.njk" %}
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Post info</h3>
-        <p>Metadata about a blog post: data, reading time, author.</p>
-        <div class="{{ componentWrapperClass }}">
-          {% set humanDate = "14 Mar 2021" %}
-          {% set machineDate = "2021-03-14 20:00" %}
-          {% set readingTime = "123 min" %}
-          {% include "components/post-info.njk" %}
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Recent posts</h3>
-        <p>Some explanation</p>
-        <div class="{{ componentWrapperClass }}">
-          {% set n = 3 %}
-          {% set posts = collections.post | reverse | limit(n) | reverse %}
-          {% include "components/postslist.njk" %}
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Post footer (TODO)</h3>
-        <p>Some explanation</p>
-        <div class="{{ componentWrapperClass }}">
-          {% include "components/post-footer.njk" %}
-        </div>
-      </li>
-      <li class="{{ liClass }}">
-        <h3>Contact form</h3>
-        <p>A Netlify form to contact me.</p>
-        <div class="{{ componentWrapperClass }}">
-          {% include "components/contact-form.njk" %}
-        </div>
-      </li>
-    </ul>
-  </section>
-</div>
+    <section>
+      <h2>Typography</h2>
+      <ul class="stack">
+        <li class="{{ liClass }}">
+          <h3>Modular Scale</h3>
+          <p>A modular scale is represented as a number that gets multiplied against a base size again and again, creating 'steps'.</p>
+          <p>I like using a perfect fourth (1.333) for small viewports, and a perfect fifth (1.5) for large viewports.</p>
+          <p>My modular scale was generated with the <a href="https://utopia.fyi/type/calculator" rel="noopener noreferrer" target="_blank">Fluid type scale calculator</a>.</p>
+          <div class="">
+            <p style="--step-0: var(--step-4)">Step 4</p>
+            <p style="--step-0: var(--step-3)">Step 3</p>
+            <p style="--step-0: var(--step-2)">Step 2</p>
+            <p style="--step-0: var(--step-1)">Step 1</p>
+            <p>Step 0</p>
+            <p style="--step-0: var(--step--1)">Step -1</p>
+            <p style="--step-0: var(--step--2)">Step -2</p>
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Headings (h3)</h3>
+          <h4>Headings (h4)</h4>
+          <h5>Headings (h5 - never use)</h5>
+          <h6>Headings (h6 - never use)</h6>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Code (TODO)</h3>
+          {# <p>Some Clojure code</p> #}
+          {# <pre class="language-clojure">
+            <code class="language-clojure">(defmethod draw :triangle [options] (str "Drawing a " (:color options) " triangle"))</code>
+          </pre> #}
+          {# <p>Some Python code</p> #}
+          {# <pre class="language-python">
+            <code class="language-python">class Cat(Animal): def sound(self): return "meow"</code>
+          </pre> #}
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Components</h2>
+      <ul class="stack">
+        <li class="{{ liClass }}">
+          <h3>Pill (text)</h3>
+          <p>Some explanation</p>
+          <div class="{{ componentWrapperClass }}">
+            {% set text = "Some text" %}
+            {% include "components/pill.njk" %}
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Pill (link)</h3>
+          <p>Some explanation</p>
+          <div class="{{ componentWrapperClass }}">
+            {% set text = "Some link" %}
+            {% set href = "https://www.google.com/" %}
+            {% include "components/pill.njk" %}
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Socials</h3>
+          <p>Links to my social accounts</p>
+          <div class="{{ componentWrapperClass }}">
+            {% include "components/socials.njk" %}
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Tags (with links)</h3>
+          <p>A cluster of tags. Each tag link to a collection of blog posts tagged with such tag.</p>
+          <div class="{{ componentWrapperClass }}">
+            {% set tags = ["ansible", "git", "python", "webgl", "frontend", "backend", "d3", "microservices", "javascript", "zig", "clojure", "devops", "rust", "webassembly"] %}
+            {% include "components/tags.njk" %}
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Header</h3>
+          <p>The header on all pages</p>
+          <div class="{{ componentWrapperClass }}">
+            {% include "components/header.njk" %}
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Footer</h3>
+          <p>The footer on all pages</p>
+          <div class="{{ componentWrapperClass }}">
+            {% include "components/footer.njk" %}
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Theme switcher</h3>
+          <p>Some explanation</p>
+          <div class="{{ componentWrapperClass }}">
+            <span>Click this button</span>
+            {% include "components/theme-switcher.njk" %}
+            <span>and it will change theme</span>
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Menu icon</h3>
+          <p>Some explanation</p>
+          <div class="{{ componentWrapperClass }}">
+            {% include "components/menu-icon.njk" %}
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Tech stack</h3>
+          <p>Some explanation</p>
+          <div class="{{ componentWrapperClass }}">
+            {% include "components/tech-stack.njk" %}
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Post info</h3>
+          <p>Metadata about a blog post: data, reading time, author.</p>
+          <div class="{{ componentWrapperClass }}">
+            {% set humanDate = "14 Mar 2021" %}
+            {% set machineDate = "2021-03-14 20:00" %}
+            {% set readingTime = "123 min" %}
+            {% include "components/post-info.njk" %}
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Recent posts</h3>
+          <p>Some explanation</p>
+          <div class="{{ componentWrapperClass }}">
+            {% set n = 3 %}
+            {% set posts = collections.post | reverse | limit(n) | reverse %}
+            {% include "components/postslist.njk" %}
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Post footer (TODO)</h3>
+          <p>Some explanation</p>
+          <div class="{{ componentWrapperClass }}">
+            {% include "components/post-footer.njk" %}
+          </div>
+        </li>
+        <li class="{{ liClass }}">
+          <h3>Contact form</h3>
+          <p>A Netlify form to contact me.</p>
+          <div class="{{ componentWrapperClass }}">
+            {% include "components/contact-form.njk" %}
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  {# JS assets that will be injected in <head> with eleventy-plugin-helmet #}
+  <script defer src="/assets/js/back-to-top.js" data-helmet></script>
+
+  {# CSS assets that will be injected in <head> with eleventy-plugin-helmet #}
+  <link rel="stylesheet" href="/assets/css/utilities.css" data-helmet>
+</main>

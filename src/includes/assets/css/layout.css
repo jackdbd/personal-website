@@ -1,0 +1,25 @@
+.stack: {
+  --space: theme('spacing.3');
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stack > *: {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.stack > * + *: {
+  margin-top: var(--space);
+}
+
+.wrap {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--fluid-1);
+  padding-left: var(--fluid-1);
+  width: 815px;
+  max-width: 95vw;
+}

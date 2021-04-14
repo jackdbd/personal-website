@@ -1,0 +1,32 @@
+/* 
+ * Modular scale
+ * A modular scale is represented as a number that gets multiplied against a
+ * base size again and again, creating 'steps'.
+ * I like using a perfect fourth (1.333) for small viewports, and a perfect
+ * fifth (1.5) for large viewports.
+ * Do NOT edit the modular scale here! If you want to edit the scale, regenerate
+ * a new modular scale with this fluid type scale calculator.
+ * @link https://utopia.fyi/type/calculator?c=320,20,1.333,1140,24,1.5,4,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l
+ *
+ * step--1: small
+ * step-0: p, span
+ * step-1: h4
+ * step-2: h3
+ * step-3: h2
+ * step-4: h1
+ *
+ * clamp(MIN, VAL, MAX)
+ * CSS clamp() support is pretty good (~91%)
+ * https://caniuse.com/?search=clamp
+ * CSS calc() support is better (~97%), but the scale would be much more code.
+ * https://caniuse.com/?search=calc
+ */
+:root {
+  --step--2: clamp(0.70rem, 0.72rem + -0.07vw, 0.67rem);
+  --step--1: clamp(0.94rem, 0.91rem + 0.12vw, 1.00rem);
+  --step-0: clamp(1.25rem, 1.15rem + 0.49vw, 1.50rem);
+  --step-1: clamp(1.67rem, 1.44rem + 1.14vw, 2.25rem);
+  --step-2: clamp(2.22rem, 1.77rem + 2.25vw, 3.38rem);
+  --step-3: clamp(2.96rem, 2.14rem + 4.10vw, 5.06rem);
+  --step-4: clamp(3.95rem, 2.52rem + 7.12vw, 7.59rem);
+}
