@@ -1,11 +1,7 @@
-<div class="cluster">
-    <ul class="p-2 cluster-children-wrapper">
-        {% for entry in metadata.socials %}
-        <li class="">
-            <a href="{{ entry.url | url }}" rel="noopener noreferrer" target="_blank">
-                {{ entry.name }}
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
+<ul role="list" class="cluster" data-align="{{ align }}">
+  {% for entry in metadata.socials %}
+  <li>
+    <a href="{{ entry.url | url }}" rel="noopener noreferrer" target="_blank">{{ entry.name }}</a>
+  </li>
+  {% endfor %}
+</ul>

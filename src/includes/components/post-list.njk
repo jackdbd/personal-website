@@ -1,0 +1,28 @@
+<ul role="list" class="flow post-list">
+  {% for post in posts | reverse %}
+
+  <li class="flow">
+    <h3>
+      <a href="{{ post.url | url }}">
+        {% if post.data.title %}
+        {{ post.data.title }}
+        {% else %}
+        Untitled post
+        {% endif %}
+      </a>
+    </h3>
+
+    {% set humanDate = post.data.date | humanDate %}
+    {% set machineDate = post.data.date | machineDate %}
+    {% set readingTime = post | readingTime %}
+    {% include "components/post-info.njk" %}
+
+    {% if post.data.tags %}
+    {% set tags = post.data.tags %}
+    {% set align = "start" %}
+    {% include "components/tags.njk" %}
+    {% endif %}
+  </li>
+
+  {% endfor %}
+</ul>

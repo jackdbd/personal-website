@@ -4,219 +4,229 @@ eleventyExcludeFromCollections: true
 layout: bare-minimum.njk
 permalink: /styleguide/index.html
 ---
-<main role="main" class="prose wrap">
+<main role="main" class="styleguide wrapper flow">
   <h1>Style Guide</h1>
   <p>TODO: write some visual regression tests for this page with Puppeteer.</p>
 
-  {% set liClass = "outline-black" %}
-  {# {% set liClass = "" %} #}
-  {# {% set componentWrapperClass = "debug-bg" %} #}
-  {% set componentWrapperClass = "" %}
+  {% set liClass = "flow" %}
+  {% set vanillaContainer = "styleguide__example" %}
+  {% set proseContainer = "styleguide__example prose" %}
 
-  <div class="stack">
-    <section>
-      <h2>Layout primitives</h2>
-      <ul class="stack set-space:2rem">
-        <li class="{{ liClass }}">
-          <h3>Center</h3>
-          <p>
-            <span>A center layout primitive. Uses ch as CSS unit.</span>
-            <br>
-            <span>Here <code>max-width</code> is set to 10, 20, and 30 (with
-            </span><code>word-break:break-all</code><span>).</span>
-          </p>
-          <div class="center" style="max-width: 10ch;word-break:break-all;">
-            <div class="bg-red-500">000000000000000000000000000000</div>
-          </div>
-          <div class="center" style="max-width: 20ch;word-break:break-all;">
-            <div class="bg-green-500">000000000000000000000000000000</div>
-          </div>
-          <div class="center" style="max-width: 30ch;word-break:break-all;">
-            <div class="bg-blue-500">000000000000000000000000000000</div>
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Cluster</h3>
-          <p>A cluster layout primitive.</p>
-          <div class="cluster">
-            <ul class="cluster cluster-children-wrapper">
-              <li class="bg-red-500">child01</li>
-              <li class="bg-green-500">child02</li>
-              <li class="bg-blue-500">child03</li>
-              <li class="bg-red-500">child04</li>
-              <li class="bg-green-500">child05</li>
-              <li class="bg-blue-500">child06</li>
-              <li class="bg-red-500">child07</li>
-              <li class="bg-green-500">child08</li>
-              <li class="bg-blue-500">child09</li>
-              <li class="bg-red-500">child10</li>
-              <li class="bg-green-500">child11</li>
-              <li class="bg-blue-500">child12</li>
-            </ul>
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Stack</h3>
-          <p>A stack layout primitive.</p>
-          <div class="stack">
-            <div class="bg-red-500">child</div>
-            <div class="bg-green-500">child</div>
-            <div class="bg-blue-500">child</div>
-          </div>
-        </li>
-      </ul>
-    </section>
+  <section>
+    <h2>Pill</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Default</p>
+        {% set text = "hello" %}
+        {% set href = "https://www.google.com/" %}
+        <div class="{{ vanillaContainer }}">
+          {% include "components/pill.njk" %}
+        </div>
+      </li>
+      <li class="styleguide__example">
+        <p>In a <code>.prose</code> container</p>
+        <div class="{{ proseContainer }}">
+          {% include "components/pill.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
 
-    <section>
-      <h2>Typography</h2>
-      <ul class="stack">
-        <li class="{{ liClass }}">
-          <h3>Modular Scale</h3>
-          <p>A modular scale is represented as a number that gets multiplied against a base size again and again, creating 'steps'.</p>
-          <p>I like using a perfect fourth (1.333) for small viewports, and a perfect fifth (1.5) for large viewports.</p>
-          <p>My modular scale was generated with the <a href="https://utopia.fyi/type/calculator" rel="noopener noreferrer" target="_blank">Fluid type scale calculator</a>.</p>
-          <div class="">
-            <p style="--step-0: var(--step-4)">Step 4</p>
-            <p style="--step-0: var(--step-3)">Step 3</p>
-            <p style="--step-0: var(--step-2)">Step 2</p>
-            <p style="--step-0: var(--step-1)">Step 1</p>
-            <p>Step 0</p>
-            <p style="--step-0: var(--step--1)">Step -1</p>
-            <p style="--step-0: var(--step--2)">Step -2</p>
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Headings (h3)</h3>
-          <h4>Headings (h4)</h4>
-          <h5>Headings (h5 - never use)</h5>
-          <h6>Headings (h6 - never use)</h6>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Code (TODO)</h3>
-          {# <p>Some Clojure code</p> #}
-          {# <pre class="language-clojure">
-            <code class="language-clojure">(defmethod draw :triangle [options] (str "Drawing a " (:color options) " triangle"))</code>
-          </pre> #}
-          {# <p>Some Python code</p> #}
-          {# <pre class="language-python">
-            <code class="language-python">class Cat(Animal): def sound(self): return "meow"</code>
-          </pre> #}
-        </li>
-      </ul>
-    </section>
+  <section>
+    <h2>Tags</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        {% set tags = ["ansible", "git", "python", "webgl", "frontend", "backend", "d3", "microservices", "javascript", "zig", "clojure", "devops", "rust", "webassembly"] %}
+        <p>default</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/tags.njk" %}
+        </div>
+      </li>
 
-    <section>
-      <h2>Components</h2>
-      <ul class="stack">
-        <li class="{{ liClass }}">
-          <h3>Pill (text)</h3>
-          <p>Some explanation</p>
-          <div class="{{ componentWrapperClass }}">
-            {% set text = "Some text" %}
-            {% include "components/pill.njk" %}
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Pill (link)</h3>
-          <p>Some explanation</p>
-          <div class="{{ componentWrapperClass }}">
-            {% set text = "Some link" %}
-            {% set href = "https://www.google.com/" %}
-            {% include "components/pill.njk" %}
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Socials</h3>
-          <p>Links to my social accounts</p>
-          <div class="{{ componentWrapperClass }}">
-            {% include "components/socials.njk" %}
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Tags (with links)</h3>
-          <p>A cluster of tags. Each tag link to a collection of blog posts tagged with such tag.</p>
-          <div class="{{ componentWrapperClass }}">
-            {% set tags = ["ansible", "git", "python", "webgl", "frontend", "backend", "d3", "microservices", "javascript", "zig", "clojure", "devops", "rust", "webassembly"] %}
-            {% include "components/tags.njk" %}
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Header</h3>
-          <p>The header on all pages</p>
-          <div class="{{ componentWrapperClass }}">
-            {% include "components/header.njk" %}
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Footer</h3>
-          <p>The footer on all pages</p>
-          <div class="{{ componentWrapperClass }}">
-            {% include "components/footer.njk" %}
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Theme switcher</h3>
-          <p>Some explanation</p>
-          <div class="{{ componentWrapperClass }}">
-            <span>Click this button</span>
-            {% include "components/theme-switcher.njk" %}
-            <span>and it will change theme</span>
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Menu icon</h3>
-          <p>Some explanation</p>
-          <div class="{{ componentWrapperClass }}">
-            {% include "components/menu-icon.njk" %}
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Tech stack</h3>
-          <p>Some explanation</p>
-          <div class="{{ componentWrapperClass }}">
-            {% include "components/tech-stack.njk" %}
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Post info</h3>
-          <p>Metadata about a blog post: data, reading time, author.</p>
-          <div class="{{ componentWrapperClass }}">
-            {% set humanDate = "14 Mar 2021" %}
-            {% set machineDate = "2021-03-14 20:00" %}
-            {% set readingTime = "123 min" %}
-            {% include "components/post-info.njk" %}
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Recent posts</h3>
-          <p>Some explanation</p>
-          <div class="{{ componentWrapperClass }}">
-            {% set n = 3 %}
-            {% set posts = collections.post | reverse | limit(n) | reverse %}
-            {% include "components/postslist.njk" %}
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Post footer (TODO)</h3>
-          <p>Some explanation</p>
-          <div class="{{ componentWrapperClass }}">
-            {% include "components/post-footer.njk" %}
-          </div>
-        </li>
-        <li class="{{ liClass }}">
-          <h3>Contact form</h3>
-          <p>A Netlify form to contact me.</p>
-          <div class="{{ componentWrapperClass }}">
-            {% include "components/contact-form.njk" %}
-          </div>
-        </li>
-      </ul>
-    </section>
-  </div>
+      <li class="styleguide__example">
+        <p>align=start</p>
+        <div class="{{ vanillaContainer }}">
+          {% set align = "start" %}
+          {% include "components/tags.njk" %}
+        </div>
+      </li>
 
-  {# JS assets that will be injected in <head> with eleventy-plugin-helmet #}
-  <script defer src="/assets/js/back-to-top.js" data-helmet></script>
+      <li class="styleguide__example">
+        <p>align=end</p>
+        <div class="{{ vanillaContainer }}">
+          {% set align = "end" %}
+          {% include "components/tags.njk" %}
+        </div>
+      </li>
 
-  {# CSS assets that will be injected in <head> with eleventy-plugin-helmet #}
-  <link rel="stylesheet" href="/assets/css/utilities.css" data-helmet>
+      <li class="styleguide__example">
+        <p>in a <code>.prose</code> container</p>
+        <div class="{{ proseContainer }}">
+          {% set align = "" %}
+          {% include "components/tags.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Socials</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Links to my social accounts</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/socials.njk" %}
+        </div>
+      </li>
+      <li class="styleguide__example">
+        <p>in a <code>.prose</code> container</p>
+        <div class="{{ proseContainer }}">
+          {% include "components/socials.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Header</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>The header on all pages</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/header.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Footer</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>The footer on all pages</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/footer.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Tech stack</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Some explanation</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/tech-stack.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Contact Form</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>A Netlify form to contact me.</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/contact-form.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Quote</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Some explanation</p>
+        <div class="{{ vanillaContainer }}">
+          <blockquote>
+            <p>The goal is to define a datatype by cases, where one can add new cases to the datatype and new functions over
+              the datatype, without recompiling existing code, and while retaining static type safety (e.g., no casts).</p>
+          </blockquote>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Code</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Some explanation</p>
+        <div class="{{ vanillaContainer }}">
+          <pre
+            class="language-shell"><code class="language-shell"><span class="token function">sudo </span><span class="token function">apt</span> update<br><span class="token function">sudo </span><span class="token function">apt</span><span class="token function"> install</span> software-properties-common<br><span class="token function">sudo </span>apt-add-repository --yes --update ppa:ansible/ansible<br><span class="token function">sudo </span><span class="token function">apt</span><span class="token function"> install</span> ansible</code></pre>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Post info</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Metadata about a blog post: data, reading time, author.</p>
+        <div class="{{ vanillaContainer }}">
+          {% set humanDate = "14 Mar 2021" %}
+          {% set machineDate = "2021-03-14 20:00" %}
+          {% set readingTime = "123 min" %}
+          {% include "components/post-info.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Post list</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Some explanation</p>
+        <div class="{{ vanillaContainer }}">
+          {% set n = 3 %}
+          {% set posts = collections.post | reverse | limit(n) | reverse %}
+          {% include "components/post-list.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Post footer (TODO)</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Some explanation</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/post-footer.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
 </main>
+
+{# CSS assets that will be injected in <head> with eleventy-plugin-helmet #}
+{# Keep styleguide.css first, to avoid masking possible CSS specificity issues #}
+<link rel="stylesheet" href="/assets/css/styleguide.css" data-helmet>
+<link rel="stylesheet" href="/assets/css/components.css" data-helmet>
+<link rel="stylesheet" href="/assets/css/utilities.css" data-helmet>
+<link rel="stylesheet" href="/assets/css/prismjs-theme.css" data-helmet>
+
+{# Google Fonts: preconnect and prefetch for stylesheets and font files#}
+<link data-helmet rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link data-helmet rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link data-helmet rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link data-helmet rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+{# display fonts #}
+{# <link data-helmet
+  href="https://fonts.googleapis.com/css2?family=Bangers&family=Dela+Gothic+One&family=Fredericka+the+Great&display=swap"
+  rel="stylesheet" crossorigin> #}
+
+{# sans-serif fonts #}
+{# <link data-helmet href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&display=swap" rel="stylesheet" crossorigin> #}
+
+{# serif fonts #}
+{# <link data-helmet href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet"
+  crossorigin> #}

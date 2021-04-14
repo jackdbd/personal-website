@@ -1,7 +1,35 @@
-.set-space\:2rem {
-  --space: 2rem !important;
+.background\:none {
+  background: none !important;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.display\:none {
+  display: none;
+}
+
+.full-bleed {
+  margin-left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
 }
 
 .justify-content\:space-between {
   justify-content: space-between !important;
+}
+
+.list-style\:none {
+  list-style: none !important;
+}
+
+.margin-left\:0 {
+  margin-left: 0 !important;
+}
+
+.padding-left\:0 {
+  padding-left: 0 !important;
 }

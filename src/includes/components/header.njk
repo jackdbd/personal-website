@@ -1,18 +1,14 @@
-<header class="outline-black">
-  <div class="cluster">
-  <ul class="p-2 cluster-children-wrapper justify-content:space-between">
-    <li class="">
-      <a class="font-semibold uppercase" href="{{ '/' | url }}">
-        {{ metadata.title }}
-      </a>
+<header role="banner">
+  <ul class="cluster wrapper region justify-content:space-between">
+    <li>
+      <a href="{{ '/' | url }}">{{ metadata.title }}</a>
     </li>
-    <li class="cluster">
-      <ul class="p-2 cluster-children-wrapper">
-        {# <li class="flex">{% include "components/theme-switcher.njk" %}</li> #}
+    <li>
+      <ul role="list" class="cluster">
         {% set navPages = collections.all | eleventyNavigation %}
         {% for entry in navPages %}
-        <li class="">
-          <a class="font-semibold" href="{{ entry.url | url }}" {% if entry.url == page.url %} data-current="current item" {% endif %}>
+        <li>
+          <a href="{{ entry.url | url }}" {% if entry.url == page.url %} data-current="current item" {% endif %}>
             {{ entry.title }}
           </a>
         </li>
@@ -20,5 +16,4 @@
       </ul>
     </li>
     </ul>
-  </div>
 </header>

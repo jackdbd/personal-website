@@ -1,7 +1,9 @@
-<footer class="px-2 py-2 outline-black">
-  {% include "components/socials.njk" %}
-  <div class="px-2">
-    <small>{% copyright metadata.author.name %}</small>
-    {# <span class="text-sm">{% copyright metadata.author.name %}</span> #}
+<footer role="contentinfo">
+  <div class="flow wrapper region">
+    {% set align = "" %}
+    {% include "components/socials.njk" %}
+    <div class="center">
+      <small>{% copyright metadata.author.name %}</small>
+    </div>
   </div>
 </footer>

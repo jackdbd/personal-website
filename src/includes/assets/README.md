@@ -1,0 +1,28 @@
+# Assets
+
+## CSS
+
+- `scale.css`: modular scales for typography and space. This file defines some CSS custom properties and make them available globally by adding them to the `:root` selector. All the CSS custom properties defined in this file start with the `--scale` prefix, e.g. `--scale-step-0`. This file does **not** define any new CSS classes.
+- `color.css`: colors. This file defines some CSS custom properties and make them available globally by adding them to the `:root` selector. All the CSS custom properties defined in this file start with the `--color` prefix, e.g. `--color-gold`. This file does **not** define any new CSS classes.
+- `font.css`: font-face definitions and default font families. This file contains all `@font-face` rules and sets the font families for serif, sans-serif and monospace fonts. The font families are available globally since they are added to the `:root` selector. All the CSS custom properties defined in this file start with the `--font` prefix, e.g. `--font-sans-serif`. This file does **not** define any new CSS classes, nor defines rulesets for HTML elements.
+- `layout.css`: classes for layout primitives. They are quite small and have many use cases. Variations from the default configuration are set via data attributes, as described in [this article by Andy Bell](https://piccalil.li/blog/cube-css#heading-exception).
+- `utilities.css`: atomic classes that do **one thing**.
+
+## JS
+
+- scripts for service worker registration
+- scripts for the few components that require some Javascript.
+- Use `defer` to asynchronously load a script which **requires** an element to be in the DOM (e.g. attach an event listener).
+- Use `async` to asynchronously load a script which does not require the DOM to be ready, and which is completely independent from other scripts (e.g. ads). See also [Scripts: async, defer](https://javascript.info/script-async-defer).
+
+## Fonts
+
+I'm self-hosting all of my fonts because it's usually better for performance. See here:
+
+- https://csswizardry.com/2019/05/self-host-your-static-assets/
+- https://csswizardry.com/2020/05/the-fastest-google-fonts/
+- https://www.youtube.com/watch?v=FbguhX3n3Uc&ab_channel=WebConferencesAmsterdam
+
+## Images
+
+- The few images I self-host. All other images are hosted on my Cloudinary account.

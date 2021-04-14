@@ -59,11 +59,12 @@
   <link rel="manifest" href="/manifest.webmanifest">
 
   {# Inline CSS (critical CSS) #}
+  {# Rule of thumb: the sum of all inlined CSS should not exceed 1-2 KB once minified. #}
+  {# https://www.11ty.dev/docs/quicktips/inline-css/ #}
   {% set css %}
-    {% include "assets/css/inline.css" %}
-    {% include "assets/css/fonts.css" %}
-    {% include "assets/css/modular-scale.css" %}
-    {% include "assets/css/typography.css" %}
+    {% include "assets/css/scale.css" %}
+    {% include "assets/css/color.css" %}
+    {% include "assets/css/font.css" %}
     {% include "assets/css/layout.css" %}
   {% endset %}
   <style>{{ css | cssmin | safe }}</style>
@@ -83,5 +84,5 @@
   <script>{{ js | jsmin | safe }}</script>
 
   {# Non-inlined JS: use async or defer #}
-  <script defer src="/assets/js/instantpage.min.js"></script>
+  <script async src="/assets/js/instantpage.min.js"></script>
 </head>

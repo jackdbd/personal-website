@@ -1,10 +1,1 @@
-{% if href %}
-<span class="inline-flex px-2 border-2 rounded-md border-tertiary group hover:bg-tertiary focus-within:bg-tertiary">
-  <a class="font-semibold focus:outline-none focus:text-background group-hover:text-background"
-    href="{{ href | url }}" rel="tag">
-    {{ text }}
-  </a>
-</span>
-{% else %}
-<span class="inline-flex px-2 border-2 rounded-md border-tertiary">{{ text }}</span>
-{% endif %}
+<a class="pill" href="{{ href | url }}"rel="tag">{{ text }}</a>

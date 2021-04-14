@@ -177,10 +177,12 @@ const prebuild = () => {
       csp_directive: 'style-src-attr',
       sha256: hashFromString(YOUTUBE_EMBED_IFRAME_INLINE_STYLE)
     },
-    {
-      csp_directive: 'style-src-elem',
-      sha256: hashFromFilepath('src/includes/assets/css/inline.css')
-    },
+    // TODO: CSS is concatenated, then inlined in the <head>. How to compute
+    // the hash to use in the CSP?
+    // {
+    //   csp_directive: 'style-src-elem',
+    //   sha256: hashFromFilepath('src/includes/assets/css/inline.css')
+    // },
     {
       csp_directive: 'script-src-elem',
       sha256: hashFromFilepath('src/includes/assets/js/back-to-top.js')

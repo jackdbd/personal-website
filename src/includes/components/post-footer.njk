@@ -1,12 +1,12 @@
 <footer class="post-footer">
-    <ul>
-        {% set navPages = collections.all | eleventyNavigation %}
-        {% for entry in navPages %}
-        <li>
-            <a href="{{ entry.url | url }}">
-                {{ entry.title }}
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% set navPages = collections.all | eleventyNavigation %}
+    {% for entry in navPages %}
+    <li>
+      <a href="{{ entry.url | url }}">
+        {{ entry.title }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
 </footer>

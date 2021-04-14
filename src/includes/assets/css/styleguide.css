@@ -1,0 +1,37 @@
+.styleguide > * {
+  font-size: var(--scale-step-0);
+}
+
+/* .styleguide h1,
+.styleguide h2,
+.styleguide h3 {
+  background: var(--color-gold-1);
+} */
+
+.styleguide h1 {
+  font-size: var(--scale-step-3);
+}
+
+.styleguide h2 {
+  font-size: var(--scale-step-2);
+}
+
+.styleguide h3 {
+  font-size: var(--scale-step-1);
+}
+
+.styleguide figcaption,
+.styleguide small {
+  font-size: var(--scale-step--1);
+}
+
+.styleguide section {
+  outline: 2px dashed var(--color-gold);
+}
+
+.styleguide__example {
+  /* outline: 1px solid var(--color-secondary); */
+  background: var(--color-background);
+  /* background: var(--color-navy-4); */
+  /* background-color: hsl(273, 20%, 82%); */
+}

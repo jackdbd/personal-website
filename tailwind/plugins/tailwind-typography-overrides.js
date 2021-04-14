@@ -2,7 +2,7 @@
 const typography = (theme) => {
   // console.log('=== fontSize ===', theme('fontSize'));
   const headingOverrides = {
-    color: theme('colors.headline'),
+    color: theme('colors.heading'),
     'font-family': theme('fontFamily.serif').join(',')
   };
 
@@ -52,7 +52,7 @@ const typography = (theme) => {
         // the markup.
         // https://github.com/tailwindlabs/tailwindcss/discussions/2119
         // https://github.com/sgrowe/tailwind-pseudo-elements
-        '.postslist > li::before': {
+        '.post-list > li::before': {
           content: '""'
         }
       }

@@ -1,40 +1,67 @@
 ---
-layout: base.njk
+layout: bare-minimum.njk
 section: post
 ---
 {% block content %}
-<article class="">
-  <h1>{{ title }}</h1>
 
-  <div class="stack">
-    {% set humanDate = date | humanDate %}
-    {% set machineDate = date | machineDate %}
-    {% set readingTime = content | readingTime %}
-    {% include "components/post-info.njk" %}
+<div id="wrapper-for-sticky-footer">
 
-    {% if tags %}
-    {% include "components/tags.njk" %}
-    {% endif %}
+  {% include "components/header.njk" %}
 
-    {{ content | toc | safe }}
-  </div>
+  <main role="main" class="wrapper">
+    <article class="prose flow region">
 
-  {{ content | safe }}
+      <h1>{{ title }}</h1>
+      
+      <div class="cluster" data-align='start'>
+        {% set humanDate = date | humanDate %}
+        {% set machineDate = date | machineDate %}
+        {% set readingTime = content | readingTime %}
+        <time datetime="{{ machineDate }}">
+          <em>{{ humanDate }}</em>
+        </time>
+        {% if tags %}
+          {% set align = "start" %}
+          {% include "components/tags.njk" %}
+        {% endif %}
+      </div>
 
-  {% if tags %}
-  {% include "components/tags.njk" %}
-  {% endif %}
-</article>
+      <hr>
+
+      {# TODO: decide whether to include a Table Of Contents or not #}
+      {# {{ content | toc | safe }} #}
+
+      {{ content | safe }}
+
+      {# {% if tags %}
+        {% set align = "start" %}
+        {% include "components/tags.njk" %}
+      {% endif %} #}
+
+    </article>
+  </main>
+
+  {% include "components/footer.njk" %}
+
+</div>
+
 {% include "components/back-to-top.njk" %}
 
-{# CSS assets that will be injected in <head> with eleventy-plugin-helmet #}
-{# Preload Prism.js okaidia theme, so this stylesheet is not render-blocking #}
-{# <link id="prism-stylesheet" data-helmet rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" as="style" onload="this.onload=null;this.rel='stylesheet'"> #}
-<link id="prism-stylesheet" data-helmet rel="preload" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css"
-  as="style">
-<noscript data-helmet>
-  <link rel="stylesheet" href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" crossorigin></noscript>
-
-{# JS assets that will be injected in <head> with eleventy-plugin-helmet #}
-<script defer src="/assets/js/back-to-top.js" data-helmet></script>
 {% endblock content %}
+
+{# inlined CSS assets (critical CSS) #}
+
+{# inlined JS assets (critical JS) #}
+{% set js %}
+{% include "assets/js/sw-registration.js" %}
+{% endset %}
+<script data-helmet>{{ js | jsmin | safe }}</script>
+
+{# external CSS assets #}
+<link data-helmet rel="stylesheet" href="/assets/css/components.css">
+<link data-helmet rel="stylesheet" href="/assets/css/utilities.css">
+<link data-helmet rel="stylesheet" href="/assets/css/prismjs-theme.css">
+
+{# external JS assets #}
+{# <script data-helmet async src="/assets/js/sw-registration.js"></script> #}
+<script data-helmet defer src="/assets/js/back-to-top.js"></script>

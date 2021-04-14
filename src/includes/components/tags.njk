@@ -1,11 +1,8 @@
-<div class="cluster">
-  <ul class="cluster-children-wrapper">
-    {% for tag in tags %}
-      {% if tag != "post" %}
-        {% set text = tag %}
-        {% set href %}/tags/{{ text }}/{% endset %}
-        <li>{% include "components/pill.njk" %}</li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-</div>
+<ul role="list" class="cluster" data-align="{{ align }}">
+  {% for text in tags %}
+    {% if text != "post" %}
+      {% set href %}/tags/{{ text }}/{% endset %}
+      <li>{% include "components/pill.njk" %}</li>
+    {% endif %}
+  {% endfor %}
+</ul>

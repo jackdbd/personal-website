@@ -1,0 +1,278 @@
+/* defaults: move them to default.css? reset.css? --------------------------- */
+
+a {
+  color: var(--color-gold);
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 0.15rem dashed var(--color-gold);
+}
+
+a:hover {
+  text-decoration-color: var(--color-paragraph);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-paragraph);
+  font-family: var(--font-sans);
+  font-size: var(--scale-step-0);
+  line-height: 1.5;
+}
+
+blockquote p {
+  color: var(--color-gold);
+  font-size: var(--scale-step-1);
+  font-style: italic;
+  line-height: 1.25;
+}
+
+em {
+  color: var(--color-gold);
+}
+
+figcaption {
+  font-size: var(--scale-step--1);
+  display: block;
+  margin-top: 0.5em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-heading);
+  font-family: var(--font-headings);
+  font-weight: 700;
+  line-height: 1;
+}
+
+h1 {
+  --flow-space: var(--scale-step-3);
+  font-size: var(--scale-step-3);
+}
+
+h2 {
+  --flow-space: var(--scale-step-2);
+  font-size: var(--scale-step-2);
+}
+
+h3 {
+  --flow-space: var(--scale-step-1);
+  font-size: var(--scale-step-1);
+}
+
+footer,
+header {
+  background-color: var(--color-gold);
+}
+
+footer a,
+header a {
+  color: var(--color-paragraph);
+  font-family: var(--font-headings);
+  font-weight: 700;
+}
+
+footer a:focus,
+header a:focus {
+  outline: 0.15rem dashed var(--color-background);
+}
+
+footer a:hover,
+header a:hover {
+  /* background-color: var(--color-background); */
+  text-decoration-color: var(--color-background);
+  /* text-decoration-thickness: 5px; */
+}
+
+footer .flow > * {
+  --flow-space: var(--scale-space-3xs);
+}
+
+small {
+  font-size: var(--scale-step--1);
+}
+
+strong {
+  font-weight: 700;
+}
+
+/* .contact-form ------------------------------------------------------------ */
+
+.contact-form button,
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+}
+
+.contact-form button {
+  background: var(--color-gold);
+  border-radius: 0.5rem;
+}
+
+.contact-form [type='email'],
+.contact-form [type='text'],
+.contact-form textarea {
+  --tw-ring-color: var(--color-secodary);
+  --tw-ring-offset-shadow: 4px;
+  --tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+  border-color: var(--color-gold);
+  border-radius: 0.5rem;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.contact-form [type='email']:focus,
+.contact-form [type='text']:focus,
+.contact-form textarea:focus {
+  border-color: var(--color-tertiary);
+}
+
+.contact-form [type='submit'] {
+  text-transform: uppercase;
+}
+
+/* .heading-anchor ---------------------------------------------------------- */
+
+.heading-anchor {
+  text-decoration-line: none;
+}
+
+.heading-anchor:hover {
+  /* is this a good use case for revert? Or should I just use underline? */
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/revert */
+  text-decoration-color: var(--color-paragraph);
+  text-decoration-line: underline;
+}
+
+/* .pill -------------------------------------------------------------------- */
+
+.pill {
+  --background-color: var(--color-background);
+  --border-color: var(--color-gold);
+
+  display: inline-flex;
+  /* display: inline-block; */
+  border: 2px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--background-color);
+  color: var(--color-paragraph);
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.15em 0.25em 0.25em 0.25em;
+  text-decoration: none;
+}
+
+.pill:focus,
+.pill:hover {
+  background: var(--border-color);
+  color: var(--background-color);
+}
+
+.pill:focus {
+  border-color: var(--color-navy);
+  outline: none;
+}
+
+/* .post-list --------------------------------------------------------------- */
+
+.post-list {
+  --flow-space: var(--scale-space-l);
+}
+
+.post-list h3 a {
+  color: var(--color-headings);
+  text-decoration: none;
+}
+
+.post-list h3 a:hover {
+  text-decoration: underline;
+}
+
+.post-list li {
+  --flow-space: var(--scale-space-m);
+  position: relative;
+  /* background-color: aquamarine; */
+}
+
+/* .post-list > li::after {
+  content: '';
+  position: absolute;
+  width: 100vw;
+  height: 1px;
+  left: 0;
+  display: block;
+  clear: both;
+  background-color: black;
+} */
+
+.post-list li > * {
+  --flow-space: var(--scale-space-3xs);
+}
+
+/* .prose ------------------------------------------------------------------- */
+
+.prose code {
+  background: var(--color-navy-5);
+  font-family: var(--font-monospace);
+  /* maybe use --scale-step--1 on small viewports and step-0 on large ones */
+  font-size: var(--scale-step--1);
+  /* font-size: var(--scale-step-0); */
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid currentColor;
+}
+
+.prose li + li {
+  margin-top: 0.5em;
+}
+
+.prose ol > li {
+  list-style: decimal;
+  margin-left: 1.5em;
+  padding-left: 1em;
+}
+
+.prose pre {
+  max-width: 100%;
+  overflow: auto;
+  padding: var(--scale-space-s);
+  width: 100%;
+}
+
+.prose pre code {
+  background: transparent;
+  display: block;
+  /* maybe use --scale-step--1 on small viewports and step-0 on large ones */
+  font-size: var(--scale-step--1);
+}
+
+.prose ul:not(.cluster) > li {
+  background-image: url('data:image/svg+xml;utf8,<svg width="8" height="12" xmlns="http://www.w3.org/2000/svg"><circle fill="%23b29a6b" cx="4" cy="4" r="4" fill-rule="evenodd"/></svg>');
+  background-position: 0 0.6em;
+  background-repeat: no-repeat;
+  list-style: none;
+  margin-left: 1.25em;
+  padding-left: 1em;
+}
+
+/* .prose overrides (keep these to a minimum!) ------------------------------ */
+.prose .cluster li + li {
+  margin-top: var(--cluster-spacing);
+}
+
+/* #wrapper-for-sticky-footer ----------------------------------------------- */
+#wrapper-for-sticky-footer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#wrapper-for-sticky-footer > main {
+  flex: auto;
+}

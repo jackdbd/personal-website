@@ -7,16 +7,16 @@
     url('/assets/fonts/jetbrains-mono-v6-latin-regular.woff') format('woff');
 }
 
-@font-face {
+/* @font-face {
   font-family: 'Lato';
   font-display: swap;
   font-weight: 400;
   src: local('Lato-Regular'),
     url('/assets/fonts/lato-v17-latin-regular.woff2') format('woff2'),
     url('/assets/fonts/lato-v17-latin-regular.woff') format('woff');
-}
+} */
 
-@font-face {
+/* @font-face {
   font-family: 'Lobster';
   font-style: normal;
   font-display: swap;
@@ -24,7 +24,7 @@
   src: local('Lobster-Regular'),
     url('/assets/fonts/lobster.woff2') format('woff2'),
     url('/assets/fonts/lobster.woff') format('woff');
-}
+} */
 
 @font-face {
   font-family: 'Nunito';
@@ -35,23 +35,24 @@
     url('/assets/fonts/nunito-v16-latin-regular.woff') format('woff');
 }
 
-@font-face {
+/* Recursive is a variable font */
+/* @font-face {
   font-family: 'Recursive';
   font-display: swap;
   font-weight: 400;
   src: local('Recursive Regular'),
     url('/assets/fonts/recursive-v23-latin-regular.woff2') format('woff2'),
     url('/assets/fonts/recursive-v23-latin-regular.woff') format('woff');
-}
+} */
 
-@font-face {
+/* @font-face {
   font-family: 'Recursive';
   font-display: swap;
   font-weight: 800;
   src: local('Recursive Extra-bold'),
     url('/assets/fonts/recursive-v23-latin-800.woff2') format('woff2'),
     url('/assets/fonts/recursive-v23-latin-800.woff') format('woff');
-}
+} */
 
 @font-face {
   font-family: 'Source Sans Pro';
@@ -60,4 +61,39 @@
   src: local('Source Sans Pro'),
     url('/assets/fonts/source-sans-pro-v14-latin-regular.woff2') format('woff2'),
     url('/assets/fonts/source-sans-pro-v14-latin-regular.woff') format('woff');
+}
+
+:root {
+  /* --font-display: Bangers; */
+  /* --font-display: 'Dela Gothic One'; */
+  /* --font-display: 'Fredericka the Great'; */
+  --font-display: Lobster;
+
+  --font-monospace: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  /* --font-sans-serif: Lato, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji'; */
+
+  --font-sans-serif: 'Source Sans Pro', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+
+  /* --font-sans-serif: Nunito, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji'; */
+
+  --font-serif: Merriweather, ui-serif, Georgia, Cambria, 'Times New Roman',
+    Times, serif;
+
+  --font-headings: Nunito, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+
+  --font-body: var(--font-sans-serif);
 }

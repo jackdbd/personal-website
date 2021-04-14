@@ -1,8 +1,14 @@
 ---
-eleventyExcludeFromCollections: true
+description: Giacomo Debidda's about page
+eleventyNavigation:
+  key: About
+  order: 2
 layout: bare-minimum.njk
-permalink: 404.html
-title: Oops! Not Found (404)
+ogp:
+  title: About page
+permalink: /about/index.html
+section: about
+title: A few words about me
 ---
 {% block content %}
 
@@ -13,7 +19,7 @@ title: Oops! Not Found (404)
   <main role="main" class="wrapper">
     <div class="flow region">
       <h1>{{ title }}</h1>
-      <p>TODO: design 404 page. Page not found.</p>
+      <p>Page under construction.</p>
     </div>
   </main>
 

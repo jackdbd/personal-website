@@ -1,11 +1,26 @@
 ---
-date: 2020-09-01
+layout: bare-minimum.njk
 permalink: /tags/index.html
 title: Tags
 ---
-<section>
-  {% set tags = collections.userDefinedTagList | sort %}
-  {% include "components/tags.njk" %}
-</section>
-<hr>
-<p class="prose lg:prose-xl">Back to <a href="{{ '/blog/' | url }}">blog</a>.</p>
+{% block content %}
+
+<div id="wrapper-for-sticky-footer">
+
+  {% include "components/header.njk" %}
+
+  <main role="main" class="wrapper">
+    <div class="flow region">
+      <h1>{{ title }}</h1>
+      {% set tags = collections.userDefinedTagList | sort %}
+      {% include "components/tags.njk" %}
+      <hr>
+      <p class="">Back to <a href="{{ '/blog/' | url }}">blog</a>.</p>
+    </div>
+  </main>
+
+  {% include "components/footer.njk" %}
+
+</div>
+
+{% endblock content %}
