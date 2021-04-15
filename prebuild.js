@@ -43,7 +43,7 @@ const makeCsp = (resources) => {
   const styleSrcAttributes = ["'self'", "'unsafe-inline'"];
 
   const styleSrcElements = [
-    "'self'",
+    "'self' 'unsafe-inline'",
     ...resources.filter(isStyleSrcElem).map(sha256),
     'https://fonts.googleapis.com',
     'https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css'
