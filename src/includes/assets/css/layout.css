@@ -2,7 +2,7 @@
  * 
  * Exceptions for a layout primitive are set via data attributes.
  * E.g.
- * <ul role="list" class="cluster" data-align="start"></ul>
+ * <ul class="cluster" data-align="start"></ul>
  */
 
 /* https://every-layout.dev/layouts/cluster/ */
