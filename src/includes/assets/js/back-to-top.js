@@ -6,7 +6,6 @@
     const selector = document.getElementById(ELEMENT_ID);
 
     const handleScroll = () => {
-      // console.log('BACK TO TOP SCROLL');
       const threshold = document.documentElement.scrollHeight / SCROLL_FACTOR;
       if (
         document.body.scrollTop > threshold ||
@@ -20,7 +19,6 @@
 
     // When the user clicks on the button, scroll to the top of the document
     const handleClick = () => {
-      // console.log('BACK TO TOP CLICK');
       document.body.scrollTop = 0; // For Safari
       document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       // document.documentElement.scrollIntoView();

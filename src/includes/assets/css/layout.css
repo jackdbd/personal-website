@@ -34,11 +34,11 @@
 /* https://piccalil.li/quick-tip/flow-utility */
 /* the :not() is to avoid the hidden field in the contact form (for the honey pot) */
 .flow > :not(.display\:none) + * {
-  margin-top: var(--flow-space, var(--scale-step-0));
+  margin-top: var(--flow-space, 1em);
 }
 
 .region {
-  padding: var(--region-space, var(--scale-step-0)) 0;
+  padding: var(--region-space, 1em) 0;
 }
 
 .wrapper {

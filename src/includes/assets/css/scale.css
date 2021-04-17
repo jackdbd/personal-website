@@ -37,6 +37,8 @@
   --fluid-max-width: 1140;
 
   --fluid-screen: 100vw;
+
+  /* fluid breakpoint (value between 0 and 1 */
   --fluid-bp: calc(
     (var(--fluid-screen) - var(--fluid-min-width) / 16 * 1rem) /
       (var(--fluid-max-width) - var(--fluid-min-width))
