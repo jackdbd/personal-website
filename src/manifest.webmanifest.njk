@@ -2,11 +2,11 @@
 permalink: /manifest.webmanifest
 ---
 {
-    "lang": "{{ metadata.lang }}",
-    "dir": "ltr",
-    "name": "{{ metadata.title }}",
-    "short_name": "{{ metadata.title }}",
+    "background_color": "#ffffff",
+    "categories": ["education"],
     "description": "{{ metadata.description }}",
+    "dir": "ltr",
+    "display": "minimal-ui",
     "icons": [
         {
             "src": "/assets/img/favicon/maskable-icon-192x192.png",
@@ -21,9 +21,12 @@ permalink: /manifest.webmanifest
             "purpose": "any maskable"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "lang": "{{ metadata.lang }}",
+    "name": "{{ metadata.title }}",
+    "orientation": "natural",
+    "screenshots": [],
+    "short_name": "{{ metadata.title }}",
+    "shortcuts": [],
     "start_url": "/index.html",
-    "display": "minimal-ui",
-    "orientation": "natural"
+    "theme_color": "#ffffff"
 }
