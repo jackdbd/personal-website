@@ -1,47 +1,47 @@
 [
-    {
-        "path": "/contact$",
-        "resourceCounts": [
-            {
-                "resourceType": "third-party",
-                "budget": 18
-            }
-        ],
-        "resourceSizes": [
-            {
-                "resourceType": "document",
-                "budget": 20
-            },
-            {
-                "resourceType": "stylesheet",
-                "budget": 35
-            },
-            {
-                "resourceType": "font",
-                "budget": 40
-            },
-            {
-                "resourceType": "image",
-                "budget": 3
-            },
-            {
-                "resourceType": "script",
-                "budget": 150
-            }
-        ],
-        "timings": [
-            {
-                "metric": "cumulative-layout-shift",
-                "budget": 500
-            },
-            {
-                "metric": "largest-contentful-paint",
-                "budget": 3000
-            },
-            {
-                "metric": "max-potential-fid",
-                "budget": 800
-            }
-        ]
-    }
+  {
+    "path": "/contact$",
+    "resourceCounts": [
+      {
+        "resourceType": "third-party",
+        "budget": 18
+      }
+    ],
+    "resourceSizes": [
+      {
+        "resourceType": "document",
+        "budget": 20
+      },
+      {
+        "resourceType": "stylesheet",
+        "budget": 35
+      },
+      {
+        "resourceType": "font",
+        "budget": 100
+      },
+      {
+        "resourceType": "image",
+        "budget": 3
+      },
+      {
+        "resourceType": "script",
+        "budget": 150
+      }
+    ],
+    "timings": [
+      {
+        "metric": "cumulative-layout-shift",
+        "budget": 500
+      },
+      {
+        "metric": "largest-contentful-paint",
+        "budget": 3000
+      },
+      {
+        "metric": "max-potential-fid",
+        "budget": 800
+      }
+    ]
+  }
 ]

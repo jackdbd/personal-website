@@ -76,13 +76,13 @@
   {# Preload fonts to improve performance
   Note: crossorigin is required even for fonts hosted on this origin.
   See here: https://www.smashingmagazine.com/2016/02/preload-what-is-it-good-for/ #}
-  {# probably I shouldn't preload ALL the fonts #}
-  <link rel="preload" href="/assets/fonts/source-code-pro-v14-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/nunito-v16-latin-800.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/merriweather-v22-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/merriweather-v22-latin-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/merriweather-v22-latin-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/merriweather-v22-latin-700italic.woff2" as="font" type="font/woff2" crossorigin>
+  {# I use italic only on a few pages, so maybe it's better NOT to preload any italic font variant #}
+  {# <link rel="preload" href="/assets/fonts/merriweather-v22-latin-italic.woff2" as="font" type="font/woff2" crossorigin> #}
+  {# <link rel="preload" href="/assets/fonts/merriweather-v22-latin-700italic.woff2" as="font" type="font/woff2" crossorigin> #}
+  {# I am using a monospace font only in blog posts, so I'll preload it only for those page types. #}
 
   {# RSS Feed #}
   <link rel="alternate" href="{{ metadata.url }}/feed.xml" title="{{ metadata.title }}" type="application/atom+xml">
