@@ -88,6 +88,12 @@ header a:hover {
   text-decoration-thickness: 0.25rem;
 }
 
+footer small {
+  color: var(--color-background);
+  font-family: var(--font-headings);
+  text-align: end;
+}
+
 footer .flow > * {
   --flow-space: var(--scale-space-3xs);
 }
@@ -103,6 +109,10 @@ strong {
 
 /* .contact-form ------------------------------------------------------------ */
 
+.contact-form {
+  font-size: inherit;
+}
+
 .contact-form button,
 .contact-form input,
 .contact-form textarea {
@@ -112,29 +122,48 @@ strong {
 .contact-form button {
   background: var(--color-gold);
   border-radius: 0.5rem;
+  color: var(--color-background);
+  padding: var(--scale-space-xs);
+}
+
+.contact-form button:focus {
+  outline: 0.25rem dashed var(--color-paragraph);
+}
+
+.contact-form button:hover {
+  text-transform: uppercase;
+}
+
+/* .contact-form button:hover::before {
+  content: 'YES, ';
+} */
+
+/* .contact-form button:hover::after {
+  content: ' NOW!';
+} */
+
+.contact-form button,
+.contact-form label {
+  font-family: var(--font-headings);
 }
 
 .contact-form [type='email'],
 .contact-form [type='text'],
 .contact-form textarea {
-  --tw-ring-color: var(--color-secodary);
-  --tw-ring-offset-shadow: 4px;
-  --tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-
-  border-color: var(--color-gold);
-  border-radius: 0.5rem;
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: none;
+  font-size: inherit;
+  outline: none;
 }
 
 .contact-form [type='email']:focus,
 .contact-form [type='text']:focus,
 .contact-form textarea:focus {
-  border-color: var(--color-tertiary);
+  border-color: var(--color-paragraph);
+  outline: 0.25rem dashed var(--color-gold);
 }
 
 .contact-form [type='submit'] {
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 /* .heading-anchor ---------------------------------------------------------- */
@@ -197,19 +226,7 @@ strong {
 .post-list li {
   --flow-space: var(--scale-space-m);
   position: relative;
-  /* background-color: aquamarine; */
 }
-
-/* .post-list > li::after {
-  content: '';
-  position: absolute;
-  width: 100vw;
-  height: 1px;
-  left: 0;
-  display: block;
-  clear: both;
-  background-color: black;
-} */
 
 .post-list li > * {
   --flow-space: var(--scale-space-3xs);
@@ -221,8 +238,6 @@ strong {
   background: var(--color-navy-5);
   font-family: var(--font-code);
   /* maybe use --scale-step--1 on small viewports and step-0 on large ones */
-  /* font-size: var(--scale-step--1); */
-  /* font-size: var(--scale-step-0); */
 }
 
 .prose hr {
