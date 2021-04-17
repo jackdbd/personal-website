@@ -20,8 +20,6 @@ const workboxConfig = {
     'assets/js/*.js',
     // I still don't know whether precaching the RSS feed (it's ~1MB) and the
     // sitemap (it's ~16KB) is a good idea or not. Probably not...
-    // '{feed,sitemap}.xml'
-    // Should I precache the webmanifest.json? I guess so...
     'manifest.webmanifest'
   ],
   globStrict: true,
@@ -43,7 +41,7 @@ const workboxConfig = {
       handler: 'CacheFirst',
       urlPattern: /^https:\/\/res\.cloudinary\.com/,
       options: {
-        cacheName: `${cacheId}-cloudinary-images`,
+        cacheName: `${cacheId}-cloudinary`,
         expiration: {
           maxAgeSeconds: 60 * 60 * 24 * 365,
           maxEntries: 30

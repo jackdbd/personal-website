@@ -4,25 +4,6 @@ layout: bare-minimum.njk
 permalink: /success/index.html
 title: Success
 ---
-{% block content %}
-
-<div id="wrapper-for-sticky-footer">
-
-  {% include "components/header.njk" %}
-
-  <main class="wrapper">
-    <div class="flow region">
-      <h1>{{ title }}</h1>
-      <p>Page under construction.</p>
-    </div>
-  </main>
-
-  {% include "components/footer.njk" %}
-
-</div>
-
-{% endblock content %}
-
-{# external CSS assets #}
-<link data-helmet rel="stylesheet" href="/assets/css/components.css">
-<link data-helmet rel="stylesheet" href="/assets/css/utilities.css">
+{% block pagecontent %}
+<p>Success page under construction.</p>
+{% endblock pagecontent %}

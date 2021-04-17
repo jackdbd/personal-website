@@ -1,14 +1,5 @@
 ---
-description: Giacomo Debidda's blog
-eleventyNavigation:
-  key: Blog
-  order: 0
 layout: bare-minimum.njk
-ogp:
-  title: Blog
-permalink: /blog/index.html
-section: blog
-title: Blog
 ---
 {% block content %}
 
@@ -19,8 +10,9 @@ title: Blog
   <main class="wrapper">
     <div class="flow region">
       <h1>{{ title }}</h1>
-      {% set posts = collections.post %}
-      {% include "components/post-list.njk" %}
+      {% block pagecontent %}
+      {{ content | safe }}
+      {% endblock pagecontent %}
     </div>
   </main>
 
@@ -28,17 +20,11 @@ title: Blog
 
 </div>
 
-{% include "components/back-to-top.njk" %}
-
 {% endblock content %}
 
 {# inlined CSS assets (critical CSS) #}
 
 {# inlined JS assets (critical JS) #}
-{% set js %}
-{% include "assets/js/sw-registration.js" %}
-{% endset %}
-<script data-helmet>{{ js | jsmin | safe }}</script>
 
 {# external CSS assets #}
 <link data-helmet rel="stylesheet" href="/assets/css/components.css">
@@ -46,4 +32,3 @@ title: Blog
 
 {# external JS assets #}
 <script data-helmet async src="/assets/js/sw-registration.js"></script>
-<script data-helmet defer src="/assets/js/back-to-top.js"></script>
