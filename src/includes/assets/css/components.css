@@ -28,10 +28,6 @@ blockquote p {
   line-height: 1.25;
 }
 
-em {
-  color: var(--color-gold);
-}
-
 figcaption {
   font-size: var(--scale-step--1);
   display: block;
@@ -96,6 +92,7 @@ small {
 }
 
 strong {
+  color: var(--color-gold);
   font-weight: 700;
 }
 

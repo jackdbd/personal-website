@@ -1,11 +1,12 @@
 ---
 description: website design system and style guide
 eleventyExcludeFromCollections: true
-layout: bare-minimum.njk
+layout: page.njk
 permalink: /styleguide/index.html
+title: Style Guide
 ---
-<main class="styleguide wrapper flow">
-  <h1>Style Guide</h1>
+{% block pagecontent %}
+<div class="styleguide">
   <p>TODO: write some visual regression tests for this page with Puppeteer.</p>
 
   {% set liClass = "flow" %}
@@ -204,13 +205,12 @@ permalink: /styleguide/index.html
     </ul>
   </section>
 
-</main>
+</div>
+{% endblock pagecontent %}
 
 {# CSS assets that will be injected in <head> with eleventy-plugin-helmet #}
 {# Keep styleguide.css first, to avoid masking possible CSS specificity issues #}
 <link rel="stylesheet" href="/assets/css/styleguide.css" data-helmet>
-<link rel="stylesheet" href="/assets/css/components.css" data-helmet>
-<link rel="stylesheet" href="/assets/css/utilities.css" data-helmet>
 <link rel="stylesheet" href="/assets/css/prismjs-theme.css" data-helmet>
 
 {# Google Fonts: preconnect and prefetch for stylesheets and font files#}

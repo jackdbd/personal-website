@@ -18,7 +18,7 @@ section: post
         {% set machineDate = date | machineDate %}
         {% set readingTime = content | readingTime %}
         <time datetime="{{ machineDate }}">
-          <em>{{ humanDate }}</em>
+          <strong>{{ humanDate }}</strong>
         </time>
         {% if tags %}
           {% set align = "start" %}
