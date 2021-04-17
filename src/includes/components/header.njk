@@ -4,7 +4,7 @@
       <a href="{{ '/' | url }}">{{ metadata.title }}</a>
     </li>
     <li>
-      <ul class="cluster">
+      <ul class="cluster" data-align="start">
         {% set navPages = collections.all | eleventyNavigation %}
         {% for entry in navPages %}
         <li>

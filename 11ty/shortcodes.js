@@ -45,6 +45,7 @@ const cloudinaryRespImage = (src, alt, width, height, shouldLazyLoad) => {
 
   return `<img 
       alt="${alt ? alt : ''}"
+      class="mx-auto"
       src="${src}"
       srcset="${srcset}"
       sizes="${sizes}"

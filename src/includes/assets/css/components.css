@@ -2,21 +2,23 @@
 
 a {
   color: var(--color-gold);
+  font-weight: 700;
   text-decoration: underline;
 }
 
 a:focus {
-  outline: 0.15rem dashed var(--color-gold);
+  outline: 0.25rem dashed var(--color-gold);
 }
 
 a:hover {
   text-decoration-color: var(--color-paragraph);
+  text-decoration-thickness: 0.25rem;
 }
 
 body {
   background-color: var(--color-background);
   color: var(--color-paragraph);
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   font-size: var(--scale-step-0);
   line-height: 1.5;
 }
@@ -66,21 +68,24 @@ header {
 
 footer a,
 header a {
-  color: var(--color-paragraph);
+  /* color: var(--color-paragraph); */
+  color: var(--color-background);
   font-family: var(--font-headings);
-  font-weight: 700;
+  text-decoration: none;
 }
 
 footer a:focus,
 header a:focus {
-  outline: 0.15rem dashed var(--color-background);
+  outline: 0.25rem dashed var(--color-background);
 }
 
 footer a:hover,
 header a:hover {
   /* background-color: var(--color-background); */
-  text-decoration-color: var(--color-background);
-  /* text-decoration-thickness: 5px; */
+  text-decoration-color: var(--color-paragraph);
+  text-decoration: underline;
+  /* text-decoration-thickness: var(--scale-space-3xs); */
+  text-decoration-thickness: 0.25rem;
 }
 
 footer .flow > * {
@@ -180,12 +185,12 @@ strong {
   --flow-space: var(--scale-space-l);
 }
 
-.post-list h3 a {
+.post-list h2 a {
   color: var(--color-headings);
   text-decoration: none;
 }
 
-.post-list h3 a:hover {
+.post-list h2 a:hover {
   text-decoration: underline;
 }
 
@@ -214,9 +219,9 @@ strong {
 
 .prose code {
   background: var(--color-navy-5);
-  font-family: var(--font-monospace);
+  font-family: var(--font-code);
   /* maybe use --scale-step--1 on small viewports and step-0 on large ones */
-  font-size: var(--scale-step--1);
+  /* font-size: var(--scale-step--1); */
   /* font-size: var(--scale-step-0); */
 }
 
@@ -250,10 +255,7 @@ strong {
 }
 
 .prose ul:not(.cluster) > li {
-  background-image: url('data:image/svg+xml;utf8,<svg width="8" height="12" xmlns="http://www.w3.org/2000/svg"><circle fill="%23b29a6b" cx="4" cy="4" r="4" fill-rule="evenodd"/></svg>');
-  background-position: 0 0.6em;
-  background-repeat: no-repeat;
-  list-style: none;
+  list-style: disc;
   margin-left: 1.25em;
   padding-left: 1em;
 }
@@ -272,4 +274,27 @@ strong {
 
 #wrapper-for-sticky-footer > main {
   flex: auto;
+}
+
+/* scrollbar */
+
+/* Works on Firefox */
+* {
+  scrollbar-color: var(--color-gold) var(--color-paragraph);
+  scrollbar-width: thin;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 1rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--color-paragraph);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-gold);
+  border: 3px solid var(--color-paragraph);
+  border-radius: 1.5rem;
 }

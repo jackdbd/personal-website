@@ -2,10 +2,10 @@
   background: none !important;
 }
 
-.center {
+.flex-end {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .display\:none {
@@ -32,4 +32,9 @@
 
 .padding-left\:0 {
   padding-left: 0 !important;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
