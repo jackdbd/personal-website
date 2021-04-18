@@ -20,18 +20,22 @@ const filters = require('./11ty/filters');
 const shortcodes = require('./11ty/shortcodes');
 const transforms = require('./11ty/transforms.js');
 
-const prebuild = require('./prebuild');
-const buildSW = require('./build-sw');
+const {
+  buildSW,
+  contentSecurityPolicyFromJSON,
+  writeAllowedResourcesForContentSecurityPolicyAsJSON,
+  writeCSPinNetlifyToml
+} = require('./scripts');
 
 module.exports = function (eleventyConfig) {
-  eleventyConfig.on('beforeBuild', () => {
-    // TODO: maybe read all files in src/includes/assets/css and
-    // src/includes/assets/js and pass them to prebuild()
-    prebuild();
-  });
+  eleventyConfig.on('beforeBuild', () => {});
 
-  eleventyConfig.on('afterBuild', (eleventyConfig) => {
-    buildSW();
+  eleventyConfig.on('afterBuild', async () => {
+    const filepath = 'csp-allowed-resources.json';
+    await writeAllowedResourcesForContentSecurityPolicyAsJSON(filepath);
+    const csp = await contentSecurityPolicyFromJSON(filepath);
+    await writeCSPinNetlifyToml(csp, { netlifyTomlPath: 'netlify.toml' });
+    await buildSW(csp);
   });
 
   // --- 11ty plugins ------------------------------------------------------- //
@@ -66,7 +70,10 @@ module.exports = function (eleventyConfig) {
     'src/includes/assets/css': 'assets/css',
     'src/includes/assets/fonts': 'assets/fonts',
     'src/includes/assets/img': 'assets/img',
-    'src/includes/assets/js': 'assets/js'
+    'src/includes/assets/js': 'assets/js',
+    'node_modules/ackee-tracker/dist/ackee-tracker.min.js':
+      'assets/js/ackee-tracker.js',
+    'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js'
   });
 
   // 11ty shortcodes

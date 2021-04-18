@@ -27,6 +27,11 @@ const humanDateJS = (dateObj) => {
 };
 
 // Minify JS (used for inlined JS)
+// I would like to use terser, but terser exposes a single async function, and
+// at the moment 11ty filters can't be asynchronous.
+// https://github.com/11ty/eleventy/issues/518
+// TODO: I might try to de-async terser using this package
+// https://github.com/abbr/deasync
 const jsmin = (code) => {
   const minified = UglifyJS.minify(code);
   if (minified.error) {
