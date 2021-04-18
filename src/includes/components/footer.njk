@@ -1,22 +1,9 @@
-<footer class="debug-breakpoints">
-  <ul class="flex justify-center flex-wrap mx-auto">
-    {% for entry in metadata.socials %}
-    <li class="">
-      <a href="{{ entry.url | url }}" rel="noopener noreferrer" target="_blank">
-        {{ entry.name }}
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
-  <div class="">
-    <div class="px-2 mx-auto text-center">
-      <span class="text-sm py-1">I built this website with <a href="https://www.11ty.dev/" rel="noopener noreferrer"
-          target="_blank">11ty</a> and <a href="https://tailwindcss.com/" rel="noopener noreferrer"
-          target="_blank">Tailwind CSS</a> — It's hosted on <a href="https://www.netlify.com/" rel="noopener noreferrer"
-          target="_blank">Netlify</a></span>
-    </div>
-    <div class="px-2 mx-auto text-center">
-      <span class="text-sm font-semibold py-1">{% copyright metadata.author.name %}</span>
+<footer>
+  <div class="flow wrapper region">
+    {% set align = "end" %}
+    {% include "components/socials.njk" %}
+    <div class="flex-end">
+      <small>{% copyright metadata.author.name %}</small>
     </div>
   </div>
 </footer>

@@ -1,4 +1,5 @@
-// I am not sure whether to include this script in the <body> or in the <head>
+// I am not sure whether to inline this script or load it asynchronously (with
+// either `async` or `defer`).
 if ('serviceWorker' in navigator) {
   const onSuccess = (reg) => {
     // console.log('SW registration succeeded.', reg);

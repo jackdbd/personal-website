@@ -1,7 +1,34 @@
 ---
-layout: base.njk
+layout: bare-minimum.njk
 ---
 {% block content %}
-<h1>{{ title }}</h1>
-{{ content | safe }}
+
+<div id="wrapper-for-sticky-footer">
+
+  {% include "components/header.njk" %}
+
+  <main class="wrapper">
+    <div class="flow region">
+      <h1>{{ title }}</h1>
+      {% block pagecontent %}
+      {{ content | safe }}
+      {% endblock pagecontent %}
+    </div>
+  </main>
+
+  {% include "components/footer.njk" %}
+
+</div>
+
 {% endblock content %}
+
+{# inlined CSS assets (critical CSS) #}
+
+{# inlined JS assets (critical JS) #}
+
+{# external CSS assets #}
+<link data-helmet rel="stylesheet" href="/assets/css/components.css">
+<link data-helmet rel="stylesheet" href="/assets/css/utilities.css">
+
+{# external JS assets #}
+<script data-helmet async src="/assets/js/sw-registration.js"></script>

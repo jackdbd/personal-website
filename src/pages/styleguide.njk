@@ -1,0 +1,232 @@
+---
+description: website design system and style guide
+eleventyExcludeFromCollections: true
+layout: page.njk
+permalink: /styleguide/index.html
+title: Style Guide
+---
+{% block pagecontent %}
+<div class="styleguide">
+  <p>TODO: write some visual regression tests for this page with Puppeteer.</p>
+
+  {% set liClass = "flow" %}
+  {% set vanillaContainer = "styleguide__example" %}
+  {% set proseContainer = "styleguide__example prose" %}
+
+  <section>
+    <h2>Pill</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Default</p>
+        {% set text = "hello" %}
+        {% set href = "https://www.google.com/" %}
+        <div class="{{ vanillaContainer }}">
+          {% include "components/pill.njk" %}
+        </div>
+      </li>
+      <li class="styleguide__example">
+        <p>In a <code>.prose</code> container</p>
+        <div class="{{ proseContainer }}">
+          {% include "components/pill.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Tags</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        {% set tags = ["ansible", "git", "python", "webgl", "frontend", "backend", "d3", "microservices", "javascript", "zig", "clojure", "devops", "rust", "webassembly"] %}
+        <p>default</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/tags.njk" %}
+        </div>
+      </li>
+
+      <li class="styleguide__example">
+        <p>align=start</p>
+        <div class="{{ vanillaContainer }}">
+          {% set align = "start" %}
+          {% include "components/tags.njk" %}
+        </div>
+      </li>
+
+      <li class="styleguide__example">
+        <p>align=end</p>
+        <div class="{{ vanillaContainer }}">
+          {% set align = "end" %}
+          {% include "components/tags.njk" %}
+        </div>
+      </li>
+
+      <li class="styleguide__example">
+        <p>in a <code>.prose</code> container</p>
+        <div class="{{ proseContainer }}">
+          {% set align = "" %}
+          {% include "components/tags.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Socials</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Links to my social accounts</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/socials.njk" %}
+        </div>
+      </li>
+      <li class="styleguide__example">
+        <p>in a <code>.prose</code> container</p>
+        <div class="{{ proseContainer }}">
+          {% include "components/socials.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Header</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>The header on all pages</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/header.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Footer</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>The footer on all pages</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/footer.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Tech stack</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Some explanation</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/tech-stack.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Contact Form</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>A Netlify form to contact me.</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/contact-form.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Quote</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Some explanation</p>
+        <div class="{{ vanillaContainer }}">
+          <blockquote>
+            <p>The goal is to define a datatype by cases, where one can add new cases to the datatype and new functions over
+              the datatype, without recompiling existing code, and while retaining static type safety (e.g., no casts).</p>
+          </blockquote>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Code</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Some explanation</p>
+        <div class="{{ vanillaContainer }}">
+          <pre
+            class="language-shell"><code class="language-shell"><span class="token function">sudo </span><span class="token function">apt</span> update<br><span class="token function">sudo </span><span class="token function">apt</span><span class="token function"> install</span> software-properties-common<br><span class="token function">sudo </span>apt-add-repository --yes --update ppa:ansible/ansible<br><span class="token function">sudo </span><span class="token function">apt</span><span class="token function"> install</span> ansible</code></pre>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Post info</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Metadata about a blog post: data, reading time, author.</p>
+        <div class="{{ vanillaContainer }}">
+          {% set humanDate = "14 Mar 2021" %}
+          {% set machineDate = "2021-03-14 20:00" %}
+          {% set readingTime = "123 min" %}
+          {% include "components/post-info.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Post list</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Some explanation</p>
+        <div class="{{ vanillaContainer }}">
+          {% set n = 3 %}
+          {% set posts = collections.post | reverse | limit(n) | reverse %}
+          {% include "components/post-list.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Post footer (TODO)</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Some explanation</p>
+        <div class="{{ vanillaContainer }}">
+          {% include "components/post-footer.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+</div>
+{% endblock pagecontent %}
+
+{# CSS assets that will be injected in <head> with eleventy-plugin-helmet #}
+{# Keep styleguide.css first, to avoid masking possible CSS specificity issues #}
+<link rel="stylesheet" href="/assets/css/styleguide.css" data-helmet>
+<link rel="stylesheet" href="/assets/css/prismjs-theme.css" data-helmet>
+
+{# Google Fonts: preconnect and prefetch for stylesheets and font files#}
+<link data-helmet rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link data-helmet rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link data-helmet rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link data-helmet rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+{# display fonts #}
+{# <link data-helmet
+  href="https://fonts.googleapis.com/css2?family=Bangers&family=Dela+Gothic+One&family=Fredericka+the+Great&display=swap"
+  rel="stylesheet" crossorigin> #}
+
+{# sans-serif fonts #}
+{# <link data-helmet href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&display=swap" rel="stylesheet" crossorigin> #}
+
+{# serif fonts #}
+{# <link data-helmet href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet"
+  crossorigin> #}

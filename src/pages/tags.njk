@@ -1,11 +1,12 @@
 ---
-date: 2020-09-01
+layout: page.njk
 permalink: /tags/index.html
 title: Tags
 ---
-<section>
-  {% set tags = collections.userDefinedTagList | sort %}
-  {% include "components/tags.njk" %}
-</section>
+{% block pagecontent %}
+{% set tags = collections.userDefinedTagList | sort %}
+{% set align = "start" %}
+{% include "components/tags.njk" %}
 <hr>
-<p class="prose lg:prose-xl">Back to <a href="{{ '/blog/' | url }}">blog</a>.</p>
+<p class="">Back to <a href="{{ '/blog/' | url }}">blog</a>.</p>
+{% endblock pagecontent %}

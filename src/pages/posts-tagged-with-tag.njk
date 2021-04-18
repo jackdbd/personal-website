@@ -1,6 +1,7 @@
 ---
 eleventyComputed:
-  title: Articles tagged with “{{ tag }}”
+  title: Articles filed under “{{ tag }}”
+layout: page.njk
 pagination:
   addAllPagesToCollections: true
   alias: tag
@@ -14,6 +15,8 @@ pagination:
   size: 1
 permalink: /tags/{{ tag }}/
 ---
+{% block pagecontent %}
 {% set posts = collections[ tag ] %}
-{% include "components/postslist.njk" %}
-<p class="prose lg:prose-xl">See <a href="{{ '/tags/' | url }}">all tags</a>.</p>
+{% include "components/post-list.njk" %}
+<p class="">See <a href="{{ '/tags/' | url }}">all tags</a>.</p>
+{% endblock pagecontent %}

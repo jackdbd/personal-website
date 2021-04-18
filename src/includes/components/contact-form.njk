@@ -1,24 +1,22 @@
-<form name="Contact" netlify method="POST" data-netlify-honeypot="bot-field" action="/success/index.html">
-  <div class="flex flex-col">
-    <p class="hidden">
-      <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-    </p>
-    <div class="mt-4">
-      <label for="name">Name (optional)</label>
-      <input
+<form name="Contact" class="contact-form flow" netlify method="POST" data-netlify-honeypot="bot-field" action="/success/index.html">
+  <div class="display:none">
+    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+  </div>
+  <div>
+    <label for="name">Name (optional)</label>
+    <input
         autocomplete="name"
-        class="w-full"
         id="name"
         name="name"
         placeholder="John Smith"
         title="Please enter your name"
         type="text">
-    </div>
-    <div class="mt-4">
-      <label for="email">Email</label>
-      <input
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input
         autocomplete="email"
-        class="w-full"
+        class=""
         id="email"
         name="email"
         pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$"
@@ -26,13 +24,10 @@
         required
         title="The domain portion of the email address is invalid (the portion after the @)."
         type="email">
-    </div>
-    <div class="mt-4">
-      <label for="message">Message</label>
-      <textarea class="w-full" name="message" id="message" placeholder="Your message here…" rows="7" required></textarea>
-    </div>
-    <div class="mt-4">
-      <button class="w-full" name="submit" type="submit">Send Message</button>
-    </div>
   </div>
+  <div>
+      <label for="message">Message</label>
+      <textarea name="message" id="message" placeholder="Your message here…" rows="7" required></textarea>
+    </div>
+    <button name="submit" type="submit">Send Message</button>
 </form>

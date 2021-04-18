@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const cspBuilder = require('content-security-policy-builder');
-const { cssmin, jsmin } = require('./_11ty/filters');
+const { cssmin, jsmin } = require('./11ty/filters');
 
 const writeNetlifyToml = (csp_value) => {
   const NETLIFY_TOML_PATH = 'netlify.toml';
@@ -43,7 +43,7 @@ const makeCsp = (resources) => {
   const styleSrcAttributes = ["'self'", "'unsafe-inline'"];
 
   const styleSrcElements = [
-    "'self'",
+    "'self' 'unsafe-inline'",
     ...resources.filter(isStyleSrcElem).map(sha256),
     'https://fonts.googleapis.com',
     'https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css'
@@ -177,10 +177,12 @@ const prebuild = () => {
       csp_directive: 'style-src-attr',
       sha256: hashFromString(YOUTUBE_EMBED_IFRAME_INLINE_STYLE)
     },
-    {
-      csp_directive: 'style-src-elem',
-      sha256: hashFromFilepath('src/includes/assets/css/inline.css')
-    },
+    // TODO: CSS is concatenated, then inlined in the <head>. How to compute
+    // the hash to use in the CSP?
+    // {
+    //   csp_directive: 'style-src-elem',
+    //   sha256: hashFromFilepath('src/includes/assets/css/inline.css')
+    // },
     {
       csp_directive: 'script-src-elem',
       sha256: hashFromFilepath('src/includes/assets/js/back-to-top.js')

@@ -19,12 +19,6 @@
   https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch#best_practices
   #}
 
-  {# Google Fonts stylesheets #}
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  {# Google Fonts font files (e.g. woff, woff2) #}
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   {# Cloudinary (CDN where I host all my images and media) #}
   <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
   <link rel="dns-prefetch" href="https://res.cloudinary.com">
@@ -65,17 +59,30 @@
   <link rel="manifest" href="/manifest.webmanifest">
 
   {# Inline CSS (critical CSS) #}
+  {# Rule of thumb: the sum of all inlined CSS should not exceed 1-2 KB once minified. #}
+  {# https://www.11ty.dev/docs/quicktips/inline-css/ #}
   {% set css %}
-    {% include "assets/css/inline.css" %}
+    {% include "assets/css/scale.css" %}
+    {% include "assets/css/color.css" %}
+    {% include "assets/css/font.css" %}
+    {% include "assets/css/layout.css" %}
   {% endset %}
   <style>{{ css | cssmin | safe }}</style>
-
-  {# Non-inlined CSS #}
-  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Nunito:wght@800&family=Source+Code+Pro&display=swap&display=swap" rel="stylesheet" crossorigin>
 
   {# This stylesheet is render-blocking, but I don't think it's feasible to preload it without causing layout shifts,
   since it defines the entire website layout #}
   <link rel="stylesheet" href="/assets/css/style.css">
+
+  {# Preload fonts to improve performance
+  Note: crossorigin is required even for fonts hosted on this origin.
+  See here: https://www.smashingmagazine.com/2016/02/preload-what-is-it-good-for/ #}
+  <link rel="preload" href="/assets/fonts/nunito-v16-latin-800.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/merriweather-v22-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/merriweather-v22-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+  {# I use italic only on a few pages, so maybe it's better NOT to preload any italic font variant #}
+  {# <link rel="preload" href="/assets/fonts/merriweather-v22-latin-italic.woff2" as="font" type="font/woff2" crossorigin> #}
+  {# <link rel="preload" href="/assets/fonts/merriweather-v22-latin-700italic.woff2" as="font" type="font/woff2" crossorigin> #}
+  {# I am using a monospace font only in blog posts, so I'll preload it only for those page types. #}
 
   {# RSS Feed #}
   <link rel="alternate" href="{{ metadata.url }}/feed.xml" title="{{ metadata.title }}" type="application/atom+xml">
@@ -87,5 +94,5 @@
   <script>{{ js | jsmin | safe }}</script>
 
   {# Non-inlined JS: use async or defer #}
-  <script defer src="/assets/js/instantpage.min.js"></script>
+  <script async src="/assets/js/instantpage.min.js"></script>
 </head>

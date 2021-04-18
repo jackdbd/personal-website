@@ -12,9 +12,9 @@ This time we are going to replace the Model and implement a persistance layer wi
 
 Here are the links to the other articles in the series:
 
-1.  [MVC pattern in Python: Introduction and BasicModel](http://www.giacomodebidda.com/mvc-pattern-in-python-introduction-and-basicmodel/)
-2.  [MVC pattern in Python: SQLite](http://www.giacomodebidda.com/mvc-pattern-in-python-sqlite/)
-3.  [MVC pattern in Python: Dataset](http://www.giacomodebidda.com/mvc-pattern-in-python-dataset/)
+1. [MVC pattern in Python: Introduction and BasicModel](http://www.giacomodebidda.com/mvc-pattern-in-python-introduction-and-basicmodel/)
+2. [MVC pattern in Python: SQLite](http://www.giacomodebidda.com/mvc-pattern-in-python-sqlite/)
+3. [MVC pattern in Python: Dataset](http://www.giacomodebidda.com/mvc-pattern-in-python-dataset/)
 
 _All code was written in Python 3.5. If you are using Python 2.7 you should be able to run it with a few minor changes._
 
@@ -22,16 +22,16 @@ _All code was written in Python 3.5. If you are using Python 2.7 you should be a
 
 Table of contents
 
-1.  <a href="#intro">Introduction</a>
-2.  <a href="#crud">CRUD</a>
-3.  <a href="#model">Model</a>
-4.  <a href="#view-controller">View and Controller</a>
-5.  <a href="#conclusion">Conclusion</a>
+1. <a href="#intro">Introduction</a>
+2. <a href="#crud">CRUD</a>
+3. <a href="#model">Model</a>
+4. <a href="#view-controller">View and Controller</a>
+5. <a href="#conclusion">Conclusion</a>
 
-<a name="intro"><h2>Introduction</h2></a>
+<a><h2>Introduction</h2></a>
 First of all, if you haven't read my previous article in the MVC series, I suggest you to read that one first, otherwise many of the things here will not make much sense. Moreover, you will need the code for the `View` and the `Controller`.
 
-<a name="crud"><h2>CRUD</h2></a>
+<a><h2>CRUD</h2></a>
 Let's review the inventory of a small grocery store. A typical product list would look like this:
 
 <div class="table-responsive">
@@ -425,7 +425,7 @@ conn = connect_to_db(DB_name)  # physical database (i.e. a .db file)
 
 Th former creates an in-memory database, so it's faster and does not create any file. The latter creates a `.db` file that you can explore with tools like [DB Browser for SQLite](http://sqlitebrowser.org/) or even online viewers like [this one](http://inloop.github.io/sqlite-viewer/).
 
-<a name="model"><h2>Model</h2></a>
+<a><h2>Model</h2></a>
 Now that all CRUD operations are implemented as simple functions, creating a class for a Model that uses a SQLite database as persistence layer is pretty straightforward.
 
 ```python
@@ -479,7 +479,7 @@ class ModelSQLite(object):
             self.connection, name, table_name=self.item_type)
 ```
 
-<a name="view-controller"><h2>View and Controller</h2></a>
+<a><h2>View and Controller</h2></a>
 As I said last time, `View` and `Controller` are completely **decoupled** from the `Model` (and between themselves), so you don't need to change anything in their implementation. If you need the code for these classes, see the [first article](http://www.giacomodebidda.com/blog/mvc-pattern-in-python-introduction-and-basicmodel/) in the series.
 
 The only thing to do is to plug the `ModelSQLite` in the `Controller`.
@@ -521,7 +521,7 @@ if __name__ == '__main__':
         c.show_items()
 ```
 
-<a name="conclusion"><h2>Conclusion</h2></a>
+<a><h2>Conclusion</h2></a>
 In this article we replaced `ModelBasic` with `ModelSQLite`. Thanks to the SQLite database we gained a persistence layer for our application, and thanks to the modular architecture of the MVC pattern we kept the same functionality without having to change a single line of code in the `View` or in the `Controller`.
 
 In the next article we will use a very cool package called [Dataset](https://dataset.readthedocs.io/en/latest/) to get rid of all these ugly SQL statements! We will be able to simplify all these database operations and make the code more pythonic.

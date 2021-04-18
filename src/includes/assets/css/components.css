@@ -1,0 +1,314 @@
+/* defaults: move them to default.css? reset.css? --------------------------- */
+
+a {
+  color: var(--color-accent);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 0.25rem dashed var(--color-accent);
+}
+
+a:hover {
+  text-decoration-color: var(--color-text);
+  text-decoration-thickness: 0.25rem;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--scale-step-0);
+  line-height: 1.5;
+}
+
+blockquote p {
+  color: var(--color-accent);
+  font-size: var(--scale-step-1);
+  font-style: italic;
+  line-height: 1.25;
+}
+
+figcaption {
+  font-size: var(--scale-step--1);
+  display: block;
+  margin-top: 0.5em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-heading);
+  font-family: var(--font-headings);
+  font-weight: 700;
+  line-height: 1;
+}
+
+h1 {
+  --flow-space: var(--scale-step-3);
+  font-size: var(--scale-step-3);
+}
+
+h2 {
+  --flow-space: var(--scale-step-2);
+  font-size: var(--scale-step-2);
+}
+
+h3 {
+  --flow-space: var(--scale-step-1);
+  font-size: var(--scale-step-1);
+}
+
+footer,
+header {
+  background-color: var(--color-accent);
+}
+
+footer a,
+header a {
+  /* color: var(--color-text); */
+  color: var(--color-background);
+  font-family: var(--font-headings);
+  text-decoration: none;
+}
+
+footer a:focus,
+header a:focus {
+  outline: 0.25rem dashed var(--color-background);
+}
+
+footer a:hover,
+header a:hover {
+  /* background-color: var(--color-background); */
+  text-decoration-color: var(--color-text);
+  text-decoration: underline;
+  /* text-decoration-thickness: var(--scale-space-3xs); */
+  text-decoration-thickness: 0.25rem;
+}
+
+footer small {
+  color: var(--color-background);
+  font-family: var(--font-headings);
+  text-align: end;
+}
+
+footer .flow > * {
+  --flow-space: var(--scale-space-3xs);
+}
+
+small {
+  font-size: var(--scale-step--1);
+}
+
+strong {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* .contact-form ------------------------------------------------------------ */
+
+.contact-form {
+  font-size: inherit;
+}
+
+.contact-form button,
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+}
+
+.contact-form button {
+  background: var(--color-accent);
+  /* border-radius: 0.5rem; */
+  color: var(--color-background);
+  padding: var(--scale-space-xs);
+}
+
+.contact-form button:focus {
+  outline: 0.25rem dashed var(--color-text);
+}
+
+.contact-form button:hover {
+  text-transform: uppercase;
+}
+
+.contact-form button,
+.contact-form label {
+  font-family: var(--font-headings);
+}
+
+.contact-form [type='email'],
+.contact-form [type='text'],
+.contact-form textarea {
+  border: 0.15rem solid var(--color-text);
+  font-size: inherit;
+  outline: none;
+  padding: var(--scale-space-xs);
+}
+
+.contact-form [type='email']:focus,
+.contact-form [type='text']:focus,
+.contact-form textarea:focus {
+  border-color: var(--color-text);
+  outline: 0.25rem dashed var(--color-accent);
+}
+
+.contact-form [type='submit'] {
+  text-transform: capitalize;
+}
+
+/* .heading-anchor ---------------------------------------------------------- */
+
+.heading-anchor {
+  text-decoration-line: none;
+}
+
+.heading-anchor:hover {
+  /* is this a good use case for revert? Or should I just use underline? */
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/revert */
+  text-decoration-color: var(--color-text);
+  text-decoration-line: underline;
+}
+
+/* .pill -------------------------------------------------------------------- */
+
+.pill {
+  --background-color: var(--color-background);
+  --border-color: var(--color-accent);
+
+  border: 0.125rem solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--background-color);
+  color: var(--color-text);
+  font-family: var(--font-headings);
+  line-height: 1;
+  padding: 0.25em;
+  text-decoration: none;
+}
+
+.pill:focus,
+.pill:hover {
+  background: var(--border-color);
+  color: var(--background-color);
+}
+
+.pill:focus {
+  border-color: var(--color-text);
+  outline: none;
+}
+
+/* .post-list --------------------------------------------------------------- */
+
+.post-list {
+  --flow-space: var(--scale-space-l);
+}
+
+.post-list h2 a {
+  color: var(--color-headings);
+  text-decoration: none;
+}
+
+.post-list h2:focus-within {
+  outline: 0.25rem dashed var(--color-accent);
+}
+
+.post-list h2 a:focus {
+  outline: none;
+}
+
+.post-list h2 a:hover {
+  text-decoration: underline;
+}
+
+.post-list li {
+  --flow-space: var(--scale-space-m);
+  position: relative;
+}
+
+.post-list li > * {
+  --flow-space: var(--scale-space-3xs);
+}
+
+/* .prose ------------------------------------------------------------------- */
+
+.prose code {
+  background: var(--color-background-code);
+  font-family: var(--font-code);
+  /* maybe use --scale-step--1 on small viewports and step-0 on large ones */
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid currentColor;
+}
+
+.prose li + li {
+  margin-top: 0.5em;
+}
+
+.prose ol > li {
+  list-style: decimal;
+  margin-left: 1.5em;
+  padding-left: 1em;
+}
+
+.prose pre {
+  max-width: 100%;
+  overflow: auto;
+  padding: var(--scale-space-s);
+  width: 100%;
+}
+
+.prose pre code {
+  background: transparent;
+  display: block;
+  /* maybe use --scale-step--1 on small viewports and step-0 on large ones */
+  font-size: var(--scale-step--1);
+}
+
+.prose ul:not(.cluster) > li {
+  list-style: disc;
+  margin-left: 1.25em;
+  padding-left: 1em;
+}
+
+/* .prose overrides (keep these to a minimum!) ------------------------------ */
+.prose .cluster li + li {
+  margin-top: var(--cluster-spacing);
+}
+
+/* #wrapper-for-sticky-footer ----------------------------------------------- */
+#wrapper-for-sticky-footer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#wrapper-for-sticky-footer > main {
+  flex: auto;
+}
+
+/* scrollbar ---------------------------------------------------------------- */
+
+/* Works on Firefox */
+* {
+  scrollbar-color: var(--color-accent) var(--color-text);
+  scrollbar-width: auto;
+}
+
+/* Works on Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+  width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-text);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+  border: 0.2rem solid var(--color-text);
+  border-radius: 0.5rem;
+}

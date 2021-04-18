@@ -1,0 +1,29 @@
+.styleguide > * {
+  font-size: var(--scale-step-0);
+}
+
+.styleguide h1 {
+  font-size: var(--scale-step-3);
+}
+
+.styleguide h2 {
+  font-size: var(--scale-step-2);
+}
+
+.styleguide h3 {
+  font-size: var(--scale-step-1);
+}
+
+.styleguide figcaption,
+.styleguide small {
+  font-size: var(--scale-step--1);
+}
+
+.styleguide section {
+  outline: 0.125rem dashed var(--color-accent);
+}
+
+.styleguide__example {
+  /* outline: 1px solid var(--color-secondary); */
+  background: var(--color-background);
+}

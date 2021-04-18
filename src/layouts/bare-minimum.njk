@@ -1,0 +1,12 @@
+<!doctype html>
+<html {% if section %} data-current="{{ section }}" {% endif %} lang="en" data-theme="default">
+
+{% include "components/head.njk" %}
+
+<body>
+  {% block content %}
+  {{ content | safe }}
+  {% endblock content %}
+</body>
+
+</html>

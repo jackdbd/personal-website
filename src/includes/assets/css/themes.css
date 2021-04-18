@@ -1,0 +1,85 @@
+/* https://www.happyhues.co/palettes/17 */
+:root {
+  --color-background: #fef6e4;
+  --color-button: #f582ae;
+  --color-button-text: #001858;
+  --color-headline: #001858;
+  --color-highlight: #fef6e4;
+  --color-main: #f3d2c1;
+  --color-text: #172c66;
+  --color-secondary: #8bd3dd;
+  --color-stroke: #001858;
+  --color-tertiary: #f582ae;
+}
+
+/* @supports (prefers-color-scheme: dark) {} */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #0f0e17;
+    --color-button: #ff8906;
+    --color-button-text: #fffffe;
+    --color-headline: #fffffe;
+    --color-highlight: #ff8906;
+    --color-main: #fffffe;
+    --color-text: #bebebe;
+    --color-secondary: #f25f4c;
+    --color-stroke: black;
+    --color-tertiary: #e53170;
+  }
+}
+
+/* https://www.happyhues.co/palettes/1 */
+[data-theme='teal-purple'] {
+  --color-background: #fffffe;
+  --color-button: #4fc4cf;
+  --color-button-text: #181818;
+  --color-headline: #181818;
+  --color-highlight: #4fc4cf;
+  --color-main: #f2eef5;
+  --color-text: #2e2e2e;
+  --color-secondary: #994ff3;
+  --color-stroke: #181818;
+  --color-tertiary: #fbdd74;
+}
+
+/* https://www.happyhues.co/palettes/13 */
+[data-theme='dark'] {
+  --color-background: #0f0e17;
+  --color-button: #ff8906;
+  --color-button-text: #fffffe;
+  --color-headline: #fffffe;
+  --color-highlight: #ff8906;
+  --color-main: #fffffe;
+  --color-text: #bebebe;
+  --color-secondary: #f25f4c;
+  --color-stroke: black;
+  --color-tertiary: #e53170;
+}
+
+/* https://www.happyhues.co/palettes/16 */
+[data-theme='choco'] {
+  --color-background: #55423d;
+  --color-button: #ffc0ad;
+  --color-button-text: #271c19;
+  --color-headline: #fffffe;
+  --color-highlight: #e78fb3;
+  --color-main: #fff3ec;
+  --color-text: #fff3ec;
+  --color-secondary: #ff8906;
+  --color-stroke: #140d0b;
+  --color-tertiary: #9656a1;
+}
+
+/* https://www.happyhues.co/palettes/17 */
+[data-theme='default'] {
+  --color-background: #fef6e4;
+  --color-button: #f582ae;
+  --color-button-text: #001858;
+  --color-headline: #001858;
+  --color-highlight: #fef6e4;
+  --color-main: #f3d2c1;
+  --color-text: #172c66;
+  --color-secondary: #8bd3dd;
+  --color-stroke: #001858;
+  --color-tertiary: #f582ae;
+}

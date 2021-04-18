@@ -1,0 +1,56 @@
+/* Layout primitives
+ * 
+ * Exceptions for a layout primitive are set via data attributes.
+ * E.g.
+ * <ul class="cluster" data-align="start"></ul>
+ */
+
+/* https://every-layout.dev/layouts/cluster/ */
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  /* max-width: 45rem; */
+  margin: 0 auto;
+  gap: var(--cluster-gap, 1ch);
+}
+
+.cluster > * {
+  --cluster-spacing: 0.05em;
+  margin: var(--cluster-spacing);
+}
+
+.cluster[data-align='start'] {
+  justify-content: flex-start;
+  margin-left: 0;
+}
+
+.cluster[data-align='end'] {
+  justify-content: flex-end;
+  margin-right: 0;
+}
+
+/* https://piccalil.li/quick-tip/flow-utility */
+/* the :not() is to avoid the hidden field in the contact form (for the honey pot) */
+.flow > :not(.display\:none) + * {
+  margin-top: var(--flow-space, 1em);
+}
+
+.region {
+  padding: var(--region-space, 1em) 0;
+}
+
+.wrapper {
+  --max-width: 50rem;
+
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 95vw;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  /* some browsers still don't support clamp() and will keep the first value */
+  width: var(--max-width);
+  width: clamp(16rem, 95vw, var(--max-width));
+  position: relative;
+}

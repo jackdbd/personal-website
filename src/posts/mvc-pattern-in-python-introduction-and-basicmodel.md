@@ -11,9 +11,9 @@ Since I wanted to understand and implement in Python the most popular patterns, 
 
 This is the **first** article of a series of blog posts related to the MVC pattern. Here are the links to the other articles in the series:
 
-1.  [MVC pattern in Python: Introduction and BasicModel](http://www.giacomodebidda.com/mvc-pattern-in-python-introduction-and-basicmodel/)
-2.  [MVC pattern in Python: SQLite](http://www.giacomodebidda.com/mvc-pattern-in-python-sqlite/)
-3.  [MVC pattern in Python: Dataset](http://www.giacomodebidda.com/mvc-pattern-in-python-dataset/)
+1. [MVC pattern in Python: Introduction and BasicModel](http://www.giacomodebidda.com/mvc-pattern-in-python-introduction-and-basicmodel/)
+2. [MVC pattern in Python: SQLite](http://www.giacomodebidda.com/mvc-pattern-in-python-sqlite/)
+3. [MVC pattern in Python: Dataset](http://www.giacomodebidda.com/mvc-pattern-in-python-dataset/)
 
 _All code was written in Python 3.5. If you are using Python 2.7 you should be able to run it with a few minor changes._
 
@@ -21,15 +21,15 @@ _All code was written in Python 3.5. If you are using Python 2.7 you should be a
 
 Table of contents
 
-1.  <a href="#intro">Introduction</a>
-2.  <a href="#crud">CRUD</a>
-3.  <a href="#model">Model</a>
-4.  <a href="#view">View</a>
-5.  <a href="#controller">Controller</a>
-6.  <a href="#test-run">Test Run</a>
-7.  <a href="#conclusion">Conclusion</a>
+1. <a href="#intro">Introduction</a>
+2. <a href="#crud">CRUD</a>
+3. <a href="#model">Model</a>
+4. <a href="#view">View</a>
+5. <a href="#controller">Controller</a>
+6. <a href="#test-run">Test Run</a>
+7. <a href="#conclusion">Conclusion</a>
 
-<a name="intro"><h2>Introduction</h2></a>
+<a><h2>Introduction</h2></a>
 The three components of the MVC pattern are **decoupled** and they are responsible for different things:
 
 * the **Model** manages the data and defines rules and behaviors. It represents the [business logic](WIKIPEDIA) of the application. The data can be stored in the Model itself or in a database (only the Model has access to the database).
@@ -38,7 +38,7 @@ The three components of the MVC pattern are **decoupled** and they are responsib
 
 Since Model, View and Controller are **decoupled**, each one of the three can be extended, modified and replaced without having to rewrite the other two.
 
-<a name="crud"><h2>CRUD</h2></a>
+<a><h2>CRUD</h2></a>
 In order to understand how the MVC works I decided to implement a simple CRUD (Create, Read, Update, Delete) application.
 
 _A word of caution:_ according to Wikipedia, [create, read, update, and delete](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) are the four basic functions of _persistent storage_. A persistance layer can be implemented with a database table, a XML file, a JSON, or even a CSV. However, in this first post I want to keep things as simple as possible, so I will create a MVC application that doesn't have any persistent storage. You could argue that this is not really a CRUD application, but I hope that you will be satisfied with the next article, where I will implement the persistance layer with a SQLite database.
@@ -132,13 +132,13 @@ def read_items():
 
 Actually there are already a couple of problems with this implementation:
 
-1.  if you create the same element twice, you get a duplicate in the `items` list;
-2.  if you try to read a non-existing item, you get an `IndexError` exception.
+1. if you create the same element twice, you get a duplicate in the `items` list;
+2. if you try to read a non-existing item, you get an `IndexError` exception.
 
 These issues are very easy to fix, but I think it's important to pause for a moment and think about why they are a problem for your application, and how you want to handle these exceptions.
 
-1.  _duplicate item_ -> you don't want duplicates in the list of items. As soon as the user tries to append an item that already exists, you want to prevent this operation and return her a message that the item was _already stored_.
-2.  _non-existing item_ -> obviously you can't read an item which is not currently available, so you want to tell the user that the item is _not stored_.
+1. _duplicate item_ -> you don't want duplicates in the list of items. As soon as the user tries to append an item that already exists, you want to prevent this operation and return her a message that the item was _already stored_.
+2. _non-existing item_ -> obviously you can't read an item which is not currently available, so you want to tell the user that the item is _not stored_.
 
 It's important to think about these issues right now because we want to create specific exceptions for these situations.
 
@@ -274,7 +274,7 @@ if __name__ == '__main__':
     main()
 ```
 
-<a name="model"><h2>Model</h2></a>
+<a><h2>Model</h2></a>
 Now that all CRUD operations are implemented as simple functions, it's very easy to "package" them into a single class. As you can see, there is no mention of `View` or `Controller` in the `ModelBasic` class.
 
 ```python
@@ -316,7 +316,7 @@ class ModelBasic(object):
         basic_backend.delete_item(name)
 ```
 
-<a name="view"><h2>View</h2></a>
+<a><h2>View</h2></a>
 Now that the business logic is ready, let's focus on the presentation layer. In this tutorial the data is presented to the user in a python shell, so this is definitely not something that you would use in a real application. However, the important thing to notice is that there is no logic in the `View` class, and all of its methods are **normal functions** (see the `@staticmethod` decorator). Also, there is no mention of the other two components of the MVC pattern. This means that if you want to design a fancy UI for your application, you just have to replace the `View` class.
 
 ```python
@@ -394,7 +394,7 @@ class View(object):
         print('--------------------------------------------------------------')
 ```
 
-<a name="controller"><h2>Controller</h2></a>
+<a><h2>Controller</h2></a>
 Finally, now that rules and logic (the Model) and information representation (the View) are done, we can focus on the `Controller`.
 As you can see, when you instantiate a `Controller` you have to specify a Model and a View. However, this is just _composition_, so whenever you want to use a different Model, and/or a different View, you just have to plug them in when you instantiate the Controller. The Controller accepts user's inputs and _delegates_ data representation to the View and data handling to the Model.
 
@@ -462,7 +462,7 @@ class Controller(object):
             self.view.display_item_not_yet_stored_error(name, item_type, e)
 ```
 
-<a name="test-run"><h2>Test Run</h2></a>
+<a><h2>Test Run</h2></a>
 Let's see how everything works together!
 
 Create some items and instantiate a `Controller`.
@@ -577,6 +577,6 @@ We have just removed bread from our list
 --------------------------------------------------------------
 ```
 
-<a name="conclusion"><h2>Conclusion</h2></a>
+<a><h2>Conclusion</h2></a>
 In this article we saw how to implement a very simple Model-View-Controller pattern. I hope that the implementation of all CRUD operations as simple functions made things a bit easier to understand. However, this MVC application would not be very useful in the real world because there is no _persistance layer_ where to store the data.
 In the next article we will replace `ModelBasic` with a different class that uses a SQLite database. As I said, thanks to the flexible architecture provided by the MVC pattern, nothing is going to change neither in the `View`, nor in the `Controller`.

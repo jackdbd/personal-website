@@ -1,7 +1,6 @@
 (function iife() {
   const ELEMENT_ID = 'back-to-top';
   const SCROLL_FACTOR = 50.0; // arbitrary value
-  // console.log('IIFE back-to-top.js', document.getElementById(ELEMENT_ID));
 
   document.addEventListener('DOMContentLoaded', function (event) {
     const selector = document.getElementById(ELEMENT_ID);

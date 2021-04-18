@@ -1,0 +1,161 @@
+/* 
+ * Scales for typography and space.
+ *
+ * A modular scale is represented as a number that gets multiplied against a
+ * base size again and again, creating 'steps'.
+ * I like using a perfect fourth (1.333) for small viewports, and a perfect
+ * fifth (1.5) for large viewports.
+ *
+ * Do NOT edit the modular scale here! If you want to edit the scale, regenerate
+ * a new modular scale with this fluid type scale calculator.
+ * @link https://utopia.fyi/type/calculator?c=320,20,1.333,1140,24,1.5,4,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l
+ * @link https://utopia.fyi/space/calculator?c=320,20,1.333,1140,24,1.5,4,2,&s=0.75|0.5|0.5,1.5|2|3|4|6,s-l
+ *
+ * Example:
+ * --scale-step--1: small, figcaption
+ * --scale-step-0: p, span, em, strong
+ * --scale-step-1: h3
+ * --scale-step-2: h2
+ * --scale-step-3: h1
+ *
+ * clamp(MIN, VAL, MAX)
+ * CSS clamp() support is pretty good (~91%)
+ * https://caniuse.com/?search=clamp
+ * CSS calc() support is better (~97%), but the scale would be much more code.
+ * https://caniuse.com/?search=calc
+ */
+:root {
+  --scale-step--2: clamp(0.7rem, 0.72rem + -0.07vw, 0.67rem);
+  --scale-step--1: clamp(0.94rem, 0.91rem + 0.12vw, 1rem);
+  --scale-step-0: clamp(1.25rem, 1.15rem + 0.49vw, 1.5rem);
+  --scale-step-1: clamp(1.67rem, 1.44rem + 1.14vw, 2.25rem);
+  --scale-step-2: clamp(2.22rem, 1.77rem + 2.25vw, 3.38rem);
+  --scale-step-3: clamp(2.96rem, 2.14rem + 4.1vw, 5.06rem);
+  --scale-step-4: clamp(3.95rem, 2.52rem + 7.12vw, 7.59rem);
+
+  --fluid-min-width: 320;
+  --fluid-max-width: 1140;
+
+  --fluid-screen: 100vw;
+
+  /* fluid breakpoint (value between 0 and 1 */
+  --fluid-bp: calc(
+    (var(--fluid-screen) - var(--fluid-min-width) / 16 * 1rem) /
+      (var(--fluid-max-width) - var(--fluid-min-width))
+  );
+}
+
+/* TODO: cleanup and explain every single CSS custom property defined in this file. */
+
+@media screen and (min-width: 1140px) {
+  :root {
+    --fluid-screen: calc(var(--fluid-max-width) * 1px);
+  }
+}
+
+:root {
+  --fc-3xs-min: (var(--fc-s-min) * 0.5);
+  --fc-3xs-max: (var(--fc-s-max) * 0.5);
+
+  --fc-2xs-min: (var(--fc-s-min) * 0.5);
+  --fc-2xs-max: (var(--fc-s-max) * 0.5);
+
+  --fc-xs-min: (var(--fc-s-min) * 0.75);
+  --fc-xs-max: (var(--fc-s-max) * 0.75);
+
+  --fc-s-min: (var(--f-0-min, 20));
+  --fc-s-max: (var(--f-0-max, 24));
+
+  --fc-m-min: (var(--fc-s-min) * 1.5);
+  --fc-m-max: (var(--fc-s-max) * 1.5);
+
+  --fc-l-min: (var(--fc-s-min) * 2);
+  --fc-l-max: (var(--fc-s-max) * 2);
+
+  --fc-xl-min: (var(--fc-s-min) * 3);
+  --fc-xl-max: (var(--fc-s-max) * 3);
+
+  --fc-2xl-min: (var(--fc-s-min) * 4);
+  --fc-2xl-max: (var(--fc-s-max) * 4);
+
+  --fc-3xl-min: (var(--fc-s-min) * 6);
+  --fc-3xl-max: (var(--fc-s-max) * 6);
+
+  /* T-shirt sizes */
+  --scale-space-3xs: calc(
+    ((var(--fc-3xs-min) / 16) * 1rem) + (var(--fc-3xs-max) - var(--fc-3xs-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-2xs: calc(
+    ((var(--fc-2xs-min) / 16) * 1rem) + (var(--fc-2xs-max) - var(--fc-2xs-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-xs: calc(
+    ((var(--fc-xs-min) / 16) * 1rem) + (var(--fc-xs-max) - var(--fc-xs-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-s: calc(
+    ((var(--fc-s-min) / 16) * 1rem) + (var(--fc-s-max) - var(--fc-s-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-m: calc(
+    ((var(--fc-m-min) / 16) * 1rem) + (var(--fc-m-max) - var(--fc-m-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-l: calc(
+    ((var(--fc-l-min) / 16) * 1rem) + (var(--fc-l-max) - var(--fc-l-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-xl: calc(
+    ((var(--fc-xl-min) / 16) * 1rem) + (var(--fc-xl-max) - var(--fc-xl-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-2xl: calc(
+    ((var(--fc-2xl-min) / 16) * 1rem) + (var(--fc-2xl-max) - var(--fc-2xl-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-3xl: calc(
+    ((var(--fc-3xl-min) / 16) * 1rem) + (var(--fc-3xl-max) - var(--fc-3xl-min)) *
+      var(--fluid-bp)
+  );
+
+  /* One-up pairs */
+  --scale-space-3xs-2xs: calc(
+    ((var(--fc-3xs-min) / 16) * 1rem) + (var(--fc-2xs-max) - var(--fc-3xs-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-2xs-xs: calc(
+    ((var(--fc-2xs-min) / 16) * 1rem) + (var(--fc-xs-max) - var(--fc-2xs-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-xs-s: calc(
+    ((var(--fc-xs-min) / 16) * 1rem) + (var(--fc-s-max) - var(--fc-xs-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-s-m: calc(
+    ((var(--fc-s-min) / 16) * 1rem) + (var(--fc-m-max) - var(--fc-s-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-m-l: calc(
+    ((var(--fc-m-min) / 16) * 1rem) + (var(--fc-l-max) - var(--fc-m-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-l-xl: calc(
+    ((var(--fc-l-min) / 16) * 1rem) + (var(--fc-xl-max) - var(--fc-l-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-xl-2xl: calc(
+    ((var(--fc-xl-min) / 16) * 1rem) + (var(--fc-2xl-max) - var(--fc-xl-min)) *
+      var(--fluid-bp)
+  );
+  --scale-space-2xl-3xl: calc(
+    ((var(--fc-2xl-min) / 16) * 1rem) + (var(--fc-3xl-max) - var(--fc-2xl-min)) *
+      var(--fluid-bp)
+  );
+
+  /* Custom pairs */
+  --scale-space-s-l: calc(
+    ((var(--fc-s-min) / 16) * 1rem) + (var(--fc-l-max) - var(--fc-s-min)) *
+      var(--fluid-bp)
+  );
+}

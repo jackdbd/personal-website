@@ -3,9 +3,15 @@
     "bradlc.vscode-tailwindcss",
     "chakrounanas.turbo-console-log",
     "christian-kohler.npm-intellisense",
+    "cschleiden.vscode-github-actions",
     "davidanson.vscode-markdownlint",
     "eg2.vscode-npm-script",
+    "esbenp.prettier-vscode",
+    "heybourn.headwind",
     "pflannery.vscode-versionlens",
-    "webhint.vscode-webhint"
+    "pranaygp.vscode-css-peek",
+    "ronnidc.nunjucks",
+    "webhint.vscode-webhint",
+    "zignd.html-css-class-completion"
   ]
 }

@@ -1,0 +1,17 @@
+/* I'm using a monospace font only in blog posts, so there is no need to make a
+request for this woff/woff2 file in any other page types. */
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+    url('/assets/fonts/source-code-pro-v14-latin-regular.woff2') format('woff2'),
+    url('/assets/fonts/source-code-pro-v14-latin-regular.woff') format('woff');
+}
+
+:root {
+  --font-code: 'Source Code Pro', ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, 'Liberation Mono', 'Courier New', monospace;
+}

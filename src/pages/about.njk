@@ -3,8 +3,13 @@ description: Giacomo Debidda's about page
 eleventyNavigation:
   key: About
   order: 2
+layout: page.njk
+ogp:
+  title: About page
 permalink: /about/index.html
 section: about
 title: A few words about me
 ---
-Page under construction.
+{% block pagecontent %}
+<p>About page under construction.</p>
+{% endblock pagecontent %}
