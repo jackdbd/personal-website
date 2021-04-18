@@ -8,6 +8,10 @@
   justify-content: flex-end;
 }
 
+.display\:inline-flex {
+  display: inline-flex;
+}
+
 .display\:none {
   display: none;
 }

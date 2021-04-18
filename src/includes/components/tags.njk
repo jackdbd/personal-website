@@ -2,7 +2,7 @@
   {% for text in tags %}
     {% if text != "post" %}
       {% set href %}/tags/{{ text }}/{% endset %}
-      <li>{% include "components/pill.njk" %}</li>
+      <li class="display:inline-flex">{% include "components/pill.njk" %}</li>
     {% endif %}
   {% endfor %}
 </ul>

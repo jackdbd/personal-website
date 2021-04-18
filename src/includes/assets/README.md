@@ -3,7 +3,7 @@
 ## CSS
 
 - `scale.css`: modular scales for typography and space. This file defines some CSS custom properties and make them available globally by adding them to the `:root` selector. All the CSS custom properties defined in this file start with the `--scale` prefix, e.g. `--scale-step-0`. This file does **not** define any new CSS classes.
-- `color.css`: colors. This file defines some CSS custom properties and make them available globally by adding them to the `:root` selector. All the CSS custom properties defined in this file start with the `--color` prefix, e.g. `--color-gold`. This file does **not** define any new CSS classes.
+- `color.css`: colors. This file defines some CSS custom properties and make them available globally by adding them to the `:root` selector. All the CSS custom properties defined in this file start with the `--color` prefix, e.g. `--color-text`. This file does **not** define any new CSS classes.
 - `font.css`: font-face definitions and default font families. This file contains all `@font-face` rules and sets the font families for serif, sans-serif and monospace fonts. The font families are available globally since they are added to the `:root` selector. All the CSS custom properties defined in this file start with the `--font` prefix, e.g. `--font-sans-serif`. This file does **not** define any new CSS classes, nor defines rulesets for HTML elements.
 - `layout.css`: classes for layout primitives. They are quite small and have many use cases. Variations from the default configuration are set via data attributes, as described in [this article by Andy Bell](https://piccalil.li/blog/cube-css#heading-exception).
 - `utilities.css`: atomic classes that do **one thing**.
