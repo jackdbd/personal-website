@@ -121,7 +121,7 @@ strong {
 
 .contact-form button {
   background: var(--color-gold);
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
   color: var(--color-background);
   padding: var(--scale-space-xs);
 }
@@ -134,14 +134,6 @@ strong {
   text-transform: uppercase;
 }
 
-/* .contact-form button:hover::before {
-  content: 'YES, ';
-} */
-
-/* .contact-form button:hover::after {
-  content: ' NOW!';
-} */
-
 .contact-form button,
 .contact-form label {
   font-family: var(--font-headings);
@@ -150,9 +142,10 @@ strong {
 .contact-form [type='email'],
 .contact-form [type='text'],
 .contact-form textarea {
-  box-shadow: none;
+  border: 0.15rem solid var(--color-paragraph);
   font-size: inherit;
   outline: none;
+  padding: var(--scale-space-xs);
 }
 
 .contact-form [type='email']:focus,
@@ -291,25 +284,25 @@ strong {
   flex: auto;
 }
 
-/* scrollbar */
+/* scrollbar ---------------------------------------------------------------- */
 
 /* Works on Firefox */
 * {
   scrollbar-color: var(--color-gold) var(--color-paragraph);
-  scrollbar-width: thin;
+  scrollbar-width: auto;
 }
 
 /* Works on Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 1rem;
 }
 
-*::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: var(--color-paragraph);
 }
 
-*::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: var(--color-gold);
-  border: 3px solid var(--color-paragraph);
-  border-radius: 1.5rem;
+  border: 0.2rem solid var(--color-paragraph);
+  border-radius: 0.5rem;
 }

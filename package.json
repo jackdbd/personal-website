@@ -73,7 +73,6 @@
     "@11ty/eleventy-plugin-rss": "1.1.1",
     "@11ty/eleventy-plugin-syntaxhighlight": "3.1.0",
     "@hint/hint-performance-budget": "2.4.9",
-    "@tailwindcss/forms": "0.3.2",
     "autoprefixer": "10.2.5",
     "clean-css": "5.1.2",
     "content-security-policy-builder": "^2.1.0",
