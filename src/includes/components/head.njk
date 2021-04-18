@@ -19,6 +19,10 @@
   https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch#best_practices
   #}
 
+  {# Ackee analytics #}
+  <link rel="preconnect" href="https://analytics.projects.giacomodebidda.com" crossorigin>
+  <link rel="dns-prefetch" href="https://analytics.projects.giacomodebidda.com">
+
   {# Cloudinary (CDN where I host all my images and media) #}
   <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
   <link rel="dns-prefetch" href="https://res.cloudinary.com">
@@ -87,13 +91,9 @@
   {# RSS Feed #}
   <link rel="alternate" href="{{ metadata.url }}/feed.xml" title="{{ metadata.title }}" type="application/atom+xml">
 
-  {# Inline JS #}
-  {% set js %}
-    {% include "assets/js/inline.js" %}
-  {% endset %}
-  <script>{{ js | jsmin | safe }}</script>
-
   {# Non-inlined JS: use async or defer #}
-  <script async src="/assets/js/instantpage.min.js"></script>
-  <script async src="https://analytics.projects.giacomodebidda.com/tracker.js" data-ackee-server="https://analytics.projects.giacomodebidda.com" data-ackee-domain-id="b02966d8-54f5-4faf-a867-250290c0b113"></script>
+  <script async src="/assets/js/instantpage.js"></script>
+  <script async src="/assets/js/async-load-prism-theme.js"></script>
+  <script defer src="/assets/js/ackee-tracker.js"></script>
+  <script defer src="/assets/js/instantiate-ackee-tracker.js"></script>
 </head>

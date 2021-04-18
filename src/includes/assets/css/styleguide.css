@@ -24,6 +24,5 @@
 }
 
 .styleguide__example {
-  /* outline: 1px solid var(--color-secondary); */
   background: var(--color-background);
 }

@@ -35,15 +35,11 @@ title: Hi there!
 {# inlined CSS assets (critical CSS) #}
 
 {# inlined JS assets (critical JS) #}
-{% set js %}
-{% include "assets/js/sw-registration.js" %}
-{% endset %}
-<script data-helmet>{{ js | jsmin | safe }}</script>
 
 {# external CSS assets #}
 <link data-helmet rel="stylesheet" href="/assets/css/components.css">
 <link data-helmet rel="stylesheet" href="/assets/css/utilities.css">
 
 {# external JS assets #}
-{# <script data-helmet async src="/assets/js/sw-registration.js"></script> #}
+<script data-helmet async src="/assets/js/sw-registration.js"></script>
 {# <script data-helmet defer src="/assets/js/back-to-top.js"></script> #}
