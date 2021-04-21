@@ -89,8 +89,8 @@ package = "netlify-plugin-is-website-vulnerable"
     X-XSS-Protection = "1; mode=block"
 
 # ---------------------------------------------------------------------------- #
-# Content-Security-Policy (it's a security header)                             #
-# The CSP for this website is generated automatically at build time.           #
+# Content-Security-Policy                                                      #
+# The CSP for this website is generated automatically after each build.        #
 # ---------------------------------------------------------------------------- #
 
 # The Content-Security-Policy header should only be sent for HTML resources, but
