@@ -49,7 +49,16 @@ const hashesFromStyleTagsInHtmlPages = async (filepaths) => {
   }
 };
 
+// This is how Workbox generate the `revision` for an asset.
+// https://github.com/GoogleChrome/workbox/blob/v6/packages/workbox-build/src/lib/get-string-hash.js
+const workboxRevisionFromString = (string) => {
+  const md5 = crypto.createHash('md5');
+  md5.update(string);
+  return md5.digest('hex');
+};
+
 module.exports = {
   hashFromString,
-  hashesFromStyleTagsInHtmlPages
+  hashesFromStyleTagsInHtmlPages,
+  workboxRevisionFromString
 };

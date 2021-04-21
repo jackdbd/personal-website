@@ -2,7 +2,7 @@
 // either `async` or `defer`).
 if ('serviceWorker' in navigator) {
   const onSuccess = (reg) => {
-    console.log('SW registration succeeded.', reg);
+    // console.log('SW registration succeeded.', reg);
   };
   const onError = (err) => {
     console.error('SW registration failed ', err);

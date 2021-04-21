@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
@@ -27,15 +28,43 @@ const {
   writeCSPinNetlifyToml
 } = require('./scripts');
 
+const OUTPUT_DIR = '_site';
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.on('beforeBuild', () => {});
 
   eleventyConfig.on('afterBuild', async () => {
     const filepath = 'csp-allowed-resources.json';
+    const netlifyTomlPath = 'netlify.toml';
+
     await writeAllowedResourcesForContentSecurityPolicyAsJSON(filepath);
     const csp = await contentSecurityPolicyFromJSON(filepath);
-    await writeCSPinNetlifyToml(csp, { netlifyTomlPath: 'netlify.toml' });
-    await buildSW(csp);
+    await writeCSPinNetlifyToml(csp, { netlifyTomlPath });
+
+    // TODO: fetch list of popular HTML pages from Ackee before generating sw
+    const htmlPagesToPrecache = [
+      path.join(OUTPUT_DIR, '404.html'),
+      path.join(OUTPUT_DIR, 'index.html'),
+      path.join(OUTPUT_DIR, 'about', 'index.html'),
+      path.join(OUTPUT_DIR, 'blog', 'index.html'),
+      path.join(OUTPUT_DIR, 'contact', 'index.html'),
+      path.join(OUTPUT_DIR, 'projects', 'index.html'),
+      path.join(OUTPUT_DIR, 'styleguide', 'index.html'),
+      path.join(OUTPUT_DIR, 'success', 'index.html'),
+      path.join(OUTPUT_DIR, 'tags', 'index.html'),
+      path.join(
+        OUTPUT_DIR,
+        'posts',
+        '12-years-of-fires-in-sardinia',
+        'index.html'
+      )
+    ];
+    await buildSW({
+      cacheId: 'giacomodebidda.com',
+      outputDir: OUTPUT_DIR,
+      htmlPagesToPrecache,
+      netlifyTomlPath
+    });
   });
 
   // --- 11ty plugins ------------------------------------------------------- //
@@ -123,7 +152,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setBrowserSyncConfig({
     callbacks: {
       ready: function (err, browserSync) {
-        const content_404 = fs.readFileSync('_site/404.html');
+        const content_404 = fs.readFileSync(`${OUTPUT_DIR}/404.html`);
 
         browserSync.addMiddleware('*', (req, res) => {
           // Provides the 404 content without redirect.
@@ -147,7 +176,7 @@ module.exports = function (eleventyConfig) {
       includes: 'includes',
       input: 'src',
       layouts: 'layouts',
-      output: '_site'
+      output: OUTPUT_DIR
     },
     htmlTemplateEngine: 'njk',
     markdownTemplateEngine: 'njk',
