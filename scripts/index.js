@@ -7,6 +7,7 @@ const winston = require('winston');
 const { allowedResources } = require('./allowed-resources');
 const { contentSecurityPolicyFromJSON } = require('./csp');
 const { buildSW } = require('./build-sw');
+const { getBearerToken, makeAnalyticsClient } = require('./analytics');
 
 const logger = winston.createLogger({
   level: 'info',
@@ -118,6 +119,8 @@ const writeAllowedResourcesForContentSecurityPolicyAsJSON = async (
 
 module.exports = {
   buildSW,
+  getBearerToken,
+  makeAnalyticsClient,
   writeAllowedResourcesForContentSecurityPolicyAsJSON,
   contentSecurityPolicyFromJSON,
   writeCSPinNetlifyToml
