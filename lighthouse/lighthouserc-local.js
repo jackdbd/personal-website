@@ -25,11 +25,11 @@ const collect = {
   },
   staticDistDir: './_site',
   url: [
-    'http://localhost:8080',
-    'http://localhost:8080/blog',
-    'http://localhost:8080/contact',
-    'http://localhost:8080/posts/12-years-of-fires-in-sardinia',
-    'http://localhost:8080/projects'
+    'http://localhost:8080/',
+    'http://localhost:8080/blog/',
+    'http://localhost:8080/contact/',
+    'http://localhost:8080/posts/12-years-of-fires-in-sardinia/',
+    'http://localhost:8080/projects/'
   ]
 };
 

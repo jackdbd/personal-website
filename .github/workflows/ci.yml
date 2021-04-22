@@ -24,17 +24,9 @@ jobs:
         run: npm run test
       - name: Build website
         run: npm run build
-  analytics:
-    name: Fetch analytics from Ackee
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get most popular blog posts
-        run: echo "TODO get 3-5 most popular blog posts"
-      - name: Get total visitors
-        run: echo "TODO get total visitors"
   audit:
     name: Audit website with Lighthouse CI
-    needs: [build, analytics]
+    needs: [build]
     env:
       ARTICLE_SLUG: 12-years-of-fires-in-sardinia
       SITE_NAME: ${{ secrets.SITE_NAME }}
