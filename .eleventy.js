@@ -24,14 +24,30 @@ const transforms = require('./11ty/transforms.js');
 const {
   buildSW,
   contentSecurityPolicyFromJSON,
+  getBearerToken,
+  makeAnalyticsClient,
   writeAllowedResourcesForContentSecurityPolicyAsJSON,
   writeCSPinNetlifyToml
 } = require('./scripts');
 
 const OUTPUT_DIR = '_site';
 
+const checkEnvironmentVariables = () => {
+  if (process.env.ACKEE_API === undefined) {
+    throw new Error('Environment variable ACKEE_API not set');
+  }
+  if (process.env.ACKEE_USERNAME === undefined) {
+    throw new Error('Environment variable ACKEE_USERNAME not set');
+  }
+  if (process.env.ACKEE_PASSWORD === undefined) {
+    throw new Error('Environment variable ACKEE_PASSWORD not set');
+  }
+};
+
 module.exports = function (eleventyConfig) {
-  eleventyConfig.on('beforeBuild', () => {});
+  eleventyConfig.on('beforeBuild', () => {
+    checkEnvironmentVariables();
+  });
 
   eleventyConfig.on('afterBuild', async () => {
     const filepath = 'csp-allowed-resources.json';
@@ -41,24 +57,50 @@ module.exports = function (eleventyConfig) {
     const csp = await contentSecurityPolicyFromJSON(filepath);
     await writeCSPinNetlifyToml(csp, { netlifyTomlPath });
 
-    // TODO: fetch list of popular HTML pages from Ackee before generating sw
-    const htmlPagesToPrecache = [
-      path.join(OUTPUT_DIR, '404.html'),
-      path.join(OUTPUT_DIR, 'index.html'),
-      path.join(OUTPUT_DIR, 'about', 'index.html'),
-      path.join(OUTPUT_DIR, 'blog', 'index.html'),
-      path.join(OUTPUT_DIR, 'contact', 'index.html'),
-      path.join(OUTPUT_DIR, 'projects', 'index.html'),
-      path.join(OUTPUT_DIR, 'styleguide', 'index.html'),
-      path.join(OUTPUT_DIR, 'success', 'index.html'),
-      path.join(OUTPUT_DIR, 'tags', 'index.html'),
-      path.join(
-        OUTPUT_DIR,
-        'posts',
-        '12-years-of-fires-in-sardinia',
-        'index.html'
-      )
-    ];
+    let htmlPagesToPrecache = [];
+    try {
+      const token = await getBearerToken({
+        endpoint: process.env.ACKEE_API,
+        username: process.env.ACKEE_USERNAME,
+        password: process.env.ACKEE_PASSWORD
+      });
+
+      const analytics = makeAnalyticsClient({
+        endpoint: process.env.ACKEE_API,
+        domainId: process.env.ACKEE_DOMAIN_ID,
+        token
+      });
+
+      const results = await analytics.topFivePages();
+      const toPathname = (res) => {
+        const pageUrl = new URL(res.id);
+        return path.join(OUTPUT_DIR, pageUrl.pathname, 'index.html');
+      };
+
+      htmlPagesToPrecache = results.map(toPathname);
+      console.log('htmlPagesToPrecache (Ackee)', htmlPagesToPrecache);
+    } catch (err) {
+      console.warn('Could not fetch pages from Ackee!!! Using default pages');
+      htmlPagesToPrecache = [
+        path.join(OUTPUT_DIR, '404.html'),
+        path.join(OUTPUT_DIR, 'index.html'),
+        path.join(OUTPUT_DIR, 'about', 'index.html'),
+        path.join(OUTPUT_DIR, 'blog', 'index.html'),
+        path.join(OUTPUT_DIR, 'contact', 'index.html'),
+        path.join(OUTPUT_DIR, 'projects', 'index.html'),
+        path.join(OUTPUT_DIR, 'styleguide', 'index.html'),
+        path.join(OUTPUT_DIR, 'success', 'index.html'),
+        path.join(OUTPUT_DIR, 'tags', 'index.html'),
+        path.join(
+          OUTPUT_DIR,
+          'posts',
+          '12-years-of-fires-in-sardinia',
+          'index.html'
+        )
+      ];
+      console.log('htmlPagesToPrecache (default)', htmlPagesToPrecache);
+    }
+
     await buildSW({
       cacheId: 'giacomodebidda.com',
       outputDir: OUTPUT_DIR,
