@@ -107,6 +107,25 @@ package = "netlify-plugin-is-website-vulnerable"
 # Redirects                                                                    #
 # ---------------------------------------------------------------------------- #
 
+# Permanent redirects for some of my most popular blog posts.
+[[redirects]]
+  from = "/mvc-pattern-in-python-introduction-and-basicmodel"
+  to = "/posts/mvc-pattern-in-python-introduction-and-basicmodel"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mvc-pattern-in-python-sqlite"
+  to = "/posts/mvc-pattern-in-python-sqlite"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/mvc-pattern-in-python-dataset"
+  to = "/posts/mvc-pattern-in-python-dataset"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "*"
   to = "/404"
