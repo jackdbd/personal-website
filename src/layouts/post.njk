@@ -33,10 +33,12 @@ section: post
 
       {{ content | safe }}
 
-      {# {% if tags %}
-        {% set align = "start" %}
+      <hr>
+
+      {% if tags %}
+        {% set align = "end" %}
         {% include "components/tags.njk" %}
-      {% endif %} #}
+      {% endif %}
 
     </article>
   </main>
