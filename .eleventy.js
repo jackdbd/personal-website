@@ -44,6 +44,18 @@ const checkEnvironmentVariables = () => {
   }
 };
 
+// shamelessly stolen from:
+// https://github.com/maxboeck/mxb/blob/db6ca7743f46cf67367a93c8de404cbcb50b98d1/utils/markdown.js
+const headingAnchorSlugify = (s) =>
+  encodeURIComponent(
+    'h-' +
+      String(s)
+        .trim()
+        .toLowerCase()
+        .replace(/[.,\/#!$%\^&\*;:{}=_`~()]/g, '')
+        .replace(/\s+/g, '-')
+  );
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.on('beforeBuild', () => {
     checkEnvironmentVariables();
@@ -121,6 +133,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(readingTime);
   eleventyConfig.addPlugin(rss);
   eleventyConfig.addPlugin(syntaxHighlight);
+  // Check also this one as an alternative
+  // https://github.com/nagaozen/markdown-it-toc-done-right
   eleventyConfig.addPlugin(toc, {
     tags: ['h2', 'h3'],
     wrapperClass: 'toc'
@@ -181,10 +195,13 @@ module.exports = function (eleventyConfig) {
 
   // https://github.com/valeriangalliat/markdown-it-anchor
   md.use(markdownItAnchor, {
+    level: 2,
     permalink: true,
     permalinkBefore: true,
     permalinkClass: 'heading-anchor',
-    permalinkSymbol: '#'
+    permalinkSymbol: '#',
+    permalinkAttrs: () => ({ 'aria-hidden': true }),
+    slugify: headingAnchorSlugify
   });
   eleventyConfig.setLibrary('md', md);
 
