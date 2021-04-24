@@ -54,11 +54,6 @@ const machineDateJS = (dateObj) => {
   return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('yyyy-MM-dd');
 };
 
-// Create a slug. Useful to create the slugified version of a blog post title.
-// TODO: am I really using this filter? I think that 11ty already uses slugify
-// automatically.
-// https://www.11ty.dev/docs/filters/slug/
-
 module.exports = {
   cssmin,
   humanDate,
