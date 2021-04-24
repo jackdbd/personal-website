@@ -1,4 +1,5 @@
 <ul class="cluster" data-align="{{ align }}">
+  <li><a href="{{ metadata.feeds.posts.href }}">RSS</a></li>
   {% for entry in metadata.socials %}
   <li>
     <a href="{{ entry.url | url }}" rel="noopener noreferrer" target="_blank">{{ entry.name }}</a>
