@@ -89,7 +89,7 @@
   {# I am using a monospace font only in blog posts, so I'll preload it only for those page types. #}
 
   {# RSS Feed #}
-  <link rel="alternate" href="{{ metadata.url }}/feed.xml" title="{{ metadata.title }}" type="application/atom+xml">
+  <link rel="alternate" type="application/rss+xml" href="{{ metadata.feeds.posts.href }}" title="{{ metadata.feeds.posts.title }}">
 
   {# Non-inlined JS: use async or defer #}
   <script async src="/assets/js/instantpage.js"></script>

@@ -4,6 +4,12 @@
     "name": "Giacomo Debidda"
   },
   "description": "Giacomo Debidda's personal website and blog",
+  "feeds": {
+    "posts": {
+      "href": "/feeds/posts.xml",
+      "title": "Giacomo Debidda's blog posts"
+    }
+  },
   "lang": "en",
   "ogp": {
     "type": "website"
