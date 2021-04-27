@@ -83,7 +83,7 @@ module.exports = function (eleventyConfig) {
         token
       });
 
-      const results = await analytics.topFivePages();
+      const results = await analytics.topThreePages();
       const toPathname = (res) => {
         const pageUrl = new URL(res.id);
         return path.join(OUTPUT_DIR, pageUrl.pathname, 'index.html');

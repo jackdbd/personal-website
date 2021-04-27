@@ -104,27 +104,80 @@ package = "netlify-plugin-is-website-vulnerable"
     Content-Security-Policy = "base-uri 'self'; child-src https://www.youtube.com/embed/ https://www.youtube-nocookie.com/ https://player.vimeo.com/video/; connect-src 'self' https://analytics.projects.giacomodebidda.com https://res.cloudinary.com; default-src 'self'; font-src 'self'; form-action 'self'; frame-ancestors 'none'; frame-src https://www.youtube.com/embed/ https://www.youtube-nocookie.com/ https://player.vimeo.com/video/; img-src 'self' https://res.cloudinary.com/jackdbd/image/upload/; manifest-src 'self'; media-src 'none'; object-src 'none'; prefetch-src 'self'; report-to default; report-uri https://giacomodebidda.report-uri.com; script-src 'unsafe-inline' 'self' 'sha256-PyAOqXgueeuk+8T8n00FvGNw7yCUcqcyD6E756FNmHo=' 'sha256-79P8AviabWxQGa1mlv2UcVqqDIAW0EHFiy7thd0Kza4=' 'sha256-GuPrCS6ENCSo+IUOOYkN+3dXas947C1GpqWIo24oWSc=' 'sha256-De+QVTzV8XQzxXulo8iB06ksKNitqK8PtbSJawnUDSo=' 'sha256-KEhjQMcGJHS4Ovb2P59Ue58GzrlVoSV7XJj1VvTbYdg=' 'sha256-kvWvKAySeAiwX8v6qUB6cn6yRLaCssbaSklkpq21AmE=' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' 'sha256-9YNk/uS/bXBVw7dHbEI5eY2MLGztFrN0/shogbc2+eI=' 'sha256-SvMTZsajFGVQX0edOXu1REFeA67Ia0SK92upNXpD72Q='; script-src-attr 'none'; script-src-elem 'self' 'sha256-PyAOqXgueeuk+8T8n00FvGNw7yCUcqcyD6E756FNmHo=' 'sha256-79P8AviabWxQGa1mlv2UcVqqDIAW0EHFiy7thd0Kza4=' 'sha256-GuPrCS6ENCSo+IUOOYkN+3dXas947C1GpqWIo24oWSc=' 'sha256-De+QVTzV8XQzxXulo8iB06ksKNitqK8PtbSJawnUDSo=' 'sha256-KEhjQMcGJHS4Ovb2P59Ue58GzrlVoSV7XJj1VvTbYdg=' 'sha256-kvWvKAySeAiwX8v6qUB6cn6yRLaCssbaSklkpq21AmE=' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' 'sha256-9YNk/uS/bXBVw7dHbEI5eY2MLGztFrN0/shogbc2+eI=' 'sha256-SvMTZsajFGVQX0edOXu1REFeA67Ia0SK92upNXpD72Q='; style-src 'self' 'unsafe-inline' 'self' 'sha256-qz5B6VOirK+Yv3zKYqgFLMMk2fSp9Nh2yZMF7NhIQT4=' 'sha256-3DOBxHy23tOjYX6Anl9n0OFUQ45OQu5FToeDrN+ApbE=' 'sha256-m5jc1lAmBceaceSbtgXbXZfkNzIR6MyGmTZ7Lkpofpc=' 'sha256-bLb6T4vhf3aPDAOpprJ0c0yzw+8lPaTztWO1ehx/wRo=' 'sha256-GYqogNdvJYq8rmCmKtZTJ3mwSJTQdvgiOkJjErRkos4=' 'sha256-LUf42m42mvci3HgGvGhIPJ/UjwjT3senEOm7htPwlBs=' 'sha256-4AJ9eSr08pnMQdAX2l3BUCEpCJPrHLaduzR5j1J+xHA=' 'sha256-g1cPNJoVAPuSICnZJfs6dbUSCkPiU42r5PFXJfPhH/Q=' 'sha256-LXWxNFYvuapRx1IXKS+CCyOxc5UtnT7h2oxYrrguB18=' 'sha256-T19TyhF4bRnspPjB0/clI2+a9IFm0qHzBRnhkFIy2Xo=' 'sha256-yD0sDopqUtFVHhHUKv9MCE4LbII92iYZCaKJn7eE7Uk=' 'sha256-+bNRuf8EyqSNF+zcTCvtfPack0O/KogYDWqJD1uWDRc='; style-src-attr 'self' 'unsafe-inline'; style-src-elem 'self' 'sha256-qz5B6VOirK+Yv3zKYqgFLMMk2fSp9Nh2yZMF7NhIQT4=' 'sha256-3DOBxHy23tOjYX6Anl9n0OFUQ45OQu5FToeDrN+ApbE=' 'sha256-m5jc1lAmBceaceSbtgXbXZfkNzIR6MyGmTZ7Lkpofpc=' 'sha256-bLb6T4vhf3aPDAOpprJ0c0yzw+8lPaTztWO1ehx/wRo=' 'sha256-GYqogNdvJYq8rmCmKtZTJ3mwSJTQdvgiOkJjErRkos4=' 'sha256-LUf42m42mvci3HgGvGhIPJ/UjwjT3senEOm7htPwlBs=' 'sha256-4AJ9eSr08pnMQdAX2l3BUCEpCJPrHLaduzR5j1J+xHA=' 'sha256-g1cPNJoVAPuSICnZJfs6dbUSCkPiU42r5PFXJfPhH/Q=' 'sha256-LXWxNFYvuapRx1IXKS+CCyOxc5UtnT7h2oxYrrguB18=' 'sha256-T19TyhF4bRnspPjB0/clI2+a9IFm0qHzBRnhkFIy2Xo=' 'sha256-yD0sDopqUtFVHhHUKv9MCE4LbII92iYZCaKJn7eE7Uk=' 'sha256-+bNRuf8EyqSNF+zcTCvtfPack0O/KogYDWqJD1uWDRc='; upgrade-insecure-requests; worker-src 'self'"
 
 # ---------------------------------------------------------------------------- #
-# Redirects                                                                    #
+# Redirects (TODO: move redirects and rewrites to _redirects file?)            #
 # ---------------------------------------------------------------------------- #
 
-# Permanent redirects for some of my most popular blog posts.
 [[redirects]]
-  from = "/mvc-pattern-in-python-introduction-and-basicmodel"
-  to = "/posts/mvc-pattern-in-python-introduction-and-basicmodel"
-  status = 301
-  force = true
+  from = "/a-simple-git-hook-for-your-python-projects"
+  to = "/posts/a-simple-git-hook-for-your-python-projects"
 
 [[redirects]]
-  from = "/mvc-pattern-in-python-sqlite"
-  to = "/posts/mvc-pattern-in-python-sqlite"
-  status = 301
-  force = true
+  from = "/adapter-pattern-in-python"
+  to = "/posts/adapter-pattern-in-python"
+
+[[redirects]]
+  from = "/better-git-commits"
+  to = "/posts/better-git-commits"
+
+[[redirects]]
+  from = "/bridge-pattern-in-python"
+  to = "/posts/bridge-pattern-in-python"
+
+[[redirects]]
+  from = "/facade-pattern-in-python"
+  to = "/posts/facade-pattern-in-python"
+
+[[redirects]]
+  from = "/factory-method-and-abstract-factory-in-python"
+  to = "/posts/factory-method-and-abstract-factory-in-python"
+
+[[redirects]]
+  from = "/how-to-import-d3-plugins-with-webpack"
+  to = "/posts/how-to-import-d3-plugins-with-webpack"
+
+[[redirects]]
+  from = "/my-personal-git-memo"
+  to = "/posts/my-personal-git-memo"
 
 [[redirects]]
   from = "/mvc-pattern-in-python-dataset"
   to = "/posts/mvc-pattern-in-python-dataset"
-  status = 301
-  force = true
+
+[[redirects]]
+  from = "/mvc-pattern-in-python-introduction-and-basicmodel"
+  to = "/posts/mvc-pattern-in-python-introduction-and-basicmodel"
+
+[[redirects]]
+  from = "/mvc-pattern-in-python-sqlite"
+  to = "/posts/mvc-pattern-in-python-sqlite"
+
+[[redirects]]
+  from = "/reactive-dashboards-with-plotly-dash"
+  to = "/posts/reactive-dashboards-with-plotly-dash"
+
+[[redirects]]
+  from = "/reading-large-excel-files-with-pandas"
+  to = "/posts/reading-large-excel-files-with-pandas"
+
+[[redirects]]
+  from = "/squashing-git-commits"
+  to = "/posts/squashing-git-commits"
+
+[[redirects]]
+  from = "/strategy-pattern-in-python"
+  to = "/posts/strategy-pattern-in-python"
+
+[[redirects]]
+  from = "/template-method-pattern-in-python"
+  to = "/posts/template-method-pattern-in-python"
+
+[[redirects]]
+  from = "/threejs-project-starter-for-es6-and-webpack-2"
+  to = "/posts/threejs-project-starter-for-es6-and-webpack-2"
+
+[[redirects]]
+  from = "/visualize-earthquakes-with-plotly-dash"
+  to = "/posts/visualize-earthquakes-with-plotly-dash"
 
 [[redirects]]
   from = "*"

@@ -144,6 +144,7 @@ const makeAnalyticsClient = ({ endpoint, domainId, token }) => {
     domainsFacts: makeDomainsFacts(gqlClient),
     events: makeEvents(gqlClient),
     facts: makeFactsByDomainId(gqlClient, domainId),
+    topThreePages: makeTopPages(gqlClient, domainId, 3),
     topFivePages: makeTopPages(gqlClient, domainId, 5),
     topTenPages: makeTopPages(gqlClient, domainId, 10)
   };
@@ -179,3 +180,21 @@ module.exports = {
   getBearerToken,
   makeAnalyticsClient
 };
+
+// const fn = async () => {
+//   const token = await getBearerToken({
+//     endpoint: process.env.ACKEE_API,
+//     username: process.env.ACKEE_USERNAME,
+//     password: process.env.ACKEE_PASSWORD
+//   });
+//   const analytics = makeAnalyticsClient({
+//     endpoint: process.env.ACKEE_API,
+//     domainId: process.env.ACKEE_DOMAIN_ID,
+//     token
+//   });
+
+//   const results = await analytics.topFivePages();
+//   console.log('🚀 ~ fn ~ results', results);
+// };
+
+// fn();
