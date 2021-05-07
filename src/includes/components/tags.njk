@@ -1,5 +1,5 @@
 <ul class="cluster" data-align="{{ align }}">
-  {% for text in tags %}
+  {% for text in tags | sort %}
     {% if text != "post" %}
       {% set href %}/tags/{{ text }}/{% endset %}
       <li class="display:inline-flex">{% include "components/pill.njk" %}</li>
