@@ -1,0 +1,6 @@
+{
+  "blockAds": true,
+  "connectivity": "Cable",
+  "location": "ec2-eu-south-1:Chrome",
+  "runs": 1
+}

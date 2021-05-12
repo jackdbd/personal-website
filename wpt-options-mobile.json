@@ -1,0 +1,6 @@
+{
+  "blockAds": false,
+  "connectivity": "3GFast",
+  "location": "ec2-eu-south-1:Chrome",
+  "runs": 1
+}

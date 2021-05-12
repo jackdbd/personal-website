@@ -24,6 +24,44 @@ jobs:
         run: npm run test
       - name: Build website
         run: npm run build
+  wpt:
+    name: Audit website with WebPageTest API
+    needs: [build]
+    env:
+      ARTICLE_SLUG: 12-years-of-fires-in-sardinia
+      SITE_NAME: ${{ secrets.SITE_NAME }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Wait for a successfull Deploy Preview on Netlify
+        uses: jakepartusch/wait-for-netlify-action@v1
+        id: netlify
+        with:
+          site_name: ${{ env.SITE_NAME }}
+          max_timeout: 60
+      - name: Audit pages with WebPageTest API (mobile)
+        uses: WPO-Foundation/webpagetest-github-action@main
+        with:
+          apiKey: ${{ secrets.WPT_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          label: 'GitHub Action mobile'
+          urls: |
+            ${{ steps.netlify.outputs.url }}/
+            ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
+            ${{ steps.netlify.outputs.url }}/contact/
+          wptOptions: 'wpt-options-mobile.json'
+      - name: Audit pages with WebPageTest API (desktop)
+        uses: WPO-Foundation/webpagetest-github-action@main
+        with:
+          apiKey: ${{ secrets.WPT_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          label: 'GitHub Action desktop'
+          urls: |
+            ${{ steps.netlify.outputs.url }}/
+            ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
+            ${{ steps.netlify.outputs.url }}/contact/
+          wptOptions: 'wpt-options-desktop.json'
   audit:
     name: Audit website with Lighthouse CI
     needs: [build]
