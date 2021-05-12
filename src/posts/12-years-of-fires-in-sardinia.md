@@ -3,6 +3,7 @@ title: 12 Years of Fires in Sardinia
 date: "2018-08-22T19:00:03.284Z"
 ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1599200654/sardinia-fires_yakjue.png
+  imageAlt: A map of 12 years of fires in Sardinia. Each fire is represented as a circle of various size and color.
 tags:
   - python
   - data visualization

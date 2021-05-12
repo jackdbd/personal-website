@@ -5,6 +5,7 @@ description: The expression problem is about adding new capabilities to existing
 ogp:
   # 320x180 image from Youtube video, generated here: https://y-image.net/
   image: https://i.ytimg.com/vi/lC39ifspIf4/mqdefault.jpg
+  imageAlt: Michael Fogus presenting the talk ClojureScript Anatomy at the InfoQ conference in 2012
   video: https://youtu.be/lC39ifspIf4
 tags:
   - clojure

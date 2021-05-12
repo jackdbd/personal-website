@@ -3,6 +3,7 @@ title: Export a GeoDataFrame to Spatialite
 date: '2018-08-21T21:00:03.284Z'
 ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1599302022/spatialite-gui_xgzx3z.png
+  imageAlt: A map preview in Spatialite GUI.
 tags:
   - python
   - geospatial

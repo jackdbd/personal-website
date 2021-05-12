@@ -4,6 +4,7 @@ date: "2021-05-06T17:30:03.284Z"
 description: A HAR (Http ARchive) file is important when troubleshooting performance issues because it contains data related to the HTTP transactions that occur between a web browser and a website or web app.
 ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1620314435/waterfall_google_compare_hqyhcf.png
+  imageAlt: A waterfall chart generated from a HAR file.
 tags:
   - http
   - web performance

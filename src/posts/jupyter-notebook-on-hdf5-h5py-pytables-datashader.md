@@ -3,6 +3,7 @@ title: Jupyter notebook on HDF5, h5py, PyTables, Datashader
 date: '2018-01-06T21:00:03.284Z'
 ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1599303197/nyc-yellow-taxis-pickups_nipps2.png
+  imageAlt: New York City taxi pickups represented as yellow dots.
 tags:
   - python
   - data visualization
