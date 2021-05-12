@@ -45,10 +45,11 @@
 
   {# TODO: add images for sharing the content on Twitter #}
   <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="giacomodebidda.com">
   <meta property="twitter:url" content="{{ absolutePageUrl }}">
   <meta property="twitter:title" content="{{ title or metadata.title }}">
   <meta property="twitter:description" content="{{ description or metadata.description }}">
-  <meta property="twitter:image" content="{{ metadata.profilePic }}">
+  <meta property="twitter:image" content="{{ ogp.image or metadata.profilePic }}">
 
   <meta name="theme-color" content="#1a1a1a">
 

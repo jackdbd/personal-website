@@ -1,8 +1,6 @@
 ---
 title: Test your JavaScript on multiple engines with eshost-cli and jsvu
 date: "2021-05-07T17:00:03.284Z"
-ogp:
-  image: 
 tags:
   - cli
   - javascript
