@@ -279,6 +279,16 @@ strong {
   margin-top: var(--cluster-spacing);
 }
 
+#toc summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+#toc ol > li {
+  list-style: none;
+  padding-left: 0;
+}
+
 /* #wrapper-for-sticky-footer ----------------------------------------------- */
 #wrapper-for-sticky-footer {
   display: flex;

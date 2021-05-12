@@ -28,8 +28,7 @@ section: post
 
       <hr>
 
-      {# TODO: decide whether to include a Table Of Contents or not #}
-      {# {{ content | toc | safe }} #}
+      {% include "components/toc.njk" %}
 
       {{ content | safe }}
 

@@ -14,7 +14,7 @@ const embedYouTube = require('eleventy-plugin-youtube-embed');
 const emoji = require('eleventy-plugin-emoji');
 const helmet = require('eleventy-plugin-helmet');
 const readingTime = require('eleventy-plugin-reading-time');
-const toc = require('eleventy-plugin-toc');
+const toc = require('eleventy-plugin-nesting-toc');
 
 const collections = require('./11ty/collections');
 const filters = require('./11ty/filters');
@@ -133,11 +133,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(readingTime);
   eleventyConfig.addPlugin(rss);
   eleventyConfig.addPlugin(syntaxHighlight);
-  // Check also this one as an alternative
-  // https://github.com/nagaozen/markdown-it-toc-done-right
   eleventyConfig.addPlugin(toc, {
     tags: ['h2', 'h3'],
-    wrapperClass: 'toc'
+    wrapperClass: 'toc-nav'
   });
 
   // --- 11ty data cascade -------------------------------------------------- //
