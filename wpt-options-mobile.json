@@ -1,6 +1,8 @@
 {
   "blockAds": false,
   "connectivity": "3GFast",
+  "firstViewOnly": true,
   "location": "ec2-eu-south-1:Chrome",
-  "runs": 1
+  "runs": 1,
+  "video": true
 }
