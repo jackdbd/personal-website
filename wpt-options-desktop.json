@@ -1,6 +1,10 @@
 {
   "blockAds": true,
   "connectivity": "Cable",
+  "emulateMobile": false,
+  "firstViewOnly": true,
   "location": "ec2-eu-south-1:Chrome",
-  "runs": 1
+  "notifyEmail": "jackdebidda@gmail.com",
+  "runs": 1,
+  "video": true
 }
