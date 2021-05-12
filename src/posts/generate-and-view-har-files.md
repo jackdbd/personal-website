@@ -56,7 +56,7 @@ You can use several tools to create a HAR file:
 
 I like to use WebPageTest to generate a HAR file because of its many test locations and the many options for device emulation. Replicating the same options in Chrome would mean having to implement [custom profiles](https://developer.chrome.com/docs/devtools/device-mode/) for CPU throttling, network throttling and location.
 
-Also, you should always create a HAR file in an incognito tab, to avoid having requests made by Chrome extensions show up in your waterfall. I find this quite annoying and easy to forget. That's another reason why I prefer a tool like WebPageTest for this task.
+{% callout "warn" %}You should always create a HAR file in an incognito tab, to avoid having requests made by Chrome extensions show up in your waterfall. I find this quite annoying and easy to forget. That's another reason why I prefer a tool like WebPageTest for this task.{% endcallout %}
 
 ## View and analyze a HAR file
 

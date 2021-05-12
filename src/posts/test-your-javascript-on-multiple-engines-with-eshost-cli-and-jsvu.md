@@ -33,7 +33,7 @@ Every time `jsvu` runs, including the first time, it installs the latest version
 
 `jsvu` then compiles the engines' source files and stores their binaries in `~/.jsvu/engines`. It also creates either a symlink or a small shell script to execute each engine's shell.
 
-Note: you may want to add the `~/.jsvu` directory to your PATH, as they suggest in the [project's README](https://github.com/GoogleChromeLabs/jsvu#installation).
+{% callout "tip" %}You may want to add the `~/.jsvu` directory to your PATH, as they suggest in the [project's README](https://github.com/GoogleChromeLabs/jsvu#installation).{%endcallout %}
 
 Having all JS engines in `~/.jsvu` (through a symlink or a shell script) is quite convenient for setting up [eshost-cli](https://github.com/bterlson/eshost-cli), the tool that runs your code on all of these engines.
 
@@ -60,7 +60,7 @@ eshost --add 'V8' d8 ~/.jsvu/v8
 eshost --add 'V8-debug' d8 ~/.jsvu/v8-debug
 ```
 
-Note: that `d8` is not a typo. It's the [V8 developer shell](https://v8.dev/docs/d8).
+{% callout "info" %}That `d8` is not a typo. It's the [V8 developer shell](https://v8.dev/docs/d8).{% endcallout %}
 
 Now that you have configured some hosts, you can evaluate your code on multiple engines:
 

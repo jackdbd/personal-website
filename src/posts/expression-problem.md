@@ -220,7 +220,7 @@ By doing so, we gained new functionality for the existing `Triangle` and `Square
   (perimeter triangle))
 ```
 
-Note: [Clojure protocols can also extend final Java classes](https://news.ycombinator.com/item?id=1285039), even if I still don't know how they are able to do it.
+{% callout "info" %}[Clojure protocols can also extend final Java classes](https://news.ycombinator.com/item?id=1285039), even if I still don't know how they are able to do it.{% endcallout %}
 
 ## Other approaches
 

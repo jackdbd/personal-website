@@ -19,6 +19,7 @@ const toc = require('eleventy-plugin-nesting-toc');
 const collections = require('./11ty/collections');
 const filters = require('./11ty/filters');
 const shortcodes = require('./11ty/shortcodes');
+const pairedShortcodes = require('./11ty/paired-shortcodes');
 const transforms = require('./11ty/transforms.js');
 
 const { buildSW, getBearerToken, makeAnalyticsClient } = require('./scripts');
@@ -146,6 +147,9 @@ module.exports = function (eleventyConfig) {
   // 11ty shortcodes
   Object.keys(shortcodes).forEach((name) => {
     eleventyConfig.addShortcode(name, shortcodes[name]);
+  });
+  Object.keys(pairedShortcodes).forEach((name) => {
+    eleventyConfig.addPairedShortcode(name, pairedShortcodes[name]);
   });
 
   // 11ty transforms

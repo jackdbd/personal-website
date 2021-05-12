@@ -107,6 +107,18 @@ strong {
   font-weight: 700;
 }
 
+/* .callout ----------------------------------------------------------------- */
+
+.callout {
+  background: var(--color-background-code);
+  /* border: 0.5rem solid var(--color-accent); */
+  border-radius: 0.5rem;
+}
+
+.callout__content {
+  padding: var(--scale-space-xs);
+}
+
 /* .contact-form ------------------------------------------------------------ */
 
 .contact-form {
