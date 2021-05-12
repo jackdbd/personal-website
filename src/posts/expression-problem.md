@@ -1,6 +1,7 @@
 ---
 title: 3 ways to solve the expression problem
 date: "2020-09-10T12:00:00.000Z"
+description: The expression problem is about adding new capabilities to existing code without modifying it. In this article we discuss a few approaches to solve the expression problem.
 ogp:
   # 320x180 image from Youtube video, generated here: https://y-image.net/
   image: https://i.ytimg.com/vi/lC39ifspIf4/mqdefault.jpg

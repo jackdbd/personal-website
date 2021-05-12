@@ -1,6 +1,6 @@
 ---
 title: How I setup my laptop with Ansible
-description: A checklist of steps I perform when upgrading my system
+description: Here is how I (re)configure my laptop with Ansible
 date: "2020-09-18T12:00:00.000Z"
 tags:
   - ansible

@@ -1,6 +1,7 @@
 ---
 title: Test your JavaScript on multiple engines with eshost-cli and jsvu
 date: "2021-05-07T17:00:03.284Z"
+description: Testing your code on multiple JavaScript engines can be an effective way to understand how to write more performant libraries and applications.
 tags:
   - cli
   - javascript

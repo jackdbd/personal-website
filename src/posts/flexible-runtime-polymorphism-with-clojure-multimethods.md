@@ -1,6 +1,6 @@
 ---
 title: Flexible runtime polymorphism with Clojure multimethods
-description: Clojure multimethods allow us to use multiple dynamic dispatch
+description: Polymorphism is a generic concept that means providing many implementations while retaining a single interface. Clojure multimethods allow us to use multiple dynamic dispatch.
 date: "2020-09-12T12:00:00.000Z"
 tags:
   - clojure
