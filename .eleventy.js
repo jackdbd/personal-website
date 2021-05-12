@@ -21,14 +21,7 @@ const filters = require('./11ty/filters');
 const shortcodes = require('./11ty/shortcodes');
 const transforms = require('./11ty/transforms.js');
 
-const {
-  buildSW,
-  contentSecurityPolicyFromJSON,
-  getBearerToken,
-  makeAnalyticsClient,
-  writeAllowedResourcesForContentSecurityPolicyAsJSON,
-  writeCSPinNetlifyToml
-} = require('./scripts');
+const { buildSW, getBearerToken, makeAnalyticsClient } = require('./scripts');
 
 const OUTPUT_DIR = '_site';
 
@@ -62,13 +55,6 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.on('afterBuild', async () => {
-    const filepath = 'csp-allowed-resources.json';
-    const netlifyTomlPath = 'netlify.toml';
-
-    await writeAllowedResourcesForContentSecurityPolicyAsJSON(filepath);
-    const csp = await contentSecurityPolicyFromJSON(filepath);
-    await writeCSPinNetlifyToml(csp, { netlifyTomlPath });
-
     let htmlPagesToPrecache = [];
     try {
       const token = await getBearerToken({
@@ -115,9 +101,7 @@ module.exports = function (eleventyConfig) {
 
     await buildSW({
       cacheId: 'giacomodebidda.com',
-      outputDir: OUTPUT_DIR,
-      htmlPagesToPrecache,
-      netlifyTomlPath
+      htmlPagesToPrecache
     });
   });
 
