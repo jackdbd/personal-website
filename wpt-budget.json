@@ -1,0 +1,10 @@
+{
+  "median": {
+    "firstView": {
+      "firstContentfulPaint": 2400,
+      "loadTime": 2400,
+      "render": 2500,
+      "requests": 70
+    }
+  }
+}
