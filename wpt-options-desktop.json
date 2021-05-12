@@ -4,7 +4,6 @@
   "emulateMobile": false,
   "firstViewOnly": true,
   "location": "ec2-eu-south-1:Chrome",
-  "notifyEmail": "jackdebidda@gmail.com",
   "runs": 1,
   "video": true
 }

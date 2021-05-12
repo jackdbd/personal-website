@@ -40,27 +40,37 @@ jobs:
         with:
           site_name: ${{ env.SITE_NAME }}
           max_timeout: 60
-      - name: Audit pages with WebPageTest API (mobile)
+      - name: Audit pages with WebPageTest (home/contact, mobile)
         uses: WPO-Foundation/webpagetest-github-action@main
         with:
           apiKey: ${{ secrets.WPT_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          label: 'GitHub Action mobile'
+          label: 'home-contact-mobile'
           urls: |
             ${{ steps.netlify.outputs.url }}/
-            ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
             ${{ steps.netlify.outputs.url }}/contact/
+          budget: 'wpt-budget.json'
           wptOptions: 'wpt-options-mobile.json'
-      - name: Audit pages with WebPageTest API (desktop)
+      - name: Audit pages with WebPageTest (home/contact, desktop)
         uses: WPO-Foundation/webpagetest-github-action@main
         with:
           apiKey: ${{ secrets.WPT_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          label: 'GitHub Action desktop'
+          label: 'home-contact-desktop'
           urls: |
             ${{ steps.netlify.outputs.url }}/
-            ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
             ${{ steps.netlify.outputs.url }}/contact/
+          budget: 'wpt-budget.json'
+          wptOptions: 'wpt-options-desktop.json'
+      - name: Audit page with WebPageTest (article, desktop)
+        uses: WPO-Foundation/webpagetest-github-action@main
+        with:
+          apiKey: ${{ secrets.WPT_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          label: 'article-desktop'
+          urls: |
+            ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
+          budget: 'wpt-budget-article-desktop.json'
           wptOptions: 'wpt-options-desktop.json'
   audit:
     name: Audit website with Lighthouse CI
