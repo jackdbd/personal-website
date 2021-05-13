@@ -23,10 +23,7 @@ I tried tmux a couple of times, but it didn't really stick with me. I watched a 
 
 A colleague at [work](https://www.develer.com/) recommended me [Byobu](https://help.ubuntu.com/community/Byobu), so I decided to try it out.
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599302017/byobu-screenshot_sbkhm6.png",
-"A screenshot of Byobu on my Xubuntu system",
-1920, 1051 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599302017/byobu-screenshot_sbkhm6.png
 
 ## Installation and first steps
 

@@ -21,10 +21,7 @@ The UI components are created with D3.js and WebGL, so they look amazing. And yo
 
 The [getting started](https://plot.ly/dash/getting-started) is top-notch, so I suggest you to start from there if you want to try Dash out. Here I will briefly describe what I did for my app.
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303705/demo_dudpt8.gif",
-"A GIF showing the Dash-Earthquakes Dash app",
-1366, 600 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303705/demo_dudpt8.gif
 
 ## Imports
 

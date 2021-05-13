@@ -31,10 +31,7 @@ If the description is really long, you can divide it into several paragraphs and
 
 Here is an example:
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599301996/commit_1_ah0dkn.png",
-"A good commit message",
-559, 255 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599301996/commit_1_ah0dkn.png
 
 ## Why 72 characters? And how to do it?
 

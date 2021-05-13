@@ -20,10 +20,7 @@ A typical implementation of this pattern consists in an abstract class for the b
 
 Private name mangling for the `__do_absolutely_this` method. The original class name is prepended to the method name. That's why we see `Algorithm__do_absolutely_this` even when we look at the list of attributes of class `AlgorithmA`.
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303221/private_name_mangling_nmkcrn.png",
-"Private name mangling",
-866, 541 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303221/private_name_mangling_nmkcrn.png
 
 ## The Skeleton
 

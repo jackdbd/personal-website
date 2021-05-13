@@ -36,10 +36,7 @@ After some specific commit (`Initial commit` in the image below) you wrote some 
 
 Let's say that with the 3rd "WIP commit" you have concluded your work on the new feature and you would like to wrap your changes up and start working on a different topic. This is what you should see with `gitk`:
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_4_vbpscq.png",
-"WIP commits in gitk",
-135, 59 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_4_vbpscq.png
 
 Make sure that you have a clean working tree and run:
 
@@ -49,17 +46,11 @@ git reset --soft HEAD~3
 
 This is the current situation: the changes are staged, but not yet committed.
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_2_ism7ym.png",
-"Changes staged, not yet committed",
-359, 36 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_2_ism7ym.png
 
 Commit these changes, and this time write a meaningful commit message.
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_3_pygx89.png",
-"Replace WIP commits with a meaningful commit message",
-242, 37 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_3_pygx89.png
 
 Notice that now that you have moved the HEAD, all changes done in the 3 "WIP commits" are no longer in the branch history, because you have just rewritten it. That's the reason why you should never squash commits on a branch where other developers are working.
 
@@ -70,10 +61,7 @@ The command you are looking for is `git rebase -i HEAD~X`.
 
 Once again, let's pretend that you have 3 commits and you would like to squash them into one.
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_4_vbpscq.png",
-"WIP commits in gitk",
-135, 59 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_4_vbpscq.png
 
 Use git rebase to carry on the squashing procedure.
 
@@ -83,10 +71,7 @@ git rebase -i HEAD~3
 
 Now the default editor will display a message like the following one:
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_5_bjmj1p.png",
-"Interactive rebase",
-495, 282 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_5_bjmj1p.png
 
 Since you want a single commit to appear in the branch history, you have to use one commit and squash the remaining two.
 
@@ -94,29 +79,17 @@ In this image **the last commit is the third one from the top**, but you don't w
 
 In this specific example I wrote a meaningless message for the first commit (WIP 1), so I will `reword` it. If the commit message is fine, you can simply `pick` the commit. The other 2 commits will be squashed with `squash`.
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_6_xcii5l.png",
-"Squash and reword WIP commits",
-148, 47 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_6_xcii5l.png
 
 When you accept the changes (`Ctrl + X` in Nano, `Esc` then `:wq` in Vim) you will see a recap like this one:
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_7_ajppex.png",
-"Recap of the interactive rebase process",
-266, 155 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_7_ajppex.png
 
 You can also edit this recap, which will appear in the commit _description_. Save your changes for this recap message. In `gitk` you should see something like this:
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_3_pygx89.png",
-"The commit summary in gitk",
-242, 37 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_3_pygx89.png
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_9_fjoalj.png",
-"The commit description in gitk",
-463, 169 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_9_fjoalj.png
 
 ## 3. Merge
 

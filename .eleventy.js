@@ -21,6 +21,7 @@ const filters = require('./11ty/filters');
 const shortcodes = require('./11ty/shortcodes');
 const pairedShortcodes = require('./11ty/paired-shortcodes');
 const transforms = require('./11ty/transforms.js');
+const embedCloudinary = require('eleventy-plugin-embed-cloudinary');
 
 const { buildSW, getBearerToken, makeAnalyticsClient } = require('./scripts');
 
@@ -112,6 +113,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(embedTwitter, { align: 'center', doNotTrack: true });
   eleventyConfig.addPlugin(embedVimeo, { dnt: true });
   eleventyConfig.addPlugin(embedYouTube, { lazy: true, noCookie: true });
+  eleventyConfig.addPlugin(embedCloudinary, {
+    apiKey: process.env.CLOUDINARY_API_KEY,
+    apiSecret: process.env.CLOUDINARY_API_SECRET,
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME
+  });
   eleventyConfig.addPlugin(emoji);
   eleventyConfig.addPlugin(helmet);
   eleventyConfig.addPlugin(navigation);
