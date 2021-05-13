@@ -12,10 +12,7 @@ I have already written about Dash [here](https://www.giacomodebidda.com/visualiz
 
 It seems that the audience liked the topic, and on Twitter [Chris Parmer](https://github.com/chriddyp) himself wrote some kind words of appreciation. I wasn't expecting that. It was pretty cool!
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303202/tweet-chrisp_xunbgu.png",
-"Chris Parmer's Tweet",
-638, 217 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303202/tweet-chrisp_xunbgu.png
 
 Dash is a pretty new framework in the Python ecosystem, but I think it will manage to get its own space among tools like Jupyter noteboooks and Bokeh interactive plots.
 

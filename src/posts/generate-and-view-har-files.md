@@ -21,17 +21,11 @@ Every [entry](http://www.softwareishard.com/blog/har-12-spec/#entries) in a HAR 
 
 Down below you can see how [Chrome DevTools](https://developer.chrome.com/docs/devtools/network/reference/) displays the waterfall chart of the Google homepage. The blue vertical line represents the DOMContentLoaded event, while the red one the Load event.
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1620314435/waterfall_google_chrome_bp672m.png",
-"waterfall in Chrome DevTools",
-1423, 452, true %}
+https://res.cloudinary.com/jackdbd/image/upload/v1620314435/waterfall_google_chrome_bp672m.png
 
 And here you can see the waterfall of the same webpage using [Compare](https://compare.sitespeed.io/). The lavender vertical line represents the load event, while the violet one the startRender event (which is a metric calculated by [visualmetrics](https://github.com/WPO-Foundation/visualmetrics/blob/22d152978ac5a3007603d1dca374011874cbf49f/visualmetrics.py#L542)).
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1620314435/waterfall_google_compare_hqyhcf.png",
-"waterfall in Compare",
-1106, 499, true %}
+https://res.cloudinary.com/jackdbd/image/upload/v1620314435/waterfall_google_compare_hqyhcf.png
 
 Note how Chrome DevTools and Compare share the same color scheme for the horizontal bars. This is usually the case with HAR file viewers, even if there are some tools that use a different color scheme.
 

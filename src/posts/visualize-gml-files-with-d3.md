@@ -76,17 +76,11 @@ Apparently there must be some randomness when the figure gets generated, because
 
 Here is the first one:
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303249/dolphins_1_i4rute.png",
-"The figure generated when dolphins.gml is drawn, the first time",
-800, 600 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303249/dolphins_1_i4rute.png
 
 and the second one:
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303249/dolphins_2_osadpo.png",
-"The figure generated when dolphins.gml is drawn, the second time",
-800, 600 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303249/dolphins_2_osadpo.png
 
 The network data can also be exported and visualized in a program like GraphViz or Gephi, or, like I will do here, in D3.
 

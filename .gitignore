@@ -18,3 +18,7 @@ lighthouse/reports/*
 
 # Webhint HTML reports
 hint-report/
+
+# 11ty cache
+# https://www.11ty.dev/docs/plugins/cache/
+.cache/

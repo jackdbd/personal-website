@@ -275,10 +275,7 @@ Ah, don't forget `.babelrc`!
 
 Check that everything works by running `yarn run dev` and going to `http://localhost:8080/`.
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599302618/webpack-configured_xzitfv.png",
-"Webpack configured",
-301, 215 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599302618/webpack-configured_xzitfv.png
 
 ## Your first regl command
 
@@ -387,19 +384,14 @@ drawTriangle({
 
 Run `yarn run dev` and go to `http://localhost:8080/`. You should see something like this:
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599302618/one-shot-rendering-points_bmyos0.png",
+https://res.cloudinary.com/jackdbd/image/upload/v1599302618/one-shot-rendering-points_bmyos0.png
 "One-shot rendering: three points at localhost:8080",
-693, 173 %}
 
 Well... not that exciting you might say. All that code for three points on the screen?
 
 Ok, let's try changing the line `primitive: 'points'`. You can either remove it or replace `'points'` with `'triangle'` (the default primitive). Now you should see this:
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599302618/one-shot-rendering-triangle_y8sbuf.png",
-"One-shot rendering: a triangle at localhost:8080",
-682, 163 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599302618/one-shot-rendering-triangle_y8sbuf.png
 
 That's better! Let's stop for a second and try to explain what's going on.
 
@@ -411,10 +403,7 @@ The line `const regl = require('regl')();` creates a full screen canvas element 
 
 Context and props can be accessed with `pointSize: (context, prop) => prop.pointSize,`, or even with a shorthand syntax: `regl.context('pixelRatio')` and `regl.prop('scale')`.
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599302618/context_lgay6x.png",
-"The regl context",
-638, 215 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599302618/context_lgay6x.png
 
 As you can see from the image, the `drawingBufferWidth` is equal to the `viewportWidth`, and the `drawingBufferHeight` is equal to the `viewportHeight`. However, this is true only because we created a `WebGLRenderingContext` without specifying any initialization argument for the regl contructor and because we didn't set the `viewport`.
 
@@ -478,10 +467,7 @@ viewport: {
 },
 ```
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599302618/canvas_shfdsz.png",
-"The canvas is no longer full screen",
-705, 346 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599302618/canvas_shfdsz.png
 
 ## Batch rendering
 
@@ -640,10 +626,7 @@ regl.frame(() => {
 })
 ```
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599302618/batch-rendering_ge93a1.png",
-"Five triangle with batch rendering and the frame loop",
-701, 356 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599302618/batch-rendering_ge93a1.png
 
 ## GLSL? There is a loader for that!
 

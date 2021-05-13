@@ -53,10 +53,7 @@ Basically I harmonized the datasets from 2005 to 2016, so they had the same stru
 gdf2016.head()
 ```
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599200654/gdf-head_gqjp24.png",
-"GeoFataFrame head() method",
-783, 181 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599200654/gdf-head_gqjp24.png
 
 Then I concatenated everything:
 
@@ -69,10 +66,7 @@ gdf = pd.concat([gdf2005, gdf2006, gdf2007,
 
 I experimented a little bit with [GeoViews](http://geoviews.org/) in a Jupyter notebook...
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599200647/experiments_wv8vp5.png",
-"Experiments with GeoViews",
-398, 657, true %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599200647/experiments_wv8vp5.png
 
 ## Simplify (after all, [Less is More](https://en.wikipedia.org/wiki/Ludwig_Mies_van_der_Rohe))
 
@@ -102,17 +96,11 @@ I decided to use the following [visual encoding](https://blog.qlik.com/visual-en
 
 I took a screenshot:
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599200654/sardinia-fires_yakjue.png",
-"12 Years of fire in Sardinia",
-345, 579, true %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599200654/sardinia-fires_yakjue.png
 
 and an animated GIF (I recorded it with [Peek](https://github.com/phw/peek), a really amazing tool):
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599200654/sardinia-fires_adzh9o.gif",
-"12 Years of fire in Sardinia",
-1598, 855, true %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599200654/sardinia-fires_adzh9o.gif
 
 I posted it on the [DataIsBeautiful subreddit](https://www.reddit.com/r/dataisbeautiful/comments/8z1i0p/12_years_of_fires_in_sardinia_20052016_oc/) and it was quite succesfull.
 

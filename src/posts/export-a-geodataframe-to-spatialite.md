@@ -179,10 +179,7 @@ print(results)
 
 or you can use a Spatialite viewer like [Spatialite GUI](https://www.gaia-gis.it/fossil/spatialite_gui/index) and use its _Map Preview_ feature.
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599302022/spatialite-gui_xgzx3z.png",
-"Map Preview in Spatialite GUI",
-917, 722 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599302022/spatialite-gui_xgzx3z.png
 
 ## Reference
 

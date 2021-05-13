@@ -13,10 +13,7 @@ Last month at a [PyDataMunich](https://www.meetup.com/it-IT/PyData-Munchen/) mee
 
 I started the workshop with this picture:
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303197/h5py-pytables-refactor_kziyfd.png",
-"The HDF5 stack in Python",
-334, 360 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303197/h5py-pytables-refactor_kziyfd.png
 
 As you can see, at the moment python developers have to make a choice between h5py and PyTables.
 
@@ -30,9 +27,6 @@ It took me quite a while to prepare this workshop, but it was a great opportunit
 
 Here is an image I generated from the yellow taxis data from January 2015. Pickup locations are shown in blue. The pickup locations resulted from a search are shown in yellow.
 
-{% cloudinaryRespImage
-"https://res.cloudinary.com/jackdbd/image/upload/v1599303197/nyc-yellow-taxis-pickups_nipps2.png",
-"New York City yellow taxis pickups",
-556, 525 %}
+https://res.cloudinary.com/jackdbd/image/upload/v1599303197/nyc-yellow-taxis-pickups_nipps2.png
 
 Snippets and notebook are available on [this GitHub repo](https://github.com/jackdbd/hdf5-pydata-munich).
