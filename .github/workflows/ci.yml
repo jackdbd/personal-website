@@ -1,23 +1,25 @@
-name: CI/CD & audit
+name: CI
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 jobs:
-  build:
+  build-and-test:
     name: Build website, run tests, deploy to Netlify
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x]
+    env:
+      NODE_LATEST_LTS: 14.17.0 # keep this up to date!
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js ${{ env.NODE_LATEST_LTS }}
+        # https://github.com/actions/setup-node
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.NODE_LATEST_LTS }}
       - name: Install dependencies
         run: npm ci
       - name: Run tests
@@ -26,21 +28,20 @@ jobs:
         run: npm run build
   wpt:
     name: Audit website with WebPageTest API
-    needs: [build]
-    env:
-      ARTICLE_SLUG: 12-years-of-fires-in-sardinia
-      SITE_NAME: ${{ secrets.SITE_NAME }}
+    needs: [build-and-test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Wait for a successfull Deploy Preview on Netlify
+        # https://github.com/JakePartusch/wait-for-netlify-action
         uses: jakepartusch/wait-for-netlify-action@v1
         id: netlify
         with:
-          site_name: ${{ env.SITE_NAME }}
+          site_name: ${{ secrets.SITE_NAME }}
           max_timeout: 60
       - name: Audit pages with WebPageTest (home/contact, mobile)
+        # https://github.com/WPO-Foundation/webpagetest-github-action
         uses: WPO-Foundation/webpagetest-github-action@main
         with:
           apiKey: ${{ secrets.WPT_API_KEY }}
@@ -64,6 +65,8 @@ jobs:
           wptOptions: 'wpt-options-desktop.json'
       - name: Audit page with WebPageTest (article, desktop)
         uses: WPO-Foundation/webpagetest-github-action@main
+        env:
+          ARTICLE_SLUG: 12-years-of-fires-in-sardinia
         with:
           apiKey: ${{ secrets.WPT_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -74,10 +77,7 @@ jobs:
           wptOptions: 'wpt-options-desktop.json'
   audit:
     name: Audit website with Lighthouse CI
-    needs: [build]
-    env:
-      ARTICLE_SLUG: 12-years-of-fires-in-sardinia
-      SITE_NAME: ${{ secrets.SITE_NAME }}
+    needs: [build-and-test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -86,7 +86,7 @@ jobs:
         uses: jakepartusch/wait-for-netlify-action@v1
         id: netlify
         with:
-          site_name: ${{ env.SITE_NAME }}
+          site_name: ${{ secrets.SITE_NAME }}
           max_timeout: 60
       - name: Audit contact page with Lighthouse CI (mobile)
         uses: treosh/lighthouse-ci-action@v7
@@ -94,18 +94,20 @@ jobs:
           urls: |
             ${{ steps.netlify.outputs.url }}/contact/
           configPath: lighthouse/lighthouserc-contact-mobile.js
-          uploadArtifacts: true
           temporaryPublicStorage: true
+          uploadArtifacts: true
       - name: Audit contact page with Lighthouse CI (desktop)
         uses: treosh/lighthouse-ci-action@v7
         with:
           urls: |
             ${{ steps.netlify.outputs.url }}/contact/
           configPath: lighthouse/lighthouserc-contact-desktop.js
-          uploadArtifacts: true
           temporaryPublicStorage: true
+          uploadArtifacts: true
       - name: Audit home, blog, project page with Lighthouse CI (desktop)
         uses: treosh/lighthouse-ci-action@v7
+        env:
+          ARTICLE_SLUG: 12-years-of-fires-in-sardinia
         with:
           urls: |
             ${{ steps.netlify.outputs.url }}/
@@ -113,5 +115,5 @@ jobs:
             ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
             ${{ steps.netlify.outputs.url }}/projects/
           configPath: lighthouse/lighthouserc-all-desktop.js
-          uploadArtifacts: true
           temporaryPublicStorage: true
+          uploadArtifacts: true

@@ -1,0 +1,81 @@
+name: WebPageTest audit
+on:
+  # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule
+  schedule:
+    # https://crontab.guru/every-12-hours
+    - cron:  '0 */12 * * *'
+  # allow to trigger this workflow manually
+  workflow_dispatch:
+jobs:
+  audit:
+    name: Audit website with the WebPageTest API
+    runs-on: ubuntu-latest
+    steps:
+      - name: Audit / and /contact with WebPageTest (mobile)
+        # https://github.com/WPO-Foundation/webpagetest-github-action
+        # All WebPageTest options are set via the wptOptions input
+        uses: WPO-Foundation/webpagetest-github-action@main
+        id: wpt_home_mobile
+        with:
+          apiKey: ${{ secrets.WPT_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          label: 'home-contact-mobile'
+          urls: |
+            ${{ secrets.SITE_NAME }}/
+            ${{ secrets.SITE_NAME }}/contact/
+          budget: 'wpt-budget.json'
+          wptOptions: 'wpt-options-mobile.json'
+      - name: Audit / and /contact with WebPageTest (desktop)
+        uses: WPO-Foundation/webpagetest-github-action@main
+        id: wpt_home_desktop
+        with:
+          apiKey: ${{ secrets.WPT_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          label: 'home-contact-desktop'
+          urls: |
+            ${{ secrets.SITE_NAME }}/
+            ${{ secrets.SITE_NAME }}/contact/
+          budget: 'wpt-budget.json'
+          wptOptions: 'wpt-options-desktop.json'
+      - name: Audit /posts/${{ env.ARTICLE_SLUG }} with WebPageTest (desktop)
+        uses: WPO-Foundation/webpagetest-github-action@main
+        id: wpt_article_desktop
+        env:
+          ARTICLE_SLUG: 12-years-of-fires-in-sardinia
+        with:
+          apiKey: ${{ secrets.WPT_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          label: 'article-desktop'
+          urls: |
+            ${{ secrets.SITE_NAME }}/posts/${{ env.ARTICLE_SLUG }}
+          budget: 'wpt-budget-article-desktop.json'
+          wptOptions: 'wpt-options-desktop.json'
+  notify-of-audit-results:
+    needs: audit
+    runs-on: ubuntu-latest
+    env:
+      REPO_URL: ${{ github.event.repository.html_url }}
+      WORKFLOW_RUN_URL: ${{ github.event.workflow_run.html_url }}
+      WORKFLOW_RUN_CREATED_AT: ${{ github.event.workflow_run.created_at }}
+      HOME_MOBILE_OUTPUTS: ${{ toJSON(steps.wpt_home_mobile.outputs) }}
+    steps:
+      - name: Dump wpt outputs 1
+        run: echo "$HOME_MOBILE_OUTPUTS"
+      - name: Dump wpt outputs 2
+        run: echo "${{ env.HOME_MOBILE_OUTPUTS }}"
+      - name: Notify Telegram of WebPageTest performace audit
+        uses: appleboy/telegram-action@master
+        # https://github.com/appleboy/telegram-action
+        # This is a container action, so it must run on Linux (it would fail if
+        # `runs-on` is either `windows-latest` or `macOS-latest`)
+        # https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action#introduction
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          # https://emojipedia.org/
+          message: |
+            🚀 WebPageTest audit report 🚅 🚄
+            Repo: ${{ env.REPO_URL }}.
+            Workflow run: ${{ env.WORKFLOW_RUN_URL }}
+            Workflow run created at: ${{ env.WORKFLOW_RUN_CREATED_AT }}
+            Home page (mobile) results: ${{ env.HOME_MOBILE_OUTPUTS }}
