@@ -14,29 +14,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Dump job context
-        env:
-          JOB_CONTEXT: ${{ toJSON(job) }}
-        run: echo "$JOB_CONTEXT"
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJSON(steps) }}
-        run: echo "$STEPS_CONTEXT"
-      - name: Dump github event
-        # useful for debugging
-        env:
-          GITHUB_EVENT: ${{ toJSON(github.event) }}
-        run: echo "$GITHUB_EVENT"
       - name: Audit / and /contact with WebPageTest (mobile)
         # https://github.com/WPO-Foundation/webpagetest-github-action
         # All WebPageTest options are set via the wptOptions input
         uses: WPO-Foundation/webpagetest-github-action@main
         # unfortunately this action has no outputs, so it's pointless to assign
         # an `id` to this step to access `steps.wpt_home_mobile.outputs` later
+        # id: wpt_home_mobile
         with:
           apiKey: ${{ secrets.WPT_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -78,7 +62,7 @@ jobs:
         env:
           REPO_URL: ${{ github.event.repository.html_url }}
           WORKFLOW_URL: https://github.com/jackdbd/personal-website/actions/workflows/wpt-audit.yml
-          # HOME_MOBILE_OUTPUTS: ${{ toJSON(steps.wpt_home_mobile.outputs) }}
+          # HOME_MOBILE_RESULTS: ${{ steps.wpt_home_mobile.outputs.full_test_results }}
           # ARTICLE_DESKTOP_OUTPUTS: ${{ toJSON(steps.wpt_article_desktop.outputs) }}
         with:
           to: ${{ secrets.TELEGRAM_TO }}
