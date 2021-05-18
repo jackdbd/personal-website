@@ -28,7 +28,7 @@ jobs:
             ${{ secrets.SITE_NAME }}/
             ${{ secrets.SITE_NAME }}/contact/
           wptOptions: 'wpt-options-mobile.json'
-          budget: 'wpt-budget.json'
+          # budget: 'wpt-budget.json'
       - name: Audit / and /contact with WebPageTest (desktop)
         uses: WPO-Foundation/webpagetest-github-action@main
         with:
@@ -39,7 +39,7 @@ jobs:
             ${{ secrets.SITE_NAME }}/
             ${{ secrets.SITE_NAME }}/contact/
           wptOptions: 'wpt-options-desktop.json'
-          budget: 'wpt-budget.json'
+          # budget: 'wpt-budget.json'
       - name: Audit /posts/${{ env.ARTICLE_SLUG }} with WebPageTest (desktop)
         uses: WPO-Foundation/webpagetest-github-action@main
         env:
@@ -51,7 +51,7 @@ jobs:
           urls: |
             ${{ secrets.SITE_NAME }}/posts/${{ env.ARTICLE_SLUG }}
           wptOptions: 'wpt-options-desktop.json'
-          budget: 'wpt-budget-article-desktop.json'
+          # budget: 'wpt-budget-article-desktop.json'
       - name: Dump workflow dispatch
         env:
           WORKFLOW_DISPATCH: ${{ toJSON(github.event.workflow_dispatch) }}
