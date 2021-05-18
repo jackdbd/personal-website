@@ -29,6 +29,7 @@ jobs:
   wpt:
     name: Audit website with WebPageTest API
     needs: [build-and-test]
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -78,6 +79,7 @@ jobs:
   audit:
     name: Audit website with Lighthouse CI
     needs: [build-and-test]
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

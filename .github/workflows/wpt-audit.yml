@@ -5,6 +5,7 @@ on:
     # https://crontab.guru/every-12-hours
     - cron:  '0 */12 * * *'
   # allow to trigger this workflow manually
+  # https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event--parameters
   workflow_dispatch:
 jobs:
   audit:
@@ -51,6 +52,10 @@ jobs:
             ${{ secrets.SITE_NAME }}/posts/${{ env.ARTICLE_SLUG }}
           wptOptions: 'wpt-options-desktop.json'
           budget: 'wpt-budget-article-desktop.json'
+      - name: Dump workflow dispatch
+        env:
+          WORKFLOW_DISPATCH: ${{ toJSON(github.event.workflow_dispatch) }}
+        run: echo "$WORKFLOW_DISPATCH"
       - name: Notify Telegram of WebPageTest performace audit
         # https://github.com/appleboy/telegram-action
         # This is a container action, so it must run on Linux (it would fail if
@@ -72,3 +77,4 @@ jobs:
             Repo: ${{ env.REPO_URL }}
             Workflow: ${{ env.WORKFLOW_URL }}
             Created at: ${{ env.WORKFLOW_CREATED_AT }}
+            Workflow ID ${{ github.event.workflow_dispatch.workflow_id }}
