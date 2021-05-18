@@ -11,6 +11,8 @@ jobs:
     name: Audit website with the WebPageTest API
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Audit / and /contact with WebPageTest (mobile)
         # https://github.com/WPO-Foundation/webpagetest-github-action
         # All WebPageTest options are set via the wptOptions input
