@@ -26,6 +26,12 @@ jobs:
           urls: |
             ${{ secrets.SITE_NAME }}/
             ${{ secrets.SITE_NAME }}/contact/
+          wptOptions: 'wpt-options-mobile.json'
+          # budget: 'wpt-budget.json'
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Audit / and /contact with WebPageTest (desktop)
         uses: WPO-Foundation/webpagetest-github-action@main
         with:
@@ -35,6 +41,8 @@ jobs:
           urls: |
             ${{ secrets.SITE_NAME }}/
             ${{ secrets.SITE_NAME }}/contact/
+          wptOptions: 'wpt-options-desktop.json'
+          # budget: 'wpt-budget.json'
       - name: Audit /posts/${{ env.ARTICLE_SLUG }} with WebPageTest (desktop)
         uses: WPO-Foundation/webpagetest-github-action@main
         env:
@@ -45,10 +53,8 @@ jobs:
           label: 'article-desktop'
           urls: |
             ${{ secrets.SITE_NAME }}/posts/${{ env.ARTICLE_SLUG }}
-      - name: Dump GitHub event
-        env:
-          GITHUB_EVENT: ${{ toJSON(github.event) }}
-        run: echo "${{ env.GITHUB_EVENT }}"
+          wptOptions: 'wpt-options-desktop.json'
+          budget: 'wpt-budget-article-desktop.json'
       - name: Notify Telegram of WebPageTest performace audit
         # https://github.com/appleboy/telegram-action
         # This is a container action, so it must run on Linux (it would fail if
@@ -66,7 +72,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           # https://emojipedia.org/
           message: |
-            🚀 WebPageTest audit report
+            🚀 WebPageTest audit report ready
             Repo: ${{ env.REPO_URL }}
             Workflow: ${{ env.WORKFLOW_URL }}
             Created at: ${{ env.WORKFLOW_CREATED_AT }}
