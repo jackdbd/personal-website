@@ -15,7 +15,8 @@ jobs:
         # https://github.com/WPO-Foundation/webpagetest-github-action
         # All WebPageTest options are set via the wptOptions input
         uses: WPO-Foundation/webpagetest-github-action@main
-        id: wpt_home_mobile
+        # unfortunately this action has no outputs, so it's pointless to assign
+        # an `id` to this step to access `steps.wpt_home_mobile.outputs` later
         with:
           apiKey: ${{ secrets.WPT_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -27,7 +28,6 @@ jobs:
           wptOptions: 'wpt-options-mobile.json'
       - name: Audit / and /contact with WebPageTest (desktop)
         uses: WPO-Foundation/webpagetest-github-action@main
-        id: wpt_home_desktop
         with:
           apiKey: ${{ secrets.WPT_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,7 +39,6 @@ jobs:
           wptOptions: 'wpt-options-desktop.json'
       - name: Audit /posts/${{ env.ARTICLE_SLUG }} with WebPageTest (desktop)
         uses: WPO-Foundation/webpagetest-github-action@main
-        id: wpt_article_desktop
         env:
           ARTICLE_SLUG: 12-years-of-fires-in-sardinia
         with:
@@ -50,22 +49,10 @@ jobs:
             ${{ secrets.SITE_NAME }}/posts/${{ env.ARTICLE_SLUG }}
           budget: 'wpt-budget-article-desktop.json'
           wptOptions: 'wpt-options-desktop.json'
-      - name: Dump wpt outputs
+      - name: Dump GitHub event
         env:
-          HOME_MOBILE: ${{ toJSON(steps.wpt_home_mobile) }}
-        run: echo "$HOME_MOBILE_OUTPUTS"
-      - name: Dump wpt outputs aaa
-        env:
-          HOME_MOBILE: ${{ toJSON(steps.wpt_home_mobile) }}
-        run: echo "${{ env.HOME_MOBILE_OUTPUTS }}"
-      - name: Dump wpt outputs 1
-        env:
-          HOME_MOBILE_OUTPUTS: ${{ toJSON(steps.wpt_home_mobile.outputs) }}
-        run: echo "$HOME_MOBILE_OUTPUTS"
-      - name: Dump wpt outputs 2
-        env:
-          HOME_MOBILE_OUTPUTS: ${{ toJSON(steps.wpt_home_mobile.outputs) }}
-        run: echo "${{ env.HOME_MOBILE_OUTPUTS }}"
+          GITHUB_EVENT: ${{ toJSON(github.event) }}
+        run: echo "${{ env.GITHUB_EVENT }}"
       - name: Notify Telegram of WebPageTest performace audit
         # https://github.com/appleboy/telegram-action
         # This is a container action, so it must run on Linux (it would fail if
@@ -74,17 +61,16 @@ jobs:
         uses: appleboy/telegram-action@master
         env:
           REPO_URL: ${{ github.event.repository.html_url }}
-          WORKFLOW_RUN_URL: ${{ github.event.workflow_run.html_url }}
-          WORKFLOW_RUN_CREATED_AT: ${{ github.event.workflow_run.created_at }}
-          HOME_MOBILE: ${{ toJSON(steps.wpt_home_mobile) }}
-          HOME_MOBILE_OUTPUTS: ${{ toJSON(steps.wpt_home_mobile.outputs) }}
+          WORKFLOW_URL: ${{ github.event.workflow_dispatch.html_url }}
+          WORKFLOW_CREATED_AT: ${{ github.event.workflow_dispatch.created_at }}
+          # HOME_MOBILE_OUTPUTS: ${{ toJSON(steps.wpt_home_mobile.outputs) }}
+          # ARTICLE_DESKTOP_OUTPUTS: ${{ toJSON(steps.wpt_article_desktop.outputs) }}
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           # https://emojipedia.org/
           message: |
-            🚀 WebPageTest audit report 🚅 🚄
-            Repo: ${{ env.REPO_URL }}.
-            Workflow run: ${{ env.WORKFLOW_RUN_URL }}
-            Workflow run created at: ${{ env.WORKFLOW_RUN_CREATED_AT }}
-            Home page (mobile) results: ${{ env.HOME_MOBILE_OUTPUTS }}
+            🚀 WebPageTest audit report
+            Repo: ${{ env.REPO_URL }}
+            Workflow: ${{ env.WORKFLOW_URL }}
+            Created at: ${{ env.WORKFLOW_CREATED_AT }}
