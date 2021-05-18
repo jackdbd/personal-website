@@ -26,8 +26,6 @@ jobs:
           urls: |
             ${{ secrets.SITE_NAME }}/
             ${{ secrets.SITE_NAME }}/contact/
-          budget: 'wpt-budget.json'
-          wptOptions: 'wpt-options-mobile.json'
       - name: Audit / and /contact with WebPageTest (desktop)
         uses: WPO-Foundation/webpagetest-github-action@main
         with:
@@ -37,8 +35,6 @@ jobs:
           urls: |
             ${{ secrets.SITE_NAME }}/
             ${{ secrets.SITE_NAME }}/contact/
-          budget: 'wpt-budget.json'
-          wptOptions: 'wpt-options-desktop.json'
       - name: Audit /posts/${{ env.ARTICLE_SLUG }} with WebPageTest (desktop)
         uses: WPO-Foundation/webpagetest-github-action@main
         env:
@@ -49,8 +45,6 @@ jobs:
           label: 'article-desktop'
           urls: |
             ${{ secrets.SITE_NAME }}/posts/${{ env.ARTICLE_SLUG }}
-          budget: 'wpt-budget-article-desktop.json'
-          wptOptions: 'wpt-options-desktop.json'
       - name: Dump GitHub event
         env:
           GITHUB_EVENT: ${{ toJSON(github.event) }}
