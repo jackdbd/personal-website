@@ -1,6 +1,6 @@
 # My personal website
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0842fe55-a9cb-484a-82d0-6a5c08b62d62/deploy-status)](https://app.netlify.com/sites/epic-benz-a3f006/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0842fe55-a9cb-484a-82d0-6a5c08b62d62/deploy-status)](https://app.netlify.com/sites/epic-benz-a3f006/deploys) ![Security Headers](https://img.shields.io/security-headers?url=https%3A%2F%2Fwww.giacomodebidda.com%2F) ![Chromium HSTS preload](https://img.shields.io/hsts/preload/giacomodebidda.com)
 
 My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Workbox](https://github.com/googlechrome/workbox). Hosted on [Netlify](https://www.netlify.com/).
 
