@@ -1,0 +1,46 @@
+name: 'Ackee Analytics'
+
+on:
+  schedule:
+    # https://crontab.guru/#0_14*_*_*
+    - cron:  '0 14 * * *'
+  # allow to trigger this workflow manually
+  # https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event--parameters
+  workflow_dispatch:
+    inputs:
+      endpoint:
+      num_top_pages:
+        description: 'num top pages'
+        required: false
+        default: '5'
+
+jobs:
+  fetch-analytics:
+    name: 📈 Fetch analytics from Ackee and send them to Telegram
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: ⬇️ Fetch data from Ackee
+        uses: jackdbd/ackee-action@v1.0.0
+        id: ackee
+        with:
+          endpoint: ${{ secrets.ACKEE_API }}
+          username: ${{ secrets.ACKEE_USERNAME }}
+          password: ${{ secrets.ACKEE_PASSWORD }}
+          domain_id: ${{ secrets.ACKEE_DOMAIN_ID }}
+          num_top_pages: ${{ github.event.inputs.num_top_pages }}
+          # num_top_pages: '5'
+      - name: Dump data
+        run: echo "${{ steps.ackee.outputs.data }}"
+      - name: 📨 Send report to Telegram
+        uses: appleboy/telegram-action@master
+        env:
+          ACKEE_REPORT: ${{ steps.ackee.outputs.data }}
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            🚀 Ackee report!
+
+            ${{ env.ACKEE_REPORT }}
