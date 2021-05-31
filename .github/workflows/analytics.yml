@@ -3,9 +3,9 @@ name: 'Ackee report'
 on:
   schedule:
     # https://crontab.guru/#0_18_*_*_*
-    # - cron: '0 18 * * *'
+    - cron: '0 18 * * *'
     # https://crontab.guru/every-half-hour
-    - cron: '*/30 * * * *'
+    # - cron: '*/30 * * * *'
   # allow to trigger this workflow manually
   # https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event--parameters
   workflow_dispatch:
