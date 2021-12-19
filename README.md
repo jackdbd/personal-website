@@ -53,14 +53,6 @@ Build all pages, CSS files and the service worker (all minified):
 npm run build
 ```
 
-## Other commands
-
-Some npm scripts in this repo have quite long names. Use [Node Task List](https://github.com/ruyadorno/ntl) to print all available npm scripts:
-
-```sh
-npm run menu
-```
-
 ## Security audit
 
 Check the Content-Security-Policy header with one of these online tools:
