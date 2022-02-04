@@ -25,13 +25,13 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
 
 Install all project dependencies.
 
-```sh
+```shell
 npm install
 ```
 
 This website is deployed on Netlify, so be sure to install the [Netlify CLI](https://cli.netlify.com/):
 
-```sh
+```shell
 npm install netlify-cli -g
 ```
 
@@ -39,7 +39,7 @@ npm install netlify-cli -g
 
 Launch [Netlify Dev](https://docs.netlify.com/cli/get-started/#netlify-dev), recompile Nunjucks templates, JS/CSS assets, watch workbox configuration, reload the browser and share a live development server with a single command:
 
-```sh
+```shell
 npm run netlify:dev
 ```
 
@@ -49,7 +49,7 @@ npm run netlify:dev
 
 Build all pages, CSS files and the service worker (all minified):
 
-```sh
+```shell
 npm run build
 ```
 

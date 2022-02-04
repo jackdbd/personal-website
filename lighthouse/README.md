@@ -11,14 +11,14 @@ This directory contains:
 
 If you want to test Lighthouse CI locally (useful to check performance budget and configuration), install the Lighthouse CI CLI and any additional Lighthouse plugin:
 
-```sh
+```shell
 npm install -g @lhci/cli
 npm install -g lighthouse-plugin-field-performance
 ```
 
 Run the Lighthouse CI CLI:
 
-```sh
+```shell
 npm run lhci
 ```
 
@@ -26,6 +26,6 @@ npm run lhci
 
 View all Lighthouse & Lighthouse CI reports:
 
-```sh
+```shell
 npm run lh:reports
 ```
