@@ -16,7 +16,7 @@ jobs:
       - name: Audit / and /contact with WebPageTest (mobile)
         # https://github.com/WPO-Foundation/webpagetest-github-action
         # All WebPageTest options are set via the wptOptions input
-        uses: WPO-Foundation/webpagetest-github-action@main
+        uses: WPO-Foundation/webpagetest-github-action@v1.1.2
         # unfortunately this action has no outputs, so it's pointless to assign
         # an `id` to this step to access `steps.wpt_home_mobile.outputs` later
         # id: wpt_home_mobile
@@ -30,7 +30,7 @@ jobs:
           wptOptions: 'wpt-options-mobile.json'
           # budget: 'wpt-budget.json'
       - name: Audit / and /contact with WebPageTest (desktop)
-        uses: WPO-Foundation/webpagetest-github-action@main
+        uses: WPO-Foundation/webpagetest-github-action@v1.1.2
         with:
           apiKey: ${{ secrets.WPT_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -41,7 +41,7 @@ jobs:
           wptOptions: 'wpt-options-desktop.json'
           # budget: 'wpt-budget.json'
       - name: Audit /posts/${{ env.ARTICLE_SLUG }} with WebPageTest (desktop)
-        uses: WPO-Foundation/webpagetest-github-action@main
+        uses: WPO-Foundation/webpagetest-github-action@v1.1.2
         env:
           ARTICLE_SLUG: 12-years-of-fires-in-sardinia
         with:
