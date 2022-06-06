@@ -1,4 +1,4 @@
-const { gql, GraphQLClient, request } = require('graphql-request');
+const { gql, GraphQLClient, request } = require('graphql-request')
 
 const makeDomains = (gqlClient) => {
   const query = gql`
@@ -8,16 +8,16 @@ const makeDomains = (gqlClient) => {
         title
       }
     }
-  `;
+  `
   return async function domains() {
     try {
-      const data = await gqlClient.request(query);
-      return data.domains;
+      const data = await gqlClient.request(query)
+      return data.domains
     } catch (err) {
-      throw err;
+      throw err
     }
-  };
-};
+  }
+}
 
 const makeFactsByDomainId = (gqlClient, domainId) => {
   const query = gql`
@@ -35,19 +35,19 @@ const makeFactsByDomainId = (gqlClient, domainId) => {
         }
       }
     }
-  `;
+  `
   const variables = {
     domainId
-  };
+  }
   return async function facts() {
     try {
-      const data = await gqlClient.request(query, variables);
-      return data.domain.facts;
+      const data = await gqlClient.request(query, variables)
+      return data.domain.facts
     } catch (err) {
-      throw err;
+      throw err
     }
-  };
-};
+  }
+}
 
 const makeDomainsFacts = (gqlClient) => {
   const query = gql`
@@ -65,16 +65,16 @@ const makeDomainsFacts = (gqlClient) => {
         }
       }
     }
-  `;
+  `
   return async function domainsFacts() {
     try {
-      const data = await gqlClient.request(query);
-      return data.domains;
+      const data = await gqlClient.request(query)
+      return data.domains
     } catch (err) {
-      throw err;
+      throw err
     }
-  };
-};
+  }
+}
 
 const makeEvents = (gqlClient) => {
   const query = gql`
@@ -94,16 +94,16 @@ const makeEvents = (gqlClient) => {
         }
       }
     }
-  `;
+  `
   return async function domains() {
     try {
-      const data = await gqlClient.request(query);
-      return data.events;
+      const data = await gqlClient.request(query)
+      return data.events
     } catch (err) {
-      throw err;
+      throw err
     }
-  };
-};
+  }
+}
 
 const makeTopPages = (gqlClient, domainId, numPages) => {
   const query = gql`
@@ -118,27 +118,27 @@ const makeTopPages = (gqlClient, domainId, numPages) => {
         }
       }
     }
-  `;
+  `
   const variables = {
     domainId,
     numPages
-  };
+  }
   return async function topPages() {
     try {
-      const data = await gqlClient.request(query, variables);
-      return data.domain.statistics.pages;
+      const data = await gqlClient.request(query, variables)
+      return data.domain.statistics.pages
     } catch (err) {
-      throw err;
+      throw err
     }
-  };
-};
+  }
+}
 
 const makeAnalyticsClient = ({ endpoint, domainId, token }) => {
   const gqlClient = new GraphQLClient(endpoint, {
     headers: {
       authorization: `Bearer ${token}`
     }
-  });
+  })
   return {
     domains: makeDomains(gqlClient),
     domainsFacts: makeDomainsFacts(gqlClient),
@@ -147,8 +147,8 @@ const makeAnalyticsClient = ({ endpoint, domainId, token }) => {
     topThreePages: makeTopPages(gqlClient, domainId, 3),
     topFivePages: makeTopPages(gqlClient, domainId, 5),
     topTenPages: makeTopPages(gqlClient, domainId, 10)
-  };
-};
+  }
+}
 
 // Get a Bearer token from my self-hosted analytics server (Ackee)
 const getBearerToken = async ({ endpoint, username, password }) => {
@@ -160,26 +160,26 @@ const getBearerToken = async ({ endpoint, username, password }) => {
         }
       }
     }
-  `;
+  `
   const variables = {
     input: {
       username,
       password
     }
-  };
+  }
 
   try {
-    const data = await request(endpoint, query, variables);
-    return data.createToken.payload.id;
+    const data = await request(endpoint, query, variables)
+    return data.createToken.payload.id
   } catch (err) {
-    throw err;
+    throw err
   }
-};
+}
 
 module.exports = {
   getBearerToken,
   makeAnalyticsClient
-};
+}
 
 // const fn = async () => {
 //   const token = await getBearerToken({

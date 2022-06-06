@@ -1,4 +1,4 @@
-const plugin = require('tailwindcss/plugin');
+const plugin = require('tailwindcss/plugin')
 
 const tailwindLayoutPrimitivesPlugin = plugin(function ({
   addComponents,
@@ -34,7 +34,7 @@ const tailwindLayoutPrimitivesPlugin = plugin(function ({
     '.cluster > .cluster-children-wrapper > li::before': {
       content: 'none'
     }
-  };
+  }
 
   // https://every-layout.dev/layouts/center/
   const centerLayout = {
@@ -48,7 +48,7 @@ const tailwindLayoutPrimitivesPlugin = plugin(function ({
       'padding-left': 'var(--space)',
       'padding-right': 'var(--space)'
     }
-  };
+  }
 
   const stackLayout = {
     '.stack': {
@@ -65,13 +65,13 @@ const tailwindLayoutPrimitivesPlugin = plugin(function ({
     '.stack > * + *': {
       'margin-top': 'var(--space)'
     }
-  };
+  }
 
   addComponents({
     ...centerLayout,
     ...clusterLayout,
     ...stackLayout
-  });
-});
+  })
+})
 
-module.exports = tailwindLayoutPrimitivesPlugin;
+module.exports = tailwindLayoutPrimitivesPlugin

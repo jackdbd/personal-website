@@ -5,10 +5,10 @@ _site/*
 # dependencies
 node_modules/
 
-# Environment variables
+# environment variables
 .envrc
 
-# Local Netlify folder
+# local Netlify folder
 .netlify
 
 # Lighthouse and Lighthouse CI web performance reports

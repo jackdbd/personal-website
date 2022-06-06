@@ -1,31 +1,33 @@
-const fs = require('fs');
-const crypto = require('crypto');
-const path = require('path');
-const util = require('util');
-const readFileAsync = util.promisify(fs.readFile);
-const { generateSW } = require('workbox-build');
+const fs = require('node:fs')
+const crypto = require('node:crypto')
+const path = require('node:path')
+const util = require('node:util')
+const readFileAsync = util.promisify(fs.readFile)
+const { generateSW } = require('workbox-build')
+
+const PREFIX = '[👷 build-sw] '
 
 // Factory that returns a function to generate an additional ManifestEntry for
 // the Workbox configuration.
 // https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.ManifestEntry
 const makeManifestEntry = (outputDir, string) => {
   return async (filepath) => {
-    const sha256Hasher = crypto.createHash('sha256');
+    const sha256Hasher = crypto.createHash('sha256')
     try {
-      const html = await readFileAsync(filepath, 'utf8');
-      const url = path.relative(outputDir, filepath);
-      sha256Hasher.update(`${html}-${string}`, 'utf-8');
+      const html = await readFileAsync(filepath, 'utf8')
+      const url = path.relative(outputDir, filepath)
+      sha256Hasher.update(`${html}-${string}`, 'utf-8')
       return {
         url,
         revision: sha256Hasher.digest('base64')
-      };
+      }
     } catch (err) {
       throw new Error(
         `Could not read ${filepath}. Double-check the paths in htmlPagesToPrecache\n${err.message}`
-      );
+      )
     }
-  };
-};
+  }
+}
 
 const makeWorkboxConfig = (options) => {
   const {
@@ -33,7 +35,7 @@ const makeWorkboxConfig = (options) => {
     cacheId = 'test-cache-id',
     globDirectory = '_site',
     swDest = '_site/sw.js'
-  } = options || {};
+  } = options || {}
 
   return {
     additionalManifestEntries,
@@ -110,8 +112,8 @@ const makeWorkboxConfig = (options) => {
     // https://m.signalvnoise.com/paying-tribute-to-the-web-with-view-source/
     sourcemap: true,
     swDest
-  };
-};
+  }
+}
 
 // 11ty outputs the generated html pages in this directory.
 // const BUILD_ROOT = '_site';
@@ -128,42 +130,42 @@ const buildSW = async (options) => {
     cacheId = 'test-cache-id',
     netlifyTomlPath = 'netlify.toml',
     outputDir = '_site'
-  } = options || {};
+  } = options || {}
 
   const swDest =
     options !== undefined && options.swDest !== undefined
       ? options.swDest
-      : path.join(outputDir, 'sw.js');
+      : path.join(outputDir, 'sw.js')
 
   const DEFAULT_HTML_PAGES_TO_PRECACHE = [
     path.join(outputDir, '404.html'),
     path.join(outputDir, 'index.html')
-  ];
+  ]
 
   const wereHtmlPagesToPrecacheSpecified =
-    options !== undefined && options.htmlPagesToPrecache !== undefined;
+    options !== undefined && options.htmlPagesToPrecache !== undefined
 
   const htmlPagesToPrecache = wereHtmlPagesToPrecacheSpecified
     ? options.htmlPagesToPrecache
-    : DEFAULT_HTML_PAGES_TO_PRECACHE;
+    : DEFAULT_HTML_PAGES_TO_PRECACHE
 
-  let string;
+  let string
   try {
-    string = await readFileAsync(netlifyTomlPath);
+    string = await readFileAsync(netlifyTomlPath)
   } catch (err) {
-    throw new Error(`Could not read ${netlifyTomlPath}\n${err.message}`);
+    throw new Error(`Could not read ${netlifyTomlPath}\n${err.message}`)
   }
 
-  const manifestEntry = makeManifestEntry(outputDir, string);
-  const promises = htmlPagesToPrecache.map(manifestEntry);
+  const manifestEntry = makeManifestEntry(outputDir, string)
+  const promises = htmlPagesToPrecache.map(manifestEntry)
 
-  let additionalManifestEntries;
+  let additionalManifestEntries
   try {
-    additionalManifestEntries = await Promise.all(promises);
+    additionalManifestEntries = await Promise.all(promises)
   } catch (err) {
     throw new Error(
       `Could not generate additionalManifestEntries for Workbox config\n${err.message}`
-    );
+    )
   }
 
   const workboxConfig = makeWorkboxConfig({
@@ -171,21 +173,23 @@ const buildSW = async (options) => {
     cacheId,
     globDirectory: outputDir,
     swDest
-  });
+  })
 
   try {
-    const result = await generateSW(workboxConfig);
-    const { count, filePaths, size, warnings } = result;
-    const kB = `(${new Intl.NumberFormat('en-US').format(size / 1024)} kB)`;
+    const result = await generateSW(workboxConfig)
+    const { count, filePaths, size, warnings } = result
+    const kB = `(${new Intl.NumberFormat('en-US').format(size / 1024)} kB)`
     console.log(
-      `Generated ${swDest}, which will precache ${count} files in cache ${cacheId}, totaling ${size} bytes. ${kB}`
-    );
-    console.log(`Generated ${filePaths.length} files`, filePaths);
-    console.warn('warnings', warnings);
+      `${PREFIX}generated ${swDest}, which will precache ${count} files in cache ${cacheId}, totaling ${size} bytes. ${kB}`
+    )
+    console.log(`${PREFIX}generated ${filePaths.length} files`, filePaths)
+    if (warnings.length > 0) {
+      console.warn(`${PREFIX}warnings`, warnings)
+    }
   } catch (err) {
-    throw new Error(`Could not generate ${swDest}\n${err.message}`);
+    throw new Error(`Could not generate ${swDest}\n${err.message}`)
   }
-};
+}
 
 // TODO: write tests for this
 // const CONFIG = {
@@ -204,4 +208,4 @@ const buildSW = async (options) => {
 
 // buildSW(CONFIG).then(console.log).catch(console.error);
 
-module.exports = { buildSW };
+module.exports = { buildSW }

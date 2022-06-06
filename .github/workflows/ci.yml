@@ -8,74 +8,87 @@ on:
       - main
 jobs:
   build-and-test:
-    name: Build website, run tests, deploy to Netlify
-    runs-on: ubuntu-latest
-    env:
-      NODE_LATEST_LTS: 14.17.0 # keep this up to date!
+    name: 🔧 Build website and run tests
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: ['17.x']
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node.js ${{ env.NODE_LATEST_LTS }}
-        # https://github.com/actions/setup-node
-        uses: actions/setup-node@v1
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+      - name: 🖥️ Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.NODE_LATEST_LTS }}
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: npm run test
-      - name: Build website
-        run: npm run build
-  wpt:
-    name: Audit website with WebPageTest API
-    needs: [build-and-test]
-    if: ${{ github.event_name == 'pull_request' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Wait for a successfull Deploy Preview on Netlify
-        # https://github.com/JakePartusch/wait-for-netlify-action
-        uses: jakepartusch/wait-for-netlify-action@v1
-        id: netlify
-        with:
-          site_name: ${{ secrets.SITE_NAME }}
-          max_timeout: 60
-      - name: Audit pages with WebPageTest (home/contact, mobile)
-        # https://github.com/WPO-Foundation/webpagetest-github-action
-        uses: WPO-Foundation/webpagetest-github-action@main
-        with:
-          apiKey: ${{ secrets.WPT_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          label: 'home-contact-mobile'
-          urls: |
-            ${{ steps.netlify.outputs.url }}/
-            ${{ steps.netlify.outputs.url }}/contact/
-          budget: 'wpt-budget.json'
-          wptOptions: 'wpt-options-mobile.json'
-      - name: Audit pages with WebPageTest (home/contact, desktop)
-        uses: WPO-Foundation/webpagetest-github-action@main
-        with:
-          apiKey: ${{ secrets.WPT_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          label: 'home-contact-desktop'
-          urls: |
-            ${{ steps.netlify.outputs.url }}/
-            ${{ steps.netlify.outputs.url }}/contact/
-          budget: 'wpt-budget.json'
-          wptOptions: 'wpt-options-desktop.json'
-      - name: Audit page with WebPageTest (article, desktop)
-        uses: WPO-Foundation/webpagetest-github-action@main
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - name: 🛡️ Audit security
+        continue-on-error: true
+        if: ${{ matrix.os }} == 'ubuntu-latest'
+        run: npm audit --audit-level=moderate
+      - name: 🔍 Test website
+        run: npm test
+      - name: 🔧 Build website
         env:
-          ARTICLE_SLUG: 12-years-of-fires-in-sardinia
-        with:
-          apiKey: ${{ secrets.WPT_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          label: 'article-desktop'
-          urls: |
-            ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
-          budget: 'wpt-budget-article-desktop.json'
-          wptOptions: 'wpt-options-desktop.json'
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          DOMAIN: ${{ secrets.DOMAIN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        run: npm run build
+
+  # wpt:
+  #   name: Audit website with WebPageTest API
+  #   needs: [build-and-test]
+  #   if: ${{ github.event_name == 'pull_request' }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: 🛎️ Checkout repo
+  #       uses: actions/checkout@v3
+  #     - name: Wait for a successfull Deploy Preview on Netlify
+  #       # https://github.com/JakePartusch/wait-for-netlify-action
+  #       uses: jakepartusch/wait-for-netlify-action@v1
+  #       id: netlify
+  #       with:
+  #         site_name: ${{ secrets.SITE_NAME }}
+  #         max_timeout: 60
+  #     - name: Audit pages with WebPageTest (home/contact, mobile)
+  #       # https://github.com/WPO-Foundation/webpagetest-github-action
+  #       uses: WPO-Foundation/webpagetest-github-action@main
+  #       with:
+  #         apiKey: ${{ secrets.WPT_API_KEY }}
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         label: 'home-contact-mobile'
+  #         urls: |
+  #           ${{ steps.netlify.outputs.url }}/
+  #           ${{ steps.netlify.outputs.url }}/contact/
+  #         budget: 'wpt-budget.json'
+  #         wptOptions: 'wpt-options-mobile.json'
+  #     - name: Audit pages with WebPageTest (home/contact, desktop)
+  #       uses: WPO-Foundation/webpagetest-github-action@main
+  #       with:
+  #         apiKey: ${{ secrets.WPT_API_KEY }}
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         label: 'home-contact-desktop'
+  #         urls: |
+  #           ${{ steps.netlify.outputs.url }}/
+  #           ${{ steps.netlify.outputs.url }}/contact/
+  #         budget: 'wpt-budget.json'
+  #         wptOptions: 'wpt-options-desktop.json'
+  #     - name: Audit page with WebPageTest (article, desktop)
+  #       uses: WPO-Foundation/webpagetest-github-action@main
+  #       env:
+  #         ARTICLE_SLUG: 12-years-of-fires-in-sardinia
+  #       with:
+  #         apiKey: ${{ secrets.WPT_API_KEY }}
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         label: 'article-desktop'
+  #         urls: |
+  #           ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
+  #         budget: 'wpt-budget-article-desktop.json'
+  #         wptOptions: 'wpt-options-desktop.json'
+
   audit:
     name: Audit website with Lighthouse CI
     needs: [build-and-test]
@@ -83,13 +96,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Wait for a successfull Deploy Preview on Netlify
         uses: jakepartusch/wait-for-netlify-action@v1
         id: netlify
         with:
           site_name: ${{ secrets.SITE_NAME }}
           max_timeout: 60
+      - name: 🌐 Notify Telegram chat about Netlify deployment
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: html
+          disable_web_page_preview: true
+          # https://core.telegram.org/bots/api#formatting-options
+          message: |
+            <b>🌐 Deploy Preview on Netlify</b>
+
+            The website <code>${{ secrets.SITE_NAME }}</code> is <b>live</b> at:
+            <a href="${{ steps.netlify.outputs.url }}">${{ steps.netlify.outputs.url }}</a>
+
+            Repository: <a href="https://github.com/${{ github.repository }}/">${{ github.repository }}</a>
+
+            <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">Changes</a> in commit <code>${{github.sha}}</code>
+
       - name: Audit contact page with Lighthouse CI (mobile)
         uses: treosh/lighthouse-ci-action@v7
         with:
@@ -106,16 +137,16 @@ jobs:
           configPath: lighthouse/lighthouserc-contact-desktop.js
           temporaryPublicStorage: true
           uploadArtifacts: true
-      - name: Audit home, blog, project page with Lighthouse CI (desktop)
-        uses: treosh/lighthouse-ci-action@v7
-        env:
-          ARTICLE_SLUG: 12-years-of-fires-in-sardinia
-        with:
-          urls: |
-            ${{ steps.netlify.outputs.url }}/
-            ${{ steps.netlify.outputs.url }}/blog/
-            ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
-            ${{ steps.netlify.outputs.url }}/projects/
-          configPath: lighthouse/lighthouserc-all-desktop.js
-          temporaryPublicStorage: true
-          uploadArtifacts: true
+      # - name: Audit home, blog, project page with Lighthouse CI (desktop)
+      #   uses: treosh/lighthouse-ci-action@v7
+      #   env:
+      #     ARTICLE_SLUG: 12-years-of-fires-in-sardinia
+      #   with:
+      #     urls: |
+      #       ${{ steps.netlify.outputs.url }}/
+      #       ${{ steps.netlify.outputs.url }}/blog/
+      #       ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
+      #       ${{ steps.netlify.outputs.url }}/projects/
+      #     configPath: lighthouse/lighthouserc-all-desktop.js
+      #     temporaryPublicStorage: true
+      #     uploadArtifacts: true

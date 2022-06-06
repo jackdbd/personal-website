@@ -3,13 +3,13 @@
  * https://www.11ty.dev/docs/config/#transforms
  */
 
-const htmlmin = require('html-minifier');
+const htmlmin = require('html-minifier')
 
 // minify HTML files when in production
 const shouldTransformHTML = (outputPath) =>
   outputPath &&
   outputPath.endsWith('.html') &&
-  process.env.ELEVENTY_ENV === 'production';
+  process.env.ELEVENTY_ENV === 'production'
 
 module.exports = {
   // https://github.com/kangax/html-minifier#options-quick-reference
@@ -19,9 +19,9 @@ module.exports = {
         collapseWhitespace: true,
         removeComments: true,
         useShortDoctype: true
-      });
+      })
     } else {
-      return content;
+      return content
     }
   }
-};
+}

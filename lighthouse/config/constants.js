@@ -4,4 +4,4 @@ module.exports = {
 
   // max time to wait for the page to load, in ms
   maxWaitForLoad: 20 * 1000
-};
+}

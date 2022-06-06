@@ -1,21 +1,21 @@
-const plugin = require('tailwindcss/plugin');
+const plugin = require('tailwindcss/plugin')
 
 // https://tailwindcss.com/docs/ring-width
 const ring2 = {
   'box-shadow':
     'var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);'
-};
+}
 const ring4 = {
   'box-shadow':
     'var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color)'
-};
+}
 
 // https://tailwindcss.com/docs/box-shadow#class-reference
 const shadowSm = {
   '--tw-shadow': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
   'box-shadow':
     'var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)'
-};
+}
 
 // overrides for @tailwindcss/forms
 const tailwindFormsOverridesPlugin = plugin(function ({ addBase, theme }) {
@@ -35,8 +35,8 @@ const tailwindFormsOverridesPlugin = plugin(function ({ addBase, theme }) {
       [`${selector}:hover`]: {
         ...ring4
       }
-    };
-  };
+    }
+  }
 
   const twFormsCheckboxOverride = (selector) => {
     return {
@@ -54,8 +54,8 @@ const tailwindFormsOverridesPlugin = plugin(function ({ addBase, theme }) {
       [`${selector}:hover`]: {
         ...ring2
       }
-    };
-  };
+    }
+  }
 
   const formInputsOverrides = Object.assign(
     ...[
@@ -72,7 +72,7 @@ const tailwindFormsOverridesPlugin = plugin(function ({ addBase, theme }) {
       "[type='url']",
       "[type='week']"
     ].map(twFormsOverride)
-  );
+  )
 
   const formButtonOverrides = {
     'form button': {
@@ -94,7 +94,7 @@ const tailwindFormsOverridesPlugin = plugin(function ({ addBase, theme }) {
     'form button:hover': {
       ...ring4
     }
-  };
+  }
 
   addBase({
     ...formInputsOverrides,
@@ -107,7 +107,7 @@ const tailwindFormsOverridesPlugin = plugin(function ({ addBase, theme }) {
       'font-weight': theme('fontWeight.semibold')
     },
     ...formButtonOverrides
-  });
-});
+  })
+})
 
-module.exports = tailwindFormsOverridesPlugin;
+module.exports = tailwindFormsOverridesPlugin

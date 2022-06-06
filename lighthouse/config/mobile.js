@@ -1,7 +1,7 @@
-const constants = require('./constants');
+const constants = require('./constants')
 
 const emulatedUserAgent =
-  'Mozilla/5.0 (Linux; Android 7.0; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4420.0 Mobile Safari/537.36 Chrome-Lighthouse';
+  'Mozilla/5.0 (Linux; Android 7.0; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4420.0 Mobile Safari/537.36 Chrome-Lighthouse'
 
 // Screen/viewport emulation
 // With the default configuration, Lighthouse emulates a mobile device, so there
@@ -31,6 +31,6 @@ const config = {
       auditRefs: [{ id: 'first-contentful-paint-3g', weight: 0 }]
     }
   }
-};
+}
 
-module.exports = config;
+module.exports = config
