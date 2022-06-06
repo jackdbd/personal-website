@@ -1,4 +1,4 @@
-const plugin = require('tailwindcss/plugin');
+const plugin = require('tailwindcss/plugin')
 
 // color, backgroundColor: pick one of the colors from the Tailwind palette
 // prefix: the prefix you want to use in your code. E.g. with prefix = debug you
@@ -19,21 +19,21 @@ const debugBreakpointsPlugin = plugin.withOptions(function (options) {
     outlineColor = 'green',
     showBackgroundColor = true,
     showOutline = true
-  } = options || {};
-  const pre = 'debug'; // prefix is a Tailwind function, so I avoid using it.
+  } = options || {}
+  const pre = 'debug' // prefix is a Tailwind function, so I avoid using it.
   return function ({ addUtilities, theme }) {
     // Make a `PRE-bg` utility class for this screen breakpoint.
     const bgUtility = ([screen, minWidth], i) => {
-      const shade = (i + 1) * 100;
-      const col = `${theme(`colors.${backgroundColor}.${shade}`)} !important`;
+      const shade = (i + 1) * 100
+      const col = `${theme(`colors.${backgroundColor}.${shade}`)} !important`
       return {
         [`@media(min-width: ${minWidth})`]: {
           [`.${pre}-bg`]: {
             'background-color': col
           }
         }
-      };
-    };
+      }
+    }
 
     // Make a `PRE-screen` utility class for this screen breakpoint.
     const screenUtility = ([screen, minWidth], i) => {
@@ -47,42 +47,42 @@ const debugBreakpointsPlugin = plugin.withOptions(function (options) {
             bottom: '0.25em'
           }
         }
-      };
-    };
+      }
+    }
 
     // Make a `PRE-text` utility class for this screen breakpoint.
     const textUtility = ([screen, minWidth], i) => {
-      const shade = (i + 1) * 100;
+      const shade = (i + 1) * 100
       return {
         [`@media(min-width: ${minWidth})`]: {
           [`.${pre}-text`]: {
             color: `${theme(`colors.${color}.${shade}`)} !important`
           }
         }
-      };
-    };
+      }
+    }
 
     // Make a `PRE-outline` utility class for this screen breakpoint.
     const outlineUtility = ([screen, minWidth], i) => {
-      const shade = (i + 1) * 100;
-      const col = `${theme(`colors.${outlineColor}.${shade}`)}`;
+      const shade = (i + 1) * 100
+      const col = `${theme(`colors.${outlineColor}.${shade}`)}`
       return {
         [`@media(min-width: ${minWidth})`]: {
           [`.${pre}-outline`]: {
             outline: `1px solid ${col} !important`
           }
         }
-      };
-    };
+      }
+    }
 
-    const breakpoints = Object.entries(theme('screens'));
+    const breakpoints = Object.entries(theme('screens'))
     addUtilities([
       ...[showBackgroundColor ? breakpoints.map(bgUtility) : []],
       ...breakpoints.map(screenUtility),
       ...breakpoints.map(textUtility),
       ...[showOutline ? breakpoints.map(outlineUtility) : []]
-    ]);
-  };
-});
+    ])
+  }
+})
 
-module.exports = debugBreakpointsPlugin;
+module.exports = debugBreakpointsPlugin

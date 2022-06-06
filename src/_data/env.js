@@ -4,4 +4,4 @@ module.exports = {
   // 11ty transforms, shortcodes, filters, and collections.
   domain: process.env.DOMAIN,
   environment: process.env.ELEVENTY_ENV
-};
+}

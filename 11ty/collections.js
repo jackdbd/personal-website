@@ -4,18 +4,18 @@
  */
 
 const BACKEND_TAGS =
-  'ansible,CLI,clojure,devops,domain-driven design,inversion of control,microservices,python';
+  'ansible,CLI,clojure,devops,domain-driven design,inversion of control,microservices,python'
 
 const FRONTEND_TAGS =
-  'css,d3,data visualization,es6,js,regl,sass,three.js,typescript,webgl,webpack';
+  'css,d3,data visualization,es6,js,regl,sass,three.js,typescript,webgl,webpack'
 
 const isBackendTag = (tag) => {
-  return BACKEND_TAGS.includes(tag);
-};
+  return BACKEND_TAGS.includes(tag)
+}
 
 const isFrontendTag = (tag) => {
-  return FRONTEND_TAGS.includes(tag);
-};
+  return FRONTEND_TAGS.includes(tag)
+}
 
 const isUserDefinedTag = (tag) => {
   switch (tag) {
@@ -24,35 +24,35 @@ const isUserDefinedTag = (tag) => {
     case 'nav':
     case 'post':
     case 'posts':
-      return false;
+      return false
     default:
-      return true;
+      return true
   }
-};
+}
 
 const makeAddTagsToTagSet = (tagSet, predicate) => {
   return (item) => {
     if ('tags' in item.data) {
       // console.log('item.data.tags', item.data.tags);
-      let tags = item.data.tags;
-      tags = tags.filter(predicate);
+      let tags = item.data.tags
+      tags = tags.filter(predicate)
       for (const tag of tags) {
-        tagSet.add(tag);
+        tagSet.add(tag)
       }
     } else {
       // console.log('item.data.permalink', item.data.permalink);
     }
-  };
-};
+  }
+}
 
 const userDefinedTagList = (collection) => {
-  const tagSet = new Set();
-  const addTagsToTagSet = makeAddTagsToTagSet(tagSet, isUserDefinedTag);
+  const tagSet = new Set()
+  const addTagsToTagSet = makeAddTagsToTagSet(tagSet, isUserDefinedTag)
   // const addTagsToTagSet = makeAddTagsToTagSet(tagSet, isFrontendTag);
-  collection.getAll().forEach(addTagsToTagSet);
-  return [...tagSet];
-};
+  collection.getAll().forEach(addTagsToTagSet)
+  return [...tagSet]
+}
 
 module.exports = {
   userDefinedTagList
-};
+}

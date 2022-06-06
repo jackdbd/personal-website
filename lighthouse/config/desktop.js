@@ -1,7 +1,7 @@
-const constants = require('./constants');
+const constants = require('./constants')
 
 const emulatedUserAgent =
-  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4420.0 Safari/537.36 Chrome-Lighthouse';
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4420.0 Safari/537.36 Chrome-Lighthouse'
 
 // Screen/viewport emulation
 // https://github.com/GoogleChrome/lighthouse/blob/95ae481e23b96a4fecd23910fd912f5fd5dceac4/docs/emulation.md
@@ -12,7 +12,7 @@ const screenEmulation = {
   height: 940,
   mobile: false,
   width: 1350
-};
+}
 
 // Network and CPU throttling/simulation
 // https://github.com/GoogleChrome/lighthouse/blob/95ae481e23b96a4fecd23910fd912f5fd5dceac4/docs/throttling.md
@@ -28,7 +28,7 @@ const throttling = {
   rttMs: 40, // Round Trip Time, in ms
   throughputKbps: 10 * 1024, // 10 Mbps
   uploadThroughputKbps: 0
-};
+}
 
 // https://github.com/GoogleChrome/lighthouse/blob/master/docs/configuration.md
 // https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/config/lr-desktop-config.js
@@ -44,4 +44,4 @@ module.exports = {
     skipAudits: ['uses-http2'],
     throttling
   }
-};
+}

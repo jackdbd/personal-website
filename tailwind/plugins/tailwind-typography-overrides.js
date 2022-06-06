@@ -4,12 +4,12 @@ const typography = (theme) => {
   const headingOverrides = {
     color: theme('colors.heading'),
     'font-family': theme('fontFamily.serif').join(',')
-  };
+  }
 
   // https://tailwindcss.com/docs/ring-width
   // https://tailwindcss.com/docs/ring-offset-width
   const ring4 =
-    'var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color)';
+    'var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color)'
 
   return {
     DEFAULT: {
@@ -65,7 +65,7 @@ const typography = (theme) => {
         lineHeight: theme('fontSize.lg')[1]
       }
     }
-  };
-};
+  }
+}
 
-module.exports = typography;
+module.exports = typography

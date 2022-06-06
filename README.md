@@ -14,7 +14,7 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
 - CSS on the critical path is inlined in the `<head>` and minified with [clean-css](https://www.11ty.dev/docs/quicktips/inline-css/). All other CSS is managed by PostCSS.
 - Post-build HTML validation with [netlify-plugin-html-validate](https://github.com/oliverroick/netlify-plugin-html-validate) and [HTML-validate](https://html-validate.org/usage/index.html).
 - Post-build accessiblity check with [netlify-plugin-a11y](https://github.com/netlify-labs/netlify-plugin-a11y).
-- Detect vulnerable JS librarie with [netlify-plugin-is-website-vulnerable](https://github.com/erezrokah/netlify-plugin-is-website-vulnerable).
+- Detect vulnerable JS libraries with [netlify-plugin-is-website-vulnerable](https://github.com/erezrokah/netlify-plugin-is-website-vulnerable).
 - [Custom headers](https://docs.netlify.com/routing/headers/#custom-headers) for the [Reporting API](https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API):
   - [Report-To](https://developers.google.com/web/updates/2018/09/reportingapi#header) with [Report URI](https://report-uri.com/)
   - [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) generated after every build with [netlify-plugin-csp-generator](https://github.com/MarcelloTheArcane/netlify-plugin-csp-generator).

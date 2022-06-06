@@ -7,19 +7,6 @@
 # Build plugins                                                                #
 # ---------------------------------------------------------------------------- #
 
-# https://github.com/netlify-labs/netlify-plugin-a11y
-[[plugins]]
-package = "netlify-plugin-a11y"
-  [plugins.inputs]
-  checkPaths = [
-    '/',
-    '/about/',
-    '/blog/',
-    '/contact/',
-    '/posts/12-years-of-fires-in-sardinia/',
-    '/projects/',
-  ]
-
 # https://github.com/MarcelloTheArcane/netlify-plugin-csp-generator
 [[plugins]]
 package = "netlify-plugin-csp-generator"
@@ -78,27 +65,17 @@ package = "netlify-plugin-csp-generator"
     styleSrcElem = "'self' 'unsafe-inline'"
     workerSrc = "'self'"
 
-[[plugins]]
-package = "netlify-plugin-debug-cache"
-
-# https://github.com/oliverroick/netlify-plugin-html-validate
-[[plugins]]
-package = "netlify-plugin-html-validate"
-  [plugins.inputs]
-  config = ".htmlvalidate.json"
-
-[[plugins]]
-package = "netlify-plugin-is-website-vulnerable"
-
 # ---------------------------------------------------------------------------- #
 # Deploy contexts                                                              #
 # ---------------------------------------------------------------------------- #
 
 [context.production]
   command = "npm run build"
+  environment = { NODE_VERSION = "17.9.0" }
 
 [context.deploy-preview]
   command = "npm run build"
+  environment = { NODE_VERSION = "17.9.0" }
 
 # ---------------------------------------------------------------------------- #
 # Headers (don't use the _headers file. I prefer keeping everything here)      #
@@ -134,16 +111,6 @@ package = "netlify-plugin-is-website-vulnerable"
     NEL = '{"report_to":"default","max_age":31536000,"include_subdomains":true}'
     Permissions-Policy = "geolocation=(), microphone=()"
     Referrer-Policy = "no-referrer, strict-origin-when-cross-origin"
-    Report-To = '''
-    {
-      "group": "default",
-      "max_age": 31536000,
-      "endpoints": [
-        {"url": "https://giacomodebidda.report-uri.com/a/d/g"}
-      ],
-      "include_subdomains":true
-    }
-    '''
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "SAMEORIGIN"

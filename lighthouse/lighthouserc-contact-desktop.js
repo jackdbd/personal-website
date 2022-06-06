@@ -1,4 +1,4 @@
-const budget = 'lighthouse/budgets/contact-desktop.json';
+const budget = 'lighthouse/budgets/contact-desktop.json'
 
 // https://github.com/GoogleChrome/lighthouse-ci/blob/v0.4.1/docs/configuration.md
 const config = {
@@ -15,6 +15,6 @@ const config = {
       }
     }
   }
-};
+}
 
-module.exports = config;
+module.exports = config

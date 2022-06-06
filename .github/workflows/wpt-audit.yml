@@ -6,10 +6,13 @@ on:
 jobs:
   audit:
     name: Audit website with the WebPageTest API
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
       - name: Audit / and /contact with WebPageTest (mobile)
         # https://github.com/WPO-Foundation/webpagetest-github-action
         # All WebPageTest options are set via the wptOptions input
@@ -54,14 +57,14 @@ jobs:
         # This is a container action, so it must run on Linux (it would fail if
         # `runs-on` is either `windows-latest` or `macOS-latest`)
         # https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action#introduction
-        uses: appleboy/telegram-action@master
+        uses: appleboy/telegram-action@v0.1.1
         env:
           REPO_URL: ${{ github.event.repository.html_url }}
           WORKFLOW_URL: https://github.com/jackdbd/personal-website/actions/workflows/wpt-audit.yml
           # HOME_MOBILE_RESULTS: ${{ steps.wpt_home_mobile.outputs.full_test_results }}
           # ARTICLE_DESKTOP_OUTPUTS: ${{ toJSON(steps.wpt_article_desktop.outputs) }}
         with:
-          to: ${{ secrets.TELEGRAM_TO }}
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           # https://emojipedia.org/
           message: |
