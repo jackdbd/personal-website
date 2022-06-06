@@ -98,12 +98,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Wait for a successfull Deploy on Netlify
-        uses: jakepartusch/wait-for-netlify-action@v1
-        id: netlify
-        with:
-          site_name: ${{ secrets.SITE_NAME }}
-          max_timeout: 60
       - name: 🌐 Notify Telegram chat about Netlify deployment
         uses: appleboy/telegram-action@v0.1.1
         with:
@@ -116,7 +110,7 @@ jobs:
             <b>🌐 New deploy on Netlify</b>
 
             The website <code>${{ secrets.SITE_NAME }}</code> is <b>live</b> at:
-            <a href="${{ steps.netlify.outputs.url }}">${{ steps.netlify.outputs.url }}</a>
+            <a href="https://www.${{ secrets.DOMAIN }}">${{ secrets.DOMAIN }}</a>
 
             Repository: <a href="https://github.com/${{ github.repository }}/">${{ github.repository }}</a>
 
