@@ -38,6 +38,7 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         run: npm run build
 
+  # I am commenting this out because at the moment I don't have a valid API key for WebPageTest
   # wpt:
   #   name: Audit website with WebPageTest API
   #   needs: [build-and-test]
@@ -55,7 +56,7 @@ jobs:
   #         max_timeout: 60
   #     - name: Audit pages with WebPageTest (home/contact, mobile)
   #       # https://github.com/WPO-Foundation/webpagetest-github-action
-  #       uses: WPO-Foundation/webpagetest-github-action@main
+  #       uses: WPO-Foundation/webpagetest-github-action@v1.1.2
   #       with:
   #         apiKey: ${{ secrets.WPT_API_KEY }}
   #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -66,7 +67,7 @@ jobs:
   #         budget: 'wpt-budget.json'
   #         wptOptions: 'wpt-options-mobile.json'
   #     - name: Audit pages with WebPageTest (home/contact, desktop)
-  #       uses: WPO-Foundation/webpagetest-github-action@main
+  #       uses: WPO-Foundation/webpagetest-github-action@v1.1.2
   #       with:
   #         apiKey: ${{ secrets.WPT_API_KEY }}
   #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -77,7 +78,7 @@ jobs:
   #         budget: 'wpt-budget.json'
   #         wptOptions: 'wpt-options-desktop.json'
   #     - name: Audit page with WebPageTest (article, desktop)
-  #       uses: WPO-Foundation/webpagetest-github-action@main
+  #       uses: WPO-Foundation/webpagetest-github-action@v1.1.2
   #       env:
   #         ARTICLE_SLUG: 12-years-of-fires-in-sardinia
   #       with:
@@ -88,6 +89,38 @@ jobs:
   #           ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
   #         budget: 'wpt-budget-article-desktop.json'
   #         wptOptions: 'wpt-options-desktop.json'
+
+  notify-deploy:
+    name: Notify Telegram chat about deploy on Netlify
+    needs: [build-and-test]
+    if: ${{ github.ref_name == 'main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Wait for a successfull Deploy on Netlify
+        uses: jakepartusch/wait-for-netlify-action@v1
+        id: netlify
+        with:
+          site_name: ${{ secrets.SITE_NAME }}
+          max_timeout: 60
+      - name: 🌐 Notify Telegram chat about Netlify deployment
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: html
+          disable_web_page_preview: true
+          # https://core.telegram.org/bots/api#formatting-options
+          message: |
+            <b>🌐 New deploy on Netlify</b>
+
+            The website <code>${{ secrets.SITE_NAME }}</code> is <b>live</b> at:
+            <a href="${{ steps.netlify.outputs.url }}">${{ steps.netlify.outputs.url }}</a>
+
+            Repository: <a href="https://github.com/${{ github.repository }}/">${{ github.repository }}</a>
+
+            <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">Changes</a> in commit <code>${{github.sha}}</code>
 
   audit:
     name: Audit website with Lighthouse CI
@@ -112,7 +145,7 @@ jobs:
           disable_web_page_preview: true
           # https://core.telegram.org/bots/api#formatting-options
           message: |
-            <b>🌐 Deploy Preview on Netlify</b>
+            <b>🌐 New deploy preview on Netlify</b>
 
             The website <code>${{ secrets.SITE_NAME }}</code> is <b>live</b> at:
             <a href="${{ steps.netlify.outputs.url }}">${{ steps.netlify.outputs.url }}</a>
@@ -120,7 +153,6 @@ jobs:
             Repository: <a href="https://github.com/${{ github.repository }}/">${{ github.repository }}</a>
 
             <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">Changes</a> in commit <code>${{github.sha}}</code>
-
       - name: Audit contact page with Lighthouse CI (mobile)
         uses: treosh/lighthouse-ci-action@v7
         with:
@@ -145,8 +177,8 @@ jobs:
       #     urls: |
       #       ${{ steps.netlify.outputs.url }}/
       #       ${{ steps.netlify.outputs.url }}/blog/
-      #       ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
       #       ${{ steps.netlify.outputs.url }}/projects/
+      #       ${{ steps.netlify.outputs.url }}/posts/${{ env.ARTICLE_SLUG }}
       #     configPath: lighthouse/lighthouserc-all-desktop.js
       #     temporaryPublicStorage: true
       #     uploadArtifacts: true
