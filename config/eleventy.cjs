@@ -67,9 +67,6 @@ module.exports = function (eleventyConfig) {
       token: env.TELEGRAM_TOKEN
     })
     const env_vars = [
-      // 'ACKEE_API',
-      // 'ACKEE_USERNAME',
-      // 'ACKEE_PASSWORD',
       'CLOUDINARY_API_KEY',
       'CLOUDINARY_API_SECRET',
       'CLOUDINARY_CLOUD_NAME'
@@ -153,8 +150,6 @@ module.exports = function (eleventyConfig) {
     'src/includes/assets/fonts': 'assets/fonts',
     'src/includes/assets/img': 'assets/img',
     'src/includes/assets/js': 'assets/js',
-    'node_modules/ackee-tracker/dist/ackee-tracker.min.js':
-      'assets/js/ackee-tracker.js',
     'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js'
   })
 

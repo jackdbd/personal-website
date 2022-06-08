@@ -3,7 +3,6 @@
 // for the eleventy.after event.
 
 const { join } = require('node:path')
-const { getBearerToken, makeAnalyticsClient } = require('../../scripts')
 
 const PREFIX = '[📈 pages from analytics] '
 
@@ -27,30 +26,18 @@ const popularPagesFromAnalyticsOrFallback = async ({
   }
 
   try {
-    const token = await getBearerToken({
-      endpoint,
-      username,
-      password
-    })
-
-    const analytics = makeAnalyticsClient({
-      endpoint,
-      domainId,
-      token
-    })
-
-    const results = await analytics.topThreePages()
+    throw new Error(`TODO: fetch top pages from Plausible.io`)
 
     console.log(
-      `${PREFIX}✅ retrieved ${results.length} most popular pages according to analytics`
+      `${PREFIX}✅ retrieved most popular pages according to analytics`
     )
 
-    const toPathname = (res) => {
-      const pageUrl = new URL(res.id)
-      return join(outputDir, pageUrl.pathname, 'index.html')
-    }
+    // const toPathname = (res) => {
+    //   const pageUrl = new URL(res.id)
+    //   return join(outputDir, pageUrl.pathname, 'index.html')
+    // }
 
-    return results.map(toPathname)
+    // return results.map(toPathname)
   } catch (err) {
     console.warn(
       `${PREFIX}⚠️ could not retrieve most popular pages from analytics`

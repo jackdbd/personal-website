@@ -10,7 +10,7 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
 - just-in-time preloading with [instant.page](https://instant.page/)
 - Service worker generated with [workbox-build](https://developers.google.com/web/tools/workbox/modules/workbox-build) (in development, open Chrome DevTools and enable `Update on reload` in `Application > Service Workers` to always have the latest service worker).
 - Performance reports with multiple [performance budgets](https://www.afasterweb.com/2020/01/28/performance-budgets-with-lighthouse/) using the [Lighthouse CLI](https://github.com/GoogleChrome/lighthouse#using-the-node-cli) and [webhint](https://github.com/webhintio/hint).
-- Run Lighthouse every commit thanks to the [Lighouse CI](https://github.com/GoogleChrome/lighthouse-ci).
+- Run Lighthouse every commit thanks to the [Lightouse CI](https://github.com/GoogleChrome/lighthouse-ci).
 - CSS on the critical path is inlined in the `<head>` and minified with [clean-css](https://www.11ty.dev/docs/quicktips/inline-css/). All other CSS is managed by PostCSS.
 - Post-build HTML validation with [netlify-plugin-html-validate](https://github.com/oliverroick/netlify-plugin-html-validate) and [HTML-validate](https://html-validate.org/usage/index.html).
 - Post-build accessiblity check with [netlify-plugin-a11y](https://github.com/netlify-labs/netlify-plugin-a11y).
