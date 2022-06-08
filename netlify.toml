@@ -23,7 +23,7 @@ package = "netlify-plugin-csp-generator"
   # protect Clickjacking, Formjacking, Data Exfiltration and more.
 
   # connectSrc
-  # I need to fetch images from Cloudinary and to POST analytics to Ackee.
+  # I need to fetch images from Cloudinary and to POST analytics to Plausible.
 
   # fontSrc
   # Allow only font files hosted on this origin (self-hosted).
@@ -49,7 +49,7 @@ package = "netlify-plugin-csp-generator"
 
   [plugins.inputs.policies]
     childSrc = "https://www.youtube.com/embed/ https://www.youtube-nocookie.com/ https://player.vimeo.com/video/"
-    connectSrc = "'self' https://analytics.projects.giacomodebidda.com https://res.cloudinary.com"
+    connectSrc = "'self' https://plausible.io/api/event https://res.cloudinary.com"
     defaultSrc = "'self'"
     fontSrc = "'self'"
     frameSrc = "https://www.youtube.com/embed/ https://www.youtube-nocookie.com/ https://player.vimeo.com/video/"
