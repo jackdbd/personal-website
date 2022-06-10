@@ -8,10 +8,10 @@
   {% endset %}
 
   {# TODO: how to get the base URL? The website base URL is dynamic, because the
-  website could be running locally (either with eleventy --serve or netlify dev),
-  or it could be deployed on netlify (either with a deploy preview or a with a
-  production deploy). If I use <base> with a wrong URL all requests are
-  considered cross-origin, so the browser refuse both sw.js and the webmanifest. #}
+  website could be running locally (e.g. with eleventy --serve),
+  or it could be deployed to Cloudflare Pages. If I use <base> with a wrong URL
+  all requests are considered cross-origin, so the browser refuse both sw.js and
+  the webmanifest. #}
   {# <base href="{{ env.domain }}">  #}
 
   {# Here I use dns-prefetch to resolve some domain names before resources get

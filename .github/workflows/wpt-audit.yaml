@@ -21,7 +21,7 @@ jobs:
         # an `id` to this step to access `steps.wpt_home_mobile.outputs` later
         # id: wpt_home_mobile
         with:
-          apiKey: ${{ secrets.WPT_API_KEY }}
+          apiKey: ${{ fromJSON(secrets.WEBPAGETEST).api_key }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           label: 'home-contact-mobile'
           urls: |
@@ -32,7 +32,7 @@ jobs:
       - name: Audit / and /contact with WebPageTest (desktop)
         uses: WPO-Foundation/webpagetest-github-action@v1.1.2
         with:
-          apiKey: ${{ secrets.WPT_API_KEY }}
+          apiKey: ${{ fromJSON(secrets.WEBPAGETEST).api_key }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           label: 'home-contact-desktop'
           urls: |
@@ -45,7 +45,7 @@ jobs:
         env:
           ARTICLE_SLUG: 12-years-of-fires-in-sardinia
         with:
-          apiKey: ${{ secrets.WPT_API_KEY }}
+          apiKey: ${{ fromJSON(secrets.WEBPAGETEST).api_key }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           label: 'article-desktop'
           urls: |
@@ -64,8 +64,8 @@ jobs:
           # HOME_MOBILE_RESULTS: ${{ steps.wpt_home_mobile.outputs.full_test_results }}
           # ARTICLE_DESKTOP_OUTPUTS: ${{ toJSON(steps.wpt_article_desktop.outputs) }}
         with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
+          to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
+          token: ${{ fromJSON(secrets.TELEGRAM).token }}
           # https://emojipedia.org/
           message: |
             🚀 WebPageTest audit report ready
