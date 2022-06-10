@@ -23,6 +23,7 @@ const filters = require('../11ty/filters')
 const shortcodes = require('../11ty/shortcodes')
 const pairedShortcodes = require('../11ty/paired-shortcodes')
 const transforms = require('../11ty/transforms.js')
+const reportPrecacheManifestPlugin = require('@jackdbd/eleventy-plugin-report-precache-manifest')
 const {
   notifyTelegramChat
 } = require('../11ty/plugins/notify-telegram-chat.cjs')
@@ -95,11 +96,6 @@ module.exports = function (eleventyConfig) {
       ]
     })
 
-    console.log(
-      `the service worker will precache these pages`,
-      htmlPagesToPrecache
-    )
-
     await buildSW({
       cacheId: 'giacomodebidda.com',
       htmlPagesToPrecache
@@ -132,6 +128,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(toc, {
     tags: ['h2', 'h3'],
     wrapperClass: 'toc-nav'
+  })
+
+  eleventyConfig.addPlugin(reportPrecacheManifestPlugin, {
+    // reportName: 'my-report.json',
+    // verbose: true
   })
 
   // --- 11ty data cascade -------------------------------------------------- //
