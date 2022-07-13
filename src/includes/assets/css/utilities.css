@@ -17,9 +17,13 @@
 }
 
 .full-bleed {
+  /* background-color: var(--color-bone); */
   margin-left: 50%;
   transform: translateX(-50%);
-  width: 100vw;
+  /* something in the card component is messed up, and if I set a width of 98vw
+  or more the grid overflows and the horizontal slider appears. */
+  /* width: 100vw; */
+  width: 95vw;
 }
 
 .justify-content\:space-between {

@@ -1,0 +1,15 @@
+<ul class="box card-grid full-bleed">
+  {% for project in collections.project %}
+
+  <li>
+    {% set name = project.data.title %}
+    {% set content = project.templateContent %}
+    {% set href = project.data.href %}
+    {% set imageAlt = project.data.ogp.imageAlt %}
+    {% set imageSrc = project.data.ogp.image %}
+    {% set tags = project.data.tags %}
+    {% include "components/card.njk" %}
+  </li>
+
+  {% endfor %}
+</ul>

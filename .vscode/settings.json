@@ -2,6 +2,10 @@
   "css.validate": true,
   "editor.defaultFormatter": null,
   "editor.formatOnSave": false,
+  "files.associations": {
+    "_headers": "toml",
+    "_redirects": "toml"
+  },
   "files.exclude": {
     "node_modules/": true
   },

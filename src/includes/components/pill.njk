@@ -1,1 +1,5 @@
-<a class="pill" href="{{ href | url }}"rel="tag">{{ text }}</a>
+{% if href %}
+  <a class="pill" href="{{ href | url }}" rel="tag">{{ text }}</a>
+{% else %}
+  <span class="pill">{{ text }}</span>
+{% endif %}

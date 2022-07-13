@@ -125,6 +125,38 @@ title: Style Guide
   </section>
 
   <section>
+    <h2>Card</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Some explanation</p>
+        <div class="{{ vanillaContainer }}">
+          {% set name = "My Card" %}
+          {% set content = '<p>This is an example card with a <a href="https://www.google.com/" target="_blank">link</a>.</p>' %}
+          {% set href = "https://github.com/jackdbd/calderone" %}
+          {% set tags = ['foo', 'Some other tag'] %}
+          {% include "components/card.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Talk</h2>
+    <ul class="flow">
+      <li class="styleguide__example">
+        <p>Some explanation</p>
+        <div class="{{ vanillaContainer }}">
+          {% set n = 3 %}
+          {% set title = "My Talk" %}
+          {% set description = "This is an example talk" %}
+          {% set href = "https://github.com/jackdbd/python-firenze-meetup-2020-02-06" %}
+          {% include "components/talk.njk" %}
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
     <h2>Contact Form</h2>
     <ul class="flow">
       <li class="styleguide__example">

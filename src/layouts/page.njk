@@ -20,6 +20,8 @@ layout: bare-minimum.njk
 
 </div>
 
+{% include "components/back-to-top.njk" %}
+
 {% endblock content %}
 
 {# inlined CSS assets (critical CSS) #}
@@ -30,5 +32,8 @@ layout: bare-minimum.njk
 <link data-helmet rel="stylesheet" href="/assets/css/components.css">
 <link data-helmet rel="stylesheet" href="/assets/css/utilities.css">
 
+<link data-helmet rel="preload" href="/assets/fonts/source-code-pro-v14-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link data-helmet rel="stylesheet" href="/assets/css/font-monospace.css">
+
 {# external JS assets #}
-<script data-helmet async src="/assets/js/sw-registration.js"></script>
+<script data-helmet defer src="/assets/js/back-to-top.js"></script>

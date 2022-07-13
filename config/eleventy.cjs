@@ -166,25 +166,27 @@ module.exports = function (eleventyConfig) {
     wrapperClass: 'toc-nav'
   })
 
-  // on GitHub Actions I use a JSON secret for Telegram chat ID and token, and I
-  // expose that secret as an environment variable.
-  let telegram_json_string
-  if (process.env.TELEGRAM) {
-    telegram_json_string = process.env.TELEGRAM
-  } else {
-    telegram_json_string = fs.readFileSync(
-      join(REPO_ROOT, 'secrets', 'telegram.json'),
-      { encoding: 'utf8' }
-    )
-  }
-  const telegram = JSON.parse(telegram_json_string)
+  if (process.env.CF_PAGES) {
+    // on GitHub Actions I use a JSON secret for Telegram chat ID and token, and I
+    // expose that secret as an environment variable.
+    let telegram_json_string
+    if (process.env.TELEGRAM) {
+      telegram_json_string = process.env.TELEGRAM
+    } else {
+      telegram_json_string = fs.readFileSync(
+        join(REPO_ROOT, 'secrets', 'telegram.json'),
+        { encoding: 'utf8' }
+      )
+    }
+    const telegram = JSON.parse(telegram_json_string)
 
-  eleventyConfig.addPlugin(telegramPlugin, {
-    chatId: telegram.chat_id,
-    token: telegram.token,
-    textBeforeBuild: '11ty has just <b>started</b> building my personal site',
-    textAfterBuild: '🏁 11ty has <b>finished</b> building my personal website'
-  })
+    eleventyConfig.addPlugin(telegramPlugin, {
+      chatId: telegram.chat_id,
+      token: telegram.token,
+      textBeforeBuild: '11ty has just <b>started</b> building my personal site',
+      textAfterBuild: '🏁 11ty has <b>finished</b> building my personal website'
+    })
+  }
 
   eleventyConfig.addPlugin(textToSpeechPlugin, {
     audioHost: {

@@ -1,0 +1,12 @@
+<ul class="flow talk-list">
+  {% for talk in talks %}
+
+  <li class="flow">
+    {% set title = talk.title %}
+    {% set description = talk.description %}
+    {% set href = talk.href %}
+    {% include "components/talk.njk" %}
+  </li>
+
+  {% endfor %}
+</ul>
