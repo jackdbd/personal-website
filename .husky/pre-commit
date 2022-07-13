@@ -1,5 +1,16 @@
-#!/bin/sh
+#!/bin/bash
+# Husky seems to run all hook scripts using sh, regardless of the shebang present
+# in the git hook.
+# https://github.com/typicode/husky/issues/971
 . "$(dirname "$0")/_/husky.sh"
 
-echo "About to commit as $GIT_AUTHOR_NAME ($GIT_AUTHOR_EMAIL)"
+# https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -eu
+
+echo "PRE COMMIT HOOK"
+
+# https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables
+# https://stackoverflow.com/questions/18750808/difference-between-author-and-committer-in-git
+echo "about to author this commit as $GIT_AUTHOR_NAME ($GIT_AUTHOR_EMAIL)"
+
 npm run format

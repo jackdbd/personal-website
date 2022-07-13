@@ -1,8 +1,10 @@
 # My personal website
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0842fe55-a9cb-484a-82d0-6a5c08b62d62/deploy-status)](https://app.netlify.com/sites/epic-benz-a3f006/deploys) ![Security Headers](https://img.shields.io/security-headers?url=https%3A%2F%2Fwww.giacomodebidda.com%2F) ![Chromium HSTS preload](https://img.shields.io/hsts/preload/giacomodebidda.com) [![CI](https://github.com/jackdbd/personal-website/actions/workflows/ci.yml/badge.svg)](https://github.com/jackdbd/personal-website/actions/workflows/ci.yml)
+![Security Headers](https://img.shields.io/security-headers?url=https%3A%2F%2Fwww.giacomodebidda.com%2F)
+![Chromium HSTS preload](https://img.shields.io/hsts/preload/giacomodebidda.com)
+[![CI](https://github.com/jackdbd/personal-website/actions/workflows/ci.yml/badge.svg)](https://github.com/jackdbd/personal-website/actions/workflows/ci.yml)
 
-My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Workbox](https://github.com/googlechrome/workbox). Hosted on [Netlify](https://www.netlify.com/).
+My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Workbox](https://github.com/googlechrome/workbox). Hosted on [Cloudflare Pages](https://pages.cloudflare.com/).
 
 ## Features
 
@@ -12,38 +14,25 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
 - Performance reports with multiple [performance budgets](https://www.afasterweb.com/2020/01/28/performance-budgets-with-lighthouse/) using the [Lighthouse CLI](https://github.com/GoogleChrome/lighthouse#using-the-node-cli) and [webhint](https://github.com/webhintio/hint).
 - Run Lighthouse every commit thanks to the [Lightouse CI](https://github.com/GoogleChrome/lighthouse-ci).
 - CSS on the critical path is inlined in the `<head>` and minified with [clean-css](https://www.11ty.dev/docs/quicktips/inline-css/). All other CSS is managed by PostCSS.
-- Post-build HTML validation with [netlify-plugin-html-validate](https://github.com/oliverroick/netlify-plugin-html-validate) and [HTML-validate](https://html-validate.org/usage/index.html).
-- Post-build accessiblity check with [netlify-plugin-a11y](https://github.com/netlify-labs/netlify-plugin-a11y).
-- Detect vulnerable JS libraries with [netlify-plugin-is-website-vulnerable](https://github.com/erezrokah/netlify-plugin-is-website-vulnerable).
-- [Custom headers](https://docs.netlify.com/routing/headers/#custom-headers) for the [Reporting API](https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API):
+- [Custom HTTP headers](https://developers.cloudflare.com/pages/how-to/add-custom-http-headers/) for the [Reporting API](https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API):
   - [Report-To](https://developers.google.com/web/updates/2018/09/reportingapi#header) with [Report URI](https://report-uri.com/)
-  - [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) generated after every build with [netlify-plugin-csp-generator](https://github.com/MarcelloTheArcane/netlify-plugin-csp-generator).
+  - [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
   - [Network Error Logging](https://developer.cdn.mozilla.net/en-US/docs/Web/HTTP/Headers/NEL)
   - [Permissions-Policy](https://scotthelme.co.uk/goodbye-feature-policy-and-hello-permissions-policy/)
 
 ## Installation
 
-Install all project dependencies.
+Install all project dependencies:
 
 ```shell
 npm install
 ```
 
-This website is deployed on Netlify, so be sure to install the [Netlify CLI](https://cli.netlify.com/):
-
-```shell
-npm install netlify-cli -g
-```
-
 ## Development
 
-Launch [Netlify Dev](https://docs.netlify.com/cli/get-started/#netlify-dev), recompile Nunjucks templates, JS/CSS assets, watch workbox configuration, reload the browser and share a live development server with a single command:
-
 ```shell
-npm run netlify:dev
+npm run dev
 ```
-
-*Note*: with Netlify Dev you can test your Netlify Functions, but I don't think it can handle Netlify Forms submissions (yet).
 
 ## Production
 

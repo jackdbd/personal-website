@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: ['17.x']
+        node: ['16.16.0']
     steps:
       - name: 🛎️ Checkout repo
         uses: actions/checkout@v3
@@ -27,15 +27,17 @@ jobs:
         if: ${{ matrix.os }} == 'ubuntu-latest'
         run: npm audit --audit-level=moderate
       - name: 🔍 Test website
-        run: npm test
+        run: npm run test
       - name: 🔧 Build website
         env:
-          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY: ${{ secrets.CLOUDINARY }}
+          DEBUG: Eleventy:cmd,Eleventy:ErrorHandler,Eleventy:UserConfig
           DOMAIN: ${{ secrets.DOMAIN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          ELEVENTY_ENV: production
+          NODE_ENV: development
+          PLAUSIBLE: ${{ secrets.PLAUSIBLE }}
+          TELEGRAM: ${{ secrets.TELEGRAM }}
+          WEBPAGETEST: ${{ secrets.WEBPAGETEST }}
         run: npm run build
 
   # I am commenting this out because at the moment I don't have a valid API key for WebPageTest
@@ -90,79 +92,59 @@ jobs:
   #         budget: 'wpt-budget-article-desktop.json'
   #         wptOptions: 'wpt-options-desktop.json'
 
-  notify-deploy:
-    name: Notify Telegram chat about deploy on Netlify
-    needs: [build-and-test]
-    if: ${{ github.ref_name == 'main' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: 🌐 Notify Telegram chat about Netlify deployment
-        uses: appleboy/telegram-action@v0.1.1
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: html
-          disable_web_page_preview: true
-          # https://core.telegram.org/bots/api#formatting-options
-          message: |
-            <b>🌐 New deploy on Netlify</b>
+  # TOOD: wait for successful Deploy Preview on Cloudflare Pages
+  # audit:
+  #   name: Audit website with Lighthouse CI
+  #   needs: [build-and-test]
+  #   if: ${{ github.event_name == 'pull_request' }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-            The website <code>${{ secrets.SITE_NAME }}</code> is <b>live</b> at:
-            <a href="https://www.${{ secrets.DOMAIN }}">${{ secrets.DOMAIN }}</a>
+  #     - name: Wait for a successful Deploy Preview on Netlify
+  #       uses: jakepartusch/wait-for-netlify-action@v1
+  #       id: netlify
+  #       with:
+  #         site_name: ${{ secrets.SITE_NAME }}
+  #         max_timeout: 60
 
-            Repository: <a href="https://github.com/${{ github.repository }}/">${{ github.repository }}</a>
+  #     - name: 🌐 Notify Telegram chat about Netlify deployment
+  #       uses: appleboy/telegram-action@v0.1.1
+  #       with:
+  #         to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
+  #         token: ${{ fromJSON(secrets.TELEGRAM).token }}
+  #         format: html
+  #         disable_web_page_preview: true
+  #         # https://core.telegram.org/bots/api#formatting-options
+  #         message: |
+  #           <b>🌐 New deploy preview on Netlify</b>
 
-            <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">Changes</a> in commit <code>${{github.sha}}</code>
+  #           The website <code>${{ secrets.SITE_NAME }}</code> is <b>live</b> at:
+  #           <a href="${{ steps.netlify.outputs.url }}">${{ steps.netlify.outputs.url }}</a>
 
-  audit:
-    name: Audit website with Lighthouse CI
-    needs: [build-and-test]
-    if: ${{ github.event_name == 'pull_request' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Wait for a successfull Deploy Preview on Netlify
-        uses: jakepartusch/wait-for-netlify-action@v1
-        id: netlify
-        with:
-          site_name: ${{ secrets.SITE_NAME }}
-          max_timeout: 60
-      - name: 🌐 Notify Telegram chat about Netlify deployment
-        uses: appleboy/telegram-action@v0.1.1
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: html
-          disable_web_page_preview: true
-          # https://core.telegram.org/bots/api#formatting-options
-          message: |
-            <b>🌐 New deploy preview on Netlify</b>
+  #           Repository: <a href="https://github.com/${{ github.repository }}/">${{ github.repository }}</a>
 
-            The website <code>${{ secrets.SITE_NAME }}</code> is <b>live</b> at:
-            <a href="${{ steps.netlify.outputs.url }}">${{ steps.netlify.outputs.url }}</a>
+  #           <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">Changes</a> in commit <code>${{github.sha}}</code>
 
-            Repository: <a href="https://github.com/${{ github.repository }}/">${{ github.repository }}</a>
-
-            <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">Changes</a> in commit <code>${{github.sha}}</code>
-      - name: Audit contact page with Lighthouse CI (mobile)
-        uses: treosh/lighthouse-ci-action@v7
-        with:
-          urls: |
-            ${{ steps.netlify.outputs.url }}/contact/
-          configPath: lighthouse/lighthouserc-contact-mobile.js
-          temporaryPublicStorage: true
-          uploadArtifacts: true
-      - name: Audit contact page with Lighthouse CI (desktop)
-        uses: treosh/lighthouse-ci-action@v7
-        with:
-          urls: |
-            ${{ steps.netlify.outputs.url }}/contact/
-          configPath: lighthouse/lighthouserc-contact-desktop.js
-          temporaryPublicStorage: true
-          uploadArtifacts: true
+  #     - name: Audit contact page with Lighthouse CI (mobile)
+  #       uses: treosh/lighthouse-ci-action@v7
+  #       with:
+  #         urls: |
+  #           ${{ steps.netlify.outputs.url }}/contact/
+  #         configPath: lighthouse/lighthouserc-contact-mobile.js
+  #         temporaryPublicStorage: true
+  #         uploadArtifacts: true
+        
+  #     - name: Audit contact page with Lighthouse CI (desktop)
+  #       uses: treosh/lighthouse-ci-action@v7
+  #       with:
+  #         urls: |
+  #           ${{ steps.netlify.outputs.url }}/contact/
+  #         configPath: lighthouse/lighthouserc-contact-desktop.js
+  #         temporaryPublicStorage: true
+  #         uploadArtifacts: true
+        
       # - name: Audit home, blog, project page with Lighthouse CI (desktop)
       #   uses: treosh/lighthouse-ci-action@v7
       #   env:
