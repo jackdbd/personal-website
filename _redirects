@@ -1,4 +1,4 @@
-/blog/* /posts/:splat 301
+# /blog/* /posts/:splat 301
 
 /a-simple-git-hook-for-your-python-projects /posts/a-simple-git-hook-for-your-python-projects 301
 /adapter-pattern-in-python /posts/adapter-pattern-in-python 301

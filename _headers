@@ -1,7 +1,6 @@
 /sw.js
   Cache-Control: no-store,max-age=0
 
-# 31536000 seconds are one year
 /*
   NEL: '{"report_to":"default","max_age":31536000,"include_subdomains":true}'
   Permissions-Policy: geolocation=(), microphone=()
