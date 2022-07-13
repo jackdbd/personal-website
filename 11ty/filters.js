@@ -45,6 +45,10 @@ const limit = (array, n) => {
   return array.slice(0, n)
 }
 
+const log = (value) => {
+  console.log('=== LOG ===', value)
+}
+
 // Date formatting (machine readable)
 const machineDate = (isoString) => {
   return DateTime.fromISO(isoString, { zone: 'utc' }).toFormat('yyyy-MM-dd')
@@ -60,6 +64,7 @@ module.exports = {
   humanDateJS,
   jsmin,
   limit,
+  log,
   machineDate,
   machineDateJS,
   slugify: function (str) {

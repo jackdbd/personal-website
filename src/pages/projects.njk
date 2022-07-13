@@ -11,5 +11,25 @@ section: projects
 title: Personal projects
 ---
 {% block pagecontent %}
-<p>Project page under construction.</p>
+{% include "components/card-grid.njk" %}
+
+{# {{ talks | log }} #}
+{# <p>Talks</p> #}
+{# {% include "components/talk-list.njk" %} #}
 {% endblock pagecontent %}
+
+{# inlined CSS assets (critical CSS) #}
+
+{# inlined JS assets (critical JS) #}
+
+{# external CSS assets #}
+<link data-helmet rel="stylesheet" href="/assets/css/components.css">
+<link data-helmet rel="stylesheet" href="/assets/css/utilities.css">
+<link data-helmet rel="stylesheet" href="/assets/css/prismjs-theme.css">
+{# The blog post pages are the only ones where I am using a monospace font #}
+<link data-helmet rel="preload" href="/assets/fonts/source-code-pro-v14-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link data-helmet rel="stylesheet" href="/assets/css/font-monospace.css">
+
+{# external JS assets #}
+<script data-helmet async src="/assets/js/sw-registration.js"></script>
+<script data-helmet defer src="/assets/js/back-to-top.js"></script>

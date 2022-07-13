@@ -5,6 +5,12 @@
  * <ul class="cluster" data-align="start"></ul>
  */
 
+.box {
+  --box-space: var(--scale-space-m);
+
+  padding: var(--box-space, 1em);
+}
+
 /* https://every-layout.dev/layouts/cluster/ */
 .cluster {
   display: flex;
@@ -18,6 +24,7 @@
 
 .cluster > * {
   --cluster-spacing: 0.05em;
+
   margin: var(--cluster-spacing);
 }
 
@@ -39,6 +46,19 @@
 
 .region {
   padding: var(--region-space, 1em) 0;
+}
+
+.stack {
+  --stack-spacing: var(--scale-space-m);
+}
+
+.stack > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.stack > * + * {
+  margin-top: var(--stack-spacing);
 }
 
 .wrapper {

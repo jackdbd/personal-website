@@ -1,0 +1,37 @@
+<div class="box stack card">
+  <h3>
+    <a href="{{ href }}" target="_blank">
+      {% if name %}
+        {{ name }}
+      {% else %}
+        Unnamed card
+      {% endif %}
+    </a>
+  </h3>
+
+  {% if imageSrc %}
+    <figure>
+      <img src="{{ imageSrc }}" alt="{{ imageAlt }}" />
+    </figure>
+  {% endif %}
+
+  {{ content | safe }}
+  
+  {% if tags %}
+  <div class="card-tags-wrapper">
+    <ul class="cluster" data-align="start">
+    {% for text in tags %}
+      {# {{ text | log }} #}
+      {% if text != "project" %}
+        {% set align = "start" %}
+        {% set href = undefined %}
+        <li class="display:inline-flex">
+          {% include "components/pill.njk" %}
+        </li>
+      {% endif %}
+    {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+</div>

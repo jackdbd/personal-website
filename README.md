@@ -30,6 +30,8 @@ npm install
 
 ## Development
 
+Build all templates, CSS and JS in watch mode, and automatically refresh the browser thanks to [BrowserSync](https://github.com/Browsersync/browser-sync):
+
 ```shell
 npm run dev
 ```

@@ -119,6 +119,40 @@ strong {
   padding: var(--scale-space-xs);
 }
 
+/* .card ------------------------------------------------------------------- */
+
+.card-grid {
+  --gutters-space: var(--scale-space-s);
+  /* box-sizing: border-box; */
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(321px, 1fr));
+  grid-template-rows: 1fr;
+  grid-column-gap: var(--gutters-space);
+  grid-row-gap: var(--gutters-space);
+}
+
+.card {
+  --box-space: var(--scale-space-3xs);
+
+  background: var(--color-background);
+  border: 0.15rem solid var(--color-text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.card-tags-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: auto; /* equivalent to flex-grow: 1; flex-shrink: 1; flex-basis: auto */
+  justify-content: flex-end;
+}
+
+/* .card-tags-wrapper > ul {
+  background: var(--color-background-code);
+} */
+
 /* .contact-form ------------------------------------------------------------ */
 
 .contact-form {
