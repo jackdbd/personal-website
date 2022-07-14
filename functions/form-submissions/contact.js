@@ -88,9 +88,31 @@ export async function onRequestPost(context) {
   const { origin, pathname } = url
 
   const requestPayload = await request.formData()
-  // console.log('=== requestPayload ===', requestPayload)
 
-  const { email, message, name } = Object.fromEntries(requestPayload)
+  // How do I see thin in the production logs? with `wrangler tail`?
+  // https://developers.cloudflare.com/workers/wrangler/commands/#tail
+  console.log('=== request payload contact form ===', requestPayload)
+
+  const {
+    email,
+    message,
+    name,
+    ['ahah-gotcha-bot']: botField
+  } = Object.fromEntries(requestPayload)
+
+  if (botField) {
+    // TODO: report the bot? Log something?
+    const responsePayload = JSON.stringify(
+      {
+        message: `Sorry bot. I refuse to process your form submission.`
+      },
+      null,
+      2
+    )
+    const response = new Response(responsePayload, { status: 403 })
+    response.headers.set('Content-Type', 'application/json; charset=utf-8')
+    return response
+  }
 
   try {
     ensureEnvVarsAreSet(env, ['SENDGRID', 'TELEGRAM'])
