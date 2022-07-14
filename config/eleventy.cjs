@@ -197,7 +197,7 @@ module.exports = function (eleventyConfig) {
     rules: [
       {
         regex: new RegExp('about\\/index\\.html$'),
-        cssSelectors: ['main.wrapper p']
+        cssSelectors: ['.text-to-speech']
       }
     ],
     // https://cloud.google.com/text-to-speech/docs/voices

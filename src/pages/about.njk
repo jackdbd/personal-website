@@ -11,7 +11,67 @@ section: about
 title: A few words about me
 ---
 {% block pagecontent %}
-<p>About page under construction.</p>
-{# <p>Talks</p> #}
-{# {% include "components/talk-list.njk" %} #}
+
+<div class="stack stack-space:l">
+
+  <p class="margin-top:l">Hi! I'm Giacomo, a freelance full-stack software developer from Italy.</p>
+
+  <div>
+    <section class="stack">
+      <div class="stack text-to-speech">
+        <h2>Professional experience</h2>
+
+        <p>I've been writing software for more than 20 years, starting with little scripts in <a href="https://en.wikipedia.org/wiki/Turbo_Pascal">Turbo Pascal</a> when I was in high school, signal/image processing programs in Matlab when at the University (I am a biomedical engineer by training), and applications of various nature in my professional life: data analysis programs in R and Python; web applications in JavaScript, TypeScript and ClojureScript; native applications in Zig.</p>
+        <p>Nowadays I specialize in developing services in Node.js on Google Cloud Platform. I am also pretty familiar with Clojure and its ecosystem. If you need to target the Java Virtual Machine, I can help.</p>
+      </div>
+
+{# do NOT indent this, otherwise markdown-it will interpret it as code #}
+{% callout "tip" %}
+You can also *listen* to the description above.
+
+The text is automatically synthesized into speech using [@jackdbd/eleventy-plugin-text-to-speech](https://www.npmjs.com/package/@jackdbd/eleventy-plugin-text-to-speech), an [Eleventy](https://www.11ty.dev/) plugin that uses the [Cloud Text-to-Speech API](https://cloud.google.com/text-to-speech).
+{% endcallout %}
+
+      {# Specifying a name for the download does not work because I host my CV on a different origin than my site. #}
+      {# A solution would be to copy the remote PDF hosted on GitHub to the Eleventy _site directory, at build time. The PDF would then be hosted on the same origin as the about page (and all other pages) #}
+      {# https://stackoverflow.com/questions/33909763/download-attribute-with-a-file-name-not-working #}
+      <p>In case you need it, here is <a href="{{ metadata.author.cv }}" download>my CV in PDF</a>.</p>
+    </section>
+  </div>
+
+  <div>
+    <section class="stack">
+      <h2>Talks</h2>
+
+      <p>Pre-COVID era I used to give talks at conferences and Meetups. Here are a few ones I shortlisted:</p>
+
+      {% include "components/talk-list.njk" %}
+
+      {% callout "info" %}
+      I keep track of all of my talks in [this GitHub repo](https://github.com/jackdbd/talks), where you can find links to the relevant material for each talk.
+      {% endcallout %}
+    </section>
+  </div>
+
+  <div>
+    <section class="stack">
+      <h2>Hobbies</h2>
+      <p>I like both surf skating and inline skating. I try doing either one of the two at least 3 times a week. I also have an all-terrain electric skateboard. It's pretty cool.</p>
+
+      {% callout "warn" %}
+      Always wear a helmet when you ride. [I love helmets](https://youtu.be/b9yL5usLFgY).
+      {% endcallout %}
+    </section>
+  </div>
+
+  <div>
+    <section class="stack">
+      <h2>Find me online</h2>
+      <p>I'm on <a href="https://github.com/jackdbd">GitHub</a>, <a href="https://stackoverflow.com/users/3036129/jackdbd">Stack Overflow</a>, <a href="https://www.linkedin.com/in/giacomodebidda/">LinkedIn</a> and—rarely—on <a href="https://twitter.com/jackdbd">Twitter</a>. I'm also on <a href="https://www.goodreads.com/user/show/76503683-giacomo-debidda">Goodreads</a> if you have any books you want to recommend me.</p>
+      <p>For availability and rates, please <a href="mailto:giacomo@giacomodebidda.com"><strong>email me</strong></a>.</p>
+    </section>
+  </div>
+
+</div>
+
 {% endblock pagecontent %}

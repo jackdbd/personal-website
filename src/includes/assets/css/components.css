@@ -15,6 +15,11 @@ a:hover {
   text-decoration-thickness: 0.25rem;
 }
 
+/* https://blog.shahednasser.com/how-to-style-an-audio-element/ */
+audio {
+  width: 100%;
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-text);
