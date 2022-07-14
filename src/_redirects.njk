@@ -1,0 +1,38 @@
+---
+eleventyExcludeFromCollections: true
+excludeFromSitemap: true
+permalink: /_redirects
+---
+{# https://mozilla.github.io/nunjucks/templating.html#whitespace-control #}
+{# my old blog had all articles at / dir. Now they're at /posts/ #}
+{%- set slugs = [
+  'a-simple-git-hook-for-your-python-projects',
+  'adapter-pattern-in-python',
+  'better-git-commits',
+  'bridge-pattern-in-python',
+  'facade-pattern-in-python',
+  'factory-method-and-abstract-factory-in-python',
+  'how-to-import-d3-plugins-with-webpack',
+  'my-personal-git-memo',
+  'mvc-pattern-in-python-dataset',
+  'mvc-pattern-in-python-introduction-and-basicmodel',
+  'mvc-pattern-in-python-sqlite',
+  'reactive-dashboards-with-plotly-dash',
+  'reading-large-excel-files-with-pandas',
+  'squashing-git-commits',
+  'strategy-pattern-in-python',
+  'template-method-pattern-in-python',
+  'threejs-project-starter-for-es6-and-webpack-2',
+  'visualize-earthquakes-with-plotly-dash'
+]
+-%}
+{%- for slug in slugs -%}
+{%- set oldPath = ["/", slug] | join -%}
+{%- set newPath = ["/posts/", slug] | join -%}
+{%- set movedPermanently = [oldPath, " ", newPath, " ", 301] | join -%}
+{# {{ movedPermanently | log }} #}
+{{ movedPermanently }}
+{%- endfor -%}
+
+{# universal catch all for every URL that didn't match anything. Not sure I need it #}
+{# * /404 404 #}
