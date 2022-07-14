@@ -38,6 +38,10 @@
   margin-left: 0 !important;
 }
 
+.margin-top\:l {
+  margin-top: var(--scale-space-l);
+}
+
 .padding-left\:0 {
   padding-left: 0 !important;
 }
@@ -45,4 +49,12 @@
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.stack-space\:l {
+  --stack-space: var(--scale-space-l);
+}
+
+.stack-space\:s {
+  --stack-space: var(--scale-space-s);
 }
