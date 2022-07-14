@@ -59,7 +59,8 @@
     "webhint:blog": "hint $DOMAIN/blog/",
     "webhint:home": "hint $DOMAIN/",
     "webhint:projects": "hint $DOMAIN/projects/",
-    "webhint:reports": "serve hint-report/"
+    "webhint:reports": "serve hint-report/",
+    "wrangler": "wrangler pages dev _site --binding SENDGRID=\"$(cat ./secrets/sendgrid.json)\" --binding TELEGRAM=\"$(cat ./secrets/telegram.json)\""
   },
   "browserslist": [
     "defaults",
@@ -115,6 +116,7 @@
     "uuid": "8.3.2",
     "workbox-build": "6.5.3",
     "workbox-core": "6.5.3",
-    "workbox-precaching": "6.5.3"
+    "workbox-precaching": "6.5.3",
+    "wrangler": "2.0.19"
   }
 }
