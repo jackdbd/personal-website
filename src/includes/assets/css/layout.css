@@ -49,7 +49,7 @@
 }
 
 .stack {
-  --stack-spacing: var(--scale-space-m);
+  --stack-space: var(--scale-space-m);
 }
 
 .stack > * {
@@ -58,7 +58,7 @@
 }
 
 .stack > * + * {
-  margin-top: var(--stack-spacing);
+  margin-top: var(--stack-space);
 }
 
 .wrapper {
