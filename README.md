@@ -36,6 +36,12 @@ Build all templates, CSS and JS in watch mode, and automatically refresh the bro
 npm run dev
 ```
 
+Develop and preview locally the site with [wrangler](https://developers.cloudflare.com/pages/platform/functions/#develop-and-preview-locally):
+
+```sh
+npm run wrangler
+```
+
 ## Production
 
 Build all pages, CSS files and the service worker (all minified):
