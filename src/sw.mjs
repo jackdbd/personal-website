@@ -12,6 +12,9 @@ import { registerRoute, setCatchHandler } from 'workbox-routing'
 // In particular, he defines a custom Workbox strategy to cache his blog posts.
 // https://github.com/jeffposnick/jeffy-info/blob/main/src/service-worker.ts
 
+// Check also this other service worker I created with workbox-build.
+// https://github.com/jackdbd/personal-website/blob/e7685da3f1c39457e98223d408c556c724f3ffa3/scripts/build-sw.js#L13
+
 // This method seems to support only one runtime cache, but I want to use
 // multiple runtime caches.
 // https://developer.chrome.com/docs/workbox/modules/workbox-core/#view-and-change-the-default-cache-names

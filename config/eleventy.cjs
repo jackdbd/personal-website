@@ -29,6 +29,7 @@ const transforms = require('../11ty/transforms.js')
 // const {
 //   popularPagesFromAnalyticsOrFallback
 // } = require('../11ty/plugins/pages-from-analytics.cjs')
+const cspPlugin = require('../plugins/11ty/csp/index.cjs')
 const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
 // const workboxPlugin = require('../plugins/11ty/workbox/index.cjs')
 const { buildServiceWorker } = require('../src/build-sw.cjs')
@@ -147,6 +148,62 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(plausiblePlugin, {
     apiKey: plausible.api_key,
     siteId: plausible.site_id
+  })
+
+  eleventyConfig.addPlugin(cspPlugin, {
+    // allowDeprecatedDirectives: true,
+    directives: {
+      // 'connect-src': [
+      //   'https://cloudflareinsights.com',
+      //   'https://plausible.io/api/event',
+      //   'https://res.cloudinary.com'
+      // ],
+
+      // allow embedding iframes from these websites (cross-origin iframes)
+      'frame-src': [
+        'https://www.youtube.com/embed/',
+        'https://www.youtube-nocookie.com/',
+        'https://player.vimeo.com/video/',
+        'https://slides.com/'
+      ],
+
+      // allow loading images hosted on GitHub, Cloudinary
+      'img-src': [
+        'self',
+        'https://github.com',
+        'https://raw.githubusercontent.com',
+        'https://res.cloudinary.com'
+      ],
+
+      // allow <audio> and <video> hosted on Cloud Storage
+      'media-src': ['https://storage.googleapis.com'],
+
+      // allow to report to the group called "default". See Report-To header.
+      'report-to': ['default'],
+
+      // report-uri is deprecated in favor of report-to, but Firefox still does
+      // not support report-to (it only supports report-uri).
+      // 'report-uri': ['https://giacomodebidda.report-uri.com'],
+
+      // allow scripts hosted on this origin, and scripts hosted on Plausible
+      // (analytics) and Cloudflare insights (analytics)
+      'script-src-elem': [
+        'self',
+        'https://plausible.io/js/plausible.js',
+        'https://static.cloudflareinsights.com/beacon.min.js'
+      ],
+
+      // allow CSS hosted on this origin, and inline styles that match a sha256
+      // hash automatically computed at build time by this 11ty plugin.
+      // See also here for the pros and cons of 'unsafe-inline'
+      // https://stackoverflow.com/questions/30653698/csp-style-src-unsafe-inline-is-it-worth-it
+      'style-src': ['self', 'sha256'],
+
+      // allow service workers, workers and shared workers hosted on the this origin
+      'worker-src': ['self']
+    },
+    globPatternsDetach: ['/*.png']
+    // reportOnly: true
   })
 
   // https://github.com/gfscott/eleventy-plugin-embed-twitter#configure

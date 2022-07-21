@@ -1,5 +1,8 @@
 name: 'Notify of workflow run conclusion'
 
+# Workflow_run full payload example
+# https://github.community/t/workflow-run-full-payload-example/195854
+
 on:
   workflow_run:
     workflows: ['CI', 'WebPageTest audit']
@@ -10,6 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump GitHub event
+        env:
+          GITHUB_EVENT: ${{ toJson(github.event) }}
+        run: echo "$GITHUB_EVENT"
       - name: 💬 Notify Telegram of workflow run FAILURE
         # https://github.com/appleboy/telegram-action
         uses: appleboy/telegram-action@v0.1.1
