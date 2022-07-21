@@ -16,8 +16,7 @@
   ],
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "npm-run-all --parallel 'build:11ty' 'build:css'",
-    "build:sw": "node src/build-sw.cjs",
+    "build": "run-s --print-label 'build:11ty' 'build:css'",
     "build:11ty": "ELEVENTY_ENV=production eleventy --config ./config/eleventy.cjs",
     "build:css": "postcss ./config/input.css --output _site/assets/css/style.css --config ./config --env production --verbose",
     "postbuild": "ls --size --human-readable _site/ | head -n 1",
@@ -116,7 +115,9 @@
     "uuid": "8.3.2",
     "workbox-build": "6.5.3",
     "workbox-core": "6.5.3",
+    "workbox-expiration": "6.5.3",
     "workbox-precaching": "6.5.3",
-    "wrangler": "2.0.19"
+    "wrangler": "2.0.19",
+    "yargs": "17.5.1"
   }
 }

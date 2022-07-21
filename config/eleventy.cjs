@@ -31,6 +31,7 @@ const transforms = require('../11ty/transforms.js')
 // } = require('../11ty/plugins/pages-from-analytics.cjs')
 const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
 // const workboxPlugin = require('../plugins/11ty/workbox/index.cjs')
+const { buildServiceWorker } = require('../src/build-sw.cjs')
 
 const REPO_ROOT = join(__filename, '..', '..')
 const OUTPUT_DIR = join(REPO_ROOT, '_site')
@@ -64,6 +65,21 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.on('eleventy.before', async () => {
     const env_vars = ['DEBUG', 'ELEVENTY_ENV', 'NODE_ENV']
     await ensureEnvironmentVariablesAreSet(env_vars)
+  })
+
+  eleventyConfig.on('eleventy.after', async () => {
+    await buildServiceWorker({
+      precachePaths: [
+        join(OUTPUT_DIR, 'manifest.webmanifest'),
+        join(OUTPUT_DIR, '404.html'),
+        join(OUTPUT_DIR, 'index.html'),
+        join(OUTPUT_DIR, 'about', 'index.html'),
+        join(OUTPUT_DIR, 'projects', 'index.html'),
+        join(OUTPUT_DIR, 'tags', 'index.html'),
+        join(OUTPUT_DIR, 'posts', '12-years-of-fires-in-sardinia', 'index.html')
+        // join(OUTPUT_DIR, 'assets', 'fonts', 'nunito-v16-latin-800.woff2	')
+      ]
+    })
   })
 
   // eleventyConfig.on('eleventy.after', async () => {
