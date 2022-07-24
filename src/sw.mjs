@@ -21,7 +21,7 @@ import { registerRoute, setCatchHandler } from 'workbox-routing'
 setCacheNameDetails({
   prefix: 'giacomodebidda-com',
   // suffix: 'v1',
-  precache: 'sw-precache'
+  precache: 'precache'
 })
 
 // console.log('cacheNames.precache', cacheNames.precache)
@@ -34,8 +34,9 @@ cleanupOutdatedCaches()
 precacheAndRoute(process.env.PRECACHE_ENTRIES)
 
 const runtimeCachesNames = {
-  css: `${cacheNames.prefix}-sw-css-runtime-cache`,
-  fonts: `${cacheNames.prefix}-sw-font-runtime-cache`
+  css: `${cacheNames.prefix}-css-runtime-cache`,
+  fonts: `${cacheNames.prefix}-font-runtime-cache`,
+  images: `${cacheNames.prefix}-image-runtime-cache`
 }
 
 const matchCssAssets = ({ request, sameOrigin }) => {
@@ -78,8 +79,6 @@ registerRoute(
   })
 )
 
-const imgCacheName = 'giacomodebidda-com-sw-image-runtime-cache'
-
 const matchImgAssets = ({ request }) => request.destination === 'image'
 
 // const matchImgAssets = ({ request, sameOrigin }) => {
@@ -102,7 +101,7 @@ const matchImgAssets = ({ request }) => request.destination === 'image'
 registerRoute(
   matchImgAssets,
   new CacheFirst({
-    cacheName: imgCacheName,
+    cacheName: runtimeCachesNames.images,
     plugins: [
       // https://developer.chrome.com/docs/workbox/modules/workbox-expiration/
       new ExpirationPlugin({

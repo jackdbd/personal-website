@@ -1,9 +1,76 @@
 const Joi = require('joi')
 
-// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources#sources
-const csp_source_value = Joi.string().min(1)
+// 2 is because top level domains have at least 2 characters
+const csp_host_source_with_no_protocol = Joi.string().pattern(
+  /^((?!https?).)+(.*\..{2,})$/,
+  {
+    name: 'host-with-no-protocol'
+  }
+)
 
-const csp_source_values = Joi.array().items(csp_source_value).min(1)
+const csp_host_source_with_protocol = Joi.string().pattern(/^https?:\/\/.*$/, {
+  name: 'host-with-protocol'
+})
+
+const csp_hash_source_to_compute = Joi.valid('sha256', 'sha384', 'sha512')
+
+const csp_hash_source = Joi.string().pattern(/^sha-(256|384|512).*$/, {
+  name: '<hash-algorithm>-<base64-value>'
+})
+
+const csp_nonce_source = Joi.string().pattern(/^nonce-.*$/, {
+  name: 'nonce-<base64-value>'
+})
+
+const csp_scheme_source = Joi.valid(
+  'http:',
+  'https:',
+  // data schemes are possible, but not recommended
+  'blob:',
+  'data:',
+  'filesystem:',
+  'mediastream:'
+)
+
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources#sources
+// const csp_source_value = Joi.string().min(1)
+const csp_source_value = Joi.alternatives().try(
+  csp_host_source_with_no_protocol,
+  csp_host_source_with_protocol,
+  csp_scheme_source,
+  csp_hash_source_to_compute,
+  csp_hash_source,
+  csp_nonce_source,
+  Joi.valid(
+    'none',
+    'report-sample',
+    'self',
+    'strict-dynamic',
+    'unsafe-eval',
+    'unsafe-hashes',
+    'unsafe-inline'
+  )
+)
+
+// https://joi.dev/api/?v=17.6.0#arrayuniquecomparator-options
+const hashAlgorithmComparator = (a, b) => {
+  if (a === 'sha256' && (b === 'sha384' || b === 'sha512')) {
+    return true
+  }
+  if (a === 'sha384' && (b === 'sha256' || b === 'sha512')) {
+    return true
+  }
+  if (a === 'sha512' && (b === 'sha256' || b === 'sha384')) {
+    return true
+  }
+  return false
+}
+
+const csp_source_values = Joi.array()
+  .items(csp_source_value)
+  .min(1)
+  .unique()
+  .unique(hashAlgorithmComparator)
 
 const glob_pattern = Joi.string().min(1)
 
@@ -41,38 +108,11 @@ const trusted_types_value = Joi.string().min(1)
 
 const defaultOptions = {
   allowDeprecatedDirectives: false,
-  //
-  // This is similar to the starter policy described here:
-  // https://content-security-policy.com/
-  //
-  // The differences are the following ones:
-  // - font-src is set to 'self', to allow self-hosted fonts
-  // - frame-ancestors is set to 'none'
-  // - manifest-src is set to 'self', to allow a self-hosted web application
-  //   manifest,so the website can be installed as Progressive Web App.
-  //   Learn more: https://developer.mozilla.org/en-US/docs/Web/Manifest
-  // - object-src is set to 'none' as recommended here: https://csp.withgoogle.com/docs/strict-csp.html
-  // - prefetch-src is set to 'self, to allow prefetching content hosted on this origin
-  // - upgrade-insecure-requests is set to true, even if I am not sure it's
-  //   really necessary, since it does NOT replace HSTS.
-  //   Learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests
-  directives: {
-    'base-uri': ['self'],
-    'connect-src': ['self'],
-    'default-src': ['none'],
-    'font-src': ['self'],
-    'form-action': ['self'],
-    'frame-ancestors': ['none'],
-    'img-src': ['self'],
-    'manifest-src': ['self'],
-    'object-src': ['none'],
-    'prefetch-src': ['self'],
-    'script-src': ['self'],
-    'style-src': ['self'],
-    'upgrade-insecure-requests': true
-  },
+  directives: {},
   globPatterns: ['/', '/*/'],
   globPatternsDetach: [],
+  excludePatterns: [],
+  includePatterns: ['/**/**.html'],
   reportOnly: false
 }
 
@@ -105,7 +145,7 @@ const directives = Joi.object({
   'style-src-elem': csp_source_values,
   'trusted-types': Joi.array().items(trusted_types_value).min(1),
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests
-  'upgrade-insecure-request': Joi.boolean(),
+  'upgrade-insecure-requests': Joi.boolean(),
   'worker-src': csp_source_values
 })
 
@@ -116,10 +156,14 @@ const pluginOptions = Joi.object().keys({
 
   directives: directives.default(defaultOptions.directives),
 
+  excludePatterns: glob_patterns.default(defaultOptions.excludePatterns),
+
   globPatterns: glob_patterns.default(defaultOptions.globPatterns),
 
   // https://developers.cloudflare.com/pages/platform/headers/#detach-a-header
   globPatternsDetach: glob_patterns.default(defaultOptions.globPatternsDetach),
+
+  includePatterns: glob_patterns.default(defaultOptions.includePatterns),
 
   reportOnly: Joi.boolean().default(defaultOptions.reportOnly)
 })

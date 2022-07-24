@@ -23,6 +23,8 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
   - [Network Error Logging](https://developer.cdn.mozilla.net/en-US/docs/Web/HTTP/Headers/NEL)
   - [Permissions-Policy](https://scotthelme.co.uk/goodbye-feature-policy-and-hello-permissions-policy/)
 
+You could also generate a Permission-Policy header with this website: https://www.permissionspolicy.com/
+
 ## Installation
 
 Install all dependencies:
@@ -55,9 +57,8 @@ npm run build
 
 ## Security audit
 
-Check the Content-Security-Policy header with one of these online tools:
+Check the `Content-Security-Policy` and the other security headers with these online tools:
 
-- https://cspscanner.com/
 - https://observatory.mozilla.org/
 - https://securityheaders.com/
 - https://csp-evaluator.withgoogle.com/

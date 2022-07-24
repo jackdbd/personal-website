@@ -1,12 +1,7 @@
-const fs = require('node:fs')
 const crypto = require('node:crypto')
-const util = require('node:util')
 const makeDebug = require('debug')
-const { parse, parseDefaults } = require('himalaya')
 
 const debug = makeDebug('eleventy-plugin-csp/utils')
-
-const readFileAsync = util.promisify(fs.readFile)
 
 const isBoolean = (val) => typeof val === 'boolean'
 
@@ -23,6 +18,7 @@ const mergeDeep = (target, ...sources) => {
     return target
   }
   const source = sources.shift()
+  // debug(`merge SOURCE %O into TARGET %O`, source, target)
 
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
@@ -48,80 +44,11 @@ function diffBetweenSets(setA, setB) {
   return new Set([...setA].filter((elem) => !setB.has(elem)))
 }
 
-const isHtml = (json) => json.tagName === 'html'
-const isHead = (json) => json.tagName === 'head'
-const children = (json) => json.children
-const isScriptTag = (json) => json.tagName === 'script'
-const isStyleTag = (json) => json.tagName === 'style'
-const content = (json) => json.content
-
-// for debugging
-const tap = (json) => {
-  console.log('=== Himalaya tap ===')
-  console.log(json)
-  return json
-}
-
-const getScriptTagsContents = (json) => {
-  // .map(tap)
-  return json
-    .filter(isHtml)
-    .flatMap(children)
-    .filter(isHead)
-    .flatMap(children)
-    .filter(isScriptTag)
-    .flatMap(children)
-    .map(content)
-}
-
-const getStyleTagsContents = (json) => {
-  // .map(tap)
-  return json
-    .filter(isHtml)
-    .flatMap(children)
-    .filter(isHead)
-    .flatMap(children)
-    .filter(isStyleTag)
-    .flatMap(children)
-    .map(content)
-}
-
-const scriptTagsContents = async (filepath) => {
-  try {
-    const html = await readFileAsync(filepath, { encoding: 'utf8' })
-    const json = parse(html, { ...parseDefaults, includePositions: false })
-    return getScriptTagsContents(json)
-  } catch (err) {
-    throw new Error(`Could not parse ${filepath}\n${err.message}`)
-  }
-}
-
-// filepath: fullpath to the HTML file to parse.
-// https://github.com/andrejewski/himalaya/blob/master/text/ast-spec-v1.md
-// https://github.com/andrejewski/himalaya/blob/f0b870011b84da362c863dc914157f30d4a603ac/src/index.js#L12
-const styleTagsContents = async (filepath) => {
-  try {
-    const html = await readFileAsync(filepath, { encoding: 'utf8' })
-    const json = parse(html, { ...parseDefaults, includePositions: false })
-    return getStyleTagsContents(json)
-  } catch (err) {
-    throw new Error(`Could not parse ${filepath}\n${err.message}`)
-  }
-}
-
-// TODO: add info about string. E.g. the string YOUTUBE_EMBED_DIV_INLINE_STYLE
-// could hava the description: youtube-embed-div-container-inline-style
-const makeHashFromString = (hashAlgorithm) => {
-  return function hashFromString(str) {
-    const hasher = crypto.createHash(hashAlgorithm)
-    return `${hashAlgorithm}-${hasher.update(str, 'utf-8').digest('base64')}`
-  }
-}
-
 const stringReplacer = (s) => {
   if (
     s === 'none' ||
     s === 'report-sample' ||
+    s === 'script' ||
     s === 'self' ||
     s === 'strict-dynamic' ||
     s === 'unsafe-eval' ||
@@ -135,16 +62,40 @@ const stringReplacer = (s) => {
   }
 }
 
+const hashAlgorithmFromCspSourceValues = (arr) => {
+  const algorithms = arr.filter(
+    (s) => s === 'sha256' || s === 'sha384' || s === 'sha512'
+  )
+
+  debug(`Hash algorithms found: ${algorithms.join(', ')}`)
+
+  if (algorithms.length === 0) {
+    return { value: undefined, error: undefined }
+  } else if (algorithms.length === 1) {
+    return { value: algorithms[0], error: undefined }
+  } else {
+    return {
+      value: undefined,
+      error: new Error(
+        `multiple hash algorithms specified (${algorithms.join(', ')})`
+      )
+    }
+  }
+}
+
+const contentHash = ({ algorithm, content }) => {
+  debug(`Compute ${algorithm}-hash from a string of length ${content.length}`)
+  const hasher = crypto.createHash(algorithm)
+  return `${algorithm}-${hasher.update(content, 'utf-8').digest('base64')}`
+}
+
 module.exports = {
+  contentHash,
   diffBetweenSets,
-  sha256FromString: makeHashFromString('sha256'),
-  sha384FromString: makeHashFromString('sha384'),
-  sha512FromString: makeHashFromString('sha512'),
+  hashAlgorithmFromCspSourceValues,
   isBoolean,
   isObject,
   isString,
   mergeDeep,
-  scriptTagsContents,
-  stringReplacer,
-  styleTagsContents
+  stringReplacer
 }

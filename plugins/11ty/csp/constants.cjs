@@ -1,3 +1,5 @@
+const PREFIX = '[👮 11ty-plugin-csp]'
+
 const deprecatedDirectives = {
   'block-all-mixed-content': {
     hrefs: [
@@ -66,5 +68,6 @@ const supportedDirectivesSet = new Set([
 module.exports = {
   deprecatedDirectives,
   deprecatedDirectivesSet,
+  PREFIX,
   supportedDirectivesSet
 }
