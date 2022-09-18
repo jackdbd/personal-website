@@ -236,6 +236,11 @@ strong {
   text-transform: capitalize;
 }
 
+/* .gotcha (honeypot field for a form --------------------------------------- */
+.gotcha {
+  display: none !important;
+}
+
 /* .heading-anchor ---------------------------------------------------------- */
 
 .heading-anchor {
