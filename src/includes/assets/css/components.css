@@ -112,6 +112,32 @@ strong {
   font-weight: 700;
 }
 
+/* #back-to-top ------------------------------------------------------------- */
+#back-to-top {
+  position: fixed;
+  opacity: 0.75;
+  bottom: 3rem;
+  right: 3rem;
+}
+
+#back-to-top > svg {
+  height: 3rem;
+  width: 3rem;
+  fill: currentColor;
+}
+
+@media screen and (min-width: 1024px) {
+  #back-to-top {
+    bottom: 4rem;
+    right: 4rem;
+  }
+
+  #back-to-top > svg {
+    height: 4rem;
+    width: 4rem;
+  }
+}
+
 /* .callout ----------------------------------------------------------------- */
 
 .callout {
@@ -208,6 +234,11 @@ strong {
 
 .contact-form [type='submit'] {
   text-transform: capitalize;
+}
+
+/* .gotcha (honeypot field for a form --------------------------------------- */
+.gotcha {
+  display: none !important;
 }
 
 /* .heading-anchor ---------------------------------------------------------- */

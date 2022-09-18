@@ -1,7 +1,6 @@
 <form name="Contact" class="contact-form flow" method="POST" action="https://formspree.io/f/mrgdevqb">
-  <div class="display:none">
-    <label>Don’t fill this out if you're human: <input name="ahah-gotcha-bot" /></label>
-  </div>
+  {# https://help.formspree.io/hc/en-us/articles/360013580813-Honeypot-spam-filtering #}
+  <input name="_gotcha" class="gotcha" />
   <div>
     <label for="name">Name (optional)</label>
     <input

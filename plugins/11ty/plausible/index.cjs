@@ -1,6 +1,6 @@
 const Joi = require('joi')
 const makeDebug = require('debug')
-const promise = import('@jackdbd/plausible-client')
+const plausibleClientPromise = import('@jackdbd/plausible-client')
 
 const PREFIX = '[📈 11ty-plugin-plausible]'
 
@@ -47,8 +47,26 @@ const plausible = (eleventyConfig, providedOptions) => {
     verbose
   }
 
+  // https://www.raymondcamden.com/2021/11/07/eleventy-10-global-data-via-plugins-example
+  eleventyConfig.addGlobalData('plausibleGlobalDataString', 'this is a test')
+  eleventyConfig.addGlobalData('plausibleGlobalDataNumber', 12345)
+
+  eleventyConfig.addGlobalData('plausibleStatsBreakdown', async () => {
+    const { makeClient } = await plausibleClientPromise
+    const plausible = makeClient(credentials, options)
+    const results = await plausible.stats.breakdown()
+    // const message = `retrieved ${results.length} results from the Plausible.io Stats API`
+    // console.log(`${PREFIX} ${message}`, results)
+
+    const obj = {
+      breakdown: results,
+      retrievedAtISOString: new Date().toISOString()
+    }
+    return JSON.stringify(obj, null, 2)
+  })
+
   eleventyConfig.on('eleventy.before', async () => {
-    const { makeClient } = await promise
+    const { makeClient } = await plausibleClientPromise
     const plausible = makeClient(credentials, options)
     const results = await plausible.stats.breakdown()
     const message = `retrieved ${results.length} results from the Plausible.io Stats API`

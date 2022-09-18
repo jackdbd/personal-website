@@ -6,79 +6,29 @@ permalink: /_headers
 {#- https://mozilla.github.io/nunjucks/templating.html#whitespace-control -#}
 {#- https://mozilla.github.io/nunjucks/templating.html#join -#}
 /sw.js
-  Cache-Control: no-store,max-age=0
+  Cache-Control: no-store, max-age=0
+  Content-Type: application/javascript; charset=utf-8
 
-/*
-  NEL: {"report_to": "default", "max_age": 31536000, "include_subdomains": true}
-  Permissions-Policy: geolocation=(), microphone=()
+{%- set responseHeaders %}
+  Accept-CH: Save-Data,DPR,Width,Sec-CH-Prefers-Reduced-Data,Sec-CH-DPR, Sec-CH-Width
+  Feature-Policy: accelerometer 'none';camera 'none';geolocation 'none';gyroscope 'none';magnetometer 'none';microphone 'none';payment 'none';usb 'none';ch-dpr 'self' https://res.cloudinary.com;ch-width 'self' https://res.cloudinary.com
+  NEL: {"report_to":"default","max_age":31536000,"include_subdomains":true}
+  Permissions-Policy: accelerometer=(),camera=(),geolocation=(),gyroscope=(),magnetometer=(),microphone=(),payment=(),usb=(),ch-width=(self "https://res.cloudinary.com"),ch-dpr=(self "https://res.cloudinary.com")
   Referrer-Policy: no-referrer, strict-origin-when-cross-origin
+  Report-To: {"group":"default","max_age":31536000,"endpoints":[{"url":"https://giacomodebidda.report-uri.com/a/d/g"}],"include_subdomains":true}
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   X-XSS-Protection: 1; mode=block
+{% endset %}
 
-{#- This is a fallback for frame-src and worker-src. I keep it for backward compatibility. Both 'child-src' and 'frame-src' should exist in order to protect Clickjacking, Formjacking, Data Exfiltration and more. -#}
-{%- set childSrc = ["child-src", "https://www.youtube.com/embed/", "https://www.youtube-nocookie.com/", "https://player.vimeo.com/video/"] | join(" ") -%}
+/
+  {{- responseHeaders | safe }}
 
-{#- I need to fetch images from Cloudinary and to POST analytics to Plausible. -#}
-{%- set connectSrc = ["connect-src", "self", "https://plausible.io/api/event", "https://res.cloudinary.com"] | join(" ") -%}
+/*/
+  {{- responseHeaders | safe }}
 
-{%- set defaultSrc = ["default-src", "self"] | join(" ") -%}
-
-{#- Allow only font files hosted on this origin (self-hosted). -#}
-{%- set fontSrc = ["font-src", "self"] | join(" ") -%}
-
-{#- Allow iframes from YouTube, Vimeo. -#}
-{%- set frameSrc = ["frame-src", "https://www.youtube.com/embed/", "https://www.youtube-nocookie.com/", "https://player.vimeo.com/video/"] | join(" ") -%}
-
-{#- Allow images hosted on this origin and on my Cloudinary media library. -#}
-{%- set imgSrc = ["img-src", "self", "https://res.cloudinary.com/jackdbd/image/upload/"] | join(" ") -%}
-
-{%- set manifestSrc = ["manifest-src", "self"] | join(" ") -%}
-{%- set mediaSrc = ["media-src", "none"] | join(" ") -%}
-{%- set objectSrc = ["object-src", "none"] | join(" ") -%}
-{%- set reportTo = ["report-to", "default"] | join(" ") -%}
-
-{#- Send CSP violations to reporting service -#}
-{#- Note: report-uri is a deprecated CSP directive, but I include it here because Firefox does not yet support the report-to CSP directive, nor the Report-To header. -#}
-{%- set reportUri = ["report-uri", "https://giacomodebidda.report-uri.com"] | join(" ") -%}
-
-{#- Unfortunately Firefox does not yet support the script-src-attr and script-src-elem CSP directives, so we need to fallback to script-src -#}
-{#- https://bugzilla.mozilla.org/show_bug.cgi?id=1529337 -#}
-{#- 'unsafe-inline' is to be backward compatible with older browsers. It's ignored by browsers supporting nonces/hashes. -#}
-{%- set scriptSrc = ["script-src", "unsafe-inline"] | join(" ") -%}
-{%- set scriptSrcAttr = ["script-src-attr", "none"] | join(" ") -%}
-{%- set scriptSrcElem = ["script-src-elem", "self", "https://plausible.io/js/plausible.js"] | join(" ") -%}
-{%- set styleSrc = ["style-src", "self", "sha256-qz5B6VOirK+Yv3zKYqgFLMMk2fSp9Nh2yZMF7NhIQT4="] | join(" ") -%}
-{%- set styleSrcAttr = ["style-src-attr", "self", "unsafe-inline"] | join(" ") -%}
-{%- set styleSrcElem = ["style-src-elem", "self", "unsafe-inline"] | join(" ") -%}
-{%- set workerSrc = ["worker-src", "self"] | join(" ") -%}
-
-{%- set cspDirectives = [
-  defaultSrc,
-  childSrc,
-  connectSrc,
-  fontSrc,
-  frameSrc,
-  imgSrc,
-  manifestSrc,
-  mediaSrc,
-  objectSrc,
-  reportTo,
-  reportUri,
-  scriptSrc,
-  scriptSrcAttr,
-  scriptSrcElem,
-  styleSrc,
-  styleSrcAttr,
-  styleSrcElem,
-  workerSrc
-] | join("; ")
- -%}
-
-{%- set contentSecurityPolicy = [cspDirectives, ";"] | join("") -%}
-{# {{ contentSecurityPolicy | log }} #}
-
-/*.html
-  Content-Security-Policy-Report-Only: {{ contentSecurityPolicy }}
-
+{#- Prevent any *.pages.dev deployment from being indexed -#}
+{# https://developers.cloudflare.com/pages/platform/headers/#prevent-your-pagesdev-deployments-showing-in-search-results #}
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex

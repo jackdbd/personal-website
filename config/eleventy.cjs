@@ -1,13 +1,11 @@
 const fs = require('node:fs')
 const { join } = require('node:path')
-
 const markdownIt = require('markdown-it')
 const markdownItAnchor = require('markdown-it-anchor')
-
+const globbyPromise = import('globby')
 const navigation = require('@11ty/eleventy-navigation')
 const rss = require('@11ty/eleventy-plugin-rss')
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
-// const reportPrecacheManifestPlugin = require('@jackdbd/eleventy-plugin-report-precache-manifest')
 const { telegramPlugin } = require('@jackdbd/eleventy-plugin-telegram')
 const {
   plugin: textToSpeechPlugin
@@ -26,11 +24,10 @@ const filters = require('../11ty/filters')
 const shortcodes = require('../11ty/shortcodes')
 const pairedShortcodes = require('../11ty/paired-shortcodes')
 const transforms = require('../11ty/transforms.js')
-// const {
-//   popularPagesFromAnalyticsOrFallback
-// } = require('../11ty/plugins/pages-from-analytics.cjs')
+const cspPlugin = require('../plugins/11ty/csp/index.cjs')
+const plausibleClientPromise = import('@jackdbd/plausible-client')
 const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
-// const workboxPlugin = require('../plugins/11ty/workbox/index.cjs')
+const { buildServiceWorker } = require('../src/build-sw.cjs')
 
 const REPO_ROOT = join(__filename, '..', '..')
 const OUTPUT_DIR = join(REPO_ROOT, '_site')
@@ -61,28 +58,94 @@ const headingAnchorSlugify = (s) => {
 }
 
 module.exports = function (eleventyConfig) {
+  let popularHtmlPages = []
+
   eleventyConfig.on('eleventy.before', async () => {
     const env_vars = ['DEBUG', 'ELEVENTY_ENV', 'NODE_ENV']
     await ensureEnvironmentVariablesAreSet(env_vars)
+
+    // on GitHub Actions I use a JSON secret for Plausible API key and site ID,
+    // and I expose that secret as an environment variable.
+    let plausible_json_string
+    if (process.env.PLAUSIBLE) {
+      plausible_json_string = process.env.PLAUSIBLE
+    } else {
+      plausible_json_string = fs.readFileSync(
+        join(REPO_ROOT, 'secrets', 'plausible.json'),
+        { encoding: 'utf8' }
+      )
+    }
+    const plausible = JSON.parse(plausible_json_string)
+
+    const { makeClient } = await plausibleClientPromise
+    const client = makeClient(
+      {
+        apiKey: plausible.api_key,
+        siteId: plausible.site_id
+      },
+      { verbose: true }
+    )
+    const results = await client.stats.breakdown()
+    // console.log('=== Plausible.io stats/ breakdown ===')
+    popularHtmlPages = results
+      .filter((res) => res.visitors > 50)
+      .map((res) => {
+        // console.log('res', res)
+        const filepath = `${OUTPUT_DIR}${res.page}index.html`
+        // console.log('filepath', filepath)
+        return filepath
+      })
   })
 
-  // eleventyConfig.on('eleventy.after', async () => {
-  //   const htmlPagesToPrecache = await popularPagesFromAnalyticsOrFallback({
-  //     outputDir: OUTPUT_DIR,
-  //     defaultPagesToPrecache: [
-  //       join(OUTPUT_DIR, '404.html'),
-  //       join(OUTPUT_DIR, 'index.html'),
-  //       join(OUTPUT_DIR, 'about', 'index.html'),
-  //       join(OUTPUT_DIR, 'blog', 'index.html'),
-  //       join(OUTPUT_DIR, 'contact', 'index.html'),
-  //       join(OUTPUT_DIR, 'projects', 'index.html'),
-  //       join(OUTPUT_DIR, 'styleguide', 'index.html'),
-  //       join(OUTPUT_DIR, 'success', 'index.html'),
-  //       join(OUTPUT_DIR, 'tags', 'index.html'),
-  //       join(OUTPUT_DIR, 'posts', '12-years-of-fires-in-sardinia', 'index.html')
-  //     ]
-  //   })
-  // })
+  eleventyConfig.on('eleventy.after', async () => {
+    const defaultHtmlPagesToPrecache = [
+      join(OUTPUT_DIR, '404.html'),
+      join(OUTPUT_DIR, 'index.html'),
+      join(OUTPUT_DIR, 'about', 'index.html'),
+      join(OUTPUT_DIR, 'blog', 'index.html'),
+      join(OUTPUT_DIR, 'contact', 'index.html'),
+      join(OUTPUT_DIR, 'projects', 'index.html')
+    ]
+    // console.log('=== popularHtmlPages ===', popularHtmlPages)
+
+    // I still don't know whether precaching the RSS feed (the one for my
+    // website is ~1MB) and the sitemap (the one for my website is ~16KB)
+    // is a good idea or not. Probably not...
+
+    // precache SOME html pages, but not too many
+
+    // precache CSS hosted on this origin.
+    // CSS files are tipically quite small, so the browser can precache them
+    // pretty quickly when installing the service worker.
+
+    // precache JS hosted on this origin.
+
+    // precache fonts hosted on this origin. Maybe...
+
+    // precache SOME images hosted on this origin.
+
+    const patterns = [
+      // `${OUTPUT_DIR}/assets/**/*.css`,
+      // `${OUTPUT_DIR}/assets/**/*.js`,
+      `${OUTPUT_DIR}/assets/**/*.{ico,svg}`,
+      `${OUTPUT_DIR}/assets/**/*.{woff,woff2}`
+    ]
+    const module = await globbyPromise
+    const globby = module.globby
+    const assetPaths = await globby(patterns)
+
+    await buildServiceWorker({
+      precachePaths: [
+        ...assetPaths,
+        // I think precaching the manifest.webmanifest is required to make the
+        // website usable offline.
+        join(OUTPUT_DIR, 'manifest.webmanifest'),
+        ...defaultHtmlPagesToPrecache,
+        ...popularHtmlPages
+        // join(OUTPUT_DIR, 'assets', 'fonts', 'nunito-v16-latin-800.woff2	')
+      ]
+    })
+  })
 
   let keyFilename
   if (process.env.GCP_CREDENTIALS_JSON) {
@@ -131,6 +194,91 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(plausiblePlugin, {
     apiKey: plausible.api_key,
     siteId: plausible.site_id
+  })
+
+  eleventyConfig.addPlugin(cspPlugin, {
+    allowDeprecatedDirectives: true,
+    directives: {
+      'base-uri': ['self'],
+
+      'connect-src': [
+        'self',
+        'cloudflareinsights.com',
+        'plausible.io',
+        // 'https://plausible.io/api/event',
+        'res.cloudinary.com'
+      ],
+
+      'default-src': ['none'],
+
+      'font-src': ['self'],
+
+      'form-action': ['self'],
+
+      'frame-ancestors': ['none'],
+
+      // allow embedding iframes from these websites (cross-origin iframes)
+      'frame-src': [
+        'https://www.youtube.com/embed/',
+        'https://www.youtube-nocookie.com/',
+        'https://player.vimeo.com/video/',
+        'slides.com'
+      ],
+
+      // allow loading images hosted on GitHub, Cloudinary
+      'img-src': [
+        'self',
+        'github.com',
+        'raw.githubusercontent.com',
+        'res.cloudinary.com'
+      ],
+
+      'manifest-src': ['self'],
+
+      // allow <audio> and <video> hosted on Cloud Storage
+      'media-src': ['storage.googleapis.com'],
+
+      'object-src': ['none'],
+
+      'prefetch-src': ['self'],
+
+      // allow to report to the group called "default". See Report-To header.
+      'report-to': ['default'],
+
+      // TODO: If I use require-trusted-types-for, I also need to configure
+      // TrustedScriptURL, otherwise the service worker installation fails.
+      // https://developer.mozilla.org/en-US/docs/Web/API/TrustedScriptURL
+      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/trusted-types
+      // https://javascript.tutorialink.com/this-document-requires-trustedscripturl-assignment/
+      // 'require-trusted-types-for': ['script'],
+
+      // report-uri is deprecated in favor of report-to, but Firefox still does
+      // not support report-to (it only supports report-uri).
+      'report-uri': ['https://giacomodebidda.report-uri.com/r/d/csp/enforce'],
+
+      // allow scripts hosted on this origin, and scripts hosted on Plausible
+      // (analytics) and Cloudflare insights (analytics)
+      'script-src-elem': [
+        'self',
+        'https://plausible.io/js/plausible.js',
+        'https://static.cloudflareinsights.com/beacon.min.js'
+      ],
+
+      // allow CSS hosted on this origin, and inline styles that match a sha256
+      // hash automatically computed at build time by this 11ty plugin.
+      // See also here for the pros and cons of 'unsafe-inline'
+      // https://stackoverflow.com/questions/30653698/csp-style-src-unsafe-inline-is-it-worth-it
+      'style-src-elem': ['self', 'sha256'],
+
+      'upgrade-insecure-requests': true,
+
+      // allow service workers, workers and shared workers hosted on the this origin
+      'worker-src': ['self']
+    },
+    globPatternsDetach: ['/*.png'],
+    includePatterns: ['/**/**.html'],
+    excludePatterns: []
+    // reportOnly: true
   })
 
   // https://github.com/gfscott/eleventy-plugin-embed-twitter#configure
@@ -220,7 +368,10 @@ module.exports = function (eleventyConfig) {
     'src/includes/assets/fonts': 'assets/fonts',
     'src/includes/assets/img': 'assets/img',
     'src/includes/assets/js': 'assets/js',
-    'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js'
+    'node_modules/@11ty/is-land/is-land.js': 'assets/js/is-land.js',
+    'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js',
+    'node_modules/htm/dist/htm.module.js': 'assets/js/htm.module.js',
+    'node_modules/preact/dist/preact.module.js': 'assets/js/preact.module.js'
   })
 
   // 11ty shortcodes

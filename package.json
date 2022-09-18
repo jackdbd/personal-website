@@ -16,8 +16,7 @@
   ],
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "npm-run-all --parallel 'build:11ty' 'build:css'",
-    "build:sw": "node src/build-sw.cjs",
+    "build": "run-s --print-label 'build:11ty' 'build:css'",
     "build:11ty": "ELEVENTY_ENV=production eleventy --config ./config/eleventy.cjs",
     "build:css": "postcss ./config/input.css --output _site/assets/css/style.css --config ./config --env production --verbose",
     "postbuild": "ls --size --human-readable _site/ | head -n 1",
@@ -73,6 +72,7 @@
     "@11ty/eleventy-navigation": "0.3.3",
     "@11ty/eleventy-plugin-rss": "1.2.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "4.1.0",
+    "@11ty/is-land": "1.0.0",
     "@hint/hint-performance-budget": "2.4.20",
     "@jackdbd/eleventy-plugin-report-precache-manifest": "1.0.4",
     "@jackdbd/eleventy-plugin-telegram": "1.1.0",
@@ -93,9 +93,11 @@
     "eleventy-plugin-vimeo-embed": "1.3.3",
     "eleventy-plugin-youtube-embed": "1.7.0",
     "esbuild": "0.14.49",
+    "globby": "13.1.2",
     "graphql-request": "4.3.0",
     "himalaya": "1.1.0",
     "hint": "7.1.0",
+    "htm": "^3.1.1",
     "html-minifier": "4.0.0",
     "husky": "8.0.1",
     "instant.page": "5.1.1",
@@ -108,6 +110,7 @@
     "npm-run-all": "4.1.5",
     "postcss": "8.4.14",
     "postcss-cli": "10.0.0",
+    "preact": "^10.11.0",
     "prettier": "2.7.1",
     "serve": "14.0.0",
     "tailwindcss": "3.1.6",
@@ -116,7 +119,9 @@
     "uuid": "8.3.2",
     "workbox-build": "6.5.3",
     "workbox-core": "6.5.3",
+    "workbox-expiration": "6.5.3",
     "workbox-precaching": "6.5.3",
-    "wrangler": "2.0.19"
+    "wrangler": "2.0.19",
+    "yargs": "17.5.1"
   }
 }
