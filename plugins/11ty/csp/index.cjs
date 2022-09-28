@@ -2,43 +2,28 @@ const fs = require('node:fs')
 const path = require('node:path')
 const util = require('node:util')
 const makeDebug = require('debug')
-const { validationErrorOrWarnings } = require('./errors.cjs')
-const { mergeDeep } = require('./utils.cjs')
-const { cspDirectives } = require('./lib.cjs')
+// https://adamcoster.com/blog/commonjs-and-esm-importexport-compatibility-examples
+const cspPromise = import('@jackdbd/content-security-policy')
 const {
   defaultOptions,
   pluginOptions: optionsSchema
 } = require('./schemas.cjs')
-
-const writeFileAsync = util.promisify(fs.writeFile)
+const { mergeDeep } = require('./utils.cjs')
 
 const debug = makeDebug('eleventy-plugin-csp')
+
+const writeFileAsync = util.promisify(fs.writeFile)
 
 // give the plugin configuration function a name, so it can be easily spotted in
 // EleventyErrorHandler
 const contentSecurityPolicy = (eleventyConfig, providedOptions) => {
   // https://joi.dev/api/?v=17.6.0#anyvalidatevalue-options
   const result = optionsSchema.validate(providedOptions, {
-    // allowUnknown: true
-    // debug: true
+    allowUnknown: true
   })
 
   const pluginConfig = {}
   mergeDeep(pluginConfig, defaultOptions, providedOptions)
-
-  if (result.error) {
-    const { error, warnings } = validationErrorOrWarnings({
-      allowDeprecatedDirectives: pluginConfig.allowDeprecatedDirectives,
-      error: result.error
-    })
-    if (error) {
-      throw error
-    } else {
-      warnings.forEach((w) => {
-        console.warn(w)
-      })
-    }
-  }
 
   const outdir = eleventyConfig.dir.output
   const headersFilepath = path.join(outdir, '_headers')
@@ -53,10 +38,38 @@ const contentSecurityPolicy = (eleventyConfig, providedOptions) => {
   )
 
   eleventyConfig.on('eleventy.after', async () => {
+    // const module = await cspPromise
+    const { cspDirectives, cspJSON, validationErrorOrWarnings } =
+      await cspPromise
+
+    if (result.error) {
+      const { error, warnings } = validationErrorOrWarnings({
+        allowDeprecatedDirectives: pluginConfig.allowDeprecatedDirectives,
+        error: result.error
+      })
+      if (error) {
+        throw error
+      } else {
+        warnings.forEach((w) => {
+          console.warn(w)
+        })
+      }
+    }
+
     const directives = await cspDirectives({
       directives: pluginConfig.directives,
       patterns
     })
+
+    // const headerValue = await cspHeader({
+    //   directives: pluginConfig.directives,
+    //   patterns
+    // })
+
+    // const cspObj = await cspJSON({
+    //   directives: pluginConfig.directives,
+    //   patterns
+    // })
 
     if (!fs.existsSync(headersFilepath)) {
       fs.writeFileSync(headersFilepath, '', { encoding: 'utf8' })
@@ -70,6 +83,11 @@ const contentSecurityPolicy = (eleventyConfig, providedOptions) => {
       path.join(outdir, 'eleventy-plugin-csp-config.json'),
       JSON.stringify(pluginConfig, null, 2)
     )
+
+    // await writeFileAsync(
+    //   path.join(outdir, 'eleventy-plugin-csp.json'),
+    //   JSON.stringify(cspObj, null, 2)
+    // )
 
     const headerKey = pluginConfig.reportOnly
       ? 'Content-Security-Policy-Report-Only'

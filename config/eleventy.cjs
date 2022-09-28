@@ -164,6 +164,8 @@ module.exports = function (eleventyConfig) {
     process.env.GOOGLE_APPLICATION_CREDENTIALS = keyFilename
   }
 
+  // https://developers.cloudflare.com/pages/platform/build-configuration/#environment-variables
+  // https://www.11ty.dev/docs/environment-vars/
   const environment = {
     CF_PAGES: process.env.CF_PAGES,
     CF_PAGES_BRANCH: process.env.CF_PAGES_BRANCH,
@@ -172,7 +174,8 @@ module.exports = function (eleventyConfig) {
     DEBUG: process.env.DEBUG,
     ELEVENTY_ENV: process.env.ELEVENTY_ENV,
     GOOGLE_APPLICATION_CREDENTIALS: process.env.GOOGLE_APPLICATION_CREDENTIALS,
-    NODE_ENV: process.env.NODE_ENV
+    NODE_ENV: process.env.NODE_ENV,
+    SA_JSON_KEY: process.env.SA_JSON_KEY
   }
   console.log('environment', environment)
 
@@ -256,12 +259,13 @@ module.exports = function (eleventyConfig) {
       // not support report-to (it only supports report-uri).
       'report-uri': ['https://giacomodebidda.report-uri.com/r/d/csp/enforce'],
 
-      // allow scripts hosted on this origin, and scripts hosted on Plausible
-      // (analytics) and Cloudflare insights (analytics)
+      // allow scripts hosted on this origin, on plausible.io (analytics),
+      // cloudflareinsights.com (analytics), unpkg.com (preact)
       'script-src-elem': [
         'self',
         'https://plausible.io/js/plausible.js',
-        'https://static.cloudflareinsights.com/beacon.min.js'
+        'https://static.cloudflareinsights.com/beacon.min.js',
+        'https://unpkg.com/htm/preact/standalone.module.js'
       ],
 
       // allow CSS hosted on this origin, and inline styles that match a sha256

@@ -33,13 +33,21 @@ Install all dependencies:
 npm install
 ```
 
+If you dont't already have it, install [zx](https://github.com/google/zx) globally:
+
+```sh
+npm i -g zx
+```
+
 ## Development
 
-Build all templates, CSS, JS, service worker in watch mode, and automatically refresh the browser using [BrowserSync](https://github.com/Browsersync/browser-sync):
+Watch all templates, CSS, JS, service worker, and automatically refresh the browser using [BrowserSync](https://github.com/Browsersync/browser-sync):
 
 ```shell
 npm run dev
 ```
+
+Then visit http://localhost:8080/ to see the website.
 
 In alternative, develop and preview locally the site with [wrangler](https://developers.cloudflare.com/pages/platform/functions/#develop-and-preview-locally) (this is useful when developing functions that will be deployed to [Cloudflare Pages Functions](https://developers.cloudflare.com/pages/platform/functions/)):
 
@@ -54,6 +62,10 @@ Build all templates, CSS, JS and the service worker (all minified):
 ```shell
 npm run build
 ```
+
+## Deploy
+
+Just push to the remote repository. Cloudflare Pages takes care of deploying the `main` branch to production, and creates a [preview deployment](https://developers.cloudflare.com/pages/platform/preview-deployments/) for all other branches (e.g. `develop`).
 
 ## Security audit
 
