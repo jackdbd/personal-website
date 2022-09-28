@@ -38,9 +38,7 @@ const contentSecurityPolicy = (eleventyConfig, providedOptions) => {
   )
 
   eleventyConfig.on('eleventy.after', async () => {
-    // const module = await cspPromise
-    const { cspDirectives, cspJSON, validationErrorOrWarnings } =
-      await cspPromise
+    const { cspDirectives, validationErrorOrWarnings } = await cspPromise
 
     if (result.error) {
       const { error, warnings } = validationErrorOrWarnings({
@@ -61,16 +59,6 @@ const contentSecurityPolicy = (eleventyConfig, providedOptions) => {
       patterns
     })
 
-    // const headerValue = await cspHeader({
-    //   directives: pluginConfig.directives,
-    //   patterns
-    // })
-
-    // const cspObj = await cspJSON({
-    //   directives: pluginConfig.directives,
-    //   patterns
-    // })
-
     if (!fs.existsSync(headersFilepath)) {
       fs.writeFileSync(headersFilepath, '', { encoding: 'utf8' })
       debug(`${headersFilepath} did not exist, so it was created`)
@@ -83,11 +71,6 @@ const contentSecurityPolicy = (eleventyConfig, providedOptions) => {
       path.join(outdir, 'eleventy-plugin-csp-config.json'),
       JSON.stringify(pluginConfig, null, 2)
     )
-
-    // await writeFileAsync(
-    //   path.join(outdir, 'eleventy-plugin-csp.json'),
-    //   JSON.stringify(cspObj, null, 2)
-    // )
 
     const headerKey = pluginConfig.reportOnly
       ? 'Content-Security-Policy-Report-Only'

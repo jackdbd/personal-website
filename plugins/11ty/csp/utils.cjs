@@ -6,6 +6,8 @@ const isObject = (item) => {
   return item && typeof item === 'object' && !Array.isArray(item)
 }
 
+// TODO: use hapi.hoek apply to defaults (or mergerino, etc)
+
 const mergeDeep = (target, ...sources) => {
   if (!sources.length) {
     return target

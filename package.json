@@ -76,7 +76,7 @@
     "@11ty/is-land": "^2.0.3",
     "@hint/hint-performance-budget": "^2.4.22",
     "@jackdbd/checks": "^2.0.0",
-    "@jackdbd/content-security-policy": "1.0.0-canary.3",
+    "@jackdbd/content-security-policy": "1.0.0-canary.4",
     "@jackdbd/eleventy-plugin-report-precache-manifest": "^1.0.4",
     "@jackdbd/eleventy-plugin-telegram": "^1.1.1",
     "@jackdbd/eleventy-plugin-text-to-speech": "^2.0.1",
