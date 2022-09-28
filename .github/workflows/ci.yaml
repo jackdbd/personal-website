@@ -1,4 +1,5 @@
 name: CI
+
 on:
   push:
     branches:
@@ -6,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   build-and-test:
     name: 🔧 Build website and run tests
@@ -13,21 +15,26 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: ['16.16.0']
+        node: ['16.17.1']
     steps:
       - name: 🛎️ Checkout repo
         uses: actions/checkout@v3
+
       - name: 🖥️ Setup Node.js ${{ matrix.node }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+
       - run: npm ci
+
       - name: 🛡️ Audit security
         continue-on-error: true
         if: ${{ matrix.os }} == 'ubuntu-latest'
         run: npm audit --audit-level=moderate
+
       - name: 🔍 Test website
         run: npm run test
+
       - name: 🔧 Build website
         env:
           CLOUDINARY: ${{ secrets.CLOUDINARY }}

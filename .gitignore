@@ -27,3 +27,5 @@ hint-report/
 # default cache directory of @11ty/eleventy-fetch
 # https://www.11ty.dev/docs/plugins/cache/
 .cache/
+# cache used by my work-in-progress eleventy-plugin-plausible
+.cache-plausible-json-responses/

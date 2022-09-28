@@ -4,7 +4,8 @@
   "editor.formatOnSave": false,
   "files.associations": {
     "_headers": "toml",
-    "_redirects": "toml"
+    "_redirects": "toml",
+    "*.webc": "html"
   },
   "files.exclude": {
     "node_modules/": true
