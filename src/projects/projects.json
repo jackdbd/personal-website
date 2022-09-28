@@ -1,6 +1,8 @@
 {
+  "layout": "project.njk",
   "ogp": {
     "type": "article"
   },
+  "permalink": "projects/{{ title | slugify }}/index.html",
   "tags": ["project"]
 }
