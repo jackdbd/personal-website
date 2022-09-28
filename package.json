@@ -67,12 +67,13 @@
     "maintained node versions"
   ],
   "devDependencies": {
-    "@11ty/eleventy": "1.0.1",
+    "@11ty/eleventy": "2.0.0-canary.16",
     "@11ty/eleventy-fetch": "3.0.0",
-    "@11ty/eleventy-navigation": "0.3.3",
+    "@11ty/eleventy-navigation": "0.3.5",
     "@11ty/eleventy-plugin-rss": "1.2.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "4.1.0",
-    "@11ty/is-land": "1.0.0",
+    "@11ty/eleventy-plugin-webc": "^0.4.0",
+    "@11ty/is-land": "^2.0.3",
     "@hint/hint-performance-budget": "2.4.20",
     "@jackdbd/eleventy-plugin-report-precache-manifest": "1.0.4",
     "@jackdbd/eleventy-plugin-telegram": "1.1.0",
@@ -123,5 +124,22 @@
     "workbox-precaching": "6.5.3",
     "wrangler": "2.0.19",
     "yargs": "17.5.1"
+  },
+  "overrides": {
+    "@jackdbd/eleventy-plugin-report-precache-manifest@1.0.4": {
+      "@11ty/eleventy": "2.0.0-canary.16"
+    },
+    "@jackdbd/eleventy-plugin-telegram": {
+      "@11ty/eleventy": "2.0.0-canary.16"
+    },
+    "@jackdbd/eleventy-plugin-text-to-speech": {
+      "@11ty/eleventy": "2.0.0-canary.16"
+    },
+    "eleventy-plugin-embed-cloudinary": {
+      "@11ty/eleventy": "2.0.0-canary.16"
+    },
+    "eleventy-plugin-helmet": {
+      "@11ty/eleventy": "2.0.0-canary.16"
+    }
   }
 }
