@@ -6,6 +6,10 @@ const globbyPromise = import('globby')
 const navigation = require('@11ty/eleventy-navigation')
 const rss = require('@11ty/eleventy-plugin-rss')
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
+const cspPlugin = require('@jackdbd/eleventy-plugin-content-security-policy')
+const {
+  ensureEnvVarsPlugin
+} = require('@jackdbd/eleventy-plugin-ensure-env-vars')
 const { telegramPlugin } = require('@jackdbd/eleventy-plugin-telegram')
 const {
   plugin: textToSpeechPlugin
@@ -24,25 +28,12 @@ const filters = require('../11ty/filters')
 const shortcodes = require('../11ty/shortcodes')
 const pairedShortcodes = require('../11ty/paired-shortcodes')
 const transforms = require('../11ty/transforms.js')
-const cspPlugin = require('../plugins/11ty/csp/index.cjs')
 const plausibleClientPromise = import('@jackdbd/plausible-client')
 const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
 const { buildServiceWorker } = require('../src/build-sw.cjs')
 
 const REPO_ROOT = join(__filename, '..', '..')
 const OUTPUT_DIR = join(REPO_ROOT, '_site')
-
-const ensureEnvironmentVariablesAreSet = async (env_vars) => {
-  await Promise.all(
-    env_vars.map((env_var) => {
-      if (process.env[env_var] === undefined) {
-        throw new Error(`Environment variable ${env_var} not set`)
-      } else {
-        return true
-      }
-    })
-  )
-}
 
 // shamelessly stolen from:
 // https://github.com/maxboeck/mxb/blob/db6ca7743f46cf67367a93c8de404cbcb50b98d1/utils/markdown.js
@@ -60,10 +51,11 @@ const headingAnchorSlugify = (s) => {
 module.exports = function (eleventyConfig) {
   let popularHtmlPages = []
 
-  eleventyConfig.on('eleventy.before', async () => {
-    const env_vars = ['DEBUG', 'ELEVENTY_ENV', 'NODE_ENV']
-    await ensureEnvironmentVariablesAreSet(env_vars)
+  eleventyConfig.addPlugin(ensureEnvVarsPlugin, {
+    envVars: ['DEBUG', 'ELEVENTY_ENV', 'NODE_ENV']
+  })
 
+  eleventyConfig.on('eleventy.before', async () => {
     // on GitHub Actions I use a JSON secret for Plausible API key and site ID,
     // and I expose that secret as an environment variable.
     let plausible_json_string
@@ -281,7 +273,8 @@ module.exports = function (eleventyConfig) {
     },
     globPatternsDetach: ['/*.png'],
     includePatterns: ['/**/**.html'],
-    excludePatterns: []
+    excludePatterns: [],
+    jsonRecap: true
     // reportOnly: true
   })
 
