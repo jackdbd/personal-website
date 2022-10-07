@@ -51,6 +51,14 @@ const headingAnchorSlugify = (s) => {
 module.exports = function (eleventyConfig) {
   let popularHtmlPages = []
 
+  // https://www.11ty.dev/docs/data-global-custom/
+  // https://benmyers.dev/blog/eleventy-data-cascade/
+  const contactFormSubmissionUrl = 'https://formspree.io/f/mrgdevqb'
+  eleventyConfig.addGlobalData(
+    'contactFormSubmissionUrl',
+    contactFormSubmissionUrl
+  )
+
   eleventyConfig.addPlugin(ensureEnvVarsPlugin, {
     envVars: ['DEBUG', 'ELEVENTY_ENV', 'NODE_ENV']
   })
@@ -217,7 +225,8 @@ module.exports = function (eleventyConfig) {
 
       'font-src': ['self'],
 
-      'form-action': ['self'],
+      // allow form submissions to Formspree
+      'form-action': ['self', contactFormSubmissionUrl],
 
       'frame-ancestors': ['none'],
 
