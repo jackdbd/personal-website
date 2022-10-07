@@ -191,6 +191,15 @@ module.exports = function (eleventyConfig) {
     siteId: plausible.site_id
   })
 
+  const scriptSrcElem = [
+    'self',
+    'https://plausible.io/js/plausible.js',
+    'https://static.cloudflareinsights.com/beacon.min.js',
+    'https://unpkg.com/htm/preact/standalone.module.js'
+  ]
+
+  const styleSrcElem = ['self', 'sha256']
+
   eleventyConfig.addPlugin(cspPlugin, {
     allowDeprecatedDirectives: true,
     directives: {
@@ -253,18 +262,21 @@ module.exports = function (eleventyConfig) {
 
       // allow scripts hosted on this origin, on plausible.io (analytics),
       // cloudflareinsights.com (analytics), unpkg.com (preact)
-      'script-src-elem': [
-        'self',
-        'https://plausible.io/js/plausible.js',
-        'https://static.cloudflareinsights.com/beacon.min.js',
-        'https://unpkg.com/htm/preact/standalone.module.js'
-      ],
+      // Firefox and Safari on iOS do not support script-src-elem, so we need a
+      // fallback to script-src.
+      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src-elem
+      'script-src': [...scriptSrcElem],
+      'script-src-elem': [...scriptSrcElem],
 
       // allow CSS hosted on this origin, and inline styles that match a sha256
       // hash automatically computed at build time by this 11ty plugin.
       // See also here for the pros and cons of 'unsafe-inline'
       // https://stackoverflow.com/questions/30653698/csp-style-src-unsafe-inline-is-it-worth-it
-      'style-src-elem': ['self', 'sha256'],
+      // Firefox and Safari on iOS do not support style-src-elem, so we need a
+      // fallback to style-src.
+      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/style-src-elem
+      'style-src': [...styleSrcElem],
+      'style-src-elem': [...styleSrcElem],
 
       'upgrade-insecure-requests': true,
 
