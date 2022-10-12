@@ -47,10 +47,6 @@ const plausible = (eleventyConfig, providedOptions) => {
     verbose
   }
 
-  // https://www.raymondcamden.com/2021/11/07/eleventy-10-global-data-via-plugins-example
-  // eleventyConfig.addGlobalData('plausibleGlobalDataString', 'this is a test')
-  // eleventyConfig.addGlobalData('plausibleGlobalDataNumber', 12345)
-
   eleventyConfig.addGlobalData('plausibleStatsBreakdown', async () => {
     const { makeClient } = await plausibleClientPromise
     const plausible = makeClient(credentials, options)

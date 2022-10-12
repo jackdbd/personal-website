@@ -87,6 +87,8 @@
     "@hint/hint-performance-budget": "^2.4.24",
     "@jackdbd/eleventy-plugin-content-security-policy": "^2.0.0",
     "@jackdbd/eleventy-plugin-ensure-env-vars": "^1.0.0",
+    "@jackdbd/eleventy-plugin-permissions-policy": "1.0.0-canary.3",
+    "@jackdbd/eleventy-plugin-plausible": "^1.0.0",
     "@jackdbd/eleventy-plugin-report-precache-manifest": "^1.0.4",
     "@jackdbd/eleventy-plugin-telegram": "^1.1.1",
     "@jackdbd/eleventy-plugin-text-to-speech": "^2.0.1",

@@ -13,6 +13,9 @@ const cspPlugin = require('@jackdbd/eleventy-plugin-content-security-policy')
 const {
   ensureEnvVarsPlugin
 } = require('@jackdbd/eleventy-plugin-ensure-env-vars')
+const {
+  permissionsPolicyPlugin
+} = require('@jackdbd/eleventy-plugin-permissions-policy')
 const { telegramPlugin } = require('@jackdbd/eleventy-plugin-telegram')
 const {
   plugin: textToSpeechPlugin
@@ -66,6 +69,34 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPlugin(ensureEnvVarsPlugin, {
     envVars: ['DEBUG', 'ELEVENTY_ENV', 'NODE_ENV']
+  })
+
+  eleventyConfig.addPlugin(permissionsPolicyPlugin, {
+    // see also this Permissions-Policy generator
+    // https://www.permissionspolicy.com/
+    directives: [
+      // disallow camera on all origins
+      { feature: 'camera' },
+      // disallow geolocation on all origins
+      { feature: 'geolocation', allowlist: [] },
+      // allow gyroscope on all origins
+      { feature: 'gyroscope', allowlist: ['*'] },
+      // allow microphone on this origin
+      { feature: 'microphone', allowlist: ['self'] },
+      { feature: 'payment' },
+      { feature: 'usb' }
+      // {
+      //   feature: 'ch-dpr',
+      //   allowlist: ['self', 'https://res.cloudinary.com']
+      // }
+      // {
+      //   feature: 'ch-width',
+      //   allowlist: ['self', 'https://res.cloudinary.com']
+      // }
+    ],
+    includeFeaturePolicy: true,
+    includePatterns: ['/*'],
+    jsonRecap: true
   })
 
   eleventyConfig.on('eleventy.after', async () => {
