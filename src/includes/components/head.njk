@@ -94,10 +94,13 @@
   {# Links to social media profiles, so webmentions.io can authenticate me using IndieLogin.com #}
   {# https://indielogin.com/setup #}
   {# https://indieauth.com/setup #}
-  <link href="https://github.com/jackdbd" rel="me">
-  <link href="https://https://twitter.com/jackdbd" rel="me">
+  {# These are invisible links. However, visible links are preferred over
+  invisible data, see antipattern:invisible metadata for why. #}
+  {# https://indieweb.org/antipatterns#invisible_metadata #}
+  <link rel="me" href="https://github.com/jackdbd">
+  <link rel="me" href="https://twitter.com/jackdbd">
   {# I'm afraid I'll get a lot of spam by leaving my email here #}
-  <link href="mailto:{{ metadata.author.email }}" rel="me">
+  <link rel="me" href="mailto:{{ metadata.author.email }}">
   {# IndieLogin.com and IndieAuth.com also support authentication via a PGP key #}
   {# https://indieauth.com/pgp #}
 
