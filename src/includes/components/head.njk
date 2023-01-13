@@ -91,6 +91,16 @@
   {# <link rel="preload" href="/assets/fonts/merriweather-v22-latin-700italic.woff2" as="font" type="font/woff2" crossorigin> #}
   {# I am using a monospace font only in blog posts, so I'll preload it only for those page types. #}
 
+  {# Links to social media profiles, so webmentions.io can authenticate me using IndieLogin.com #}
+  {# https://indielogin.com/setup #}
+  {# https://indieauth.com/setup #}
+  <link href="https://github.com/jackdbd" rel="me">
+  <link href="https://https://twitter.com/jackdbd" rel="me">
+  {# I'm afraid I'll get a lot of spam by leaving my email here #}
+  <link href="mailto:{{ metadata.author.email }}" rel="me">
+  {# IndieLogin.com and IndieAuth.com also support authentication via a PGP key #}
+  {# https://indieauth.com/pgp #}
+
   {# RSS Feed #}
   <link rel="alternate" type="application/rss+xml" href="{{ metadata.feeds.posts.href }}" title="{{ metadata.feeds.posts.title }}">
 
