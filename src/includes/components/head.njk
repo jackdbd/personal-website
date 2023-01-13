@@ -91,18 +91,18 @@
   {# <link rel="preload" href="/assets/fonts/merriweather-v22-latin-700italic.woff2" as="font" type="font/woff2" crossorigin> #}
   {# I am using a monospace font only in blog posts, so I'll preload it only for those page types. #}
 
-  {# Links to social media profiles, so webmentions.io can authenticate me using IndieLogin.com #}
+  {# Link to my github profile, so webmentions.io can authenticate me using IndieLogin.com #}
+  {# Note: IndieAuth no longer supports Twitter as identity provider #}
   {# https://indielogin.com/setup #}
-  {# https://indieauth.com/setup #}
-  {# These are invisible links. However, visible links are preferred over
-  invisible data, see antipattern:invisible metadata for why. #}
+  {# These are invisible links. Keep in mind that visible links are preferred
+  over invisible data, see antipattern:invisible metadata for why. #}
   {# https://indieweb.org/antipatterns#invisible_metadata #}
   <link rel="me" href="https://github.com/jackdbd">
-  <link rel="me" href="https://twitter.com/jackdbd">
   {# I'm afraid I'll get a lot of spam by leaving my email here #}
   <link rel="me" href="mailto:{{ metadata.author.email }}">
   {# IndieLogin.com and IndieAuth.com also support authentication via a PGP key #}
   {# https://indieauth.com/pgp #}
+  <link rel="pgpkey" href="/assets/key.pub">
 
   <link rel="webmention" href="https://webmention.io/giacomodebidda.com/webmention" />
   <link rel="pingback" href="https://webmention.io/giacomodebidda.com/xmlrpc" />
