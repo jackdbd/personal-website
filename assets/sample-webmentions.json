@@ -1,0 +1,71 @@
+{
+  "type": "feed",
+  "name": "Webmentions",
+  "children": [
+    {
+      "type": "entry",
+      "author": {
+        "type": "card",
+        "name": "Webmention Rocks!",
+        "photo": "https://webmention.io/avatar/webmention.rocks/e08155b03da96cb1bdfd161ea24efdfad8d85d06afcee540ec246f1f613eb5a9.png",
+        "url": ""
+      },
+      "url": "https://webmention.rocks/receive/1",
+      "published": "2023-01-13T08:04:27-08:00",
+      "wm-received": "2023-01-13T16:04:29Z",
+      "wm-id": 1598904,
+      "wm-source": "https://webmention.rocks/receive/1/1ca1ceaa76fe24897463d21da49014bf",
+      "wm-target": "https://www.giacomodebidda.com/posts/test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu/",
+      "name": "Receiver Test #1",
+      "content": {
+        "html": "<p>This test verifies that you accept a Webmention request that contains a valid source and target URL. To pass this test, your Webmention endpoint must return either HTTP 200, 201 or 202 along with the <a href=\"https://www.w3.org/TR/webmention/#receiving-webmentions\">appropriate headers</a>.</p>\n        <p>If your endpoint returns HTTP 201, then it MUST also return a <code>Location</code> header. If it returns HTTP 200 or 202, then it MUST NOT include a <code>Location</code> header.</p>",
+        "text": "This test verifies that you accept a Webmention request that contains a valid source and target URL. To pass this test, your Webmention endpoint must return either HTTP 200, 201 or 202 along with the appropriate headers.\n        If your endpoint returns HTTP 201, then it MUST also return a Location header. If it returns HTTP 200 or 202, then it MUST NOT include a Location header."
+      },
+      "in-reply-to": "https://www.giacomodebidda.com/posts/test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu/",
+      "wm-property": "in-reply-to",
+      "wm-private": false
+    },
+    {
+      "type": "entry",
+      "author": {
+        "type": "card",
+        "name": "Nicholas Pacini",
+        "photo": "https://webmention.io/avatar/pbs.twimg.com/5d4ab010be42afbfdd6d50a1b693bce1eeb10e37d328eee5fbc7674d64e9e7ab.jpg",
+        "url": "https://twitter.com/NicholasPacini1"
+      },
+      "url": "https://twitter.com/NicholasPacini1/status/1614374872498462721",
+      "published": "2023-01-14T21:32:17+00:00",
+      "wm-received": "2023-01-14T21:46:02Z",
+      "wm-id": 1599571,
+      "wm-source": "https://brid.gy/repost/twitter/jackdbd/1614370209061634048/1614374872498462721",
+      "wm-target": "https://www.giacomodebidda.com/posts/inspect-container-images-with-dive/",
+      "content": {
+        "text": "dive is a tool I use almost every day when working with container images. I wrote a short tutorial some time ago:\ngiacomodebidda.com/posts/inspect-…"
+      },
+      "repost-of": "https://www.giacomodebidda.com/posts/inspect-container-images-with-dive/",
+      "wm-property": "repost-of",
+      "wm-private": false
+    },
+    {
+      "type": "entry",
+      "author": {
+        "type": "card",
+        "name": "Guido Giacometti",
+        "photo": "https://webmention.io/avatar/pbs.twimg.com/a30a82e1c7052c6334fd65f0051ebee87f0f3793c428e000d4498f28491dc221.jpg",
+        "url": "https://twitter.com/GuidoGiacometti"
+      },
+      "url": "https://twitter.com/GuidoGiacometti/status/1614370837540265988",
+      "published": "2023-01-14T21:16:15+00:00",
+      "wm-received": "2023-01-14T21:17:23Z",
+      "wm-id": 1599568,
+      "wm-source": "https://brid.gy/repost/twitter/jackdbd/1614370209061634048/1614370837540265988",
+      "wm-target": "https://www.giacomodebidda.com/posts/inspect-container-images-with-dive/",
+      "content": {
+        "text": "dive is a tool I use almost every day when working with container images. I wrote a short tutorial some time ago:\ngiacomodebidda.com/posts/inspect-…"
+      },
+      "repost-of": "https://www.giacomodebidda.com/posts/inspect-container-images-with-dive/",
+      "wm-property": "repost-of",
+      "wm-private": false
+    }
+  ]
+}
