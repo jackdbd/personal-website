@@ -249,12 +249,17 @@ module.exports = function (eleventyConfig) {
         'slides.com'
       ],
 
-      // allow loading images hosted on GitHub, Cloudinary
+      // allow loading images hosted on GitHub, Cloudinary, Webmention.io
       'img-src': [
         'self',
         'github.com',
         'raw.githubusercontent.com',
-        'res.cloudinary.com'
+        'res.cloudinary.com',
+        'webmention.io',
+        // webmention.io hosts here the avatars of the Twitter users that sent me a webmention
+        'https://s3-us-west-2.amazonaws.com/ca3db/pbs.twimg.com/',
+        // webmention.io hosts here the avatar of webmention.rocks
+        'https://s3-us-west-2.amazonaws.com/ca3db/webmention.rocks/'
       ],
 
       'manifest-src': ['self'],
