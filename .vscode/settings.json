@@ -11,6 +11,10 @@
   "files.exclude": {
     "node_modules/": true
   },
+  // https://www.michael1e.com/turning-on-emmet-for-nunjuck-files-on-vscode/
+  "emmet.includeLanguages": {
+    "nunjucks": "html"
+  },
   "tailwindCSS.emmetCompletions": true,
   "turboConsoleLog.includeFileNameAndLineNum": false,
   "[css]": {
@@ -24,6 +28,15 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
+  },
+  // https://11ty.rocks/tips/vscode/
+  "[markdown]": {
+    "editor.wordWrapColumn": 120,
+    "editor.wordWrap": "bounded"
+  },
+  "[nunjucks]": {
+    "editor.wordWrapColumn": 120,
+    "editor.wordWrap": "bounded"
   },
   // https://github.com/prettier/prettier-vscode#prettierconfigpath
   "prettier.configPath": "config/prettier.cjs",
