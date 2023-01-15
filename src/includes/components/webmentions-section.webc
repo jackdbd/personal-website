@@ -1,0 +1,144 @@
+<template webc:root :id="uid" aria-label="list of webmentions">
+  <script webc:type="render" webc:is="template">
+    async function renderItems() {
+      const webmentions = await this.helpers.webmentionsForPage(this.page)
+
+      const s = [
+        `webmentions created by`,
+        `<a href="https://brid.gy" target="_blank" rel="external noopener noreferrer">Bridgy</a>`,
+        `and sent to`,
+        `<a href="https://webmention.io" target="_blank" rel="external noopener noreferrer">Webmention.io</a>`
+      ].join(' ')
+
+      // in a webmention, the field 'wm-property' can be one of these values:
+      // https://github.com/snarfed/granary/blob/c6b11da5c1d6cd2ca04738287cc85a8bf9f4eb56/granary/microformats2.py#L554
+
+      // https://indieweb.org/reply
+      const replies = webmentions.filter((d) => d['in-reply-to'])
+      // https://indieweb.org/like. TODO: check it is actually 'like'
+      const likes = webmentions.filter((d) => d['like'])
+      // https://indieweb.org/repost
+      const reposts = webmentions.filter((d) => d['repost-of'])
+      
+      let h3_likes = ''
+      if (likes.length === 0) {
+        h3_likes = `<h3>No Likes</h3>`
+      } else if (likes.length === 1) {
+        h3_likes = `<h3>1 Likes</h3>`
+      } else {
+        h3_likes = `<h3>${likes.length} Likes</h3>`
+      }
+
+      let h3_reposts = ''
+      if (reposts.length === 0) {
+        h3_reposts = `<h3>No Reposts</h3>`
+      } else if (reposts.length === 1) {
+        h3_reposts = `<h3>1 Repost</h3>`
+      } else {
+        h3_reposts = `<h3>${reposts.length} Reposts</h3>`
+      }
+
+      let h3_replies = ''
+      if (replies.length === 0) {
+        h3_replies = `<h3>No Replies</h3>`
+      } else if (replies.length === 1) {
+        h3_replies = `<h3>1 Reply</h3>`
+      } else {
+        h3_replies = `<h3>${replies.length} Replies</h3>`
+      }
+
+      const li_reposts = reposts.map((wm, i) => {
+        // console.log(`=== reposts[${i}] ===`, wm)
+
+        const published = this.helpers.humanDate(wm.published)
+        const authorName = wm.author.name
+        const imgSrc = wm.author.photo
+        const imgAlt = `${wm.author.name}'s avatar`
+        const authorUrl = wm.author.url
+
+        return `
+        <li>
+          <webmention-entry>
+            <webmention-author src="${imgSrc}" alt="${imgAlt}" href="${authorUrl}">
+              <span slot="author-name">${authorName}</span>
+              <span slot="author-action">reposted on <time datetime="${wm.published}">${published}</time></span>
+            </webmention-author>
+          </webmention-entry>
+        </li>`
+        })
+
+      const li_replies = replies.map((wm, i) => {
+        // console.log(`=== replies[${i}] ===`, wm)
+
+        const published = this.helpers.humanDate(wm.published)
+        const authorName = wm.author.name
+        const imgSrc = wm.author.photo
+        const imgAlt = `${wm.author.name}'s avatar`
+        const authorUrl = wm.author.url
+
+        // todo: sanitize HTML
+        // const replyHtml = wm.content.html ? `<blockquote>${wm.content.html}</blockquote>` : ''
+        const reply = wm.content.html ? `<em>${wm.content.html}</em>` : ''
+
+        return `
+        <li>
+          <webmention-entry>
+            <webmention-author src="${imgSrc}" alt="${imgAlt}" href="${authorUrl}">
+              <span slot="author-name">${authorName}</span>
+              <span slot="author-action">replied on <time datetime="${wm.published}">${published}</time></span>
+            </webmention-author>
+            ${reply}
+          </webmention-entry>
+        </li>`
+      })
+
+      const li_likes = likes.map((wm, i) => {
+        // console.log(`=== likes[${i}] ===`, wm)
+
+        const published = this.helpers.humanDate(wm.published)
+        const authorName = wm.author.name
+        const imgSrc = wm.author.photo
+        const imgAlt = `${wm.author.name}'s avatar`
+        const authorUrl = wm.author.url
+
+        return `
+        <li>
+          <webmention-entry>
+            <webmention-author src="${imgSrc}" alt="${imgAlt}" href="${authorUrl}">
+              <span slot="author-name">${authorName}</span>
+              <span slot="author-action">liked on <time datetime="${wm.published}">${published}</time></span>
+            </webmention-author>
+          </webmention-entry>
+        </li>`
+
+      })
+
+      const ol_reposts = `<ol class="stack stack-space:s">${li_reposts.join('')}</ol>`
+      const ol_replies = `<ol class="stack stack-space:s">${li_replies.join('')}</ol>`
+      const ol_likes = `<ol class="stack stack-space:s">${li_likes.join('')}</ol>`
+
+      let webmentions_html = ''
+      if (li_reposts.length === 0 && li_replies.length === 0 && li_likes.length === 0) {
+        webmentions_html = `<p>No webmentions to show.</p>`
+      }
+      if (li_replies.length > 0) {
+        webmentions_html = webmentions_html.concat(`${h3_replies}${ol_replies}`)
+      }
+      if (li_reposts.length > 0) {
+        webmentions_html = webmentions_html.concat(`${h3_reposts}${ol_reposts}`)
+      }
+      if (li_likes.length > 0) {
+        webmentions_html = webmentions_html.concat(`${h3_likes}${ol_likes}`)
+      }
+
+      return `
+      <section class="flow region">
+        <h2>Webmentions</h2>
+        <div class="stack">
+          <p><em>${s}</em></p>
+          ${webmentions_html}
+        </div>
+      </section>`
+    }
+  </script>
+</template>
