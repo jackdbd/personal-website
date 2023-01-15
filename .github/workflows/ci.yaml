@@ -44,6 +44,7 @@ jobs:
           NODE_ENV: development
           PLAUSIBLE: ${{ secrets.PLAUSIBLE }}
           TELEGRAM: ${{ secrets.TELEGRAM }}
+          WEBMENTION_IO_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }}
           WEBPAGETEST: ${{ secrets.WEBPAGETEST }}
         run: npm run build
 

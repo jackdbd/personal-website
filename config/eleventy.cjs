@@ -3,9 +3,11 @@ const { join } = require('node:path')
 const markdownIt = require('markdown-it')
 const markdownItAnchor = require('markdown-it-anchor')
 const globbyPromise = import('globby')
+const { EleventyRenderPlugin } = require('@11ty/eleventy')
 const navigation = require('@11ty/eleventy-navigation')
 const rss = require('@11ty/eleventy-plugin-rss')
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
+const webcPlugin = require('@11ty/eleventy-plugin-webc')
 const cspPlugin = require('@jackdbd/eleventy-plugin-content-security-policy')
 const {
   ensureEnvVarsPlugin
@@ -30,6 +32,7 @@ const pairedShortcodes = require('../11ty/paired-shortcodes')
 const transforms = require('../11ty/transforms.js')
 const plausibleClientPromise = import('@jackdbd/plausible-client')
 const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
+const webmentionsPlugin = require('../plugins/11ty/webmentions/index.cjs')
 const { buildServiceWorker } = require('../src/build-sw.cjs')
 
 const REPO_ROOT = join(__filename, '..', '..')
@@ -181,6 +184,9 @@ module.exports = function (eleventyConfig) {
 
   // --- 11ty plugins ------------------------------------------------------- //
 
+  // https://www.11ty.dev/docs/plugins/render/#installation
+  eleventyConfig.addPlugin(EleventyRenderPlugin)
+
   // on GitHub Actions I use a JSON secret for Plausible API key and site ID,
   // and I expose that secret as an environment variable.
   let plausible_json_string
@@ -197,6 +203,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(plausiblePlugin, {
     apiKey: plausible.api_key,
     siteId: plausible.site_id
+  })
+
+  eleventyConfig.addPlugin(webmentionsPlugin, {
+    subdomain: 'www.giacomodebidda.com',
+    token: process.env.WEBMENTION_IO_TOKEN
   })
 
   const scriptSrcElem = [
@@ -330,6 +341,12 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(toc, {
     tags: ['h2', 'h3'],
     wrapperClass: 'toc-nav'
+  })
+
+  // see full list of options here:
+  // https://www.11ty.dev/docs/languages/webc/#installation
+  eleventyConfig.addPlugin(webcPlugin, {
+    components: 'src/includes/components/**/*.webc'
   })
 
   if (process.env.CF_PAGES) {
@@ -469,7 +486,6 @@ module.exports = function (eleventyConfig) {
 
   // https://www.11ty.dev/docs/config/#configuration-options
   return {
-    dataTemplateEngine: 'njk',
     dir: {
       data: '_data',
       includes: 'includes',
@@ -479,7 +495,6 @@ module.exports = function (eleventyConfig) {
     },
     htmlTemplateEngine: 'njk',
     markdownTemplateEngine: 'njk',
-    pathPrefix: '/',
-    templateFormats: ['html', 'md', 'njk']
+    pathPrefix: '/'
   }
 }
