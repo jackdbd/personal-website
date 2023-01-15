@@ -40,6 +40,11 @@ section: post
       {% endif %}
 
     </article>
+
+    {% renderTemplate "webc" %}
+    <webmentions-section></webmentions-section>
+    {% endrenderTemplate %}
+
   </main>
 
   {% include "components/back-to-top-is-land.njk" %}

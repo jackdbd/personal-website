@@ -1,0 +1,10 @@
+<div :id="uid">
+  <slot>webmention like/repost/reply</slot>
+</div>
+
+<style webc:keep webc:scoped>
+  :host p {
+    /* background-color: lightgray; */
+    padding: 0.5em;
+  }
+</style>
