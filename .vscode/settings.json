@@ -5,6 +5,7 @@
   "files.associations": {
     "_headers": "toml",
     "_redirects": "toml",
+    ".ignore": "txt",
     "*.webc": "html"
   },
   "files.exclude": {

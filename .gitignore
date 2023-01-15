@@ -29,3 +29,5 @@ hint-report/
 .cache/
 # cache used by my work-in-progress eleventy-plugin-plausible
 .cache-plausible-json-responses/
+# cache for webmentions fetched from webmention.io
+.cache-webmentions/
