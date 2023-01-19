@@ -11,6 +11,8 @@
     {{ page.url | url | absoluteUrl(metadata.url) }}
   {% endset %}
 
+  <link rel="canonical" href="{{ absolutePageUrl }}">
+
   {# TODO: how to get the base URL? The website base URL is dynamic, because the
   website could be running locally (e.g. with eleventy --serve),
   or it could be deployed to Cloudflare Pages. If I use <base> with a wrong URL
