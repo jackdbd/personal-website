@@ -1,0 +1,32 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+# If you find a security issue and would like to report it,
+# please contact us using the contact details below (listed in order of preference).
+# If you want to send us an email, please encrypt your message using our public PGP key.
+
+Canonical: https://www.giacomodebidda.com/.well-known/security.txt
+
+Contact: mailto:giacomo@giacomodebidda.com
+Contact: https://twitter.com/jackdbd
+
+Encryption: https://www.giacomodebidda.com/assets/pgp-key.txt
+
+Expires: 2024-01-20T23:36:54.188Z
+
+Preferred-Languages: en, it
+
+-----BEGIN PGP SIGNATURE-----
+
+wsDzBAEBCgAnBQJjyyWWCRDwZPVr2x9szxYhBB72mM8L8t/baXINIPBk9Wvb
+H2zPAABPlgv/SbsViuovnU1RR8s8+GGHJE2sfJ8Odo8j5/oi+6ZORoOsXdmO
+w/OyYnnRiz+8FDwmabx2uK6qndQieKMlrTc1Gzt/EPGktstwTVViHD2Q6uMY
+kKHQG+E9c1cSEHMS0BcdkMV4OFQS2f8V/STmkMa6fAFnF55NgxmXnheTm3gI
+57NFZqJqgvgT+IIfW9uuu+iX2BUmesOgMugjXHumIc0KATAThRUlftmkBLrT
+0MzT9+nOKOXezAZDMbSmTwmvcXAavLHrhzWzQqdjqJYc7YeZhnlYcGErVFB9
+isllw//cvdIaEcX4cW3ER+cyFeylgBfUOeBMT/HdoIFkRfGjoimSLcVAKPY4
+ivTQGnotK6ZNIPlnmNRh5Q3hbRgWuWCmQoDoft116+HWwebw5/rW4PzqDp4W
+4cIWryGPh1/g4AxjQoFavp9FBdmNPC8SSy6fFfFRwoXn44W4FbiN6lvOv2G6
+gclaYWXW5CZjxpYTvuopIKSKEuXccywTFjnj9CTx23Qn
+=U6eu
+-----END PGP SIGNATURE-----
