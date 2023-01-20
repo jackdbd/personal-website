@@ -47,11 +47,11 @@
     "lh:projects:mobile": "lighthouse $DOMAIN/projects/ --config-path ./lighthouse/config/mobile.js --budget-path=./lighthouse/budgets/all-mobile.json --output-path=./lighthouse/reports/projects-mobile.html --quiet",
     "lh:reports": "python -m webbrowser lighthouse/reports/",
     "lhci": "lhci autorun --config lighthouse/lighthouserc-local.js",
-    "aaa": "./scripts/plausible.mjs",
     "ncu": "ncu --loglevel verbose",
     "ncuu": "ncu --doctor --upgrade",
     "nuke": "rm -rf package-lock.json node_modules/ .cache/",
     "prepare": "husky install",
+    "scripts:plausible": "./scripts/plausible.mjs",
     "site": "npm-run-all --parallel site:* --print-label",
     "site:open": "google-chrome http://localhost:3000",
     "site:serve": "serve _site",
@@ -67,7 +67,6 @@
     "not IE 11",
     "maintained node versions"
   ],
-  "dependencies": {},
   "devDependencies": {
     "@11ty/eleventy": "2.0.0-canary.19",
     "@11ty/eleventy-fetch": "^3.0.0",
@@ -115,10 +114,12 @@
     "markdown-it-anchor": "^8.6.5",
     "npm-check-updates": "^16.3.2",
     "npm-run-all": "^4.1.5",
+    "openpgp": "^5.5.0",
     "postcss": "^8.4.16",
     "postcss-cli": "^10.0.0",
     "preact": "^10.11.0",
     "prettier": "^2.7.1",
+    "sanitize-html": "^2.8.1",
     "serve": "^14.0.1",
     "tailwindcss": "^3.1.8",
     "uglify-es": "^3.3.9",
@@ -128,7 +129,8 @@
     "workbox-expiration": "^6.5.4",
     "workbox-precaching": "^6.5.4",
     "wrangler": "^2.1.8",
-    "yargs": "^17.5.1"
+    "yargs": "^17.5.1",
+    "zod": "^3.20.2"
   },
   "overrides": {
     "@jackdbd/eleventy-plugin-content-security-policy": {

@@ -1,6 +1,5 @@
-const Joi = require('joi')
-const Hoek = require('@hapi/hoek')
 const makeDebug = require('debug')
+const { z } = require('zod')
 const { makeClient } = require('./webmention-io.cjs')
 
 const PREFIX = '[💬 11ty-plugin-webmentions]'
@@ -11,31 +10,53 @@ const defaults = {
   cacheDirectory: '.cache-webmentions',
   cacheDuration: '3600s',
   cacheVerbose: false,
-  subdomain: undefined,
+  domain: undefined,
+  // https://github.com/apostrophecms/sanitize-html#default-options
+  sanitizeOptions: {
+    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p'],
+    allowedAttributes: {
+      a: ['href']
+    }
+  },
   token: undefined
 }
 
-const options_schema = Joi.object().keys({
-  cacheDirectory: Joi.string().min(1).default(defaults.cacheDirectory),
-  cacheDuration: Joi.string().default(defaults.cacheDuration),
-  cacheVerbose: Joi.boolean().default(defaults.cacheVerbose),
-  subdomain: Joi.string().min(1).required(),
-  token: Joi.string().min(1).required()
+const sanitize_options_schema = z.object({
+  allowedTags: z.array(z.string().min(1)),
+  allowedAttributes: z.any()
+  // allowedAttributes: z.object({
+  //   a: z.array(z.string().min(1))
+  // })
 })
+
+const schema = z.object({
+  cacheDirectory: z.string().min(1).default(defaults.cacheDirectory),
+  cacheDuration: z.string().default(defaults.cacheDuration),
+  cacheVerbose: z.boolean().optional().default(defaults.cacheVerbose),
+  domain: z.string().min(1),
+  sanitizeOptions: sanitize_options_schema.default(defaults.sanitizeOptions),
+  token: z.string().min(1)
+})
+
+// type Config = z.infer<typeof schema>
 
 // give the plugin configuration function a name, so it can be easily spotted in
 // EleventyErrorHandler
 const webmentions = (eleventyConfig, providedOptions) => {
-  const config = Hoek.applyToDefaults(defaults, providedOptions)
+  const result = schema.safeParse(providedOptions)
 
-  const result = options_schema.validate(config)
-  if (result.error) {
-    const message = `${PREFIX} invalid configuration: ${result.error.message}`
-    throw new Error(message)
+  if (!result.success) {
+    throw new Error(`${PREFIX} invalid configuration: ${result.error.message}`)
   }
 
-  const { cacheDirectory, cacheDuration, cacheVerbose, subdomain, token } =
-    result.value
+  const {
+    cacheDirectory,
+    cacheDuration,
+    cacheVerbose,
+    domain,
+    sanitizeOptions,
+    token
+  } = result.data
 
   debug(`cache responses from webmention.io %O`, {
     cacheDirectory,
@@ -46,17 +67,18 @@ const webmentions = (eleventyConfig, providedOptions) => {
     cacheDirectory,
     cacheDuration,
     cacheVerbose,
+    sanitizeOptions,
     token
   })
 
-  eleventyConfig.addGlobalData('webmentionsForSubdomain', async () => {
-    return await webmentionsIo.webmentionsForSubdomain(subdomain)
-  })
+  // eleventyConfig.addGlobalData('webmentionsForDomain', async () => {
+  //   return await webmentionsIo.webmentionsForDomain(domain)
+  // })
 
   eleventyConfig.addAsyncFilter('webmentionsForPage', async (page) => {
     // console.log('=== this ===', this)
     // console.log('=== page ===', page)
-    const target = `https://${subdomain}${page.url}`
+    const target = `https://${domain}${page.url}`
     return await webmentionsIo.webmentionsForTarget(target)
   })
 }

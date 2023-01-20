@@ -11,10 +11,6 @@ node_modules/
 # secrets
 secrets/*
 !secrets/README.md
-credentials.json
-
-# local Netlify folder
-.netlify
 
 # Lighthouse and Lighthouse CI web performance reports
 lighthouse/reports/*

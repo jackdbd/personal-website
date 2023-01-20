@@ -1,4 +1,5 @@
-import path from 'node:path'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { isOnCloudBuild, isOnGithub } from '@jackdbd/checks/environment'
 
 export const jsonSecret = (name, env = process.env) => {
@@ -8,16 +9,26 @@ export const jsonSecret = (name, env = process.env) => {
 
   let json
   if (isOnGithub(env)) {
-    // we read a secret from GitHub and expose it as environment variable
     json = env[env_var_name]
-  }
-  if (isOnCloudBuild(env)) {
-    // we read a secret from Secret Manager and expose it as environment variable
+  } else if (isOnCloudBuild(env)) {
     json = env[env_var_name]
   } else {
-    const json_path = path.join('secrets', `${name}.json`)
-    json = fs.readFileSync(json_path).toString()
+    const filepath = join('secrets', `${name}.json`)
+    json = readFileSync(filepath).toString()
   }
 
   return JSON.parse(json)
+}
+
+export const txtSecret = (name, env = process.env) => {
+  const env_var_name = name.replaceAll('-', '_').toUpperCase()
+
+  let txt
+  if (isOnGithub(env)) {
+    txt = env[env_var_name]
+  } else {
+    const filepath = join('secrets', `${name}.txt`)
+    txt = readFileSync(filepath).toString()
+  }
+  return txt
 }

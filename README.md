@@ -11,6 +11,7 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
 - PWA with [web application manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - RSS feed with [@11ty/eleventy-plugin-rss](https://www.11ty.dev/docs/plugins/rss/)
 - `sitemap.xml` and `robots.txt`
+- `security.txt` in `.well-known` directory
 - just-in-time preloading with [instant.page](https://instant.page/)
 - Service worker generated with [workbox-core](https://developer.chrome.com/docs/workbox/modules/workbox-core/) and [esbuild](https://github.com/evanw/esbuild)
 - contact form submission with a function deployed to Cloudflare Pages Functions (see the `functions/` directory)

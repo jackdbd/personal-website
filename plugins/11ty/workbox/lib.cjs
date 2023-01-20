@@ -139,11 +139,6 @@ const buildServiceWorker = async (config) => {
   }
 
   let string = ''
-  // try {
-  //   string = await readFile(netlifyTomlPath, { encoding: 'utf8' })
-  // } catch (err) {
-  //   throw new Error(`Could not read ${netlifyTomlPath}\n${err.message}`)
-  // }
 
   const filepathToWorkboxManifestEntry = makeFilepathToWorkboxManifestEntry({
     eleventyOutputDirectory,
