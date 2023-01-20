@@ -1,6 +1,5 @@
-const Joi = require('joi')
-const Hoek = require('@hapi/hoek')
 const makeDebug = require('debug')
+const { z } = require('zod')
 const { makeClient } = require('./webmention-io.cjs')
 
 const PREFIX = '[💬 11ty-plugin-webmentions]'
@@ -21,24 +20,41 @@ const defaults = {
   token: undefined
 }
 
-const options_schema = Joi.object().keys({
-  cacheDirectory: Joi.string().min(1).default(defaults.cacheDirectory),
-  cacheDuration: Joi.string().default(defaults.cacheDuration),
-  cacheVerbose: Joi.boolean().default(defaults.cacheVerbose),
-  domain: Joi.string().min(1).required(),
-  sanitizeOptions: Joi.object().default(defaults.sanitizeOptions),
-  token: Joi.string().min(1).required()
+const sanitize_options_schema = z.object({
+  allowedTags: z.array(z.string().min(1)),
+  allowedAttributes: z.any()
+  // allowedAttributes: z.object({
+  //   a: z.array(z.string().min(1))
+  // })
 })
+
+// const options_schema = Joi.object().keys({
+//   cacheDirectory: Joi.string().min(1).default(defaults.cacheDirectory),
+//   cacheDuration: Joi.string().default(defaults.cacheDuration),
+//   cacheVerbose: Joi.boolean().default(defaults.cacheVerbose),
+//   domain: Joi.string().min(1).required(),
+//   sanitizeOptions: Joi.object().default(defaults.sanitizeOptions),
+//   token: Joi.string().min(1).required()
+// })
+
+const schema = z.object({
+  cacheDirectory: z.string().min(1).default(defaults.cacheDirectory),
+  cacheDuration: z.string().default(defaults.cacheDuration),
+  cacheVerbose: z.boolean().optional().default(defaults.cacheVerbose),
+  domain: z.string().min(1),
+  sanitizeOptions: sanitize_options_schema.default(defaults.sanitizeOptions),
+  token: z.string().min(1)
+})
+
+// type Config = z.infer<typeof schema>
 
 // give the plugin configuration function a name, so it can be easily spotted in
 // EleventyErrorHandler
 const webmentions = (eleventyConfig, providedOptions) => {
-  const config = Hoek.applyToDefaults(defaults, providedOptions)
+  const result = schema.safeParse(providedOptions)
 
-  const result = options_schema.validate(config)
-  if (result.error) {
-    const message = `${PREFIX} invalid configuration: ${result.error.message}`
-    throw new Error(message)
+  if (!result.success) {
+    throw new Error(`${PREFIX} invalid configuration: ${result.error.message}`)
   }
 
   const {
@@ -48,7 +64,7 @@ const webmentions = (eleventyConfig, providedOptions) => {
     domain,
     sanitizeOptions,
     token
-  } = result.value
+  } = result.data
 
   debug(`cache responses from webmention.io %O`, {
     cacheDirectory,
