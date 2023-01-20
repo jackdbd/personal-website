@@ -12,6 +12,22 @@ const isReply = (entry) =>
 
 const isRepost = (entry) => entry['wm-property'] === 'repost-of'
 
+// sort in chronological order (oldest to most recent)
+// const sortFn = (a, b) => {
+//   const delta_ms =
+//     new Date(a.published || a['wm-received']).getTime() -
+//     new Date(b.published || b['wm-received']).getTime()
+//   return delta_ms
+// }
+
+// sort in reverse chronological order (most recent to oldest)
+const sortFn = (a, b) => {
+  const delta_ms =
+    new Date(b.published || b['wm-received']).getTime() -
+    new Date(a.published || a['wm-received']).getTime()
+  return delta_ms
+}
+
 const makeSanitize = (options) => {
   debug(`options for sanitize-html %O`, options)
 
@@ -54,42 +70,35 @@ const makeClient = ({
 
   const sanitize = makeSanitize(sanitizeOptions)
 
-  const webmentionsForDomain = async (domain) => {
-    const url = `${endpoint}?token=${token}`
-
-    debug(`fetch all webmentions sent to ${domain}`)
+  const webmentionsForUrl = async (url) => {
     const response = await EleventyFetch(url, {
       directory: cacheDirectory,
       duration: cacheDuration,
       type: 'json',
       verbose: cacheVerbose
     })
-    debug(`fetched ${response.children.length} webmentions sent to ${domain}`)
+
+    debug(`fetched ${response.children.length} webmentions sent to ${url}`)
 
     const likes = response.children.filter(isLike)
     const replies = response.children.filter(isReply)
     const reposts = response.children.filter(isRepost)
 
-    return [...likes, ...replies.map(sanitize), ...reposts.map(sanitize)]
+    return [
+      ...likes.sort(sortFn),
+      ...replies.map(sanitize).sort(sortFn),
+      ...reposts.map(sanitize).sort(sortFn)
+    ]
+  }
+
+  const webmentionsForDomain = async (domain) => {
+    debug(`fetch all webmentions sent to ${domain}`)
+    return webmentionsForUrl(`${endpoint}?token=${token}`)
   }
 
   const webmentionsForTarget = async (target) => {
-    const url = `${endpoint}?token=${token}&target=${target}`
-
     debug(`fetch all webmentions sent to ${target}`)
-    const response = await EleventyFetch(url, {
-      directory: cacheDirectory,
-      duration: cacheDuration,
-      type: 'json',
-      verbose: cacheVerbose
-    })
-    debug(`fetched ${response.children.length} webmentions sent to ${target}`)
-
-    const likes = response.children.filter(isLike)
-    const replies = response.children.filter(isReply)
-    const reposts = response.children.filter(isRepost)
-
-    return [...likes, ...replies.map(sanitize), ...reposts.map(sanitize)]
+    return webmentionsForUrl(`${endpoint}?token=${token}&target=${target}`)
   }
 
   return { webmentionsForDomain, webmentionsForTarget }
