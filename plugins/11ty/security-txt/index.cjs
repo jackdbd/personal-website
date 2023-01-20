@@ -1,8 +1,9 @@
 const fs = require('node:fs')
 const { join } = require('node:path')
 const { promisify } = require('node:util')
-const { z } = require('zod')
 const makeDebug = require('debug')
+const openpgp = require('openpgp')
+const { z } = require('zod')
 
 const writeFileAsync = promisify(fs.writeFile)
 
@@ -13,8 +14,6 @@ const debug = makeDebug('eleventy-plugin-security-txt')
 // https://ijmacd.github.io/rfc3339-iso8601/
 // https://www.rfc-editor.org/rfc/rfc9116#name-example-of-a-signed-securit
 
-// TODO: It is RECOMMENDED that a "security.txt" file be digitally signed using
-// an OpenPGP cleartext signature
 // https://www.rfc-editor.org/rfc/rfc9116#name-digital-signature
 // https://www.rfc-editor.org/rfc/rfc9116#name-example-of-a-signed-securit
 
@@ -57,6 +56,9 @@ const schema = z.object({
 
   hiring: z.string().url().optional(),
 
+  pgpPassphrase: z.string().optional(),
+  pgpPrivateKeyArmored: z.string().optional(),
+
   policy: z.string().url().optional(),
 
   preferredLanguages: z.array(z.string()).default(['en'])
@@ -67,14 +69,16 @@ const schema = z.object({
 // What is the security.txt file?
 // https://youtu.be/f-FbcobQQb8
 
-const content = ({
+const content = async ({
   acknowledgments,
+  armoredKey,
   contacts,
   domain,
   encryption,
   expires,
   header,
   hiring,
+  passphrase,
   policy,
   preferredLanguages
 }) => {
@@ -84,6 +88,7 @@ const content = ({
 
   if (header) {
     s += header
+      .trim()
       .split('\n')
       .map((line) => line.trim())
       .join('\n')
@@ -132,7 +137,25 @@ const content = ({
     s += '\n'
   }
 
-  return s
+  if (armoredKey) {
+    debug(`create cleartext and sign it using PGP private key`)
+    const privateKey = await openpgp.decryptKey({
+      privateKey: await openpgp.readPrivateKey({ armoredKey }),
+      passphrase
+    })
+
+    const unsignedMessage = await openpgp.createCleartextMessage({ text: s })
+
+    return await openpgp.sign({
+      message: unsignedMessage,
+      signingKeys: privateKey
+    })
+  } else {
+    debug(
+      `tip: it's recommended to sign the content of the security.txt using OpenPGP`
+    )
+    return s
+  }
 }
 
 // give the plugin configuration function a name, so it can be easily spotted in
@@ -149,23 +172,62 @@ const securityTxt = (eleventyConfig, providedOptions) => {
     # please contact us using the contact details below (listed in order of preference).
     # If you want to send us an email, please encrypt your message using our public OpenPGP key.`
 
+    let pgpPassphrase = undefined
+    if (result.data.pgpPassphrase) {
+      pgpPassphrase = result.data.pgpPassphrase.trim()
+    }
+    if (process.env.PGP_PASSPHRASE) {
+      pgpPassphrase = process.env.PGP_PASSPHRASE.trim()
+    }
+
+    let pgpPrivateKeyArmored = undefined
+    if (result.data.pgpPrivateKeyArmored) {
+      pgpPrivateKeyArmored = result.data.pgpPrivateKeyArmored.trim()
+    }
+    if (process.env.PGP_PRIVATE_KEY_ARMORED) {
+      pgpPrivateKeyArmored = process.env.PGP_PRIVATE_KEY_ARMORED.trim()
+    }
+
     config = {
       ...result.data,
       expires: result.data.expires.toISOString(),
-      header: result.data.header || header
+      header: result.data.header || header,
+      pgpPassphrase,
+      pgpPrivateKeyArmored
     }
   }
 
-  debug(`config %O`, config)
   const outdir = join(eleventyConfig.dir.output, '.well-known')
 
   eleventyConfig.on('eleventy.before', async () => {
     if (!fs.existsSync(outdir)) {
       fs.mkdirSync(outdir)
     }
-    await writeFileAsync(join(outdir, 'security.txt'), content(config), {
+
+    let text = ''
+    try {
+      text = await content({
+        acknowledgments: config.acknowledgments,
+        armoredKey: config.pgpPrivateKeyArmored,
+        contacts: config.contacts,
+        domain: config.domain,
+        encryption: config.encryption,
+        expires: config.expires,
+        header: config.header,
+        hiring: config.hiring,
+        passphrase: config.pgpPassphrase,
+        policy: config.policy,
+        preferredLanguages: config.preferredLanguages
+      })
+    } catch (err) {
+      throw new Error(`${PREFIX} ${err.message}`)
+    }
+
+    const filepath = join(outdir, 'security.txt')
+    await writeFileAsync(filepath, text, {
       encoding: 'utf8'
     })
+    debug(`wrote ${filepath}`)
   })
 }
 

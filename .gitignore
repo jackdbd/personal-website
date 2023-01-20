@@ -11,7 +11,6 @@ node_modules/
 # secrets
 secrets/*
 !secrets/README.md
-credentials.json
 
 # Lighthouse and Lighthouse CI web performance reports
 lighthouse/reports/*

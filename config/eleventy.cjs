@@ -208,6 +208,26 @@ module.exports = function (eleventyConfig) {
 
   const domain = 'www.giacomodebidda.com'
 
+  let pgpPrivateKeyArmored
+  if (process.env.PGP_PRIVATE_KEY_ARMORED) {
+    pgpPrivateKeyArmored = process.env.PGP_PRIVATE_KEY_ARMORED
+  } else {
+    pgpPrivateKeyArmored = fs.readFileSync(
+      join(REPO_ROOT, 'secrets', 'ASCII-armored-PGP-private-key.txt'),
+      { encoding: 'utf8' }
+    )
+  }
+
+  let pgpPassphrase
+  if (process.env.PGP_PASSPHRASE) {
+    pgpPassphrase = process.env.PGP_PASSPHRASE
+  } else {
+    pgpPassphrase = fs.readFileSync(
+      join(REPO_ROOT, 'secrets', 'PGP-passphrase.txt'),
+      { encoding: 'utf8' }
+    )
+  }
+
   eleventyConfig.addPlugin(securityTxtPlugin, {
     contacts: [
       'mailto:giacomo@giacomodebidda.com',
@@ -215,6 +235,8 @@ module.exports = function (eleventyConfig) {
     ],
     domain,
     encryption: `https://${domain}/assets/pgp-key.txt`,
+    pgpPassphrase,
+    pgpPrivateKeyArmored,
     preferredLanguages: ['en', 'it']
   })
 
