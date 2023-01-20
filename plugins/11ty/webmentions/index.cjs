@@ -11,6 +11,7 @@ const defaults = {
   cacheDuration: '3600s',
   cacheVerbose: false,
   domain: undefined,
+  // https://github.com/apostrophecms/sanitize-html#default-options
   sanitizeOptions: {
     allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p'],
     allowedAttributes: {
@@ -27,15 +28,6 @@ const sanitize_options_schema = z.object({
   //   a: z.array(z.string().min(1))
   // })
 })
-
-// const options_schema = Joi.object().keys({
-//   cacheDirectory: Joi.string().min(1).default(defaults.cacheDirectory),
-//   cacheDuration: Joi.string().default(defaults.cacheDuration),
-//   cacheVerbose: Joi.boolean().default(defaults.cacheVerbose),
-//   domain: Joi.string().min(1).required(),
-//   sanitizeOptions: Joi.object().default(defaults.sanitizeOptions),
-//   token: Joi.string().min(1).required()
-// })
 
 const schema = z.object({
   cacheDirectory: z.string().min(1).default(defaults.cacheDirectory),
