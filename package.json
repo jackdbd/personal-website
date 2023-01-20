@@ -17,7 +17,7 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "run-s --print-label 'build:11ty' 'build:css'",
-    "build:11ty": "ELEVENTY_ENV=production PGP_PASSPHRASE=$(cat secrets/PGP-passphrase.txt) eleventy --config ./config/eleventy.cjs",
+    "build:11ty": "ELEVENTY_ENV=production eleventy --config ./config/eleventy.cjs",
     "build:css": "postcss ./config/input.css --output _site/assets/css/style.css --config ./config --env production --verbose",
     "postbuild": "ls --size --human-readable _site/ | head -n 1",
     "clean": "find _site/* -not -name 'README.md' -delete",

@@ -170,7 +170,7 @@ const securityTxt = (eleventyConfig, providedOptions) => {
     const header = `
     # If you find a security issue and would like to report it,
     # please contact us using the contact details below (listed in order of preference).
-    # If you want to send us an email, please encrypt your message using our public OpenPGP key.`
+    # If you want to send us an email, please encrypt your message using our public PGP key.`
 
     let pgpPassphrase = undefined
     if (result.data.pgpPassphrase) {
@@ -184,8 +184,8 @@ const securityTxt = (eleventyConfig, providedOptions) => {
     if (result.data.pgpPrivateKeyArmored) {
       pgpPrivateKeyArmored = result.data.pgpPrivateKeyArmored.trim()
     }
-    if (process.env.PGP_PRIVATE_KEY_ARMORED) {
-      pgpPrivateKeyArmored = process.env.PGP_PRIVATE_KEY_ARMORED.trim()
+    if (process.env.PGP_PRIVATE_KEY_ASCII_ARMOR) {
+      pgpPrivateKeyArmored = process.env.PGP_PRIVATE_KEY_ASCII_ARMOR.trim()
     }
 
     config = {

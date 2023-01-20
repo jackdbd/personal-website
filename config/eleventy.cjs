@@ -208,24 +208,28 @@ module.exports = function (eleventyConfig) {
 
   const domain = 'www.giacomodebidda.com'
 
-  let pgpPrivateKeyArmored
-  if (process.env.PGP_PRIVATE_KEY_ARMORED) {
-    pgpPrivateKeyArmored = process.env.PGP_PRIVATE_KEY_ARMORED
-  } else {
-    pgpPrivateKeyArmored = fs.readFileSync(
-      join(REPO_ROOT, 'secrets', 'ASCII-armored-PGP-private-key.txt'),
-      { encoding: 'utf8' }
-    )
+  let pgpPrivateKeyArmored = undefined
+  const filepath_private_key = join(
+    REPO_ROOT,
+    'secrets',
+    'ASCII-armored-PGP-private-key.txt'
+  )
+  if (fs.existsSync(filepath_private_key)) {
+    pgpPrivateKeyArmored = fs.readFileSync(filepath_private_key, {
+      encoding: 'utf8'
+    })
+  }
+  if (process.env.PGP_PRIVATE_KEY_ASCII_ARMOR) {
+    pgpPrivateKeyArmored = process.env.PGP_PRIVATE_KEY_ASCII_ARMOR
   }
 
-  let pgpPassphrase
+  let pgpPassphrase = undefined
+  const filepath_passphrase = join(REPO_ROOT, 'secrets', 'PGP-passphrase.txt')
+  if (fs.existsSync(filepath_passphrase)) {
+    pgpPassphrase = fs.readFileSync(filepath_passphrase, { encoding: 'utf8' })
+  }
   if (process.env.PGP_PASSPHRASE) {
     pgpPassphrase = process.env.PGP_PASSPHRASE
-  } else {
-    pgpPassphrase = fs.readFileSync(
-      join(REPO_ROOT, 'secrets', 'PGP-passphrase.txt'),
-      { encoding: 'utf8' }
-    )
   }
 
   eleventyConfig.addPlugin(securityTxtPlugin, {
