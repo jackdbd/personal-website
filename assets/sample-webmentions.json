@@ -66,6 +66,24 @@
       "repost-of": "https://www.giacomodebidda.com/posts/inspect-container-images-with-dive/",
       "wm-property": "repost-of",
       "wm-private": false
+    },
+    {
+      "type": "entry",
+      "author": {
+        "type": "card",
+        "name": "Anton Cáceres 🇺🇦",
+        "photo": "https://webmention.io/avatar/pbs.twimg.com/1ce336a2375849860212e5d0dc74e3757d7de400c03e384e5006aa7f0cfea36d.jpg",
+        "url": "https://twitter.com/anton_caceres"
+      },
+      "url": "https://twitter.com/jackdbd/status/1605925652963655682#favorited-by-758066723710988288",
+      "published": false,
+      "wm-received": "2023-01-13T18:02:26Z",
+      "wm-id": 1599000,
+      "wm-source": "https://brid.gy/like/twitter/jackdbd/1605925652963655682/758066723710988288",
+      "wm-target": "https://www.giacomodebidda.com/",
+      "like-of": "https://www.giacomodebidda.com/",
+      "wm-property": "like-of",
+      "wm-private": false
     }
   ]
 }

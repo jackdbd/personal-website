@@ -13,10 +13,10 @@
       // in a webmention, the field 'wm-property' can be one of these values:
       // https://github.com/snarfed/granary/blob/c6b11da5c1d6cd2ca04738287cc85a8bf9f4eb56/granary/microformats2.py#L554
 
+      // https://indieweb.org/like
+      const likes = webmentions.filter((d) => d['like-of'])
       // https://indieweb.org/reply
       const replies = webmentions.filter((d) => d['in-reply-to'])
-      // https://indieweb.org/like. TODO: check it is actually 'like'
-      const likes = webmentions.filter((d) => d['like'])
       // https://indieweb.org/repost
       const reposts = webmentions.filter((d) => d['repost-of'])
       
@@ -76,9 +76,9 @@
         const imgAlt = `${wm.author.name}'s avatar`
         const authorUrl = wm.author.url
 
-        // todo: sanitize HTML
         // const replyHtml = wm.content.html ? `<blockquote>${wm.content.html}</blockquote>` : ''
-        const reply = wm.content.html ? `<em>${wm.content.html}</em>` : ''
+        const reply = wm.content.html ? `<em>${wm.content.html}</em>` : wm.content.text
+        // const reply = wm.content.html ? `<em>${wm.content.html}</em>` : ''
 
         return `
         <li>

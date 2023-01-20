@@ -12,6 +12,12 @@ const defaults = {
   cacheDuration: '3600s',
   cacheVerbose: false,
   domain: undefined,
+  sanitizeOptions: {
+    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p'],
+    allowedAttributes: {
+      a: ['href']
+    }
+  },
   token: undefined
 }
 
@@ -20,6 +26,7 @@ const options_schema = Joi.object().keys({
   cacheDuration: Joi.string().default(defaults.cacheDuration),
   cacheVerbose: Joi.boolean().default(defaults.cacheVerbose),
   domain: Joi.string().min(1).required(),
+  sanitizeOptions: Joi.object().default(defaults.sanitizeOptions),
   token: Joi.string().min(1).required()
 })
 
@@ -34,8 +41,14 @@ const webmentions = (eleventyConfig, providedOptions) => {
     throw new Error(message)
   }
 
-  const { cacheDirectory, cacheDuration, cacheVerbose, domain, token } =
-    result.value
+  const {
+    cacheDirectory,
+    cacheDuration,
+    cacheVerbose,
+    domain,
+    sanitizeOptions,
+    token
+  } = result.value
 
   debug(`cache responses from webmention.io %O`, {
     cacheDirectory,
@@ -46,12 +59,13 @@ const webmentions = (eleventyConfig, providedOptions) => {
     cacheDirectory,
     cacheDuration,
     cacheVerbose,
+    sanitizeOptions,
     token
   })
 
-  eleventyConfig.addGlobalData('webmentionsForDomain', async () => {
-    return await webmentionsIo.webmentionsForDomain(domain)
-  })
+  // eleventyConfig.addGlobalData('webmentionsForDomain', async () => {
+  //   return await webmentionsIo.webmentionsForDomain(domain)
+  // })
 
   eleventyConfig.addAsyncFilter('webmentionsForPage', async (page) => {
     // console.log('=== this ===', this)
