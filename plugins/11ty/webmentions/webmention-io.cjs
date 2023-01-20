@@ -9,8 +9,7 @@ const debug = makeDebug('eleventy-plugin-webmentions:webmention.io')
  *
  * You can retrieve:
  *
- * - all webmentions sent to the subdomain associated with the token (i.e. API
- *   key) webmention.io gave you
+ * - all webmentions sent to the domain associated with the token (i.e. API key) webmention.io gave you
  * - all webmentions sent to a specific target (e.g. the URL where a blog post
  *   is hosted at)
  */
@@ -18,19 +17,17 @@ const makeClient = ({ cacheDirectory, cacheDuration, cacheVerbose, token }) => {
   const format = 'jf2'
   const endpoint = `https://webmention.io/api/mentions.${format}`
 
-  const webmentionsForSubdomain = async (subdomain) => {
+  const webmentionsForDomain = async (domain) => {
     const url = `${endpoint}?token=${token}`
 
-    debug(`fetch all webmentions sent to ${subdomain}`)
+    debug(`fetch all webmentions sent to ${domain}`)
     const response = await EleventyFetch(url, {
       directory: cacheDirectory,
       duration: cacheDuration,
       type: 'json',
       verbose: cacheVerbose
     })
-    debug(
-      `fetched ${response.children.length} webmentions sent to ${subdomain}`
-    )
+    debug(`fetched ${response.children.length} webmentions sent to ${domain}`)
 
     return response.children
   }
@@ -50,7 +47,7 @@ const makeClient = ({ cacheDirectory, cacheDuration, cacheVerbose, token }) => {
     return response.children
   }
 
-  return { webmentionsForSubdomain, webmentionsForTarget }
+  return { webmentionsForDomain, webmentionsForTarget }
 }
 
 module.exports = { makeClient }

@@ -11,7 +11,7 @@ const defaults = {
   cacheDirectory: '.cache-webmentions',
   cacheDuration: '3600s',
   cacheVerbose: false,
-  subdomain: undefined,
+  domain: undefined,
   token: undefined
 }
 
@@ -19,7 +19,7 @@ const options_schema = Joi.object().keys({
   cacheDirectory: Joi.string().min(1).default(defaults.cacheDirectory),
   cacheDuration: Joi.string().default(defaults.cacheDuration),
   cacheVerbose: Joi.boolean().default(defaults.cacheVerbose),
-  subdomain: Joi.string().min(1).required(),
+  domain: Joi.string().min(1).required(),
   token: Joi.string().min(1).required()
 })
 
@@ -34,7 +34,7 @@ const webmentions = (eleventyConfig, providedOptions) => {
     throw new Error(message)
   }
 
-  const { cacheDirectory, cacheDuration, cacheVerbose, subdomain, token } =
+  const { cacheDirectory, cacheDuration, cacheVerbose, domain, token } =
     result.value
 
   debug(`cache responses from webmention.io %O`, {
@@ -49,14 +49,14 @@ const webmentions = (eleventyConfig, providedOptions) => {
     token
   })
 
-  eleventyConfig.addGlobalData('webmentionsForSubdomain', async () => {
-    return await webmentionsIo.webmentionsForSubdomain(subdomain)
+  eleventyConfig.addGlobalData('webmentionsForDomain', async () => {
+    return await webmentionsIo.webmentionsForDomain(domain)
   })
 
   eleventyConfig.addAsyncFilter('webmentionsForPage', async (page) => {
     // console.log('=== this ===', this)
     // console.log('=== page ===', page)
-    const target = `https://${subdomain}${page.url}`
+    const target = `https://${domain}${page.url}`
     return await webmentionsIo.webmentionsForTarget(target)
   })
 }

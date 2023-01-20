@@ -206,7 +206,7 @@ module.exports = function (eleventyConfig) {
   })
 
   eleventyConfig.addPlugin(webmentionsPlugin, {
-    subdomain: 'www.giacomodebidda.com',
+    domain,
     token: process.env.WEBMENTION_IO_TOKEN
   })
 
