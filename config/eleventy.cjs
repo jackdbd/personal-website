@@ -32,6 +32,7 @@ const pairedShortcodes = require('../11ty/paired-shortcodes')
 const transforms = require('../11ty/transforms.js')
 const plausibleClientPromise = import('@jackdbd/plausible-client')
 const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
+const securityTxtPlugin = require('../plugins/11ty/security-txt/index.cjs')
 const webmentionsPlugin = require('../plugins/11ty/webmentions/index.cjs')
 const { buildServiceWorker } = require('../src/build-sw.cjs')
 
@@ -180,7 +181,7 @@ module.exports = function (eleventyConfig) {
     NODE_ENV: process.env.NODE_ENV,
     SA_JSON_KEY: process.env.SA_JSON_KEY
   }
-  console.log('environment', environment)
+  // console.log('environment', environment)
 
   // --- 11ty plugins ------------------------------------------------------- //
 
@@ -203,6 +204,18 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(plausiblePlugin, {
     apiKey: plausible.api_key,
     siteId: plausible.site_id
+  })
+
+  const domain = 'www.giacomodebidda.com'
+
+  eleventyConfig.addPlugin(securityTxtPlugin, {
+    contacts: [
+      'mailto:giacomo@giacomodebidda.com',
+      'https://twitter.com/jackdbd'
+    ],
+    domain,
+    encryption: `https://${domain}/assets/pgp-key.txt`,
+    preferredLanguages: ['en', 'it']
   })
 
   eleventyConfig.addPlugin(webmentionsPlugin, {

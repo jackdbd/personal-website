@@ -67,7 +67,6 @@
     "not IE 11",
     "maintained node versions"
   ],
-  "dependencies": {},
   "devDependencies": {
     "@11ty/eleventy": "2.0.0-canary.19",
     "@11ty/eleventy-fetch": "^3.0.0",
@@ -128,7 +127,8 @@
     "workbox-expiration": "^6.5.4",
     "workbox-precaching": "^6.5.4",
     "wrangler": "^2.1.8",
-    "yargs": "^17.5.1"
+    "yargs": "^17.5.1",
+    "zod": "^3.20.2"
   },
   "overrides": {
     "@jackdbd/eleventy-plugin-content-security-policy": {
