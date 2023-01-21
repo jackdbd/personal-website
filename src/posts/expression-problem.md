@@ -110,13 +110,13 @@ foo = FooChild()
 del foo
 ```
 
-we [might](https://stackoverflow.com/a/1481512/3036129) get `"I am garbage collected!"`.
+we [might](https://stackoverflow.com/questions/1481488/what-is-the-del-method-and-how-do-i-call-it/1481512#1481512) get `"I am garbage collected!"`.
 
 JavaScript is based on prototypes rather than classes, so monkey patching involves extending the prototype of the object we want to extend. If we have an application and plan to extend the prototype of a library that no other library uses, that might be ok, but extending native objects such as `String` is a [big no-no](https://www.reddit.com/r/javascript/comments/5ch66r/why_is_extending_native_objects_such_as_string/).
 
 Keep in mind that the problem here is that these native Javascript objects have a [global scope](https://softwareengineering.stackexchange.com/questions/287827/whats-wrong-about-extending-a-class-with-prototype-methods). ClojureScript is able to bypass this issue and extend native objects prototypes safely because it extends the JS prototypes per namespace (if you want to know more about it, watch the talk "ClojureScript Anatomy" at around 19'25").
 
-https://www.youtube.com/watch?v=lC39ifspIf4&ab_channel=ZhangJian
+https://www.youtube.com/watch?v=lC39ifspIf4
 
 So, monkey patching can solve the expression problem. It's convenient and easy to understand. It has several problems though. First of all, only dynamic languages can use it. Second, it's easy to make a mess and forget what code we monkey patched and why. There are some ways to mitigate these issues. For example, in Ruby we can [scope our monkey patches in a module](https://www.justinweiss.com/articles/3-ways-to-monkey-patch-without-making-a-mess/) or use [Ruby refinements](https://blog.alex-miller.co/ruby/2017/07/22/scope-the-monkey.html).
 
@@ -124,7 +124,7 @@ So, monkey patching can solve the expression problem. It's convenient and easy t
 
 Some—though not many—programming languages support multiple dispatch. In these languages a function uses more than one piece of information to determine which function to actually call (runtime polymorphism). Usually the pieces of information are the types of the arguments passed to the function.
 
-A language [designed with multiple dispatch in mind](https://nbviewer.jupyter.org/gist/StefanKarpinski/b8fe9dbb36c1427b9f22) is Julia. In fact in Julia multiple dispatch is so at the core of the language that `+` is a generic function with 96 implementations. And since generic functions are open, functions are more like protocols which users can also implement.
+A language [designed with multiple dispatch in mind](https://nbviewer.org/gist/StefanKarpinski/b8fe9dbb36c1427b9f22) is Julia. In fact in Julia multiple dispatch is so at the core of the language that `+` is a generic function with 96 implementations. And since generic functions are open, functions are more like protocols which users can also implement.
 
 Let's say we have a function `f` which comes from an existing library we don't control (if you want you can try this code in a [Julia REPL](https://docs.julialang.org/en/v1/stdlib/REPL/)).
 
@@ -230,7 +230,7 @@ Open classes and dynamic dispatch (single or multiple) are not the only approach
 
 - [Typeclasses](https://eli.thegreenplace.net/2018/more-thoughts-on-the-expression-problem-in-haskell/)
 - [Object algebras](https://i.cs.hku.hk/~bruno/oa/) (only available in languages that support generics)
-- [Tagless final](http://okmij.org/ftp/tagless-final/index.html)
+- [Tagless final](https://okmij.org/ftp/tagless-final/index.html)
 
 ## References
 

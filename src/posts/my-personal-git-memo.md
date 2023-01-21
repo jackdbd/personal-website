@@ -63,7 +63,7 @@ You just have to remove the `index.lock` file (not the index!).
 rm .git/index.lock
 ```
 
-Reference [here](https://robots.thoughtbot.com/how-to-fix-rm-f-git-index)
+Reference [here](https://thoughtbot.com/blog/how-to-fix-rm-f-git-index)
 
 ## Permanently remove a file from a repo
 

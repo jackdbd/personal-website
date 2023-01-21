@@ -80,7 +80,7 @@ app = Dash(name=app_name, server=server)
 ## Data
 
 I get the latest 4.5+ magnitude earthquakes from the [USGS](https://www.usgs.gov/) website with a basic, synchronous `GET` request.
-Next time I will try to make an asynchronous request with [asyncio](http://terriblecode.com/blog/asynchronous-http-requests-in-python/) or one of the following libraries: [grequests](https://github.com/kennethreitz/grequests), [asks](https://github.com/theelous3/asks), [curio-http](https://github.com/scribu/curio-http), [requests-futures](https://github.com/ross/requests-futures).
+Next time I will try to make an asynchronous request with [asyncio](https://www.terriblecode.com/blog/asynchronous-http-requests-in-python/) or one of the following libraries: [grequests](https://github.com/kennethreitz/grequests), [asks](https://github.com/theelous3/asks), [curio-http](https://github.com/scribu/curio-http), [requests-futures](https://github.com/ross/requests-futures).
 
 ```python
 usgs = 'http://earthquake.usgs.gov/earthquakes/'
@@ -90,7 +90,7 @@ req = requests.get(url)
 data = json.loads(req.text)
 ```
 
-Choosing the right colors for a visualization is [surprisingly hard](https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/), so I use [ColorBrewer](http://colorbrewer2.org/).
+Choosing the right colors for a visualization is [surprisingly hard](https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/), so I use [ColorBrewer](https://colorbrewer2.org/).
 
 ```python
 # http://colorbrewer2.org/#type=sequential&scheme=YlOrRd&n=5
