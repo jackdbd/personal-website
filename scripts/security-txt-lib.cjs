@@ -1,14 +1,8 @@
-const fs = require('node:fs')
-const { join } = require('node:path')
-const { promisify } = require('node:util')
 const makeDebug = require('debug')
 const openpgp = require('openpgp')
 const { z } = require('zod')
 
-const writeFileAsync = promisify(fs.writeFile)
-
-const PREFIX = '[💬 11ty-plugin-security-txt]'
-const debug = makeDebug('eleventy-plugin-security-txt')
+const debug = makeDebug('security-txt')
 
 // https://securitytxt.org/
 // https://ijmacd.github.io/rfc3339-iso8601/
@@ -56,18 +50,13 @@ const schema = z.object({
 
   hiring: z.string().url().optional(),
 
-  pgpPassphrase: z.string().optional(),
-  pgpPrivateKeyArmored: z.string().optional(),
+  armoredKey: z.string().optional(),
+  passphrase: z.string().optional(),
 
   policy: z.string().url().optional(),
 
   preferredLanguages: z.array(z.string()).default(['en'])
 })
-
-// type Config = z.infer<typeof schema>
-
-// What is the security.txt file?
-// https://youtu.be/f-FbcobQQb8
 
 const content = async ({
   acknowledgments,
@@ -152,18 +141,16 @@ const content = async ({
     })
   } else {
     debug(
-      `tip: it's recommended to sign the content of the security.txt using OpenPGP`
+      `tip: it's recommended to sign the content of the security.txt using a PGP private key`
     )
     return s
   }
 }
 
-// give the plugin configuration function a name, so it can be easily spotted in
-// EleventyErrorHandler
-const securityTxt = (eleventyConfig, providedOptions) => {
+const securityTxt = async (options) => {
   let config = { expires: '' }
 
-  const result = schema.safeParse(providedOptions)
+  const result = schema.safeParse(options)
   if (!result.success) {
     throw new Error(`${PREFIX} invalid configuration: ${result.error.message}`)
   } else {
@@ -172,63 +159,32 @@ const securityTxt = (eleventyConfig, providedOptions) => {
     # please contact us using the contact details below (listed in order of preference).
     # If you want to send us an email, please encrypt your message using our public PGP key.`
 
-    let pgpPassphrase = undefined
-    if (result.data.pgpPassphrase) {
-      pgpPassphrase = result.data.pgpPassphrase.trim()
-    }
-    if (process.env.PGP_PASSPHRASE) {
-      pgpPassphrase = process.env.PGP_PASSPHRASE.trim()
-    }
-
-    let pgpPrivateKeyArmored = undefined
-    if (result.data.pgpPrivateKeyArmored) {
-      pgpPrivateKeyArmored = result.data.pgpPrivateKeyArmored.trim()
+    let armoredKey = undefined
+    if (result.data.armoredKey) {
+      armoredKey = result.data.armoredKey.trim()
     }
     if (process.env.PGP_PRIVATE_KEY_ASCII_ARMOR) {
-      pgpPrivateKeyArmored = process.env.PGP_PRIVATE_KEY_ASCII_ARMOR.trim()
+      armoredKey = process.env.PGP_PRIVATE_KEY_ASCII_ARMOR.trim()
+    }
+
+    let passphrase = undefined
+    if (result.data.passphrase) {
+      passphrase = result.data.passphrase.trim()
+    }
+    if (process.env.PGP_PASSPHRASE) {
+      passphrase = process.env.PGP_PASSPHRASE.trim()
     }
 
     config = {
       ...result.data,
       expires: result.data.expires.toISOString(),
       header: result.data.header || header,
-      pgpPassphrase,
-      pgpPrivateKeyArmored
+      armoredKey,
+      passphrase
     }
   }
 
-  const outdir = join(eleventyConfig.dir.output, '.well-known')
-
-  eleventyConfig.on('eleventy.before', async () => {
-    if (!fs.existsSync(outdir)) {
-      fs.mkdirSync(outdir)
-    }
-
-    let text = ''
-    try {
-      text = await content({
-        acknowledgments: config.acknowledgments,
-        armoredKey: config.pgpPrivateKeyArmored,
-        contacts: config.contacts,
-        domain: config.domain,
-        encryption: config.encryption,
-        expires: config.expires,
-        header: config.header,
-        hiring: config.hiring,
-        passphrase: config.pgpPassphrase,
-        policy: config.policy,
-        preferredLanguages: config.preferredLanguages
-      })
-    } catch (err) {
-      throw new Error(`${PREFIX} ${err.message}`)
-    }
-
-    const filepath = join(outdir, 'security.txt')
-    await writeFileAsync(filepath, text, {
-      encoding: 'utf8'
-    })
-    debug(`wrote ${filepath}`)
-  })
+  return await content(config)
 }
 
-module.exports = { initArguments: {}, configFunction: securityTxt }
+module.exports = { securityTxt }

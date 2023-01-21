@@ -32,7 +32,6 @@ const pairedShortcodes = require('../11ty/paired-shortcodes')
 const transforms = require('../11ty/transforms.js')
 const plausibleClientPromise = import('@jackdbd/plausible-client')
 const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
-const securityTxtPlugin = require('../plugins/11ty/security-txt/index.cjs')
 const webmentionsPlugin = require('../plugins/11ty/webmentions/index.cjs')
 const { buildServiceWorker } = require('../src/build-sw.cjs')
 
@@ -207,42 +206,6 @@ module.exports = function (eleventyConfig) {
   })
 
   const domain = 'www.giacomodebidda.com'
-
-  let pgpPrivateKeyArmored = undefined
-  const filepath_private_key = join(
-    REPO_ROOT,
-    'secrets',
-    'ASCII-armored-PGP-private-key.txt'
-  )
-  if (fs.existsSync(filepath_private_key)) {
-    pgpPrivateKeyArmored = fs.readFileSync(filepath_private_key, {
-      encoding: 'utf8'
-    })
-  }
-  if (process.env.PGP_PRIVATE_KEY_ASCII_ARMOR) {
-    pgpPrivateKeyArmored = process.env.PGP_PRIVATE_KEY_ASCII_ARMOR
-  }
-
-  let pgpPassphrase = undefined
-  const filepath_passphrase = join(REPO_ROOT, 'secrets', 'PGP-passphrase.txt')
-  if (fs.existsSync(filepath_passphrase)) {
-    pgpPassphrase = fs.readFileSync(filepath_passphrase, { encoding: 'utf8' })
-  }
-  if (process.env.PGP_PASSPHRASE) {
-    pgpPassphrase = process.env.PGP_PASSPHRASE
-  }
-
-  eleventyConfig.addPlugin(securityTxtPlugin, {
-    contacts: [
-      'mailto:giacomo@giacomodebidda.com',
-      'https://twitter.com/jackdbd'
-    ],
-    domain,
-    encryption: `https://${domain}/assets/pgp-key.txt`,
-    pgpPassphrase,
-    pgpPrivateKeyArmored,
-    preferredLanguages: ['en', 'it']
-  })
 
   eleventyConfig.addPlugin(webmentionsPlugin, {
     domain,
@@ -454,6 +417,7 @@ module.exports = function (eleventyConfig) {
     'src/includes/assets/img': 'assets/img',
     'src/includes/assets/js': 'assets/js',
     'src/includes/assets/pgp-key.txt': 'assets/pgp-key.txt',
+    'src/includes/assets/security.txt': '.well-known/security.txt',
     'node_modules/@11ty/is-land/is-land.js': 'assets/js/is-land.js',
     'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js',
     'node_modules/htm/dist/htm.module.js': 'assets/js/htm.module.js',
