@@ -480,7 +480,7 @@ class ModelSQLite(object):
 ```
 
 <a><h2>View and Controller</h2></a>
-As I said last time, `View` and `Controller` are completely **decoupled** from the `Model` (and between themselves), so you don't need to change anything in their implementation. If you need the code for these classes, see the [first article](https://www.giacomodebidda.com/blog/mvc-pattern-in-python-introduction-and-basicmodel/) in the series.
+As I said last time, `View` and `Controller` are completely **decoupled** from the `Model` (and between themselves), so you don't need to change anything in their implementation. If you need the code for these classes, see the [first article](https://www.giacomodebidda.com/posts/mvc-pattern-in-python-introduction-and-basicmodel/) in the series.
 
 The only thing to do is to plug the `ModelSQLite` in the `Controller`.
 

@@ -9,7 +9,7 @@ Three years ago I followed a few data science courses offered by the Johns Hopki
 
 Some time ago I had the idea of rewriting the entire thing in Python, so I started looking for a Python equivalent of Shiny. I stumbled upon [Spyre](https://github.com/adamhajari/spyre), [Pyxley](https://github.com/stitchfix/pyxley) and [Superset](https://github.com/apache/incubator-superset)). I immediately discarded Superset. It looked amazing, but I wanted something for a very small application, not an enterprise-ready business intelligence tool. Spyre didn't convince me, and I tried but struggled with Pyxley.
 
-I toyed with the idea of writing the application with a combination of Flask for the logic and routing, Vue.js for the front-end, Webpack for asset bundling and maybe a SASS framework (or toolkit, like [Susy](https://oddbird.net/susy/)) for styling. I knew I would have to invest a considerable amount of time to put everything together, so I left the project on the side for a while.
+I toyed with the idea of writing the application with a combination of Flask for the logic and routing, Vue.js for the front-end, Webpack for asset bundling and maybe a SASS framework (or toolkit, like [Susy](https://www.oddbird.net/susy/)) for styling. I knew I would have to invest a considerable amount of time to put everything together, so I left the project on the side for a while.
 
 A few months passed and I discovered a few more packages: [Bowtie](https://github.com/jwkvam/bowtie), [Bokeh](https://demo.bokehplots.com/), [Dash](https://plot.ly/dash/). I found out that you can also create an [online dashboard with plotly](https://plot.ly/python/create-online-dashboard/).
 

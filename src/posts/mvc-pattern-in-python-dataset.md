@@ -325,7 +325,7 @@ if __name__ == '__main__':
 <a><h2>Switch to PostgreSQL</h2></a>
 OK cool, now that we tested all CRUD operations on a SQLite database, let's try to switch to PostgreSQL.
 
-If you need to setup PostgreSQL on your machine have a look at [this post](https://www.giacomodebidda.com/blog/first-steps-with-postgresql/), otherwise just open a terminal and create a new Postgres user:
+If you need to setup PostgreSQL on your machine have a look at [this post](https://www.giacomodebidda.com/posts/first-steps-with-postgresql/), otherwise just open a terminal and create a new Postgres user:
 
 ```shell
 sudo -i -u postgres
@@ -466,7 +466,7 @@ class ModelDataset(object):
 ```
 
 <a><h2>View and Controller</h2></a>
-`View` and `Controller` are completely **decoupled** from the `Model` (and between themselves), so you don't need to change anything in their implementation. If you need the code for these classes, see the [first article](https://www.giacomodebidda.com/blog/mvc-pattern-in-python-introduction-and-basicmodel/) in the series.
+`View` and `Controller` are completely **decoupled** from the `Model` (and between themselves), so you don't need to change anything in their implementation. If you need the code for these classes, see the [first article](https://www.giacomodebidda.com/posts/mvc-pattern-in-python-introduction-and-basicmodel/) in the series.
 
 The only thing to do is to plug the `ModelDataset` in the `Controller`.
 

@@ -142,6 +142,6 @@ solve(a, b)
 
 ## Strategy VS Template Method
 
-Strategy and [Template Method](https://www.giacomodebidda.com/blog/template-method-pattern-in-python/) are very similar and follow the same principles. The main difference is that in Template Method an implementation is chosen at _compile time_ by _inheritance_, while in Strategy is chosen at _runtime_ by _containment_. See also [here](https://stackoverflow.com/a/669366) to understand the difference between these two behavioral design patterns.
+Strategy and [Template Method](https://www.giacomodebidda.com/posts/template-method-pattern-in-python/) are very similar and follow the same principles. The main difference is that in Template Method an implementation is chosen at _compile time_ by _inheritance_, while in Strategy is chosen at _runtime_ by _containment_. See also [here](https://stackoverflow.com/a/669366) to understand the difference between these two behavioral design patterns.
 
 You need the code? Grab it [here](https://github.com/jackdbd/design-patterns)!
