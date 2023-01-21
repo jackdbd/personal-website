@@ -8,6 +8,7 @@ const navigation = require('@11ty/eleventy-navigation')
 const rss = require('@11ty/eleventy-plugin-rss')
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
 const webcPlugin = require('@11ty/eleventy-plugin-webc')
+const UpgradeHelper = require('@11ty/eleventy-upgrade-help')
 const cspPlugin = require('@jackdbd/eleventy-plugin-content-security-policy')
 const {
   ensureEnvVarsPlugin
@@ -206,6 +207,8 @@ module.exports = function (eleventyConfig) {
     excludeUrls: [
       // several Wikipedia pages return HTTP 302. They shouldn't be an issue.
       'https://en.wikipedia.org/wiki/*',
+      // this article seems no longer online
+      'https://getdango.com/emoji-and-deep-learning/',
       // I don't know why there is a HTTP (not HTTPS!) redirect for this...
       'http://Kepler.gl',
       'https://www.qlik.com/blog/visual-encoding',
@@ -429,6 +432,9 @@ module.exports = function (eleventyConfig) {
     voice: 'en-US-Wavenet-I'
   })
 
+  // UpgradeHelper must be added last
+  eleventyConfig.addPlugin(UpgradeHelper)
+
   // --- 11ty data cascade -------------------------------------------------- //
   // https://www.11ty.dev/docs/data-cascade/
 
@@ -505,26 +511,13 @@ module.exports = function (eleventyConfig) {
   })
   eleventyConfig.setLibrary('md', md)
 
-  // --- Browsersync configuration ------------------------------------------ //
+  // --- Eleventy dev server configuration ---------------------------------- //
 
-  // https://www.11ty.dev/docs/quicktips/not-found/#with-serve
-  eleventyConfig.setBrowserSyncConfig({
-    callbacks: {
-      ready: function (err, browserSync) {
-        const content_404 = fs.readFileSync(join(OUTPUT_DIR, '404.html'))
-
-        browserSync.addMiddleware('*', (req, res) => {
-          // Provides the 404 content without redirect.
-          res.write(content_404)
-          // Add 404 http status code in request header.
-          // res.writeHead(404, { "Content-Type": "text/html" });
-          res.writeHead(404)
-          res.end()
-        })
-      }
-    }
-    // ghostMode: false,
-    // ui: false
+  // https://www.11ty.dev/docs/dev-server/
+  eleventyConfig.setServerOptions({
+    liveReload: true,
+    domDiff: true,
+    port: 8080
   })
 
   // https://www.11ty.dev/docs/config/#configuration-options
