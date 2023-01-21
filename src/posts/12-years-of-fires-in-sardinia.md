@@ -13,7 +13,7 @@ This summer I was looking for some data visualization challenges and I came acro
 
 It's basically a [scrollytelling](https://flowingdata.com/tag/scrollytelling/) visualization, a type of visualization popularized - among others - by [The New York Times](https://www.nytimes.com/interactive/2016/12/07/world/asia/rodrigo-duterte-philippines-drugs-killings.html) and the guys at [The Pudding](https://pudding.cool/).
 
-There were no links to the data that Mauro used, but it was pretty easy to find the datasets from [2005](https://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2005) to [2016](https://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2016), namely 12 years of wild fires in Sardinia.
+There were no links to the data that Mauro used, but it was pretty easy to find the datasets from [2005](http://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2005) to [2016](http://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2016), namely 12 years of wild fires in Sardinia.
 
 I like scrollytelling, but I wanted to do something quick this time. I also wanted to try an online tool (it's also a library, but I used the online tool) developed by Uber: [Kepler.gl](https://kepler.gl/).
 

@@ -39,7 +39,7 @@ def greet(ctx):
     print('Hi! I will create a new Project in {}...'.format(REPOS))
 ```
 
-You can see that the function `greet` is decorated with the decorator `@task`, which makes it an `invoke` task. Every invoke task has a [Context](https://docs.pyinvoke.org/en/latest/getting_started.html#why-context) and can be invoked from the terminal with:
+You can see that the function `greet` is decorated with the decorator `@task`, which makes it an `invoke` task. Every invoke task has a [Context](https://docs.pyinvoke.org/en/latest/api/context.html) and can be invoked from the terminal with:
 
 ```shell
 invoke <task-name>
@@ -230,4 +230,4 @@ _Note: Oviously you don't need to set the `editor.rules`, but since I use it in 
 
 ## Conclusion
 
-With Invoke you can also execute shell commands with `sudo`, create [namespaces](https://docs.pyinvoke.org/en/latest/getting_started.html#creating-namespaces) and use a [MockContext](https://docs.pyinvoke.org/en/latest/concepts/testing.html#use-mockcontext). I didn't need these features this time, but I think I will try them for more complex tasks. I really liked the clean API and the easy of use of Invoke.
+With Invoke you can also execute shell commands with `sudo`, create [namespaces](https://docs.pyinvoke.org/en/latest/concepts/namespaces.html) and use a [MockContext](https://docs.pyinvoke.org/en/latest/concepts/testing.html#use-mockcontext). I didn't need these features this time, but I think I will try them for more complex tasks. I really liked the clean API and the easy of use of Invoke.

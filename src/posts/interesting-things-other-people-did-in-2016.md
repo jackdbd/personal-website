@@ -6,7 +6,7 @@ tags:
 ---
 
 Some time ago I followed a data science course taught by Jeff Leek on Coursera. The course was so good and thorough that eventually they decided to split it into several courses and create a [data science specialization](https://www.coursera.org/specializations/jhu-data-science) out of it.
-During the course Jeff Leek mentioned that toward the end of the year he likes to compile a [list of things other people did during the year](https://simplystatistics.org/2016/12/20/noncomprehensive-list-of-awesome/).
+During the course Jeff Leek mentioned that toward the end of the year he likes to compile a [list of things other people did during the year](https://simplystatistics.org/posts/2016-12-20-noncomprehensive-list-of-awesome/).
 
 I think it's a nice idea, so I'll make a list of the things I stumbled upon during the year and that I found interesting.
 
@@ -15,7 +15,7 @@ Here it is:
 * Nathan Yau posted a scary but entertaining visualization on [how you will die](https://flowingdata.com/2016/01/19/how-you-will-die/). The analysis and data preparation was performed in R, while for the visualization he used D3.js.
 * Omar Wagih created [Guess the Correlation](https://guessthecorrelation.com/), a hilarious game where you try to guess how correlated the two variables in a scatter plot are.
 * Toby Walsh published a [short paper on AI and singularity](https://arxiv.org/pdf/1602.06462v1.pdf). Quite a different opinion than the one expressed by Ray Kurzweil in [The Singularity is Near](https://en.wikipedia.org/wiki/The_Singularity_Is_Near).
-* Clayton d'Arnault wrote a really interesting article about information overload, one of the biggest problem of our hyperconnected society. The title couldn't be more appropriate: [Drowning in a Sea of Information](https://digitalculturist.com/drowning-in-a-sea-of-information-563a3160efbb#.2x8iotwh4). I really like the paragraph about [idea debt](https://jessicaabel.com/2016/01/27/idea-debt/).
+* Clayton d'Arnault wrote a really interesting article about information overload, one of the biggest problem of our hyperconnected society. The title couldn't be more appropriate: [Drowning in a Sea of Information](https://digitalculturist.com/drowning-in-a-sea-of-information-563a3160efbb#.2x8iotwh4). I really like the paragraph about [idea debt](https://jessicaabel.com/idea-debt/).
 * Someone created [dsxyliea](https://geon.github.io/programming/2016/03/03/dsxyliea), a web page that gives you an idea about how people with dyslexia see text.
 * Someone created an [Atari Breakout in a pdf](https://rawgit.com/osnr/horrifying-pdf-experiments/master/breakout.pdf). You have to view the PDF in Chrome to be able to play it. The author created this game to show that PDF has its own JavaScript scripting (which uses a completely different standard library from the Javascript available in a browser).
 * Two twin teenagers built a fusion reactor in their bedroom and posted an [AMA on Reddit](https://www.reddit.com/r/IAmA/comments/4tgsaz/iama_i_built_a_fusion_reactor_in_my_bedroom_ama/).
@@ -32,4 +32,4 @@ _Note: I was really tempted to steal some stuff from Jeff's list, there were rea
 
 ## References
 
-Jeff Leek's ["A non-comprehensive list of awesome things other people did in 2016"](https://simplystatistics.org/2016/12/20/noncomprehensive-list-of-awesome/).
+Jeff Leek's ["A non-comprehensive list of awesome things other people did in 2016"](https://simplystatistics.org/posts/2016-12-20-noncomprehensive-list-of-awesome/).

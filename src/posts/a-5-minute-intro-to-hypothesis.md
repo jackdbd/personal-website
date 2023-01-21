@@ -75,7 +75,7 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
-You can also use a library called [ddt](https://www.giacomodebidda.com/multiply-your-python-unit-test-cases-with-ddt/) to generate many random test cases.
+You can also use a library called [ddt](https://www.giacomodebidda.com/posts/multiply-your-python-unit-test-cases-with-ddt/) to generate many random test cases.
 
 ```python
 # test_example.py

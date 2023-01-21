@@ -20,7 +20,7 @@ John mentioned that a common issue for researches that have to showcase their wo
 
 Given that I had already [heard about Spatialite](https://www.bostongis.com/PrinterFriendly.aspx?content_name=spatialite_tut01), I decided to try it.
 
-In a [toy project of mine](https://github.com/jackdbd/aree-protette) I used some shapefiles available on the [Open Data portal of Tuscany](https://dati.toscana.it/dataset). I loaded the shapefiles with [GeoPandas](https://geopandas.org/), performed some really simple geospatial analysis, and created a few maps with [GeoViews](https://geoviews.org/) and [Cartopy](https://scitools.org.uk/cartopy/docs/latest/index.html). I decided to use Spatialite to export the geometries created by GeoPandas to a SQLite database.
+In a [toy project of mine](https://github.com/jackdbd/aree-protette) I used some shapefiles available on the [Open Data portal of Tuscany](https://dati.toscana.it/dataset). I loaded the shapefiles with [GeoPandas](https://geopandas.org/en/stable/), performed some really simple geospatial analysis, and created a few maps with [GeoViews](https://geoviews.org/) and [Cartopy](https://scitools.org.uk/cartopy/docs/latest/index.html). I decided to use Spatialite to export the geometries created by GeoPandas to a SQLite database.
 
 The `GeoPandas`'s `GeoDataFrame` class inherits from `Pandas`'s `DataFrame`, so it has a `to_sql()` method. I thought: _"I just have to call that method and pass the connection URI to my SQLite database, easy peasy!"_.
 
@@ -102,7 +102,7 @@ So, to recap:
 
 SQLite 3 supports only a few [storage classes (i.e. datatypes)](https://www.sqlite.org/datatype3.html). You need to store your geospatial data as [BLOB](https://en.wikipedia.org/wiki/Binary_large_object).
 
-GeoPandas stores geospatial data as shapely geometries, so you have to convert them somehow. Thanks to [this answer on GIS Stack Exchange](https://gis.stackexchange.com/a/141854/119309) I found that the `shapely.wkb` module provides `dumps()` and `loads()` functions that work almost exactly as their `pickle` and `simplejson` module counterparts. See [here](https://toblerity.org/shapely/manual.html#well-known-formats) for details.
+GeoPandas stores geospatial data as shapely geometries, so you have to convert them somehow. Thanks to [this answer on GIS Stack Exchange](https://gis.stackexchange.com/a/141854/119309) I found that the `shapely.wkb` module provides `dumps()` and `loads()` functions that work almost exactly as their `pickle` and `simplejson` module counterparts. See [here](https://shapely.readthedocs.io/en/stable/manual.html#well-known-formats) for details.
 
 Each geometry in a GeoPandas `GeoDataFrame` is a `GeoSeries`. A `GeoSeries` is basically a shapely geometry with some additional properties. This means that you can convert a geometry into a binary string with something like this:
 
