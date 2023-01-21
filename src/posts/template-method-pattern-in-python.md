@@ -7,7 +7,7 @@ tags:
   - inversion of control
 ---
 
-Behavioral design patterns are a family of patterns which focus on algorithms and the assignments of responsibilities between objects. They help in changing the behavior of the objects and reduce the coupling between them. In this article we will see a Python implementation of the _Template Method_ pattern. Next time we will see the [_Strategy_ pattern](http://www.giacomodebidda.com/blog/strategy-pattern-in-python/).
+Behavioral design patterns are a family of patterns which focus on algorithms and the assignments of responsibilities between objects. They help in changing the behavior of the objects and reduce the coupling between them. In this article we will see a Python implementation of the _Template Method_ pattern. Next time we will see the [_Strategy_ pattern](https://www.giacomodebidda.com/blog/strategy-pattern-in-python/).
 
 Template Method defines an algorithm's skeleton in a base class, and lets subclasses redefine certain steps of the algorithm. The skeleton stays the same for all subclasses, and it defines which methods to call and when to call them. Some methods in the base class are just _placeholders_ (or _hooks_), and they have to be overridden in each subclass.
 

@@ -9,11 +9,11 @@ tags:
   - data visualization
   - geospatial
 ---
-This summer I was looking for some data visualization challenges and I came across [this cool project](https://mauromelis.gitlab.io/sardinia-on-fire/) by Mauro Melis. Mauro created it for a contest organized by [Open Data Sardegna](http://contest.formez.it/), and the jury found it so cool that he won the first prize in the data visualization category.
+This summer I was looking for some data visualization challenges and I came across [this cool project](https://mauromelis.gitlab.io/sardinia-on-fire/) by Mauro Melis. Mauro created it for a contest organized by [Open Data Sardegna](https://contest.formez.it/), and the jury found it so cool that he won the first prize in the data visualization category.
 
 It's basically a [scrollytelling](https://flowingdata.com/tag/scrollytelling/) visualization, a type of visualization popularized - among others - by [The New York Times](https://www.nytimes.com/interactive/2016/12/07/world/asia/rodrigo-duterte-philippines-drugs-killings.html) and the guys at [The Pudding](https://pudding.cool/).
 
-There were no links to the data that Mauro used, but it was pretty easy to find the datasets from [2005](http://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2005) to [2016](http://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2016), namely 12 years of wild fires in Sardinia.
+There were no links to the data that Mauro used, but it was pretty easy to find the datasets from [2005](https://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2005) to [2016](https://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2016), namely 12 years of wild fires in Sardinia.
 
 I like scrollytelling, but I wanted to do something quick this time. I also wanted to try an online tool (it's also a library, but I used the online tool) developed by Uber: [Kepler.gl](https://kepler.gl/).
 
@@ -64,7 +64,7 @@ gdf = pd.concat([gdf2005, gdf2006, gdf2007,
                  gdf2014, gdf2015, gdf2016])
 ```
 
-I experimented a little bit with [GeoViews](http://geoviews.org/) in a Jupyter notebook...
+I experimented a little bit with [GeoViews](https://geoviews.org/) in a Jupyter notebook...
 
 https://res.cloudinary.com/jackdbd/image/upload/v1599200647/experiments_wv8vp5.png
 

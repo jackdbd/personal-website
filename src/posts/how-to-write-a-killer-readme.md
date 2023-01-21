@@ -34,7 +34,7 @@ Stephen Whitmore, author of [The Art of README](https://github.com/noffle/art-of
 >
 > — Ken Williams
 
-Tom Preston Warner even suggests to [writing the README first](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html). I have never tried, but Tom's reasons are very well sound: writing a README first gives you clarity about what you actually want to build, and lets you avoid some pitfalls when you start writing code.
+Tom Preston Warner even suggests to [writing the README first](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html). I have never tried, but Tom's reasons are very well sound: writing a README first gives you clarity about what you actually want to build, and lets you avoid some pitfalls when you start writing code.
 
 A developer who reads your README should be able to answer these questions:
 
@@ -112,7 +112,7 @@ The most important things in a cookbook repository are:
 * Reproducibility: I should be able to run the scripts without any issue. The dependencies are clearly stated and there is a section to explain how to run them. If a script relies on external data, there is a link to the original dataset.
 * Recipes are task-specific.
 * Recipes are not too big.
-* References: there are links to articles/resources to delve deeper into a specific topic (e.g. a script about how to use [lxml](http://lxml.de/) to perform web scraping on a particular website could have a short README with a list of articles about lxml and a screenshot of the target website).
+* References: there are links to articles/resources to delve deeper into a specific topic (e.g. a script about how to use [lxml](https://lxml.de/) to perform web scraping on a particular website could have a short README with a list of articles about lxml and a screenshot of the target website).
 
 Keep in mind that on GitHub you can define a README in each directory, so you can include the necessary information where it is more relevant.
 
@@ -148,7 +148,7 @@ Other examples are [awesome-journalism](https://github.com/eyeseast/awesome-jour
 I wrote this article after reading several articles on how to write a great README. Here are the ones that you _have to_ read:
 
 * [The Art of README](https://github.com/noffle/art-of-readme)
-* [README driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html)
+* [README driven development](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html)
 * [How to write a README that rocks](https://m.dotdev.co/how-to-write-a-readme-that-rocks-bc29f279611a)
 * [How To Get Thousands of Stars on Your Github Project](https://blog.cwrichardkim.com/how-to-get-hundreds-of-stars-on-your-github-project-345b065e20a2)
 * [Top ten reasons why I won't use your open source project](https://changelog.com/posts/top-ten-reasons-why-i-wont-use-your-open-source-project)

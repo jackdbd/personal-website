@@ -8,7 +8,7 @@ tags:
 
 When it comes to manage environments and dependencies in Python projects, a very popular combination includes [Virtualenvwrapper](https://www.giacomodebidda.com/virtual-environments-with-virtualenvwrapper/) to manage environments, and pip to install/remove Python packages. Of course, every time you start working on a project you need to remember to activate the virtual environment of that particular project. For example, with Virtualenvwrapper you would use `workon <your-python-project>`.
 
-A few weeks ago I found out about [Pipenv](http://docs.pipenv.org/en/latest/), an experimental project by Kenneth Reitz. While I was reading the documentation I couldn't help but notice how much Pipenv resembles the Javascript package manager [yarn](https://yarnpkg.com/lang/en/). With yarn — or [npm](<https://en.wikipedia.org/wiki/Npm_(software)>) — you have a single tool that you can use to install/remove packages **and** create/manage environments.
+A few weeks ago I found out about [Pipenv](https://docs.pipenv.org/en/latest/), an experimental project by Kenneth Reitz. While I was reading the documentation I couldn't help but notice how much Pipenv resembles the Javascript package manager [yarn](https://yarnpkg.com/lang/en/). With yarn — or [npm](<https://en.wikipedia.org/wiki/Npm_(software)>) — you have a single tool that you can use to install/remove packages **and** create/manage environments.
 
 In this post I will show you how to use Pipenv in two scenarios: when starting a new project, and when installing the dependencies of a pre-existing project.
 
@@ -293,7 +293,7 @@ pip list
 
 I use Pipenv for [dash-earthquakes](https://github.com/jackdbd/dash-earthquakes), a very simple dashboard that displays the most recent eathquakes in the world (if you are interested in how I created this application, I wrote an [article](https://www.giacomodebidda.com/visualize-earthquakes-with-plotly-dash/) about it).
 
-I wanted to setup [Travis](https://travis-ci.org/) for this project, but it took me a while to figure out how to use pipenv in this environment. A possible solution comes from the [pipenv advanced documentation](http://docs.pipenv.org/en/latest/advanced.html): use a `Makefile` to install pipenv and run the tests.
+I wanted to setup [Travis](https://travis-ci.org/) for this project, but it took me a while to figure out how to use pipenv in this environment. A possible solution comes from the [pipenv advanced documentation](https://docs.pipenv.org/en/latest/advanced.html): use a `Makefile` to install pipenv and run the tests.
 
 Here is how the `Makefile` looks like.
 

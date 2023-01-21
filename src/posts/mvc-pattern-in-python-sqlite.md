@@ -12,9 +12,9 @@ This time we are going to replace the Model and implement a persistance layer wi
 
 Here are the links to the other articles in the series:
 
-1. [MVC pattern in Python: Introduction and BasicModel](http://www.giacomodebidda.com/posts/mvc-pattern-in-python-introduction-and-basicmodel/)
-2. [MVC pattern in Python: SQLite](http://www.giacomodebidda.com/posts/mvc-pattern-in-python-sqlite/)
-3. [MVC pattern in Python: Dataset](http://www.giacomodebidda.com/posts/mvc-pattern-in-python-dataset/)
+1. [MVC pattern in Python: Introduction and BasicModel](https://www.giacomodebidda.com/posts/mvc-pattern-in-python-introduction-and-basicmodel/)
+2. [MVC pattern in Python: SQLite](https://www.giacomodebidda.com/posts/mvc-pattern-in-python-sqlite/)
+3. [MVC pattern in Python: Dataset](https://www.giacomodebidda.com/posts/mvc-pattern-in-python-dataset/)
 
 _All code was written in Python 3.5. If you are using Python 2.7 you should be able to run it with a few minor changes._
 
@@ -114,7 +114,7 @@ Let's say that you have the following requirement for your application: each dat
 
 You could call `connect_to_db` at the beginning of each database operation, but this would open a new database connection for each operation, every time. This doesn't sound too smart, and you should try to reuse a connection that already exists.
 
-You could place a `try/except` block at the beginning of each database operation, but you would end up with a lot of ugly, [duplicate code](http://stackoverflow.com/a/2298357).
+You could place a `try/except` block at the beginning of each database operation, but you would end up with a lot of ugly, [duplicate code](https://stackoverflow.com/a/2298357).
 
 Luckily, in Python there is a better alternative: a decorator.
 The `try/except` block in the code below is dead simple. We just try a very fast query. If it succeeds, it means that there is an open connection that we can use. If it fails, it means that there is no connection or that the connection is closed, and we have to open a new one.
@@ -125,7 +125,7 @@ from sqlite3 import OperationalError, IntegrityError, ProgrammingError
 
 
 # TODO: use this decorator to wrap commit/rollback in a try/except block ?
-# see http://www.kylev.com/2009/05/22/python-decorators-and-database-idioms/
+# see https://www.kylev.com/2009/05/22/python-decorators-and-database-idioms/
 def connect(func):
     """Decorator to (re)open a sqlite database connection when needed.
 
@@ -171,7 +171,7 @@ Your table must contain data about `name`, `price` and `quantity` of every singl
 
 In SQLite there are both ["storage classes" and "datatypes"](https://sqlite.org/datatype3.html), but for the most part, "storage class" is indistinguishable from "datatype" and the two terms can be used interchangeably. So, which storage class should you assign to `name`, `price`, `quantity`? I think a good choice is: `TEXT`, `REAL` and `INTEGER`, respectively.
 
-_Note that here we are defining a table, so we use a [Data Definition Language](https://en.wikipedia.org/wiki/Data_definition_language) and [there is no need to explicitly commit](http://stackoverflow.com/questions/730621/do-ddl-statements-always-give-you-an-implicit-commit-or-can-you-get-an-implicit)_
+_Note that here we are defining a table, so we use a [Data Definition Language](https://en.wikipedia.org/wiki/Data_definition_language) and [there is no need to explicitly commit](https://stackoverflow.com/questions/730621/do-ddl-statements-always-give-you-an-implicit-commit-or-can-you-get-an-implicit)_
 
 ```python
 # sqlite_backend.py
@@ -423,7 +423,7 @@ or this one:
 conn = connect_to_db(DB_name)  # physical database (i.e. a .db file)
 ```
 
-Th former creates an in-memory database, so it's faster and does not create any file. The latter creates a `.db` file that you can explore with tools like [DB Browser for SQLite](http://sqlitebrowser.org/) or even online viewers like [this one](http://inloop.github.io/sqlite-viewer/).
+Th former creates an in-memory database, so it's faster and does not create any file. The latter creates a `.db` file that you can explore with tools like [DB Browser for SQLite](https://sqlitebrowser.org/) or even online viewers like [this one](https://inloop.github.io/sqlite-viewer/).
 
 <a><h2>Model</h2></a>
 Now that all CRUD operations are implemented as simple functions, creating a class for a Model that uses a SQLite database as persistence layer is pretty straightforward.
@@ -480,7 +480,7 @@ class ModelSQLite(object):
 ```
 
 <a><h2>View and Controller</h2></a>
-As I said last time, `View` and `Controller` are completely **decoupled** from the `Model` (and between themselves), so you don't need to change anything in their implementation. If you need the code for these classes, see the [first article](http://www.giacomodebidda.com/blog/mvc-pattern-in-python-introduction-and-basicmodel/) in the series.
+As I said last time, `View` and `Controller` are completely **decoupled** from the `Model` (and between themselves), so you don't need to change anything in their implementation. If you need the code for these classes, see the [first article](https://www.giacomodebidda.com/blog/mvc-pattern-in-python-introduction-and-basicmodel/) in the series.
 
 The only thing to do is to plug the `ModelSQLite` in the `Controller`.
 

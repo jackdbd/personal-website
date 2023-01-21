@@ -5,7 +5,7 @@ tags:
   - git
 ---
 
-A [git hook](http://githooks.com/) is a script that git executes before or after a relevant git event or action is triggered. The hooks are stored in the `.git/hooks` directory of your repository, which is created automatically when you run `git init`.
+A [git hook](https://githooks.com/) is a script that git executes before or after a relevant git event or action is triggered. The hooks are stored in the `.git/hooks` directory of your repository, which is created automatically when you run `git init`.
 
 Git hooks can be really useful to enforce a certain policy on your commits, push your changes to a continuous integration server, or automatically deploy your code.
 

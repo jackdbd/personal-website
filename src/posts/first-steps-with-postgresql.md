@@ -17,7 +17,7 @@ To satisfy the dependencies of the operative system, open a terminal and type:
 sudo apt-get install postgresql postgresql-contrib libpq-dev python-dev
 ```
 
-For the python dependencies, I'd suggest to create a virtual environment with [virtualenv](https://virtualenv.pypa.io/en/stable/), or even better with [virtualenvwrapper](http://www.giacomodebidda.com/blog/virtual-environments-with-virtualenvwrapper/), and install the `psycopg2` driver:
+For the python dependencies, I'd suggest to create a virtual environment with [virtualenv](https://virtualenv.pypa.io/en/stable/), or even better with [virtualenvwrapper](https://www.giacomodebidda.com/blog/virtual-environments-with-virtualenvwrapper/), and install the `psycopg2` driver:
 
 ```shell
 pip install psycopg2
@@ -68,7 +68,7 @@ In the `psql` shell, type:
 ALTER USER test_user WITH PASSWORD 'test_password';
 ```
 
-Don't forget the semi-colon and [avoid double quotation marks](http://blog.lerner.co.il/quoting-postgresql/).
+Don't forget the semi-colon and [avoid double quotation marks](https://blog.lerner.co.il/quoting-postgresql/).
 
 ## Create a database
 
@@ -146,6 +146,6 @@ DROP USER test_user;
 
 Here are some additional resources:
 
-* [psql](http://postgresguide.com/utilities/psql.html)
+* [psql](https://postgresguide.com/utilities/psql.html)
 * [How to secure PostgreSQL on a Ubuntu VPS](https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps)
 * [backup and restore postgreSQL databases with Barman](https://www.digitalocean.com/community/tutorials/how-to-back-up-restore-and-migrate-postgresql-databases-with-barman-on-centos-7)

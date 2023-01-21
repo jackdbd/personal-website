@@ -8,7 +8,7 @@ tags:
 
 `virtualenvwrapper` is a set of shell functions built on top of the `virtualenv` python module, and make it even easier to create and manage python virtual environments.
 
-The [documentation](http://virtualenvwrapper.readthedocs.io/en/latest/install.html) for this project is quite good, but here I wanted to write a reminder (mostly for me) about the configuration of this tool on a Linux server.
+The [documentation](https://virtualenvwrapper.readthedocs.io/en/latest/install.html) for this project is quite good, but here I wanted to write a reminder (mostly for me) about the configuration of this tool on a Linux server.
 
 ## Configuration
 
@@ -40,12 +40,12 @@ export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 ```
 
-Thanks to [this answer on askubuntu](http://askubuntu.com/a/121075) I found out that this difference is due to the different access modality:
+Thanks to [this answer on askubuntu](https://askubuntu.com/a/121075) I found out that this difference is due to the different access modality:
 
 * on your local machine you are accessing the console in interactive, non-login mode, and the `~/.bashrc` file will be sourced;
 * on a remote server (e.g. a DigitalOcean droplet) via SSH you are accessing the console in interactive, login mode, and the `~/.bash_profile` file will be sourced.
 
-If you want to know more about these bash files, see [here](http://stackoverflow.com/questions/415403/whats-the-difference-between-bashrc-bash-profile-and-environment).
+If you want to know more about these bash files, see [here](https://stackoverflow.com/questions/415403/whats-the-difference-between-bashrc-bash-profile-and-environment).
 
 ## Hooks
 

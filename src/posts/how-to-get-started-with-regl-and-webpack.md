@@ -9,11 +9,11 @@ tags:
 
 I have been wanting to play around with the [regl](https://github.com/regl-project/regl) library since I wathed the [talk that Mikola Lysenko gave at PLOTCON 2016](https://www.youtube.com/watch?v=rFjszW5L2aw&t=1196s), and this week I finally decided to invest some time in setting up a repo with Webpack and some regl examples.
 
-regl is a pretty new library, but it seems quite popular among data visualization practitioners. [Jim Vallandingham](http://vallandingham.me/regl_intro.html) and [Peter Beshai](https://peterbeshai.com/beautifully-animate-points-with-webgl-and-regl.html) wrote really nice tutorials about regl, and Nadieh Bremer created the stunning visualization ["A breathing Earth"](https://bl.ocks.org/nbremer/1acc6c95e3bb374dc78329e94f85a9b0).
+regl is a pretty new library, but it seems quite popular among data visualization practitioners. [Jim Vallandingham](https://vallandingham.me/regl_intro.html) and [Peter Beshai](https://peterbeshai.com/beautifully-animate-points-with-webgl-and-regl.html) wrote really nice tutorials about regl, and Nadieh Bremer created the stunning visualization ["A breathing Earth"](https://bl.ocks.org/nbremer/1acc6c95e3bb374dc78329e94f85a9b0).
 
 ## regl and WebGL
 
-Before starting to learn about regl, you need some basic knowledge about WebGL, the low level API to draw 3D graphics in the browser, and its [graphics pipeline (aka rendering pipeline)](http://tsherif.github.io/webgl-presentation/#/). [This article on WebGL Fundamentals](https://webglfundamentals.org/webgl/lessons/webgl-how-it-works.html) does a great job in explaining what WebGL is:
+Before starting to learn about regl, you need some basic knowledge about WebGL, the low level API to draw 3D graphics in the browser, and its [graphics pipeline (aka rendering pipeline)](https://tsherif.github.io/webgl-presentation/#/). [This article on WebGL Fundamentals](https://webglfundamentals.org/webgl/lessons/webgl-how-it-works.html) does a great job in explaining what WebGL is:
 
 > WebGL is just a rasterization engine. It draws points, lines, and triangles based on code you supply.
 
@@ -28,7 +28,7 @@ In regl there are two fundamentals abstractions: **resources** and **commands**.
 * A resource is a handle to something that you load on the GPU, like a texture.
 * A command is a complete representation of the WebGL state required to perform some draw call. It wraps it up and packages it into a single reusable function.
 
-In this article I will only talk about [commands](http://regl.party/api#commands).
+In this article I will only talk about [commands](https://regl.party/api#commands).
 
 ## Project structure and boilerplate
 
@@ -115,7 +115,7 @@ Next, you will need 2 HTML files, one for the index, one for the actual regl app
     <ul>
       <li><a href="/one-shot-rendering.html">one-shot rendering</a></li>
     </ul>
-    <p>For documentation, see the <a href="http://regl.party/" target="_blank">regl API</a>.</p>
+    <p>For documentation, see the <a href="https://regl.party/" target="_blank">regl API</a>.</p>
     <footer>Examples with regl version <code>1.3.0</code></footer>
     <!-- bundle.js is injected here by html-webpack-plugin -->
   </body>
@@ -273,7 +273,7 @@ Ah, don't forget `.babelrc`!
 }
 ```
 
-Check that everything works by running `yarn run dev` and going to `http://localhost:8080/`.
+Check that everything works by running `yarn run dev` and going to `https://localhost:8080/`.
 
 https://res.cloudinary.com/jackdbd/image/upload/v1599302618/webpack-configured_xzitfv.png
 
@@ -300,7 +300,7 @@ Here is a summary:
 A function written in GLSL that runs on your GPU. Its job is to compute vertex positions and set a variable called `gl_Position`. It gets the data from Javascript and can pass other data to the fragment shader.
 
 **Fragment shader**.
-A function written in GLSL that runs on your GPU. Its job is to compute the color of each fragment (you can think of a fragment like a pixel, but the whole story is [more complicated](http://t-machine.org/index.php/2013/10/05/why-is-a-fragment-shader-named-a-fragment-shader/) than that).
+A function written in GLSL that runs on your GPU. Its job is to compute the color of each fragment (you can think of a fragment like a pixel, but the whole story is [more complicated](https://t-machine.org/index.php/2013/10/05/why-is-a-fragment-shader-named-a-fragment-shader/) than that).
 
 **Uniforms**.
 Global variables that you set in Javascript and that are broadcasted to both shaders. They cannot be changed (something similar to `const` in ES6). They stay the same for all vertices during a single draw call.
@@ -309,7 +309,7 @@ Global variables that you set in Javascript and that are broadcasted to both sha
 Data that points to Vertex Buffer Objects. Attributes are used in the vertex shader.
 
 **Primitive**.
-The primitive type for the [element](http://regl.party/api#elements) buffer. WebGL is mostly used to draw triangles, but you can also draw individual points. In regl the supported primitives are: `'points'`, `'lines'`, `'line strip'`, `'line loop'`, `'triangles'`, `'triangle strip'` and `'triangle fan'`.
+The primitive type for the [element](https://regl.party/api#elements) buffer. WebGL is mostly used to draw triangles, but you can also draw individual points. In regl the supported primitives are: `'points'`, `'lines'`, `'line strip'`, `'line loop'`, `'triangles'`, `'triangle strip'` and `'triangle fan'`.
 
 **Count**.
 The number of vertices to draw (e.g. if you want to draw 2 triangles you need to set `count` to 6).
@@ -382,7 +382,7 @@ drawTriangle({
 })
 ```
 
-Run `yarn run dev` and go to `http://localhost:8080/`. You should see something like this:
+Run `yarn run dev` and go to `https://localhost:8080/`. You should see something like this:
 
 https://res.cloudinary.com/jackdbd/image/upload/v1599302618/one-shot-rendering-points_bmyos0.png
 "One-shot rendering: three points at localhost:8080",
@@ -395,7 +395,7 @@ https://res.cloudinary.com/jackdbd/image/upload/v1599302618/one-shot-rendering-t
 
 That's better! Let's stop for a second and try to explain what's going on.
 
-The way we drew this triangle is called [one-shot rendering](http://regl.party/api#one-shot-rendering). The command is executed only once and immediately.
+The way we drew this triangle is called [one-shot rendering](https://regl.party/api#one-shot-rendering). The command is executed only once and immediately.
 
 We called the command with some **props**, which will be available in uniforms and attributes.
 
@@ -471,7 +471,7 @@ https://res.cloudinary.com/jackdbd/image/upload/v1599302618/canvas_shfdsz.png
 
 ## Batch rendering
 
-With [batch rendering](http://regl.party/api#batch-rendering) you can execute a regl command multiple times. The command is executed once for each element of the array passed as argument. Let's see it in action.
+With [batch rendering](https://regl.party/api#batch-rendering) you can execute a regl command multiple times. The command is executed once for each element of the array passed as argument. Let's see it in action.
 
 Create a new HTML file called `batch-rendering.html`:
 
@@ -595,7 +595,7 @@ const drawTriangle = regl({
   },
 
   // disable the depth buffer
-  // http://learningwebgl.com/blog/?p=859
+  // https://learningwebgl.com/blog/?p=859
   depth: {
     enable: false,
   },
@@ -715,7 +715,7 @@ const drawTriangle = regl({
   },
 
   // disable the depth buffer
-  // http://learningwebgl.com/blog/?p=859
+  // https://learningwebgl.com/blog/?p=859
   depth: {
     enable: false,
   },

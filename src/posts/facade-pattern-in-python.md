@@ -19,7 +19,7 @@ Note that the client can still have direct access to these functionalities: the 
 
 > Subsystem implementation gains _flexibility_, client gains _simplicity_.
 
-The [caret package in R](http://topepo.github.io/caret/index.html) is a great example of a Façade, because it wraps a collection of APIs into a single well-designed API. The R programming language contains a huge number of packages for implementing almost all statistical models ever created. Unfortunately, more often then not, these packages have their own specific syntax, so when training/testing the model, one must know the syntax for the model being used. Caret implements a set of functions that provide a uniform interface when creating predictive models (e.g. the functions `train` and `predict`), but if you want you can still use the original syntax to train/test a specific model.
+The [caret package in R](https://topepo.github.io/caret/index.html) is a great example of a Façade, because it wraps a collection of APIs into a single well-designed API. The R programming language contains a huge number of packages for implementing almost all statistical models ever created. Unfortunately, more often then not, these packages have their own specific syntax, so when training/testing the model, one must know the syntax for the model being used. Caret implements a set of functions that provide a uniform interface when creating predictive models (e.g. the functions `train` and `predict`), but if you want you can still use the original syntax to train/test a specific model.
 
 ## Façade Pattern in Python
 

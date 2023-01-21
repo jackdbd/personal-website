@@ -9,7 +9,7 @@ tags:
 
 Every time I want to try out a new Python library or develop a small weekend project I need to create a git repository and configure a virtual environment. Most of the time I forget one passage or another and I end up losing a few minutes searching on Google how to perform some trivial task. Not fun.
 
-Luckily, there are several tools to automate these boring, repetivive tasks. I know a little bit of [make](https://www.gnu.org/software/make/) and [Fabric](http://www.fabfile.org/), but I came across [Invoke](http://docs.pyinvoke.org/en/latest/index.html) and I wanted to try it.
+Luckily, there are several tools to automate these boring, repetivive tasks. I know a little bit of [make](https://www.gnu.org/software/make/) and [Fabric](https://www.fabfile.org/), but I came across [Invoke](https://docs.pyinvoke.org/en/latest/index.html) and I wanted to try it.
 
 I will show you how to automate the creation and the initial configuration of a basic Python project with Invoke.
 
@@ -39,7 +39,7 @@ def greet(ctx):
     print('Hi! I will create a new Project in {}...'.format(REPOS))
 ```
 
-You can see that the function `greet` is decorated with the decorator `@task`, which makes it an `invoke` task. Every invoke task has a [Context](http://docs.pyinvoke.org/en/latest/getting_started.html#why-context) and can be invoked from the terminal with:
+You can see that the function `greet` is decorated with the decorator `@task`, which makes it an `invoke` task. Every invoke task has a [Context](https://docs.pyinvoke.org/en/latest/getting_started.html#why-context) and can be invoked from the terminal with:
 
 ```shell
 invoke <task-name>
@@ -160,7 +160,7 @@ def _setup_pipenv(ctx, repo_dir):
     _create_vscode_settings(ctx, repo_dir)
 ```
 
-I also wanted to create a simple `example.py` file, just to save a few characters when I start writing code. That thing beginning with `<<EOF` and ending with `EOF` is a [Here Document](http://tldp.org/LDP/abs/html/here-docs.html).
+I also wanted to create a simple `example.py` file, just to save a few characters when I start writing code. That thing beginning with `<<EOF` and ending with `EOF` is a [Here Document](https://tldp.org/LDP/abs/html/here-docs.html).
 
 ```python
 def _create_python_module(ctx, repo_dir):
@@ -230,4 +230,4 @@ _Note: Oviously you don't need to set the `editor.rules`, but since I use it in 
 
 ## Conclusion
 
-With Invoke you can also execute shell commands with `sudo`, create [namespaces](http://docs.pyinvoke.org/en/latest/getting_started.html#creating-namespaces) and use a [MockContext](http://docs.pyinvoke.org/en/latest/concepts/testing.html#use-mockcontext). I didn't need these features this time, but I think I will try them for more complex tasks. I really liked the clean API and the easy of use of Invoke.
+With Invoke you can also execute shell commands with `sudo`, create [namespaces](https://docs.pyinvoke.org/en/latest/getting_started.html#creating-namespaces) and use a [MockContext](https://docs.pyinvoke.org/en/latest/concepts/testing.html#use-mockcontext). I didn't need these features this time, but I think I will try them for more complex tasks. I really liked the clean API and the easy of use of Invoke.

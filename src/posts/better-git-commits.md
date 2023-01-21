@@ -54,5 +54,5 @@ Here are some additional resources on writing great commit messages:
 
 * [5 useful tips for a better commit message](https://thoughtbot.com/blog/5-useful-tips-for-a-better-commit-message)
 * [A note about git commit messages](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
-* [Git best practices](http://sethrobertson.github.io/GitBestPractices/)
+* [Git best practices](https://sethrobertson.github.io/GitBestPractices/)
 * [Git commit](https://cbea.ms/git-commit/)

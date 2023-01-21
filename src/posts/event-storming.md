@@ -56,5 +56,5 @@ Event Storming can be a great way to gather business and engineering requirement
 
 ## References
 
-- [Introducing Event Storming (by Alberto Brandolini)](http://ziobrando.blogspot.com/2013/11/introducing-event-storming.html)
+- [Introducing Event Storming (by Alberto Brandolini)](https://ziobrando.blogspot.com/2013/11/introducing-event-storming.html)
 - [Event Storming (Wikipedia)](https://en.wikipedia.org/wiki/Event_storming)

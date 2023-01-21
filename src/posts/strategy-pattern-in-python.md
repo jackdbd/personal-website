@@ -20,7 +20,7 @@ Following these two principles is extremely useful when you want to design a com
 
 ## How to implement a Strategy pattern in Python?
 
-In programming languages like Java you can implement the Strategy pattern by creating a common (abstract) interface and subclassing it with a new class for each strategy. You can do the same in Python, like it's done [here](http://python-3-patterns-idioms-test.readthedocs.io/en/latest/FunctionObjects.html#strategy-choosing-the-algorithm-at-runtime). However, you can also use a leaner approach: create a single `Strategy` class and replace a method of that class, at runtime, with a different function based on a given context.
+In programming languages like Java you can implement the Strategy pattern by creating a common (abstract) interface and subclassing it with a new class for each strategy. You can do the same in Python, like it's done [here](https://python-3-patterns-idioms-test.readthedocs.io/en/latest/FunctionObjects.html#strategy-choosing-the-algorithm-at-runtime). However, you can also use a leaner approach: create a single `Strategy` class and replace a method of that class, at runtime, with a different function based on a given context.
 
 Enough talking, let's see some code!
 
@@ -142,6 +142,6 @@ solve(a, b)
 
 ## Strategy VS Template Method
 
-Strategy and [Template Method](http://www.giacomodebidda.com/blog/template-method-pattern-in-python/) are very similar and follow the same principles. The main difference is that in Template Method an implementation is chosen at _compile time_ by _inheritance_, while in Strategy is chosen at _runtime_ by _containment_. See also [here](http://stackoverflow.com/a/669366) to understand the difference between these two behavioral design patterns.
+Strategy and [Template Method](https://www.giacomodebidda.com/blog/template-method-pattern-in-python/) are very similar and follow the same principles. The main difference is that in Template Method an implementation is chosen at _compile time_ by _inheritance_, while in Strategy is chosen at _runtime_ by _containment_. See also [here](https://stackoverflow.com/a/669366) to understand the difference between these two behavioral design patterns.
 
 You need the code? Grab it [here](https://github.com/jackdbd/design-patterns)!

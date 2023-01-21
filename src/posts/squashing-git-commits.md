@@ -29,7 +29,7 @@ There isn't a `git squash` command. Squashing commits is an operation which can 
 
 ## 1. Reset
 
-This is the easiest approach. I first heard about this method [here](http://stackoverflow.com/a/7275658). You just have to start with a clean working tree and run `git reset --soft HEAD~X`, where `X` is the number of commits to squash together.
+This is the easiest approach. I first heard about this method [here](https://stackoverflow.com/a/7275658). You just have to start with a clean working tree and run `git reset --soft HEAD~X`, where `X` is the number of commits to squash together.
 
 Let's make a simple example to see how it works.
 After some specific commit (`Initial commit` in the image below) you wrote some changes and you committed 3 times. When you wrote those 3 commit messages you just wanted to save your work, maybe because you had to checkout a different branch and fix a bug, or maybe because you don't like to use `git stash`.
@@ -94,10 +94,10 @@ https://res.cloudinary.com/jackdbd/image/upload/v1599303211/squash_9_fjoalj.png
 ## 3. Merge
 
 I must admit I've never tried this approach. It looks overly complicated and uses a git reset, so it's probably the riskiest option of the three. Anyway, this is where I found it:
-[squash-merge](http://stackoverflow.com/a/5190323).
+[squash-merge](https://stackoverflow.com/a/5190323).
 
 ## References
 
-* [To squash or not to squash](http://jamescooke.info/git-to-squash-or-not-to-squash.html)
+* [To squash or not to squash](https://jamescooke.info/git-to-squash-or-not-to-squash.html)
 * [Squashing with rebase, 1](https://ariejan.net/2011/07/05/git-squash-your-latests-commits-into-one/)
 * [Squashing with rebase, 2](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History).

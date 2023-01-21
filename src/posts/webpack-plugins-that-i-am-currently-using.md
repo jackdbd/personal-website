@@ -104,11 +104,11 @@ plugins = [
 ## html-webpack-plugin
 
 [This plugin](https://github.com/jantimon/html-webpack-plugin) is a _must have_. It generates an HTML5 file that includes all your webpack bundles in the body using script tags. This way in your `index.html` file you don't have to include any `<link>` tag in the `<head>` for your stylesheet bundle, nor you have to include any `<script>` tag in the `<body>` for your javascript bundle.
-You can either let the plugin generate an HTML file for you, supply your own template using lodash templates or use your own loader if you are using different templates (e.g. handlebars). If you have the appropriate loaders, [you can even use Django templates](http://stackoverflow.com/questions/42861651/can-i-use-html-webpack-plugin-with-a-django-base-template) with this plugin.
+You can either let the plugin generate an HTML file for you, supply your own template using lodash templates or use your own loader if you are using different templates (e.g. handlebars). If you have the appropriate loaders, [you can even use Django templates](https://stackoverflow.com/questions/42861651/can-i-use-html-webpack-plugin-with-a-django-base-template) with this plugin.
 
 If you have multiple entry points, create an instance of this plugin for each one of them.
 
-_A small gotcha_: if you forget to remove the `<link>` tag or your `<script>` tag in your `index.html` , Webpack [executes twice](http://stackoverflow.com/questions/37081559/all-my-code-runs-twice-when-compiled-by-webpack) all the code required by your entry point.
+_A small gotcha_: if you forget to remove the `<link>` tag or your `<script>` tag in your `index.html` , Webpack [executes twice](https://stackoverflow.com/questions/37081559/all-my-code-runs-twice-when-compiled-by-webpack) all the code required by your entry point.
 
 ```javascript
 plugins = [

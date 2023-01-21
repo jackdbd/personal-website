@@ -62,13 +62,13 @@ Peopleware is definitely against micromanagement and "carrot and stick" approach
 
 Most of creative people (e.g. designers, engineers) love their work, so a manager doesn't really have to adopt strict measures to keep these people working. In fact, he may even have to take steps to make them work less, and thus get more _meaningful work_ done.
 
-Leaving people "loose" doesn't mean restraining from measuring their performance. Even if you are not sure, you should start nonetheless, because according to the [Gilb's Law](http://vanderburg.org/blog/2003/02/03/gilbs-trap.html) anything you need to quantify can be measured in some way that is superior to not measuring it at all.
+Leaving people "loose" doesn't mean restraining from measuring their performance. Even if you are not sure, you should start nonetheless, because according to the [Gilb's Law](https://vanderburg.org/blog/2003/02/03/gilbs-trap.html) anything you need to quantify can be measured in some way that is superior to not measuring it at all.
 
-The authors advocate the rise of an "invisible manager", someone who [stands somewhere behind the scenes, observing that things are alright, and acts on things which aren't](http://www.oscarberg.net/2012/05/invisible-manager.html). Such manager can manage a team without the team members knowing they've been "managed".
+The authors advocate the rise of an "invisible manager", someone who [stands somewhere behind the scenes, observing that things are alright, and acts on things which aren't](https://www.oscarberg.net/2012/05/invisible-manager.html). Such manager can manage a team without the team members knowing they've been "managed".
 
 > The manager's function is not to make people work, but to make it possible for people to work.
 
-For a manager is essential to read and internalize the [seven false hopes of software management](http://mysticmundane.blogspot.it/2008/03/seven-false-hopes-of-software.html). I particularly like the number 5: Because of the backlog, you need to double productivity immediately. I struggle with this rule every time I want to start a small personal project. I have a Trello board with more than 100 items in my "Backlog" list. I know I would have fun in doing them, but I also know that I don't have the time for doing even half of them. And when something ends up in a Backlog, it's hard to prioritize it and/or think of it as a potential loss of my leisure time.
+For a manager is essential to read and internalize the [seven false hopes of software management](https://mysticmundane.blogspot.it/2008/03/seven-false-hopes-of-software.html). I particularly like the number 5: Because of the backlog, you need to double productivity immediately. I struggle with this rule every time I want to start a small personal project. I have a Trello board with more than 100 items in my "Backlog" list. I know I would have fun in doing them, but I also know that I don't have the time for doing even half of them. And when something ends up in a Backlog, it's hard to prioritize it and/or think of it as a potential loss of my leisure time.
 
 ## Quality
 
@@ -86,7 +86,7 @@ The authors are pretty critical of methodologies. They say that methodologies ai
 
 ## Meetings
 
-Every other day we read articles against unnecessary meetings. Take for example this recent piece about Jeff Bezos's [two pizza rule for meetings](http://www.businessinsider.com/amazon-jeff-bezos-two-pizza-rule-productive-meetings-2017-7?IR=T). I think most of these articles do not add much value to what the authors of Peopleware wrote 30 years ago: regular meetings are most likely _unnecessary_.
+Every other day we read articles against unnecessary meetings. Take for example this recent piece about Jeff Bezos's [two pizza rule for meetings](https://www.businessinsider.com/amazon-jeff-bezos-two-pizza-rule-productive-meetings-2017-7?IR=T). I think most of these articles do not add much value to what the authors of Peopleware wrote 30 years ago: regular meetings are most likely _unnecessary_.
 
 There should be a meeting only when it's actually _needed_. There must be a real reason for _all the people_ invited to think through some matter together. The purpose of the meeting is to _reach consensus_. Such a meeting is, almost by definition, an _ad hoc affair_.
 

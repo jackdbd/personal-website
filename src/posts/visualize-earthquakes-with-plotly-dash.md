@@ -9,7 +9,7 @@ Three years ago I followed a few data science courses offered by the Johns Hopki
 
 Some time ago I had the idea of rewriting the entire thing in Python, so I started looking for a Python equivalent of Shiny. I stumbled upon [Spyre](https://github.com/adamhajari/spyre), [Pyxley](https://github.com/stitchfix/pyxley) and [Superset](https://github.com/apache/incubator-superset)). I immediately discarded Superset. It looked amazing, but I wanted something for a very small application, not an enterprise-ready business intelligence tool. Spyre didn't convince me, and I tried but struggled with Pyxley.
 
-I toyed with the idea of writing the application with a combination of Flask for the logic and routing, Vue.js for the front-end, Webpack for asset bundling and maybe a SASS framework (or toolkit, like [Susy](http://oddbird.net/susy/)) for styling. I knew I would have to invest a considerable amount of time to put everything together, so I left the project on the side for a while.
+I toyed with the idea of writing the application with a combination of Flask for the logic and routing, Vue.js for the front-end, Webpack for asset bundling and maybe a SASS framework (or toolkit, like [Susy](https://oddbird.net/susy/)) for styling. I knew I would have to invest a considerable amount of time to put everything together, so I left the project on the side for a while.
 
 A few months passed and I discovered a few more packages: [Bowtie](https://github.com/jwkvam/bowtie), [Bokeh](https://demo.bokehplots.com/), [Dash](https://plot.ly/dash/). I found out that you can also create an [online dashboard with plotly](https://plot.ly/python/create-online-dashboard/).
 
@@ -83,7 +83,7 @@ I get the latest 4.5+ magnitude earthquakes from the [USGS](https://www.usgs.gov
 Next time I will try to make an asynchronous request with [asyncio](https://www.terriblecode.com/blog/asynchronous-http-requests-in-python/) or one of the following libraries: [grequests](https://github.com/kennethreitz/grequests), [asks](https://github.com/theelous3/asks), [curio-http](https://github.com/scribu/curio-http), [requests-futures](https://github.com/ross/requests-futures).
 
 ```python
-usgs = 'http://earthquake.usgs.gov/earthquakes/'
+usgs = 'https://earthquake.usgs.gov/earthquakes/'
 geoJsonFeed = 'feed/v1.0/summary/4.5_month.geojson'
 url = '{}{}'.format(usgs, geoJsonFeed)
 req = requests.get(url)
@@ -93,7 +93,7 @@ data = json.loads(req.text)
 Choosing the right colors for a visualization is [surprisingly hard](https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/), so I use [ColorBrewer](https://colorbrewer2.org/).
 
 ```python
-# http://colorbrewer2.org/#type=sequential&scheme=YlOrRd&n=5
+# https://colorbrewer2.org/#type=sequential&scheme=YlOrRd&n=5
 colorscale_magnitude = [
     [0, '#ffffb2'],
     [0.25, '#fecc5c'],
@@ -102,7 +102,7 @@ colorscale_magnitude = [
     [1, '#bd0026'],
 ]
 
-# http://colorbrewer2.org/#type=sequential&scheme=Greys&n=3
+# https://colorbrewer2.org/#type=sequential&scheme=Greys&n=3
 colorscale_depth = [
     [0, '#f0f0f0'],
     [0.5, '#bdbdbd'],
