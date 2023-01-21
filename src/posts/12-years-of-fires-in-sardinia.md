@@ -9,13 +9,13 @@ tags:
   - data visualization
   - geospatial
 ---
-This summer I was looking for some data visualization challenges and I came across [this cool project](https://mauromelis.gitlab.io/sardinia-on-fire/) by Mauro Melis. Mauro created it for a contest organized by [Open Data Sardegna](http://contest.formez.it/), and the jury found it so cool that he won the first prize in the data visualization category.
+This summer I was looking for some data visualization challenges and I came across [this cool project](https://mauromelis.gitlab.io/sardinia-on-fire/) by Mauro Melis. Mauro created it for a contest organized by [Open Data Sardegna](https://contest.formez.it/), and the jury found it so cool that he won the first prize in the data visualization category.
 
 It's basically a [scrollytelling](https://flowingdata.com/tag/scrollytelling/) visualization, a type of visualization popularized - among others - by [The New York Times](https://www.nytimes.com/interactive/2016/12/07/world/asia/rodrigo-duterte-philippines-drugs-killings.html) and the guys at [The Pudding](https://pudding.cool/).
 
-There were no links to the data that Mauro used, but it was pretty easy to find the datasets from [2005](http://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2005) to [2016](http://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2016), namely 12 years of wild fires in Sardinia.
+There were no links to the data that Mauro used, but it was pretty easy to find the datasets from [2005](https://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2005) to [2016](https://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2016), namely 12 years of wild fires in Sardinia.
 
-I like scrollytelling, but I wanted to do something quick this time. I also wanted to try an online tool (it's also a library, but I used the online tool) developed by Uber: [Kepler.gl](http://kepler.gl/#/).
+I like scrollytelling, but I wanted to do something quick this time. I also wanted to try an online tool (it's also a library, but I used the online tool) developed by Uber: [Kepler.gl](https://kepler.gl/).
 
 ## Shapefiles? GeoPandas!
 
@@ -64,7 +64,7 @@ gdf = pd.concat([gdf2005, gdf2006, gdf2007,
                  gdf2014, gdf2015, gdf2016])
 ```
 
-I experimented a little bit with [GeoViews](http://geoviews.org/) in a Jupyter notebook...
+I experimented a little bit with [GeoViews](https://geoviews.org/) in a Jupyter notebook...
 
 https://res.cloudinary.com/jackdbd/image/upload/v1599200647/experiments_wv8vp5.png
 
@@ -78,7 +78,7 @@ df.to_csv('sardinia_fires.csv')
 
 While this worked, it resulted in a ~150MB CSV file. This is because I was including in the output the geometries of all the polygons. I uploaded the CSV file to Kepler.gl and it actually worked (well, I wasn't exactly surprised given that Kepler was developed to visualize Uber's data), but it took some time (I think ~10 minutes to upload).
 
-I explored the data in [Kepler.gl](http://kepler.gl/#/demo) for a couple of minutes. The vast majority of the wild fires in these datasets were quite small, so they looked like points. I decided to get rid of the `geometry` column in the `GeoDataFrame` and to export only the coordinates of the centroid of each polygon. This was super easy to do with GeoPandas:
+I explored the data in [Kepler.gl](https://kepler.gl/demo) for a couple of minutes. The vast majority of the wild fires in these datasets were quite small, so they looked like points. I decided to get rid of the `geometry` column in the `GeoDataFrame` and to export only the coordinates of the centroid of each polygon. This was super easy to do with GeoPandas:
 
 ```python
 gdf['CentroidLongitude'] = gdf['geometry'].apply(lambda poly: poly.centroid.bounds[0])
@@ -87,7 +87,7 @@ gdf['CentroidLatitude'] = gdf['geometry'].apply(lambda poly: poly.centroid.bound
 
 The resulting CSV file was obviously much smaller.
 
-I decided to use the following [visual encoding](https://blog.qlik.com/visual-encoding) for the points (well, circles):
+I decided to use the following [visual encoding](https://www.qlik.com/blog/visual-encoding) for the points (well, circles):
 
 * color correlates with number of fires (yellow = less fires; purple = more fires)
 * size correlates with area (in hectares).
@@ -120,4 +120,4 @@ You can find the [repository on GitHub](https://github.com/jackdbd/sardinia-fire
 
 ## A Note on Reproducibilty
 
-I recently tried to reproduce the notebook and I had to exclude the dataset from 2010. I think this is due to some dependency issues with [fiona](https://macwright.org/2012/10/31/gis-with-python-shapely-fiona.html), which is used by GeoPandas.
+I recently tried to reproduce the notebook and I had to exclude the dataset from 2010. I think this is due to some dependency issues with [fiona](https://macwright.com/2012/10/31/gis-with-python-shapely-fiona.html), which is used by GeoPandas.

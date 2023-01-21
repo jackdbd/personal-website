@@ -8,19 +8,19 @@ tags:
   - python
   - geospatial
 ---
-I have been doing some geospatial analysis in the last few months, and since I came back from [GeoPython](http://2018.geopython.net/) in Basel (really good conference by the way, definitely recommended) I kept playing around with several Python libraries.
+I have been doing some geospatial analysis in the last few months, and since I came back from [GeoPython](https://2018.geopython.net/) in Basel (really good conference by the way, definitely recommended) I kept playing around with several Python libraries.
 
 https://twitter.com/jackdbd/status/994548711664570369
 
-One of my favourite talks at the conference was by [John A Stevenson](http://all-geo.org/volcan01010/), a Scottish volcanologist.
+One of my favourite talks at the conference was by [John A Stevenson](https://all-geo.org/volcan01010/), a Scottish volcanologist.
 
 Apart from the scans of his amazing field notebooks, beautifully filled with annotations and drawings, I was impressed by his technical expertise and passion for his work.
 
 John mentioned that a common issue for researches that have to showcase their work at conferences is to deal with shapefiles. Instead of having to juggle with many different folders, files, and versions, he suggested to use a portable geospatial database. He mentioned two software solutions: [Geopackage](https://cholmes.wordpress.com/2013/08/20/spatialite-and-geopackage/) and [Spatialite](https://en.wikipedia.org/wiki/SpatiaLite).
 
-Given that I had already [heard about Spatialite](http://www.bostongis.com/PrinterFriendly.aspx?content_name=spatialite_tut01), I decided to try it.
+Given that I had already [heard about Spatialite](https://www.bostongis.com/PrinterFriendly.aspx?content_name=spatialite_tut01), I decided to try it.
 
-In a [toy project of mine](https://github.com/jackdbd/aree-protette) I used some shapefiles available on the [Open Data portal of Tuscany](http://dati.toscana.it/dataset). I loaded the shapefiles with [GeoPandas](http://geopandas.org/), performed some really simple geospatial analysis, and created a few maps with [GeoViews](http://geoviews.org/) and [Cartopy](https://scitools.org.uk/cartopy/docs/latest/index.html). I decided to use Spatialite to export the geometries created by GeoPandas to a SQLite database.
+In a [toy project of mine](https://github.com/jackdbd/aree-protette) I used some shapefiles available on the [Open Data portal of Tuscany](https://dati.toscana.it/dataset). I loaded the shapefiles with [GeoPandas](https://geopandas.org/), performed some really simple geospatial analysis, and created a few maps with [GeoViews](https://geoviews.org/) and [Cartopy](https://scitools.org.uk/cartopy/docs/latest/index.html). I decided to use Spatialite to export the geometries created by GeoPandas to a SQLite database.
 
 The `GeoPandas`'s `GeoDataFrame` class inherits from `Pandas`'s `DataFrame`, so it has a `to_sql()` method. I thought: _"I just have to call that method and pass the connection URI to my SQLite database, easy peasy!"_.
 
@@ -73,7 +73,7 @@ Now that you have your table, you can use the Spatialite extension to add a new 
 
 You might wonder: _why do I have to add this column now? Couldn't I have added the column when I created the table?_
 
-According to the [Spatialite documentation](http://www.gaia-gis.it/gaia-sins/spatialite-cookbook/html/new-geom.html), you always must _first create the table_, then add the Geometry-column in a _second time and as a separate step_.
+According to the [Spatialite documentation](https://www.gaia-gis.it/gaia-sins/spatialite-cookbook/html/new-geom.html), you always must _first create the table_, then add the Geometry-column in a _second time and as a separate step_.
 
 Another thing you have to is to load the Spatialite extension and to initialize your spatial metadata.
 
@@ -102,7 +102,7 @@ So, to recap:
 
 SQLite 3 supports only a few [storage classes (i.e. datatypes)](https://www.sqlite.org/datatype3.html). You need to store your geospatial data as [BLOB](https://en.wikipedia.org/wiki/Binary_large_object).
 
-GeoPandas stores geospatial data as shapely geometries, so you have to convert them somehow. Thanks to [this answer on GIS Stack Exchange](https://gis.stackexchange.com/a/141854/119309) I found that the `shapely.wkb` module provides `dumps()` and `loads()` functions that work almost exactly as their `pickle` and `simplejson` module counterparts. See [here](http://toblerity.org/shapely/manual.html#well-known-formats) for details.
+GeoPandas stores geospatial data as shapely geometries, so you have to convert them somehow. Thanks to [this answer on GIS Stack Exchange](https://gis.stackexchange.com/a/141854/119309) I found that the `shapely.wkb` module provides `dumps()` and `loads()` functions that work almost exactly as their `pickle` and `simplejson` module counterparts. See [here](https://toblerity.org/shapely/manual.html#well-known-formats) for details.
 
 Each geometry in a GeoPandas `GeoDataFrame` is a `GeoSeries`. A `GeoSeries` is basically a shapely geometry with some additional properties. This means that you can convert a geometry into a binary string with something like this:
 

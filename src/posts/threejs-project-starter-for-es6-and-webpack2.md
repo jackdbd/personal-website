@@ -18,16 +18,16 @@ As most developers know, the best way to learn is to build some stuff, so I deci
 
 ## ES6, Babel and Webpack
 
-ES6, also known as Ecma Script 2015, is the next generation Javascript and introduces a lot of [great features](https://babeljs.io/learn-es2015/) into the language. The [latest versions of Node.js already support many features of this syntax](https://nodejs.org/en/docs/es6/), but several browsers, especially the older ones, are still behind in adopting this new standard and some features are still [not fully supported](http://caniuse.com/#search=es6). Luckily there are some great tools, like [Babel](https://babeljs.io/), that let you write ES6 Javascript and _transpile_ it to ES5.1 Javascript (or any other version you want).
+ES6, also known as Ecma Script 2015, is the next generation Javascript and introduces a lot of [great features](https://babeljs.io/learn-es2015/) into the language. The [latest versions of Node.js already support many features of this syntax](https://nodejs.org/en/docs/es6/), but several browsers, especially the older ones, are still behind in adopting this new standard and some features are still [not fully supported](https://caniuse.com/#search=es6). Luckily there are some great tools, like [Babel](https://babeljs.io/), that let you write ES6 Javascript and _transpile_ it to ES5.1 Javascript (or any other version you want).
 
-You can use a tool like `babel-cli` to _transpile_ your ES6 Javascript to ES5.1 Javascript manually, but there are better options that let you automate this process. In the Javascript ecosystem there are many task runners suited for this job. Until some years ago the most popular options were [Grunt](https://gruntjs.com/), [Gulp](http://gulpjs.com/) and [Broccoli](http://broccolijs.com/). Nowadays it seems that everyone is using a module bundler like [Neutrino](https://www.npmjs.com/package/neutrino), [Rollup](https://rollupjs.org/) or [Webpack](https://webpack.github.io/). I opted for Webpack version 2.
+You can use a tool like `babel-cli` to _transpile_ your ES6 Javascript to ES5.1 Javascript manually, but there are better options that let you automate this process. In the Javascript ecosystem there are many task runners suited for this job. Until some years ago the most popular options were [Grunt](https://gruntjs.com/), [Gulp](https://gulpjs.com/) and [Broccoli](https://broccolijs.com/). Nowadays it seems that everyone is using a module bundler like [Neutrino](https://www.npmjs.com/package/neutrino), [Rollup](https://rollupjs.org/) or [Webpack](https://webpack.github.io/). I opted for Webpack version 2.
 
 It took me a while to write the configuration file for Webpack, but at least it's a _set-and-forget_ thing.
 After you have done it, you can write ES6 code, and your Webpack toolchain will take care of transpiling it to ES5.1 and bundling it into a single file (usually called `bundle.js`).
 
 ## ESLint and AirBnB style guide
 
-I think that one of the best way to write clean and readable code is to use a linter, and for ES6 there is [ESLint](http://eslint.org/). Writing all the rules for your linter is just insane and counterproductive, so I decided to use a popular style guide and stick to it. After a quick search I found out that the [AirBnB Javascript style guide](https://github.com/airbnb/javascript) is one of - if not _the_ - most popular style guide. I tried it for a while and I immediately liked it. It seems pretty strict, and I've already learned several things thanks to the warnings given me by the linter.
+I think that one of the best way to write clean and readable code is to use a linter, and for ES6 there is [ESLint](https://eslint.org/). Writing all the rules for your linter is just insane and counterproductive, so I decided to use a popular style guide and stick to it. After a quick search I found out that the [AirBnB Javascript style guide](https://github.com/airbnb/javascript) is one of - if not _the_ - most popular style guide. I tried it for a while and I immediately liked it. It seems pretty strict, and I've already learned several things thanks to the warnings given me by the linter.
 
 ## SASS
 
@@ -60,11 +60,11 @@ If you want to give Three.js a try, clone the repo [threejs-es6-webpack-starter]
 
 ## Additional resources
 
-You can find some really nice tutorials about shaders and Custom Materials in Three.js [here](http://blog.cjgammon.com/threejs-custom-shader-material), [here](https://github.com/Jam3/jam3-lesson-webgl-shader-threejs) and [here](https://aerotwist.com/tutorials/an-introduction-to-shaders-part-1/).
+You can find some really nice tutorials about shaders and Custom Materials in Three.js [here](https://blog.cjgammon.com/threejs-custom-shader-material), [here](https://github.com/Jam3/jam3-lesson-webgl-shader-threejs) and [here](https://aerotwist.com/tutorials/an-introduction-to-shaders-part-1/).
 
 For some more advanced stuff on shaders see these websites:
 
 * [Shadertoy](https://www.shadertoy.com/)
-* [GLSL Sandbox](http://glslsandbox.com/)
-* [The Book of Shaders](http://thebookofshaders.com/)
-* [Kick.js shader editor](http://www.kickjs.org/example/shader_editor/shader_editor.html)
+* [GLSL Sandbox](https://glslsandbox.com/)
+* [The Book of Shaders](https://thebookofshaders.com/)
+* [Kick.js shader editor](https://www.kickjs.org/example/shader_editor/shader_editor.html)

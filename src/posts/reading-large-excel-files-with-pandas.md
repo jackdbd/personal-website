@@ -73,7 +73,7 @@ if __name__ == '__main__':
     df = make_df_from_excel('claims-2002-2006_0.xls', nrows=10000)
 ```
 
-Another thing to keep in mind. When working with [Excel files in Python](http://www.python-excel.org/), you might need to use different packages whether you need to read/write data from/to `.xls` and `.xlsx` files.
+Another thing to keep in mind. When working with [Excel files in Python](https://www.python-excel.org/), you might need to use different packages whether you need to read/write data from/to `.xls` and `.xlsx` files.
 
 This dataset contained both `.xls` and `.xlsx` files, so I had to use [xlrd](https://github.com/python-excel/xlrd) to read them. Please [be aware](https://groups.google.com/forum/#!msg/python-excel/P6TjJgFVjMI/g8d0eWxTBQAJ) that if your only concern is reading `.xlsx` files, then [openpyxl](https://openpyxl.readthedocs.io/en/stable/) is the way to go, even if xlrd [could still be faster](https://stackoverflow.com/questions/35823835/reading-excel-file-is-magnitudes-slower-using-openpyxl-compared-to-xlrd).
 

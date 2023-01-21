@@ -14,7 +14,7 @@ For a weekend project I wanted to create a visualization of a simple graph with 
 
 ## Looking for some data
 
-I started looking for JSON files that contained the necessary information to represent a small social network graph. To my surprise, I didn't find any. Instead, I found some small network data sets as GML files [here](https://networkdata.ics.uci.edu/index.php) and [here](http://www-personal.umich.edu/~mejn/netdata/). I had never heard of the GML file format before, but since I liked these data sets I decided to proceed. At the end of the article you can see a visualization of a small social network of dolphins (62 nodes, 159 edges). The original file (`dolphins.gml`) was found on [this page](https://networkdata.ics.uci.edu/data.php?id=6) of the University of California Irvine.
+I started looking for JSON files that contained the necessary information to represent a small social network graph. To my surprise, I didn't find any. Instead, I found some small network data sets as GML files [here](https://networkdata.ics.uci.edu/index.php) and [here](https://www-personal.umich.edu/~mejn/netdata/). I had never heard of the GML file format before, but since I liked these data sets I decided to proceed. At the end of the article you can see a visualization of a small social network of dolphins (62 nodes, 159 edges). The original file (`dolphins.gml`) was found on [this page](https://networkdata.ics.uci.edu/data.php?id=6) of the University of California Irvine.
 
 ## GML (Graph Modelling Language)
 
@@ -57,7 +57,7 @@ It doesn't look to different from a JSON file, but the problem is that D3 cannot
 
 ## NetworkX
 
-[NetworkX](http://networkx.readthedocs.io/en/networkx-1.11/index.html) is a Python package for the creation, manipulation, and study of the structure, dynamics, and functions of complex networks. It's distributed with a BSD license and was developed by Aric Hagberg, Dan Schulz and Pieter Swart.
+[NetworkX](https://networkx.readthedocs.io/en/networkx-1.11/index.html) is a Python package for the creation, manipulation, and study of the structure, dynamics, and functions of complex networks. It's distributed with a BSD license and was developed by Aric Hagberg, Dan Schulz and Pieter Swart.
 
 In NetworkX one can create graphs for undirected and directed networks, add and remove nodes and edges in different ways, visualize the network and export network data to draw it with an external tool.
 
@@ -84,7 +84,7 @@ https://res.cloudinary.com/jackdbd/image/upload/v1599303249/dolphins_2_osadpo.pn
 
 The network data can also be exported and visualized in a program like GraphViz or Gephi, or, like I will do here, in D3.
 
-I didn't play with NetworkX too much, but from what I've seen [the documentation is great](http://networkx.readthedocs.io/en/networkx-1.11/tutorial/). There is also a nice presentation [here](https://www.cl.cam.ac.uk/~cm542/teaching/2010/stna-pdfs/stna-lecture8.pdf).
+I didn't play with NetworkX too much, but from what I've seen [the documentation is great](https://networkx.readthedocs.io/en/networkx-1.11/tutorial/). There is also a nice presentation [here](https://www.cl.cam.ac.uk/~cm542/teaching/2010/stna-pdfs/stna-lecture8.pdf).
 
 Here is the snippet of code to convert a GML file into a JSON file:
 
@@ -101,7 +101,7 @@ with open('dolphins.json', 'w') as fp:
     json.dump(d, fp)
 ```
 
-Note that the GML file I used with the latest NetworkX version (1.11) caused the Exception `networkx.exception.NetworkXError: cannot tokenize u'graph' at (2, 1)`. I downgraded NetworkX to version 1.9.1 as suggestes in [this thread](https://www.bountysource.com/issues/27097685-problem-reading-gml-file) and it worked fine. Another approach would have been to [format the GML file in a different way](http://stackoverflow.com/questions/32895291/unexpected-error-reading-gml-graph/37819717#37819717).
+Note that the GML file I used with the latest NetworkX version (1.11) caused the Exception `networkx.exception.NetworkXError: cannot tokenize u'graph' at (2, 1)`. I downgraded NetworkX to version 1.9.1 as suggestes in [this thread](https://www.bountysource.com/issues/27097685-problem-reading-gml-file) and it worked fine. Another approach would have been to [format the GML file in a different way](https://stackoverflow.com/questions/32895291/unexpected-error-reading-gml-graph/37819717#37819717).
 
 ## The D3 visualization
 
@@ -120,4 +120,4 @@ Additional information on the network can be found in:
 
 * _D. Lusseau, The emergent properties of a dolphin social network, Proc. R. Soc. London B (suppl.) 270, S186-S188 (2003)._
 
-* _D. Lusseau, [Evidence for social role in a dolphin social network](http://arxiv.org/abs/q-bio.PE/0607048), Preprint q-bio/0607048_
+* _D. Lusseau, [Evidence for social role in a dolphin social network](https://arxiv.org/abs/q-bio.PE/0607048), Preprint q-bio/0607048_

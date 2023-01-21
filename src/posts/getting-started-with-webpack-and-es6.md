@@ -31,7 +31,7 @@ Here is a nice checklist:
 
 Take some time to think about your project. Will it be a small project? A big one? Are you going to use third-party Javascript / CSS libraries? What about a CSS preprocessor like SASS? Do you need different environments (e.g. development, production, test)?
 
-The structure of your project depends on the type of application you are developing, the size of the project itself, and of course on personal preferences. You can use some common principles and general guidelines though. A popular approach is to follow [the Twelve Factor App](https://12factor.net/) (see also [here](http://www.clearlytech.com/2014/01/04/12-factor-apps-plain-english/) for an explanation easier to digest than the original one). Probably for small projects - like this one - such considerations are a bit an overkill, but I think it's important to keep that in mind anyway.
+The structure of your project depends on the type of application you are developing, the size of the project itself, and of course on personal preferences. You can use some common principles and general guidelines though. A popular approach is to follow [the Twelve Factor App](https://12factor.net/) (see also [here](https://www.clearlytech.com/2014/01/04/12-factor-apps-plain-english/) for an explanation easier to digest than the original one). Probably for small projects - like this one - such considerations are a bit an overkill, but I think it's important to keep that in mind anyway.
 
 In this article we are going to create a very simple project. In the end it will look like this:
 
@@ -128,17 +128,17 @@ babel-core is the Babel compiler itself, or maybe it's more appropriate calling 
 yarn add --dev babel-core
 ```
 
-_Note: [this page on babeljs.io](http://babeljs.io/docs/setup/#installation) tells you which packages you need in order to integrate Babel with your tools of choice_.
+_Note: [this page on babeljs.io](https://babeljs.io/docs/setup/#installation) tells you which packages you need in order to integrate Babel with your tools of choice_.
 
 ## 5- babel-preset-es2015
 
-As the name implies, it's a preset that automatically determines the Babel plugins you need, based on your supported environments, so Babel can perform its syntax transformation. If you are developing a web application then you want the es2015 preset because you need to target ECMAScript 2015 (a.k.a ES6). You enter ES6 code, and thanks to all Babel plugins installed (because such plugins are required by this preset) the Babel compiler will generate code that can run in all major browsers. You can find more about this process [here](http://babeljs.io/docs/plugins/preset-env/).
+As the name implies, it's a preset that automatically determines the Babel plugins you need, based on your supported environments, so Babel can perform its syntax transformation. If you are developing a web application then you want the es2015 preset because you need to target ECMAScript 2015 (a.k.a ES6). You enter ES6 code, and thanks to all Babel plugins installed (because such plugins are required by this preset) the Babel compiler will generate code that can run in all major browsers. You can find more about this process [here](https://babeljs.io/docs/plugins/preset-env/).
 
 ```shell
 yarn add --dev "babel-preset-es2015
 ```
 
-You could specify the preset in a `.babelrc` file (you need to put it under version control) or in the `webpack.confg.js`. For more information about `babelrc` see [here](http://babeljs.io/docs/usage/babelrc/).
+You could specify the preset in a `.babelrc` file (you need to put it under version control) or in the `webpack.confg.js`. For more information about `babelrc` see [here](https://babeljs.io/docs/usage/babelrc/).
 
 _Note: Keep in mind that ECMAScript is a standard, and Javascript is an implementation of such standard. For a nice, short overview of major ECMAScript versions see [this article](https://benmccormick.org/2015/09/14/es5-es6-es2016-es-next-whats-going-on-with-javascript-versioning/)_.
 
@@ -255,4 +255,4 @@ _Note: it's not mandatory to set_ `devtool` _and generate a source map, but sinc
 
 If you managed to run this project, congratulations! As you can see, even for a small project like this one the `webpack.config.js` file is not that small. If your application gets bigger, you might want to create multiple entry points for your app, organize your project tree in a different way (e.g. create a folder for js files, another one for css files, etc), or use some Webpack plugin.
 
-Webpack is a great tool, and has a vast ecosystem of plugins. In this article I wanted to keep things as simple as possible, so I didn't include any, but in a real project you will likely use several plugins. If you are curious about which Webpack plugins I am currently using you may want to check [this article](http://giacomodebidda.com/blog/webpack-plugins-that-i-am-currently-using/).
+Webpack is a great tool, and has a vast ecosystem of plugins. In this article I wanted to keep things as simple as possible, so I didn't include any, but in a real project you will likely use several plugins. If you are curious about which Webpack plugins I am currently using you may want to check [this article](https://giacomodebidda.com/blog/webpack-plugins-that-i-am-currently-using/).

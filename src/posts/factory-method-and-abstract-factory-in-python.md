@@ -8,7 +8,7 @@ tags:
 
 Factory Method and Abstract Factory are **creational** design patterns and allow you to create objects without manually invoking a constructor. These patterns are closely related and share many similarities, that's why I had a hard time in understanding the difference between the two.
 
-A [concise answer on Stack Overflow](http://stackoverflow.com/a/4210168) pointed me in the right direction, suggesting me to focus on the intent of these patterns. So, let's see what problem Factory Method and Abstract Factory try to solve.
+A [concise answer on Stack Overflow](https://stackoverflow.com/questions/4209791/design-patterns-abstract-factory-vs-factory-method/4210168) pointed me in the right direction, suggesting me to focus on the intent of these patterns. So, let's see what problem Factory Method and Abstract Factory try to solve.
 
 ## Factory Method
 

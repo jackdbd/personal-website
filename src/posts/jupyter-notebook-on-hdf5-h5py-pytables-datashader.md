@@ -23,7 +23,7 @@ I have more experience with PyTables, so I am a little bit biased towards it.
 
 What I really like about these projects is that they have very different philosophies, and for this reason the mainteners agreed to work together in creating a new python stack for HDF5.
 
-It took me quite a while to prepare this workshop, but it was a great opportunity to play with the [New York City taxi dataset](http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml) and try out [Datashader](https://github.com/bokeh/datashader), an innovative data rasterization pipeline that can be used to create data visualizations from massive datasets.
+It took me quite a while to prepare this workshop, but it was a great opportunity to play with the [New York City taxi dataset](https://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml) and try out [Datashader](https://github.com/bokeh/datashader), an innovative data rasterization pipeline that can be used to create data visualizations from massive datasets.
 
 Here is an image I generated from the yellow taxis data from January 2015. Pickup locations are shown in blue. The pickup locations resulted from a search are shown in yellow.
 

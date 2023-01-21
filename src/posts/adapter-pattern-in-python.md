@@ -214,7 +214,7 @@ smarthone_with_eu_adapter.charge(USSocket.output_voltage)
 
 ## Object adapter or Class Adapter?
 
-There are two [strong reasons](http://stackoverflow.com/questions/5467005/adapter-pattern-class-adapter-vs-object-adapter) to prefer the Object Adapter over the Class Adapter:
+There are two [strong reasons](https://stackoverflow.com/questions/5467005/adapter-pattern-class-adapter-vs-object-adapter) to prefer the Object Adapter over the Class Adapter:
 
 * loose coupling
 * multiple inheritance is tricky

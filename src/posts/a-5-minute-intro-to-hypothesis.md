@@ -258,7 +258,7 @@ Can you really afford to reject `nan` as an input value for `add_numbers`? Maybe
 
 ## References
 
-* [What is Property Based Testing?](http://hypothesis.works/articles/what-is-property-based-testing/)
-* [Getting started with Hypothesis](http://hypothesis.works/articles/getting-started-with-hypothesis/)
-* [Anatomy of a Hypothesis Based Test](http://hypothesis.works/articles/anatomy-of-a-test/)
-* [Evolving toward property-based testing with Hypothesis](http://hypothesis.works/articles/incremental-property-based-testing/)
+* [What is Property Based Testing?](https://hypothesis.works/articles/what-is-property-based-testing/)
+* [Getting started with Hypothesis](https://hypothesis.works/articles/getting-started-with-hypothesis/)
+* [Anatomy of a Hypothesis Based Test](https://hypothesis.works/articles/anatomy-of-a-test/)
+* [Evolving toward property-based testing with Hypothesis](https://hypothesis.works/articles/incremental-property-based-testing/)

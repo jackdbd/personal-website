@@ -63,7 +63,7 @@ You just have to remove the `index.lock` file (not the index!).
 rm .git/index.lock
 ```
 
-Reference [here](https://robots.thoughtbot.com/how-to-fix-rm-f-git-index)
+Reference [here](https://thoughtbot.com/blog/how-to-fix-rm-f-git-index)
 
 ## Permanently remove a file from a repo
 
@@ -183,13 +183,13 @@ with
 git stash pop
 ```
 
-Reference [here](http://stackoverflow.com/a/16137932).
+Reference [here](https://stackoverflow.com/a/16137932).
 
 In alternative to `git gui`, you can use [interactive staging from the terminal](https://git-scm.com/book/en/v2/Git-Tools-Interactive-Staging). I have never tried this.
 
 ## Git hooks
 
-I am not an expert on hooks in Git, but I found this really [nice article about them](http://blog.ittybittyapps.com/blog/2013/09/03/git-pre-push/).
+I am not an expert on hooks in Git, but I found this really [nice article about them](https://blog.ittybittyapps.com/blog/2013/09/03/git-pre-push/).
 
 I think the most useful hooks are
 

@@ -1,6 +1,7 @@
 {
   "author": {
-    "cv": "https://github.com/jackdbd/jackdbd/raw/main/assets/cv.pdf",
+    "cv": "https://raw.githubusercontent.com/jackdbd/jackdbd/main/assets/cv.pdf",
+    "cv_causes_redirect_302": "https://github.com/jackdbd/jackdbd/raw/main/assets/cv.pdf",
     "email": "giacomo@giacomodebidda.com",
     "name": "Giacomo Debidda"
   },

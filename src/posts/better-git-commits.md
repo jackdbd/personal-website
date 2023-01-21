@@ -9,12 +9,12 @@ Knowing what changes to commit and when to commit them is a valuable skill that 
 
 ## Atomic commits
 
-First of all, a commit should be [atomic](https://www.freshconsulting.com/atomic-commits/), namely it should be about one task or one fix. If you have changes which are completely unrelated, you should have different commits for each one of them.
+First of all, a commit should be [atomic](https://www.freshconsulting.com/insights/blog/atomic-commits/), namely it should be about one task or one fix. If you have changes which are completely unrelated, you should have different commits for each one of them.
 
 ## Squashing? Yes please!
 
-It's good to commit early and often, but you probably don't want to end up with a zillion tiny commits on a public branch. It's very hard to read the history of that branch and go back to a specific snapshot where you (or another developer in you team) introduced the changes. You can instead commit many times on a feature branch, rewrite your local history by [squashing several commits together](http://giacomodebidda.com/blog/squashing-git-commits/) into a reasonable number of commits, and only then push your squashed commits to a public branch.
-There are also [some other strategies](http://stackoverflow.com/a/6544580), but I have to admit that I'm still not very comfortable with them.
+It's good to commit early and often, but you probably don't want to end up with a zillion tiny commits on a public branch. It's very hard to read the history of that branch and go back to a specific snapshot where you (or another developer in you team) introduced the changes. You can instead commit many times on a feature branch, rewrite your local history by [squashing several commits together](https://giacomodebidda.com/posts/squashing-git-commits/) into a reasonable number of commits, and only then push your squashed commits to a public branch.
+There are also [some other strategies](https://stackoverflow.com/questions/6543913/git-commit-best-practices/6544580#6544580), but I have to admit that I'm still not very comfortable with them.
 
 ## The commit message
 
@@ -45,14 +45,14 @@ A really handy way to have syntax highlighting and automatic text wrapping is wr
     editor = vim
 ```
 
-Then you need to configure Vim. Locate the `.vimrc` file in the `home` folder (or create one if it's missing) and copy/paste the content of the example file you can find [here](http://vim.wikia.com/wiki/Example_vimrc) to have 50 character limit on the first line, text wrap to 72 characters for the commit message description, syntax highlighting and line numbers.
+Then you need to configure Vim. Locate the `.vimrc` file in the `home` folder (or create one if it's missing) and copy/paste the content of the example file you can find [here](https://vim.fandom.com/wiki/Example_vimrc) to have 50 character limit on the first line, text wrap to 72 characters for the commit message description, syntax highlighting and line numbers.
 If you are curious why you can't find these settings in the text you just pasted in the `.vimrc` file, it's because Vim understands automatically that we are writing a gitcommit file, and uses a specific setting with them. We can check these settings by typing `:set` in command mode while we are about to commit our changes. We will see some entries like `filetype=gitcommit` and `textwidth=72`.
 
 ## References
 
 Here are some additional resources on writing great commit messages:
 
-* [5 useful tips for a better commit message](https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message)
-* [A note about git commit messages](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
-* [Git best practices](http://sethrobertson.github.io/GitBestPractices/)
-* [Git commit](http://chris.beams.io/posts/git-commit/)
+* [5 useful tips for a better commit message](https://thoughtbot.com/blog/5-useful-tips-for-a-better-commit-message)
+* [A note about git commit messages](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
+* [Git best practices](https://sethrobertson.github.io/GitBestPractices/)
+* [Git commit](https://cbea.ms/git-commit/)

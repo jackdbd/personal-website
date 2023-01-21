@@ -16,6 +16,7 @@ const { telegramPlugin } = require('@jackdbd/eleventy-plugin-telegram')
 const {
   plugin: textToSpeechPlugin
 } = require('@jackdbd/eleventy-plugin-text-to-speech')
+const brokenLinksPlugin = require('eleventy-plugin-broken-links')
 const embedTwitter = require('eleventy-plugin-embed-twitter')
 const embedVimeo = require('eleventy-plugin-vimeo-embed')
 const embedYouTube = require('eleventy-plugin-youtube-embed')
@@ -186,6 +187,34 @@ module.exports = function (eleventyConfig) {
 
   // https://www.11ty.dev/docs/plugins/render/#installation
   eleventyConfig.addPlugin(EleventyRenderPlugin)
+
+  // https://github.com/bradleyburgess/eleventy-plugin-broken-links
+  eleventyConfig.addPlugin(brokenLinksPlugin, {
+    cacheDuration: '7d',
+    callback: (brokenLinks, redirectLinks) => {
+      if (brokenLinks.length > 0) {
+        // throw new Error(`${brokenLinks.length} BROKEN LINKS`)
+        console.log(`!!! ${brokenLinks.length} BROKEN links`)
+        console.log(brokenLinks)
+        process.exit(1)
+      }
+      if (redirectLinks.length > 0) {
+        console.log(`!!! ${redirectLinks.length} REDIRECT links`)
+        console.log(redirectLinks)
+      }
+    },
+    excludeUrls: [
+      // several Wikipedia pages return HTTP 302. They shouldn't be an issue.
+      'https://en.wikipedia.org/wiki/*',
+      // I don't know why there is a HTTP (not HTTPS!) redirect for this...
+      'http://Kepler.gl',
+      'https://www.qlik.com/blog/visual-encoding',
+      // several YouTube pages return HTTP 302. They shouldn't be an issue.
+      'https://www.youtube.com/watch?v=b9yL5usLFgY',
+      'https://www.youtube.com/watch?v=lC39ifspIf4'
+    ],
+    loggingLevel: 2
+  })
 
   // on GitHub Actions I use a JSON secret for Plausible API key and site ID,
   // and I expose that secret as an environment variable.

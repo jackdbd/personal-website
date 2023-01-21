@@ -11,9 +11,9 @@ Since I wanted to understand and implement in Python the most popular patterns, 
 
 This is the **first** article of a series of blog posts related to the MVC pattern. Here are the links to the other articles in the series:
 
-1. [MVC pattern in Python: Introduction and BasicModel](http://www.giacomodebidda.com/posts/mvc-pattern-in-python-introduction-and-basicmodel/)
-2. [MVC pattern in Python: SQLite](http://www.giacomodebidda.com/posts/mvc-pattern-in-python-sqlite/)
-3. [MVC pattern in Python: Dataset](http://www.giacomodebidda.com/posts/mvc-pattern-in-python-dataset/)
+1. [MVC pattern in Python: Introduction and BasicModel](https://www.giacomodebidda.com/posts/mvc-pattern-in-python-introduction-and-basicmodel/)
+2. [MVC pattern in Python: SQLite](https://www.giacomodebidda.com/posts/mvc-pattern-in-python-sqlite/)
+3. [MVC pattern in Python: Dataset](https://www.giacomodebidda.com/posts/mvc-pattern-in-python-dataset/)
 
 _All code was written in Python 3.5. If you are using Python 2.7 you should be able to run it with a few minor changes._
 
