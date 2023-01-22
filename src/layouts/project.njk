@@ -11,9 +11,21 @@ layout: bare-minimum.njk
     <article class="prose flow region">
 
       <h1>{{ title }}</h1>
-
       {{ content | safe }}
 
+      {% if ogp.image %}
+        <figure>
+          {% if ogp.imageAlt %}
+            <img src="{{ ogp.image }}" alt="{{ ogp.imageAlt }}" />
+          {% else %}
+            <img src="{{ ogp.image }}" />
+          {% endif %}
+        </figure>
+      {% endif %}
+
+      {% if href %}
+        <p class="break-all">🔗 <a href="{{ href }}" rel="external noopener noreferrer" target="_blank">{{ href }}</a></p>
+      {% endif %}
       <hr>
 
       {% if tags %}

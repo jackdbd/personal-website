@@ -1,5 +1,7 @@
 <aside id="toc">
   <details>
-  <summary>Table of Contents 📑</summary>
-  {{ content | toc | safe }}
+    <summary>Table of Contents 📑</summary>
+    {# 11ty filter "toc" from eleventy-plugin-nesting-toc #}
+    {{ content | toc | safe }}
+  </details>
 </aside>
