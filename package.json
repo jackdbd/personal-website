@@ -52,7 +52,7 @@
     "nuke": "rm -rf package-lock.json node_modules/ .cache/",
     "prepare": "husky install",
     "scripts:plausible": "./scripts/plausible.mjs",
-    "scripts:security-txt": "./scripts/security-txt.mjs",
+    "scripts:security-txt": "node ./scripts/security-txt.cjs",
     "site": "npm-run-all --parallel site:* --print-label",
     "site:open": "google-chrome http://localhost:3000",
     "site:serve": "serve _site",

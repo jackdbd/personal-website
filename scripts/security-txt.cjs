@@ -33,7 +33,7 @@ const main = async () => {
 
   const text = await securityTxt({
     contacts: [
-      'mailto:giacomo@giacomodebidda.com',
+      'mailto:security@giacomodebidda.com',
       'https://twitter.com/jackdbd'
     ],
     domain,

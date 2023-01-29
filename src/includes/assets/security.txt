@@ -7,26 +7,26 @@ Hash: SHA512
 
 Canonical: https://www.giacomodebidda.com/.well-known/security.txt
 
-Contact: mailto:giacomo@giacomodebidda.com
+Contact: mailto:security@giacomodebidda.com
 Contact: https://twitter.com/jackdbd
 
 Encryption: https://www.giacomodebidda.com/assets/pgp-key.txt
 
-Expires: 2024-01-20T23:36:54.188Z
+Expires: 2024-01-29T10:45:09.338Z
 
 Preferred-Languages: en, it
 
 -----BEGIN PGP SIGNATURE-----
 
-wsDzBAEBCgAnBQJjyyWWCRDwZPVr2x9szxYhBB72mM8L8t/baXINIPBk9Wvb
-H2zPAABPlgv/SbsViuovnU1RR8s8+GGHJE2sfJ8Odo8j5/oi+6ZORoOsXdmO
-w/OyYnnRiz+8FDwmabx2uK6qndQieKMlrTc1Gzt/EPGktstwTVViHD2Q6uMY
-kKHQG+E9c1cSEHMS0BcdkMV4OFQS2f8V/STmkMa6fAFnF55NgxmXnheTm3gI
-57NFZqJqgvgT+IIfW9uuu+iX2BUmesOgMugjXHumIc0KATAThRUlftmkBLrT
-0MzT9+nOKOXezAZDMbSmTwmvcXAavLHrhzWzQqdjqJYc7YeZhnlYcGErVFB9
-isllw//cvdIaEcX4cW3ER+cyFeylgBfUOeBMT/HdoIFkRfGjoimSLcVAKPY4
-ivTQGnotK6ZNIPlnmNRh5Q3hbRgWuWCmQoDoft116+HWwebw5/rW4PzqDp4W
-4cIWryGPh1/g4AxjQoFavp9FBdmNPC8SSy6fFfFRwoXn44W4FbiN6lvOv2G6
-gclaYWXW5CZjxpYTvuopIKSKEuXccywTFjnj9CTx23Qn
-=U6eu
+wsDzBAEBCgAnBQJj1k41CRDwZPVr2x9szxYhBB72mM8L8t/baXINIPBk9Wvb
+H2zPAACgOgwApRTMpRhnOs1vyGiVsWquT2kvlNlzWKmfnOkLDL6DM2xJvM9m
+LWsq+MHeogwEUA/RA0ZPrfSZAtBaj6zxG0yLp4EmAfy8wwp9Z2jiidliZbAo
+qrcMaGXXVGGtxVbl2VH+7maCSVgLXVAI3ogy7Yk2v4aCDTz6GN3F405TBxs6
+j+DQfh86OqRKTflRiQzw9BWsbs7qA0bP5SPvCMxpEjMs/kRlGGzoCGQ08m1L
+SGAm+8mWaiz046DisU8pFqeg8haS2ycCt1Ukmd3O1OqP81Rvm9k6OJcU5rwd
+5yqjcW4tRGO6HE4DwHKQpZzHq7DIAXoQOir/7ifO4lX5juvLgE5U0QGJ73YY
+5OrPO+KtO3owDX7ApTJkLVlELbkZRn3dlSN8E9MQZPfIwGnqrOAsMD+SgV/X
+/4pRl886Q7lB42gLudXrCuC2JFdr1nj8Sr97TqjUXUwEGZ7U9JYgREv9y6Su
+t6FoZMGLjzuBPDAWxIuowlPKYhGIhAdafW1o92OVjHqy
+=q7uE
 -----END PGP SIGNATURE-----
