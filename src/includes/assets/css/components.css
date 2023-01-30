@@ -236,15 +236,6 @@ strong {
   text-transform: capitalize;
 }
 
-/* .cta --------------------------------------------------------------------- */
-
-.cta {
-  background: var(--color-background-code);
-  /* border: 0.5rem solid var(--color-accent); */
-  border-radius: 0.5rem;
-  padding: var(--scale-space-xs);
-}
-
 /* .gotcha (honeypot field for a form --------------------------------------- */
 .gotcha {
   display: none !important;

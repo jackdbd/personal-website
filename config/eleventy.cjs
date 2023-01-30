@@ -33,14 +33,13 @@ const shortcodes = require('../11ty/shortcodes')
 const pairedShortcodes = require('../11ty/paired-shortcodes')
 const transforms = require('../11ty/transforms.js')
 const plausibleClientPromise = import('@jackdbd/plausible-client')
-const ctaPlugin = require('../plugins/11ty/cta/index.cjs')
 const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
 const webmentionsPlugin = require('../plugins/11ty/webmentions/index.cjs')
 const { buildServiceWorker } = require('../src/build-sw.cjs')
 
 const REPO_ROOT = join(__filename, '..', '..')
 const OUTPUT_DIR = join(REPO_ROOT, '_site')
-const ASSETS_DIR = join(REPO_ROOT, 'assets')
+// const ASSETS_DIR = join(REPO_ROOT, 'assets')
 
 // shamelessly stolen from:
 // https://github.com/maxboeck/mxb/blob/db6ca7743f46cf67367a93c8de404cbcb50b98d1/utils/markdown.js
@@ -219,20 +218,6 @@ module.exports = function (eleventyConfig) {
       'https://www.youtube.com/watch?v=lC39ifspIf4'
     ],
     loggingLevel: 2
-  })
-
-  const ctaInBlogPosts = fs
-    .readFileSync(join(ASSETS_DIR, 'cta-posts.html'))
-    .toString()
-
-  eleventyConfig.addPlugin(ctaPlugin, {
-    rules: [
-      {
-        regex: new RegExp('^.*\\/posts\\/.*\\/.*\\.html$'),
-        cta: ctaInBlogPosts,
-        cssSelectors: ['article']
-      }
-    ]
   })
 
   // on GitHub Actions I use a JSON secret for Plausible API key and site ID,
