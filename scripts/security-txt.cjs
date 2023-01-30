@@ -40,6 +40,7 @@ const main = async () => {
     encryption: `https://${domain}/assets/pgp-key.txt`,
     armoredKey,
     passphrase,
+    policy: `https://github.com/jackdbd/personal-website/blob/main/SECURITY.md`,
     preferredLanguages: ['en', 'it']
   })
 

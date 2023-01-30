@@ -12,21 +12,23 @@ Contact: https://twitter.com/jackdbd
 
 Encryption: https://www.giacomodebidda.com/assets/pgp-key.txt
 
-Expires: 2024-01-29T10:45:09.338Z
+Expires: 2024-01-30T09:27:55.143Z
+
+Policy: https://github.com/jackdbd/personal-website/blob/main/SECURITY.md
 
 Preferred-Languages: en, it
 
 -----BEGIN PGP SIGNATURE-----
 
-wsDzBAEBCgAnBQJj1k41CRDwZPVr2x9szxYhBB72mM8L8t/baXINIPBk9Wvb
-H2zPAACgOgwApRTMpRhnOs1vyGiVsWquT2kvlNlzWKmfnOkLDL6DM2xJvM9m
-LWsq+MHeogwEUA/RA0ZPrfSZAtBaj6zxG0yLp4EmAfy8wwp9Z2jiidliZbAo
-qrcMaGXXVGGtxVbl2VH+7maCSVgLXVAI3ogy7Yk2v4aCDTz6GN3F405TBxs6
-j+DQfh86OqRKTflRiQzw9BWsbs7qA0bP5SPvCMxpEjMs/kRlGGzoCGQ08m1L
-SGAm+8mWaiz046DisU8pFqeg8haS2ycCt1Ukmd3O1OqP81Rvm9k6OJcU5rwd
-5yqjcW4tRGO6HE4DwHKQpZzHq7DIAXoQOir/7ifO4lX5juvLgE5U0QGJ73YY
-5OrPO+KtO3owDX7ApTJkLVlELbkZRn3dlSN8E9MQZPfIwGnqrOAsMD+SgV/X
-/4pRl886Q7lB42gLudXrCuC2JFdr1nj8Sr97TqjUXUwEGZ7U9JYgREv9y6Su
-t6FoZMGLjzuBPDAWxIuowlPKYhGIhAdafW1o92OVjHqy
-=q7uE
+wsDzBAEBCgAnBQJj142bCRDwZPVr2x9szxYhBB72mM8L8t/baXINIPBk9Wvb
+H2zPAADYLAv/QUuQ63LC5s7oFUCzehRjtLrAx1mAx0yhPxZAl8+UaCutudPQ
+orSbDjhaAYmYaefTWmLaaBFDjvcvmNvTdYm1+HeBYYTIVjb9hDXK6Una2GG1
+gHVzR6Arf8TGtDpxKnu0AXPrJ5zuZZVMI9jmVQ7/otn58AToTQ6i6zZNi6AT
+ltPGIEgNOP3LwlxCqSFBmq5cULbGRSHg2I2IVtK3QCKJOBmhpYrBucW9GBuJ
+B4zmnk6hOfDq/hNY8MY6BWool1bJORXGrta4wYQWADStrdloM8lFn0uDHiZp
+TDiVUL7QNYdfNlQW3WFt1lRTytJnqYKEZng7Q/g3S6HRT8a6rfA+3mZEGyuQ
+wkf9WRQEhVjR5G7BMSOt1Ns4U9n85FoBoOciLz9OJKQkqopwGW/cgZqkbT6H
+273tiM4oN9mS8chiydeEOctlmDVbLwZbufJWL/Gwxujud0cbWM4e+5ctHnu8
++899NtPRGHqdIe+0nrJAVTt/HwcSGXJSJ8sQFpfZjkg7
+=ORUy
 -----END PGP SIGNATURE-----

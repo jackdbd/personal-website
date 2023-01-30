@@ -76,6 +76,10 @@ Check the `Content-Security-Policy` and the other security headers with these on
 - https://securityheaders.com/
 - https://csp-evaluator.withgoogle.com/
 
+## Security policy
+
+See [SECURITY.md](./SECURITY.md).
+
 ## Troubleshooting the service worker
 
 When developing, open Chrome DevTools, go to `Application > Service Workers` and check that:
