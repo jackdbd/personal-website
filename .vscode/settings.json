@@ -40,5 +40,8 @@
   },
   // https://github.com/prettier/prettier-vscode#prettierconfigpath
   "prettier.configPath": "config/prettier.cjs",
-  "prettier.requireConfig": true
+  "prettier.requireConfig": true,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  }
 }
