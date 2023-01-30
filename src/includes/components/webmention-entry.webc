@@ -3,8 +3,13 @@
 </div>
 
 <style webc:keep webc:scoped>
+  :host div {
+    background: var(--color-background-code);
+    border-radius: 0.5rem;
+    padding: var(--scale-space-xs);
+  }
+
   :host p {
-    /* background-color: lightgray; */
     padding: 0.5em;
   }
 </style>

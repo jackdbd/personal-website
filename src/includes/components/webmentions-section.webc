@@ -58,12 +58,7 @@
 
         return `
         <li>
-          <webmention-entry>
-            <webmention-author src="${imgSrc}" alt="${imgAlt}" href="${authorUrl}">
-              <span slot="author-name">${authorName}</span>
-              <span slot="author-action">reposted on <time datetime="${wm.published}">${published}</time></span>
-            </webmention-author>
-          </webmention-entry>
+          <webmention-repost src="${imgSrc}" alt="${imgAlt}" href="${authorUrl}"></webmention-repost>
         </li>`
         })
 
@@ -83,8 +78,7 @@
         return `
         <li>
           <webmention-entry>
-            <webmention-author src="${imgSrc}" alt="${imgAlt}" href="${authorUrl}">
-              <span slot="author-name">${authorName}</span>
+            <webmention-author src="${imgSrc}" alt="${imgAlt}" href="${authorUrl}" @name="${authorName}">
               <span slot="author-action">replied on <time datetime="${wm.published}">${published}</time></span>
             </webmention-author>
             ${reply}
@@ -103,32 +97,31 @@
 
         return `
         <li>
-          <webmention-entry>
-            <webmention-author src="${imgSrc}" alt="${imgAlt}" href="${authorUrl}">
-              <span slot="author-name">${authorName}</span>
-              <span slot="author-action">liked on <time datetime="${wm.published}">${published}</time></span>
-            </webmention-author>
-          </webmention-entry>
+          <webmention-like src="${imgSrc}" alt="${imgAlt}" href="${authorUrl}"></webmention-like>
         </li>`
 
       })
 
-      const ol_reposts = `<ol class="stack stack-space:s">${li_reposts.join('')}</ol>`
-      const ol_replies = `<ol class="stack stack-space:s">${li_replies.join('')}</ol>`
-      const ol_likes = `<ol class="stack stack-space:s">${li_likes.join('')}</ol>`
+      const ul_class = 'flex -space-x-4 stack-space:s'
 
       let webmentions_html = ''
       if (li_reposts.length === 0 && li_replies.length === 0 && li_likes.length === 0) {
         webmentions_html = `<p>No webmentions to show.</p>`
       }
+
       if (li_replies.length > 0) {
+        const ol_replies = `<ol class="stack stack-space:s">${li_replies.join('')}</ol>`
         webmentions_html = webmentions_html.concat(`${h3_replies}${ol_replies}`)
       }
+      
       if (li_reposts.length > 0) {
-        webmentions_html = webmentions_html.concat(`${h3_reposts}${ol_reposts}`)
+        const ul_reposts = `<ul class="${ul_class}">${li_reposts.join('')}</ul>`
+        webmentions_html = webmentions_html.concat(`${h3_reposts}${ul_reposts}`)
       }
+
       if (li_likes.length > 0) {
-        webmentions_html = webmentions_html.concat(`${h3_likes}${ol_likes}`)
+        const ul_likes = `<ul class="${ul_class}">${li_likes.join('')}</ul>`
+        webmentions_html = webmentions_html.concat(`${h3_likes}${ul_likes}`)
       }
 
       return `
