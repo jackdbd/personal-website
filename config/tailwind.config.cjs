@@ -3,10 +3,13 @@ const debugBreakpoints = require('../tailwind/plugins/tailwind-debug-breakpoints
 
 const config = {
   content: [
-    './src/includes/components/**/*.njk',
+    './assets/**/*.{html,njk}',
+    './src/includes/components/**/*.{njk,webc}',
     './src/layouts/**/*.njk',
     './src/pages/**/*.{html,njk}'
   ],
+  // https://tailwindcss.com/docs/configuration#important
+  // important: true,
   plugins: [debugBreakpoints],
   theme: {
     extend: {

@@ -1,0 +1,13 @@
+<div :id="uid">
+  <a :href="href" target="_blank" rel="external noopener noreferrer">
+    <img class="w-10 h-10 rounded-full" :src="src" :alt="alt" loading="lazy" decoding="async" width="48" height="48">
+  </a>
+</div>
+
+<!-- https://flowbite.com/docs/components/avatar/ -->
+
+<style webc:keep webc:scoped>
+  :host img {
+    display: inline-block;
+  }
+</style>

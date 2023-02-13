@@ -1,0 +1,28 @@
+<div :id="uid" class="stack">
+  <h3>🗣️ Let's have a chat!</h3>
+
+  <p>If you think I can help you, feel free to reach out to me. You can ask me anything you want.</p>
+
+  <p>
+    <strong>Reserve your spot here:</strong>
+    <br>
+    <a class="break-all" href="https://cal.com/giacomodebidda/30min" target="_blank" rel="external noopener noreferrer">https://cal.com/giacomodebidda/30min</a>
+  </p>
+
+  <p><em>If no time slot fits you, send me a DM on
+    <a href="https://www.linkedin.com/in/giacomodebidda/" target="_blank" rel="external noopener noreferrer">LinkedIn</a> or <a href="https://twitter.com/jackdbd" target="_blank" rel="external noopener noreferrer">Twitter</a>.</em></p>
+</div>
+
+<style webc:keep webc:scoped>
+  :host div {
+    background: var(--color-background-code);
+    border-radius: 0.5rem;
+    padding: var(--scale-space-xs);
+  }
+
+  :host ol {
+    list-style-position: inside;
+    list-style-type: decimal;
+    padding-left: var(--scale-space-s);
+  }
+</style>

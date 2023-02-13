@@ -1,17 +1,16 @@
 <div :id="uid">
-  <img :src="src" :alt="alt" loading="lazy" decoding="async" width="48" height="48">
+  <img class="w-10 h-10 rounded-full" :src="src" :alt="alt" loading="lazy" decoding="async" width="48" height="48">
   <a :href="href" target="_blank" rel="external noopener noreferrer">
-    <span>
-      <slot name="author-name">Anonymous</slot>
-    </span>
+    <span @text="name"></span>
   </a>
+  <!-- <span>&nbsp;</span> -->
   <span>
     <slot name="author-action">mentioned this</slot>
   </span>
 </div>
 
 <style webc:keep webc:scoped>
-  :host img {
+  :host a, :host img {
     display: inline-block;
   }
 </style>

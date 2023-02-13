@@ -39,6 +39,7 @@ const { buildServiceWorker } = require('../src/build-sw.cjs')
 
 const REPO_ROOT = join(__filename, '..', '..')
 const OUTPUT_DIR = join(REPO_ROOT, '_site')
+// const ASSETS_DIR = join(REPO_ROOT, 'assets')
 
 // shamelessly stolen from:
 // https://github.com/maxboeck/mxb/blob/db6ca7743f46cf67367a93c8de404cbcb50b98d1/utils/markdown.js
@@ -211,6 +212,8 @@ module.exports = function (eleventyConfig) {
       'https://getdango.com/emoji-and-deep-learning/',
       // I don't know why there is a HTTP (not HTTPS!) redirect for this...
       'http://Kepler.gl',
+      // I don't know why this is marked as a broken link when building on Cloudflare...
+      'https://www.cairographics.org/',
       'https://www.qlik.com/blog/visual-encoding',
       // several YouTube pages return HTTP 302. They shouldn't be an issue.
       'https://www.youtube.com/watch?v=b9yL5usLFgY',
