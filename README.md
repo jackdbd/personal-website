@@ -14,6 +14,7 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
 - `security.txt` in `.well-known` directory
 - just-in-time preloading with [instant.page](https://instant.page/)
 - Service worker generated with [workbox-core](https://developer.chrome.com/docs/workbox/modules/workbox-core/) and [esbuild](https://github.com/evanw/esbuild)
+- modular type scale and fluid space system thanks to [Utopia](https://utopia.fyi/)
 - contact form submission with a function deployed to Cloudflare Pages Functions (see the `functions/` directory)
 - Performance reports with multiple [performance budgets](https://www.afasterweb.com/2020/01/28/performance-budgets-with-lighthouse/) using the [Lighthouse CLI](https://github.com/GoogleChrome/lighthouse#using-the-node-cli) and [webhint](https://github.com/webhintio/hint)
 - Run Lighthouse every commit thanks to the [Lightouse CI](https://github.com/GoogleChrome/lighthouse-ci)
