@@ -34,6 +34,44 @@ const callout = (content, type = 'warn') => {
   </div>`
 }
 
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td
+ */
+const table = (content, caption = '', separator = ',') => {
+  const lines = content.trim().split('\n')
+
+  const lineToRow = (s) => {
+    return s
+      .split(separator)
+      .map((s) => `<td class="">${s}</td>`)
+      .join('')
+  }
+
+  const headings = lines[0]
+    .split(separator)
+    .map((s) => `<th scope="col" class="">${s}</th>`)
+    .join('')
+
+  const tds = lines.slice(1).map(lineToRow)
+  const trs = tds.map((td) => `<tr class="">${td}</tr>`).join('')
+
+  return `
+<div class="table-container">
+  <div class="table-scroll">
+  <table class="">
+    <caption>${caption}</caption>
+    <thead class="">
+      <tr class="">${headings}</tr>
+    </thead>
+    <tbody class="">
+      ${trs}
+    </tbody>
+  </table>
+  </div>
+</div>`
+}
+
 module.exports = {
-  callout
+  callout,
+  table
 }
