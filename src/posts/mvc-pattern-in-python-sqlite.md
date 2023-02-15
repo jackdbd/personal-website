@@ -34,34 +34,12 @@ First of all, if you haven't read my previous article in the MVC series, I sugge
 <a><h2>CRUD</h2></a>
 Let's review the inventory of a small grocery store. A typical product list would look like this:
 
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead class="thead-inverse">
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Bread</td>
-                <td>0.5</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>Milk</td>
-                <td>1.0</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>Wine</td>
-                <td>10.0</td>
-                <td>5</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+{% table %}
+Name,Price,Quantity
+Bread,0.5,20
+Milk,1.0,10
+Wine,10.0,5
+{% endtable %}
 
 In this article we will use SQLite and store all these products in a database table.
 
