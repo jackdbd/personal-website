@@ -333,7 +333,7 @@ strong {
 .prose ol > li {
   list-style: decimal;
   margin-left: 1.5em;
-  padding-left: 1em;
+  padding-left: 0.25em;
 }
 
 .prose pre {
@@ -353,7 +353,7 @@ strong {
 .prose ul:not(.cluster) > li {
   list-style: disc;
   margin-left: 1.25em;
-  padding-left: 1em;
+  padding-left: 0.25em;
 }
 
 /* .prose overrides (keep these to a minimum!) ------------------------------ */
