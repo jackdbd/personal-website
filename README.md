@@ -26,9 +26,8 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
   - [Report-To](https://developers.google.com/web/updates/2018/09/reportingapi#header) with [Report URI](https://report-uri.com/)
   - [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
   - [Network Error Logging](https://developer.cdn.mozilla.net/en-US/docs/Web/HTTP/Headers/NEL)
-  - [Permissions-Policy](https://scotthelme.co.uk/goodbye-feature-policy-and-hello-permissions-policy/)
-
-You could also generate a Permission-Policy header with this website: https://www.permissionspolicy.com/
+  - [Permissions-Policy](https://scotthelme.co.uk/goodbye-feature-policy-and-hello-permissions-policy/) (if you prefer you can generate this header on [permissionspolicy.com](https://www.permissionspolicy.com/))
+- Configurable text to speech synthesis, thanks to [@jackdbd/eleventy-plugin-text-to-speech](https://github.com/jackdbd/undici/tree/main/packages/eleventy-plugin-text-to-speech)
 
 ## Installation
 
@@ -46,7 +45,7 @@ npm i -g zx
 
 ## Development
 
-Watch all templates, CSS, JS, service worker, and automatically refresh the browser using [BrowserSync](https://github.com/Browsersync/browser-sync):
+Watch all templates, CSS, JS, service worker, and automatically refresh the browser:
 
 ```shell
 npm run dev
