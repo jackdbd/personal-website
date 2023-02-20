@@ -13,6 +13,11 @@ const callout = (content, type = 'warn') => {
       emoji = 'ℹ️'
       break
     }
+    case 'question': {
+      calloutType = 'callout--question'
+      emoji = '❓'
+      break
+    }
     case 'tip': {
       calloutType = 'callout--tip'
       emoji = '💡'
