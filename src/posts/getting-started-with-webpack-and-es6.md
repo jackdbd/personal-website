@@ -128,7 +128,7 @@ babel-core is the Babel compiler itself, or maybe it's more appropriate calling 
 yarn add --dev babel-core
 ```
 
-_Note: [this page on babeljs.io](https://babeljs.io/en/setup/) tells you which packages you need in order to integrate Babel with your tools of choice_.
+_Note: [this page on babeljs.io](https://babeljs.io/setup) tells you which packages you need in order to integrate Babel with your tools of choice_.
 
 ## 5- babel-preset-es2015
 

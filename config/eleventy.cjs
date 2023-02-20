@@ -206,18 +206,22 @@ module.exports = function (eleventyConfig) {
       }
     },
     excludeUrls: [
-      // several Wikipedia pages return HTTP 302. They shouldn't be an issue.
-      'https://en.wikipedia.org/wiki/*',
-      // this article seems no longer online
+      // these articles seem no longer online. What can I do? Just remove them from blog posts? Replace them with similar articles?
+      'https://www.oscarberg.net/blog/2012/05/invisible-manager/',
       'https://getdango.com/emoji-and-deep-learning/',
       // I don't know why there is a HTTP (not HTTPS!) redirect for this...
       'http://Kepler.gl',
-      // I don't know why this is marked as a broken link when building on Cloudflare...
-      'https://www.cairographics.org/',
-      'https://www.qlik.com/blog/visual-encoding',
       // several YouTube pages return HTTP 302. They shouldn't be an issue.
       'https://www.youtube.com/watch?v=b9yL5usLFgY',
-      'https://www.youtube.com/watch?v=lC39ifspIf4'
+      'https://www.youtube.com/watch?v=lC39ifspIf4',
+      // several Wikipedia pages return HTTP 302. They shouldn't be an issue.
+      'https://en.wikipedia.org/wiki/*',
+      // the plugin marks this as a HTTP 403, but it seems a HTTP 200 to me.
+      'https://www.cloudflare.com/learning/cdn/glossary/origin-server/',
+      // I don't know why these are marked as broken links. They seem fine to me...
+      'https://all-geo.org/volcan01010/',
+      'https://www.cairographics.org/',
+      'https://www.qlik.com/blog/visual-encoding'
     ],
     loggingLevel: 2
   })
