@@ -305,8 +305,8 @@ module.exports = function (eleventyConfig) {
 
       'manifest-src': ['self'],
 
-      // allow <audio> and <video> hosted on Cloud Storage
-      'media-src': ['storage.googleapis.com'],
+      // allow <audio> and <video> hosted on Cloudinary, Cloud Storage
+      'media-src': ['res.cloudinary.com', 'storage.googleapis.com'],
 
       'object-src': ['none'],
 
