@@ -4,6 +4,7 @@ a {
   color: var(--color-accent);
   font-weight: 700;
   text-decoration: underline;
+  /* word-break: break-word; */
 }
 
 a:focus {
@@ -451,4 +452,5 @@ strong {
   background-color: var(--color-accent);
   border: 0.2rem solid var(--color-text);
   border-radius: 0.5rem;
+  min-height: 4rem;
 }
