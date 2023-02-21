@@ -8,7 +8,7 @@ const navigation = require('@11ty/eleventy-navigation')
 const rss = require('@11ty/eleventy-plugin-rss')
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
 const webcPlugin = require('@11ty/eleventy-plugin-webc')
-const UpgradeHelper = require('@11ty/eleventy-upgrade-help')
+// const UpgradeHelper = require('@11ty/eleventy-upgrade-help')
 const cspPlugin = require('@jackdbd/eleventy-plugin-content-security-policy')
 const {
   ensureEnvVarsPlugin
@@ -378,9 +378,11 @@ module.exports = function (eleventyConfig) {
   }
   const cloudinary = JSON.parse(cloudinary_json_string)
 
+  // https://github.com/jackdbd/eleventy-plugin-embed-cloudinary#configuration
   eleventyConfig.addPlugin(embedCloudinary, {
     apiKey: cloudinary.api_key,
     apiSecret: cloudinary.api_secret,
+    cacheDuration: '7d',
     cloudName: cloudinary.cloud_name
   })
 
@@ -440,7 +442,7 @@ module.exports = function (eleventyConfig) {
   })
 
   // UpgradeHelper must be added last
-  eleventyConfig.addPlugin(UpgradeHelper)
+  // eleventyConfig.addPlugin(UpgradeHelper)
 
   // --- 11ty data cascade -------------------------------------------------- //
   // https://www.11ty.dev/docs/data-cascade/
