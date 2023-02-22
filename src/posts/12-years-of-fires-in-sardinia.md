@@ -5,9 +5,9 @@ ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1599200654/sardinia-fires_yakjue.png
   imageAlt: A map of 12 years of fires in Sardinia. Each fire is represented as a circle of various size and color.
 tags:
-  - python
   - data visualization
   - geospatial
+  - Python
 ---
 This summer I was looking for some data visualization challenges and I came across [this cool project](https://mauromelis.gitlab.io/sardinia-on-fire/) by Mauro Melis. Mauro created it for a contest organized by [Open Data Sardegna](https://contest.formez.it/), and the jury found it so cool that he won the first prize in the data visualization category.
 

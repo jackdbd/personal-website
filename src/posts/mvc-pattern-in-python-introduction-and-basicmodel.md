@@ -2,8 +2,8 @@
 title: "MVC pattern in Python: Introduction and BasicModel"
 date: "2017-04-02"
 tags:
-  - python
   - design patterns
+  - Python
 ---
 
 If you have ever worked with Graphical User Interfaces or web frameworks (e.g. Django), chances are that you heard about the _Model-View-Controller_ pattern.

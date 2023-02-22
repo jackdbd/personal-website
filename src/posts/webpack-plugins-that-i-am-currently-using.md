@@ -2,7 +2,7 @@
 title: Webpack plugins that I am currently using
 date: "2017-05-11"
 tags:
-  - webpack
+  - Webpack
 ---
 
 Webpack is probably the most popular module bundler for Javascript applications. Its idea is to have a **single tool** that manages all the assets: Javascript files, CSS files, Images, etc. Webpack lets you also perform all the necessary tasks for managing and optimizing code dependencies, such as compilation, concatenation, minification, and compression.

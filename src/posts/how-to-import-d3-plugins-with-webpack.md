@@ -2,9 +2,9 @@
 title: How to import d3 plugins with Webpack
 date: "2017-10-13T19:30:03.284Z"
 tags:
-  - d3
-  - es6
-  - webpack
+  - D3.js
+  - ES6
+  - Webpack
 ---
 
 Last week I started working on a new visualization and I wanted to include a couple of d3 plugins: [d3-legend](https://d3-legend.susielu.com/) by Susie Lu and [d3-line-chunked](https://peterbeshai.com/vis/d3-line-chunked/) by Peter Beshai.

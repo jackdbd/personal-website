@@ -2,8 +2,8 @@
 title: Factory Method and Abstract Factory in Python
 date: "2017-03-13"
 tags:
-  - python
   - design patterns
+  - Python
 ---
 
 Factory Method and Abstract Factory are **creational** design patterns and allow you to create objects without manually invoking a constructor. These patterns are closely related and share many similarities, that's why I had a hard time in understanding the difference between the two.

@@ -2,8 +2,8 @@
 title: Bridge pattern in Python
 date: "2017-01-21"
 tags:
-  - python
   - design patterns
+  - Python
 ---
 
 I struggled quite a bit with the Bridge pattern. The idea itself is rather simple, decouple an interface from its implementation, but I couldn't think about a simple, yet "real life" example of this pattern.

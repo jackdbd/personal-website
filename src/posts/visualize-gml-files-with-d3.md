@@ -2,10 +2,10 @@
 title: Visualize GML files with D3
 date: "2017-01-12"
 tags:
-  - python
-  - d3
-  - networkX
-  - gml
+  - D3.js
+  - GML
+  - NetworkX
+  - Python
 ---
 
 I have recently switched from D3 v3.0 to D3 v4.0, and I have already encountered some important changes. For example, the scaling functions are quite different, and the [old layouts available in the older API](https://github.com/d3/d3-3.x-api-reference/blob/master/Layouts.md) have been moved and renamed. In fact, D3 v4.0 is no longer a single library, but many small libraries (about 30) that are designed to work together.

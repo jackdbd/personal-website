@@ -2,8 +2,8 @@
 title: Reactive Dashboards with Plotly Dash
 date: "2017-12-10T23:00:03.284Z"
 tags:
-  - python
-  - dash
+  - Dash
+  - Python
 ---
 
 Last month I gave a talk at [PyMunich](https://www.meetup.com/it-IT/PyMunich/) on how to create reactive dashboards with Plotly [Dash](https://plot.ly/products/dash/).

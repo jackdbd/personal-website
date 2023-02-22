@@ -2,8 +2,8 @@
 title: "MVC pattern in Python: SQLite"
 date: "2017-04-10"
 tags:
-  - python
   - design patterns
+  - Python
 ---
 
 This is the **second** article of a series of blog posts related to the MVC pattern. Last time we saw how to divide business logic, presentation layer and user interaction into three components: Model, View and Controller.

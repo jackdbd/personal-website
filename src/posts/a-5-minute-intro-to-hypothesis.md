@@ -2,7 +2,7 @@
 title: A 5 minute Intro to Hypothesis
 date: "2017-10-14T08:30:03.284Z"
 tags:
-  - python
+  - Python
   - tests
 ---
 

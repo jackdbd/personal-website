@@ -2,9 +2,9 @@
 title: Strategy pattern in Python
 date: "2017-01-28"
 tags:
-  - python
   - design patterns
   - inversion of control
+  - Python
 ---
 
 _Strategy_ (also known as _Policy_) is a behavioral design pattern that enables an algorithm's behavior to be selected at runtime.

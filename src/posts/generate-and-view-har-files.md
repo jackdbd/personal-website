@@ -6,7 +6,7 @@ ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1620314435/waterfall_google_compare_hqyhcf.png
   imageAlt: A waterfall chart generated from a HAR file.
 tags:
-  - http
+  - HTTP
   - web performance
 ---
 A HAR (Http ARchive) file contains data related to the HTTP transactions that occur between a web browser and a website or web app. Generating and analyzing a HAR file is important when troubleshooting performance issues.

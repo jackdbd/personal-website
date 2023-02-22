@@ -2,8 +2,8 @@
 title: Pipenv
 date: "2017-07-28T23:12:03.284Z"
 tags:
-  - python
-  - virtual environments
+  - Python
+  - virtual environment
 ---
 
 When it comes to manage environments and dependencies in Python projects, a very popular combination includes [Virtualenvwrapper](https://www.giacomodebidda.com/virtual-environments-with-virtualenvwrapper/) to manage environments, and pip to install/remove Python packages. Of course, every time you start working on a project you need to remember to activate the virtual environment of that particular project. For example, with Virtualenvwrapper you would use `workon <your-python-project>`.

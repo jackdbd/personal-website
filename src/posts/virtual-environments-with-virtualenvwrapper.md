@@ -2,8 +2,8 @@
 title: Virtual environments with virtualenvwrapper
 date: "2016-12-11"
 tags:
-  - python
-  - virtual environments
+  - Python
+  - virtual environment
 ---
 
 `virtualenvwrapper` is a set of shell functions built on top of the `virtualenv` python module, and make it even easier to create and manage python virtual environments.

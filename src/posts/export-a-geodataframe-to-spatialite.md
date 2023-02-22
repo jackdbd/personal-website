@@ -5,8 +5,8 @@ ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1599302022/spatialite-gui_xgzx3z.png
   imageAlt: A map preview in Spatialite GUI.
 tags:
-  - python
   - geospatial
+  - Python
 ---
 I have been doing some geospatial analysis in the last few months, and since I came back from [GeoPython](https://2018.geopython.net/) in Basel (really good conference by the way, definitely recommended) I kept playing around with several Python libraries.
 

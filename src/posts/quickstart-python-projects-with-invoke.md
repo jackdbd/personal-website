@@ -2,9 +2,9 @@
 title: Quickstart Python projects with Invoke
 date: "2017-08-07T20:12:03.284Z"
 tags:
-  - python
-  - virtual environments
   - invoke
+  - Python
+  - virtual environment
 ---
 
 Every time I want to try out a new Python library or develop a small weekend project I need to create a git repository and configure a virtual environment. Most of the time I forget one passage or another and I end up losing a few minutes searching on Google how to perform some trivial task. Not fun.
