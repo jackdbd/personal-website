@@ -25,7 +25,6 @@ const emoji = require('eleventy-plugin-emoji')
 const helmet = require('eleventy-plugin-helmet')
 const readingTime = require('eleventy-plugin-reading-time')
 const toc = require('eleventy-plugin-nesting-toc')
-const embedCloudinary = require('eleventy-plugin-embed-cloudinary')
 
 const collections = require('../11ty/collections')
 const filters = require('../11ty/filters')
@@ -33,6 +32,7 @@ const shortcodes = require('../11ty/shortcodes')
 const pairedShortcodes = require('../11ty/paired-shortcodes')
 const transforms = require('../11ty/transforms.js')
 const plausibleClientPromise = import('@jackdbd/plausible-client')
+const cloudinaryPlugin = require('../plugins/11ty/cloudinary/index.cjs')
 const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
 const webmentionsPlugin = require('../plugins/11ty/webmentions/index.cjs')
 const { buildServiceWorker } = require('../src/build-sw.cjs')
@@ -92,7 +92,7 @@ module.exports = function (eleventyConfig) {
       { verbose: true }
     )
     const results = await client.stats.breakdown()
-    // console.log('=== Plausible.io stats/ breakdown ===')
+    // console.log('=== Plausible.io stats/ breakdown ===', results)
     popularHtmlPages = results
       .filter((res) => res.visitors > 50)
       .map((res) => {
@@ -223,7 +223,7 @@ module.exports = function (eleventyConfig) {
       'https://www.cairographics.org/',
       'https://www.qlik.com/blog/visual-encoding'
     ],
-    loggingLevel: 2
+    loggingLevel: 1
   })
 
   // on GitHub Actions I use a JSON secret for Plausible API key and site ID,
@@ -378,11 +378,11 @@ module.exports = function (eleventyConfig) {
   }
   const cloudinary = JSON.parse(cloudinary_json_string)
 
-  // https://github.com/jackdbd/eleventy-plugin-embed-cloudinary#configuration
-  eleventyConfig.addPlugin(embedCloudinary, {
+  eleventyConfig.addPlugin(cloudinaryPlugin, {
     apiKey: cloudinary.api_key,
     apiSecret: cloudinary.api_secret,
     cacheDuration: '7d',
+    cacheVerbose: true,
     cloudName: cloudinary.cloud_name
   })
 
@@ -486,7 +486,11 @@ module.exports = function (eleventyConfig) {
   // 11ty filters
   // https://www.11ty.dev/docs/filters/
   Object.keys(filters).forEach((name) => {
-    eleventyConfig.addFilter(name, filters[name])
+    if (name === 'jsmin') {
+      eleventyConfig.addAsyncFilter(name, filters[name])
+    } else {
+      eleventyConfig.addFilter(name, filters[name])
+    }
   })
 
   // 11ty collections
@@ -510,8 +514,12 @@ module.exports = function (eleventyConfig) {
   // https://github.com/valeriangalliat/markdown-it-anchor
   md.use(markdownItAnchor, {
     level: 2,
-    // permalink: markdownItAnchor.permalink.headerLink(),
-    permalink: true,
+    // https://github.com/valeriangalliat/markdown-it-anchor#link-inside-header
+    permalink: markdownItAnchor.permalink.linkInsideHeader({
+      symbol: `<span aria-hidden="true">#</span>`,
+      placement: 'before'
+    }),
+    // permalink: true,
     permalinkBefore: true,
     permalinkClass: 'heading-anchor',
     permalinkSymbol: '#',

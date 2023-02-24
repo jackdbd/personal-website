@@ -67,7 +67,7 @@
   {# Web app manifest for PWA installation #}
   <link rel="manifest" href="/manifest.webmanifest">
 
-  {# Inline CSS (critical CSS) #}
+  {# Inlined CSS (critical CSS) #}
   {# Rule of thumb: the sum of all inlined CSS should not exceed 1-2 KB once minified. #}
   {# https://www.11ty.dev/docs/quicktips/inline-css/ #}
   {% set css %}
@@ -115,9 +115,12 @@
   {# RSS Feed #}
   <link rel="alternate" type="application/rss+xml" href="{{ metadata.feeds.posts.href }}" title="{{ metadata.feeds.posts.title }}">
 
-  {# Non-inlined JS: use async or defer #}
+  {# External JS: use async or defer #}
   <script async type="module" src="/assets/js/is-land.js"></script>
   <script async src="/assets/js/instantpage.js"></script>
   <script async src="/assets/js/async-load-prism-theme.js"></script>
   <script defer data-domain="giacomodebidda.com" src="https://plausible.io/js/plausible.js"></script>
+
+  {# I don't inline any JS because it would require me to have a less secure Content-Security-Policy #}
+  {# https://www.11ty.dev/docs/quicktips/inline-js/ #}
 </head>

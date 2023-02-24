@@ -113,6 +113,17 @@ strong {
   font-weight: 700;
 }
 
+video {
+  max-width: 100%;
+}
+
+/* WebVTT */
+/* https://caniuse.com/mdn-api_texttrack_cues */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/::cue */
+video::cue {
+  font-size: var(--scale-step--1);
+}
+
 /* #back-to-top ------------------------------------------------------------- */
 #back-to-top {
   position: fixed;

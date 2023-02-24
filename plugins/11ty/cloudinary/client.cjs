@@ -1,0 +1,86 @@
+const { AssetCache } = require('@11ty/eleventy-fetch')
+const { v2: cloudinary } = require('cloudinary')
+const makeDebug = require('debug')
+const { DEBUG_PREFIX, ERROR_MESSAGE_PREFIX } = require('./constants.cjs')
+
+const debug = makeDebug(`${DEBUG_PREFIX}:client`)
+
+// Fetch an image hosted on your Cloudinary Media Library using the Cloudinary
+// Search API. Cache each response using the 11ty Cache.
+const makeClient = (config) => {
+  const {
+    api_key,
+    api_secret,
+    cache_directory,
+    cache_duration,
+    cache_verbose,
+    cloud_name
+  } = config
+
+  debug(`cache responses from Cloudinary %O`, {
+    cache_directory,
+    cache_duration,
+    cache_verbose
+  })
+
+  cloudinary.config({
+    cloud_name,
+    api_key,
+    api_secret,
+    secure: true
+  })
+  debug(`Cloudinary API client configured for cloud_name: ${cloud_name}`)
+
+  const fetchCloudinaryResponse = async (public_id) => {
+    // https://cloudinary.com/documentation/search_api#expressions
+    // const expression = `resource_type:video AND public_id:${public_id}`
+    const expression = `public_id:${public_id}`
+    debug(`search %O`, { cloud_name, expression, fields: ['context', 'tags'] })
+
+    // TODO: search in asset cache before fetching from Cloudinary Media Library
+    // https://www.11ty.dev/docs/plugins/fetch/#manually-store-your-own-data-in-the-cache
+    // https://github.com/chrisburnell/eleventy-cache-webmentions/blob/main/eleventy-cache-webmentions.js
+    const asset = new AssetCache(public_id, cache_directory, {
+      duration: cache_duration,
+      verbose: cache_verbose
+    })
+
+    await asset.ensureDir()
+
+    if (asset.isCacheValid(cache_duration)) {
+      debug(
+        `${public_id} in ${cache_directory} and still fresh. Extracting from cache.`
+      )
+      return await asset.getCachedValue()
+    }
+
+    try {
+      debug(
+        `${public_id} not in ${cache_directory} or expired. Fetching from Cloudinary Media Library.`
+      )
+      const result = await cloudinary.search
+        .expression(expression)
+        .with_field('context')
+        .with_field('tags')
+        .max_results(1)
+        .execute()
+
+      if (!result.resources || result.resources.length !== 1) {
+        throw new Error(
+          `${ERROR_MESSAGE_PREFIX}there should be exactly one resource with public_id ${public_id}`
+        )
+      }
+
+      await asset.save(result.resources[0], 'json')
+      debug(`${public_id} stored in ${cache_directory}`)
+
+      return result.resources[0]
+    } catch (err) {
+      throw new Error(`${ERROR_MESSAGE_PREFIX}${err.message}`)
+    }
+  }
+
+  return { fetchCloudinaryResponse }
+}
+
+module.exports = { makeClient }

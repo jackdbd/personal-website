@@ -3,20 +3,6 @@
  * https://www.11ty.dev/docs/collections/
  */
 
-const BACKEND_TAGS =
-  'ansible,CLI,clojure,devops,domain-driven design,inversion of control,microservices,python'
-
-const FRONTEND_TAGS =
-  'css,d3,data visualization,es6,js,regl,sass,three.js,typescript,webgl,webpack'
-
-const isBackendTag = (tag) => {
-  return BACKEND_TAGS.includes(tag)
-}
-
-const isFrontendTag = (tag) => {
-  return FRONTEND_TAGS.includes(tag)
-}
-
 const isUserDefinedTag = (tag) => {
   switch (tag) {
     // this list should match the `filter` list in pages/posts-tagged-with-tag.njk
@@ -48,7 +34,6 @@ const makeAddTagsToTagSet = (tagSet, predicate) => {
 const userDefinedTagList = (collection) => {
   const tagSet = new Set()
   const addTagsToTagSet = makeAddTagsToTagSet(tagSet, isUserDefinedTag)
-  // const addTagsToTagSet = makeAddTagsToTagSet(tagSet, isFrontendTag);
   collection.getAll().forEach(addTagsToTagSet)
   return [...tagSet]
 }
