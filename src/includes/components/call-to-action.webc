@@ -1,7 +1,7 @@
 <div :id="uid" class="stack">
   <h3>🗣️ Let's have a chat!</h3>
 
-  <p>If you think I can help you, feel free to reach out to me. You can ask me anything you want.</p>
+  <p>Each week, I carve out some time for anyone to contact me. Feel free to reach out to me. I'll do my best to help you with whatever you need.</p>
 
   <p>
     <strong>Reserve your spot here:</strong>
