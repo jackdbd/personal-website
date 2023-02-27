@@ -4,6 +4,7 @@ const debugBreakpoints = require('../tailwind/plugins/tailwind-debug-breakpoints
 const config = {
   content: [
     './assets/**/*.{html,njk}',
+    './11ty/paired-shortcodes.js',
     './src/includes/components/**/*.{njk,webc}',
     './src/layouts/**/*.njk',
     './src/pages/**/*.{html,njk}'

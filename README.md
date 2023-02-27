@@ -10,22 +10,24 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
 
 - PWA with [web application manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - RSS feed with [@11ty/eleventy-plugin-rss](https://www.11ty.dev/docs/plugins/rss/)
-- `sitemap.xml` and `robots.txt`
+- `sitemap.xml` and `robots.txt` for SEO
 - `security.txt` in `.well-known` directory
 - just-in-time preloading with [instant.page](https://instant.page/)
 - Service worker generated with [workbox-core](https://developer.chrome.com/docs/workbox/modules/workbox-core/) and [esbuild](https://github.com/evanw/esbuild)
-- modular type scale and fluid space system thanks to [Utopia](https://utopia.fyi/)
-- contact form submission with a function deployed to Cloudflare Pages Functions (see the `functions/` directory)
+- Modular type scale and fluid space system thanks to [Utopia](https://utopia.fyi/)
+- Contact form submission with a function deployed to Cloudflare Pages Functions (see the `functions/` directory)
 - Performance reports with multiple [performance budgets](https://www.afasterweb.com/2020/01/28/performance-budgets-with-lighthouse/) using the [Lighthouse CLI](https://github.com/GoogleChrome/lighthouse#using-the-node-cli) and [webhint](https://github.com/webhintio/hint)
-- Run Lighthouse every commit thanks to the [Lightouse CI](https://github.com/GoogleChrome/lighthouse-ci)
-- CSS on the critical path is inlined in the `<head>` and minified with [clean-css](https://www.11ty.dev/docs/quicktips/inline-css/). All other CSS is managed by [PostCSS](https://github.com/postcss/postcss)
+- Lighthouse runs on every commit thanks to the [Lightouse CI](https://github.com/GoogleChrome/lighthouse-ci)
+- HTML minified using [html-minifier-terser](https://github.com/terser/html-minifier-terser) (only when building for production)
+- CSS on the critical path minified with [clean-css](https://www.11ty.dev/docs/quicktips/inline-css/) and inlined in the `<head>`. All other CSS is managed by [PostCSS](https://github.com/postcss/postcss).
+- Embeds for YouTube and Video thanks to [eleventy-plugin-youtube-embed](https://github.com/gfscott/eleventy-plugin-embed-everything/tree/main/packages/youtube) and [eleventy-plugin-vimeo-embed](https://github.com/gfscott/eleventy-plugin-embed-everything/tree/main/packages/vimeo)
+- Framework agnostic partial hydration with [@11ty/is-land](https://github.com/11ty/is-land)
 - [Custom HTTP headers](https://developers.cloudflare.com/pages/how-to/add-custom-http-headers/) for the [Reporting API](https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API):
   - [Report-To](https://developers.google.com/web/updates/2018/09/reportingapi#header) with [Report URI](https://report-uri.com/)
   - [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
   - [Network Error Logging](https://developer.cdn.mozilla.net/en-US/docs/Web/HTTP/Headers/NEL)
-  - [Permissions-Policy](https://scotthelme.co.uk/goodbye-feature-policy-and-hello-permissions-policy/)
-
-You could also generate a Permission-Policy header with this website: https://www.permissionspolicy.com/
+  - [Permissions-Policy](https://scotthelme.co.uk/goodbye-feature-policy-and-hello-permissions-policy/) (if you prefer you can generate this header on [permissionspolicy.com](https://www.permissionspolicy.com/))
+- Configurable text to speech synthesis, thanks to [@jackdbd/eleventy-plugin-text-to-speech](https://github.com/jackdbd/undici/tree/main/packages/eleventy-plugin-text-to-speech)
 
 ## Installation
 
@@ -43,7 +45,7 @@ npm i -g zx
 
 ## Development
 
-Watch all templates, CSS, JS, service worker, and automatically refresh the browser using [BrowserSync](https://github.com/Browsersync/browser-sync):
+Watch all templates, CSS, JS, service worker, and automatically refresh the browser:
 
 ```shell
 npm run dev

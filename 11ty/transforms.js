@@ -3,30 +3,50 @@
  * https://www.11ty.dev/docs/config/#transforms
  */
 
-const htmlmin = require('html-minifier')
+const { minify } = require('html-minifier-terser')
 
-// minify HTML files when in production
-const shouldTransformHTML = (outputPath) => {
-  return (
+const shouldMinify = (outputPath) => {
+  let boolean = false
+
+  if (
     outputPath &&
     process.env.ELEVENTY_ENV === 'production' &&
     outputPath.endsWith('.html') &&
-    // FIXME: this HTML page is cut if minified. Why? For now I avoid minifying it
-    !outputPath.includes('inspect-container-images-with-dive')
-  )
+    process.env.ELEVENTY_ENV === 'production'
+  ) {
+    if (
+      outputPath.includes(
+        'some-page-that-for-whatever-reason-you-dont-want-to-minify'
+      )
+    ) {
+      boolean = false
+      console.log(`[minify-html] ${outputPath} will NOT be minified`)
+    } else {
+      boolean = true
+    }
+  }
+
+  return boolean
+}
+
+/**
+ * Minifies HTML files only in production.
+ */
+const htmlmin = (content, outputPath) => {
+  if (shouldMinify(outputPath)) {
+    // https://github.com/terser/html-minifier-terser#options-quick-reference
+    return minify(content, {
+      collapseWhitespace: true,
+      preserveLineBreaks: true, // removing all line breaks BREAKS a few pages.
+      removeComments: true,
+      removeRedundantAttributes: true,
+      useShortDoctype: true
+    })
+  } else {
+    return content
+  }
 }
 
 module.exports = {
-  // https://github.com/kangax/html-minifier#options-quick-reference
-  htmlmin: function (content, outputPath) {
-    if (shouldTransformHTML(outputPath)) {
-      return htmlmin.minify(content, {
-        collapseWhitespace: true,
-        removeComments: true,
-        useShortDoctype: true
-      })
-    } else {
-      return content
-    }
-  }
+  htmlmin
 }

@@ -3,7 +3,7 @@ title: Façade pattern in Python
 date: "2016-11-26T21:12:03.284Z"
 tags:
   - design patterns
-  - python
+  - Python
 ---
 
 Let's continue our journey through the most used design patterns by implementing a _Façade_ pattern in Python.

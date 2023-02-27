@@ -2,8 +2,8 @@
 title: "MVC pattern in Python: Dataset"
 date: "2017-04-15"
 tags:
-  - python
   - design patterns
+  - Python
 ---
 
 This is the **third** article of a series of blog posts related to the MVC pattern. In the first article we saw how to divide business logic, presentation layer and user interaction into three components: Model, View and Controller. Last time we replaced the Model without touching a single line of code neither in the View, nor in the Controller.
@@ -43,34 +43,12 @@ As we did last time, let's implement each CRUD functionality in the simplest way
 
 Let's review the inventory of a small grocery store. A typical product list would look like this:
 
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead class="thead-inverse">
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Bread</td>
-                <td>0.5</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>Milk</td>
-                <td>1.0</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>Wine</td>
-                <td>10.0</td>
-                <td>5</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+{% table %}
+Name,Price,Quantity
+Bread,0.5,20
+Milk,1.0,10
+Wine,10.0,5
+{% endtable %}
 
 Create a Python script and call it `dataset_backend.py`.
 

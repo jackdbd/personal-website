@@ -5,15 +5,20 @@
 const CleanCSS = require('clean-css')
 const { DateTime } = require('luxon')
 const slugify = require('slugify')
-const UglifyJS = require('uglify-es')
+const { minify } = require('terser')
 
-// Minify CSS (used for inlined CSS. Non-inlined CSS is managed by PostCSS)
-// I don't (can't?) use cssnano here because it would require a postcss runner.
+/**
+ * Minifies CSS
+ *
+ * Use this for CSS that you want to inline in the <head> (critical CSS).
+ * Non-inlined CSS is managed by PostCSS. I don't (can't?) use cssnano to minify
+ * CSS because it would require a postcss runner.
+ */
 const cssmin = (code) => {
   return new CleanCSS({
     compatibility: '*',
     level: 2, // if 2  breaks something, try 1
-    sourceMap: false
+    sourceMap: true
   }).minify(code).styles
 }
 
@@ -26,16 +31,17 @@ const humanDateJS = (dateObj) => {
   return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('dd LLL yyyy')
 }
 
-// Minify JS (used for inlined JS)
-// I would like to use terser, but terser exposes a single async function, and
-// at the moment 11ty filters can't be asynchronous.
-// https://github.com/11ty/eleventy/issues/518
-// TODO: I might try to de-async terser using this package
-// https://github.com/abbr/deasync
-const jsmin = (code) => {
-  const minified = UglifyJS.minify(code)
+/**
+ * Minifies JavaScript using terser.
+ *
+ * If you are using a Content Security Policy on your website, make sure the
+ * script-src directive allows 'unsafe-inline'. Otherwise, your inline
+ * Javascript will not load.
+ */
+const jsmin = async (code) => {
+  const minified = await minify(code, { sourceMap: true })
   if (minified.error) {
-    console.error('UglifyJS error: ', minified.error)
+    console.log(`!!! terser could not minify JS code`)
     return code
   }
   return minified.code

@@ -5,8 +5,8 @@ ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1599303197/nyc-yellow-taxis-pickups_nipps2.png
   imageAlt: New York City taxi pickups represented as yellow dots.
 tags:
-  - python
   - data visualization
+  - Python
 ---
 
 Last month at a [PyDataMunich](https://www.meetup.com/it-IT/PyData-Munchen/) meetup I gave a short workshop on HDF5 and the python packages that we can use when dealing with HDF5 files.

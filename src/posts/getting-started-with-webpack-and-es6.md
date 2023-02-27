@@ -2,8 +2,8 @@
 title: Getting started with Webpack and ES6
 date: "2017-05-12"
 tags:
-  - webpack
-  - es6
+  - ES6
+  - Webpack
 ---
 
 Project starters like [Angular starter](https://github.com/AngularClass/angular-starter) and [Cookiecutter-Django](https://github.com/pydanny/cookiecutter-django) are really amazing when you are experienced with the technology they use and you want to develop applications that follow best practices and are ready for production. On the other hand, if you are just starting out, trying to wrap your head around these complex setups will be a daunting task and most likely a waste of your time. It's fundamental to know why you need a given package in your project, and why it's good to have your files in a given location in your project directory tree.
@@ -128,7 +128,7 @@ babel-core is the Babel compiler itself, or maybe it's more appropriate calling 
 yarn add --dev babel-core
 ```
 
-_Note: [this page on babeljs.io](https://babeljs.io/en/setup/) tells you which packages you need in order to integrate Babel with your tools of choice_.
+_Note: [this page on babeljs.io](https://babeljs.io/setup) tells you which packages you need in order to integrate Babel with your tools of choice_.
 
 ## 5- babel-preset-es2015
 

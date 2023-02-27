@@ -23,6 +23,8 @@ hint-report/
 # default cache directory of @11ty/eleventy-fetch
 # https://www.11ty.dev/docs/plugins/cache/
 .cache/
+# cache for images and videos fetched from Cloudinary
+.cache-cloudinary/
 # cache used by my work-in-progress eleventy-plugin-plausible
 .cache-plausible-json-responses/
 # cache for webmentions fetched from webmention.io

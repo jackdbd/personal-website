@@ -3,8 +3,8 @@ title: How to get started with regl and Webpack
 date: "2017-10-31T19:30:03.284Z"
 tags:
   - regl
-  - webgl
-  - webpack
+  - WebGL
+  - Webpack
 ---
 
 I have been wanting to play around with the [regl](https://github.com/regl-project/regl) library since I wathed the [talk that Mikola Lysenko gave at PLOTCON 2016](https://www.youtube.com/watch?v=rFjszW5L2aw&t=1196s), and this week I finally decided to invest some time in setting up a repo with Webpack and some regl examples.

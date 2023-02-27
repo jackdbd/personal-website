@@ -2,8 +2,8 @@
 title: Bridge pattern in Python
 date: "2017-01-21"
 tags:
-  - python
   - design patterns
+  - Python
 ---
 
 I struggled quite a bit with the Bridge pattern. The idea itself is rather simple, decouple an interface from its implementation, but I couldn't think about a simple, yet "real life" example of this pattern.
@@ -31,24 +31,10 @@ In a real life scenario the call to action could be a web component of some sort
 
 It might be useful to summarize what the components in this toy example represent:
 
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead class="thead-inverse">
-            <tr>
-                <th>Client</th>
-                <th>Interface</th>
-                <th>Implementation</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>the user</td>
-                <td>the UI of the website</td>
-                <td>what it's drawn in each UI component</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+{% table %}
+Client,Interface,Implementation
+the user,the UI of the website,what it's drawn in each UI component
+{% endtable %}
 
 The Interface is the UI of website. There are free users and paid users, so there are two interfaces to build: one with ads, excerpts and a call to action (free version) and another one with full articles (paid version).
 

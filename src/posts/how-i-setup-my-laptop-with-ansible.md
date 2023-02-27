@@ -3,8 +3,8 @@ title: How I setup my laptop with Ansible
 description: Here is how I (re)configure my laptop with Ansible
 date: "2020-09-18T12:00:00.000Z"
 tags:
-  - ansible
-  - devops
+  - Ansible
+  - DevOps
 ---
 I've recently started using Ansible to configure my laptop. Having a development machine setup with a couple of command is pretty great, but there are still some manual steps I need to take care in the process.
 

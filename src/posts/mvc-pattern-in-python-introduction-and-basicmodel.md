@@ -2,8 +2,8 @@
 title: "MVC pattern in Python: Introduction and BasicModel"
 date: "2017-04-02"
 tags:
-  - python
   - design patterns
+  - Python
 ---
 
 If you have ever worked with Graphical User Interfaces or web frameworks (e.g. Django), chances are that you heard about the _Model-View-Controller_ pattern.
@@ -45,34 +45,12 @@ _A word of caution:_ according to Wikipedia, [create, read, update, and delete](
 
 Let's think about the inventory of a small grocery store. A typical product list would look like this:
 
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead class="thead-inverse">
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Bread</td>
-                <td>0.5</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>Milk</td>
-                <td>1.0</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>Wine</td>
-                <td>10.0</td>
-                <td>5</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+{% table %}
+Name,Price,Quantity
+Bread,0.5,20
+Milk,1.0,10
+Wine,10.0,5
+{% endtable %}
 
 In Python you can think about these items as a list of dictionaries.
 

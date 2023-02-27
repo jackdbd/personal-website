@@ -61,8 +61,9 @@ const buildServiceWorker = async ({ precachePaths }) => {
     // https://esbuild.github.io/api/#sourcemap
     sourcemap: 'linked',
     // https://esbuild.github.io/api/#target
-    target: 'esnext',
-    watch: false
+    // TODO: maybe I could query https://caniuse.com/ for the latest versions of
+    // Chrome, Firefox, Safari, and Edge, and use those as the target.
+    target: 'esnext'
   }
 
   // console.log(`${PREFIX} generate service worker with this config`, config)

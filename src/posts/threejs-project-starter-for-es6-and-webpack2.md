@@ -2,12 +2,12 @@
 title: Three.js project starter for ES6 and Webpack 2
 date: "2017-04-30"
 tags:
-  - three.js
-  - es6
-  - webpack
-  - babel
-  - glsl
-  - sass
+  - Babel
+  - ES6
+  - GLSL
+  - Sass
+  - Three.js
+  - Webpack
 ---
 
 Some months ago I came across this hilarious article on HackerNoon: [how it feels to learn javascript in 2016](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f) (if you missed it, I suggest you to go and read it after you're done with this blog post). I mostly code in Python, but sometimes I have to do some frontend stuff, or write some visualizations, so I need to use Javascript.

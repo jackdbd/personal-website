@@ -8,7 +8,7 @@ const navigation = require('@11ty/eleventy-navigation')
 const rss = require('@11ty/eleventy-plugin-rss')
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
 const webcPlugin = require('@11ty/eleventy-plugin-webc')
-const UpgradeHelper = require('@11ty/eleventy-upgrade-help')
+// const UpgradeHelper = require('@11ty/eleventy-upgrade-help')
 const cspPlugin = require('@jackdbd/eleventy-plugin-content-security-policy')
 const {
   ensureEnvVarsPlugin
@@ -25,7 +25,6 @@ const emoji = require('eleventy-plugin-emoji')
 const helmet = require('eleventy-plugin-helmet')
 const readingTime = require('eleventy-plugin-reading-time')
 const toc = require('eleventy-plugin-nesting-toc')
-const embedCloudinary = require('eleventy-plugin-embed-cloudinary')
 
 const collections = require('../11ty/collections')
 const filters = require('../11ty/filters')
@@ -33,6 +32,7 @@ const shortcodes = require('../11ty/shortcodes')
 const pairedShortcodes = require('../11ty/paired-shortcodes')
 const transforms = require('../11ty/transforms.js')
 const plausibleClientPromise = import('@jackdbd/plausible-client')
+const cloudinaryPlugin = require('../plugins/11ty/cloudinary/index.cjs')
 const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
 const webmentionsPlugin = require('../plugins/11ty/webmentions/index.cjs')
 const { buildServiceWorker } = require('../src/build-sw.cjs')
@@ -92,7 +92,7 @@ module.exports = function (eleventyConfig) {
       { verbose: true }
     )
     const results = await client.stats.breakdown()
-    // console.log('=== Plausible.io stats/ breakdown ===')
+    // console.log('=== Plausible.io stats/ breakdown ===', results)
     popularHtmlPages = results
       .filter((res) => res.visitors > 50)
       .map((res) => {
@@ -206,20 +206,24 @@ module.exports = function (eleventyConfig) {
       }
     },
     excludeUrls: [
-      // several Wikipedia pages return HTTP 302. They shouldn't be an issue.
-      'https://en.wikipedia.org/wiki/*',
-      // this article seems no longer online
+      // these articles seem no longer online. What can I do? Just remove them from blog posts? Replace them with similar articles?
+      'https://www.oscarberg.net/blog/2012/05/invisible-manager/',
       'https://getdango.com/emoji-and-deep-learning/',
       // I don't know why there is a HTTP (not HTTPS!) redirect for this...
       'http://Kepler.gl',
-      // I don't know why this is marked as a broken link when building on Cloudflare...
-      'https://www.cairographics.org/',
-      'https://www.qlik.com/blog/visual-encoding',
       // several YouTube pages return HTTP 302. They shouldn't be an issue.
       'https://www.youtube.com/watch?v=b9yL5usLFgY',
-      'https://www.youtube.com/watch?v=lC39ifspIf4'
+      'https://www.youtube.com/watch?v=lC39ifspIf4',
+      // several Wikipedia pages return HTTP 302. They shouldn't be an issue.
+      'https://en.wikipedia.org/wiki/*',
+      // the plugin marks this as a HTTP 403, but it seems a HTTP 200 to me.
+      'https://www.cloudflare.com/learning/cdn/glossary/origin-server/',
+      // I don't know why these are marked as broken links. They seem fine to me...
+      'https://all-geo.org/volcan01010/',
+      'https://www.cairographics.org/',
+      'https://www.qlik.com/blog/visual-encoding'
     ],
-    loggingLevel: 2
+    loggingLevel: 1
   })
 
   // on GitHub Actions I use a JSON secret for Plausible API key and site ID,
@@ -301,8 +305,8 @@ module.exports = function (eleventyConfig) {
 
       'manifest-src': ['self'],
 
-      // allow <audio> and <video> hosted on Cloud Storage
-      'media-src': ['storage.googleapis.com'],
+      // allow <audio> and <video> hosted on Cloudinary, Cloud Storage
+      'media-src': ['res.cloudinary.com', 'storage.googleapis.com'],
 
       'object-src': ['none'],
 
@@ -374,9 +378,11 @@ module.exports = function (eleventyConfig) {
   }
   const cloudinary = JSON.parse(cloudinary_json_string)
 
-  eleventyConfig.addPlugin(embedCloudinary, {
+  eleventyConfig.addPlugin(cloudinaryPlugin, {
     apiKey: cloudinary.api_key,
     apiSecret: cloudinary.api_secret,
+    cacheDuration: '7d',
+    cacheVerbose: true,
     cloudName: cloudinary.cloud_name
   })
 
@@ -436,7 +442,7 @@ module.exports = function (eleventyConfig) {
   })
 
   // UpgradeHelper must be added last
-  eleventyConfig.addPlugin(UpgradeHelper)
+  // eleventyConfig.addPlugin(UpgradeHelper)
 
   // --- 11ty data cascade -------------------------------------------------- //
   // https://www.11ty.dev/docs/data-cascade/
@@ -480,7 +486,11 @@ module.exports = function (eleventyConfig) {
   // 11ty filters
   // https://www.11ty.dev/docs/filters/
   Object.keys(filters).forEach((name) => {
-    eleventyConfig.addFilter(name, filters[name])
+    if (name === 'jsmin') {
+      eleventyConfig.addAsyncFilter(name, filters[name])
+    } else {
+      eleventyConfig.addFilter(name, filters[name])
+    }
   })
 
   // 11ty collections
@@ -504,8 +514,12 @@ module.exports = function (eleventyConfig) {
   // https://github.com/valeriangalliat/markdown-it-anchor
   md.use(markdownItAnchor, {
     level: 2,
-    // permalink: markdownItAnchor.permalink.headerLink(),
-    permalink: true,
+    // https://github.com/valeriangalliat/markdown-it-anchor#link-inside-header
+    permalink: markdownItAnchor.permalink.linkInsideHeader({
+      symbol: `<span aria-hidden="true">#</span>`,
+      placement: 'before'
+    }),
+    // permalink: true,
     permalinkBefore: true,
     permalinkClass: 'heading-anchor',
     permalinkSymbol: '#',

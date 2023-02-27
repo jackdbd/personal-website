@@ -5,7 +5,7 @@ description: Dive is a CLI tool that can be used to inspect container images and
 tags:
   - buildpack
   - container
-  - docker
+  - Docker
   - pack
 ---
 Container images can be created using `docker build` with a `Dockerfile`, or with other tools such as [jib](https://github.com/GoogleContainerTools/jib) or [pack](https://github.com/buildpacks/pack). Regardless of which tool was used to create the container image, you can use [dive](https://github.com/wagoodman/dive) to inspect all layers that make up the final image.

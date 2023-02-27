@@ -4,6 +4,7 @@ a {
   color: var(--color-accent);
   font-weight: 700;
   text-decoration: underline;
+  /* word-break: break-word; */
 }
 
 a:focus {
@@ -110,6 +111,17 @@ small {
 strong {
   color: var(--color-accent);
   font-weight: 700;
+}
+
+video {
+  max-width: 100%;
+}
+
+/* WebVTT */
+/* https://caniuse.com/mdn-api_texttrack_cues */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/::cue */
+video::cue {
+  font-size: var(--scale-step--1);
 }
 
 /* #back-to-top ------------------------------------------------------------- */
@@ -333,7 +345,7 @@ strong {
 .prose ol > li {
   list-style: decimal;
   margin-left: 1.5em;
-  padding-left: 1em;
+  padding-left: 0.25em;
 }
 
 .prose pre {
@@ -353,7 +365,7 @@ strong {
 .prose ul:not(.cluster) > li {
   list-style: disc;
   margin-left: 1.25em;
-  padding-left: 1em;
+  padding-left: 0.25em;
 }
 
 /* .prose overrides (keep these to a minimum!) ------------------------------ */
@@ -369,6 +381,54 @@ strong {
 #toc ol > li {
   list-style: none;
   padding-left: 0;
+}
+
+/* .table-container --------------------------------------------------------- */
+.table-container {
+  position: relative;
+}
+
+.table-container > .table-scroll {
+  overflow: auto;
+}
+
+.table-container table {
+  /* table-layout: fixed; */
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /* border: 0.5rem solid magenta; */
+  border-collapse: collapse;
+  /* overflow: auto; */
+}
+
+.table-container caption {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  /* font-family: 'Nunito'; */
+  font-weight: 700;
+}
+
+/* .table-container thead tr {
+  overflow: auto;
+  width: 100%;
+} */
+
+.table-container thead th {
+  background-color: var(--color-bone);
+  padding: 0 0.5em;
+  text-align: center;
+  /* text-transform: capitalize; */
+}
+
+/* .table-container tr > th + th {
+  margin-left: 1em;
+} */
+
+.table-container tbody td {
+  /* background-color: lightgreen; */
+  text-align: center;
+  padding: 0 1em;
 }
 
 /* #wrapper-for-sticky-footer ----------------------------------------------- */
@@ -403,4 +463,5 @@ strong {
   background-color: var(--color-accent);
   border: 0.2rem solid var(--color-text);
   border-radius: 0.5rem;
+  min-height: 4rem;
 }

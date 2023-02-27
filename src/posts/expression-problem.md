@@ -8,8 +8,8 @@ ogp:
   imageAlt: Michael Fogus presenting the talk ClojureScript Anatomy at the InfoQ conference in 2012
   video: https://youtu.be/lC39ifspIf4
 tags:
-  - clojure
-  - julia
+  - Clojure
+  - Julia
   - polymorphism
 ---
 The expression problem—also known as the extensibility problem—is about adding new capabilities to existing code without modifying it.

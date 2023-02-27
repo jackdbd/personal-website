@@ -1,0 +1,7 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.000
+This is displayed from 1s to 2s
+
+00:00:02.850 --> 00:00:05.500
+This is displayed from 2.85s to 5.5s

@@ -2,10 +2,10 @@
 title: sklearn-pandas
 date: "2017-08-20T09:02:03.284Z"
 tags:
-  - python
-  - pandas
-  - scikit-learn
   - machine learning
+  - pandas
+  - Python
+  - scikit-learn
 ---
 
 [sklearn-pandas](https://github.com/pandas-dev/sklearn-pandas) is a small library that provides a bridge between [scikit-learn](https://github.com/scikit-learn/scikit-learn)'s machine learning methods and pandas Data Frames.

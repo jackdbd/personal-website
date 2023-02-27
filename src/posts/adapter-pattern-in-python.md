@@ -3,7 +3,7 @@ title: Adapter pattern in Python
 date: "2016-11-26T09:12:03.284Z"
 tags:
   - design patterns
-  - python
+  - Python
 ---
 
 Some weeks ago I decided to start studying design patterns and implementing them in Python. _Design patterns_ and _Head first in design patterns_ are constantly cited for being really good books. I added them to my reading list some time ago, but I still haven't managed to read them so far. Nonetheless, I've read several blog posts, articles on Wikipedia and answers on Stack Overflow and started implementing some of these patterns.
@@ -62,22 +62,10 @@ class USSocket(Socket):
 
 This is the current scenario:
 
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead class="thead-inverse">
-            <tr>
-                <th>Client</th>
-                <th>Supplier</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Smartphone</td>
-                <td>EUSocket</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+{% table %}
+Client,Supplier
+Smartphone,EUSocket
+{% endtable %}
 
 If you take a Smartphone instance and you call `charge` with `EUSocket.output_voltage` as argument, you will fail at charging your phone.
 
@@ -100,26 +88,11 @@ class EUAdapter(object):
 
 The EUAdapter class is a Supplier to the Smartphone class, and at the same time it's a Client to the EUSocket class.
 
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead class="thead-inverse">
-            <tr>
-                <th>Client</th>
-                <th>Supplier</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Smartphone</td>
-                <td>EUAdapter</td>
-            </tr>
-            <tr>
-                <td>EUAdapter</td>
-                <td>EUSocket</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+{% table %}
+Client,Supplier
+Smartphone,EUAdapter
+EUAdapter,EUSocket
+{% endtable %}
 
 If you now take a Smartphone instance and call `charge` with `EUAdapter.output_voltage` as argument, you can finally charge your phone.
 
@@ -184,22 +157,10 @@ class SmartphoneUSAdapter(SmartphoneAdapter, USSocket):
 
 Here are the two classes you are dealing with:
 
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead class="thead-inverse">
-            <tr>
-                <th>Client</th>
-                <th>Supplier</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>SmartphoneEUAdapter</td>
-                <td>EUSocket</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+{% table %}
+Client,Supplier
+SmartphoneEUAdapter,EUSocket
+{% endtable %}
 
 If you now take a `SmartphoneEUAdapter` instance and call `charge` with `EUSocket.output_voltage` as argument, you can see that you can charge your phone. However, if you take the same instance and call `charge` with `USSocket.output_voltage` as argument, you get a `CannotTransformVoltage` exception. In the latter case, you are using the wrong Adapter for a particular Supplier.
 

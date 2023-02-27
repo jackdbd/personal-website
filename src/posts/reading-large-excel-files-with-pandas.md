@@ -2,8 +2,8 @@
 title: Reading large Excel files with Pandas
 date: "2018-09-01T08:00:03.284Z"
 tags:
-  - python
   - pandas
+  - Python
 ---
 
 Last week I took part in a [Dataviz Battle on the dataisbeautiful subreddit](https://www.reddit.com/r/dataisbeautiful/comments/950j3n/battle_dataviz_battle_for_the_month_of_august/), where we had to create a visualization from the [TSA claims dataset](https://www.dhs.gov/tsa-claims-data). I like these kind of competitions because most of the time you end up learning a lot of useful things along the way.

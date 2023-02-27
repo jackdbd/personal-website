@@ -2,7 +2,7 @@
 title: Multiply your Python Unit Test Cases with DDT
 date: "2017-03-13"
 tags:
-  - python
+  - Python
   - tests
 ---
 
