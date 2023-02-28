@@ -1,5 +1,5 @@
 ---
-title: Game of life
+title: Game of Life
 href: https://github.com/jackdbd/game-of-life
 ogp:
   image: https://raw.githubusercontent.com/jackdbd/game-of-life/master/demo.gif
