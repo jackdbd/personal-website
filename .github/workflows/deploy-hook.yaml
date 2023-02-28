@@ -1,0 +1,24 @@
+name: 'Deploy site via Cloudflare Pages deploy hook'
+
+on:
+  schedule:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
+    # https://crontab.guru/
+    - cron:  '57 23 * * *'
+  workflow_dispatch:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+    # You can trigger this workflow manually using the GitHub CLI:
+    # gh workflow run "Deploy site via Cloudflare Pages deploy hook"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🌐 Trigger build on Cloudflare Pages
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}
+          method: 'POST'
