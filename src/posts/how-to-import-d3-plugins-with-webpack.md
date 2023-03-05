@@ -7,7 +7,7 @@ tags:
   - Webpack
 ---
 
-Last week I started working on a new visualization and I wanted to include a couple of d3 plugins: [d3-legend](https://d3-legend.susielu.com/) by Susie Lu and [d3-line-chunked](https://peterbeshai.com/vis/d3-line-chunked/) by Peter Beshai.
+Last week I started working on a new visualization and I wanted to include a couple of d3 plugins: [d3-legend](https://d3-legend.susielu.com/) by Susie Lu and [d3-line-chunked](https://pbeshai.github.io/d3-line-chunked/) by Peter Beshai.
 
 I spent some time figuring out how to include these plugins with webpack, so I'm writing this small reminder here.
 
