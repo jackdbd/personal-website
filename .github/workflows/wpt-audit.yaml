@@ -1,8 +1,13 @@
-name: WebPageTest audit
+name: 'WebPageTest audit'
+
 on:
   # allow to trigger this workflow manually
   # https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event--parameters
   workflow_dispatch:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+    # You can trigger this workflow manually using the GitHub CLI:
+    # gh workflow run "WebPageTest audit" --ref branch-name
+
 jobs:
   audit:
     name: Audit website with the WebPageTest API

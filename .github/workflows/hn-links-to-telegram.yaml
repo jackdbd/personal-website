@@ -1,0 +1,58 @@
+name: 'Hacker News links to Telegram'
+
+on:
+  schedule:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
+    # https://crontab.guru/
+    - cron:  '55 10 * * 1'
+  workflow_dispatch:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+    # You can trigger this workflow manually using the GitHub CLI:
+    # gh workflow run "Hacker News links to Telegram" --ref branch-name
+
+jobs:
+  steampipe-hn-telegram:
+    name: Hacker News links to Telegram
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: ['current']
+    steps:
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🖥️ Setup Node.js ${{ matrix.node }}
+        # https://github.com/marketplace/actions/setup-node-js-environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Setup Steampipe and its plugins
+        # https://github.com/marketplace/actions/setup-steampipe
+        uses: francois2metz/setup-steampipe@v1
+        with:
+          steampipe-version: 'latest'
+          steampipe-plugins: |
+            {
+              "hackernews": {}
+            }
+
+      - name: Hacker News links
+        run: |
+          delimiter=$(openssl rand -hex 8)
+          echo "HN_LINKS<<$delimiter" >> $GITHUB_ENV
+          node scripts/hacker-news-job-links.cjs >> $GITHUB_ENV
+          echo "$delimiter" >> $GITHUB_ENV
+
+      - name: 💬 Send Hacker News link to Telegram
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
+          token: ${{ fromJSON(secrets.TELEGRAM).token }}
+          format: html
+          disable_web_page_preview: true
+          message: |
+            <b>🤖 Jobs from YC-backed startups on HN this week</b>
+
+            ${{ env.HN_LINKS }}
