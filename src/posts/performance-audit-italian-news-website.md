@@ -16,7 +16,7 @@ News websites have a lot of text, images and other media, and they often rely on
 
 Users spend less time consuming content on a slow website. This can have a negative impact on revenue, in particular for news websites. Google's DoubleClick reports that publishers whose mobile sites load in 5 seconds earn up to [2x more mobile ad revenue](https://wpostats.com/2016/09/15/double-click-revenue.html) than sites loading in 19 seconds.
 
-In this article I'll describe what I found out about the digital version of [Il Tirreno](https://www.iltirreno.it/), an Italian newspaper that covers news about Tuscany. I'll analyze both data collected from the real users visiting the website, and data collected in a controlled environment under a predefined set of network and device conditions.
+In this article I'm going to describe what I found out about the digital version of [Il Tirreno](https://www.iltirreno.it/), an Italian newspaper that covers news about Tuscany. I'm going to analyze both data collected from the real users visiting the website, and data collected in a controlled environment under a predefined set of network and device conditions.
 
 Il Tirreno has 14 different editions, and eight out of the ten provinces in Tuscany have at least one edition of this newspaper. Since I live in Versilia, I decided to focus my analysis on the web page https://www.iltirreno.it/versilia. This means that all my findings and suggestions are related to that page. The structure of the local news front page stays the same across all 14 local editions of iltirreno.it though, so most conclusions should hold for pages like https://www.iltirreno.it/lucca or https://www.iltirreno.it/pisa.
 
@@ -30,7 +30,7 @@ These data are [aggregated by origin](https://developer.chrome.com/docs/crux/met
 
 Il Tirreno is a popular newspaper in Tuscany, and its digital edition [Iltirreno.it](https://www.iltirreno.it/) has enough traffic to end up in CrUX.
 
-The CrUX BigQuery dataset is publicly available, but in order to explore it you will need a Google Cloud Platform project and some knowledge of SQL. I'll share links for the queries I ran, so you can try them out yourself if you want.
+The CrUX BigQuery dataset is publicly available, but in order to explore it you will need a Google Cloud Platform project and some knowledge of SQL. You'll find links for the queries I ran, so you can try them out yourself if you want.
 
 {% callout "warn" %}
 The CrUX dataset is huge, so be careful when writing queries against it. With BigQuery [on-demand pricing](https://cloud.google.com/bigquery/pricing) you can query up to 1TB worth of data per month for free. If you exceed that quota you'll have to pay $5/TB. To avoid unforeseen expenses with BigQuery, always have a look at [how much data a query would process](https://cloud.google.com/bigquery/docs/estimate-costs) before running it.
@@ -866,7 +866,7 @@ The impact of third party requests on the web performance of iltirreno.it is app
 
 We can configure WebPageTest to block requests by URL or domain. We then launch a test and compare the results against a baseline where we don't block any request.
 
-First, we have to identify all third party requests. There are several ways to do it. I'll show you one that uses [xsv](https://github.com/BurntSushi/xsv). A similar tool you can use for this task is [Miller](https://miller.readthedocs.io/en/latest/).
+First, we have to identify all third party requests. There are several ways to do it. I'm going to use [xsv](https://github.com/BurntSushi/xsv) for this task.
 
 From the WebPageTest test results of the baseline (no requests blocked), click `Export` and then `Download Request CSV`.
 
