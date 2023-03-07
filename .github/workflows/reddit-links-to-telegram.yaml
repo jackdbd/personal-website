@@ -1,0 +1,97 @@
+name: 'Reddit links to Telegram'
+
+on:
+  schedule:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
+    # https://crontab.guru/
+    - cron:  '55 9 * * 1'
+  workflow_dispatch:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+    # You can trigger this workflow manually using the GitHub CLI:
+    # gh workflow run "Reddit links to Telegram" --ref branch-name
+
+jobs:
+  steampipe-reddit-telegram:
+    name: Reddit links to Telegram
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: ['current']
+    steps:
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🖥️ Setup Node.js ${{ matrix.node }}
+        # https://github.com/marketplace/actions/setup-node-js-environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Setup Steampipe and its plugins
+        # https://github.com/marketplace/actions/setup-steampipe
+        uses: francois2metz/setup-steampipe@v1
+        with:
+          steampipe-version: 'latest'
+          steampipe-plugins: |
+            {
+              "hackernews": {},
+              "reddit": {
+                "client_id": "${{ fromJSON(secrets.REDDIT).client_id }}",
+                "client_secret": "${{ fromJSON(secrets.REDDIT).client_secret }}",
+                "username": "${{ fromJSON(secrets.REDDIT).username }}",
+                "password": "${{ fromJSON(secrets.REDDIT).password }}"
+              }
+            }
+
+      - name: Query Reddit for React jobs
+        run: |
+          delimiter=$(openssl rand -hex 8)
+          echo "REDDIT_JSON<<$delimiter" >> $GITHUB_ENV
+          steampipe query assets/steampipe-queries/react-jobs-on-jobbit-subreddit.sql --output json >> $GITHUB_ENV
+          echo "$delimiter" >> $GITHUB_ENV
+
+      - name: Convert array to string (React)
+        run: |
+          delimiter=$(openssl rand -hex 8)
+          echo "REACT_JOBS_LINKS<<$delimiter" >> $GITHUB_ENV
+          node scripts/reddit-array-to-telegram-links.cjs >> $GITHUB_ENV
+          echo "$delimiter" >> $GITHUB_ENV
+
+      - name: 💬 Send React jobs to Telegram
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
+          token: ${{ fromJSON(secrets.TELEGRAM).token }}
+          format: html
+          disable_web_page_preview: true
+          message: |
+            <b>🤖 React jobs posted in r/jobbit</b>
+
+            ${{ env.REACT_JOBS_LINKS }}
+
+      - name: Query Reddit for Clojure jobs
+        run: |
+          delimiter=$(openssl rand -hex 8)
+          echo "REDDIT_JSON<<$delimiter" >> $GITHUB_ENV
+          steampipe query assets/steampipe-queries/clojure-jobs-on-jobbit-subreddit.sql --output json >> $GITHUB_ENV
+          echo "$delimiter" >> $GITHUB_ENV
+
+      - name: Convert array to string (Clojure)
+        run: |
+          delimiter=$(openssl rand -hex 8)
+          echo "CLOJURE_JOBS_LINKS<<$delimiter" >> $GITHUB_ENV
+          node scripts/reddit-array-to-telegram-links.cjs >> $GITHUB_ENV
+          echo "$delimiter" >> $GITHUB_ENV
+
+      - name: 💬 Send Clojure jobs to Telegram
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
+          token: ${{ fromJSON(secrets.TELEGRAM).token }}
+          format: html
+          disable_web_page_preview: true
+          message: |
+            <b>🤖 Clojure jobs posted in r/jobbit</b>
+
+            ${{ env.CLOJURE_JOBS_LINKS }}

@@ -1,0 +1,102 @@
+name: 'LinkedIn links to Telegram'
+
+on:
+  schedule:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
+    # https://crontab.guru/
+    - cron:  '15 21 * * 2'
+  workflow_dispatch:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+    # You can trigger this workflow manually using the GitHub CLI:
+    # gh workflow run "LinkedIn links to Telegram" --ref branch-name
+
+jobs:
+  steampipe-linkedin-telegram:
+    name: LinkedIn links to Telegram
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: ['current']
+    steps:
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🖥️ Setup Node.js ${{ matrix.node }}
+        # https://github.com/marketplace/actions/setup-node-js-environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Setup Steampipe and its plugins
+        # https://github.com/marketplace/actions/setup-steampipe
+        uses: francois2metz/setup-steampipe@v1
+        with:
+          steampipe-version: 'latest'
+          steampipe-plugins: |
+            {
+              "hackernews": {},
+              "linkedin": {
+                "token": "${{ fromJSON(secrets.LINKEDIN).token }}"
+              },
+              "openai": {
+                "api_key": "${{ fromJSON(secrets.OPENAI).api_key }}"
+              }
+            }
+
+      - name: LinkedIn people links
+        run: |
+          delimiter=$(openssl rand -hex 8)
+          echo "LINKEDIN_PEOPLE_LINKS<<$delimiter" >> $GITHUB_ENV
+          node scripts/linkedin-people-links.cjs >> $GITHUB_ENV
+          echo "$delimiter" >> $GITHUB_ENV
+
+      - name: 💬 Send LinkedIn people links to Telegram
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
+          token: ${{ fromJSON(secrets.TELEGRAM).token }}
+          format: html
+          disable_web_page_preview: true
+          message: |
+            <b>🤖 LinkedIn people profiles</b>
+
+            ${{ env.LINKEDIN_PEOPLE_LINKS }}
+
+      - name: LinkedIn companies links
+        run: |
+          delimiter=$(openssl rand -hex 8)
+          echo "LINKEDIN_COMPANIES_LINKS<<$delimiter" >> $GITHUB_ENV
+          node scripts/linkedin-companies-links.cjs >> $GITHUB_ENV
+          echo "$delimiter" >> $GITHUB_ENV
+
+      - name: 💬 Send LinkedIn companies links to Telegram
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
+          token: ${{ fromJSON(secrets.TELEGRAM).token }}
+          format: html
+          disable_web_page_preview: true
+          message: |
+            <b>🤖 LinkedIn companies profiles</b>
+
+            ${{ env.LINKEDIN_COMPANIES_LINKS }}
+
+      # - name: OpenAI ChatGPT
+      #   run: |
+      #     EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+      #     echo "CHAT_GCP_JSON<<$EOF" >> $GITHUB_ENV
+      #     steampipe query assets/steampipe-queries/openai.sql --output json >> $GITHUB_ENV
+      #     echo "$EOF" >> $GITHUB_ENV
+
+      # - name: 💬 Notify Telegram (OpenAI ChatGPT)
+      #   uses: appleboy/telegram-action@v0.1.1
+      #   with:
+      #     to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
+      #     token: ${{ fromJSON(secrets.TELEGRAM).token }}
+      #     format: html
+      #     disable_web_page_preview: true
+      #     message: |
+      #       <b>Steampipe ChatGPT</b>
+
+      #       ${{ fromJSON(env.CHAT_GCP_JSON)[0].completion }}

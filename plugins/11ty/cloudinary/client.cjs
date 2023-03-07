@@ -54,29 +54,43 @@ const makeClient = (config) => {
       return await asset.getCachedValue()
     }
 
+    debug(
+      `${public_id} not in ${cache_directory} or expired. Fetching from Cloudinary Media Library.`
+    )
+
+    let result
     try {
-      debug(
-        `${public_id} not in ${cache_directory} or expired. Fetching from Cloudinary Media Library.`
-      )
-      const result = await cloudinary.search
+      // it seems that even using the official Cloudinary client we can still
+      // encounter API rate limits.
+      result = await cloudinary.search
         .expression(expression)
         .with_field('context')
         .with_field('tags')
         .max_results(1)
         .execute()
+    } catch (err) {
+      // A Cloudinary SDK error is NOT `Error` objects, but a plain JS object
+      // with an `error` field.
+      // https://github.com/cloudinary/cloudinary_npm
+      debug(`ERROR from Cloudinary SDK %O`, err)
+      throw new Error(`${ERROR_MESSAGE_PREFIX}${err.error.message}`)
+    }
 
-      if (!result.resources || result.resources.length !== 1) {
-        throw new Error(
-          `${ERROR_MESSAGE_PREFIX}there should be exactly one resource with public_id ${public_id}`
-        )
-      }
+    if (!result.resources || result.resources.length !== 1) {
+      throw new Error(
+        `${ERROR_MESSAGE_PREFIX}there should be exactly one resource with public_id ${public_id}`
+      )
+    }
 
+    try {
       await asset.save(result.resources[0], 'json')
       debug(`${public_id} stored in ${cache_directory}`)
-
       return result.resources[0]
     } catch (err) {
-      throw new Error(`${ERROR_MESSAGE_PREFIX}${err.message}`)
+      debug(`ERROR from Eleventy asset cache ${err.message}`)
+      throw new Error(
+        `${ERROR_MESSAGE_PREFIX}could not save to ${cache_directory} resource with public_id ${public_id}`
+      )
     }
   }
 

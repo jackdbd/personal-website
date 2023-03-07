@@ -1,0 +1,59 @@
+name: 'Random cocktail to Telegram'
+
+on:
+  # push:
+  schedule:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
+    # https://crontab.guru/
+    - cron:  '45 20 5 * 4-6'
+  workflow_dispatch:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+    # You can trigger this workflow manually using the GitHub CLI:
+    # gh workflow run "Random cocktail to Telegram" --ref branch-name
+
+# https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
+permissions:
+  # google-github-actions/auth must be able to create a GitHub OIDC token, so it
+  # can exchange it for an access token (Workload Identity Federation)
+  # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
+  id-token: write
+
+jobs:
+  cocktail-telegram:
+    name: Random cocktail to Telegram
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: ['current']
+
+    steps:
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+
+      # For the life of me, I can't manage to get Workload Identity Federation to work.
+      # - name: 'Authenticate to Google Cloud via WIF'
+      #   # https://github.com/marketplace/actions/authenticate-to-google-cloud#authenticating-via-workload-identity-federation
+      #   id: 'auth'
+      #   uses: 'google-github-actions/auth@v1'
+      #   with:
+      #     workload_identity_provider: 'projects/1051247446620/locations/global/workloadIdentityPools/github-actions-pool/providers/github-actions-provider'
+      #     service_account: 'sa-workflows-runner@prj-kitchen-sink.iam.gserviceaccount.com'
+
+      - name: 'Authenticate to Google Cloud via SA JSON key'
+        # https://github.com/marketplace/actions/authenticate-to-google-cloud#authenticating-via-service-account-key-json
+        # I "compressed" the JSON key to a single string using jq, as suggested here:
+        # https://github.com/google-github-actions/auth/blob/main/docs/TROUBLESHOOTING.md#aggressive--replacement-in-logs
+        id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: ${{ secrets.SA_GCP_WORKFLOWS }}
+
+      - name: Set up gcloud Cloud SDK environment
+        # https://github.com/marketplace/actions/set-up-gcloud-cloud-sdk-environment
+        uses: google-github-actions/setup-gcloud@v1
+
+      - run: 'gcloud info'
+
+      - name: Execute GCP workflow
+        run: gcloud workflows execute "random-cocktail" --location=europe-west4
