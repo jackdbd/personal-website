@@ -35,7 +35,7 @@ The text is automatically synthesized into speech using [@jackdbd/eleventy-plugi
       {# Specifying a name for the download does not work because I host my CV on a different origin than my site. #}
       {# A solution would be to copy the remote PDF hosted on GitHub to the Eleventy _site directory, at build time. The PDF would then be hosted on the same origin as the about page (and all other pages) #}
       {# https://stackoverflow.com/questions/33909763/download-attribute-with-a-file-name-not-working #}
-      <p>In case you need it, here is <a href="{{ metadata.author.cv }}" download>my CV in PDF</a>.</p>
+      <p>Here is my <a href="{{ metadata.author['cv-one-page'] }}" download>one-page CV in PDF</a>. And here is in a <a href="{{ metadata.author['cv-longer-format'] }}" download>slightly longer format</a>.</p>
     </section>
   </div>
 
