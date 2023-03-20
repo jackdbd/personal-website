@@ -2,6 +2,13 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { isOnCloudBuild, isOnGithub } from '@jackdbd/checks/environment'
 
+export const STRIPE_CONFIG = {
+  // https://stripe.com/docs/api/versioning
+  apiVersion: '2022-11-15', // as Stripe.LatestApiVersion,
+  maxNetworkRetries: 3, // (default is 0)
+  timeout: 10000 // ms (default is 80000)
+}
+
 export const jsonSecret = (name, env = process.env) => {
   // replaceAll available in Node.js 15 and later
   // https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V15.md#v8-86---35415
