@@ -5,7 +5,7 @@ const { execSync } = require('node:child_process')
  * node scripts/linkedin.cjs <company_id>
  *
  * Example:
- * node scripts/linkedin.cjs 114426
+ * node scripts/linkedin/linkedin.cjs 114426
  */
 
 const entry = (d, i) => {

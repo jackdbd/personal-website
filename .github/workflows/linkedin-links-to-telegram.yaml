@@ -48,7 +48,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "LINKEDIN_PEOPLE_LINKS<<$delimiter" >> $GITHUB_ENV
-          node scripts/linkedin-people-links.cjs >> $GITHUB_ENV
+          node scripts/linkedin/linkedin-people-links.cjs >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Send LinkedIn people links to Telegram
@@ -67,7 +67,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "LINKEDIN_COMPANIES_LINKS<<$delimiter" >> $GITHUB_ENV
-          node scripts/linkedin-companies-links.cjs >> $GITHUB_ENV
+          node scripts/linkedin/linkedin-companies-links.cjs >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Send LinkedIn companies links to Telegram

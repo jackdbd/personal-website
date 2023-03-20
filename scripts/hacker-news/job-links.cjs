@@ -12,7 +12,7 @@ const anchor = (d, i) => {
  * To be used in a GitHub worklow that sends such string to a Telegram chat.
  *
  * Usage:
- * node scripts/hacker-news-job-links.cjs
+ * node scripts/hacker-news/job-links.cjs
  */
 
 const main = async () => {

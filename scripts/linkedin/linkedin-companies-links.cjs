@@ -5,26 +5,29 @@ const { debuglog } = require('node:util')
 const debug = debuglog('github-workflow')
 
 /**
- * Script that constructs a string full of links from LinkedIn profiles.
+ * Script that constructs a string full of links from LinkedIn companies.
  *
  * To be used in a GitHub worklow that sends such string to a Telegram chat.
  *
  * Usage:
- * node scripts/linkedin-people-links.cjs
+ * node scripts/linkedin/linkedin-companies-links.cjs
  *
  * See also:
- * https://hub.steampipe.io/plugins/turbot/linkedin/tables/linkedin_search_profile
+ * https://hub.steampipe.io/plugins/turbot/linkedin/tables/linkedin_search_company
  */
 
 const entry = (d, i) => {
   debug(`entries[${i}] %O`, d)
-  const arr = [`${i + 1}. <a href="${d.navigation_url}">${d.title}</a>`]
+  const href = `https://www.linkedin.com/company/${d.id}`
+  const arr = [`${i + 1}. <a href="${href}">${d.title}</a>`]
+  arr.push(`<i>company_id</i>: <code>${d.id}</code>`)
   if (d.headline) {
     arr.push(`<i>headline</i>: ${d.headline}`)
   }
   if (d.subline) {
     arr.push(`<i>subline</i>: ${d.subline}`)
   }
+
   return arr.join('\n')
 }
 
@@ -32,20 +35,13 @@ const main = async () => {
   const filepath = path.join(
     'assets',
     'steampipe-queries',
-    'linkedin-people.sql'
+    'linkedin-companies.sql'
   )
   const sql = fs.readFileSync(filepath).toString()
   debug(`SQL query:\n%s`, sql)
 
   const buf = execSync(`steampipe query "${sql}" --output json`)
   const arr = JSON.parse(buf.toString())
-
-  if (!arr) {
-    let s = `<b>Steampipe query found no data</b>`
-    s = s.concat('\n', `<pre>${sql}<pre>`, '\n')
-    console.log(s)
-    return
-  }
 
   let s = arr.map(entry).join('\n\n')
   // we need to add a newline character, otherwise the GitHub workflow will fail

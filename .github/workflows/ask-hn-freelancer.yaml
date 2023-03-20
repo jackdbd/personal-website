@@ -63,7 +63,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "HN_AD<<$delimiter" >> $GITHUB_ENV
-          cat assets/ask-hn-freelancer-ad.txt >> $GITHUB_ENV
+          cat assets/ads/ask-hn-freelancer.txt >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       # Playwright complains if project dependencies are not installed
@@ -81,7 +81,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "RESULT_STRING<<$delimiter" >> $GITHUB_ENV
-          node scripts/post-ad-on-hn-freelancer.cjs ${{ fromJSON(env.HN_JSON)[0].id }} >> $GITHUB_ENV
+          node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs ${{ fromJSON(env.HN_JSON)[0].id }} >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram of my ad
