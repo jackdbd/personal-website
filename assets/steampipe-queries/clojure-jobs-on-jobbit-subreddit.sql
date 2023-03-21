@@ -1,4 +1,3 @@
--- https://hub.steampipe.io/plugins/turbot/reddit/tables/reddit_subreddit_post_search
 select
   author,
   created_utc,

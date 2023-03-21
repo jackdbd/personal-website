@@ -1,6 +1,7 @@
 select
   t.headline,
   t.id,
+  t.rank,
   t.subline,
   t.title
 from
