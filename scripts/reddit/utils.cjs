@@ -1,4 +1,5 @@
 const fs = require('node:fs')
+const os = require('node:os')
 const path = require('node:path')
 
 const slugify = (title) => {
@@ -58,4 +59,14 @@ const sendOutput = async (text) => {
   }
 }
 
-module.exports = { renderTelegramMessage, sendOutput, slugify }
+/**
+ * The User-Agent should be in the following format:
+ * <platform>:<app ID>:<version string> (by /u/<reddit username>)
+ *
+ * https://github.com/reddit-archive/reddit/wiki/API
+ */
+const userAgent = ({ app_id, username, version = '0.1.0' }) => {
+  return `${os.platform()}:${app_id}:v${version} (by /u/${username})`
+}
+
+module.exports = { renderTelegramMessage, sendOutput, slugify, userAgent }
