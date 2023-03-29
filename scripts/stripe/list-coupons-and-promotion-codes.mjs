@@ -25,16 +25,22 @@ const main = async () => {
   const stripe = new Stripe(api_key, STRIPE_CONFIG)
   console.log(`operating on Stripe ${stripe_env.toUpperCase()}`)
 
-  // https://stripe.com/docs/api/prices/list
-  const params = {
-    active: true
+  const m = {}
+  // https://stripe.com/docs/api/coupons/list
+  for await (const coupon of stripe.coupons.list()) {
+    const coupon_url = `https://dashboard.stripe.com/${stripe_env}/coupons/${coupon.id}`
+    // console.log(`coupon '${coupon.name}' ${coupon_url}`)
+    m[coupon.id] = { name: coupon.name, url: coupon_url, codes: [] }
+    for await (const code of stripe.promotionCodes.list({
+      coupon: coupon.id
+    })) {
+      const code_url = `https://dashboard.stripe.com/${stripe_env}/promotion_codes/${code.id}`
+      // console.log(`  promotion code '${code.code}' ${code_url}`)
+      m[coupon.id].codes.push({ code: code.code, url: code_url })
+    }
   }
-
-  for await (const price of stripe.prices.list(params)) {
-    const { id, nickname, lookup_key } = price
-    const url = `https://dashboard.stripe.com/${stripe_env}/prices/${id}`
-    console.log({ nickname, url, lookup_key }, price)
-  }
+  console.log(`coupons and promotion codes`)
+  console.log(JSON.stringify(m, null, 2))
 }
 
 main()
