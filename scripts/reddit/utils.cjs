@@ -2,6 +2,30 @@ const fs = require('node:fs')
 const os = require('node:os')
 const path = require('node:path')
 
+// https://emojipedia.org/
+const EMOJI = {
+  ChartDecreasing: '📉',
+  Coin: '🪙',
+  CreditCard: '💳',
+  Customer: '👤',
+  DollarBanknote: '💵',
+  Error: '🚨',
+  Failure: '❌',
+  Hook: '🪝',
+  Inspect: '🔍',
+  Invalid: '❌',
+  MoneyBag: '💰',
+  Notification: '💬',
+  ShoppingBags: '🛍️',
+  Ok: '✅',
+  Robot: '🤖',
+  Sparkles: '✨',
+  Success: '✅',
+  Timer: '⏱️',
+  User: '👤',
+  Warning: '⚠️'
+}
+
 const slugify = (title) => {
   return title
     .replaceAll('[', '')
@@ -11,13 +35,17 @@ const slugify = (title) => {
 }
 
 const renderTelegramMessage = (d) => {
-  let s = `<b>🤖 Advertisement posted to r/${d.subreddit}</b>`
+  let s = `<b>${EMOJI.Robot} Advertisement posted on r/${d.subreddit}</b>`
   s = s.concat('\n\n')
   s = s.concat(`<a href="${d.url}">submission ${d.name}</a>`)
   s = s.concat('\n\n')
   s = s.concat(`<b>${d.title}</b>`)
   s = s.concat('\n\n')
   s = s.concat(`<pre>${d.text}</pre>`)
+  s = s.concat('\n\n')
+  s = s.concat(`<i>User-Agent: ${d.user_agent}</i>`)
+  // we need to add a newline character, otherwise the GitHub workflow will fail
+  // with this error: "Matching delimiter not found"
   s = s.concat('\n')
   return s
 }
@@ -69,4 +97,28 @@ const userAgent = ({ app_id, username, version = '0.1.0' }) => {
   return `${os.platform()}:${app_id}:v${version} (by /u/${username})`
 }
 
-module.exports = { renderTelegramMessage, sendOutput, slugify, userAgent }
+const jsonSecret = (name) => {
+  // replaceAll available in Node.js 15 and later
+  // https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V15.md#v8-86---35415
+  const env_var_name = name.replaceAll('-', '_').toUpperCase()
+
+  let secret = ''
+  if (process.env.GITHUB_SHA) {
+    if (!process.env[env_var_name]) {
+      throw new Error(`environment variable ${env_var_name} not set`)
+    }
+    secret = process.env[env_var_name]
+  } else {
+    secret = fs.readFileSync(path.join('secrets', `${name}.json`)).toString()
+  }
+  return JSON.parse(secret)
+}
+
+module.exports = {
+  EMOJI,
+  jsonSecret,
+  renderTelegramMessage,
+  sendOutput,
+  slugify,
+  userAgent
+}

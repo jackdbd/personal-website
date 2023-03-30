@@ -2,4 +2,4 @@ I will review your JavaScript/Typescript codebase and make suggestions regarding
 
 I can evaluate both front-end projects and back-end projects.
 
-Expected delivery: 1 week.
+Estimated delivery: 1 week.

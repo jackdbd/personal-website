@@ -35,7 +35,7 @@ const main = async () => {
       describe: 'Stripe environment (live, test)',
       demandOption: false
     })
-    .help('help')
+    .help('info')
     .default(DEFAULT).argv as Argv
 
   const { api_key } = jsonSecret('stripe-test')
@@ -65,7 +65,7 @@ const main = async () => {
   if (result.has_more) {
     throw new Error(`There are more than ${result.data.length} coupons`)
   }
-  const coupon = couponByName(result.data, 'First 10 customers get 25% off')
+  const coupon = await couponByName(stripe, '25% off')
 
   const quote = await stripe.quotes.create({
     automatic_tax: { enabled: true },

@@ -1,12 +1,11 @@
-name: 'r/slavelabour Website Audit'
+name: 'r/ForHire freelancing'
 
 on:
   # schedule:
-  #   - cron:  '45 15 * * 2'
+  #   - cron:  '45 23 * * 1'
   workflow_dispatch:
-    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
     # You can trigger this workflow manually using the GitHub CLI:
-    # gh workflow run "r/slavelabour Website Audit" --ref branch-name
+    # gh workflow run "r/ForHire freelancing" --ref branch-name
 
 jobs:
   post-on-reddit-and-notify-telegram:
@@ -29,11 +28,11 @@ jobs:
       - name: Install dependencies
         run: npm install -g snoowrap
 
-      - name: 🤖 Post on Reddit r/slavelabour
+      - name: 🤖 Post on Reddit r/ForHire
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "TELEGRAM_MESSAGE<<$delimiter" >> $GITHUB_ENV
-          node scripts/reddit/post-ad-website-audit.cjs --cta-md '[ORDER NOW](https://buy.stripe.com/test_eVaeXRasmdiOdtCg0V?prefilled_promo_code=REDDITSLAVELABOUR80)' >> $GITHUB_ENV
+          node scripts/reddit/post-ad-freelancing.cjs >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram

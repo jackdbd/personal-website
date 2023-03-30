@@ -1,27 +1,46 @@
-const fs = require('node:fs')
-const os = require('node:os')
-const path = require('node:path')
 const snoowrap = require('snoowrap')
+const yargs = require('yargs')
+const { EMOJI, jsonSecret, sendOutput, userAgent } = require('./utils.cjs')
 
 const splits = __filename.split('/')
 const app_id = splits[splits.length - 1]
 
-const main = async () => {
-  let secret = ''
-  if (process.env.GITHUB_SHA) {
-    if (!process.env.REDDIT) {
-      throw new Error(`environment variable REDDIT not set`)
-    }
-    secret = process.env.REDDIT
-  } else {
-    secret = fs.readFileSync(path.join('secrets', 'reddit.json')).toString()
-  }
-  const { username, password, client_id, client_secret } = JSON.parse(secret)
+const KEYWORDS = [
+  'performance audit',
+  'site speed',
+  'slow website',
+  'web performance',
+  'website performance',
+  'website speed'
+]
 
-  // The User-Agent should be in the following format:
-  // <platform>:<app ID>:<version string> (by /u/<reddit username>)
-  // https://github.com/reddit-archive/reddit/wiki/API
-  const user_agent = `${os.platform()}:${app_id}:v0.1.0 (by /u/${username})`
+const SUBREDDITS = [
+  'advancedentrepreneur',
+  'analytics',
+  // 'dropship',
+  'GrowthHacking',
+  'SaaS',
+  // 'SEO',
+  'smallbusiness',
+  'webdev'
+  // 'Wordpress'
+]
+
+const main = async () => {
+  const argv = yargs(process.argv.slice(2))
+    .usage('node scripts/reddit/$0')
+    .option('keyword', {
+      default: KEYWORDS.join(','),
+      describe: 'keyword to search (comma-separated list)'
+    })
+    .option('subreddits', {
+      default: SUBREDDITS.join(','),
+      describe: 'subreddits where to run the search (comma-separated list)'
+    })
+    .help('help').argv
+
+  const { username, password, client_id, client_secret } = jsonSecret('reddit')
+  const user_agent = userAgent({ app_id, username, version: '0.1.0' })
 
   const r = new snoowrap({
     userAgent: user_agent,
@@ -31,28 +50,9 @@ const main = async () => {
     password
   })
 
-  const keywords = [
-    'performance audit',
-    'site speed',
-    'slow website',
-    'web performance',
-    'website performance',
-    'website speed'
-  ]
-  // const keywords = ['freelance', 'freelancer', 'freelancing']
+  const keywords = argv.keyword.split(',')
   const s = keywords.map((k) => `selftext:"${k}" OR title:"${k}"`).join(' OR ')
-
-  const subreddits = [
-    'advancedentrepreneur',
-    'analytics',
-    // 'dropship',
-    'GrowthHacking',
-    'SaaS',
-    // 'SEO',
-    'smallbusiness',
-    'webdev'
-    // 'Wordpress'
-  ]
+  const subreddits = argv.subreddits.split(',')
   const sr = subreddits.map((s) => `subreddit:${s}`).join(' OR ')
 
   const query = `
@@ -76,7 +76,25 @@ const main = async () => {
       url: d.url
     }
   })
-  console.log(subs)
+  // console.log(subs)
+  return { query, submissions: subs, user_agent }
 }
 
-main()
+const renderTelegramMessage = (d) => {
+  const links = d.submissions.map((s, i) => {
+    return `${i + 1}. <a href="${s.url}">${s.title}</a>`
+  })
+  let s = `<b>${EMOJI.Robot} Reddit search</b>`
+  s = s.concat('\n\n')
+  s = s.concat(links.join('\n\n'))
+  s = s.concat('\n\n')
+  s = s.concat(`<i>Query</i>`)
+  s = s.concat('\n')
+  s = s.concat(`<pre><code>${d.query}</code></pre>`)
+  s = s.concat('\n\n')
+  s = s.concat(`<i>User-Agent: ${d.user_agent}</i>`)
+  s = s.concat('\n')
+  return s
+}
+
+main().then(renderTelegramMessage).then(sendOutput)

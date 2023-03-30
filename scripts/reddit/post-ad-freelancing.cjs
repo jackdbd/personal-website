@@ -1,53 +1,57 @@
 const fs = require('node:fs')
-const os = require('node:os')
 const path = require('node:path')
 const snoowrap = require('snoowrap')
-const { sendOutput, slugify, renderTelegramMessage } = require('./utils.cjs')
+const yargs = require('yargs')
+const {
+  jsonSecret,
+  sendOutput,
+  slugify,
+  renderTelegramMessage,
+  userAgent
+} = require('./utils.cjs')
 
 const splits = __filename.split('/')
 const app_id = splits[splits.length - 1]
 
+const DEFAULT = {
+  ad: 'reddit-freelancing.md',
+  'cta-md': '**Free 30m consultation:** https://cal.com/giacomodebidda/30min',
+  'rate-md':
+    '**Rate:** €400/day. Open to flat-rate pricing for well-scoped projects.',
+  test: false
+}
+
 /**
- * Script to post an ad on Reddit.
- *
+ * Script that posts an ad on Reddit.
  *
  * This script is meant to be used in a GitHub worklow, but can also be run locally.
- *
- * Usage:
- * node scripts/reddit/post-ad-freelancing.cjs
- *
- * Rules of r/forhire.
- * https://www.reddit.com/r/forhire/comments/44aeko/rules_guidelines_read_before_posting/
- *
  */
 const submitRedditPost = async () => {
-  const subreddit = 'test'
-  // const subreddit = 'forhire'
-  // const subreddit = 'jobbit'
+  const argv = yargs(process.argv.slice(2))
+    .usage('node scripts/reddit/$0')
+    .option('ad', {
+      describe: 'Text to post',
+      demandOption: false
+    })
+    .option('cta-md', {
+      describe: 'Call to action in markdown',
+      demandOption: false
+    })
+    .option('rate-md', {
+      describe: 'My freelance rate info in markdown',
+      demandOption: false
+    })
+    .option('test', {
+      alias: 't',
+      boolean: true,
+      describe: 'Post the ad on r/test instead of r/ForHire',
+      demandOption: false
+    })
+    .help('help')
+    .default(DEFAULT).argv
 
-  // title of the submission. up to 300 characters long
-  const title = `[For Hire] Full-stack developer & cloud consultant (GCP certified)`
-  const slug = slugify(title)
-
-  const filepath = path.join('assets', 'ads', 'reddit-freelancing.md')
-  // body of the submission (raw markdown text)
-  const text = fs.readFileSync(filepath).toString()
-
-  let secret = ''
-  if (process.env.GITHUB_SHA) {
-    if (!process.env.REDDIT) {
-      throw new Error(`environment variable REDDIT not set`)
-    }
-    secret = process.env.REDDIT
-  } else {
-    secret = fs.readFileSync(path.join('secrets', 'reddit.json')).toString()
-  }
-  const { username, password, client_id, client_secret } = JSON.parse(secret)
-
-  // The User-Agent should be in the following format:
-  // <platform>:<app ID>:<version string> (by /u/<reddit username>)
-  // https://github.com/reddit-archive/reddit/wiki/API
-  const user_agent = `${os.platform()}:${app_id}:v0.1.0 (by /u/${username})`
+  const { username, password, client_id, client_secret } = jsonSecret('reddit')
+  const user_agent = userAgent({ app_id, username, version: '0.1.0' })
 
   const r = new snoowrap({
     userAgent: user_agent,
@@ -57,18 +61,32 @@ const submitRedditPost = async () => {
     password
   })
 
-  const submission = await r.getSubreddit(subreddit).submitSelfpost({
+  const subreddit = argv.test ? 'test' : 'forhire'
+  // const subreddit = 'forhire'
+  // const subreddit = 'jobbit'
+
+  // title of the submission. up to 300 characters long
+  const title = `[For Hire] Full-stack developer & cloud consultant (GCP certified)`
+  const slug = slugify(title)
+
+  const filepath = path.join('assets', 'ads', argv.ad)
+  let text = fs.readFileSync(filepath).toString()
+  text = text.replace('RATE_MARKDOWN_PLACEHOLDER', argv['rate-md'])
+  text = text.replace('CTA_MARKDOWN_PLACEHOLDER', argv['cta-md'])
+
+  const sub = await r.getSubreddit(subreddit).submitSelfpost({
     text,
     title
   })
 
   return {
-    name: submission.name,
+    name: sub.name,
     subreddit,
     title,
     slug,
     text,
-    url: `https://www.reddit.com/r/${subreddit}/comments/${submission.name}/${slug}/`
+    url: `https://www.reddit.com/r/${subreddit}/comments/${sub.name}/${slug}/`,
+    user_agent
   }
 }
 

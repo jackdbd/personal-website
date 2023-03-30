@@ -1,55 +1,52 @@
 const fs = require('node:fs')
-const os = require('node:os')
 const path = require('node:path')
 const snoowrap = require('snoowrap')
-const { sendOutput, slugify, renderTelegramMessage } = require('./utils.cjs')
+const yargs = require('yargs')
+const {
+  EMOJI,
+  jsonSecret,
+  sendOutput,
+  slugify,
+  renderTelegramMessage,
+  userAgent
+} = require('./utils.cjs')
 
 const splits = __filename.split('/')
 const app_id = splits[splits.length - 1]
 
+const DEFAULT = {
+  ad: 'reddit-website-audit.md',
+  test: false
+}
+
 /**
- * Script to post an ad on Reddit.
+ * Script that posts an ad on Reddit.
  *
  * This script is meant to be used in a GitHub worklow, but can also be run locally.
- *
- * Usage:
- * node scripts/reddit/post-ad-website-audit.cjs
- *
- * Rules of r/slavelabour.
- * https://www.reddit.com/r/slavelabour/wiki/rules/
- *
- * - max 1 post every 3 days.
- * - title must contain the flair [OFFER] if you are offering a service, or
- *   [TASK] if you are requesting a service.
  */
 const submitRedditPost = async () => {
-  const subreddit = 'test'
-  //   const subreddit = 'slavelabour'
+  const argv = yargs(process.argv.slice(2))
+    .usage('node scripts/reddit/$0')
+    .option('ad', {
+      describe: 'Text to post',
+      demandOption: false
+    })
+    .option('cta-md', {
+      describe:
+        'Call to action in markdown to inject into the ad (e.g. add a Stripe payment link)',
+      demandOption: true
+    })
+    .option('test', {
+      alias: 't',
+      boolean: true,
+      describe: 'Post the ad on r/test instead of r/slavelabour',
+      demandOption: false
+    })
+    .help('help')
+    .default(DEFAULT).argv
 
-  // title of the submission. up to 300 characters long
-  const title = `[OFFER] I will audit your website`
-  // const slug = 'offer_i_will_audit_your_website'
-  const slug = slugify(title)
-
-  const filepath = path.join('assets', 'ads', 'reddit-website-audit.md')
-  // body of the submission (raw markdown text)
-  const text = fs.readFileSync(filepath).toString()
-
-  let secret = ''
-  if (process.env.GITHUB_SHA) {
-    if (!process.env.REDDIT) {
-      throw new Error(`environment variable REDDIT not set`)
-    }
-    secret = process.env.REDDIT
-  } else {
-    secret = fs.readFileSync(path.join('secrets', 'reddit.json')).toString()
-  }
-  const { username, password, client_id, client_secret } = JSON.parse(secret)
-
-  // The User-Agent should be in the following format:
-  // <platform>:<app ID>:<version string> (by /u/<reddit username>)
-  // https://github.com/reddit-archive/reddit/wiki/API
-  const user_agent = `${os.platform()}:${app_id}:v0.1.0 (by /u/${username})`
+  const { username, password, client_id, client_secret } = jsonSecret('reddit')
+  const user_agent = userAgent({ app_id, username, version: '0.1.0' })
 
   const r = new snoowrap({
     userAgent: user_agent,
@@ -59,18 +56,30 @@ const submitRedditPost = async () => {
     password
   })
 
-  const submission = await r.getSubreddit(subreddit).submitSelfpost({
+  const subreddit = argv.test ? 'test' : 'slavelabour'
+
+  // title of the submission. up to 300 characters long
+  const title = `[OFFER] I will audit your website for $60`
+  // const slug = 'offer_i_will_audit_your_website'
+  const slug = slugify(title)
+
+  const filepath = path.join('assets', 'ads', 'reddit-website-audit.md')
+  let text = fs.readFileSync(filepath).toString()
+  text = text.replace('CTA_PLACEHOLDER', argv['cta-md'])
+
+  const sub = await r.getSubreddit(subreddit).submitSelfpost({
     text,
     title
   })
 
   return {
-    name: submission.name,
+    name: sub.name,
     subreddit,
     title,
     slug,
     text,
-    url: `https://www.reddit.com/r/${subreddit}/comments/${submission.name}/${slug}/`
+    url: `https://www.reddit.com/r/${subreddit}/comments/${sub.name}/${slug}/`,
+    user_agent
   }
 }
 

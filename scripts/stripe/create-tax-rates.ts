@@ -71,7 +71,7 @@ const main = async () => {
       describe: 'Stripe environment (live, test)',
       demandOption: false
     })
-    .help('help')
+    .help('info')
     .default(DEFAULT).argv as Argv
 
   const { api_key } = jsonSecret('stripe-test')
