@@ -1,4 +1,4 @@
-# My personal website
+# personal-website
 
 ![Security Headers](https://img.shields.io/security-headers?url=https%3A%2F%2Fwww.giacomodebidda.com%2F)
 ![Chromium HSTS preload](https://img.shields.io/hsts/preload/giacomodebidda.com)
@@ -28,6 +28,7 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
   - [Network Error Logging](https://developer.cdn.mozilla.net/en-US/docs/Web/HTTP/Headers/NEL)
   - [Permissions-Policy](https://scotthelme.co.uk/goodbye-feature-policy-and-hello-permissions-policy/) (if you prefer you can generate this header on [permissionspolicy.com](https://www.permissionspolicy.com/))
 - Configurable text to speech synthesis, thanks to [@jackdbd/eleventy-plugin-text-to-speech](https://github.com/jackdbd/undici/tree/main/packages/eleventy-plugin-text-to-speech)
+- [Scripts](./scripts/README.md) I use for various administrative tasks
 
 ## Installation
 

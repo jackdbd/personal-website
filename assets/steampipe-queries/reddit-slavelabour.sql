@@ -1,8 +1,7 @@
--- https://hub.steampipe.io/plugins/turbot/reddit/tables/reddit_subreddit_post_search
 select
   t.author,
   t.created_utc,
-  t.selftext,
+  -- t.selftext,
   t.title,
   t.url
 from

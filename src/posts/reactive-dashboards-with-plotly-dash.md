@@ -8,7 +8,7 @@ tags:
 
 Last month I gave a talk at [PyMunich](https://www.meetup.com/it-IT/PyMunich/) on how to create reactive dashboards with Plotly [Dash](https://plot.ly/products/dash/).
 
-I have already written about Dash [here](https://www.giacomodebidda.com/visualize-earthquakes-with-plotly-dash/), and the weekend before the presentation I managed to deploy [another dashboard](https://github.com/jackdbd/dash-fda) on [Heroku](https://mighty-garden-67470.herokuapp.com/).
+I have already written about Dash [here](https://www.giacomodebidda.com/posts/visualize-earthquakes-with-plotly-dash/), and the weekend before the presentation I managed to deploy [another dashboard](https://github.com/jackdbd/dash-fda) on [Heroku](https://mighty-garden-67470.herokuapp.com/).
 
 It seems that the audience liked the topic, and on Twitter [Chris Parmer](https://github.com/chriddyp) himself wrote some kind words of appreciation. I wasn't expecting that. It was pretty cool!
 

@@ -18,10 +18,10 @@ const waitMs = (ms) => {
  * This script is meant to be used in a GitHub worklow, but can also be run locally.
  *
  * Usage:
- * node scripts/post-ad-on-hn-freelancer.cjs <hn_item_id>
+ * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs <hn_item_id>
  *
  * Example: post ad for March 2023
- * node scripts/post-ad-on-hn-freelancer.cjs 34983766
+ * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs 34983766
  */
 
 const main = async () => {
@@ -47,7 +47,7 @@ const main = async () => {
     }
     ad = process.env.HN_AD
   } else {
-    const filepath = path.join('assets', 'ask-hn-freelancer-ad.txt')
+    const filepath = path.join('assets', 'ads', 'ask-hn-freelancer.txt')
     ad = fs.readFileSync(filepath).toString()
   }
 

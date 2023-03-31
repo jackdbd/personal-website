@@ -5,7 +5,7 @@ tags:
   - inspiration
 ---
 
-I like to compile a list of things I stumbled upon during the year and that I found interesting. It's an idea I adopted from Jeff Leek's blog [simply statistics](https://simplystatistics.org/). If you are curious, here is the list from [2016](https://www.giacomodebidda.com/interesting-things-other-people-did-in-2016/).
+I like to compile a list of things I stumbled upon during the year and that I found interesting. It's an idea I adopted from Jeff Leek's blog [simply statistics](https://simplystatistics.org/). If you are curious, here is the list from [2016](https://www.giacomodebidda.com/posts/interesting-things-other-people-did-in-2016/).
 
 Here is the list for 2017:
 
@@ -13,7 +13,7 @@ Here is the list for 2017:
 * Nadieh Bremer created this amazing visualization of [all fights in Dragon Ball Z](https://dragonballz.visualcinnamon.com/) for her one year long project [datasketches](https://www.datasketch.es). The amount of awesome things that both Nadieh and Shirley managed to do this year is just insane. Every time I had a look at their projects I was left wondering: "can I really use D3 to make _this_?"
 * James Talmage and Damon Maneice created [thetruesize](https://thetruesize.com), a web app that lets you select a country and drag and drop it wherever you want on Earth. I really like this app because it makes you realize how distorted the Mercator projection is when comparing the sizes of something really close to the poles (e.g. Greenland) to something on the Equator (e.g. Colombia).
 * Russell Goldenberg open sourced [Scrollama](https://pudding.cool/process/introducing-scrollama/), a lightweight JavaScript library for scrollytelling. Elliot Bentley at the Wall Street Journal released a similar library called [TwoStep](https://wsj.github.io/two-step/). I have never used any of these scrolling libraries, but I definitely will in one of my next projects.
-* plotly realeased [Dash](https://plot.ly/products/dash/), a Python library to build reactive and interactive dashboards. I like Dash a lot, and I've already written about it [here](https://www.giacomodebidda.com/visualize-earthquakes-with-plotly-dash/) and [here](https://www.giacomodebidda.com/reactive-dashboards-with-plotly-dash/). I plan to contribute to this project in 2018.
+* plotly realeased [Dash](https://plot.ly/products/dash/), a Python library to build reactive and interactive dashboards. I like Dash a lot, and I've already written about it [here](https://www.giacomodebidda.com/posts/visualize-earthquakes-with-plotly-dash/) and [here](https://www.giacomodebidda.com/posts/reactive-dashboards-with-plotly-dash/). I plan to contribute to this project in 2018.
 * Ventursky, a Czech meteorological company, created this [astonishing real-time weather map](https://www.ventusky.com). Man, wind maps are sooo cool, I would watch them for hours...
 * [unitethesefuckers](https://unitethesefuckers.com/) is a news aggregator that helps you in getting a balanced perspective of what liberals and conservatives are reading.
 * Vicki Boykis wrote [this article on how Facebook is collecting your data](https://vickiboykis.com/2017/02/01/what-should-you-think-about-when-using-facebook/). I was already considering quitting Facebook for some time. This piece gave me the final push.

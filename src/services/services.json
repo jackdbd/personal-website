@@ -1,0 +1,8 @@
+{
+  "layout": "service.njk",
+  "ogp": {
+    "type": "article"
+  },
+  "permalink": "services/{{ title | slugify }}/index.html",
+  "tags": ["service"]
+}

@@ -291,7 +291,7 @@ pip list
 
 ## Pipenv and Travis CI
 
-I use Pipenv for [dash-earthquakes](https://github.com/jackdbd/dash-earthquakes), a very simple dashboard that displays the most recent eathquakes in the world (if you are interested in how I created this application, I wrote an [article](https://www.giacomodebidda.com/visualize-earthquakes-with-plotly-dash/) about it).
+I use Pipenv for [dash-earthquakes](https://github.com/jackdbd/dash-earthquakes), a very simple dashboard that displays the most recent eathquakes in the world (if you are interested in how I created this application, I wrote an [article](https://www.giacomodebidda.com/posts/visualize-earthquakes-with-plotly-dash/) about it).
 
 I wanted to setup [Travis](https://travis-ci.org/) for this project, but it took me a while to figure out how to use pipenv in this environment. A possible solution comes from the [pipenv advanced documentation](https://docs.pipenv.org/en/latest/advanced.html): use a `Makefile` to install pipenv and run the tests.
 

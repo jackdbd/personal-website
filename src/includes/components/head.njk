@@ -78,6 +78,11 @@
   {% endset %}
   <style>{{ css | cssmin | safe }}</style>
 
+  {# https://www.11ty.dev/docs/languages/webc/#css-and-js-(bundler-mode) #}
+  {% renderTemplate "webc" %}
+  <style @raw="getBundle('css')" webc:keep></style>
+  {% endrenderTemplate %}
+
   {# This stylesheet is render-blocking, but I don't think it's feasible to preload it without causing layout shifts,
   since it defines the entire website layout #}
   <link rel="stylesheet" href="/assets/css/style.css">

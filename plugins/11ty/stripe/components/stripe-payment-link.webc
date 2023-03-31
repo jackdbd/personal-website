@@ -1,0 +1,55 @@
+<script webc:type="js" webc:root :id="uid" aria-label="payment link">
+  function fallbackCta () {
+    return `<slot name="cta"><span>BUY NOW!</span></slot>`
+  }
+
+  async function render() {
+    if (paymentUrl) {
+      return `
+      <a href="${paymentUrl}" target="_blank" rel="external noopener noreferrer">
+        ${fallbackCta()}
+      </a>`
+      }
+      
+    if (!priceLookupKey) {
+      return `
+      <stripe-payment-link-error>
+        <p slot="error">Property <code>@price-lookup-key</code> must be provided when payment-url is not provided.</p>
+      </stripe-payment-link-error>`
+    }
+
+    const plinks = await this.helpers.stripePaymentLinks(priceLookupKey)
+
+    if (plinks.length !== 1 && allowMultiple !== 'true') {
+      const summary = `There are ${plinks.length} payment links associated with price lookup_key <code>${priceLookupKey}</code> in this Stripe account.`
+
+      const lis = [
+        `<li>deactivate ${plinks.length-1} payment links in your Stripe account</li>`,
+        `<li>use the <code>stripe-payment-links</code> component to render all payment links</li>`,
+        `<li>set the <code>@allow-multiple</code> property to <code>"true"</code></li>`
+      ]
+
+      const details = [
+        `<p>You have a few options to solve this issue:</p>`,
+        `<ul>${lis.join('')}</ul>`
+      ]
+
+      return `
+      <stripe-payment-link-error>
+        <span slot="summary">${summary}</span>
+        <div slot="details">${details.join('')}</div>
+      </stripe-payment-link-error>`
+    }
+
+    const links = plinks.map((pl) => {
+      return `
+      <a href="${pl.url}" target="_blank" rel="external noopener noreferrer">
+        ${fallbackCta()}
+      </a>`
+    })
+
+    return links[0]
+  }
+
+  render()
+</script>

@@ -1,8 +1,10 @@
 # scripts
 
-Miscellaneous written in ESM and using [zx](https://github.com/google/zx).
+Miscellaneous scripts I use for various tasks:
 
-```sh
-# run this from the root
-./scripts/plausible.mjs
-```
+- [Manage my Stripe account](./stripe/README.md)
+- [Search and post on various subreddits](./reddit/README.md)
+- [Search and post on Hacker News](./hacker-news/README.md)
+- [Search companies and people on LinkedIn](./linkedin/README.md)
+
+These scripts display the help with `--info` instead of `--help`, so they don't conflict with the help of the `tsm` command.
