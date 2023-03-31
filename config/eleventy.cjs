@@ -207,6 +207,9 @@ module.exports = function (eleventyConfig) {
       }
     },
     excludeUrls: [
+      // broken links. I cannot do anything about them.
+      'http://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2005',
+      'http://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2016',
       // these articles seem no longer online. What can I do? Just remove them from blog posts? Replace them with similar articles?
       'https://www.oscarberg.net/blog/2012/05/invisible-manager/',
       'https://getdango.com/emoji-and-deep-learning/',
