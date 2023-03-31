@@ -12,6 +12,12 @@ node scripts/reddit/search.cjs
 
 Note: the [Steampipe Reddit plugin](https://hub.steampipe.io/plugins/turbot/reddit) seems **not** to allow searches across all Reddit.
 
+You can also run this script from a GitHub workflow. For example, using the [GitHub CLI](https://cli.github.com/):
+
+```sh
+gh workflow run "Reddit search"
+```
+
 ## r/ForHire
 
 Things to keep in mind when posting on [r/ForHire](https://www.reddit.com/r/ForHire/):
@@ -27,6 +33,12 @@ Post the ad [reddit-freelancing.md](../../assets/ads/reddit-freelancing.md) on [
 
 ```sh
 node scripts/reddit/post-ad-freelancing.cjs --test
+```
+
+You can also run this script from a GitHub workflow:
+
+```sh
+gh workflow run "r/ForHire freelancing"
 ```
 
 ## r/slavelabour
