@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  build-and-test:
-    name: 🔧 Build website and run tests
+  audit-build-test-deploy:
+    name: 🔧 Audit, build, test, deploy
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -32,11 +32,6 @@ jobs:
         if: ${{ matrix.os }} == 'ubuntu-latest'
         run: npm audit --audit-level=moderate
 
-      - name: 🔍 Test website
-        env:
-          STRIPE_TEST: ${{ secrets.STRIPE_TEST }}
-        run: npm run test
-
       - name: 🔧 Build website
         env:
           CLOUDINARY: ${{ secrets.CLOUDINARY }}
@@ -51,6 +46,11 @@ jobs:
           WEBPAGETEST: ${{ secrets.WEBPAGETEST }}
         run: npm run build
 
+      - name: 🔍 Test website
+        env:
+          STRIPE_TEST: ${{ secrets.STRIPE_TEST }}
+        run: npm run test
+
       - name: 🌐 Deploy to Cloudflare Pages
         # https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/
         # https://github.com/marketplace/actions/cloudflare-pages-github-action
@@ -63,10 +63,9 @@ jobs:
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
-  # I am commenting this out because at the moment I don't have a valid API key for WebPageTest
   # wpt:
   #   name: Audit website with WebPageTest API
-  #   needs: [build-and-test]
+  #   needs: [audit-build-test-deploy]
   #   if: ${{ github.event_name == 'pull_request' }}
   #   runs-on: ubuntu-latest
   #   steps:

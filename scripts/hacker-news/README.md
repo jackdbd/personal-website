@@ -9,3 +9,9 @@ Search jobs:
 ```sh
 node scripts/hacker-news/job-links.cjs
 ```
+
+You can trigger this workflow manually using the GitHub CLI:
+
+```sh
+gh workflow run "Hacker News links to Telegram"
+```

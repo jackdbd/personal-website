@@ -28,7 +28,7 @@ const main = async () => {
   // send output to stdout, so we can redirect it to GITHUB_ENV in the GitHub action
   // console.log(s)
 
-  let s = `<b>🤖 HackerNews jobs</b>`
+  let s = `<b>🤖 Jobs from YC-backed startups on HN this week</b>`
   s = s.concat('\n\n')
   const entries = arr.map(anchor)
   s = s.concat(entries.join('\n\n'))
