@@ -26,11 +26,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - run: npm install -g snoowrap yargs
-      - run: npm link snoowrap
-      - run: npm link yargs
+      - run: npm ci
 
       - name: 🤖 Post on Reddit r/slavelabour
+        env:
+          REDDIT: ${{ secrets.REDDIT }}
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "TELEGRAM_MESSAGE<<$delimiter" >> $GITHUB_ENV
