@@ -26,8 +26,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Install dependencies
-        run: npm install -g snoowrap
+      - run: npm install -g snoowrap,yargs
+      - run: npm link snoowrap
+      - run: npm link yargs
 
       - name: 🤖 Post on Reddit r/slavelabour
         run: |
