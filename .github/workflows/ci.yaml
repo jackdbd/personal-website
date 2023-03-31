@@ -51,6 +51,12 @@ jobs:
           WEBPAGETEST: ${{ secrets.WEBPAGETEST }}
         run: npm run build
 
+      - name: 🌐 Deploy to Cloudflare Pages
+        # https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler pages publish ./_site
+
   # I am commenting this out because at the moment I don't have a valid API key for WebPageTest
   # wpt:
   #   name: Audit website with WebPageTest API
