@@ -202,7 +202,11 @@ const main = async () => {
   console.log(`create ${request_bodies.length} prices on Stripe`)
   for (const body of request_bodies) {
     const price = await stripe.prices.create(body)
-    const url = `https://dashboard.stripe.com/${stripe_env}/prices/${price.id}`
+    const url =
+      stripe_env === 'test'
+        ? `https://dashboard.stripe.com/test/prices/${price.id}`
+        : `https://dashboard.stripe.com/prices/${price.id}`
+
     console.log(`created price '${price.nickname}' ${url}`)
   }
 }

@@ -33,6 +33,8 @@ jobs:
         run: npm audit --audit-level=moderate
 
       - name: 🔍 Test website
+        env:
+          STRIPE_TEST: ${{ secrets.STRIPE_TEST }}
         run: npm run test
 
       - name: 🔧 Build website
@@ -43,6 +45,7 @@ jobs:
           ELEVENTY_ENV: production
           NODE_ENV: development
           PLAUSIBLE: ${{ secrets.PLAUSIBLE }}
+          STRIPE_LIVE: ${{ secrets.STRIPE_LIVE }}
           TELEGRAM: ${{ secrets.TELEGRAM }}
           WEBMENTION_IO_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }}
           WEBPAGETEST: ${{ secrets.WEBPAGETEST }}

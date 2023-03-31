@@ -1,0 +1,41 @@
+<script webc:type="js" webc:root :id="uid" aria-label="payment links">
+  function paymentLinkToCta(plink) {
+    if (plink.submit_type === 'book') {
+      return `BOOK NOW!`
+    } else {
+      return `BUY NOW!`
+    }
+  }
+
+  async function render() {
+    if (!priceLookupKey) {
+      return `
+      <stripe-payment-link-error>
+        <p slot="summary">Property <code>@price-lookup-key</code> not provided.</p>
+      </stripe-payment-link-error>`
+    }
+
+    const plinks = await this.helpers.stripePaymentLinks(priceLookupKey)
+
+    if (plinks.length === 1) {
+      const pl = plinks[0]
+      return `
+      <stripe-payment-link @payment-url="${pl.url}">
+        <span slot="cta">${paymentLinkToCta(pl)}</span>
+      </stripe-payment-link>`
+    }
+
+    const links = plinks.map((pl) => {
+      return `
+      <stripe-payment-link @payment-url="${pl.url}">
+        <span slot="cta">${paymentLinkToCta(pl)}</span>
+      </stripe-payment-link>`
+    })
+
+    return `
+    <ul>
+      ${links.map(a => `<li>${a}</li>`).join('')}
+    </ul>`
+  }
+  render()
+</script>

@@ -24,16 +24,23 @@ node scripts/stripe/list-products.mjs -e test
 
 ## Prices
 
-Create all prices in the Stripe **TEST** account, archiving existing ones:
+Create prices in the Stripe **TEST** account, archiving existing ones:
 
 ```sh
 npx tsm scripts/stripe/create-prices.ts -e test --cleanup
 ```
 
-List all active prices in the Stripe **TEST** account:
+Create prices in the Stripe **LIVE** account, without altering existing ones:
+
+```sh
+npx tsm scripts/stripe/create-prices.ts -e live
+```
+
+List all active prices:
 
 ```sh
 node scripts/stripe/list-prices.mjs -e test
+node scripts/stripe/list-prices.mjs -e live
 ```
 
 ## Coupons and Promotion Codes

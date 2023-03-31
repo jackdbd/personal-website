@@ -1,0 +1,49 @@
+---
+description: Giacomo Debidda's services
+eleventyNavigation:
+  key: Services
+  order: 1
+layout: page.njk
+ogp:
+  title: Services page
+permalink: /services/index.html
+section: services
+title: Services
+---
+{% block pagecontent %}
+
+<p>Here is a few things I can help you with.</p>
+
+<ul class="flow post-list">
+  {% for service in collections.service | sort(attribute="data.title") %}
+
+  <li class="flow">
+    <h2>
+      <a href="{{ service.url | url }}">
+        {% if service.data.title %}
+        {{ service.data.title }}
+        {% else %}
+        Untitled service
+        {% endif %}
+      </a>
+    </h2>
+  </li>
+
+  {% endfor %}
+</ul>
+
+{% endblock pagecontent %}
+
+{# inlined CSS assets (critical CSS) #}
+
+{# inlined JS assets (critical JS) #}
+
+{# external CSS assets #}
+{# <link data-helmet rel="stylesheet" href="/assets/css/components.css"> #}
+{# <link data-helmet rel="stylesheet" href="/assets/css/utilities.css"> #}
+<link data-helmet rel="stylesheet" href="/assets/css/prismjs-theme.css">
+<link data-helmet rel="preload" href="/assets/fonts/source-code-pro-v14-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link data-helmet rel="stylesheet" href="/assets/css/font-monospace.css">
+
+{# external JS assets #}
+<script data-helmet async src="/assets/js/sw-registration.js"></script>

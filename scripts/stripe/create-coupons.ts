@@ -39,7 +39,7 @@ const main = async () => {
   const stripe_env = argv['stripe-environment']
   const { api_key } = jsonSecret(`stripe-${stripe_env}`)
   const stripe = new Stripe(api_key, STRIPE_CONFIG)
-  console.log(`[${created_by}] operating on Stripe ${stripe_env.toUpperCase()}`)
+  console.log(`operating on Stripe ${stripe_env.toUpperCase()}`)
 
   const coupons: Stripe.CouponCreateParams[] = [
     {
@@ -83,19 +83,23 @@ const main = async () => {
   ]
 
   if (argv.cleanup) {
-    console.log(`[${created_by}] delete coupons`)
+    console.log(`delete coupons`)
     for await (const c of stripe.coupons.list()) {
       await stripe.coupons.del(c.id)
-      console.log(`[${created_by}] deleted ${c.id} '${c.name}'`)
+      console.log(`deleted ${c.id} '${c.name}'`)
     }
   }
 
-  console.log(`[${created_by}] create ${coupons.length} coupons on Stripe`)
+  console.log(`create ${coupons.length} coupons on Stripe`)
 
   for (const body of coupons) {
     const coupon = await stripe.coupons.create(body)
-    const url = `https://dashboard.stripe.com/${stripe_env}/coupons/${coupon.id}`
-    console.log(`[${created_by}] created '${coupon.name}' ${url}`)
+    const url =
+      stripe_env === 'test'
+        ? `https://dashboard.stripe.com/test/coupons/${coupon.id}`
+        : `https://dashboard.stripe.com/coupons/${coupon.id}`
+
+    console.log(`created '${coupon.name}' ${url}`)
   }
 }
 

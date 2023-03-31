@@ -101,8 +101,13 @@ const main = async () => {
 
   for (const body of codes) {
     const code = await stripe.promotionCodes.create(body)
-    const code_url = `https://dashboard.stripe.com/${stripe_env}/promotion_codes/${code.id}`
-    console.log(`[${created_by}] created '${code.code}' ${code_url}`)
+
+    const url =
+      stripe_env === 'test'
+        ? `https://dashboard.stripe.com/test/promotion_codes/${code.id}`
+        : `https://dashboard.stripe.com/promotion_codes/${code.id}`
+
+    console.log(`[${created_by}] created '${code.code}' ${url}`)
   }
 }
 

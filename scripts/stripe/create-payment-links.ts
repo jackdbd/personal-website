@@ -219,8 +219,14 @@ const main = async () => {
       },
       tax_id_collection: { enabled: true }
     })
+
+    const url =
+      stripe_env === 'test'
+        ? `https://dashboard.stripe.com/test/payment-links/${plink.id}`
+        : `https://dashboard.stripe.com/payment-links/${plink.id}`
+
     console.log(`created payment link for price '${price.nickname}'`, {
-      url: `https://dashboard.stripe.com/${stripe_env}/payment-links/${plink.id}`,
+      url,
       buy: plink.url,
       promo_reddit: `${plink.url}?prefilled_promo_code=REDDITSLAVELABOUR80`,
       promo_twitter: `${plink.url}?prefilled_promo_code=TWITTER10FIRST25OFF`

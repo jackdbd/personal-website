@@ -34,6 +34,7 @@ const transforms = require('../11ty/transforms.js')
 const plausibleClientPromise = import('@jackdbd/plausible-client')
 const cloudinaryPlugin = require('../plugins/11ty/cloudinary/index.cjs')
 const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
+const stripePlugin = require('../plugins/11ty/stripe/index.cjs')
 const webmentionsPlugin = require('../plugins/11ty/webmentions/index.cjs')
 const { buildServiceWorker } = require('../src/build-sw.cjs')
 
@@ -221,6 +222,8 @@ module.exports = function (eleventyConfig) {
       // I don't know why these are marked as broken links. They seem fine to me...
       'https://all-geo.org/volcan01010/',
       'https://www.cairographics.org/',
+      'http://Genius.com',
+      'https://genius.com/a/infographic-how-dragon-ball-influenced-a-generation-of-hip-hop-artists',
       'https://www.qlik.com/blog/visual-encoding'
     ],
     loggingLevel: 1
@@ -242,6 +245,27 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(plausiblePlugin, {
     apiKey: plausible.api_key,
     siteId: plausible.site_id
+  })
+
+  let stripe_json_string
+  if (process.env.STRIPE_LIVE) {
+    stripe_json_string = process.env.STRIPE_LIVE
+  } else {
+    stripe_json_string = fs.readFileSync(
+      join(REPO_ROOT, 'secrets', 'stripe-live.json'),
+      { encoding: 'utf8' }
+    )
+  }
+  const stripe = JSON.parse(stripe_json_string)
+
+  eleventyConfig.addPlugin(stripePlugin, {
+    apiKey: stripe.api_key,
+    stripeConfig: {
+      // https://stripe.com/docs/api/versioning
+      apiVersion: '2022-11-15',
+      maxNetworkRetries: 3, // (default is 0)
+      timeout: 10000 // ms (default is 80000)
+    }
   })
 
   const domain = 'www.giacomodebidda.com'
@@ -397,10 +421,14 @@ module.exports = function (eleventyConfig) {
     wrapperClass: 'toc-nav'
   })
 
-  // see full list of options here:
-  // https://www.11ty.dev/docs/languages/webc/#installation
   eleventyConfig.addPlugin(webcPlugin, {
-    components: 'src/includes/components/**/*.webc'
+    // https://www.11ty.dev/docs/languages/webc/#global-no-import-components
+    components: [
+      'src/includes/components/**/*.webc',
+      'plugins/11ty/stripe/components/**/*.webc',
+      'npm:@11ty/is-land/*.webc',
+      'npm:@11ty/eleventy-plugin-syntaxhighlight/*.webc'
+    ]
   })
 
   if (process.env.CF_PAGES) {
