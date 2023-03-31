@@ -53,9 +53,15 @@ jobs:
 
       - name: 🌐 Deploy to Cloudflare Pages
         # https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/
-        env:
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx wrangler pages publish ./_site
+        # https://github.com/marketplace/actions/cloudflare-pages-github-action
+        uses: cloudflare/pages-action@1
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          projectName: personal-website
+          directory: _site
+          # Optional: Enable this if you want to have GitHub Deployments triggered
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
   # I am commenting this out because at the moment I don't have a valid API key for WebPageTest
   # wpt:
