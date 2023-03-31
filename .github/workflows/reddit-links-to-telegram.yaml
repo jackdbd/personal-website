@@ -69,29 +69,3 @@ jobs:
             <b>🤖 React jobs posted in r/jobbit</b>
 
             ${{ env.REACT_JOBS_LINKS }}
-
-      - name: Query Reddit for Clojure jobs
-        run: |
-          delimiter=$(openssl rand -hex 8)
-          echo "REDDIT_JSON<<$delimiter" >> $GITHUB_ENV
-          steampipe query assets/steampipe-queries/clojure-jobs-on-jobbit-subreddit.sql --output json >> $GITHUB_ENV
-          echo "$delimiter" >> $GITHUB_ENV
-
-      - name: Convert array to string (Clojure)
-        run: |
-          delimiter=$(openssl rand -hex 8)
-          echo "CLOJURE_JOBS_LINKS<<$delimiter" >> $GITHUB_ENV
-          node scripts/reddit-array-to-telegram-links.cjs >> $GITHUB_ENV
-          echo "$delimiter" >> $GITHUB_ENV
-
-      - name: 💬 Send Clojure jobs to Telegram
-        uses: appleboy/telegram-action@v0.1.1
-        with:
-          to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
-          token: ${{ fromJSON(secrets.TELEGRAM).token }}
-          format: html
-          disable_web_page_preview: true
-          message: |
-            <b>🤖 Clojure jobs posted in r/jobbit</b>
-
-            ${{ env.CLOJURE_JOBS_LINKS }}

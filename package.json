@@ -55,7 +55,7 @@
     "site": "npm-run-all --parallel site:* --print-label",
     "site:open": "google-chrome http://localhost:3000",
     "site:serve": "serve _site",
-    "test": "echo TODO tests with puppeteer, playwright, cypress, or cuic",
+    "test": "echo TODO write some e2e test with playwright",
     "webhint:blog": "hint $DOMAIN/blog/",
     "webhint:home": "hint $DOMAIN/",
     "webhint:projects": "hint $DOMAIN/projects/",

@@ -1,13 +1,13 @@
 # Reddit scripts
 
-> :bulb: Use `--test` to post the ad on [r/test](https://www.reddit.com/r/test/) instead of the "production" subreddit (e.g. `r/slavelabour`, `r/smallbusiness`, etc).
-
-## Search
+## Search Reddit for keywords
 
 Search a list of subreddits for posts containing one of the specified keywords:
 
 ```sh
-node scripts/reddit/search.cjs
+node scripts/reddit/search.cjs \
+  -s 'learnmachinelearning,MachineLearning,programming' \
+  -k 'openai,chatgpt,bard'
 ```
 
 Note: the [Steampipe Reddit plugin](https://hub.steampipe.io/plugins/turbot/reddit) seems **not** to allow searches across all Reddit.
@@ -18,7 +18,25 @@ You can also run this script from a GitHub workflow. For example, using the [Git
 gh workflow run "Reddit search"
 ```
 
-## r/ForHire
+## Post freelancing ad on Reddit
+
+Post the ad [reddit-freelancing.md](../../assets/ads/reddit-freelancing.md):
+
+```sh
+# Testing
+node scripts/reddit/post-ad-freelancing.cjs --subreddit test
+
+# Production
+node scripts/reddit/post-ad-freelancing.cjs --subreddit forhire
+node scripts/reddit/post-ad-freelancing.cjs --subreddit jobbit
+```
+
+You can also run this script from a GitHub workflow:
+
+```sh
+gh workflow run "Rddit freelancing"
+```
+### r/ForHire
 
 Things to keep in mind when posting on [r/ForHire](https://www.reddit.com/r/ForHire/):
 
@@ -29,19 +47,15 @@ Things to keep in mind when posting on [r/ForHire](https://www.reddit.com/r/ForH
 
 See also: [rules of r/forhire](https://www.reddit.com/r/forhire/comments/44aeko/rules_guidelines_read_before_posting/).
 
-Post the ad [reddit-freelancing.md](../../assets/ads/reddit-freelancing.md) on [r/test](https://www.reddit.com/r/test/):
+### r/jobbit
 
-```sh
-node scripts/reddit/post-ad-freelancing.cjs --test
-```
+Things to keep in mind when posting on [r/jobbit](https://www.reddit.com/r/jobbit/):
 
-You can also run this script from a GitHub workflow:
+- It seems r/jobbit has no rules at the moment.
 
-```sh
-gh workflow run "r/ForHire freelancing"
-```
+## Post website audit ad on Reddit
 
-## r/slavelabour
+### r/slavelabour
 
 Things to keep in mind when posting on [r/slavelabour](https://www.reddit.com/r/slavelabour/):
 
@@ -54,11 +68,11 @@ Post the ad [reddit-website-audit.md](../../assets/ads/reddit-website-audit.md) 
 
 ```sh
 node scripts/reddit/post-ad-website-audit.cjs \
-  --cta-md '[ORDER NOW](https://buy.stripe.com/test_eVaeXRasmdiOdtCg0V?prefilled_promo_code=REDDITSLAVELABOUR80)' \
+  --cta-md '[ORDER NOW](https://buy.stripe.com/6oE6oM6di9YA5eE005?prefilled_promo_code=REDDITSLAVELABOUR80)' \
   --test
 ```
 
-## r/smallbusiness
+### r/smallbusiness
 
 Things to keep in mind when posting on [r/smallbusiness](https://www.reddit.com/r/smallbusiness/):
 
@@ -68,6 +82,6 @@ Post the ad [reddit-smallbusiness.md](../../assets/ads/reddit-smallbusiness.md) 
 
 ```sh
 node scripts/reddit/post-ad-smallbusiness.cjs \
-  --cta-md '[ORDER NOW TO GET 80% OFF](https://buy.stripe.com/test_eVaeXRasmdiOdtCg0V?prefilled_promo_code=REDDITSMALLBUSINESS80)' \
+  --cta-md '[ORDER NOW TO GET 80% OFF](https://buy.stripe.com/6oE6oM6di9YA5eE005?prefilled_promo_code=REDDITSMALLBUSINESS80)' \
   --test
 ```

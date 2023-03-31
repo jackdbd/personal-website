@@ -16,10 +16,17 @@ Create all products in the Stripe **TEST** account, deleting/archiving existing 
 npx tsm scripts/stripe/create-products.ts -e test --cleanup
 ```
 
-List all active products in the Stripe **TEST** account:
+Create products in the Stripe **LIVE** account, without altering existing ones:
+
+```sh
+npx tsm scripts/stripe/create-products.ts -e live
+```
+
+List all active products:
 
 ```sh
 node scripts/stripe/list-products.mjs -e test
+node scripts/stripe/list-products.mjs -e live
 ```
 
 ## Prices
@@ -57,10 +64,11 @@ Create all promotion codes in the Stripe **TEST** account, archiving existing on
 npx tsm scripts/stripe/create-promotion-codes.ts -e test --cleanup
 ```
 
-List all coupons and promotion codes in the Stripe **TEST** account:
+List all coupons and promotion codes:
 
 ```sh
 node scripts/stripe/list-coupons-and-promotion-codes.mjs -e test
+node scripts/stripe/list-coupons-and-promotion-codes.mjs -e live
 ```
 
 ## Payment Links

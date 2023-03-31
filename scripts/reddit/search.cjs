@@ -1,6 +1,9 @@
+const PrettyError = require('pretty-error')
 const snoowrap = require('snoowrap')
 const yargs = require('yargs')
 const { EMOJI, jsonSecret, sendOutput, userAgent } = require('./utils.cjs')
+
+const pe = new PrettyError()
 
 const splits = __filename.split('/')
 const app_id = splits[splits.length - 1]
@@ -29,11 +32,13 @@ const SUBREDDITS = [
 const main = async () => {
   const argv = yargs(process.argv.slice(2))
     .usage('node scripts/reddit/$0')
-    .option('keyword', {
+    .option('keywords', {
+      alias: 'k',
       default: KEYWORDS.join(','),
       describe: 'keyword to search (comma-separated list)'
     })
     .option('subreddits', {
+      alias: 's',
       default: SUBREDDITS.join(','),
       describe: 'subreddits where to run the search (comma-separated list)'
     })
@@ -50,7 +55,7 @@ const main = async () => {
     password
   })
 
-  const keywords = argv.keyword.split(',')
+  const keywords = argv.keywords.split(',')
   const s = keywords.map((k) => `selftext:"${k}" OR title:"${k}"`).join(' OR ')
   const subreddits = argv.subreddits.split(',')
   const sr = subreddits.map((s) => `subreddit:${s}`).join(' OR ')
@@ -97,4 +102,9 @@ const renderTelegramMessage = (d) => {
   return s
 }
 
-main().then(renderTelegramMessage).then(sendOutput)
+main()
+  .then(renderTelegramMessage)
+  .then(sendOutput)
+  .catch((err) => {
+    console.log(pe.render(err))
+  })

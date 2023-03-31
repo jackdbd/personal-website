@@ -3,7 +3,6 @@ const path = require('node:path')
 const snoowrap = require('snoowrap')
 const yargs = require('yargs')
 const {
-  EMOJI,
   jsonSecret,
   sendOutput,
   slugify,
@@ -58,6 +57,8 @@ const submitRedditPost = async () => {
 
   const subreddit = argv.test ? 'test' : 'slavelabour'
 
+  // const flair_template = await r.getSubreddit(subreddit).getUserFlair(username)
+
   // title of the submission. up to 300 characters long
   const title = `[OFFER] I will audit your website for $60`
   // const slug = 'offer_i_will_audit_your_website'
@@ -67,9 +68,12 @@ const submitRedditPost = async () => {
   let text = fs.readFileSync(filepath).toString()
   text = text.replace('CTA_PLACEHOLDER', argv['cta-md'])
 
+  // You can retrieve the flair ID using this call:
+  // const flairs = await r.getSubreddit(subreddit).getLinkFlairTemplates()
   const sub = await r.getSubreddit(subreddit).submitSelfpost({
     text,
-    title
+    title,
+    flairId: 'a2317922-8e2b-11e4-a65b-22000b358ccc'
   })
 
   return {
