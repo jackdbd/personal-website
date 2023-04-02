@@ -28,21 +28,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Setup Steampipe and its plugins
-        # https://github.com/marketplace/actions/setup-steampipe
-        uses: francois2metz/setup-steampipe@v1
-        with:
-          steampipe-version: 'latest'
-          steampipe-plugins: |
-            {
-              "hackernews": {}
-            }
-
       - name: Query Hacker News
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "HN_JSON<<$delimiter" >> $GITHUB_ENV
-          node scripts/hacker-news/whoishiring-item-id >> $GITHUB_ENV
+          node scripts/hacker-news/whoishiring-item-id.cjs >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram

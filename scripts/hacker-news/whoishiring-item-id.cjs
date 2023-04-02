@@ -1,3 +1,7 @@
+const { debuglog } = require('node:util')
+
+const debug = debuglog('github-workflow')
+
 const main = async () => {
   let date = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
@@ -13,8 +17,7 @@ const main = async () => {
 
   const res = await fetch(url)
   const obj = await res.json()
-  // heuristic: check only the latest 5 submissions by whoishiring
-  const item_ids = obj.submitted.filter((_, i) => i < 5)
+  const item_ids = obj.submitted
 
   const title = `Ask HN: Freelancer? Seeking freelancer? (${date})`
   // console.log(`Search submissions by ${username} titled "${title}"`)
@@ -24,6 +27,7 @@ const main = async () => {
       const url = `https://hacker-news.firebaseio.com/v0/item/${item_id}.json?print=pretty`
       const res = await fetch(url)
       const obj = await res.json()
+      debug(`HN item ID ${item_id} %O`, obj)
       if (obj.title === title) {
         return { item_id, title: obj.title, text: obj.text }
       } else {
