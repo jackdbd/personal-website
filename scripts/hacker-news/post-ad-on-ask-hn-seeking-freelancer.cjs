@@ -20,8 +20,12 @@ const waitMs = (ms) => {
  * Usage:
  * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs <hn_item_id>
  *
- * Example: post ad for March 2023
+ * Example:
+ * post ad for March 2023
  * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs 34983766
+ *
+ * See also:
+ * https://news.ycombinator.com/submitted?id=whoishiring
  */
 
 const main = async () => {

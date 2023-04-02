@@ -42,7 +42,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "HN_JSON<<$delimiter" >> $GITHUB_ENV
-          steampipe query assets/steampipe-queries/hacker-news-whoishiring-freelancer.sql --output json >> $GITHUB_ENV
+          node scripts/hacker-news/whoishiring-item-id >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram
@@ -55,9 +55,9 @@ jobs:
           message: |
             <b>🤖 Ask HN Freelancer reminder</b>
 
-            <a href="https://news.ycombinator.com/item?id=${{ fromJSON(env.HN_JSON)[0].id }}">${{ fromJSON(env.HN_JSON)[0].title }}</a>
+            <a href="https://news.ycombinator.com/item?id=${{ fromJSON(env.HN_JSON).item_id }}">${{ fromJSON(env.HN_JSON).title }}</a>
 
-            <i>Posted by ${{ fromJSON(env.HN_JSON)[0].by }} on ${{ fromJSON(env.HN_JSON)[0].time }}</i>
+            <i>Posted by ${{ fromJSON(env.HN_JSON).username }} in ${{ fromJSON(env.HN_JSON).date }}</i>
 
       - name: Read ad for Ask HN Freelancer
         run: |
@@ -81,7 +81,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "RESULT_STRING<<$delimiter" >> $GITHUB_ENV
-          node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs ${{ fromJSON(env.HN_JSON)[0].id }} >> $GITHUB_ENV
+          node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs ${{ fromJSON(env.HN_JSON).item_id }} >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram of my ad
