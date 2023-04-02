@@ -39,7 +39,7 @@ const main = async () => {
   results = results.filter((r) => r.status === 'fulfilled' && r.value)
   if (results.length === 0) {
     throw new Error(
-      `No matches: no HN item submitted by "${username}" matches title "${title}"`
+      `No matches: no HN item submitted by "${username}" matches title "${title}". Maybe retry in a couple of days`
     )
   } else if (results.length === 1) {
     const d = results[0].value

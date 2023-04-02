@@ -25,4 +25,8 @@ I just need your email address and the URL of the website you want me to audit.
 
 🤔 *Still not sure?* Here is an [article I have recently written](https://giacomodebidda.com/posts/performance-audit-of-an-italian-news-website/) about web performance.
 
-*Estimated delivery: 1 week*.
+<div>
+  {% renderTemplate "webc" %}
+  <estimated-delivery weeks="1"></estimated-delivery>
+  {% endrenderTemplate %}
+</div>

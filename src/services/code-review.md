@@ -17,4 +17,8 @@ I can evaluate both front-end projects and back-end projects.
   {% endrenderTemplate %}
 </div>
 
-*Estimated delivery: 1 week*.
+<div>
+  {% renderTemplate "webc" %}
+  <estimated-delivery weeks="1"></estimated-delivery>
+  {% endrenderTemplate %}
+</div>

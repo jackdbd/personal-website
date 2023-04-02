@@ -7,12 +7,16 @@
   --color-alabaster: #f2f0e6;
   --color-baby-powder: #fefefa;
   --color-bone: #e3dac9;
+  /* https://design.cal.com/branding */
+  --color-cal-com-black: #292929;
   --color-cyan-blue: #e5e9eb;
   --color-firebrick: #b22222;
   --color-gray20: #333333;
+  --color-linkedin-primary: #0077b5;
   --color-red: #d7000c;
   --color-slategray: #708090;
   --color-snow: #fffafa;
+  --color-twitter-primary: #1DA1F2;
   --color-venetian-red: #c80815;
   --color-white: white;
 

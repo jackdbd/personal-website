@@ -1,0 +1,39 @@
+<script webc:setup>
+const myHtml = "<my-webc-component></my-webc-component>";
+
+function timeString(days, weeks) {
+  let s = ''
+  if (weeks) {
+    if (weeks == '1') {
+      s = `${s}1 week`
+    } else {
+      s = `${s}${weeks} weeks`
+    }
+  }
+
+  if (days) {
+    if (weeks) {
+      s = `${s} and `
+    }
+    if (days == '1') {
+      s = `${s}1 day`
+    } else {
+      s = `${s}${days} days`
+    }
+  }
+
+  return s;
+}
+</script>
+
+<p :id="uid">
+  🚚 <i>Estimated delivery time: <b><span @html="timeString(days, weeks)"></span></b></i>.
+</p>
+
+<style webc:scoped>
+  :host p {
+    background-color: var(--color-alabaster);
+    border-radius: 0.5rem;
+    padding: var(--scale-space-xs);
+  }
+</style>
