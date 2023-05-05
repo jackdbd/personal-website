@@ -8,13 +8,15 @@ const DEFAULT = {
 
 const main = async () => {
   const argv = yargs(process.argv.slice(2))
-    .usage('node scripts/stripe/$0')
+    .usage(
+      'List active products in a Stripe account.\nUsage: node scripts/stripe/$0'
+    )
     .option('stripe-environment', {
       alias: 'e',
       describe: 'Stripe environment (live, test)',
       demandOption: false
     })
-    .help('info')
+    .help('help')
     .default(DEFAULT).argv
 
   const stripe_env = argv['stripe-environment']
@@ -30,9 +32,14 @@ const main = async () => {
   }
 
   for await (const prod of stripe.products.list(params)) {
-    const url = `https://dashboard.stripe.com/${stripe_env}/products/${prod.id}`
+    const url =
+      stripe_env === 'test'
+        ? `https://dashboard.stripe.com/test/products/${prod.id}`
+        : `https://dashboard.stripe.com/products/${prod.id}`
     console.log(`${prod.type} '${prod.name}' ${url}`)
   }
 }
 
-main()
+main().catch((err) => {
+  console.error(err.message)
+})

@@ -31,6 +31,7 @@ const slugify = (title) => {
     .replaceAll('[', '')
     .replaceAll(']', '')
     .replaceAll(' ', '_')
+    .replaceAll('$', '')
     .toLowerCase()
 }
 
@@ -39,6 +40,10 @@ const renderTelegramMessage = (d) => {
   s = s.concat('\n\n')
   s = s.concat(`<a href="${d.url}">submission ${d.name}</a>`)
   s = s.concat('\n\n')
+  if (d.url_subreddit) {
+    s = s.concat(`<a href="${d.url_subreddit}">subreddit r/${d.subreddit}</a>`)
+    s = s.concat('\n\n')
+  }
   s = s.concat(`<b>${d.title}</b>`)
   s = s.concat('\n\n')
   s = s.concat(`<pre>${d.text}</pre>`)

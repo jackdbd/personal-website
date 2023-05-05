@@ -9,7 +9,7 @@ const DEFAULT = {
 
 const main = async () => {
   const argv = yargs(process.argv.slice(2))
-    .usage('node scripts/stripe/$0')
+    .usage('List prices in a Stripe account.\nUsage: node scripts/stripe/$0')
     .option('stripe-environment', {
       alias: 'e',
       describe: 'Stripe environment (live, test)',
@@ -20,7 +20,7 @@ const main = async () => {
       describe: 'Return also archived prices, not just active prices',
       demandOption: false
     })
-    .help('info')
+    .help('help')
     .default(DEFAULT).argv
 
   const stripe_env = argv['stripe-environment']
@@ -47,4 +47,6 @@ const main = async () => {
   }
 }
 
-main()
+main().catch((err) => {
+  console.error(err.message)
+})

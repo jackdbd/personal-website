@@ -1,11 +1,11 @@
 SEEKING WORK | Italy (GMT+1) | Remote
 
-Full-stack developer with 8 years of experience.
+Full-stack developer and web performance consultant with 9 years of experience.
 
 Available part-time or full-time, solo or as part of a small team.
 
-I can work with Node.js, Clojure and Zig.
-I use GCP (certified) and Cloudflare for most of my projects.
+I can work with TypeScript, Clojure and Zig.
+I use GCP (certified), Cloudflare, Vercel for most of my projects.
 
 Email: giacomo@giacomodebidda.com
 

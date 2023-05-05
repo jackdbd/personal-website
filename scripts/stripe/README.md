@@ -26,6 +26,7 @@ List all active products:
 
 ```sh
 node scripts/stripe/list-products.mjs -e test
+
 node scripts/stripe/list-products.mjs -e live
 ```
 
@@ -47,6 +48,7 @@ List all active prices:
 
 ```sh
 node scripts/stripe/list-prices.mjs -e test
+
 node scripts/stripe/list-prices.mjs -e live
 ```
 
@@ -68,6 +70,7 @@ List all coupons and promotion codes:
 
 ```sh
 node scripts/stripe/list-coupons-and-promotion-codes.mjs -e test
+
 node scripts/stripe/list-coupons-and-promotion-codes.mjs -e live
 ```
 

@@ -2,7 +2,9 @@
 
 ## Search
 
-Perform searches on Hacker News using the [Steampipe LinkedIn plugin](https://hub.steampipe.io/plugins/turbot/hackernews).
+### Search jobs
+
+Look for jobs on Hacker News using the [Steampipe hackernews plugin](https://hub.steampipe.io/plugins/turbot/hackernews) and POST a list of links to a Telegram bot, that will send a message to a Telegram chat.
 
 ```sh
 node scripts/hacker-news/job-links.cjs
@@ -14,7 +16,9 @@ You can trigger a GitHub workflow manually using the GitHub CLI:
 gh workflow run "Hacker News links to Telegram"
 ```
 
-Retrieve the item ID of the Hacker News story `Ask HN: Freelancer? Seeking freelancer?` posted by user `whoishiring`:
+### Ask HN story ID
+
+Retrieve the item ID of the Hacker News story `Ask HN: Freelancer? Seeking freelancer?` posted by the [whoishiring](https://news.ycombinator.com/submitted?id=whoishiring) bot:
 
 ```sh
 # posted this month (there might not be one yet)

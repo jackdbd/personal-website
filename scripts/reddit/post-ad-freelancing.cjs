@@ -23,7 +23,7 @@ const app_id = splits[splits.length - 1]
  */
 const submitRedditPost = async () => {
   const argv = yargs(process.argv.slice(2))
-    .usage('node scripts/reddit/$0')
+    .usage('Post my freelancing ad on Reddit.\nUsage: node scripts/reddit/$0')
     .option('cta-md', {
       default:
         '**Free 30m consultation:** https://cal.com/giacomodebidda/30min',
@@ -33,7 +33,7 @@ const submitRedditPost = async () => {
     .option('rate-md', {
       demandOption: false,
       default:
-        '**Rate:** €400/day. Open to flat-rate pricing for well-scoped projects.',
+        '**Rate:** 65 USD/hour. Open to flat-rate pricing for well-scoped projects.',
       describe: 'My freelance rate info in markdown'
     })
     .option('subreddit', {
@@ -59,7 +59,7 @@ const submitRedditPost = async () => {
   const subreddit = argv.subreddit
 
   // title of the submission. up to 300 characters long
-  const title = `[For Hire] Full-stack developer & cloud consultant (GCP certified)`
+  const title = `[For Hire] Full-stack developer & cloud consultant`
   const slug = slugify(title)
 
   const filepath = path.join('assets', 'ads', 'reddit-freelancing.md')
@@ -99,6 +99,7 @@ const submitRedditPost = async () => {
     slug,
     text,
     url: `https://www.reddit.com/r/${subreddit}/comments/${sub.name}/${slug}/`,
+    url_subreddit: `https://www.reddit.com/r/${subreddit}/`,
     user_agent
   }
 }

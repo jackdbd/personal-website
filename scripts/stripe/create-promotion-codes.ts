@@ -22,11 +22,11 @@ const DEFAULT: Argv = {
 
 const main = async () => {
   const argv = yargs(process.argv.slice(2))
-    .usage('npx tsm scripts/stripe/$0')
+    .usage('Create Stripe promotion codes.\nUsage: npx tsm scripts/stripe/$0')
     .option('cleanup', {
       alias: 'c',
       boolean: true,
-      describe: 'Delete existing coupons',
+      describe: 'Delete existing Stripe coupons',
       demandOption: false
     })
     .option('stripe-environment', {
@@ -58,20 +58,6 @@ const main = async () => {
       max_redemptions: 10,
       metadata: { created_by }
       // restrictions: { first_time_transaction: true }
-    },
-    {
-      code: 'REDDITSMALLBUSINESS80',
-      coupon: percent_80_off.id,
-      expires_at,
-      max_redemptions: 10,
-      metadata: { created_by }
-    },
-    {
-      code: 'REDDITSLAVELABOUR50',
-      coupon: percent_50_off.id,
-      expires_at,
-      max_redemptions: 15,
-      metadata: { created_by }
     },
     {
       code: 'REDDITSMALLBUSINESS50',

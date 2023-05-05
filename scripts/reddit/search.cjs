@@ -22,6 +22,7 @@ const SUBREDDITS = [
   'analytics',
   // 'dropship',
   'GrowthHacking',
+  // 'OpenAssistant',
   'SaaS',
   // 'SEO',
   'smallbusiness',

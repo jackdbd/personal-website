@@ -12,9 +12,11 @@ const DEFAULT = {
   test: false
 }
 
-const main = async () => {
+const submitRedditPost = async () => {
   const argv = yargs(process.argv.slice(2))
-    .usage('node scripts/reddit/$0')
+    .usage(
+      'Post ad for my website audit service to r/smallbusiness or r/test.\nUsage: node scripts/reddit/$0'
+    )
     .option('ad', {
       describe: 'Text to post',
       demandOption: false
@@ -64,9 +66,12 @@ const main = async () => {
       text: 'This is **some bold text** and this a [link](https://google.com).',
       title
     })
-    throw new Error(
-      `No submissions found in r/${subreddit}. Created new submission ${sub.name}. Wait a couple of minutes to give Reddit the time to update its search API, then rerun this script.`
-    )
+    const details = [
+      `No submissions found in r/${subreddit}.`,
+      `Created new submission ${sub.name}.`,
+      `Wait a couple of minutes to give Reddit the time to update its search API, then rerun this script.`
+    ]
+    throw new Error(details.join(' '))
   }
 
   const filepath = path.join('assets', 'ads', argv.ad)
@@ -96,6 +101,7 @@ const main = async () => {
     submission_url: sub.url,
     subreddit,
     text,
+    url_subreddit: `https://www.reddit.com/r/${subreddit}/`,
     user_agent
   }
 }
@@ -103,6 +109,10 @@ const main = async () => {
 const renderTelegramMessage = (d) => {
   let s = `<b>${EMOJI.Robot} Advertisement posted on r/${d.subreddit}</b>`
   s = s.concat('\n\n')
+  if (d.url_subreddit) {
+    s = s.concat(`<a href="${d.url_subreddit}">subreddit r/${d.subreddit}</a>`)
+    s = s.concat('\n\n')
+  }
   s = s.concat(
     `The text content of <code>${d.ad}</code> was posted as a comment of the submission <a href="${d.comment_url}">${d.submission_title}</a>.`
   )
@@ -116,4 +126,9 @@ const renderTelegramMessage = (d) => {
   return s
 }
 
-main().then(renderTelegramMessage).then(sendOutput)
+submitRedditPost()
+  .then(renderTelegramMessage)
+  .then(sendOutput)
+  .catch((err) => {
+    console.error(err.message)
+  })

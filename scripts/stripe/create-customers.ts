@@ -84,7 +84,9 @@ const DEFAULT: Argv = {
 
 const main = async () => {
   const argv = yargs(process.argv.slice(2))
-    .usage('tsm scripts/stripe/$0')
+    .usage(
+      'Create customers in a Stripe account.\nUsage: npx tsm scripts/stripe/$0'
+    )
     .option('cleanup', {
       alias: 'c',
       boolean: true,
