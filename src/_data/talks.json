@@ -1,5 +1,11 @@
 [
   {
+    "title": "Vale la pena imparare Zig?",
+    "language": "Italian",
+    "href": "https://github.com/jackdbd/zig-tour",
+    "description": "An introduction to the Zig programming language and toolchain. I gave this talk at pisa.dev."
+  },
+  {
     "title": "Data visualization con Python: teoria e pratica",
     "language": "Italian",
     "href": "https://github.com/jackdbd/python-firenze-meetup-2020-02-06",
