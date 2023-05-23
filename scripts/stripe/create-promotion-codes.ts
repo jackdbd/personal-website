@@ -48,7 +48,7 @@ const main = async () => {
   const percent_50_off = await couponByName(stripe, '50% off')
   const percent_25_off = await couponByName(stripe, '25% off')
 
-  const expires_at = expiresInDays(30)
+  const expires_at = expiresInDays(14)
 
   const codes: Stripe.PromotionCodeCreateParams[] = [
     {
@@ -86,14 +86,20 @@ const main = async () => {
   }
 
   for (const body of codes) {
-    const code = await stripe.promotionCodes.create(body)
+    try {
+      const code = await stripe.promotionCodes.create(body)
 
-    const url =
-      stripe_env === 'test'
-        ? `https://dashboard.stripe.com/test/promotion_codes/${code.id}`
-        : `https://dashboard.stripe.com/promotion_codes/${code.id}`
+      const url =
+        stripe_env === 'test'
+          ? `https://dashboard.stripe.com/test/promotion_codes/${code.id}`
+          : `https://dashboard.stripe.com/promotion_codes/${code.id}`
 
-    console.log(`[${created_by}] created '${code.code}' ${url}`)
+      console.log(`[${created_by}] created '${code.code}' ${url}`)
+    } catch (err) {
+      console.log(
+        `[${created_by}] could not create promotion code: ${err.message}`
+      )
+    }
   }
 }
 
