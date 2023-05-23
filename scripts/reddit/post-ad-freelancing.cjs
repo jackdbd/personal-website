@@ -58,38 +58,52 @@ const submitRedditPost = async () => {
 
   const subreddit = argv.subreddit
 
-  // title of the submission. up to 300 characters long
-  const title = `[For Hire] Full-stack developer & cloud consultant`
-  const slug = slugify(title)
-
   const filepath = path.join('assets', 'ads', 'reddit-freelancing.md')
   let text = fs.readFileSync(filepath).toString()
   text = text.replace('RATE_MARKDOWN_PLACEHOLDER', argv['rate-md'])
   text = text.replace('CTA_MARKDOWN_PLACEHOLDER', argv['cta-md'])
 
   const flairs = await r.getSubreddit(subreddit).getLinkFlairTemplates()
+  // const flairs = await r.getSubreddit(subreddit).getUserFlairTemplates()
   console.log(`flairs available in r/${subreddit}`, flairs)
 
-  let flairId
+  // title of the submission. up to 300 characters long
+  let title
+  // some subreddits require a flair to be set
+  const flair_text = 'For Hire'
+  let flair_template_id
   switch (subreddit) {
     case 'forhire':
-      flairId = '530dbcf8-6582-11e2-ab2f-12313d051e91'
+      // FIXME: submissions on r/forhire stopped working. Myabe I should try a
+      // different flair_template_id?
+      const results = flairs.filter((d) => d.flair_text === flair_text)
+      flair_template_id = results[0].flair_template_id
+      title = `[${flair_text}] Full-stack developer & cloud consultant`
       break
     case 'jobbit':
-      flairId = '09fd86a6-7815-11e2-bb33-12313d166255'
+      flair_template_id = results[0].flair_template_id
+      title = `[${flair_text}] Full-stack developer & cloud consultant`
       break
     case 'test':
-      flairId = '6b39b4a6-be2f-11e8-ac14-0e2593696d0a'
+      flair_template_id = flairs[0].flair_template_id
+      title = `[${flair_text}] Full-stack developer & cloud consultant`
       break
     default:
       throw new Error(`subreddit r/${subreddit} not handled`)
   }
 
-  const sub = await r.getSubreddit(subreddit).submitSelfpost({
-    text,
-    title,
-    flairId
-  })
+  const slug = slugify(title)
+
+  // throw new Error(`Aborted: ${title}`)
+
+  // https://not-an-aardvark.github.io/snoowrap/Subreddit.html#selectMyFlair__anchor
+  // https://not-an-aardvark.github.io/snoowrap/Subreddit.html#submitSelfpost__anchor
+  const sub = await r
+    .getSubreddit(subreddit)
+    .selectMyFlair({ flair_template_id })
+    .submitSelfpost({ text, title })
+
+  // const sub = await r.getSubreddit(subreddit).submitSelfpost(post)
   console.log(`Ad submitted on r/${subreddit}: ${title}`)
 
   return {
