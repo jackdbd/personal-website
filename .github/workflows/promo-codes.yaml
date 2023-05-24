@@ -1,0 +1,45 @@
+name: 'Promo Codes'
+
+on:
+  schedule:
+    # https://crontab.guru/
+    - cron:  '30 14 * * 3'
+  workflow_dispatch:
+    # You can trigger this workflow manually using the GitHub CLI:
+    # gh workflow run "Promo Codes"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🖥️ Setup Node.js
+        # https://github.com/marketplace/actions/setup-node-js-environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: current
+      
+      - name: Renew Stripe promotion codes
+        env:
+          STRIPE_LIVE: ${{ secrets.STRIPE_LIVE }}
+          STRIPE_TEST: ${{ secrets.STRIPE_TEST }}
+          # ${{ fromJSON(secrets.STRIPE_TEST).api_key }}
+        run: |
+          delimiter=$(openssl rand -hex 8)
+          echo "RESULT_STRING<<$delimiter" >> $GITHUB_ENV
+          npx tsm scripts/stripe/renew-promotion-codes.ts -e test >> $GITHUB_ENV
+          echo "$delimiter" >> $GITHUB_ENV
+
+      - name: 💬 Notify Telegram of my ad
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
+          token: ${{ fromJSON(secrets.TELEGRAM).token }}
+          format: html
+          disable_web_page_preview: true
+          message: |
+            <b>🤖 Ask HN Freelancer ad posting result</b>
+  
+            <pre>${{ env.RESULT_STRING }}</pre>

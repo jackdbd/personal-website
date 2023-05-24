@@ -1,5 +1,5 @@
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
+import fs from 'node:fs'
+import path from 'node:path'
 import { isOnCloudBuild, isOnGithub } from '@jackdbd/checks/environment'
 
 export const STRIPE_CONFIG = {
@@ -20,8 +20,8 @@ export const jsonSecret = (name, env = process.env) => {
   } else if (isOnCloudBuild(env)) {
     json = env[env_var_name]
   } else {
-    const filepath = join('secrets', `${name}.json`)
-    json = readFileSync(filepath).toString()
+    const filepath = path.join('secrets', `${name}.json`)
+    json = fs.readFileSync(filepath).toString()
   }
 
   return JSON.parse(json)
@@ -34,8 +34,45 @@ export const txtSecret = (name, env = process.env) => {
   if (isOnGithub(env)) {
     txt = env[env_var_name]
   } else {
-    const filepath = join('secrets', `${name}.txt`)
-    txt = readFileSync(filepath).toString()
+    const filepath = path.join('secrets', `${name}.txt`)
+    txt = fs.readFileSync(filepath).toString()
   }
   return txt
+}
+
+export const sendOutput = async (text) => {
+  if (process.env.GITHUB_SHA) {
+    // send output to stdout, so we can redirect it to GITHUB_ENV in the GitHub action
+    console.log(text)
+  } else {
+    const json_string = fs
+      .readFileSync(path.join('secrets', 'telegram.json'))
+      .toString()
+
+    const { chat_id, token } = JSON.parse(json_string)
+
+    const data = {
+      chat_id,
+      disable_notification: false,
+      disable_web_page_preview: true,
+      parse_mode: 'HTML',
+      text
+    }
+    // console.log('body for Telegram sendMessage', data)
+
+    const res = await fetch(
+      `https://api.telegram.org/bot${token}/sendMessage`,
+      {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-type': `application/json`
+        }
+      }
+    )
+
+    console.log(`Response status ${res.status}`)
+    const res_body = await res.json()
+    console.log(`Response body`, res_body)
+  }
 }

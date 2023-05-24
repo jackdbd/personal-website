@@ -105,14 +105,95 @@ export const pay = async ({
 export const couponByName = async (stripe: Stripe, name: string) => {
   const res = await stripe.coupons.list()
   if (res.has_more) {
-    throw new Error(`There are more than ${res.data.length} coupons`)
+    throw new Error(`There are more than ${res.data.length} coupons.`)
   }
 
   const data = res.data.filter((c) => c.name === name)
   if (data.length !== 1) {
-    throw new Error(`There must be exactly one '${name}' coupon`)
+    throw new Error(
+      `There are ${data.length} coupons with name '${name}'. There must be exactly one coupon.`
+    )
   }
   return data[0]
+}
+
+export const promotionCodeByName = async (stripe: Stripe, name: string) => {
+  const res = await stripe.promotionCodes.list({ active: true, code: name })
+  if (res.has_more) {
+    throw new Error(
+      `There are more than ${res.data.length} active promotion codes.`
+    )
+  }
+
+  const data = res.data.filter((c) => c.code === name)
+  if (data.length !== 1) {
+    throw new Error(
+      `There are ${data.length} promotion codes with name '${name}'. There must be exactly one active promotion code with name '${name}'.`
+    )
+  }
+  return data[0]
+}
+
+export const createOrUpdatePromotionCode = async (
+  stripe: Stripe,
+  stripe_env: string,
+  params: Stripe.PromotionCodeCreateParams
+) => {
+  let code_id: string | undefined = undefined
+  const messages: string[] = []
+  let promo_code: { name: string; url: string } | undefined = undefined
+  const errors: Error[] = []
+
+  try {
+    const code = await promotionCodeByName(stripe, params.code!)
+    code_id = code.id
+  } catch (err) {
+    errors.push(
+      new Error(`promotion code '${params.code}' not found. Creating it now`)
+    )
+  }
+
+  if (code_id) {
+    try {
+      await stripe.promotionCodes.update(code_id, { active: false })
+      messages.push(`deactivated promotion code '${params.code}'`)
+    } catch (err) {
+      errors.push(
+        new Error(
+          `could not update promotion code '${params.code}': ${err.message}`
+        )
+      )
+    }
+  }
+
+  // create a new promotion code, or re-create an existing, inactive promotion code
+  try {
+    const code = await stripe.promotionCodes.create(params)
+    const url =
+      stripe_env === 'test'
+        ? `https://dashboard.stripe.com/test/promotion_codes/${code.id}`
+        : `https://dashboard.stripe.com/promotion_codes/${code.id}`
+    messages.push(`created promotion code '${code.code}'`)
+    promo_code = { name: code.code, url }
+  } catch (err) {
+    errors.push(
+      new Error(
+        `could not create promotion code '${params.code}': ${err.message}`
+      )
+    )
+  }
+
+  if (!promo_code) {
+    return {
+      message: `could not create promotion code '${params.code}'`,
+      errors
+    }
+  } else {
+    return {
+      message: messages.join('; '),
+      promo_code
+    }
+  }
 }
 
 /**

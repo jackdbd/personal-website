@@ -1,5 +1,7 @@
 # Stripe scripts
 
+Scripts I use to manage my Stripe account.
+
 ## Customers
 
 Create all customers in the Stripe **TEST** account, deleting existing ones:
@@ -44,15 +46,13 @@ Create prices in the Stripe **LIVE** account, without altering existing ones:
 npx tsm scripts/stripe/create-prices.ts -e live
 ```
 
-List all active prices:
+List all active prices (`-e` can be `live` or `test`):
 
 ```sh
 node scripts/stripe/list-prices.mjs -e test
-
-node scripts/stripe/list-prices.mjs -e live
 ```
 
-## Coupons and Promotion Codes
+## Coupons
 
 Create all coupons in the Stripe **TEST** account, deleting existing ones:
 
@@ -60,18 +60,30 @@ Create all coupons in the Stripe **TEST** account, deleting existing ones:
 npx tsm scripts/stripe/create-coupons.ts -e test --cleanup
 ```
 
-Create all promotion codes in the Stripe **TEST** account, archiving existing ones:
-
-```sh
-npx tsm scripts/stripe/create-promotion-codes.ts -e test --cleanup
-```
-
-List all coupons and promotion codes:
+List all coupons and promotion codes (`-e` can be `live` or `test`):
 
 ```sh
 node scripts/stripe/list-coupons-and-promotion-codes.mjs -e test
+```
 
-node scripts/stripe/list-coupons-and-promotion-codes.mjs -e live
+## Promotion Codes
+
+Create or update all promotion codes in the Stripe **TEST** account:
+
+```sh
+npx tsm scripts/stripe/renew-promotion-codes.ts -e test
+```
+
+List all coupons and promotion codes (`-e` can be `live` or `test`):
+
+```sh
+node scripts/stripe/list-coupons-and-promotion-codes.mjs -e test
+```
+
+Deactivate all promotion codes:
+
+```sh
+npx tsm scripts/stripe/archive-promotion-codes.ts -e test
 ```
 
 ## Payment Links
