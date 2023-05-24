@@ -93,7 +93,7 @@ const sendOutput = async (text) => {
 }
 
 /**
- * The User-Agent should be in the following format:
+ * The User-Agent for Reddit clients should be in the following format:
  * <platform>:<app ID>:<version string> (by /u/<reddit username>)
  *
  * https://github.com/reddit-archive/reddit/wiki/API

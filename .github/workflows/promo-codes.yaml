@@ -3,7 +3,7 @@ name: 'Promo Codes'
 on:
   schedule:
     # https://crontab.guru/
-    - cron:  '30 14 * * 3'
+    - cron:  '59 20 * * 3'
   workflow_dispatch:
     # You can trigger this workflow manually using the GitHub CLI:
     # gh workflow run "Promo Codes"
@@ -20,12 +20,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: current
-      
+
+      - name: Install production dependencies
+        run: npm install --omit=dev
+
       - name: Renew Stripe promotion codes
         env:
           STRIPE_LIVE: ${{ secrets.STRIPE_LIVE }}
           STRIPE_TEST: ${{ secrets.STRIPE_TEST }}
-          # ${{ fromJSON(secrets.STRIPE_TEST).api_key }}
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "RESULT_STRING<<$delimiter" >> $GITHUB_ENV

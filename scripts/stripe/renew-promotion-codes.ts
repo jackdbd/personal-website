@@ -1,14 +1,14 @@
 import PrettyError from 'pretty-error'
 import Stripe from 'stripe'
 import yargs from 'yargs'
-import { jsonSecret, sendOutput } from '../utils.mjs'
+import { jsonSecret, sendOutput, userAgent } from '../utils.js'
 import { STRIPE_CONFIG } from './constants.js'
 import { createOrUpdatePromotionCode, expiresInDays } from './utils.js'
 
 const pe = new PrettyError()
 
 const splits = new URL(import.meta.url).pathname.split('/')
-const created_by = splits[splits.length - 1]
+const app_id = splits[splits.length - 1]
 
 interface Argv {
   'expires-in-days': number
@@ -44,12 +44,21 @@ interface PromoCode {
 }
 
 interface Result {
-  message: string
   errors?: Error[]
+  message: string
   promo_code?: PromoCode
+  stripe_env: string
 }
 
 const renderTelegramMessage = (results: Result[]) => {
+  let s = ``
+  if (results.length > 0) {
+    s = `<b>Stripe[${results[0].stripe_env}] promotion codes updated</b>`
+  } else {
+    s = `<b>No Stripe promotion codes to update</b>`
+  }
+  s = s.concat('\n\n')
+
   const strings = results.map((d) => {
     if (d.promo_code) {
       return `<a href="${d.promo_code.url}">${d.promo_code.name}</a>`
@@ -57,14 +66,14 @@ const renderTelegramMessage = (results: Result[]) => {
       return `Errors: ${d.errors?.map((err) => err.message)}`
     }
   })
-  let s = `<b>Stripe promotion codes updated</b>`
-  s = s.concat('\n\n')
   s = s.concat(strings.join('\n\n'))
-  // s = s.concat(`<i>User-Agent: ${d.user_agent}</i>`)
+  s = s.concat('\n\n')
+
+  s = s.concat(`<i>User-Agent: ${userAgent({ app_id })}</i>`)
+
   // we need to add a newline character, otherwise the GitHub workflow will fail
   // with this error: "Matching delimiter not found"
-  s = s.concat('\n')
-  return s
+  return s.concat('\n')
 }
 
 const main = async () => {
@@ -105,7 +114,7 @@ const main = async () => {
   const stripe_env = argv['stripe-environment']
   const { api_key } = jsonSecret(`stripe-${stripe_env}`)
   const stripe = new Stripe(api_key, STRIPE_CONFIG)
-  console.log(`[${created_by}] operating on Stripe ${stripe_env.toUpperCase()}`)
+  console.log(`[${app_id}] operating on Stripe ${stripe_env.toUpperCase()}`)
 
   const expires_at = expiresInDays(expires_in_days)
 
@@ -137,7 +146,7 @@ const main = async () => {
         coupon: coupon.id,
         expires_at,
         max_redemptions,
-        metadata: { created_by }
+        metadata: { created_by: app_id }
         // restrictions: { first_time_transaction: true }
       })
     })
@@ -147,7 +156,7 @@ const main = async () => {
   for (const params of codes_create_params) {
     const result = await createOrUpdatePromotionCode(stripe, stripe_env, params)
     // console.log(params.code, result)
-    results.push(result)
+    results.push({ ...result, stripe_env })
   }
 
   return results
