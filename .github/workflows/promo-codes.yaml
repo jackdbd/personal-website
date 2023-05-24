@@ -3,7 +3,7 @@ name: 'Promo Codes'
 on:
   schedule:
     # https://crontab.guru/
-    - cron:  '59 20 * * 3'
+    - cron:  '45 13 * * 4'
   workflow_dispatch:
     # You can trigger this workflow manually using the GitHub CLI:
     # gh workflow run "Promo Codes"
@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: current
 
-      - name: Install production dependencies
+      - name: ⬇️ Install production dependencies
         run: npm install --omit=dev
 
       - name: Renew Stripe promotion codes
@@ -31,7 +31,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "RESULT_STRING<<$delimiter" >> $GITHUB_ENV
-          npx tsm scripts/stripe/renew-promotion-codes.ts -e test >> $GITHUB_ENV
+          npx tsm scripts/stripe/renew-promotion-codes.ts -e live >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram of my ad
@@ -42,6 +42,6 @@ jobs:
           format: html
           disable_web_page_preview: true
           message: |
-            <b>🤖 Ask HN Freelancer ad posting result</b>
-  
-            <pre>${{ env.RESULT_STRING }}</pre>
+            <b>🤖 Stripe promotion codes renewed</b>
+
+            ${{ env.RESULT_STRING }}

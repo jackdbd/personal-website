@@ -1,7 +1,10 @@
+import { debuglog } from 'node:util'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { isOnCloudBuild, isOnGithub } from '@jackdbd/checks/environment'
+
+const debug = debuglog('utils')
 
 export const jsonSecret = (name: string, env = process.env) => {
   // replaceAll available in Node.js 15 and later
@@ -65,9 +68,9 @@ export const sendOutput = async (text: string) => {
       }
     )
 
-    console.log(`Response status ${res.status}`)
+    debug(`Response status ${res.status}`)
     const res_body = await res.json()
-    console.log(`Response body`, res_body)
+    debug(`Response body %O`, res_body)
   }
 }
 

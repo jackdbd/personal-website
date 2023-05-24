@@ -1,10 +1,13 @@
+import { debuglog } from 'node:util'
 import PrettyError from 'pretty-error'
 import Stripe from 'stripe'
+
 import yargs from 'yargs'
 import { jsonSecret, sendOutput, userAgent } from '../utils.js'
 import { STRIPE_CONFIG } from './constants.js'
 import { createOrUpdatePromotionCode, expiresInDays } from './utils.js'
 
+const debug = debuglog('renew-promotion-codes')
 const pe = new PrettyError()
 
 const splits = new URL(import.meta.url).pathname.split('/')
@@ -53,7 +56,7 @@ interface Result {
 const renderTelegramMessage = (results: Result[]) => {
   let s = ``
   if (results.length > 0) {
-    s = `<b>Stripe[${results[0].stripe_env}] promotion codes updated</b>`
+    s = `<b>Stripe environment: ${results[0].stripe_env}</b>`
   } else {
     s = `<b>No Stripe promotion codes to update</b>`
   }
@@ -69,7 +72,7 @@ const renderTelegramMessage = (results: Result[]) => {
   s = s.concat(strings.join('\n\n'))
   s = s.concat('\n\n')
 
-  s = s.concat(`<i>User-Agent: ${userAgent({ app_id })}</i>`)
+  s = s.concat(`<code><i>User-Agent: ${userAgent({ app_id })}</i></code>`)
 
   // we need to add a newline character, otherwise the GitHub workflow will fail
   // with this error: "Matching delimiter not found"
@@ -114,7 +117,7 @@ const main = async () => {
   const stripe_env = argv['stripe-environment']
   const { api_key } = jsonSecret(`stripe-${stripe_env}`)
   const stripe = new Stripe(api_key, STRIPE_CONFIG)
-  console.log(`[${app_id}] operating on Stripe ${stripe_env.toUpperCase()}`)
+  debug(`operating on Stripe ${stripe_env.toUpperCase()}`)
 
   const expires_at = expiresInDays(expires_in_days)
 
@@ -134,7 +137,7 @@ const main = async () => {
       ignore_coupons.filter((s) => s === coupon.name).length > 0
 
     if (should_ignore) {
-      console.log(`coupon '${coupon.name}' explicitly ignored`)
+      debug(`coupon '${coupon.name}' explicitly ignored`)
       continue
     }
 
@@ -155,7 +158,6 @@ const main = async () => {
   const results: Result[] = []
   for (const params of codes_create_params) {
     const result = await createOrUpdatePromotionCode(stripe, stripe_env, params)
-    // console.log(params.code, result)
     results.push({ ...result, stripe_env })
   }
 
