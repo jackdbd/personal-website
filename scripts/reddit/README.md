@@ -1,13 +1,72 @@
 # Reddit scripts
 
+Scripts that I use to search and post stuff on Reddit.
+
+- https://www.reddit.com/wiki/search/
+- https://www.reddit.com/dev/api#GET_search
+
+As far as I know, search queries are always [case insensitive](https://www.reddit.com/r/help/comments/5ubsrk/case_sensitive_search/) on Reddit.
+
+## Search Reddit for jobs
+
+Example: find remote React jobs posted in r/jobbit or r/reactjs this week.
+
+```sh
+node scripts/reddit/search.cjs \
+  --description 'Remote React jobs posted in r/jobbit or r/reactjs this week' \
+  --query '(title:"[hiring]" OR flair:Hiring) AND (selftext:"remote" AND selftext:"react") AND (subreddit:jobbit OR subreddit:reactjs)' \
+  -t 'week'
+```
+
+Example: find jobs mentioning "GCP" in various subreddits this month.
+
+```sh
+node scripts/reddit/search.cjs \
+  -d 'Jobs mentioning "GCP" in various subreddits this month' \
+  -q '(selftext:"GCP") AND (subreddit:b2bforhire OR subreddit:r/forhire OR subreddit:freelance OR subreddit:indiebiz OR subreddit:jobbit OR subreddit:r/slavelabor) AND NOT (title:"[For Hire]" OR title:"[Hire Me]")' \
+  -t 'month'
+```
+
 ## Search Reddit for keywords
 
-Search a list of subreddits for posts containing one of the specified keywords:
+Search a list of subreddits for posts containing any of the specified keywords, either in the title of the post, or in its body.
+
+Example: find posts about [LLMs](https://en.wikipedia.org/wiki/Large_language_model) and [vector databases](https://www.pinecone.io/learn/vector-database/) posted this week.
 
 ```sh
 node scripts/reddit/search.cjs \
   --subreddits 'learnmachinelearning,machinelearning,openassistant' \
-  --keywords 'bard,chatgpt,chroma,embedding'
+  --keywords 'bard,chatgpt,chroma,embedding' \
+  --time 'week'
+```
+
+Example: discover interesting middlewares and plugins for CloudFlare Workers and CloudFlare Pages Functions posted this month.
+
+```sh
+node scripts/reddit/search.cjs \
+  -d 'Middlewares and plugins for CloudFlare Workers and CloudFlare Pages Functions posted this month' \
+  -k 'middleware,plugin,worker' \
+  -s 'CloudFlare,JAMstack' \
+  -t 'month'
+```
+
+Example (WIP): find leads for website audits.
+
+```sh
+node scripts/reddit/search.cjs \
+  -d 'Find out whether someone is complaining about having a slow website' \
+  -k 'audit,web performance,slow website' \
+  -s 'advancedentrepreneur,eCommerce,SaaS,smallbusiness' \
+  -t 'month'
+```
+
+Example: find out if anyone has ever talked about Elysia or Hono on any programming subreddit.
+
+```sh
+node scripts/reddit/search.cjs \
+  -k 'elysia,hono' \
+  -s 'bunjs,CloudFlare,DevTo,frontend,JAMstack,javascript,node,programming,reactjs,WebDev,Web_Performance' \
+  -t 'all'
 ```
 
 Note: the [Steampipe Reddit plugin](https://hub.steampipe.io/plugins/turbot/reddit) seems **not** to allow searches across all Reddit. That's why I'm using [snoowrap](https://github.com/not-an-aardvark/snoowrap) for this script.
@@ -18,7 +77,7 @@ You can also run this script from a GitHub workflow. For example, using the [Git
 gh workflow run "Reddit search"
 ```
 
-## Post freelancing ad on various Reddit
+## Post freelancing ad on various subreddits
 
 🧪 Post the ad [reddit-freelancing.md](../../assets/ads/reddit-freelancing.md) to [r/test](https://www.reddit.com/r/test/):
 

@@ -1,0 +1,12 @@
+📢 Ask Me Anything
+
+In the next few weeks, I'm opening up my calendar to anyone who wants to chat with me about their project ideas, software needs, or just to ask me anything about web development.
+
+Here is a list of topics I can help you with (but feel free to contact me for anything):
+
+- Cloudflare
+- Google Cloud Platform
+- Node.js
+- Web performance
+
+https://cal.com/giacomodebidda/30min

@@ -14,39 +14,51 @@ const {
 const pe = new PrettyError()
 
 const splits = __filename.split('/')
-const app_id = splits[splits.length - 1]
+const APP_ID = splits[splits.length - 1]
+const APP_VERSION = '0.1.0'
+
+const me = JSON.parse(fs.readFileSync(path.join('assets', 'me.json')))
+
+const DEFAULT = {
+  'cta-md': me['cta-30min-consultation-md'],
+  'rate-md': `**Rate:** ${me['hourly-rate-in-usd']} USD/hour. Open to flat-rate pricing for well-scoped projects.`,
+  subreddit: 'test'
+}
 
 /**
- * Script that posts an ad on Reddit.
+ * Script that posts an ad on a single subreddit.
  *
  * This script is meant to be used in a GitHub worklow, but can also be run locally.
  */
 const submitRedditPost = async () => {
   const argv = yargs(process.argv.slice(2))
-    .usage('Post my freelancing ad on Reddit.\nUsage: node scripts/reddit/$0')
+    .usage(
+      'Post my freelancing ad on a single subreddit.\nUsage: node scripts/reddit/$0'
+    )
     .option('cta-md', {
-      default:
-        '**Free 30m consultation:** https://cal.com/giacomodebidda/30min',
-      demandOption: false,
+      default: DEFAULT['cta-md'],
       describe: 'Call to action in markdown'
     })
     .option('rate-md', {
-      demandOption: false,
-      default:
-        '**Rate:** 65 USD/hour. Open to flat-rate pricing for well-scoped projects.',
+      default: DEFAULT['rate-md'],
       describe: 'My freelance rate info in markdown'
     })
     .option('subreddit', {
       alias: 's',
       choices: ['forhire', 'jobbit', 'test'],
-      default: 'test',
+      default: DEFAULT.subreddit,
       demandOption: true,
       describe: 'Subreddit where to post the advertisement'
     })
     .help('help').argv
 
   const { username, password, client_id, client_secret } = jsonSecret('reddit')
-  const user_agent = userAgent({ app_id, username, version: '0.1.0' })
+
+  const user_agent = userAgent({
+    app_id: APP_ID,
+    username,
+    version: APP_VERSION
+  })
 
   const r = new snoowrap({
     userAgent: user_agent,

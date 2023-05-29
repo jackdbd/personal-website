@@ -5,7 +5,8 @@ const yargs = require('yargs')
 const { EMOJI, jsonSecret, sendOutput, userAgent } = require('./utils.cjs')
 
 const splits = __filename.split('/')
-const app_id = splits[splits.length - 1]
+const APP_ID = splits[splits.length - 1]
+const APP_VERSION = '0.1.0'
 
 const DEFAULT = {
   ad: 'reddit-smallbusiness.md',
@@ -36,7 +37,12 @@ const submitRedditPost = async () => {
     .default(DEFAULT).argv
 
   const { username, password, client_id, client_secret } = jsonSecret('reddit')
-  const user_agent = userAgent({ app_id, username, version: '0.1.0' })
+
+  const user_agent = userAgent({
+    app_id: APP_ID,
+    username,
+    version: APP_VERSION
+  })
 
   const r = new snoowrap({
     userAgent: user_agent,

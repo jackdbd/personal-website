@@ -23,7 +23,7 @@ I just need your email address and the URL of the website you want me to audit.
   {% endrenderTemplate %}
 </div>
 
-🤔 *Still not sure?* Here is an [article I have recently written](https://giacomodebidda.com/posts/performance-audit-of-an-italian-news-website/) about web performance.
+🤔 *Still not sure?* Here is an [article I have recently written](https://www.giacomodebidda.com/posts/performance-audit-of-an-italian-news-website/) about web performance.
 
 <div>
   {% renderTemplate "webc" %}

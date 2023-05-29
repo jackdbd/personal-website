@@ -1,13 +1,27 @@
 # Hacker News scripts
 
+Scripts that I use to search and post stuff on Hacker News.
+
 ## Search
 
 ### Search jobs
 
 Look for jobs on Hacker News using the [Steampipe hackernews plugin](https://hub.steampipe.io/plugins/turbot/hackernews) and POST a list of links to a Telegram bot, that will send a message to a Telegram chat.
 
+Example 1:
+
 ```sh
-node scripts/hacker-news/job-links.cjs
+node scripts/hacker-news/job-links.cjs \
+  -d 'Jobs from YC-backed startups posted on HN this week' \
+  -q 'hacker-news-jobs-YC.sql'
+```
+
+Example 2:
+
+```sh
+node scripts/hacker-news/job-links.cjs \
+  -d 'Jobs posted on HN in the last 2 weeks' \
+  -q 'hacker-news-jobs.sql'
 ```
 
 You can trigger a GitHub workflow manually using the GitHub CLI:

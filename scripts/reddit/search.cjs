@@ -6,7 +6,8 @@ const { EMOJI, jsonSecret, sendOutput, userAgent } = require('./utils.cjs')
 const pe = new PrettyError()
 
 const splits = __filename.split('/')
-const app_id = splits[splits.length - 1]
+const APP_ID = splits[splits.length - 1]
+const APP_VERSION = '0.1.0'
 
 const KEYWORDS = [
   'performance audit',
@@ -20,33 +21,71 @@ const KEYWORDS = [
 const SUBREDDITS = [
   'advancedentrepreneur',
   'analytics',
+  // bunjs
   // 'dropship',
+  'CloudFlare',
+  // DevTo
+  // frontend
   'GrowthHacking',
+  'JAMstack',
+  // javascript
+  // node
   // 'OpenAssistant',
+  // programming
+  // reactjs
   'SaaS',
   // 'SEO',
   'smallbusiness',
-  'webdev'
+  'WebDev'
+  // Web_Performance
   // 'Wordpress'
 ]
 
-const main = async () => {
+const DEFAULT = {
+  DESCRIPTION: 'Query description not provided',
+  KEYWORDS,
+  SUBREDDITS,
+  TIME: 'week'
+}
+
+const searchOnReddit = async () => {
   const argv = yargs(process.argv.slice(2))
     .usage('node scripts/reddit/$0')
+    .option('description', {
+      alias: 'd',
+      default: DEFAULT.DESCRIPTION,
+      describe: 'human-friendly description of the provided query'
+    })
     .option('keywords', {
       alias: 'k',
-      default: KEYWORDS.join(','),
+      default: DEFAULT.KEYWORDS.join(','),
       describe: 'keyword to search (comma-separated list)'
+    })
+    .option('query', {
+      alias: 'q',
+      demandOption: false,
+      describe: 'query to use INSTEAD of keywords and subreddits'
     })
     .option('subreddits', {
       alias: 's',
-      default: SUBREDDITS.join(','),
+      default: DEFAULT.SUBREDDITS.join(','),
       describe: 'subreddits where to run the search (comma-separated list)'
+    })
+    .option('time', {
+      alias: 't',
+      choices: ['hour', 'day', 'week', 'month', 'year', 'all'],
+      default: DEFAULT.TIME,
+      describe: 'timespan that posts should be retrieved from'
     })
     .help('help').argv
 
   const { username, password, client_id, client_secret } = jsonSecret('reddit')
-  const user_agent = userAgent({ app_id, username, version: '0.1.0' })
+
+  const user_agent = userAgent({
+    app_id: APP_ID,
+    username,
+    version: APP_VERSION
+  })
 
   const r = new snoowrap({
     userAgent: user_agent,
@@ -56,15 +95,19 @@ const main = async () => {
     password
   })
 
-  const keywords = argv.keywords.split(',')
-  const s = keywords.map((k) => `selftext:"${k}" OR title:"${k}"`).join(' OR ')
-  const subreddits = argv.subreddits.split(',')
-  const sr = subreddits.map((s) => `subreddit:${s}`).join(' OR ')
+  let query = ''
+  if (argv.query) {
+    query = argv.query
+  } else {
+    const keywords = argv.keywords.split(',')
+    const s = keywords
+      .map((k) => `selftext:"${k}" OR title:"${k}"`)
+      .join(' OR ')
+    const subreddits = argv.subreddits.split(',')
+    const sr = subreddits.map((s) => `subreddit:${s}`).join(' OR ')
 
-  const query = `
-  self:true AND
-  (${s}) AND
-  (${sr})`
+    query = `self:true AND (${s}) AND (${sr})`
+  }
 
   if (query.length > 512) {
     throw new Error(
@@ -73,7 +116,8 @@ const main = async () => {
   }
 
   // https://www.reddit.com/dev/api/#GET_search
-  const submissions = await r.search({ query, time: 'month' })
+  // https://not-an-aardvark.github.io/snoowrap/Subreddit.html
+  const submissions = await r.search({ query, time: argv.time })
 
   const subs = submissions.map((d) => {
     return {
@@ -83,7 +127,7 @@ const main = async () => {
     }
   })
   // console.log(subs)
-  return { query, submissions: subs, user_agent }
+  return { description: argv.description, query, submissions: subs, user_agent }
 }
 
 const renderTelegramMessage = (d) => {
@@ -91,19 +135,27 @@ const renderTelegramMessage = (d) => {
     return `${i + 1}. <a href="${s.url}">${s.title}</a>`
   })
   let s = `<b>${EMOJI.Robot} Reddit search</b>`
+
+  s = s.concat('\n\n')
+  s = s.concat(`<b>Description</b>`)
+  s = s.concat('\n')
+  s = s.concat(`<pre>${d.description}</pre>`)
+
   s = s.concat('\n\n')
   s = s.concat(links.join('\n\n'))
+
   s = s.concat('\n\n')
-  s = s.concat(`<i>Query</i>`)
+  s = s.concat(`<b>Query</b>`)
   s = s.concat('\n')
   s = s.concat(`<pre><code>${d.query}</code></pre>`)
+
   s = s.concat('\n\n')
   s = s.concat(`<i>User-Agent: ${d.user_agent}</i>`)
   s = s.concat('\n')
   return s
 }
 
-main()
+searchOnReddit()
   .then(renderTelegramMessage)
   .then(sendOutput)
   .catch((err) => {

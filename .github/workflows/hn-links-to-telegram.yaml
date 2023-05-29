@@ -28,6 +28,8 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - run: npm ci
+
       - name: Setup Steampipe and its plugins
         # https://github.com/marketplace/actions/setup-steampipe
         uses: francois2metz/setup-steampipe@v1
@@ -42,7 +44,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "TELEGRAM_MESSAGE<<$delimiter" >> $GITHUB_ENV
-          node scripts/hacker-news/job-links.cjs >> $GITHUB_ENV
+          node scripts/hacker-news/job-links.cjs -d 'Jobs from YC-backed startups on HN this week' -q 'hacker-news-jobs-YC.sql' >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Send Hacker News link to Telegram

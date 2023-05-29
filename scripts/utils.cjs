@@ -1,6 +1,30 @@
 const fs = require('node:fs')
 const path = require('node:path')
 
+// https://emojipedia.org/
+const EMOJI = {
+  ChartDecreasing: '📉',
+  Coin: '🪙',
+  CreditCard: '💳',
+  Customer: '👤',
+  DollarBanknote: '💵',
+  Error: '🚨',
+  Failure: '❌',
+  Hook: '🪝',
+  Inspect: '🔍',
+  Invalid: '❌',
+  MoneyBag: '💰',
+  Notification: '💬',
+  ShoppingBags: '🛍️',
+  Ok: '✅',
+  Robot: '🤖',
+  Sparkles: '✨',
+  Success: '✅',
+  Timer: '⏱️',
+  User: '👤',
+  Warning: '⚠️'
+}
+
 const sendOutput = async (text) => {
   if (process.env.GITHUB_SHA) {
     // send output to stdout, so we can redirect it to GITHUB_ENV in the GitHub action
@@ -38,6 +62,4 @@ const sendOutput = async (text) => {
   }
 }
 
-module.exports = {
-  sendOutput
-}
+module.exports = { EMOJI, sendOutput }
