@@ -1,15 +1,42 @@
 const fs = require('node:fs')
 const path = require('node:path')
 const { chromium } = require('playwright')
+const { EMOJI, waitMs, sendOutput } = require('../utils.cjs')
 
-const waitMs = (ms) => {
-  let timeout // NodeJS.Timeout
-  return new Promise((resolve) => {
-    timeout = setTimeout(() => {
-      clearTimeout(timeout)
-      resolve({ message: `timeout ${timeout} of ${ms}ms resolved` })
-    }, ms)
-  })
+const splits = __filename.split('/')
+const APP_ID = splits[splits.length - 1]
+
+const renderTelegramSuccessMessage = (d) => {
+  let s = `<b>${EMOJI.Robot} ASK HN: Freelancer? Looking for work?</b>`
+
+  s = s.concat('\n\n')
+  s = s.concat(
+    `This ad was posted on <a href="${d.hn_url}">Hacker News item ${d.hn_item_id}</a>`
+  )
+  s = s.concat('\n')
+  s = s.concat(`<pre>${d.ad}</pre>`)
+
+  s = s.concat('\n\n')
+  s = s.concat(`<i>Sent by ${APP_ID}</i>`)
+
+  // we need to add a newline character, otherwise the GitHub workflow will fail
+  // with this error: "Matching delimiter not found"
+  return s.concat('\n')
+}
+
+const renderTelegramErrorMessage = (err) => {
+  let s = `<b>${EMOJI.Robot} ASK HN: Freelancer? Looking for work?</b>`
+
+  s = s.concat('\n\n')
+  const title = err.name || 'Error'
+  s = s.concat(`<b>${title}</b>`)
+  s = s.concat('\n')
+  s = s.concat(`<pre>${err.message}</pre>`)
+
+  s = s.concat('\n\n')
+  s = s.concat(`<i>Sent by ${APP_ID}</i>`)
+
+  return s.concat('\n')
 }
 
 /**
@@ -28,11 +55,8 @@ const waitMs = (ms) => {
  * https://news.ycombinator.com/submitted?id=whoishiring
  */
 
-const main = async () => {
-  // console.log('=== process.env ===', process.env)
-
+const postAdOnHackerNews = async () => {
   const args = process.argv.slice(2)
-  // console.log('=== args ===', args)
   if (args.length !== 1) {
     throw new Error(
       [
@@ -87,7 +111,7 @@ const main = async () => {
   // we can't immediately post the ad. HN would understand this is an automated
   // submission. Explicitly waiting for a few seconds seems to bypass the HN
   // detection algorithm.
-  await waitMs(5000)
+  await waitMs(25000)
   // Note: initially I had thought of using waitForFunction, which executes JS
   // in the browser. But this can't be done because Hacker News has a
   // Content-Security-Policy that prevents JS execution.
@@ -96,12 +120,10 @@ const main = async () => {
 
   await browser.close()
 
-  let s = `This ad was posted on <a href="${hn_url}">Hacker News item ${hn_item_id}</a>`
-  s = s.concat('\n\n')
-  s = s.concat(`<pre>${ad}</pre>`)
-  s = s.concat('\n')
-  // send output to stdout, so we can redirect it to GITHUB_ENV in the GitHub action
-  console.log(s)
+  return { ad, hn_url, hn_item_id }
 }
 
-main()
+postAdOnHackerNews()
+  .then(renderTelegramSuccessMessage)
+  .catch(renderTelegramErrorMessage)
+  .finally(sendOutput)

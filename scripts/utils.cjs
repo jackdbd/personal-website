@@ -25,6 +25,16 @@ const EMOJI = {
   Warning: '⚠️'
 }
 
+const waitMs = (ms) => {
+  let timeout // NodeJS.Timeout
+  return new Promise((resolve) => {
+    timeout = setTimeout(() => {
+      clearTimeout(timeout)
+      resolve({ message: `timeout ${timeout} of ${ms}ms resolved` })
+    }, ms)
+  })
+}
+
 const sendOutput = async (text) => {
   if (process.env.GITHUB_SHA) {
     // send output to stdout, so we can redirect it to GITHUB_ENV in the GitHub action
@@ -62,4 +72,4 @@ const sendOutput = async (text) => {
   }
 }
 
-module.exports = { EMOJI, sendOutput }
+module.exports = { EMOJI, sendOutput, waitMs }
