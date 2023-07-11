@@ -112,7 +112,6 @@ module.exports = function (eleventyConfig) {
         join(OUTPUT_DIR, 'manifest.webmanifest'),
         ...defaultHtmlPagesToPrecache,
         ...popularHtmlPages
-        // join(OUTPUT_DIR, 'assets', 'fonts', 'nunito-v16-latin-800.woff2	')
       ]
     })
   })

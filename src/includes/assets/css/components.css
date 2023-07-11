@@ -405,7 +405,6 @@ video::cue {
 .table-container caption {
   background-color: var(--color-accent);
   color: var(--color-white);
-  /* font-family: 'Nunito'; */
   font-weight: 700;
 }
 
