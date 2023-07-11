@@ -17,7 +17,7 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "npm run build:11ty && npm run build:css",
-    "build:11ty": "ELEVENTY_ENV=production npx eleventy --config ./config/eleventy.cjs",
+    "build:11ty": "eleventy --config ./config/eleventy.cjs",
     "build:css": "postcss ./config/input.css --output _site/assets/css/style.css --config ./config --env production --verbose",
     "postbuild": "ls --size --human-readable _site/ | head -n 1",
     "clean": "find _site/* -not -name 'README.md' -delete",
