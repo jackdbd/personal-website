@@ -1,12 +1,4 @@
 /* Sans-Serif --------------------------------------------------------------- */
-@font-face {
-  font-family: 'Nunito';
-  font-display: swap;
-  font-style: normal;
-  font-weight: 800;
-  src: url('/assets/fonts/nunito-v16-latin-800.woff2') format('woff2'),
-    url('/assets/fonts/nunito-v16-latin-800.woff') format('woff');
-}
 
 /* Serif -------------------------------------------------------------------- */
 
@@ -48,11 +40,10 @@
 }
 
 :root {
-  --font-headings: Nunito, ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-    'Noto Color Emoji';
+  --font-headings: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
 
-  --font-body: Merriweather, ui-serif, Georgia, Cambria, 'Times New Roman',
-    Times, serif;
+  --font-body: Merriweather, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  /* --font-body: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif; */
+  /* --font-body: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif; */
+  /* --font-body: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif; */
 }
