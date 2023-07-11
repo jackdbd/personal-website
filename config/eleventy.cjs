@@ -275,8 +275,6 @@ module.exports = function (eleventyConfig) {
 
       'object-src': ['none'],
 
-      'prefetch-src': ['self'],
-
       // allow to report to the group called "default". See Report-To header.
       'report-to': ['default'],
 
