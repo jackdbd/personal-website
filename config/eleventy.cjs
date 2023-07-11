@@ -31,9 +31,7 @@ const filters = require('../11ty/filters')
 const shortcodes = require('../11ty/shortcodes')
 const pairedShortcodes = require('../11ty/paired-shortcodes')
 const transforms = require('../11ty/transforms.js')
-const plausibleClientPromise = import('@jackdbd/plausible-client')
 const cloudinaryPlugin = require('../plugins/11ty/cloudinary/index.cjs')
-const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
 const stripePlugin = require('../plugins/11ty/stripe/index.cjs')
 const webmentionsPlugin = require('../plugins/11ty/webmentions/index.cjs')
 const { buildServiceWorker } = require('../src/build-sw.cjs')
@@ -244,11 +242,6 @@ module.exports = function (eleventyConfig) {
     )
   }
   const plausible = JSON.parse(plausible_json_string)
-
-  eleventyConfig.addPlugin(plausiblePlugin, {
-    apiKey: plausible.api_key,
-    siteId: plausible.site_id
-  })
 
   let stripe_json_string
   if (process.env.STRIPE_LIVE) {

@@ -43,8 +43,9 @@ jobs:
           format: html
           disable_web_page_preview: true
           message: |
-            <b>🤖 Ask HN Freelancer reminder</b>
+            <b>🤖 Ask HN Freelancer</b>
 
+            <i>About to post ad to:</i>
             <a href="https://news.ycombinator.com/item?id=${{ fromJSON(env.HN_JSON).item_id }}">${{ fromJSON(env.HN_JSON).title }}</a>
 
             <i>Posted by ${{ fromJSON(env.HN_JSON).username }} in ${{ fromJSON(env.HN_JSON).date }}</i>
