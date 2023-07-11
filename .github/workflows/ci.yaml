@@ -39,7 +39,6 @@ jobs:
           DOMAIN: ${{ secrets.DOMAIN }}
           ELEVENTY_ENV: production
           NODE_ENV: development
-          PLAUSIBLE: ${{ secrets.PLAUSIBLE }}
           STRIPE_LIVE: ${{ secrets.STRIPE_LIVE }}
           TELEGRAM: ${{ secrets.TELEGRAM }}
           WEBMENTION_IO_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }}
