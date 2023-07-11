@@ -118,6 +118,7 @@ module.exports = function (eleventyConfig) {
   })
 
   let keyFilename
+  // on Cloudflare Pages, I set GCP_CREDENTIALS_JSON as a JSON string.
   if (process.env.GCP_CREDENTIALS_JSON) {
     keyFilename = 'credentials.json'
     fs.writeFileSync(keyFilename, process.env.GCP_CREDENTIALS_JSON)
@@ -402,7 +403,7 @@ module.exports = function (eleventyConfig) {
     keyFilename,
     rules: [
       {
-        regex: new RegExp('about\\/index\\.html$'),
+        regex: new RegExp('about\\/.*\\.html$'),
         cssSelectors: ['.text-to-speech']
       }
     ],
