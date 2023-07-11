@@ -1,6 +1,5 @@
-<template webc:root :id="uid" aria-label="list of webmentions">
-  <script webc:type="render" webc:is="template">
-    async function renderItems() {
+<script webc:type="js" webc:is="template" webc:root :id="uid" aria-label="list of webmentions">
+  async function renderItems() {
       const webmentions = await this.helpers.webmentionsForPage(this.page)
 
       const s = [
@@ -133,5 +132,6 @@
         </div>
       </section>`
     }
-  </script>
-</template>
+
+  renderItems();
+</script>
