@@ -32,10 +32,6 @@
   https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch#best_practices
   #}
 
-  {# Plausible analytics #}
-  <link rel="preconnect" href="https://plausible.io" crossorigin>
-  <link rel="dns-prefetch" href="https://plausible.io">
-
   {# Cloudinary (CDN where I host all my images and media) #}
   <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
   <link rel="dns-prefetch" href="https://res.cloudinary.com">
@@ -131,7 +127,6 @@
   <script async type="module" src="/assets/js/is-land.js"></script>
   <script async src="/assets/js/instantpage.js"></script>
   <script async src="/assets/js/async-load-prism-theme.js"></script>
-  <script defer data-domain="giacomodebidda.com" src="https://plausible.io/js/plausible.js"></script>
 
   {# I don't inline any JS because it would require me to have a less secure Content-Security-Policy #}
   {# https://www.11ty.dev/docs/quicktips/inline-js/ #}

@@ -31,9 +31,7 @@ const filters = require('../11ty/filters')
 const shortcodes = require('../11ty/shortcodes')
 const pairedShortcodes = require('../11ty/paired-shortcodes')
 const transforms = require('../11ty/transforms.js')
-const plausibleClientPromise = import('@jackdbd/plausible-client')
 const cloudinaryPlugin = require('../plugins/11ty/cloudinary/index.cjs')
-const plausiblePlugin = require('../plugins/11ty/plausible/index.cjs')
 const stripePlugin = require('../plugins/11ty/stripe/index.cjs')
 const webmentionsPlugin = require('../plugins/11ty/webmentions/index.cjs')
 const { buildServiceWorker } = require('../src/build-sw.cjs')
@@ -70,40 +68,6 @@ module.exports = function (eleventyConfig) {
     envVars: ['DEBUG', 'ELEVENTY_ENV', 'NODE_ENV']
   })
 
-  eleventyConfig.on('eleventy.before', async () => {
-    // on GitHub Actions I use a JSON secret for Plausible API key and site ID,
-    // and I expose that secret as an environment variable.
-    let plausible_json_string
-    if (process.env.PLAUSIBLE) {
-      plausible_json_string = process.env.PLAUSIBLE
-    } else {
-      plausible_json_string = fs.readFileSync(
-        join(REPO_ROOT, 'secrets', 'plausible.json'),
-        { encoding: 'utf8' }
-      )
-    }
-    const plausible = JSON.parse(plausible_json_string)
-
-    const { makeClient } = await plausibleClientPromise
-    const client = makeClient(
-      {
-        apiKey: plausible.api_key,
-        siteId: plausible.site_id
-      },
-      { verbose: true }
-    )
-    const results = await client.stats.breakdown()
-    // console.log('=== Plausible.io stats/ breakdown ===', results)
-    popularHtmlPages = results
-      .filter((res) => res.visitors > 50)
-      .map((res) => {
-        // console.log('res', res)
-        const filepath = `${OUTPUT_DIR}${res.page}index.html`
-        // console.log('filepath', filepath)
-        return filepath
-      })
-  })
-
   eleventyConfig.on('eleventy.after', async () => {
     const defaultHtmlPagesToPrecache = [
       join(OUTPUT_DIR, '404.html'),
@@ -113,7 +77,6 @@ module.exports = function (eleventyConfig) {
       join(OUTPUT_DIR, 'contact', 'index.html'),
       join(OUTPUT_DIR, 'projects', 'index.html')
     ]
-    // console.log('=== popularHtmlPages ===', popularHtmlPages)
 
     // I still don't know whether precaching the RSS feed (the one for my
     // website is ~1MB) and the sitemap (the one for my website is ~16KB)
@@ -232,24 +195,6 @@ module.exports = function (eleventyConfig) {
     loggingLevel: 1
   })
 
-  // on GitHub Actions I use a JSON secret for Plausible API key and site ID,
-  // and I expose that secret as an environment variable.
-  let plausible_json_string
-  if (process.env.PLAUSIBLE) {
-    plausible_json_string = process.env.PLAUSIBLE
-  } else {
-    plausible_json_string = fs.readFileSync(
-      join(REPO_ROOT, 'secrets', 'plausible.json'),
-      { encoding: 'utf8' }
-    )
-  }
-  const plausible = JSON.parse(plausible_json_string)
-
-  eleventyConfig.addPlugin(plausiblePlugin, {
-    apiKey: plausible.api_key,
-    siteId: plausible.site_id
-  })
-
   let stripe_json_string
   if (process.env.STRIPE_LIVE) {
     stripe_json_string = process.env.STRIPE_LIVE
@@ -280,7 +225,6 @@ module.exports = function (eleventyConfig) {
 
   const scriptSrcElem = [
     'self',
-    'https://plausible.io/js/plausible.js',
     'https://static.cloudflareinsights.com/beacon.min.js',
     'https://unpkg.com/htm/preact/standalone.module.js'
   ]
@@ -292,13 +236,7 @@ module.exports = function (eleventyConfig) {
     directives: {
       'base-uri': ['self'],
 
-      'connect-src': [
-        'self',
-        'cloudflareinsights.com',
-        'plausible.io',
-        // 'https://plausible.io/api/event',
-        'res.cloudinary.com'
-      ],
+      'connect-src': ['self', 'cloudflareinsights.com', 'res.cloudinary.com'],
 
       'default-src': ['none'],
 
@@ -353,8 +291,10 @@ module.exports = function (eleventyConfig) {
       // not support report-to (it only supports report-uri).
       'report-uri': ['https://giacomodebidda.report-uri.com/r/d/csp/enforce'],
 
-      // allow scripts hosted on this origin, on plausible.io (analytics),
-      // cloudflareinsights.com (analytics), unpkg.com (preact)
+      // allow scripts hosted on:
+      // - this origin
+      // - cloudflareinsights.com (analytics)
+      // - unpkg.com (preact)
       // Firefox and Safari on iOS do not support script-src-elem, so we need a
       // fallback to script-src.
       // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src-elem

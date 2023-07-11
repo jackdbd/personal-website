@@ -25,7 +25,5 @@ hint-report/
 .cache/
 # cache for images and videos fetched from Cloudinary
 .cache-cloudinary/
-# cache used by my work-in-progress eleventy-plugin-plausible
-.cache-plausible-json-responses/
 # cache for webmentions fetched from webmention.io
 .cache-webmentions/

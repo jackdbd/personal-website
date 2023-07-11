@@ -111,12 +111,17 @@ const postAdOnHackerNews = async () => {
   // we can't immediately post the ad. HN would understand this is an automated
   // submission. Explicitly waiting for a few seconds seems to bypass the HN
   // detection algorithm.
-  await waitMs(5000)
-  // Note: initially I had thought of using waitForFunction, which executes JS
-  // in the browser. But this can't be done because Hacker News has a
+  await waitMs(15000)
+
+  // Hacker News seems to update the page, so this selector changes quite often.
+  // const locator = await page.locator('input[type="submit"]')
+  const locator = await page.getByText('add comment')
+  await locator.click()
+  // Initially I had thought of using waitForFunction, which executes JS in the
+  // browser. But this can't be done because Hacker News has a
   // Content-Security-Policy that prevents JS execution.
   // https://playwright.dev/docs/api/class-page#page-wait-for-function
-  await page.getByText('add comment').click()
+  // await page.getByText('add comment').click()
 
   await browser.close()
 

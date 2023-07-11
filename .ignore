@@ -1,6 +1,5 @@
 _site/*
 .cache/*
-.cache-plausible-json-responses/*
 .cache-webmentions/*
 hint-report/*
 node_modules/*

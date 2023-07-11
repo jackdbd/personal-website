@@ -102,42 +102,6 @@ const buildServiceWorker = async (config) => {
     runtimeCaching
   )
 
-  let resultsFromPlausible = []
-
-  // try {
-  //   resultsFromPlausible = await topPages({
-  //     apiKey: process.env.PLAUSIBLE_API_KEY,
-  //     siteId: process.env.PLAUSIBLE_SITE_ID,
-  //     cacheDuration: '30s',
-  //     eleventyOutputDirectory,
-  //     limit: 100,
-  //     period: '30d',
-  //     verbose: false,
-  //     visitorsThreshold: 5
-  //   })
-  // } catch (err) {
-  //   console.log(
-  //     cfWarn(
-  //       `${PREFIX}could not retrieve top pages from analytics: ${err.message}`
-  //     ),
-  //     resultsFromPlausible
-  //   )
-  //   resultsFromPlausible = []
-  // }
-
-  //   const globPattersFromPlausible = resultsFromPlausible.map(
-  //     (res) => `**${res.page}*.html`
-  //   )
-
-  if (verbose && resultsFromPlausible.length > 0) {
-    console.log(
-      cfInfo(
-        `${PREFIX}precaching these ${resultsFromPlausible.length} pages because they are popular`
-      ),
-      resultsFromPlausible
-    )
-  }
-
   let string = ''
 
   const filepathToWorkboxManifestEntry = makeFilepathToWorkboxManifestEntry({
@@ -152,12 +116,6 @@ const buildServiceWorker = async (config) => {
     path.join(eleventyOutputDirectory, 'projects', 'index.html'),
     path.join(eleventyOutputDirectory, 'tags', 'index.html')
   ]
-
-  resultsFromPlausible.forEach((res) => {
-    htmlPagesToPrecache.push(
-      path.join(eleventyOutputDirectory, res.page, 'index.html')
-    )
-  })
 
   const promises = htmlPagesToPrecache.map(filepathToWorkboxManifestEntry)
 
@@ -205,7 +163,6 @@ const buildServiceWorker = async (config) => {
     // precache SOME html pages, but not too many
     // '404.html',
     // '{about,blog,projects,styleguide,tags}/index.html',
-    // ...globPattersFromPlausible,
 
     // I still don't know whether precaching the RSS feed (the one for my
     // website is ~1MB) and the sitemap (the one for my website is ~16KB)

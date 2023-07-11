@@ -52,5 +52,5 @@ node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs 36152013
 You can trigger [this GitHub workflow](../../.github/workflows/ask-hn-freelancer.yaml) manually using the GitHub CLI:
 
 ```sh
-gh workflow run "Ask HN Freelancer? Seeking Freelancer? (by whoishiring)"
+gh workflow run 'Ask HN Freelancer? Seeking Freelancer? (by whoishiring)'
 ```
