@@ -111,7 +111,7 @@ const postAdOnHackerNews = async () => {
   // we can't immediately post the ad. HN would understand this is an automated
   // submission. Explicitly waiting for a few seconds seems to bypass the HN
   // detection algorithm.
-  await waitMs(25000)
+  await waitMs(5000)
   // Note: initially I had thought of using waitForFunction, which executes JS
   // in the browser. But this can't be done because Hacker News has a
   // Content-Security-Policy that prevents JS execution.

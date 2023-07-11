@@ -5,7 +5,10 @@ name: 'Notify of workflow run conclusion'
 
 on:
   workflow_run:
-    workflows: ['CI', 'WebPageTest audit']
+    workflows:
+      - 'Ask HN Freelancer? Seeking Freelancer? (by whoishiring)'
+      - 'CI'
+      - 'WebPageTest audit'
     types: [completed]
 
 jobs:
