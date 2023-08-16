@@ -4,7 +4,12 @@ a {
   color: var(--color-accent);
   font-weight: 700;
   text-decoration: underline;
-  /* word-break: break-word; */
+  /* Long URLs on smaller viewports are very likely to overflow the available
+  width. And this is something I never want to happen. However, using break-all
+  creates a break at the exact place where text would otherwise overflow its
+  container, and this often does NOT split a word into correct syllables. So I
+  think the lesser evil is to use break-all JUST when I actually need it. */
+  word-break: normal;
 }
 
 a:focus {
@@ -109,7 +114,6 @@ small {
 }
 
 strong {
-  color: var(--color-accent);
   font-weight: 700;
 }
 
@@ -372,6 +376,11 @@ video::cue {
 .prose .cluster li + li {
   margin-top: var(--cluster-spacing);
 }
+
+#toc {
+  font-family: var(--font-headings);
+}
+
 
 #toc summary {
   cursor: pointer;

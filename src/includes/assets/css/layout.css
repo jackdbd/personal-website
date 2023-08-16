@@ -62,15 +62,14 @@
 }
 
 .wrapper {
-  --max-width: 50rem;
+  --min-width: 16rem;
+  --max-width: 55rem;
 
   margin-right: auto;
   margin-left: auto;
   max-width: 95vw;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  /* some browsers still don't support clamp() and will keep the first value */
-  width: var(--max-width);
-  width: clamp(16rem, 95vw, var(--max-width));
+  width: clamp(var(--min-width), 95vw, var(--max-width));
   position: relative;
 }
