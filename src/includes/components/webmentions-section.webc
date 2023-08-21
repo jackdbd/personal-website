@@ -8,14 +8,6 @@
       
     // console.log(`=== this['$data'] ===`, this['$data'])
       const webmentions = await this.helpers.webmentionsSentToRelativePath(relative_path)
-      
-      const s = [
-        `<a href="https://indieweb.org/Webmention" target="_blank" rel="external noopener noreferrer">Webmentions</a>`,
-        `created by`,
-        `<a href="https://brid.gy" target="_blank" rel="external noopener noreferrer">Bridgy</a>`,
-        `and sent to`,
-        `<a href="https://webmention.io" target="_blank" rel="external noopener noreferrer">Webmention.io</a>.`
-      ].join(' ')
 
       const { likes, replies, reposts } = webmentions
 
@@ -148,7 +140,7 @@
             target-url="${webmention_target_url.href}"
             @instructions="Did you mention this blog post on your website? Let me know the URL of <b>your article</b> using the form below.">
           </webmention-form>
-          <p><em>${s}</em></p>
+          <p><em>Webmentions collected by <a href="https://brid.gy" target="_blank" rel="external noopener noreferrer">Bridgy</a></em>.</p>
           ${webmentions_html}
         </div>
       </section>`
