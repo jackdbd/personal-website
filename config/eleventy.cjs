@@ -59,6 +59,7 @@ module.exports = function (eleventyConfig) {
   // https://www.11ty.dev/docs/data-global-custom/
   // https://benmyers.dev/blog/eleventy-data-cascade/
   const contactFormSubmissionUrl = 'https://formspree.io/f/mrgdevqb'
+
   eleventyConfig.addGlobalData(
     'contactFormSubmissionUrl',
     contactFormSubmissionUrl
@@ -217,6 +218,7 @@ module.exports = function (eleventyConfig) {
   })
 
   const domain = 'www.giacomodebidda.com'
+  const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`
 
   eleventyConfig.addPlugin(webmentionsPlugin, {
     blacklisted: [
@@ -245,8 +247,12 @@ module.exports = function (eleventyConfig) {
 
       'font-src': ['self'],
 
-      // allow form submissions to Formspree
-      'form-action': ['self', contactFormSubmissionUrl],
+      // allow form submissions to Formspree and Webmention.io
+      'form-action': [
+        'self',
+        contactFormSubmissionUrl,
+        sendWebmentionFormSubmissionUrl
+      ],
 
       'frame-ancestors': ['none'],
 
@@ -261,6 +267,7 @@ module.exports = function (eleventyConfig) {
       // allow loading images hosted on GitHub, Cloudinary, Webmention.io
       'img-src': [
         'self',
+        'bulma.io',
         'github.com',
         'raw.githubusercontent.com',
         'res.cloudinary.com',
