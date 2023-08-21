@@ -211,8 +211,7 @@ video::cue {
 .contact-form input,
 .contact-form textarea,
 .send-webmention-form button,
-.send-webmention-form input,
-.send-webmention-form textarea {
+.send-webmention-form input {
   width: 100%;
 }
 
@@ -242,8 +241,7 @@ video::cue {
 .contact-form [type='email'],
 .contact-form [type='text'],
 .contact-form textarea,
-.send-webmention-form [type='text'],
-.send-webmention-form textarea {
+.send-webmention-form [type='text'] {
   border: 0.15rem solid var(--color-text);
   font-size: inherit;
   outline: none;
@@ -253,7 +251,7 @@ video::cue {
 .contact-form [type='email']:focus,
 .contact-form [type='text']:focus,
 .contact-form textarea:focus,
-.send-webmention-form textarea:focus {
+.send-webmention-form [type='text']:focus {
   border-color: var(--color-text);
   outline: 0.25rem dashed var(--color-accent);
 }
