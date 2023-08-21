@@ -238,26 +238,26 @@ video::cue {
   font-family: var(--font-headings);
 }
 
-.contact-form [type='email'],
-.contact-form [type='text'],
+.contact-form input[type='email'],
+.contact-form input[type='text'],
 .contact-form textarea,
-.send-webmention-form [type='text'] {
+.send-webmention-form input[type='text'] {
   border: 0.15rem solid var(--color-text);
   font-size: inherit;
   outline: none;
   padding: var(--scale-space-xs);
 }
 
-.contact-form [type='email']:focus,
-.contact-form [type='text']:focus,
+.contact-form input[type='email']:focus,
+.contact-form input[type='text']:focus,
 .contact-form textarea:focus,
-.send-webmention-form [type='text']:focus {
+.send-webmention-form input[type='text']:focus {
   border-color: var(--color-text);
   outline: 0.25rem dashed var(--color-accent);
 }
 
-.contact-form [type='submit'],
-.send-webmention-form [type='submit'] {
+.contact-form button[type='submit'],
+.send-webmention-form button[type='submit'] {
   text-transform: capitalize;
 }
 
