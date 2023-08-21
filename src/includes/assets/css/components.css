@@ -238,20 +238,20 @@ video::cue {
   font-family: var(--font-headings);
 }
 
+.contact-form input[name='name'],
 .contact-form input[type='email'],
-.contact-form input[type='text'],
 .contact-form textarea,
-.send-webmention-form input[type='text'] {
+.send-webmention-form input[name='source'] {
   border: 0.15rem solid var(--color-text);
   font-size: inherit;
   outline: none;
   padding: var(--scale-space-xs);
 }
 
+.contact-form input[name='name']:focus,
 .contact-form input[type='email']:focus,
-.contact-form input[type='text']:focus,
 .contact-form textarea:focus,
-.send-webmention-form input[type='text']:focus {
+.send-webmention-form input[name='source']:focus {
   border-color: var(--color-text);
   outline: 0.25rem dashed var(--color-accent);
 }
