@@ -80,25 +80,21 @@
         <li>
           <webmention-entry>
             <webmention-author src="${author.photo}" alt="${imgAlt}" href="${author.url}" @name="${author.name}">
-              <span slot="author-action">
-                mentioned this page <a href="${wm.url}" target="_blank" rel="external noopener noreferrer">on ${hostname}</a> on <time datetime="${date}">${published}</time>
-              </span>
+              <span slot="author-action">mentioned this page <a href="${wm.url}" target="_blank" rel="external noopener noreferrer">on ${hostname}</a> on <time datetime="${date}">${published}</time>.</span>
             </webmention-author>
           </webmention-entry>
         </li>`
         }
 
         // const replyHtml = wm.content.html ? `<blockquote>${wm.content.html}</blockquote>` : ''
-        const reply = wm.content.html ? `<em>${wm.content.html}</em>` : wm.content.text
+        const reply = wm.content.html ? `<p><em>${wm.content.html}</em></p>` : wm.content.text
         // const reply = wm.content.html ? `<em>${wm.content.html}</em>` : ''
 
         return `
       <li>
         <webmention-entry>
           <webmention-author src="${author.photo}" alt="${imgAlt}" href="${author.url}" @name="${author.name}">
-            <span slot="author-action">
-              mentioned this page <a href="${wm.url}" target="_blank" rel="external noopener noreferrer">on ${hostname}</a> on <time datetime="${date}">${published}</time>
-            </span>
+            <span slot="author-action">mentioned this page <a href="${wm.url}" target="_blank" rel="external noopener noreferrer">on ${hostname}</a> on <time datetime="${date}">${published}</time>.</span>
           </webmention-author>
           ${reply}
         </webmention-entry>
