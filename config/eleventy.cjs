@@ -230,6 +230,7 @@ module.exports = function (eleventyConfig) {
 
   const scriptSrcElem = [
     'self',
+    'sha256',
     'https://static.cloudflareinsights.com/beacon.min.js',
     'https://unpkg.com/htm/preact/standalone.module.js'
   ]
