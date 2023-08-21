@@ -242,7 +242,12 @@ module.exports = function (eleventyConfig) {
     directives: {
       'base-uri': ['self'],
 
-      'connect-src': ['self', 'cloudflareinsights.com', 'res.cloudinary.com'],
+      'connect-src': [
+        'self',
+        'cloudflareinsights.com',
+        'res.cloudinary.com',
+        `https://webmention.io/${domain}/webmention`
+      ],
 
       'default-src': ['none'],
 
