@@ -1,0 +1,39 @@
+<!-- TODO: make this component progressive enhancement: use JS to stay on the
+  page, only if JS is available. Otherwise use the form's action attribute.
+  Have a look at this image slider for reference.
+  https://github.com/11ty/demo-webc-image-compare/blob/main/_components/image-compare-enabled.webc
+  https://www.bram.us/2022/04/22/progressive-enhancement-and-html-forms-use-formdata/
+ -->
+
+<form name="SendWebmention" class="send-webmention-form flow" :action="endpoint" method="POST">
+  <!-- this MUST have 'target' as its name -->
+  <input id="webmention-target-url" type="hidden" name="target" :value="targetUrl">
+   <p @html="instructions"></p>
+   <!-- this MUST have 'source' as its name -->
+   <input id="webmention-source-url" type="text" name="source" placeholder="https://your-website.com/your-article">
+   <button name="submit" type="submit">Send Webmention</button>
+</form>
+
+<style webc:keep webc:scoped>
+  :host p {
+    font-style: italic;
+  }
+</style>
+
+<!-- <script webc:type="js" webc:is="template" webc:root :id="uid" aria-label="send a webmention">
+  const onSubmit = (ev) => {
+    ev.preventDefault()
+  }
+
+  function renderForm() {
+    return `
+    <form name="SendWebmention" class="send-webmention-form flow" onsubmit="${onSubmit}">
+      <input id="webmention-target-url" type="hidden" name="target" :value="targetUrl">
+ 
+      <p @html="instructions"></p>
+      <input type="text" name="webmention-source-url" placeholder="https://your-website.com/your-article">
+      <button name="submit" type="submit">Send Webmention</button>
+   </form>`
+  }
+  renderForm()
+</script> -->

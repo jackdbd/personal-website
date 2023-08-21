@@ -100,16 +100,31 @@ const makeResponseToWebmentions = ({ blacklisted, sanitizeOptions }) => {
 
 const sanitizeWebmentionAuthor = (author = {}) => {
   const name = author.name || 'Anonymous'
+
   const photo =
     author.photo || 'https://bulma.io/images/placeholders/128x128.png'
 
-  return { ...author, name, photo }
+  const url = author.url || undefined
+
+  return { ...author, name, photo, url }
+}
+
+const isTwitterUrl = (s) => {
+  const url = new URL(s)
+  console.log(`isTwitterUrl`, {
+    host: url.host,
+    hostname: url.hostname,
+    origin: url.origin
+  })
+  const re = /^https:\/\/twitter\.com\/.*\/status\/\d+/
+  return s.match(re) ? true : false
 }
 
 module.exports = {
   isLike,
   isReply,
   isRepost,
+  isTwitterUrl,
   makeSanitize,
   chronologicalOrder,
   reverseChronologicalOrder,

@@ -1,13 +1,20 @@
 <script webc:type="js" webc:is="template" webc:root :id="uid" aria-label="list of webmentions">
 
   async function renderItems() {
-      const webmentions = await this.helpers.webmentionsSentToRelativePath(this['$data'].page.url)
+    const domain = 'www.giacomodebidda.com'
+    const webmention_endpoint = `https://webmention.io/${domain}/webmention`
+    const relative_path = this['$data'].page.url
+    const webmention_target_url = new URL(relative_path, `https://${domain}`)
+      
+    // console.log(`=== this['$data'] ===`, this['$data'])
+      const webmentions = await this.helpers.webmentionsSentToRelativePath(relative_path)
       
       const s = [
-        `webmentions created by`,
+        `<a href="https://indieweb.org/Webmention" target="_blank" rel="external noopener noreferrer">Webmentions</a>`,
+        `created by`,
         `<a href="https://brid.gy" target="_blank" rel="external noopener noreferrer">Bridgy</a>`,
         `and sent to`,
-        `<a href="https://webmention.io" target="_blank" rel="external noopener noreferrer">Webmention.io</a>`
+        `<a href="https://webmention.io" target="_blank" rel="external noopener noreferrer">Webmention.io</a>.`
       ].join(' ')
 
       const { likes, replies, reposts } = webmentions
@@ -46,15 +53,12 @@
         const published = this.helpers.humanDateJS(date)
 
         const author = this.helpers.sanitizeWebmentionAuthor(wm.author)
-        const authorName = author.name
-        const imgSrc = author.photo
         const imgAlt = `${author.name}'s avatar`
-        // const href = author.url
         const href = wm.url
 
         return `
         <li>
-          <webmention-repost src="${imgSrc}" alt="${imgAlt}" href="${href}"></webmention-repost>
+          <webmention-repost src="${author.photo}" alt="${imgAlt}" href="${href}"></webmention-repost>
         </li>`
         })
 
@@ -65,10 +69,9 @@
         const published = this.helpers.humanDateJS(date)
 
         const author = this.helpers.sanitizeWebmentionAuthor(wm.author)
-        const authorName = author.name
-        const imgSrc = author.photo
         const imgAlt = `${author.name}'s avatar`
-        const authorUrl = author.url
+
+        const { hostname } = new URL(wm.url)
 
         // a webmention of type mention-of apparently can have no content at all.
         // I am not sure whether all webmentions of type mention-of have no content.
@@ -76,9 +79,9 @@
           return `
         <li>
           <webmention-entry>
-            <webmention-author src="${imgSrc}" alt="${imgAlt}" href="${authorUrl}" @name="${authorName}">
+            <webmention-author src="${author.photo}" alt="${imgAlt}" href="${author.url}" @name="${author.name}">
               <span slot="author-action">
-                <a href="${wm.url}" target="_blank" rel="external noopener noreferrer">mentioned this</a> on <time datetime="${date}">${published}</time>
+                mentioned this page <a href="${wm.url}" target="_blank" rel="external noopener noreferrer">on ${hostname}</a> on <time datetime="${date}">${published}</time>
               </span>
             </webmention-author>
           </webmention-entry>
@@ -90,16 +93,16 @@
         // const reply = wm.content.html ? `<em>${wm.content.html}</em>` : ''
 
         return `
-        <li>
-          <webmention-entry>
-            <webmention-author src="${imgSrc}" alt="${imgAlt}" href="${authorUrl}" @name="${authorName}">
-              <span slot="author-action">
-                <a href="${wm.url}" target="_blank" rel="external noopener noreferrer">replied</a> on <time datetime="${date}">${published}</time>
-              </span>
-            </webmention-author>
-            ${reply}
-          </webmention-entry>
-        </li>`
+      <li>
+        <webmention-entry>
+          <webmention-author src="${author.photo}" alt="${imgAlt}" href="${author.url}" @name="${author.name}">
+            <span slot="author-action">
+              mentioned this page <a href="${wm.url}" target="_blank" rel="external noopener noreferrer">on ${hostname}</a> on <time datetime="${date}">${published}</time>
+            </span>
+          </webmention-author>
+          ${reply}
+        </webmention-entry>
+      </li>`
       })
 
       const li_likes = likes.map((wm, i) => {
@@ -109,14 +112,11 @@
         const published = this.helpers.humanDateJS(date)
 
         const author = this.helpers.sanitizeWebmentionAuthor(wm.author)
-        const authorName = author.name
-        const imgSrc = author.photo
         const imgAlt = `${author.name}'s avatar`
-        const authorUrl = author.url
 
         return `
         <li>
-          <webmention-like src="${imgSrc}" alt="${imgAlt}" href="${authorUrl}"></webmention-like>
+          <webmention-like src="${author.photo}" alt="${imgAlt}" href="${author.url}"></webmention-like>
         </li>`
 
       })
@@ -147,6 +147,11 @@
       <section class="flow region">
         <h2>Webmentions</h2>
         <div class="stack">
+          <webmention-form 
+            endpoint="${webmention_endpoint}"
+            target-url="${webmention_target_url.href}"
+            @instructions="Did you mention this blog post on your website? Let me know the URL of <b>your article</b> using the form below.">
+          </webmention-form>
           <p><em>${s}</em></p>
           ${webmentions_html}
         </div>

@@ -9,6 +9,12 @@
     padding: var(--scale-space-xs);
   }
 
+  :host a {
+    /* Long URLs on smaller viewports are very likely to overflow the available
+    width. This is one way to avoid it. */
+    word-break: break-all;
+  }
+
   :host p {
     padding: 0.5em;
   }
