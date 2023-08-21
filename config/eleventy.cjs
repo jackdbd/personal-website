@@ -219,6 +219,9 @@ module.exports = function (eleventyConfig) {
   const domain = 'www.giacomodebidda.com'
 
   eleventyConfig.addPlugin(webmentionsPlugin, {
+    blacklisted: [
+      { id: 1598904, reason: 'it was a webmention I sent for testing' }
+    ],
     domain,
     token: process.env.WEBMENTION_IO_TOKEN
   })
