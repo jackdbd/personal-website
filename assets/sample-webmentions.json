@@ -22,8 +22,8 @@
         "text": "This test verifies that you accept a Webmention request that contains a valid source and target URL. To pass this test, your Webmention endpoint must return either HTTP 200, 201 or 202 along with the appropriate headers.\n        If your endpoint returns HTTP 201, then it MUST also return a Location header. If it returns HTTP 200 or 202, then it MUST NOT include a Location header."
       },
       "in-reply-to": "https://www.giacomodebidda.com/posts/test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu/",
-      "wm-property": "in-reply-to",
-      "wm-private": false
+      "wm-private": false,
+      "wm-property": "in-reply-to"
     },
     {
       "type": "entry",
@@ -43,8 +43,8 @@
         "text": "dive is a tool I use almost every day when working with container images. I wrote a short tutorial some time ago:\ngiacomodebidda.com/posts/inspect-…"
       },
       "repost-of": "https://www.giacomodebidda.com/posts/inspect-container-images-with-dive/",
-      "wm-property": "repost-of",
-      "wm-private": false
+      "wm-private": false,
+      "wm-property": "repost-of"
     },
     {
       "type": "entry",
@@ -64,8 +64,8 @@
         "text": "dive is a tool I use almost every day when working with container images. I wrote a short tutorial some time ago:\ngiacomodebidda.com/posts/inspect-…"
       },
       "repost-of": "https://www.giacomodebidda.com/posts/inspect-container-images-with-dive/",
-      "wm-property": "repost-of",
-      "wm-private": false
+      "wm-private": false,
+      "wm-property": "repost-of"
     },
     {
       "type": "entry",
@@ -82,8 +82,30 @@
       "wm-source": "https://brid.gy/like/twitter/jackdbd/1605925652963655682/758066723710988288",
       "wm-target": "https://www.giacomodebidda.com/",
       "like-of": "https://www.giacomodebidda.com/",
-      "wm-property": "like-of",
-      "wm-private": false
+      "wm-private": false,
+      "wm-property": "like-of"
+    },
+    {
+      "type": "entry",
+      "author": {
+        "type": "card",
+        "name": "",
+        "photo": "",
+        "url": ""
+      },
+      "url": "https://zerobytes.monster/post/1009877",
+      "published": null,
+      "wm-received": "2023-08-20T10:12:45Z",
+      "wm-id": 1706866,
+      "wm-source": "https://zerobytes.monster/post/1009877",
+      "wm-target": "https://www.giacomodebidda.com/posts/auditing-an-ecommerce-website/",
+      "wm-protocol": "webmention",
+      "mention-of": "https://www.giacomodebidda.com/posts/auditing-an-ecommerce-website/",
+      "wm-property": "mention-of",
+      "wm-private": false,
+      "rels": {
+        "canonical": "https://zerobytes.monster/post/1009877"
+      }
     }
   ]
 }

@@ -10,6 +10,7 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
 
 - PWA with [web application manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - RSS feed with [@11ty/eleventy-plugin-rss](https://www.11ty.dev/docs/plugins/rss/)
+- [webmentions](https://indieweb.org/Webmention) retrieved from [Webmention.io](https://webmention.io/)
 - `sitemap.xml` and `robots.txt` for SEO
 - `security.txt` in `.well-known` directory
 - just-in-time preloading with [instant.page](https://instant.page/)
