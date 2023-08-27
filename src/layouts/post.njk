@@ -7,6 +7,8 @@ section: post
 <div id="wrapper-for-sticky-footer">
 
   {% include "components/header.njk" %}
+  
+  <is-land on:visible autoinit="preact" import="/assets/js/preact-components/back-to-top.js"></is-land>
 
   <main class="wrapper">
     <article class="prose flow region">
@@ -50,8 +52,7 @@ section: post
     {% endrenderTemplate %}
 
   </main>
-
-  {% include "components/back-to-top-is-land.njk" %}
+  
   {% include "components/footer.njk" %}
 
 </div>

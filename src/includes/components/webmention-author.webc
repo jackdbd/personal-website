@@ -7,8 +7,8 @@
   <slot name="author-action"><span>mentioned this</span></slot>
 </div>
 
-<style webc:keep webc:scoped>
-  :host img {
+<style webc:scoped>
+  :host a, :host img {
     display: inline-block;
   }
 </style>

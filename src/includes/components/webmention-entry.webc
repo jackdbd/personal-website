@@ -2,7 +2,7 @@
   <slot>webmention like/repost/reply</slot>
 </div>
 
-<style webc:keep webc:scoped>
+<style webc:scoped>
   :host div {
     background: var(--color-background-code);
     border-radius: 0.5rem;
