@@ -59,6 +59,7 @@ module.exports = function (eleventyConfig) {
   // https://www.11ty.dev/docs/data-global-custom/
   // https://benmyers.dev/blog/eleventy-data-cascade/
   const contactFormSubmissionUrl = 'https://formspree.io/f/mrgdevqb'
+
   eleventyConfig.addGlobalData(
     'contactFormSubmissionUrl',
     contactFormSubmissionUrl
@@ -217,6 +218,7 @@ module.exports = function (eleventyConfig) {
   })
 
   const domain = 'www.giacomodebidda.com'
+  const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`
 
   eleventyConfig.addPlugin(webmentionsPlugin, {
     blacklisted: [
@@ -228,10 +230,9 @@ module.exports = function (eleventyConfig) {
 
   const scriptSrcElem = [
     'self',
+    'sha256',
     // required by eleventy-plugin-embed-twitter
     'https://platform.twitter.com',
-    // 'https://platform.twitter.com/widgets.js',
-    // 'https://platform.twitter.com/js/tweet.b81b6d7af2d75db873cff6099e4f433a.js',
     // required by Cloudflare Web Analytics
     'https://static.cloudflareinsights.com/beacon.min.js',
     // required by my Preact components
@@ -245,14 +246,23 @@ module.exports = function (eleventyConfig) {
     directives: {
       'base-uri': ['self'],
 
-      'connect-src': ['self', 'cloudflareinsights.com', 'res.cloudinary.com'],
+      'connect-src': [
+        'self',
+        'cloudflareinsights.com',
+        'res.cloudinary.com',
+        `https://webmention.io/${domain}/webmention`
+      ],
 
       'default-src': ['none'],
 
       'font-src': ['self'],
 
-      // allow form submissions to Formspree
-      'form-action': ['self', contactFormSubmissionUrl],
+      // allow form submissions to Formspree and Webmention.io
+      'form-action': [
+        'self',
+        contactFormSubmissionUrl,
+        sendWebmentionFormSubmissionUrl
+      ],
 
       'frame-ancestors': ['none'],
 

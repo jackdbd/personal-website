@@ -7,9 +7,7 @@
   <meta name="generator" content="{{ eleventy.generator }}">
 
   <title>{{ title or metadata.title }}</title>
-  {% set absolutePageUrl %}
-    {{ page.url | url | absoluteUrl(metadata.url) }}
-  {% endset %}
+  {% set absolutePageUrl %}{{ page.url | url | absoluteUrl(metadata.url) }}{% endset %}
 
   <link rel="canonical" href="{{ absolutePageUrl }}">
 
@@ -40,8 +38,8 @@
   {# https://ogp.me/ #}
   <meta property="og:title" content="{{ title or metadata.title }}">
   <meta property="og:type" content="{{ ogp.type or metadata.ogp.type }}">
-  <meta property="og:image" content="{{ ogp.image or metadata.profilePic }}" />
-  <meta property="og:image:alt" content="{{ ogp.imageAlt or metadata.description }}" />
+  <meta property="og:image" content="{{ ogp.image or metadata.profilePic }}">
+  <meta property="og:image:alt" content="{{ ogp.imageAlt or metadata.description }}">
   <meta property="og:url" content="{{ absolutePageUrl }}">
   <meta property="og:description" content="{{ description or metadata.description }}">
   <meta property="og:locale" content="en_US">
@@ -84,6 +82,7 @@
   {# https://www.11ty.dev/docs/languages/webc/#css-and-js-(bundler-mode) #}
   {% renderTemplate "webc" %}
   <style @raw="getBundle('css')" webc:keep></style>
+  <script type="module" @raw="getBundle('js')" webc:keep></script>
   {% endrenderTemplate %}
 
   {# This stylesheet is render-blocking, but I don't think it's feasible to preload it without causing layout shifts,

@@ -1,7 +1,7 @@
 const makeDebug = require('debug')
 const { z } = require('zod')
 const { makeClient } = require('./webmention-io.cjs')
-const { sanitizeWebmentionAuthor } = require('./utils.cjs')
+const { isTwitterUrl, sanitizeWebmentionAuthor } = require('./utils.cjs')
 
 const PREFIX = '[💬 11ty-plugin-webmentions]'
 
@@ -96,6 +96,8 @@ const webmentions = (eleventyConfig, providedOptions) => {
     )
     return webmentions
   })
+
+  eleventyConfig.addFilter('isTwitterUrl', isTwitterUrl)
 
   eleventyConfig.addFilter('sanitizeWebmentionAuthor', sanitizeWebmentionAuthor)
 

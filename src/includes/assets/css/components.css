@@ -201,26 +201,30 @@ video::cue {
   background: var(--color-background-code);
 } */
 
-/* .contact-form ------------------------------------------------------------ */
+/* .forms ------------------------------------------------------------------- */
 
-.contact-form {
+.contact-form,
+.send-webmention-form {
   font-size: inherit;
 }
 
 .contact-form button,
 .contact-form input,
-.contact-form textarea {
+.contact-form textarea,
+.send-webmention-form button,
+.send-webmention-form input {
   width: 100%;
 }
 
-.contact-form button {
+.contact-form button,
+.send-webmention-form button {
   background: var(--color-accent);
-  /* border-radius: 0.5rem; */
   color: var(--color-background);
   padding: var(--scale-space-xs);
 }
 
-.contact-form button:focus {
+.contact-form button:focus,
+.send-webmention-form button:focus {
   outline: 0.25rem dashed var(--color-text);
 }
 
@@ -229,27 +233,32 @@ video::cue {
 }
 
 .contact-form button,
-.contact-form label {
+.contact-form label,
+.send-webmention-form button,
+.send-webmention-form label {
   font-family: var(--font-headings);
 }
 
-.contact-form [type='email'],
-.contact-form [type='text'],
-.contact-form textarea {
+.contact-form input[name='name'],
+.contact-form input[type='email'],
+.contact-form textarea,
+.send-webmention-form input[name='source'] {
   border: 0.15rem solid var(--color-text);
   font-size: inherit;
   outline: none;
   padding: var(--scale-space-xs);
 }
 
-.contact-form [type='email']:focus,
-.contact-form [type='text']:focus,
-.contact-form textarea:focus {
+.contact-form input[name='name']:focus,
+.contact-form input[type='email']:focus,
+.contact-form textarea:focus,
+.send-webmention-form input[name='source']:focus {
   border-color: var(--color-text);
   outline: 0.25rem dashed var(--color-accent);
 }
 
-.contact-form [type='submit'] {
+.contact-form button[type='submit'],
+.send-webmention-form button[type='submit'] {
   text-transform: capitalize;
 }
 

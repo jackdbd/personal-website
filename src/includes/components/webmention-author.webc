@@ -1,12 +1,10 @@
 <div :id="uid">
   <img class="w-10 h-10 rounded-full" :src="src" :alt="alt" loading="lazy" decoding="async" width="48" height="48">
-  <a :href="href" target="_blank" rel="external noopener noreferrer">
-    <span @text="name"></span>
-  </a>
-  <!-- <span>&nbsp;</span> -->
-  <span>
-    <slot name="author-action">mentioned this</slot>
-  </span>
+
+  <a webc:if="href !== 'undefined'" :href="href" target="_blank" rel="external noopener noreferrer"><span @text="name"></span></a>
+  <span webc:else @text="name"></span>
+
+  <slot name="author-action"><span>mentioned this</span></slot>
 </div>
 
 <style webc:scoped>
