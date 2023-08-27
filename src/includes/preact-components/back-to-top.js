@@ -13,7 +13,7 @@ const scrollToTop = (event) => {
 }
 
 const makeHandleScroll = ({ setDisplay, scrollFactor }) => {
-  //
+  // console.log(`makeHandleScroll`, { scrollFactor, setDisplay })
   return function handleScroll(event) {
     const threshold = document.documentElement.scrollHeight / scrollFactor
 

@@ -229,7 +229,9 @@ module.exports = function (eleventyConfig) {
   const scriptSrcElem = [
     'self',
     // required by eleventy-plugin-embed-twitter
-    'https://platform.twitter.com/widgets.js',
+    'https://platform.twitter.com',
+    // 'https://platform.twitter.com/widgets.js',
+    // 'https://platform.twitter.com/js/tweet.b81b6d7af2d75db873cff6099e4f433a.js',
     // required by Cloudflare Web Analytics
     'https://static.cloudflareinsights.com/beacon.min.js',
     // required by my Preact components
@@ -300,10 +302,6 @@ module.exports = function (eleventyConfig) {
       // not support report-to (it only supports report-uri).
       'report-uri': ['https://giacomodebidda.report-uri.com/r/d/csp/enforce'],
 
-      // allow scripts hosted on:
-      // - this origin
-      // - cloudflareinsights.com (analytics)
-      // - unpkg.com (preact)
       // Firefox and Safari on iOS do not support script-src-elem, so we need a
       // fallback to script-src.
       // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src-elem
@@ -441,9 +439,7 @@ module.exports = function (eleventyConfig) {
     'node_modules/@11ty/is-land/is-land.js': 'assets/js/is-land.js',
     'node_modules/@11ty/is-land/is-land-autoinit.js':
       'assets/js/is-land-autoinit.js',
-    'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js',
-    'node_modules/htm/dist/htm.module.js': 'assets/js/htm.module.js',
-    'node_modules/preact/dist/preact.module.js': 'assets/js/preact.module.js'
+    'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js'
   })
 
   // 11ty shortcodes
