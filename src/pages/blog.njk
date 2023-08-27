@@ -16,6 +16,8 @@ title: Blog
 
   {% include "components/header.njk" %}
 
+  <is-land on:visible autoinit="preact" import="/assets/js/preact-components/back-to-top.js"></is-land>
+
   <main class="wrapper">
     <div class="flow region">
       <h1>{{ title }}</h1>
@@ -27,8 +29,6 @@ title: Blog
   {% include "components/footer.njk" %}
 
 </div>
-
-{% include "components/back-to-top-is-land.njk" %}
 
 {% endblock content %}
 

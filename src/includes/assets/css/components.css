@@ -134,6 +134,7 @@ video::cue {
   opacity: 0.75;
   bottom: 3rem;
   right: 3rem;
+  z-index: 999;
 }
 
 #back-to-top > svg {
@@ -380,7 +381,6 @@ video::cue {
 #toc {
   font-family: var(--font-headings);
 }
-
 
 #toc summary {
   cursor: pointer;

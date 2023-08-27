@@ -427,9 +427,12 @@ module.exports = function (eleventyConfig) {
     'src/includes/assets/fonts': 'assets/fonts',
     'src/includes/assets/img': 'assets/img',
     'src/includes/assets/js': 'assets/js',
+    'src/includes/preact-components': 'assets/js/preact-components',
     'src/includes/assets/pgp-key.txt': 'assets/pgp-key.txt',
     'src/includes/assets/security.txt': '.well-known/security.txt',
     'node_modules/@11ty/is-land/is-land.js': 'assets/js/is-land.js',
+    'node_modules/@11ty/is-land/is-land-autoinit.js':
+      'assets/js/is-land-autoinit.js',
     'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js',
     'node_modules/htm/dist/htm.module.js': 'assets/js/htm.module.js',
     'node_modules/preact/dist/preact.module.js': 'assets/js/preact.module.js'
