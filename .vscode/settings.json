@@ -2,6 +2,7 @@
   "css.validate": true,
   "editor.defaultFormatter": null,
   "editor.formatOnSave": false,
+  "editor.rulers": [80, 120],
   "files.associations": {
     "_headers": "toml",
     "_redirects": "toml",
