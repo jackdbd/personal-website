@@ -13,7 +13,7 @@
     <a href="https://www.linkedin.com/in/giacomodebidda/" target="_blank" rel="external noopener noreferrer">LinkedIn</a> or <a href="https://twitter.com/jackdbd" target="_blank" rel="external noopener noreferrer">Twitter</a>.</em></p>
 </div>
 
-<style webc:keep webc:scoped>
+<style webc:scoped>
   :host div {
     background: var(--color-background-code);
     border-radius: 0.5rem;

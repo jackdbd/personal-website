@@ -6,7 +6,7 @@
 
 <!-- https://flowbite.com/docs/components/avatar/ -->
 
-<style webc:keep webc:scoped>
+<style webc:scoped>
   :host img {
     display: inline-block;
   }

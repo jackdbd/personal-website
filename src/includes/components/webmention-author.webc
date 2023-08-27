@@ -9,7 +9,7 @@
   </span>
 </div>
 
-<style webc:keep webc:scoped>
+<style webc:scoped>
   :host a, :host img {
     display: inline-block;
   }
