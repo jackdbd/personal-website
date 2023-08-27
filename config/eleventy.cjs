@@ -228,11 +228,15 @@ module.exports = function (eleventyConfig) {
 
   const scriptSrcElem = [
     'self',
+    // required by eleventy-plugin-embed-twitter
+    'https://platform.twitter.com/widgets.js',
+    // required by Cloudflare Web Analytics
     'https://static.cloudflareinsights.com/beacon.min.js',
+    // required by my Preact components
     'https://unpkg.com/htm/preact/standalone.module.js'
   ]
 
-  const styleSrcElem = ['self', 'sha256']
+  const styleSrcElem = ['self', 'unsafe-inline']
 
   eleventyConfig.addPlugin(cspPlugin, {
     allowDeprecatedDirectives: true,
@@ -252,15 +256,19 @@ module.exports = function (eleventyConfig) {
 
       // allow embedding iframes from these websites (cross-origin iframes)
       'frame-src': [
+        // required by eleventy-plugin-embed-twitter
+        'https://platform.twitter.com/',
+        'https://player.vimeo.com/video/',
         'https://www.youtube.com/embed/',
         'https://www.youtube-nocookie.com/',
-        'https://player.vimeo.com/video/',
         'slides.com'
       ],
 
       // allow loading images hosted on GitHub, Cloudinary, Webmention.io
       'img-src': [
         'self',
+        // I am using a placeholder image hosted on bulma.io
+        'bulma.io',
         'github.com',
         'raw.githubusercontent.com',
         'res.cloudinary.com',
