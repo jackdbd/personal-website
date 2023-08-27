@@ -113,7 +113,7 @@ jobs:
   #         budget: 'wpt-budget-article-desktop.json'
   #         wptOptions: 'wpt-options-desktop.json'
 
-  # TOOD: wait for successful Deploy Preview on Cloudflare Pages
+  # TODO: wait for successful Deploy Preview on Cloudflare Pages
   # audit:
   #   name: Audit website with Lighthouse CI
   #   needs: [build-and-test]
