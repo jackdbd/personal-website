@@ -135,7 +135,7 @@ def _setup_git_repo(ctx, repo_dir):
     os.mkdir(os.path.join(repo_dir, '.vscode'))
 ```
 
-I recently started to use [Pipenv](https://www.giacomodebidda.com/pipenv/). Here is a function to configure a Python virtual environment for a new project.
+I recently started to use [Pipenv](https://www.giacomodebidda.com/posts/pipenv/). Here is a function to configure a Python virtual environment for a new project.
 
 ```python
 def _setup_pipenv(ctx, repo_dir):
