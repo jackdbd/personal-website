@@ -40,10 +40,9 @@
 }
 
 :root {
-  --font-headings: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+  --font-headings: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    segoe ui, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
 
-  --font-body: Merriweather, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  /* --font-body: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif; */
-  /* --font-body: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif; */
-  /* --font-body: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif; */
+  --font-body: Merriweather, ui-serif, Georgia, Cambria, 'Times New Roman',
+    Times, serif;
 }
