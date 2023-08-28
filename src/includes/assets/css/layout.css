@@ -61,9 +61,25 @@
   margin-top: var(--stack-space);
 }
 
+/*
+ * Container for text content
+ *
+ * How many characters per line?
+ * Some studies say that the optimal line length for body text is 50–60
+ * characters per line, including spaces. Oher sources suggest that up to 75
+ * characters is acceptable.
+ * https://baymard.com/blog/line-length-readability
+ * This website suggests 50-75 characters per line on desktop, and 30-50
+ * characters on mobile for optimal readability.
+ * https://designary.com/tip/the-optimal-text-line-length-for-readability/
+ *
+ * Browser support for the ch CSS unit is excellent. I think it's a perfect unit
+ * to use for max-width.
+ * https://caniuse.com/ch-unit
+ */
 .wrapper {
   --min-width: 16rem;
-  --max-width: 55rem;
+  --max-width: 65ch;
 
   margin-right: auto;
   margin-left: auto;
