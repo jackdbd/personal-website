@@ -2,6 +2,9 @@
 title: Auditing an eCommerce website
 date: "2023-08-16T13:05:00.000Z"
 description: This is a website audit of the webpage www.vino.com. The audit contains info about security, SEO, web performance.
+ogp:
+  image: https://res.cloudinary.com/jackdbd/image/upload/v1692005417/vino-com-http-304-missing-immutable_prst47.png
+  imageAlt: WebPageTest Connection View of www.vino.com.
 tags:
   - BigQuery
   - Chrome DevTools
