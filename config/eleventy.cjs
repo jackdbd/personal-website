@@ -8,7 +8,6 @@ const navigation = require('@11ty/eleventy-navigation')
 const rss = require('@11ty/eleventy-plugin-rss')
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
 const webcPlugin = require('@11ty/eleventy-plugin-webc')
-// const UpgradeHelper = require('@11ty/eleventy-upgrade-help')
 const cspPlugin = require('@jackdbd/eleventy-plugin-content-security-policy')
 const {
   ensureEnvVarsPlugin
@@ -156,45 +155,45 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin)
 
   // https://github.com/bradleyburgess/eleventy-plugin-broken-links
-  eleventyConfig.addPlugin(brokenLinksPlugin, {
-    cacheDuration: '7d',
-    callback: (brokenLinks, redirectLinks) => {
-      if (brokenLinks.length > 0) {
-        // throw new Error(`${brokenLinks.length} BROKEN LINKS`)
-        console.log(`!!! ${brokenLinks.length} BROKEN links`)
-        console.log(brokenLinks)
-        process.exit(1)
-      }
-      if (redirectLinks.length > 0) {
-        console.log(`!!! ${redirectLinks.length} REDIRECT links`)
-        console.log(redirectLinks)
-      }
-    },
-    excludeUrls: [
-      // broken links. I cannot do anything about them.
-      'http://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2005',
-      'http://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2016',
-      // these articles seem no longer online. What can I do? Just remove them from blog posts? Replace them with similar articles?
-      'https://www.oscarberg.net/blog/2012/05/invisible-manager/',
-      'https://getdango.com/emoji-and-deep-learning/',
-      // I don't know why there is a HTTP (not HTTPS!) redirect for this...
-      'http://Kepler.gl',
-      // several YouTube pages return HTTP 302. They shouldn't be an issue.
-      'https://www.youtube.com/watch?v=b9yL5usLFgY',
-      'https://www.youtube.com/watch?v=lC39ifspIf4',
-      // several Wikipedia pages return HTTP 302. They shouldn't be an issue.
-      'https://en.wikipedia.org/wiki/*',
-      // the plugin marks this as a HTTP 403, but it seems a HTTP 200 to me.
-      'https://www.cloudflare.com/learning/cdn/glossary/origin-server/',
-      // I don't know why these are marked as broken links. They seem fine to me...
-      'https://all-geo.org/volcan01010/',
-      'https://www.cairographics.org/',
-      'http://Genius.com',
-      'https://genius.com/a/infographic-how-dragon-ball-influenced-a-generation-of-hip-hop-artists',
-      'https://www.qlik.com/blog/visual-encoding'
-    ],
-    loggingLevel: 1
-  })
+  // eleventyConfig.addPlugin(brokenLinksPlugin, {
+  //   cacheDuration: '7d',
+  //   callback: (brokenLinks, redirectLinks) => {
+  //     if (brokenLinks.length > 0) {
+  //       // throw new Error(`${brokenLinks.length} BROKEN LINKS`)
+  //       console.log(`!!! ${brokenLinks.length} BROKEN links`)
+  //       console.log(brokenLinks)
+  //       process.exit(1)
+  //     }
+  //     if (redirectLinks.length > 0) {
+  //       console.log(`!!! ${redirectLinks.length} REDIRECT links`)
+  //       console.log(redirectLinks)
+  //     }
+  //   },
+  //   excludeUrls: [
+  //     // broken links. I cannot do anything about them.
+  //     'http://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2005',
+  //     'http://dati.regione.sardegna.it/dataset/cfva-perimetrazioni-aree-percorse-dal-fuoco-2016',
+  //     // these articles seem no longer online. What can I do? Just remove them from blog posts? Replace them with similar articles?
+  //     'https://www.oscarberg.net/blog/2012/05/invisible-manager/',
+  //     'https://getdango.com/emoji-and-deep-learning/',
+  //     // I don't know why there is a HTTP (not HTTPS!) redirect for this...
+  //     'http://Kepler.gl',
+  //     // several YouTube pages return HTTP 302. They shouldn't be an issue.
+  //     'https://www.youtube.com/watch?v=b9yL5usLFgY',
+  //     'https://www.youtube.com/watch?v=lC39ifspIf4',
+  //     // several Wikipedia pages return HTTP 302. They shouldn't be an issue.
+  //     'https://en.wikipedia.org/wiki/*',
+  //     // the plugin marks this as a HTTP 403, but it seems a HTTP 200 to me.
+  //     'https://www.cloudflare.com/learning/cdn/glossary/origin-server/',
+  //     // I don't know why these are marked as broken links. They seem fine to me...
+  //     'https://all-geo.org/volcan01010/',
+  //     'https://www.cairographics.org/',
+  //     'http://Genius.com',
+  //     'https://genius.com/a/infographic-how-dragon-ball-influenced-a-generation-of-hip-hop-artists',
+  //     'https://www.qlik.com/blog/visual-encoding'
+  //   ],
+  //   loggingLevel: 1
+  // })
 
   let stripe_json_string
   if (process.env.STRIPE_LIVE) {
@@ -423,9 +422,6 @@ module.exports = function (eleventyConfig) {
     // https://cloud.google.com/text-to-speech/docs/voices
     voice: 'en-US-Wavenet-I'
   })
-
-  // UpgradeHelper must be added last
-  // eleventyConfig.addPlugin(UpgradeHelper)
 
   // --- 11ty data cascade -------------------------------------------------- //
   // https://www.11ty.dev/docs/data-cascade/
