@@ -105,7 +105,9 @@ const postAdOnHackerNews = async () => {
   // submit login credentials
   await page.locator('input[type="text"]').first().fill(username)
   await page.locator('input[type="password"]').first().fill(password)
+  // This selector is fine, but somehow HN flags this script as a "Bad Login".
   await page.locator('input[type="submit"]').first().click()
+  // I tried to add a waiting time (up to 15s) but it seems not to work.
 
   await page.locator('textarea').fill(ad)
   // we can't immediately post the ad. HN would understand this is an automated
@@ -115,8 +117,8 @@ const postAdOnHackerNews = async () => {
 
   // Hacker News seems to update the page, so this selector changes quite often.
   // const locator = await page.locator('input[type="submit"]')
-  const locator = await page.getByText('add comment')
-  await locator.click()
+  // const locator = page.getByText('add comment')
+  // await locator.click()
   // Initially I had thought of using waitForFunction, which executes JS in the
   // browser. But this can't be done because Hacker News has a
   // Content-Security-Policy that prevents JS execution.
