@@ -2,6 +2,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 const { chromium } = require('playwright')
 const { EMOJI, waitMs, sendOutput } = require('../utils.cjs')
+const { latestPost } = require('../hacker-news.cjs')
 
 const splits = __filename.split('/')
 const APP_ID = splits[splits.length - 1]
@@ -39,35 +40,7 @@ const renderTelegramErrorMessage = (err) => {
   return s.concat('\n')
 }
 
-/**
- * Script to post my ad on ASK HN: Freelancer? Looking for work?
- *
- * This script is meant to be used in a GitHub worklow, but can also be run locally.
- *
- * Usage:
- * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs <hn_item_id>
- *
- * Example:
- * post ad for March 2023
- * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs 34983766
- *
- * See also:
- * https://news.ycombinator.com/submitted?id=whoishiring
- */
-
-const postAdOnHackerNews = async () => {
-  const args = process.argv.slice(2)
-  if (args.length !== 1) {
-    throw new Error(
-      [
-        `INCORRECT NUMBER OF ARGUMENTS\n`,
-        `USAGE:`,
-        `node post-ad-on-hn-freelancer.cjs <hn_item_id>`
-      ].join('\n')
-    )
-  }
-  const hn_item_id = args[0]
-
+const postAdOnHackerNews = async ({ browser, hn_item_id }) => {
   let ad = ''
   if (process.env.GITHUB_SHA) {
     if (!process.env.HN_AD) {
@@ -91,10 +64,6 @@ const postAdOnHackerNews = async () => {
   }
   const { username, password } = JSON.parse(hn_json)
 
-  const browser = await chromium.launch({
-    headless: process.env.GITHUB_SHA ? true : false
-  })
-
   const page = await browser.newPage()
   const hn_url = `https://news.ycombinator.com/item?id=${hn_item_id}`
   await page.goto(hn_url)
@@ -113,24 +82,85 @@ const postAdOnHackerNews = async () => {
   // we can't immediately post the ad. HN would understand this is an automated
   // submission. Explicitly waiting for a few seconds seems to bypass the HN
   // detection algorithm.
-  await waitMs(15000)
+  await waitMs(5000)
 
   // Hacker News seems to update the page, so this selector changes quite often.
-  // const locator = await page.locator('input[type="submit"]')
+  const locator = page.locator('input[type="submit"]')
   // const locator = page.getByText('add comment')
-  // await locator.click()
+  await locator.click()
+
+  const loc = page.getByText("Sorry, but you've already posted here").first()
+  const text_content = await loc.textContent({ timeout: 5000 })
+  if (text_content) {
+    throw new Error(`You have already posted this ad to ${hn_url}`)
+  }
+
   // Initially I had thought of using waitForFunction, which executes JS in the
   // browser. But this can't be done because Hacker News has a
   // Content-Security-Policy that prevents JS execution.
   // https://playwright.dev/docs/api/class-page#page-wait-for-function
   // await page.getByText('add comment').click()
 
-  await browser.close()
-
   return { ad, hn_url, hn_item_id }
 }
 
-postAdOnHackerNews()
-  .then(renderTelegramSuccessMessage)
-  .catch(renderTelegramErrorMessage)
-  .finally(sendOutput)
+/**
+ * Script to post my ad on ASK HN: Freelancer? Looking for work?
+ *
+ * This script is meant to be used in a GitHub worklow, but can also be run locally.
+ *
+ * Usage:
+ * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs
+ * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs <hn_item_id>
+ *
+ * Example:
+ * post ad for this month
+ * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs
+ * post ad for March 2023
+ * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs 34983766
+ *
+ * See also:
+ * https://news.ycombinator.com/submitted?id=whoishiring
+ */
+
+const main = async () => {
+  const args = process.argv.slice(2)
+
+  let text = `<b>${EMOJI.Robot} ASK HN: Freelancer? Looking for work?</b>`
+  text = text.concat('\n\n')
+  text = text.concat('If you see this, something went wrong and must be fixed')
+  text = text.concat('\n\n')
+  text = text.concat(`<i>Sent by ${APP_ID}</i>`)
+
+  const browser = await chromium.launch({
+    headless: process.env.GITHUB_SHA ? true : false
+  })
+
+  let hn_item_id = undefined
+  if (args.length === 0) {
+    const result = await latestPost()
+    hn_item_id = result.item_id
+  } else if (args.length === 1) {
+    hn_item_id = args[0]
+  } else {
+    throw new Error(
+      [
+        `INCORRECT NUMBER OF ARGUMENTS\n`,
+        `USAGE:`,
+        `node post-ad-on-hn-freelancer.cjs OR node post-ad-on-hn-freelancer.cjs <hn_item_id>`
+      ].join('\n')
+    )
+  }
+
+  try {
+    const d = await postAdOnHackerNews({ browser, hn_item_id })
+    text = renderTelegramSuccessMessage(d)
+  } catch (err) {
+    text = renderTelegramErrorMessage(err)
+  } finally {
+    await browser.close()
+    await sendOutput(text)
+  }
+}
+
+main()

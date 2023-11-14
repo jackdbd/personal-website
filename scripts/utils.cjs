@@ -66,9 +66,9 @@ const sendOutput = async (text) => {
       }
     )
 
-    console.log(`Response status ${res.status}`)
+    console.log(`[Telegram BOT API] response status ${res.status}`)
     const res_body = await res.json()
-    console.log(`Response body`, res_body)
+    console.log(`[Telegram BOT API] response body`, res_body)
   }
 }
 

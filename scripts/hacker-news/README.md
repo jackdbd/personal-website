@@ -46,7 +46,7 @@ node scripts/hacker-news/whoishiring-item-id.cjs 'June 2023'
 Post [this ad](../../assets/ads/ask-hn-freelancer.txt) on `ASK HN: Freelancer? Looking for work?`
 
 ```sh
-node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs 36152013
+node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs
 ```
 
 You can trigger [this GitHub workflow](../../.github/workflows/ask-hn-freelancer.yaml) manually using the GitHub CLI:
