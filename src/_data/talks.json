@@ -6,6 +6,12 @@
     "description": "In this talk I described how Cloud Tasks works, highlighted its differences with Cloud Pub/Sub, and suggested a few guidelines to adopt when creating tasks and monitoring queues. I gave this talk at DevFest GDG Cloud Milano 2023."
   },
   {
+    "title": "Zig: il controllo e la potenza del C, senza spararsi sui piedi",
+    "language": "Italian",
+    "href": "https://github.com/jackdbd/zig-bolognajs",
+    "description": "An introduction to the Zig programming language, aimed to JavaScript developers. I gave this talk at Bologna JS."
+  },
+  {
     "title": "Vale la pena imparare Zig?",
     "language": "Italian",
     "href": "https://github.com/jackdbd/zig-tour",
