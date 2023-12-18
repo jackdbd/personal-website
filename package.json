@@ -69,12 +69,12 @@
   ],
   "dependencies": {
     "@jackdbd/checks": "^2.0.0",
-    "markdown-it": "^13.0.1",
+    "markdown-it": "^14.0.0",
     "markdown-it-anchor": "^8.6.7",
     "pretty-error": "^4.0.0",
-    "stripe": "^13.5.0",
+    "stripe": "^14.9.0",
     "tsm": "^2.3.0",
-    "typescript": "^5.2.2",
+    "typescript": "^5.3.3",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
