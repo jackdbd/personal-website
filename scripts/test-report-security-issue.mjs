@@ -1,5 +1,5 @@
 import openpgp from 'openpgp'
-import { txtSecret } from './utils.mjs'
+import { txtSecret } from './utils.js'
 
 const reportSecurityIssue = async () => {
   const publicKeyArmored = txtSecret('ASCII-armored-PGP-public-key').trim()

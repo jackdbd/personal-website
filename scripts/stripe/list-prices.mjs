@@ -1,6 +1,6 @@
 import Stripe from 'stripe'
 import yargs from 'yargs'
-import { jsonSecret, STRIPE_CONFIG } from '../utils.mjs'
+import { jsonSecret, STRIPE_CONFIG } from '../utils.js'
 
 const DEFAULT = {
   'include-archived': false,

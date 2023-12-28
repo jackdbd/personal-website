@@ -37,15 +37,15 @@
     "lh:blog:mobile": "lighthouse https://www.$DOMAIN/blog/ --config-path ./lighthouse/config/mobile.js --budget-path=./lighthouse/budgets/all-mobile.json --output-path=./lighthouse/reports/blog-mobile.html --quiet",
     "lh:audits": "lighthouse --list-all-audits",
     "lh:contact": "npm-run-all --parallel lh:contact:*",
-    "lh:contact:desktop": "lighthouse $DOMAIN/contact/ --config-path ./lighthouse/config/desktop.js --budget-path=./lighthouse/budgets/all-desktop.json --output-path=./lighthouse/reports/contact-desktop.html --quiet",
-    "lh:contact:mobile": "lighthouse $DOMAIN/contact/ --config-path ./lighthouse/config/mobile.js --budget-path=./lighthouse/budgets/all-mobile.json --output-path=./lighthouse/reports/contact-mobile.html --quiet",
+    "lh:contact:desktop": "lighthouse https://www.$DOMAIN/contact/ --config-path ./lighthouse/config/desktop.js --budget-path=./lighthouse/budgets/all-desktop.json --output-path=./lighthouse/reports/contact-desktop.html --quiet",
+    "lh:contact:mobile": "lighthouse https://www.$DOMAIN/contact/ --config-path ./lighthouse/config/mobile.js --budget-path=./lighthouse/budgets/all-mobile.json --output-path=./lighthouse/reports/contact-mobile.html --quiet",
     "lh:home": "npm-run-all --parallel lh:home:*",
     "lh:home:desktop": "lighthouse https://www.$DOMAIN/ --config-path ./lighthouse/config/desktop.js --budget-path=./lighthouse/budgets/all-desktop.json --output-path=./lighthouse/reports/home-desktop.html --quiet",
     "lh:home:mobile": "lighthouse https://www.$DOMAIN/ --config-path ./lighthouse/config/mobile.js --budget-path=./lighthouse/budgets/all-mobile.json --output-path=./lighthouse/reports/home-mobile.html --quiet",
     "lh:projects": "npm-run-all --parallel lh:projects:*",
     "lh:projects:desktop": "lighthouse $DOMAIN/projects/ --config-path ./lighthouse/config/desktop.js --budget-path=./lighthouse/budgets/all-desktop.json --output-path=./lighthouse/reports/projects-desktop.html --quiet",
     "lh:projects:mobile": "lighthouse $DOMAIN/projects/ --config-path ./lighthouse/config/mobile.js --budget-path=./lighthouse/budgets/all-mobile.json --output-path=./lighthouse/reports/projects-mobile.html --quiet",
-    "lh:reports": "python -m webbrowser lighthouse/reports/",
+    "lh:reports": "serve lighthouse/reports/",
     "lhci": "lhci autorun --config lighthouse/lighthouserc-local.js",
     "ncu:dev": "ncu --dep 'dev' --upgrade",
     "ncu:prod": "ncu --dep 'prod' --upgrade",
@@ -61,7 +61,7 @@
     "webhint:home": "hint $DOMAIN/",
     "webhint:projects": "hint $DOMAIN/projects/",
     "webhint:reports": "serve hint-report/",
-    "wrangler": "wrangler pages dev _site --port=8788 --live-reload --log-level=info --binding SENDGRID=\"$(cat ./secrets/sendgrid.json)\" --binding TELEGRAM=\"$(cat ./secrets/telegram.json)\""
+    "wrangler": "wrangler pages dev _site --binding SENDGRID=\"$(cat ./secrets/sendgrid.json)\" --binding TELEGRAM=\"$(cat ./secrets/telegram.json)\" --compatibility-date=2023-12-28 --live-reload --log-level=info --port=8788"
   },
   "browserslist": [
     "defaults",

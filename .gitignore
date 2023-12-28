@@ -27,3 +27,6 @@ hint-report/
 .cache-cloudinary/
 # cache for webmentions fetched from webmention.io
 .cache-webmentions/
+
+# Cloudflare CLI
+.wrangler/

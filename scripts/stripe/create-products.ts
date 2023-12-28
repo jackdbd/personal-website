@@ -3,7 +3,7 @@ import path from 'node:path'
 import PrettyError from 'pretty-error'
 import Stripe from 'stripe'
 import yargs from 'yargs'
-import { jsonSecret } from '../utils.mjs'
+import { jsonSecret } from '../utils.js'
 import { STRIPE_CONFIG } from './constants.js'
 
 const pe = new PrettyError()

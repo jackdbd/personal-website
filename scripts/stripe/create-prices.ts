@@ -1,7 +1,7 @@
 import PrettyError from 'pretty-error'
 import Stripe from 'stripe'
 import yargs from 'yargs'
-import { jsonSecret } from '../utils.mjs'
+import { jsonSecret } from '../utils.js'
 import {
   STRIPE_CONFIG,
   PriceLookupKey,

@@ -48,7 +48,7 @@
         UTIL_LINUX_MINIMAL_LIB_PATH = "${pkgs.lib.makeLibraryPath [pkgs.libuuid]}";
 
         shellHook = ''
-          export LD_LIBRARY_PATH="$UTIL_LINUX_MINIMAL_LIB_PATH:$LD_LIBRARY_PATH"
+          export LD_LIBRARY_PATH="$UTIL_LINUX_MINIMAL_LIB_PATH"
           echo LD_LIBRARY_PATH is:
           echo $LD_LIBRARY_PATH | tr ':' '\n'
 
@@ -64,9 +64,11 @@
           export NODE_ENV=production
 
           # Other environment variables
+          export ARTICLE_SLUG=test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu
           # export DEBUG=eleventy-plugin-cloudinary*
           export DEBUG=eleventy-plugin-text-to-speech/*,-eleventy-plugin-text-to-speech/transforms
           # export DEBUG=Eleventy:*
+          export DOMAIN=giacomodebidda.com
           # export ELEVENTY_ENV=development
           export ELEVENTY_ENV=production
         '';

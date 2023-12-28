@@ -1,7 +1,6 @@
 # personal-website
 
-![Security Headers](https://img.shields.io/security-headers?url=https%3A%2F%2Fwww.giacomodebidda.com%2F)
-![Chromium HSTS preload](https://img.shields.io/hsts/preload/giacomodebidda.com)
+![HSTS preload](https://img.shields.io/hsts/preload/giacomodebidda.com)
 [![CI](https://github.com/jackdbd/personal-website/actions/workflows/ci.yaml/badge.svg)](https://github.com/jackdbd/personal-website/actions/workflows/ci.yaml)
 
 My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Workbox](https://github.com/googlechrome/workbox). Hosted on [Cloudflare Pages](https://pages.cloudflare.com/).
@@ -34,23 +33,25 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
 
 ## Installation
 
-Install all dependencies:
+If you only care about the HTML, CSS and JS of this website, you can install just the production dependencies:
 
-```shell
+```sh
+npm install --omit=dev
+```
+
+If you want to run scripts and tests (e.g. e2e tests with [Playwright](https://playwright.dev/)) you will need to install also the dev dependencies:
+
+```sh
 npm install --include=prod --include=dev
 ```
 
-If you dont't already have it, install [zx](https://github.com/google/zx) globally:
-
-```sh
-npm i -g zx
-```
+> :information_source: If you are using the Nix package manager, you can find a `flake.nix` in this repository. It was generated using [dev-templates](https://github.com/the-nix-way/dev-templates). If you don't use / don't know Nix, you can safely ignore that file.
 
 ## Development
 
 Watch all templates, CSS, JS, service worker, and automatically refresh the browser:
 
-```shell
+```sh
 npm run dev
 ```
 
@@ -66,13 +67,19 @@ npm run wrangler
 
 Build all templates, CSS, JS and the service worker (all minified):
 
-```shell
+```sh
 npm run build
+```
+
+Serve the production build:
+
+```sh
+npm run site:serve
 ```
 
 ## Deploy
 
-Just push to the remote repository. Cloudflare Pages takes care of deploying the `main` branch to production, and creates a [preview deployment](https://developers.cloudflare.com/pages/platform/preview-deployments/) for all other branches (e.g. `develop`).
+Just push to the remote repository. Cloudflare Pages will take care of deploying the `main` branch to production, and creating a [preview deployment](https://developers.cloudflare.com/pages/platform/preview-deployments/) for all other branches.
 
 ## Security audit
 
@@ -85,6 +92,11 @@ Check the `Content-Security-Policy` and the other security headers with these on
 ## Security policy
 
 See [SECURITY.md](./SECURITY.md).
+
+## Scripts
+
+- [Lighthouse reports](./lighthouse/reports/README.md)
+- [Misc. scripts](./scripts/README.md)
 
 ## Troubleshooting the service worker
 

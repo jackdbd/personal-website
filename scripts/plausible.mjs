@@ -4,7 +4,7 @@ import { makeClient } from '@jackdbd/plausible-client'
 import { makeClient as makeStatsClient } from '@jackdbd/plausible-client/stats'
 import { makeEleventyFetch } from '@jackdbd/plausible-client/fetch-clients/eleventy-fetch'
 import { breakdown } from '@jackdbd/plausible-client/stats/api'
-import { jsonSecret } from './utils.mjs'
+import { jsonSecret } from './utils.js'
 
 const main = async () => {
   const { api_key: apiKey, site_id: siteId } = jsonSecret('plausible')

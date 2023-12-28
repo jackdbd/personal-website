@@ -19,18 +19,13 @@ const config = {
   extends: 'lighthouse:default',
   settings: {
     emulatedUserAgent,
-    maxWaitForFcp: constants.maxWaitForFcp,
-    maxWaitForLoad: constants.maxWaitForLoad,
-    // lighthouse:default is mobile by default
-    // Skip the h2 audit so it doesn't lie to us. See https://github.com/GoogleChrome/lighthouse/issues/6539
-    skipAudits: ['uses-http2']
+    onlyCategories: ['performance'],
+     maxWaitForFcp: constants.maxWaitForFcp,
+     maxWaitForLoad: constants.maxWaitForLoad,
+    onlyAudits: [
+      'first-meaningful-paint',
+    ],
   },
-  audits: ['metrics/first-contentful-paint-3g'],
-  categories: {
-    performance: {
-      auditRefs: [{ id: 'first-contentful-paint-3g', weight: 0 }]
-    }
-  }
 }
 
 module.exports = config
