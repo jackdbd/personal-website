@@ -37,7 +37,7 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
 Install all dependencies:
 
 ```shell
-npm install
+npm install --include=prod --include=dev
 ```
 
 If you dont't already have it, install [zx](https://github.com/google/zx) globally:

@@ -55,15 +55,20 @@
           # This is a somewhat hacky workaround to read files untracked by git (see .gitignore)
           echo "expose repository secrets as environment variables"
           export CLOUDINARY=$(cat ./secrets/cloudinary.json)
-          export ELEVENTY_ENV=development
-          export NODE_ENV=production
           export STRIPE_LIVE=$(cat ./secrets/stripe-live.json)
           export TELEGRAM=$(cat ./secrets/telegram.json)
           export WEBMENTION_IO_TOKEN=$(cat ./secrets/webmention-io-token.txt)
 
+          # ALWAYS set NODE_ENV to production
+          # https://youtu.be/HMM7GJC5E2o?si=RaVgw65WMOXDpHT2
+          export NODE_ENV=production
+
+          # Other environment variables
           # export DEBUG=eleventy-plugin-cloudinary*
           export DEBUG=eleventy-plugin-text-to-speech/*,-eleventy-plugin-text-to-speech/transforms
           # export DEBUG=Eleventy:*
+          # export ELEVENTY_ENV=development
+          export ELEVENTY_ENV=production
         '';
       };
     });
