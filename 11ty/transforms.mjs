@@ -3,7 +3,7 @@
  * https://www.11ty.dev/docs/config/#transforms
  */
 
-const { minify } = require('html-minifier-terser')
+import { minify } from 'html-minifier-terser'
 
 const shouldMinify = (outputPath) => {
   let boolean = false
@@ -32,7 +32,7 @@ const shouldMinify = (outputPath) => {
 /**
  * Minifies HTML files only in production.
  */
-const htmlmin = (content, outputPath) => {
+export const htmlmin = (content, outputPath) => {
   if (shouldMinify(outputPath)) {
     // https://github.com/terser/html-minifier-terser#options-quick-reference
     return minify(content, {
@@ -45,8 +45,4 @@ const htmlmin = (content, outputPath) => {
   } else {
     return content
   }
-}
-
-module.exports = {
-  htmlmin
 }

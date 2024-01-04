@@ -2,10 +2,10 @@
  * 11ty filters
  * https://www.11ty.dev/docs/filters/
  */
-const CleanCSS = require('clean-css')
-const { DateTime } = require('luxon')
-const slugify = require('slugify')
-const { minify } = require('terser')
+import CleanCSS from 'clean-css'
+import { DateTime } from 'luxon'
+import slugifyFn from 'slugify'
+import { minify } from 'terser'
 
 /**
  * Minifies CSS
@@ -14,7 +14,7 @@ const { minify } = require('terser')
  * Non-inlined CSS is managed by PostCSS. I don't (can't?) use cssnano to minify
  * CSS because it would require a postcss runner.
  */
-const cssmin = (code) => {
+export const cssmin = (code) => {
   return new CleanCSS({
     compatibility: '*',
     level: 2, // if 2  breaks something, try 1
@@ -23,11 +23,11 @@ const cssmin = (code) => {
 }
 
 // Date formatting (human readable)
-const humanDate = (isoString) => {
+export const humanDate = (isoString) => {
   return DateTime.fromISO(isoString, { zone: 'utc' }).toFormat('dd LLL yyyy')
 }
 
-const humanDateJS = (dateObj) => {
+export const humanDateJS = (dateObj) => {
   return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('dd LLL yyyy')
 }
 
@@ -38,7 +38,7 @@ const humanDateJS = (dateObj) => {
  * script-src directive allows 'unsafe-inline'. Otherwise, your inline
  * Javascript will not load.
  */
-const jsmin = async (code) => {
+export const jsmin = async (code) => {
   const minified = await minify(code, { sourceMap: true })
   if (minified.error) {
     console.log(`!!! terser could not minify JS code`)
@@ -47,24 +47,34 @@ const jsmin = async (code) => {
   return minified.code
 }
 
-const limit = (array, n) => {
+export const limit = (array, n) => {
   return array.slice(0, n)
 }
 
-const log = (value) => {
+export const log = (value) => {
   console.log('=== LOG ===', value)
 }
 
 // Date formatting (machine readable)
-const machineDate = (isoString) => {
+export const machineDate = (isoString) => {
   return DateTime.fromISO(isoString, { zone: 'utc' }).toFormat('yyyy-MM-dd')
 }
 
-const machineDateJS = (dateObj) => {
+export const machineDateJS = (dateObj) => {
   return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('yyyy-MM-dd')
 }
 
-module.exports = {
+
+
+export const slugify = (str) => {
+  return slugifyFn(str, {
+    lower: true,
+    replacement: '-',
+    remove: /[*+~.·,()'"`´%!?¿:@]/g
+  })
+}
+
+export default {
   cssmin,
   humanDate,
   humanDateJS,
@@ -73,11 +83,5 @@ module.exports = {
   log,
   machineDate,
   machineDateJS,
-  slugify: function (str) {
-    return slugify(str, {
-      lower: true,
-      replacement: '-',
-      remove: /[*+~.·,()'"`´%!?¿:@]/g
-    })
-  }
+  slugify
 }

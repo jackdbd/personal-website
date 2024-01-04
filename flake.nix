@@ -61,16 +61,30 @@
           echo "- npm $(npm --version)"
           echo "- $(steampipe --version)"
           echo "- zx $(zx --version)"
+          export CLOUDINARY=$(cat ./secrets/cloudinary.json);
           export REDDIT=$(cat /run/secrets/reddit/trusted_client);
           export STRIPE_TEST=$(cat /run/secrets/stripe/personal/test);
           export TELEGRAM=$(cat /run/secrets/telegram/personal_bot);
+          export WEBMENTION_IO_TOKEN=$(cat /run/secrets/webmentions_io_token);
         '';
+
         ARTICLE_SLUG = "test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu";
         # DEBUG = "Eleventy:UserConfig";
         DEBUG = "eleventy-plugin-text-to-speech/*,-eleventy-plugin-text-to-speech/transforms";
         DOMAIN = "giacomodebidda.com";
         ELEVENTY_ENV = "development";
         GOOGLE_APPLICATION_CREDENTIALS = "/run/secrets/gcp/prj-kitchen-sink/sa-storage-uploader";
+
+        # eleventy-plugin-text-to-speech depends on jsdom, which depends on canvas,
+        # which on Linux depends on the shared object libuuid.so. On NixOS the
+        # path to libuuid.so is not added to the linker, so we must add it manually.
+        LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [pkgs.libuuid];
+        # See also:
+        # https://discourse.nixos.org/t/node-libuuid-so-1-not-found/34864
+        # https://github.com/Automattic/node-canvas/issues/1893#issuecomment-1096988007
+        # It's weird, since jsdom declares canvas as an OPTIONAL peerDependency
+        # https://github.com/jsdom/jsdom/blob/main/package.json
+
         NODE_DEBUG = "scripts:*";
         # ALWAYS set NODE_ENV to production
         # https://youtu.be/HMM7GJC5E2o?si=RaVgw65WMOXDpHT2

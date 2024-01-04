@@ -69,9 +69,9 @@ Watch all templates, CSS, JS, service worker, and automatically refresh the brow
 npm run dev
 ```
 
-Then visit http://localhost:8080/ to see the website.
+Go to http://localhost:8080/ to visit the website.
 
-In alternative, develop and preview locally the site with [wrangler](https://developers.cloudflare.com/pages/platform/functions/#develop-and-preview-locally) (this is useful when developing functions that will be deployed to [Cloudflare Pages Functions](https://developers.cloudflare.com/pages/platform/functions/)):
+In alternative, develop and preview the site with [wrangler](https://developers.cloudflare.com/pages/platform/functions/#develop-and-preview-locally) (this is useful when developing functions that will be deployed to [Cloudflare Pages Functions](https://developers.cloudflare.com/pages/platform/functions/)):
 
 ```sh
 npm run wrangler

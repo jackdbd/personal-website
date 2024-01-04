@@ -1,40 +1,37 @@
-const fs = require('node:fs')
-const { join } = require('node:path')
-const markdownIt = require('markdown-it')
-const markdownItAnchor = require('markdown-it-anchor')
-const globbyPromise = import('globby')
-const { EleventyRenderPlugin } = require('@11ty/eleventy')
-const navigation = require('@11ty/eleventy-navigation')
-const rss = require('@11ty/eleventy-plugin-rss')
-const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
-const webcPlugin = require('@11ty/eleventy-plugin-webc')
-const cspPlugin = require('@jackdbd/eleventy-plugin-content-security-policy')
-const {
-  ensureEnvVarsPlugin
-} = require('@jackdbd/eleventy-plugin-ensure-env-vars')
-const { telegramPlugin } = require('@jackdbd/eleventy-plugin-telegram')
-const {
-  plugin: textToSpeechPlugin
-} = require('@jackdbd/eleventy-plugin-text-to-speech')
-const brokenLinksPlugin = require('eleventy-plugin-broken-links')
-const embedTwitter = require('eleventy-plugin-embed-twitter')
-const embedVimeo = require('eleventy-plugin-vimeo-embed')
-const embedYouTube = require('eleventy-plugin-youtube-embed')
-const emoji = require('eleventy-plugin-emoji')
-const helmet = require('eleventy-plugin-helmet')
-const readingTime = require('eleventy-plugin-reading-time')
-const toc = require('eleventy-plugin-nesting-toc')
+import fs from 'node:fs';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import markdownIt from 'markdown-it';
+import markdownItAnchor from 'markdown-it-anchor';
+import {globby} from 'globby';
+import { EleventyRenderPlugin } from '@11ty/eleventy';
+import navigation from '@11ty/eleventy-navigation';
+import rss from '@11ty/eleventy-plugin-rss';
+import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
+import webcPlugin from '@11ty/eleventy-plugin-webc';
+import cspPlugin from '@jackdbd/eleventy-plugin-content-security-policy';
+import { ensureEnvVarsPlugin } from '@jackdbd/eleventy-plugin-ensure-env-vars';
+import { telegramPlugin } from '@jackdbd/eleventy-plugin-telegram';
+import { plugin as textToSpeechPlugin } from '@jackdbd/eleventy-plugin-text-to-speech';
+import brokenLinksPlugin from 'eleventy-plugin-broken-links';
+import embedTwitter from 'eleventy-plugin-embed-twitter';
+import embedVimeo from 'eleventy-plugin-vimeo-embed';
+import embedYouTube from 'eleventy-plugin-youtube-embed';
+import emoji from 'eleventy-plugin-emoji';
+import helmet from 'eleventy-plugin-helmet';
+import readingTime from 'eleventy-plugin-reading-time';
+import toc from 'eleventy-plugin-nesting-toc';
+import collections from '../11ty/collections.mjs';
+import filters from '../11ty/filters.mjs';
+import shortcodes from '../11ty/shortcodes.mjs';
+import { callout, table } from '../11ty/paired-shortcodes.mjs';
+import {htmlmin} from '../11ty/transforms.mjs';
+import cloudinaryPlugin from '../plugins/11ty/cloudinary/index.cjs';
+import stripePlugin from '../plugins/11ty/stripe/index.cjs';
+import webmentionsPlugin from '../plugins/11ty/webmentions/index.cjs';
+import { buildServiceWorker } from '../src/build-sw.cjs';
 
-const collections = require('../11ty/collections')
-const filters = require('../11ty/filters')
-const shortcodes = require('../11ty/shortcodes')
-const pairedShortcodes = require('../11ty/paired-shortcodes')
-const transforms = require('../11ty/transforms.js')
-const cloudinaryPlugin = require('../plugins/11ty/cloudinary/index.cjs')
-const stripePlugin = require('../plugins/11ty/stripe/index.cjs')
-const webmentionsPlugin = require('../plugins/11ty/webmentions/index.cjs')
-const { buildServiceWorker } = require('../src/build-sw.cjs')
-
+const __filename = fileURLToPath(import.meta.url);
 const REPO_ROOT = join(__filename, '..', '..')
 const OUTPUT_DIR = join(REPO_ROOT, '_site')
 // const ASSETS_DIR = join(REPO_ROOT, 'assets')
@@ -52,7 +49,7 @@ const headingAnchorSlugify = (s) => {
   )
 }
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   let popularHtmlPages = []
 
   // https://www.11ty.dev/docs/data-global-custom/
@@ -100,8 +97,6 @@ module.exports = function (eleventyConfig) {
       `${OUTPUT_DIR}/assets/**/*.{ico,svg}`,
       `${OUTPUT_DIR}/assets/**/*.{woff,woff2}`
     ]
-    const module = await globbyPromise
-    const globby = module.globby
     const assetPaths = await globby(patterns)
 
     await buildServiceWorker({
@@ -448,22 +443,16 @@ module.exports = function (eleventyConfig) {
     'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js'
   })
 
-  // 11ty shortcodes
   // https://www.11ty.dev/docs/shortcodes/
   Object.keys(shortcodes).forEach((name) => {
     eleventyConfig.addShortcode(name, shortcodes[name])
   })
-  Object.keys(pairedShortcodes).forEach((name) => {
-    eleventyConfig.addPairedShortcode(name, pairedShortcodes[name])
-  })
+  eleventyConfig.addPairedShortcode('callout', callout)
+  eleventyConfig.addPairedShortcode('table', table)
 
-  // 11ty transforms
   // https://www.11ty.dev/docs/config/#transforms
-  Object.keys(transforms).forEach((name) => {
-    eleventyConfig.addTransform(name, transforms[name])
-  })
+  eleventyConfig.addTransform('htmlmin', htmlmin)
 
-  // 11ty filters
   // https://www.11ty.dev/docs/filters/
   Object.keys(filters).forEach((name) => {
     if (name === 'jsmin') {
@@ -473,7 +462,6 @@ module.exports = function (eleventyConfig) {
     }
   })
 
-  // 11ty collections
   // https://www.11ty.dev/docs/collections/
   Object.keys(collections).forEach((name) => {
     eleventyConfig.addCollection(name, collections[name])

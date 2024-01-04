@@ -17,13 +17,13 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "npm run build:11ty && npm run build:css",
-    "build:11ty": "npx @11ty/eleventy --config ./config/eleventy.cjs",
+    "build:11ty": "npx @11ty/eleventy --config ./config/eleventy.mjs",
     "build:css": "postcss ./config/input.css --output _site/assets/css/style.css --config ./config --env production --verbose",
     "postbuild": "ls --size --human-readable _site/ | head -n 1",
     "clean": "find _site/* -not -name 'README.md' -delete",
     "predev": "npm run clean",
     "dev": "npm-run-all --parallel dev:*",
-    "dev:11ty": "ELEVENTY_ENV=development eleventy --config ./config/eleventy.cjs --serve --quiet",
+    "dev:11ty": "ELEVENTY_ENV=development eleventy --config ./config/eleventy.mjs --serve --quiet",
     "dev:css": "postcss ./config/input.css --output _site/assets/css/style.css --config ./config --env development --watch --verbose",
     "format": "prettier --config ./config/prettier.cjs --write '{,!(node_modules)/}**/*.(cjs|js|mjs|ts)'",
     "headers:home": "google-chrome https://securityheaders.com/?q=${DOMAIN}&followRedirects=on&hide=on",
@@ -59,7 +59,7 @@
     "webhint:home": "hint $DOMAIN/",
     "webhint:projects": "hint $DOMAIN/projects/",
     "webhint:reports": "serve hint-report/",
-    "wrangler": "wrangler pages dev _site --binding SENDGRID=\"$(cat ./secrets/sendgrid.json)\" --binding TELEGRAM=\"$(cat ./secrets/telegram.json)\" --compatibility-date=2023-12-28 --live-reload --log-level=info --port=8788"
+    "wrangler": "wrangler pages dev _site --compatibility-date=2024-01-04 --port=8788 --live-reload --log-level=info --binding SENDGRID=\"$(cat ./secrets/sendgrid.json)\" --binding TELEGRAM=$TELEGRAM"
   },
   "browserslist": [
     "defaults",

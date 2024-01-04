@@ -28,5 +28,5 @@ hint-report/
 # cache for webmentions fetched from webmention.io
 .cache-webmentions/
 
-# Cloudflare CLI
+# tmp files for wrangler (Cloudflare CLI)
 .wrangler/

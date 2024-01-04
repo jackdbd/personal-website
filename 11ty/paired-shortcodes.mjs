@@ -2,9 +2,12 @@
  * 11ty paired shortcodes
  * https://www.11ty.dev/docs/shortcodes/#paired-shortcodes
  */
-const markdownIt = require('markdown-it')()
+import MarkdownIt from 'markdown-it'
 
-const callout = (content, type = 'warn') => {
+// https://github.com/markdown-it/markdown-it?tab=readme-ov-file#init-with-presets-and-options
+const md = MarkdownIt()
+
+export const callout = (content, type = 'warn') => {
   let calloutType = ''
   let emoji = ''
   switch (type) {
@@ -34,15 +37,17 @@ const callout = (content, type = 'warn') => {
   }
   return `<div class="callout ${calloutType}">
   <div class="callout__content">
-  ${markdownIt.render(`${emoji} — ${content}`)}
+  ${md.render(`${emoji} — ${content}`)}
   </div>
   </div>`
 }
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td
+ * TODO: use <table-saw> web component
+ * https://www.zachleat.com/web/table-saw/
  */
-const table = (content, caption = '', separator = ',') => {
+export const table = (content, caption = '', separator = ',') => {
   const lines = content.trim().split('\n')
 
   const lineToRow = (s) => {
@@ -74,9 +79,4 @@ const table = (content, caption = '', separator = ',') => {
   </table>
   </div>
 </div>`
-}
-
-module.exports = {
-  callout,
-  table
 }
