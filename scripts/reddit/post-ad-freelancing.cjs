@@ -5,6 +5,8 @@ const snoowrap = require('snoowrap')
 const yargs = require('yargs')
 const {
   jsonSecret,
+} = require('../utils.cjs')
+const {
   sendOutput,
   slugify,
   renderTelegramMessage,

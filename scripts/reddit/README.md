@@ -2,8 +2,8 @@
 
 Scripts that I use to search and post stuff on Reddit.
 
-- https://www.reddit.com/wiki/search/
-- https://www.reddit.com/dev/api#GET_search
+- [reddit search docs entry point](https://support.reddithelp.com/hc/en-us/sections/19695543476884-Search)
+- [GET /r/{subreddit}/search](https://www.reddit.com/dev/api#GET_search)
 
 As far as I know, search queries are always [case insensitive](https://www.reddit.com/r/help/comments/5ubsrk/case_sensitive_search/) on Reddit.
 
