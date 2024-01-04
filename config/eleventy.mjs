@@ -357,7 +357,7 @@ export default function (eleventyConfig) {
     apiKey: cloudinary.api_key,
     apiSecret: cloudinary.api_secret,
     cacheDuration: '7d',
-    cacheVerbose: true,
+    // cacheVerbose: true,
     cloudName: cloudinary.cloud_name
   })
 
