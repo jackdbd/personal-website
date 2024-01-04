@@ -16,33 +16,19 @@
   "emmet.includeLanguages": {
     "nunjucks": "html"
   },
-  "tailwindCSS.emmetCompletions": true,
   "turboConsoleLog.includeFileNameAndLineNum": false,
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  // https://11ty.rocks/tips/vscode/
-  "[markdown]": {
-    "editor.wordWrapColumn": 120,
-    "editor.wordWrap": "bounded"
-  },
-  "[nunjucks]": {
-    "editor.wordWrapColumn": 120,
-    "editor.wordWrap": "bounded"
-  },
   // https://github.com/prettier/prettier-vscode#prettierconfigpath
   "prettier.configPath": "config/prettier.cjs",
   "prettier.requireConfig": true,
+  "[css][javascript][json]": {
+    "editor.formatOnSave": true
+  },
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  // https://11ty.rocks/tips/vscode/
+  "[markdown][nunjucks]": {
+    "editor.wordWrapColumn": 120,
+    "editor.wordWrap": "bounded"
   }
 }
