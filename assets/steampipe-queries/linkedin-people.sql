@@ -1,21 +1,22 @@
 select
-  t.headline,
-  t.id,
-  t.member_distance,
-  t.navigation_url,
-  t.subline,
-  t.title
+  p.id,
+  p.first_name,
+  p.last_name,
+  p.headline,
+  j ->> 'companyName' as company_name,
+  (j -> 'dateRange' -> 'start' -> 'year') :: int as start_year,
+  (j -> 'dateRange' -> 'end' -> 'year') :: int as end_year,
+  j ->> 'title' as title,
+  j ->> 'description' as description
+  s ->> 'name' as skill
 from
-  linkedin_search_profile as t
+  linkedin_profile as p,
+  jsonb_array_elements(p.positions) as c,
+  jsonb_array_elements(p.skills) as s
+  jsonb_array_elements(c -> 'profilePositionInPositionGroup' -> 'elements') as j
 where
-  t.query = 'designer'
-  -- t.query = 'marketing'
-  -- and t.member_distance not in ('SELF', 'DISTANCE_1')
-  -- and lower(t.subline) ilike '%viareggio%'
-  -- t.query = 'google cloud platform'
-  -- and t.member_distance not in ('SELF', 'DISTANCE_1')
-  -- and lower(t.subline) ilike '%milan%'
-  and lower(t.headline) ilike '%ux%'
-  and lower(t.subline) ilike '%italy%'
+  lower(p.headline) ilike '%ux%'
+order by
+  start_year desc;
 limit
   25;

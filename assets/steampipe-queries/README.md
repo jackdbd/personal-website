@@ -4,8 +4,7 @@
 
 - [Table hackernews_ask_hn](https://hub.steampipe.io/plugins/turbot/hackernews/tables/hackernews_ask_hn)
 - [Table hackernews_job](https://hub.steampipe.io/plugins/turbot/hackernews/tables/hackernews_job)
-- [Table linkedin_search_company](https://hub.steampipe.io/plugins/turbot/linkedin/tables/linkedin_search_company)
-- [Table linkedin_search_profile](https://hub.steampipe.io/plugins/turbot/linkedin/tables/linkedin_search_profile)
+- [Table linkedin_profile](https://hub.steampipe.io/plugins/turbot/linkedin/tables/linkedin_profile)
 - [Table reddit_subreddit_post_search](https://hub.steampipe.io/plugins/turbot/reddit/tables/reddit_subreddit_post_search)
 
 ## How to use?

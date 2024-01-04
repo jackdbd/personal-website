@@ -4,7 +4,7 @@ const path = require('node:path')
 const { debuglog } = require('node:util')
 const { sendOutput } = require('../utils.cjs')
 
-const debug = debuglog('github-workflow')
+const debug = debuglog('gh-workflow:linkedin-people-links')
 const splits = __filename.split('/')
 const app_id = splits[splits.length - 1]
 

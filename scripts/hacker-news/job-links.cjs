@@ -6,7 +6,7 @@ const PrettyError = require('pretty-error')
 const yargs = require('yargs')
 const { EMOJI, sendOutput } = require('../utils.cjs')
 
-const debug = debuglog('github-workflow')
+const debug = debuglog('gh-workflow:hn-job-links')
 
 const pe = new PrettyError()
 

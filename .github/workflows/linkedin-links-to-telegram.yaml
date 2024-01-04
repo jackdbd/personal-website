@@ -62,24 +62,24 @@ jobs:
 
             ${{ env.LINKEDIN_PEOPLE_LINKS }}
 
-      - name: LinkedIn companies links
-        run: |
-          delimiter=$(openssl rand -hex 8)
-          echo "LINKEDIN_COMPANIES_LINKS<<$delimiter" >> $GITHUB_ENV
-          node scripts/linkedin/linkedin-companies-links.cjs >> $GITHUB_ENV
-          echo "$delimiter" >> $GITHUB_ENV
+      # - name: LinkedIn companies links
+      #   run: |
+      #     delimiter=$(openssl rand -hex 8)
+      #     echo "LINKEDIN_COMPANIES_LINKS<<$delimiter" >> $GITHUB_ENV
+      #     node scripts/linkedin/linkedin-companies-links.cjs >> $GITHUB_ENV
+      #     echo "$delimiter" >> $GITHUB_ENV
 
-      - name: 💬 Send LinkedIn companies links to Telegram
-        uses: appleboy/telegram-action@v0.1.1
-        with:
-          to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
-          token: ${{ fromJSON(secrets.TELEGRAM).token }}
-          format: html
-          disable_web_page_preview: true
-          message: |
-            <b>🤖 LinkedIn companies profiles</b>
+      # - name: 💬 Send LinkedIn companies links to Telegram
+      #   uses: appleboy/telegram-action@v0.1.1
+      #   with:
+      #     to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
+      #     token: ${{ fromJSON(secrets.TELEGRAM).token }}
+      #     format: html
+      #     disable_web_page_preview: true
+      #     message: |
+      #       <b>🤖 LinkedIn companies profiles</b>
 
-            ${{ env.LINKEDIN_COMPANIES_LINKS }}
+      #       ${{ env.LINKEDIN_COMPANIES_LINKS }}
 
       # - name: OpenAI ChatGPT
       #   run: |
