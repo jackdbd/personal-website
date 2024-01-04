@@ -33,14 +33,20 @@ jobs:
         uses: francois2metz/setup-steampipe@v1
         with:
           steampipe-version: 'latest'
-          steampipe-plugins: |
+          # https://hub.steampipe.io/plugins/turbot/hackernews#configuration
+          # https://hub.steampipe.io/plugins/turbot/reddit#configuration
+          plugin-connections: |
             {
-              "hackernews": {},
-              "reddit": {
-                "client_id": "${{ fromJSON(secrets.REDDIT).client_id }}",
-                "client_secret": "${{ fromJSON(secrets.REDDIT).client_secret }}",
-                "username": "${{ fromJSON(secrets.REDDIT).username }}",
-                "password": "${{ fromJSON(secrets.REDDIT).password }}"
+              connection "hackernews" {
+                plugin = "hackernews"
+                max_items = 5000
+              }
+              connection "reddit" {
+                plugin = "reddit"
+                client_id = "${{ fromJSON(secrets.REDDIT).client_id }}",
+                client_secret = "${{ fromJSON(secrets.REDDIT).client_secret }}",
+                username = "${{ fromJSON(secrets.REDDIT).username }}",
+                password = "${{ fromJSON(secrets.REDDIT).password }}"
               }
             }
 

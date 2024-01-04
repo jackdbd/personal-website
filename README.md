@@ -125,7 +125,11 @@ See [SECURITY.md](./SECURITY.md).
 A few GitHub workflows can be triggered by an `workflow_dispatch` event, so you can launch them using the [GitHub CLI](https://cli.github.com/):
 
 ```sh
+gh workflows run "Hacker News links to Telegram"
+
 gh workflows run "LinkedIn links to Telegram"
+
+gh workflows run "Reddit links to Telegram"
 ```
 
 ## Troubleshooting the service worker

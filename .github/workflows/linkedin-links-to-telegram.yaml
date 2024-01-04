@@ -33,14 +33,17 @@ jobs:
         uses: francois2metz/setup-steampipe@v1
         with:
           steampipe-version: 'latest'
-          steampipe-plugins: |
+          # https://hub.steampipe.io/plugins/turbot/linkedin#configuration
+          # https://hub.steampipe.io/plugins/turbot/openai#configuration
+          plugin-connections: |
             {
-              "hackernews": {},
-              "linkedin": {
-                "token": "${{ fromJSON(secrets.LINKEDIN).token }}"
-              },
-              "openai": {
-                "api_key": "${{ fromJSON(secrets.OPENAI).api_key }}"
+              connection "linkedin" {
+                plugin = "linkedin"
+                token = "${{ fromJSON(secrets.LINKEDIN).token }}"
+              }
+              connection "openai" {
+                plugin = "openai"
+                api_key = "${{ fromJSON(secrets.OPENAI).api_key }}"
               }
             }
 

@@ -35,9 +35,13 @@ jobs:
         uses: francois2metz/setup-steampipe@v1
         with:
           steampipe-version: 'latest'
-          steampipe-plugins: |
+          # https://hub.steampipe.io/plugins/turbot/hackernews#configuration
+          plugin-connections: |
             {
-              "hackernews": {}
+              connection "hackernews" {
+                plugin = "hackernews"
+                max_items = 5000
+              }
             }
 
       - name: Hacker News links
