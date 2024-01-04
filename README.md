@@ -33,10 +33,24 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
 
 ## Installation
 
-If you only care about the HTML, CSS and JS of this website, you can install just the production dependencies:
+Clone the repo:
+
+```shell
+git clone git@github.com:jackdbd/personal-website.git
+```
+
+This project uses a [nix dev shell](https://fasterthanli.me/series/building-a-rust-service-with-nix/part-10) to define a virtual environment with all the necessary dependencies. Thanks to nix, direnv and the `.envrc` file, you can activate this environment just by entering the root directory of this repository.
+
+Install all dependencies from npm.js (by passing `--include dev` we can be sure that we are installing `devDependencies` even when `NODE_ENV` is set to `production`):
 
 ```sh
-npm install --omit=dev
+npm install --include dev --include prod
+```
+
+If you don't use nix, install [zx](https://github.com/google/zx) globally.
+
+```sh
+npm install --global zx
 ```
 
 If you want to run scripts and tests (e.g. e2e tests with [Playwright](https://playwright.dev/)) you will need to install also the dev dependencies:

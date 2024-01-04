@@ -2,23 +2,30 @@
   description = "A Nix-flake-based Node.js development environment";
 
   inputs = {
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+    # nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    alejandra = {
+      url = "github:kamadorueda/alejandra/3.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
+    nil.url = "github:oxalica/nil";
   };
 
-  outputs = inputs @ {
-    self,
+  outputs = {
+    fh,
+    nil,
     nixpkgs,
-  }: let
+    self,
+    ...
+  } @ inputs: let
     overlays = [
-      (final: prev: rec {
-        nodejs = prev.nodejs_latest;
+      (final: prev: {
+        nodejs = prev.nodejs_20;
         pnpm = prev.nodePackages.pnpm;
-        yarn = prev.yarn.override {inherit nodejs;};
       })
     ];
-
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
-
     forEachSupportedSystem = f:
       nixpkgs.lib.genAttrs supportedSystems (system:
         f {
@@ -34,44 +41,40 @@
   in {
     devShells = forEachSupportedSystem ({pkgs}: {
       default = pkgs.mkShell {
-        packages = with pkgs; [node2nix nodejs pnpm yarn];
+        # steampipe seems not to work on NixOS. A possible workaround is to run
+        # it in a docker container.
+        # https://github.com/NixOS/nixpkgs/issues/215945
+        packages = with pkgs; [node2nix nodejs steampipe zx];
         # This project depends on @jackdbd/eleventy-plugin-text-to-speech, which
         # depends on jsdom, which depends on canvas.
         # On Linux, canvas requires the shared object file libuuid.so, and we
         # must explicitly require the package libuuid otherwise the build fails.
-        buildInputs = [
-          pkgs.libuuid
-        ];
+        buildInputs = [pkgs.libuuid];
         # Requiring the libuuid package is not enough. We must append to
         # LD_LIBRARY_PATH the path to that package, so the linker can find
         # libuuid.so. On NixOS, libuuid can be found in util-linux-minimal.
-        UTIL_LINUX_MINIMAL_LIB_PATH = "${pkgs.lib.makeLibraryPath [pkgs.libuuid]}";
+        # UTIL_LINUX_MINIMAL_LIB_PATH = "${pkgs.lib.makeLibraryPath [pkgs.libuuid]}";
 
         shellHook = ''
-          export LD_LIBRARY_PATH="$UTIL_LINUX_MINIMAL_LIB_PATH"
-          echo LD_LIBRARY_PATH is:
-          echo $LD_LIBRARY_PATH | tr ':' '\n'
-
-          # This is a somewhat hacky workaround to read files untracked by git (see .gitignore)
-          echo "expose repository secrets as environment variables"
-          export CLOUDINARY=$(cat ./secrets/cloudinary.json)
-          export STRIPE_LIVE=$(cat ./secrets/stripe-live.json)
-          export TELEGRAM=$(cat ./secrets/telegram.json)
-          export WEBMENTION_IO_TOKEN=$(cat ./secrets/webmention-io-token.txt)
-
-          # ALWAYS set NODE_ENV to production
-          # https://youtu.be/HMM7GJC5E2o?si=RaVgw65WMOXDpHT2
-          export NODE_ENV=production
-
-          # Other environment variables
-          export ARTICLE_SLUG=test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu
-          # export DEBUG=eleventy-plugin-cloudinary*
-          export DEBUG=eleventy-plugin-text-to-speech/*,-eleventy-plugin-text-to-speech/transforms
-          # export DEBUG=Eleventy:*
-          export DOMAIN=giacomodebidda.com
-          # export ELEVENTY_ENV=development
-          export ELEVENTY_ENV=production
+          echo "🌐 personal website dev shell"
+          echo "- Node.js $(node --version)"
+          echo "- npm $(npm --version)"
+          echo "- $(steampipe --version)"
+          echo "- zx $(zx --version)"
+          export REDDIT=$(cat /run/secrets/reddit/trusted_client);
+          export STRIPE_TEST=$(cat /run/secrets/stripe/personal/test);
+          export TELEGRAM=$(cat /run/secrets/telegram/personal_bot);
         '';
+        ARTICLE_SLUG = "test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu";
+        # DEBUG = "Eleventy:UserConfig";
+        DEBUG = "eleventy-plugin-text-to-speech/*,-eleventy-plugin-text-to-speech/transforms";
+        DOMAIN = "giacomodebidda.com";
+        ELEVENTY_ENV = "development";
+        GOOGLE_APPLICATION_CREDENTIALS = "/run/secrets/gcp/prj-kitchen-sink/sa-storage-uploader";
+        NODE_DEBUG = "scripts:*";
+        # ALWAYS set NODE_ENV to production
+        # https://youtu.be/HMM7GJC5E2o?si=RaVgw65WMOXDpHT2
+        NODE_ENV = "production";
       };
     });
   };
