@@ -2,9 +2,9 @@ const { execSync } = require('node:child_process')
 const fs = require('node:fs')
 const path = require('node:path')
 const { debuglog } = require('node:util')
-const debug = debuglog('github-workflow')
 const { sendOutput } = require('../utils.cjs')
 
+const debug = debuglog('github-workflow')
 const splits = __filename.split('/')
 const app_id = splits[splits.length - 1]
 

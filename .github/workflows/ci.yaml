@@ -12,9 +12,10 @@ jobs:
   audit-build-test-deploy:
     name: 🔧 Audit, build, test, deploy
     runs-on: ubuntu-latest
+
     steps:
       - name: 🛎️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🖥️ Setup Node.js
         # https://github.com/marketplace/actions/setup-node-js-environment
@@ -67,7 +68,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: 🛎️ Checkout repo
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Wait for a successfull Deploy Preview on Netlify
   #       # https://github.com/JakePartusch/wait-for-netlify-action
   #       uses: jakepartusch/wait-for-netlify-action@v1
@@ -119,7 +120,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
 
   #     - name: Wait for a successful Deploy Preview on Netlify
   #       uses: jakepartusch/wait-for-netlify-action@v1
