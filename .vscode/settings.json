@@ -1,34 +1,5 @@
 {
-  "css.validate": true,
-  "editor.defaultFormatter": null,
-  "editor.formatOnSave": false,
-  "editor.rulers": [80, 120],
-  "files.associations": {
-    "_headers": "toml",
-    "_redirects": "toml",
-    ".ignore": "txt",
-    "*.webc": "html"
-  },
-  "files.exclude": {
-    "node_modules/": true
-  },
-  // https://www.michael1e.com/turning-on-emmet-for-nunjuck-files-on-vscode/
-  "emmet.includeLanguages": {
-    "nunjucks": "html"
-  },
-  "turboConsoleLog.includeFileNameAndLineNum": false,
   // https://github.com/prettier/prettier-vscode#prettierconfigpath
   "prettier.configPath": "config/prettier.cjs",
-  "prettier.requireConfig": true,
-  "[css][javascript][json]": {
-    "editor.formatOnSave": true
-  },
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  // https://11ty.rocks/tips/vscode/
-  "[markdown][nunjucks]": {
-    "editor.wordWrapColumn": 120,
-    "editor.wordWrap": "bounded"
-  }
+  "prettier.requireConfig": true
 }
