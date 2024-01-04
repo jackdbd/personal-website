@@ -124,9 +124,11 @@ export default function (eleventyConfig) {
     // GOOGLE_APPLICATION_CREDENTIALS to be a filepath (as it should always be).
     process.env.GOOGLE_APPLICATION_CREDENTIALS = keyFilename
   } else {
-    // on my laptop, I keep the JSON key in the secrets/ directory
-    keyFilename = join(REPO_ROOT, 'secrets', 'sa-storage-uploader.json')
-    process.env.GOOGLE_APPLICATION_CREDENTIALS = keyFilename
+    // on my NixOS laptop, I have a secret stored on the filesystem
+    keyFilename = undefined
+    // on my non-NixOS laptop, I keep the JSON key in the secrets/ directory
+    // keyFilename = join(REPO_ROOT, 'secrets', 'sa-storage-uploader.json')
+    // process.env.GOOGLE_APPLICATION_CREDENTIALS = keyFilename
   }
 
   // https://developers.cloudflare.com/pages/platform/build-configuration/#environment-variables

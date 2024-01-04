@@ -45,15 +45,12 @@
         # it in a docker container.
         # https://github.com/NixOS/nixpkgs/issues/215945
         packages = with pkgs; [node2nix nodejs steampipe zx];
+
         # This project depends on @jackdbd/eleventy-plugin-text-to-speech, which
         # depends on jsdom, which depends on canvas.
         # On Linux, canvas requires the shared object file libuuid.so, and we
         # must explicitly require the package libuuid otherwise the build fails.
         buildInputs = [pkgs.libuuid];
-        # Requiring the libuuid package is not enough. We must append to
-        # LD_LIBRARY_PATH the path to that package, so the linker can find
-        # libuuid.so. On NixOS, libuuid can be found in util-linux-minimal.
-        # UTIL_LINUX_MINIMAL_LIB_PATH = "${pkgs.lib.makeLibraryPath [pkgs.libuuid]}";
 
         shellHook = ''
           echo "🌐 personal website dev shell"
@@ -75,9 +72,10 @@
         ELEVENTY_ENV = "development";
         GOOGLE_APPLICATION_CREDENTIALS = "/run/secrets/gcp/prj-kitchen-sink/sa-storage-uploader";
 
-        # eleventy-plugin-text-to-speech depends on jsdom, which depends on canvas,
-        # which on Linux depends on the shared object libuuid.so. On NixOS the
-        # path to libuuid.so is not added to the linker, so we must add it manually.
+        # Requiring the libuuid package is not enough. We must append to
+        # LD_LIBRARY_PATH the path to that package, so the linker can find
+        # libuuid.so. On NixOS the path to libuuid.so is not added to the linker,
+        # so we must add it manually.
         LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [pkgs.libuuid];
         # See also:
         # https://discourse.nixos.org/t/node-libuuid-so-1-not-found/34864
