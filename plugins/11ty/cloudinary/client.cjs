@@ -35,9 +35,15 @@ const makeClient = (config) => {
     // https://cloudinary.com/documentation/search_api#expressions
     // const expression = `resource_type:video AND public_id:${public_id}`
     const expression = `public_id:${public_id}`
-    debug(`search %O`, { cloud_name, expression, fields: ['context', 'tags'] })
+    if (cache_verbose) {
+      debug(`search %O`, {
+        cloud_name,
+        expression,
+        fields: ['context', 'tags']
+      })
+    }
 
-    // TODO: search in asset cache before fetching from Cloudinary Media Library
+    // search in asset cache before fetching from Cloudinary Media Library
     // https://www.11ty.dev/docs/plugins/fetch/#manually-store-your-own-data-in-the-cache
     // https://github.com/chrisburnell/eleventy-cache-webmentions/blob/main/eleventy-cache-webmentions.js
     const asset = new AssetCache(public_id, cache_directory, {
@@ -49,7 +55,7 @@ const makeClient = (config) => {
 
     if (asset.isCacheValid(cache_duration)) {
       debug(
-        `${public_id} in ${cache_directory} and still fresh. Extracting from cache.`
+        `${public_id} found in cache and still fresh. Extracting it from ${cache_directory}`
       )
       return await asset.getCachedValue()
     }
@@ -69,7 +75,7 @@ const makeClient = (config) => {
         .max_results(1)
         .execute()
     } catch (err) {
-      // A Cloudinary SDK error is NOT `Error` objects, but a plain JS object
+      // A Cloudinary SDK error is NOT an `Error` object, but a plain JS object
       // with an `error` field.
       // https://github.com/cloudinary/cloudinary_npm
       debug(`ERROR from Cloudinary SDK %O`, err)

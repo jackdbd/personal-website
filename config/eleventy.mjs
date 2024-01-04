@@ -356,8 +356,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(cloudinaryPlugin, {
     apiKey: cloudinary.api_key,
     apiSecret: cloudinary.api_secret,
-    cacheDuration: '7d',
-    cacheVerbose: true,
+    cacheDuration: '30d',
+    // cacheVerbose: true,
     cloudName: cloudinary.cloud_name
   })
 
