@@ -112,7 +112,7 @@ export default function (eleventyConfig) {
   })
 
   let keyFilename
-  // on Cloudflare Pages, I set GCP_CREDENTIALS_JSON as a JSON string.
+  // on GitHub Actions and on Cloudflare Pages, I set GCP_CREDENTIALS_JSON as a JSON string.
   if (process.env.GCP_CREDENTIALS_JSON) {
     keyFilename = 'credentials.json'
     fs.writeFileSync(keyFilename, process.env.GCP_CREDENTIALS_JSON)

@@ -93,7 +93,17 @@ npm run site:serve
 
 ## Deploy
 
-Just push to the remote repository. Cloudflare Pages will take care of deploying the `main` branch to production, and creating a [preview deployment](https://developers.cloudflare.com/pages/platform/preview-deployments/) for all other branches.
+Just push to the remote repository. The [CI GitHub workflow](./.github/workflows/ci.yaml) will run tests and deploy the website using [Cloudflare Pages GitHub Action](https://github.com/marketplace/actions/cloudflare-pages-github-action).
+
+The `main` branch will be deployed to production. All other branches will trigger a [preview deployment](https://developers.cloudflare.com/pages/platform/preview-deployments/) instead.
+
+Don't forget to set the environment variables `NODE_ENV` and `NODE_VERSION` in the [Cloudflare Pages dashboard](https://developers.cloudflare.com/pages/functions/bindings/#environment-variables). In particular, `NODE_VERSION` is used by the Cloudflare Pages [V2 build system](https://developers.cloudflare.com/pages/configuration/language-support-and-tools/#v2-build-system).
+
+The Cloudflare Pages V2 build system installs a Node.js project dependencies using this command (I don't know if this can be changed or configured in any way):
+
+```sh
+npm clean-install --progress=false
+```
 
 ## Security audit
 
@@ -111,6 +121,12 @@ See [SECURITY.md](./SECURITY.md).
 
 - [Lighthouse reports](./lighthouse/reports/README.md)
 - [Misc. scripts](./scripts/README.md)
+
+A few GitHub workflows can be triggered by an `workflow_dispatch` event, so you can launch them using the [GitHub CLI](https://cli.github.com/):
+
+```sh
+gh workflows run "LinkedIn links to Telegram"
+```
 
 ## Troubleshooting the service worker
 
