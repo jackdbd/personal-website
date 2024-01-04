@@ -1,7 +1,8 @@
 const PrettyError = require('pretty-error')
 const snoowrap = require('snoowrap')
 const yargs = require('yargs')
-const { EMOJI, jsonSecret, sendOutput, userAgent } = require('./utils.cjs')
+const { EMOJI, jsonSecret } = require('../utils.cjs')
+const { sendOutput, userAgent } = require('./utils.cjs')
 
 const pe = new PrettyError()
 

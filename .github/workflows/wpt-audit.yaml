@@ -17,7 +17,7 @@ jobs:
         os: [ubuntu-latest]
     steps:
       - name: 🛎️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Audit / and /contact with WebPageTest (mobile)
         # https://github.com/WPO-Foundation/webpagetest-github-action
         # All WebPageTest options are set via the wptOptions input

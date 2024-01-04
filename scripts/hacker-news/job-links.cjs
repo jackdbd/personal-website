@@ -1,9 +1,12 @@
 const { execSync } = require('node:child_process')
 const fs = require('node:fs')
 const path = require('node:path')
+const { debuglog } = require('node:util')
 const PrettyError = require('pretty-error')
 const yargs = require('yargs')
 const { EMOJI, sendOutput } = require('../utils.cjs')
+
+const debug = debuglog('gh-workflow:hn-job-links')
 
 const pe = new PrettyError()
 

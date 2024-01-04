@@ -13,34 +13,33 @@ on:
 jobs:
   steampipe-linkedin-telegram:
     name: LinkedIn links to Telegram
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: ['current']
+    runs-on: ubuntu-latest
+
     steps:
       - name: 🛎️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: 🖥️ Setup Node.js ${{ matrix.node }}
-        # https://github.com/marketplace/actions/setup-node-js-environment
-        uses: actions/setup-node@v3
+      - name: 🖥️ Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node }}
+          node-version: current
 
       - name: Setup Steampipe and its plugins
         # https://github.com/marketplace/actions/setup-steampipe
         uses: francois2metz/setup-steampipe@v1
         with:
           steampipe-version: 'latest'
-          steampipe-plugins: |
+          # https://hub.steampipe.io/plugins/turbot/linkedin#configuration
+          # https://hub.steampipe.io/plugins/turbot/openai#configuration
+          plugin-connections: |
             {
-              "hackernews": {},
-              "linkedin": {
-                "token": "${{ fromJSON(secrets.LINKEDIN).token }}"
-              },
-              "openai": {
-                "api_key": "${{ fromJSON(secrets.OPENAI).api_key }}"
+              connection "linkedin" {
+                plugin = "linkedin"
+                token = "${{ fromJSON(secrets.LINKEDIN).token }}"
+              }
+              connection "openai" {
+                plugin = "openai"
+                api_key = "${{ fromJSON(secrets.OPENAI).api_key }}"
               }
             }
 
@@ -63,24 +62,24 @@ jobs:
 
             ${{ env.LINKEDIN_PEOPLE_LINKS }}
 
-      - name: LinkedIn companies links
-        run: |
-          delimiter=$(openssl rand -hex 8)
-          echo "LINKEDIN_COMPANIES_LINKS<<$delimiter" >> $GITHUB_ENV
-          node scripts/linkedin/linkedin-companies-links.cjs >> $GITHUB_ENV
-          echo "$delimiter" >> $GITHUB_ENV
+      # - name: LinkedIn companies links
+      #   run: |
+      #     delimiter=$(openssl rand -hex 8)
+      #     echo "LINKEDIN_COMPANIES_LINKS<<$delimiter" >> $GITHUB_ENV
+      #     node scripts/linkedin/linkedin-companies-links.cjs >> $GITHUB_ENV
+      #     echo "$delimiter" >> $GITHUB_ENV
 
-      - name: 💬 Send LinkedIn companies links to Telegram
-        uses: appleboy/telegram-action@v0.1.1
-        with:
-          to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
-          token: ${{ fromJSON(secrets.TELEGRAM).token }}
-          format: html
-          disable_web_page_preview: true
-          message: |
-            <b>🤖 LinkedIn companies profiles</b>
+      # - name: 💬 Send LinkedIn companies links to Telegram
+      #   uses: appleboy/telegram-action@v0.1.1
+      #   with:
+      #     to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
+      #     token: ${{ fromJSON(secrets.TELEGRAM).token }}
+      #     format: html
+      #     disable_web_page_preview: true
+      #     message: |
+      #       <b>🤖 LinkedIn companies profiles</b>
 
-            ${{ env.LINKEDIN_COMPANIES_LINKS }}
+      #       ${{ env.LINKEDIN_COMPANIES_LINKS }}
 
       # - name: OpenAI ChatGPT
       #   run: |

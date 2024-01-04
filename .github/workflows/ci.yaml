@@ -11,34 +11,33 @@ on:
 jobs:
   audit-build-test-deploy:
     name: 🔧 Audit, build, test, deploy
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: ['lts/hydrogen']
+    runs-on: ubuntu-latest
+
     steps:
       - name: 🛎️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: 🖥️ Setup Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v3
+      - name: 🖥️ Setup Node.js
+        # https://github.com/marketplace/actions/setup-node-js-environment
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node }}
+          # https://github.com/nodejs/Release/blob/main/CODENAMES.md
+          node-version: lts/Iron
 
-      - run: npm ci
+      - run: npm ci --include dev --include prod
 
       - name: 🛡️ Audit security
         continue-on-error: true
-        if: ${{ matrix.os }} == 'ubuntu-latest'
         run: npm audit --audit-level=moderate
 
       - name: 🔧 Build website
         env:
           CLOUDINARY: ${{ secrets.CLOUDINARY }}
-          DEBUG: Eleventy:cmd,Eleventy:ErrorHandler,Eleventy:UserConfig
+          DEBUG: Eleventy:ErrorHandler,eleventy-plugin-text-to-speech/*,-eleventy-plugin-text-to-speech/transforms
           DOMAIN: ${{ secrets.DOMAIN }}
           ELEVENTY_ENV: production
-          NODE_ENV: development
+          GCP_CREDENTIALS_JSON: ${{ secrets.GCP_CREDENTIALS_JSON }}
+          NODE_ENV: production
           STRIPE_LIVE: ${{ secrets.STRIPE_LIVE }}
           TELEGRAM: ${{ secrets.TELEGRAM }}
           WEBMENTION_IO_TOKEN: ${{ secrets.WEBMENTION_IO_TOKEN }}
@@ -69,7 +68,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: 🛎️ Checkout repo
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Wait for a successfull Deploy Preview on Netlify
   #       # https://github.com/JakePartusch/wait-for-netlify-action
   #       uses: jakepartusch/wait-for-netlify-action@v1
@@ -121,7 +120,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
 
   #     - name: Wait for a successful Deploy Preview on Netlify
   #       uses: jakepartusch/wait-for-netlify-action@v1

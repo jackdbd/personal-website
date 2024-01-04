@@ -33,10 +33,24 @@ My personal website and blog, built with [11ty](https://www.11ty.dev/) and [Work
 
 ## Installation
 
-If you only care about the HTML, CSS and JS of this website, you can install just the production dependencies:
+Clone the repo:
+
+```shell
+git clone git@github.com:jackdbd/personal-website.git
+```
+
+This project uses a [nix dev shell](https://fasterthanli.me/series/building-a-rust-service-with-nix/part-10) to define a virtual environment with all the necessary dependencies. Thanks to nix, direnv and the `.envrc` file, you can activate this environment just by entering the root directory of this repository.
+
+Install all dependencies from npm.js (by passing `--include dev` we can be sure that we are installing `devDependencies` even when `NODE_ENV` is set to `production`):
 
 ```sh
-npm install --omit=dev
+npm install --include dev --include prod
+```
+
+If you don't use nix, install [zx](https://github.com/google/zx) globally.
+
+```sh
+npm install --global zx
 ```
 
 If you want to run scripts and tests (e.g. e2e tests with [Playwright](https://playwright.dev/)) you will need to install also the dev dependencies:
@@ -55,9 +69,9 @@ Watch all templates, CSS, JS, service worker, and automatically refresh the brow
 npm run dev
 ```
 
-Then visit http://localhost:8080/ to see the website.
+Go to http://localhost:8080/ to visit the website.
 
-In alternative, develop and preview locally the site with [wrangler](https://developers.cloudflare.com/pages/platform/functions/#develop-and-preview-locally) (this is useful when developing functions that will be deployed to [Cloudflare Pages Functions](https://developers.cloudflare.com/pages/platform/functions/)):
+In alternative, develop and preview the site with [wrangler](https://developers.cloudflare.com/pages/platform/functions/#develop-and-preview-locally) (this is useful when developing functions that will be deployed to [Cloudflare Pages Functions](https://developers.cloudflare.com/pages/platform/functions/)):
 
 ```sh
 npm run wrangler
@@ -79,7 +93,17 @@ npm run site:serve
 
 ## Deploy
 
-Just push to the remote repository. Cloudflare Pages will take care of deploying the `main` branch to production, and creating a [preview deployment](https://developers.cloudflare.com/pages/platform/preview-deployments/) for all other branches.
+Just push to the remote repository. The [CI GitHub workflow](./.github/workflows/ci.yaml) will run tests and deploy the website using [Cloudflare Pages GitHub Action](https://github.com/marketplace/actions/cloudflare-pages-github-action).
+
+The `main` branch will be deployed to production. All other branches will trigger a [preview deployment](https://developers.cloudflare.com/pages/platform/preview-deployments/) instead.
+
+Don't forget to set the environment variables `NODE_ENV` and `NODE_VERSION` in the [Cloudflare Pages dashboard](https://developers.cloudflare.com/pages/functions/bindings/#environment-variables). In particular, `NODE_VERSION` is used by the Cloudflare Pages [V2 build system](https://developers.cloudflare.com/pages/configuration/language-support-and-tools/#v2-build-system).
+
+The Cloudflare Pages V2 build system installs a Node.js project dependencies using this command (I don't know if this can be changed or configured in any way):
+
+```sh
+npm clean-install --progress=false
+```
 
 ## Security audit
 
@@ -97,6 +121,16 @@ See [SECURITY.md](./SECURITY.md).
 
 - [Lighthouse reports](./lighthouse/reports/README.md)
 - [Misc. scripts](./scripts/README.md)
+
+A few GitHub workflows can be triggered by an `workflow_dispatch` event, so you can launch them using the [GitHub CLI](https://cli.github.com/):
+
+```sh
+gh workflows run "Hacker News links to Telegram"
+
+gh workflows run "LinkedIn links to Telegram"
+
+gh workflows run "Reddit links to Telegram"
+```
 
 ## Troubleshooting the service worker
 

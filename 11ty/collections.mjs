@@ -31,13 +31,13 @@ const makeAddTagsToTagSet = (tagSet, predicate) => {
   }
 }
 
-const userDefinedTagList = (collection) => {
+export const userDefinedTagList = (collection) => {
   const tagSet = new Set()
   const addTagsToTagSet = makeAddTagsToTagSet(tagSet, isUserDefinedTag)
   collection.getAll().forEach(addTagsToTagSet)
   return [...tagSet]
 }
 
-module.exports = {
+export default {
   userDefinedTagList
 }

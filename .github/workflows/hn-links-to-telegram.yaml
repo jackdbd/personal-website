@@ -13,20 +13,16 @@ on:
 jobs:
   steampipe-hn-telegram:
     name: Hacker News links to Telegram
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: ['current']
+    runs-on: ubuntu-latest
+
     steps:
       - name: 🛎️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: 🖥️ Setup Node.js ${{ matrix.node }}
-        # https://github.com/marketplace/actions/setup-node-js-environment
-        uses: actions/setup-node@v3
+      - name: 🖥️ Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node }}
+          node-version: latest
 
       - run: npm ci
 
@@ -35,9 +31,13 @@ jobs:
         uses: francois2metz/setup-steampipe@v1
         with:
           steampipe-version: 'latest'
-          steampipe-plugins: |
+          # https://hub.steampipe.io/plugins/turbot/hackernews#configuration
+          plugin-connections: |
             {
-              "hackernews": {}
+              connection "hackernews" {
+                plugin = "hackernews"
+                max_items = 5000
+              }
             }
 
       - name: Hacker News links

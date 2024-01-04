@@ -20,12 +20,10 @@ const config = {
   settings: {
     emulatedUserAgent,
     onlyCategories: ['performance'],
-     maxWaitForFcp: constants.maxWaitForFcp,
-     maxWaitForLoad: constants.maxWaitForLoad,
-    onlyAudits: [
-      'first-meaningful-paint',
-    ],
-  },
+    maxWaitForFcp: constants.maxWaitForFcp,
+    maxWaitForLoad: constants.maxWaitForLoad,
+    onlyAudits: ['first-meaningful-paint']
+  }
 }
 
 module.exports = config

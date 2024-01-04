@@ -1,5 +1,8 @@
 const fs = require('node:fs')
 const path = require('node:path')
+const { debuglog } = require('node:util')
+
+const debug = debuglog('scripts:utils')
 
 // https://emojipedia.org/
 const EMOJI = {
@@ -33,6 +36,29 @@ const waitMs = (ms) => {
       resolve({ message: `timeout ${timeout} of ${ms}ms resolved` })
     }, ms)
   })
+}
+
+const jsonSecret = (name) => {
+  // replaceAll available in Node.js 15 and later
+  // https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V15.md#v8-86---35415
+  const env_var_name = name.replaceAll('-', '_').toUpperCase()
+
+  let secret = ''
+  if (process.env[env_var_name]) {
+    debug(`environment variable ${env_var_name} is set`)
+    secret = process.env[env_var_name]
+  } else {
+    debug(`environment variable ${env_var_name} not set`)
+    if (process.env.GITHUB_SHA) {
+      throw new Error(`environment variable ${env_var_name} not set`)
+    } else {
+      const filepath = path.join('secrets', `${name}.json`)
+      debug(`trying to read ${filepath}`)
+      secret = fs.readFileSync(filepath).toString()
+    }
+  }
+
+  return JSON.parse(secret)
 }
 
 const sendOutput = async (text) => {
@@ -72,4 +98,4 @@ const sendOutput = async (text) => {
   }
 }
 
-module.exports = { EMOJI, sendOutput, waitMs }
+module.exports = { EMOJI, jsonSecret, sendOutput, waitMs }

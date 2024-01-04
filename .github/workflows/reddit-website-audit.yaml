@@ -16,13 +16,13 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         node: ['current']
+
     steps:
       - name: 🛎️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🖥️ Setup Node.js ${{ matrix.node }}
-        # https://github.com/marketplace/actions/setup-node-js-environment
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
 
