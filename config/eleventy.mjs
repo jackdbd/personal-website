@@ -1,37 +1,37 @@
-import fs from 'node:fs';
-import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import markdownIt from 'markdown-it';
-import markdownItAnchor from 'markdown-it-anchor';
-import {globby} from 'globby';
-import { EleventyRenderPlugin } from '@11ty/eleventy';
-import navigation from '@11ty/eleventy-navigation';
-import rss from '@11ty/eleventy-plugin-rss';
-import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
-import webcPlugin from '@11ty/eleventy-plugin-webc';
-import cspPlugin from '@jackdbd/eleventy-plugin-content-security-policy';
-import { ensureEnvVarsPlugin } from '@jackdbd/eleventy-plugin-ensure-env-vars';
-import { telegramPlugin } from '@jackdbd/eleventy-plugin-telegram';
-import { plugin as textToSpeechPlugin } from '@jackdbd/eleventy-plugin-text-to-speech';
-import brokenLinksPlugin from 'eleventy-plugin-broken-links';
-import embedTwitter from 'eleventy-plugin-embed-twitter';
-import embedVimeo from 'eleventy-plugin-vimeo-embed';
-import embedYouTube from 'eleventy-plugin-youtube-embed';
-import emoji from 'eleventy-plugin-emoji';
-import helmet from 'eleventy-plugin-helmet';
-import readingTime from 'eleventy-plugin-reading-time';
-import toc from 'eleventy-plugin-nesting-toc';
-import collections from '../11ty/collections.mjs';
-import filters from '../11ty/filters.mjs';
-import shortcodes from '../11ty/shortcodes.mjs';
-import { callout, table } from '../11ty/paired-shortcodes.mjs';
-import {htmlmin} from '../11ty/transforms.mjs';
-import cloudinaryPlugin from '../plugins/11ty/cloudinary/index.cjs';
-import stripePlugin from '../plugins/11ty/stripe/index.cjs';
-import webmentionsPlugin from '../plugins/11ty/webmentions/index.cjs';
-import { buildServiceWorker } from '../src/build-sw.cjs';
+import fs from 'node:fs'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import markdownIt from 'markdown-it'
+import markdownItAnchor from 'markdown-it-anchor'
+import { globby } from 'globby'
+import { EleventyRenderPlugin } from '@11ty/eleventy'
+import navigation from '@11ty/eleventy-navigation'
+import rss from '@11ty/eleventy-plugin-rss'
+import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight'
+import webcPlugin from '@11ty/eleventy-plugin-webc'
+import cspPlugin from '@jackdbd/eleventy-plugin-content-security-policy'
+import { ensureEnvVarsPlugin } from '@jackdbd/eleventy-plugin-ensure-env-vars'
+import { telegramPlugin } from '@jackdbd/eleventy-plugin-telegram'
+import { plugin as textToSpeechPlugin } from '@jackdbd/eleventy-plugin-text-to-speech'
+import brokenLinksPlugin from 'eleventy-plugin-broken-links'
+import embedTwitter from 'eleventy-plugin-embed-twitter'
+import embedVimeo from 'eleventy-plugin-vimeo-embed'
+import embedYouTube from 'eleventy-plugin-youtube-embed'
+import emoji from 'eleventy-plugin-emoji'
+import helmet from 'eleventy-plugin-helmet'
+import readingTime from 'eleventy-plugin-reading-time'
+import toc from 'eleventy-plugin-nesting-toc'
+import collections from '../11ty/collections.mjs'
+import filters from '../11ty/filters.mjs'
+import shortcodes from '../11ty/shortcodes.mjs'
+import { callout, table } from '../11ty/paired-shortcodes.mjs'
+import { htmlmin } from '../11ty/transforms.mjs'
+import cloudinaryPlugin from '../plugins/11ty/cloudinary/index.cjs'
+import stripePlugin from '../plugins/11ty/stripe/index.cjs'
+import webmentionsPlugin from '../plugins/11ty/webmentions/index.cjs'
+import { buildServiceWorker } from '../src/build-sw.cjs'
 
-const __filename = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(import.meta.url)
 const REPO_ROOT = join(__filename, '..', '..')
 const OUTPUT_DIR = join(REPO_ROOT, '_site')
 // const ASSETS_DIR = join(REPO_ROOT, 'assets')

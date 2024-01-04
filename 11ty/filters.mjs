@@ -64,8 +64,6 @@ export const machineDateJS = (dateObj) => {
   return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('yyyy-MM-dd')
 }
 
-
-
 export const slugify = (str) => {
   return slugifyFn(str, {
     lower: true,
