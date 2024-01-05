@@ -4,9 +4,7 @@ const sendEmail = async ({ api_key, email, message, name }) => {
     message
   ]
 
-  throw new Error(
-    `sending email using the SendGrid API is not supported at the moment`
-  )
+  throw new Error(`sending email is not supported at the moment`)
 }
 
 const sendMessageToTelegramChat = async ({

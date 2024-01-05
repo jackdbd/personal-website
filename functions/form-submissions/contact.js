@@ -35,7 +35,7 @@ export async function onRequestPost(context) {
   }
 
   try {
-    ensureEnvVarsAreSet(env, ['SENDGRID', 'TELEGRAM'])
+    ensureEnvVarsAreSet(env, ['TELEGRAM'])
   } catch (err) {
     const sorry = name ? `Sorry ${name}!` : `Sorry!`
     const responsePayload = JSON.stringify(
@@ -53,23 +53,9 @@ export async function onRequestPost(context) {
     return response
   }
 
-  const notification_channels = ['sendgrid', 'telegram']
+  const notification_channels = ['telegram']
   const failures = []
   const successes = []
-
-  try {
-    const sendgrid = JSON.parse(env.SENDGRID)
-
-    await sendEmail({
-      api_key: sendgrid.api_key,
-      email,
-      message,
-      name
-    })
-    successes.push(`message sent to SendGrid`)
-  } catch (err) {
-    failures.push(err)
-  }
 
   try {
     const telegram = JSON.parse(env.TELEGRAM)

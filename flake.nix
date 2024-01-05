@@ -58,7 +58,7 @@
           echo "- npm $(npm --version)"
           echo "- $(steampipe --version)"
           echo "- zx $(zx --version)"
-          export CLOUDINARY=$(cat ./secrets/cloudinary.json);
+          export CLOUDINARY=$(cat /run/secrets/cloudinary);
           export REDDIT=$(cat /run/secrets/reddit/trusted_client);
           export STRIPE_TEST=$(cat /run/secrets/stripe/personal/test);
           export TELEGRAM=$(cat /run/secrets/telegram/personal_bot);
@@ -71,7 +71,7 @@
         # DEBUG = "eleventy-plugin-text-to-speech/*,-eleventy-plugin-text-to-speech/transforms";
         DOMAIN = "giacomodebidda.com";
         ELEVENTY_ENV = "development";
-        GOOGLE_APPLICATION_CREDENTIALS = "/run/secrets/gcp/prj-kitchen-sink/sa-storage-uploader";
+        GOOGLE_APPLICATION_CREDENTIALS = "/run/secrets/prj-kitchen-sink/sa-storage-uploader";
 
         # Requiring the libuuid package is not enough. We must append to
         # LD_LIBRARY_PATH the path to that package, so the linker can find

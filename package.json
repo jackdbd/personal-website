@@ -59,7 +59,7 @@
     "webhint:home": "hint $DOMAIN/",
     "webhint:projects": "hint $DOMAIN/projects/",
     "webhint:reports": "serve hint-report/",
-    "wrangler": "wrangler pages dev _site --compatibility-date=2024-01-04 --port=8788 --live-reload --log-level=info --binding SENDGRID=\"$(cat ./secrets/sendgrid.json)\" --binding TELEGRAM=$TELEGRAM"
+    "wrangler": "wrangler pages dev _site --compatibility-date=2024-01-04 --port=8788 --live-reload --log-level=info --binding TELEGRAM=$TELEGRAM"
   },
   "browserslist": [
     "defaults",

@@ -53,10 +53,10 @@ If you don't use nix, install [zx](https://github.com/google/zx) globally.
 npm install --global zx
 ```
 
-If you want to run scripts and tests (e.g. e2e tests with [Playwright](https://playwright.dev/)) you will need to install also the dev dependencies:
+If you want to run scrips/tests that rely on [Playwright](https://playwright.dev/), you will also need to install/update the browsers it uses:
 
 ```sh
-npm install --include=prod --include=dev
+npx playwright install
 ```
 
 > :information_source: If you are using the Nix package manager, you can find a `flake.nix` in this repository. It was generated using [dev-templates](https://github.com/the-nix-way/dev-templates). If you don't use / don't know Nix, you can safely ignore that file.

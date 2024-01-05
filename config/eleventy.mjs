@@ -62,7 +62,7 @@ export default function (eleventyConfig) {
   )
 
   eleventyConfig.addPlugin(ensureEnvVarsPlugin, {
-    envVars: ['DEBUG', 'ELEVENTY_ENV', 'NODE_ENV']
+    envVars: ['CLOUDINARY', 'DEBUG', 'ELEVENTY_ENV', 'NODE_ENV']
   })
 
   eleventyConfig.on('eleventy.after', async () => {
@@ -342,16 +342,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(embedVimeo, { dnt: true })
   eleventyConfig.addPlugin(embedYouTube, { lazy: true, noCookie: true })
 
-  let cloudinary_json_string
-  if (process.env.CLOUDINARY) {
-    cloudinary_json_string = process.env.CLOUDINARY
-  } else {
-    cloudinary_json_string = fs.readFileSync(
-      join(REPO_ROOT, 'secrets', 'cloudinary.json'),
-      { encoding: 'utf8' }
-    )
-  }
-  const cloudinary = JSON.parse(cloudinary_json_string)
+  const cloudinary = JSON.parse(process.env.CLOUDINARY)
 
   eleventyConfig.addPlugin(cloudinaryPlugin, {
     apiKey: cloudinary.api_key,
@@ -382,20 +373,12 @@ export default function (eleventyConfig) {
     ]
   })
 
-  if (process.env.CF_PAGES) {
-    // on GitHub Actions I use a JSON secret for Telegram chat ID and token, and I
-    // expose that secret as an environment variable.
-    let telegram_json_string
-    if (process.env.TELEGRAM) {
-      telegram_json_string = process.env.TELEGRAM
-    } else {
-      telegram_json_string = fs.readFileSync(
-        join(REPO_ROOT, 'secrets', 'telegram.json'),
-        { encoding: 'utf8' }
-      )
-    }
-    const telegram = JSON.parse(telegram_json_string)
+  // On my NixOS laptop, on GitHub Actions and on Cloudflare Pages I use a
+  // JSON secret for Telegram chat ID and bot token, and I expose that secret
+  // as an environment variable.
+  const telegram = JSON.parse(process.env.TELEGRAM)
 
+  if (process.env.CF_PAGES || process.env.GITHUB_SHA) {
     eleventyConfig.addPlugin(telegramPlugin, {
       chatId: telegram.chat_id,
       token: telegram.token,
