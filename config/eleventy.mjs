@@ -378,12 +378,25 @@ export default function (eleventyConfig) {
   // as an environment variable.
   const telegram = JSON.parse(process.env.TELEGRAM)
 
-  if (process.env.CF_PAGES || process.env.GITHUB_SHA) {
+  if (process.env.CF_PAGES) {
     eleventyConfig.addPlugin(telegramPlugin, {
       chatId: telegram.chat_id,
       token: telegram.token,
-      textBeforeBuild: '11ty has just <b>started</b> building my personal site',
-      textAfterBuild: '🏁 11ty has <b>finished</b> building my personal website'
+      textBeforeBuild:
+        '⏱️ 11ty <b>started</b> building <b>personal website</b> on Cloudflare',
+      textAfterBuild:
+        '🏁 11ty <b>finished</b> building <b>personal website</b> on Cloudflare'
+    })
+  }
+
+  if (process.env.GITHUB_SHA) {
+    eleventyConfig.addPlugin(telegramPlugin, {
+      chatId: telegram.chat_id,
+      token: telegram.token,
+      textBeforeBuild:
+        '⏱️ 11ty <b>started</b> building <b>personal website</b> on GitHub',
+      textAfterBuild:
+        '🏁 11ty <b>finished</b> building <b>personal website</b> on GitHub'
     })
   }
 
