@@ -2,8 +2,8 @@ const fs = require('node:fs')
 const path = require('node:path')
 const snoowrap = require('snoowrap')
 const yargs = require('yargs')
+const { jsonSecret } = require('../utils.cjs')
 const {
-  jsonSecret,
   sendOutput,
   slugify,
   renderTelegramMessage,

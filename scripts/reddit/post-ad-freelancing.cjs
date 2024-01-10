@@ -3,8 +3,8 @@ const path = require('node:path')
 const PrettyError = require('pretty-error')
 const snoowrap = require('snoowrap')
 const yargs = require('yargs')
+const { jsonSecret } = require('../utils.cjs')
 const {
-  jsonSecret,
   sendOutput,
   slugify,
   renderTelegramMessage,

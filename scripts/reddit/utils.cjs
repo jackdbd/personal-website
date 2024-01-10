@@ -102,26 +102,8 @@ const userAgent = ({ app_id, username, version = '0.1.0' }) => {
   return `${os.platform()}:${app_id}:v${version} (by /u/${username})`
 }
 
-const jsonSecret = (name) => {
-  // replaceAll available in Node.js 15 and later
-  // https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V15.md#v8-86---35415
-  const env_var_name = name.replaceAll('-', '_').toUpperCase()
-
-  let secret = ''
-  if (process.env.GITHUB_SHA) {
-    if (!process.env[env_var_name]) {
-      throw new Error(`environment variable ${env_var_name} not set`)
-    }
-    secret = process.env[env_var_name]
-  } else {
-    secret = fs.readFileSync(path.join('secrets', `${name}.json`)).toString()
-  }
-  return JSON.parse(secret)
-}
-
 module.exports = {
   EMOJI,
-  jsonSecret,
   renderTelegramMessage,
   sendOutput,
   slugify,

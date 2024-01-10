@@ -2,7 +2,8 @@ const fs = require('node:fs')
 const path = require('node:path')
 const snoowrap = require('snoowrap')
 const yargs = require('yargs')
-const { EMOJI, jsonSecret, sendOutput, userAgent } = require('./utils.cjs')
+const { jsonSecret } = require('../utils.cjs')
+const { EMOJI, sendOutput, userAgent } = require('./utils.cjs')
 
 const splits = __filename.split('/')
 const APP_ID = splits[splits.length - 1]

@@ -72,4 +72,22 @@ const sendOutput = async (text) => {
   }
 }
 
-module.exports = { EMOJI, sendOutput, waitMs }
+const jsonSecret = ({ name, filepath }) => {
+  if (process.env.CF_PAGES || process.env.GITHUB_SHA) {
+    if (!name) {
+      throw new Error(`secret name not set`)
+    }
+    const env_var_name = name.replaceAll('-', '_').toUpperCase()
+    if (!process.env[env_var_name]) {
+      throw new Error(`environment variable ${env_var_name} not set`)
+    }
+    return JSON.parse(process.env[env_var_name])
+  }
+
+  if (!filepath) {
+    throw new Error(`secret filepath not set`)
+  }
+  return JSON.parse(fs.readFileSync(filepath).toString())
+}
+
+module.exports = { EMOJI, jsonSecret, sendOutput, waitMs }
