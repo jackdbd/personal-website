@@ -35,6 +35,11 @@
     devShells = forEachSupportedSystem ({pkgs}: {
       default = pkgs.mkShell {
         packages = with pkgs; [node2nix nodejs pnpm yarn];
+
+        nativeBuildInputs = with pkgs; [
+          playwright-driver.browsers
+        ];
+
         # This project depends on @jackdbd/eleventy-plugin-text-to-speech, which
         # depends on jsdom, which depends on canvas.
         # On Linux, canvas requires the shared object file libuuid.so, and we
@@ -62,6 +67,10 @@
           # ALWAYS set NODE_ENV to production
           # https://youtu.be/HMM7GJC5E2o?si=RaVgw65WMOXDpHT2
           export NODE_ENV=production
+
+          export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
+          # It seems it's not mandatory to set this environment variable
+          # export PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=true
 
           # Other environment variables
           export ARTICLE_SLUG=test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu
