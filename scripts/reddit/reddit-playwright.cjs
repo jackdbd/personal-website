@@ -1,14 +1,14 @@
 const fs = require('node:fs')
 const path = require('node:path')
-const axios = require('axios')
-const FormData = require('form-data')
-const { chromium } = require('playwright')
-const snoowrap = require('snoowrap')
-const { jsonSecret, waitMs } = require('../utils.cjs')
-const { userAgent } = require('./utils.cjs')
+// const axios = require('axios')
+// const FormData = require('form-data')
+const { chromium } = require('playwright-core')
+// const snoowrap = require('snoowrap')
+// const { jsonSecret, waitMs } = require('../utils.cjs')
+// const { userAgent } = require('./utils.cjs')
 
-const splits = __filename.split('/')
-const app_id = splits[splits.length - 1]
+// const splits = __filename.split('/')
+// const app_id = splits[splits.length - 1]
 
 // TODO: decide what to do with this script. Fininsh implementing it or delete it.
 
@@ -18,71 +18,71 @@ const app_id = splits[splits.length - 1]
  */
 const main = async () => {
   //   const args = process.argv.slice(2)
-  const subreddit = 'test'
+  // const subreddit = 'test'
 
-  const { username, password, client_id, client_secret } = jsonSecret({
-    name: 'REDDIT',
-    filepath: '/run/secrets/reddit/trusted_client'
-  })
+  // const { username, password, client_id, client_secret } = jsonSecret({
+  //   name: 'REDDIT',
+  //   filepath: '/run/secrets/reddit/trusted_client'
+  // })
 
-  const user_agent = userAgent({ app_id, username, version: '0.1.0' })
+  // const user_agent = userAgent({ app_id, username, version: '0.1.0' })
 
-  const r = new snoowrap({
-    userAgent: user_agent,
-    clientId: client_id,
-    clientSecret: client_secret,
-    username,
-    password
-  })
+  // const r = new snoowrap({
+  //   userAgent: user_agent,
+  //   clientId: client_id,
+  //   clientSecret: client_secret,
+  //   username,
+  //   password
+  // })
 
   //   const query = `
   //   self:true AND
   //   (selftext:"test" OR title:"test") AND
   //   subreddit:${subreddit}`
 
-  const query = `
-  self:true AND 
-  (selftext:"test" OR title:"test")`
+  // const query = `self:true AND (selftext:"test" OR title:"test")`
 
-  const submissions = await r.search({
-    limit: 1,
-    query,
-    sort: 'new',
-    time: 'month'
-  })
+  // const submissions = await r.search({
+  //   limit: 1,
+  //   query,
+  //   sort: 'new',
+  //   time: 'month'
+  // })
 
-  if (submissions.length === 0) {
-    throw new Error(
-      `No submissions matching query "${query}" found in r/${subreddit}`
-    )
-  }
+  // if (submissions.length === 0) {
+  //   throw new Error(
+  //     `No submissions matching query "${query}" found in r/${subreddit}`
+  //   )
+  // }
 
-  const sub = submissions[0]
+  // const sub = submissions[0]
 
   const browser = await chromium.launch({
-    // devtools: process.env.GITHUB_SHA ? false : true,
+    devtools: process.env.GITHUB_SHA ? false : true,
+    executablePath: '/home/jack/.nix-profile/bin/chromium',
     headless: process.env.GITHUB_SHA ? true : false
   })
 
   const ctx = await browser.newContext()
 
-  const eu_cookie = encodeURIComponent(
-    JSON.stringify({ opted: true, nonessential: false })
-  )
+  // const eu_cookie = encodeURIComponent(
+  //   JSON.stringify({ opted: true, nonessential: false })
+  // )
 
   // set eu_cookie to bypass the consent banner
-  await ctx.addCookies([
-    {
-      name: 'eu_cookie',
-      value: eu_cookie,
-      domain: '.reddit.com',
-      path: '/'
-    }
-  ])
+  // await ctx.addCookies([
+  //   {
+  //     name: 'eu_cookie',
+  //     value: eu_cookie,
+  //     domain: '.reddit.com',
+  //     path: '/'
+  //   }
+  // ])
 
   const page = await ctx.newPage()
+  await page.goto('https://www.reddit.com/r/NixOS/')
 
-  await page.goto(sub.url)
+  // await page.goto(sub.url)
 
   // TODO: login, otherwise Reddit MIGHT display a dialog asking us if we are
   // over 18 (e.g. when an image is NSFW or SEEMS NSFW because it contains a lot
@@ -94,41 +94,36 @@ const main = async () => {
   //   await page.locator(`#loginUsername`).fill(username)
   //   await page.locator(`#loginPassword`).focus()
 
-  //   await waitMs(1000)
+  // await waitMs(5000)
 
-  const image_path = `reddit-submission-${sub.id}.png`
-  await page.screenshot({ path: image_path })
+  // const image_path = `reddit-submission-${sub.id}.png`
+  // await page.screenshot({ path: image_path })
 
   await browser.close()
 
-  let telegram_json_string
-  if (process.env.TELEGRAM) {
-    telegram_json_string = process.env.TELEGRAM
-  } else {
-    telegram_json_string = fs
-      .readFileSync(path.join('secrets', 'telegram.json'))
-      .toString()
-  }
-  const { chat_id, token } = JSON.parse(telegram_json_string)
+  // const { chat_id, token } = jsonSecret({
+  //   name: 'TELEGRAM',
+  //   filepath: '/run/secrets/telegram/personal_bot'
+  // })
 
   // FormData is available in Node.js 18 and later, but it doesn't seem to work here
-  const data = new FormData()
-  data.append('caption', `screenshot of Reddit submission ${sub.id}`)
-  data.append('chat_id', chat_id)
-  data.append('photo', fs.createReadStream(image_path))
+  // const data = new FormData()
+  // data.append('caption', `screenshot of Reddit submission ${sub.id}`)
+  // data.append('chat_id', chat_id)
+  // data.append('photo', fs.createReadStream(image_path))
 
   // 'Content-type': 'multipart/form-data'
-  const config = {
-    url: `https://api.telegram.org/bot${token}/sendPhoto`,
-    data,
-    maxBodyLength: Infinity,
-    method: 'POST',
-    headers: {
-      ...data.getHeaders()
-    }
-  }
+  // const config = {
+  //   url: `https://api.telegram.org/bot${token}/sendPhoto`,
+  //   data,
+  //   maxBodyLength: Infinity,
+  //   method: 'POST',
+  //   headers: {
+  //     ...data.getHeaders()
+  //   }
+  // }
 
-  const res = await axios.request(config)
+  // const res = await axios.request(config)
 
   //   fs.unlinkSync(image_path)
 
@@ -140,12 +135,12 @@ const main = async () => {
   //     headers: { ...data.getHeaders() }
   //   })
 
-  return res.data
+  // return res.data
 }
 
 main()
-  .then(console.log)
-  .catch((err) => {
-    console.error(`=== ERROR ===`, err)
-    process.exit(1)
-  })
+// .then(console.log)
+// .catch((err) => {
+//   console.error(`=== ERROR ===`, err)
+//   process.exit(1)
+// })

@@ -107,9 +107,9 @@ const postAdOnHackerNews = async ({ browser, hn_item_id }) => {
  * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs <hn_item_id>
  *
  * Example:
- * post ad for this month
+ * post ad in this month's Ask HN story
  * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs
- * post ad for March 2023
+ * post ad in the Ask HN story of March 2023
  * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs 34983766
  *
  * See also:
@@ -126,6 +126,11 @@ const main = async () => {
   text = text.concat(`<i>Sent by ${APP_ID}</i>`)
 
   const browser = await chromium.launch({
+    // When running on GitHub Actions, use the chromium revision bundled with Playwright.
+    // When running on my NixOS laptop, use the chromium revision installed with Home Manager.
+    executablePath: process.env.GITHUB_SHA
+      ? undefined
+      : '/home/jack/.nix-profile/bin/chromium',
     headless: process.env.GITHUB_SHA ? true : false
   })
 

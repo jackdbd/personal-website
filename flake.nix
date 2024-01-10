@@ -25,7 +25,6 @@
     overlays = [
       (final: prev: {
         nodejs = prev.nodejs_20;
-        pnpm = prev.nodePackages.pnpm;
       })
     ];
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
@@ -47,12 +46,7 @@
         # steampipe seems not to work on NixOS. A possible workaround is to run
         # it in a docker container.
         # https://github.com/NixOS/nixpkgs/issues/215945
-        packages = with pkgs; [node2nix nodejs pnpm steampipe zx];
-
-        # nativeBuildInputs = with pkgs; [
-        #   playwright-driver.browsers
-        # ];
-        # export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
+        packages = with pkgs; [node2nix nodejs steampipe zx];
 
         # This project depends on @jackdbd/eleventy-plugin-text-to-speech, which
         # depends on jsdom, which depends on canvas.
@@ -62,6 +56,7 @@
 
         shellHook = ''
           echo "🌐 personal website dev shell"
+          echo "- $(chromium --version)"
           echo "- Node.js $(node --version)"
           echo "- npm $(npm --version)"
           echo "- $(steampipe --version)"
@@ -105,10 +100,6 @@
         # ALWAYS set NODE_ENV to production
         # https://youtu.be/HMM7GJC5E2o?si=RaVgw65WMOXDpHT2
         NODE_ENV = "production";
-
-        # It seems it's not mandatory to set this environment variable
-        # https://discourse.nixos.org/t/running-playwright-tests/25655/11
-        # PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = true;
       };
     });
   };
