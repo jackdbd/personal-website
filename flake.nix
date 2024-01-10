@@ -4,11 +4,14 @@
   inputs = {
     # nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+
     alejandra = {
       url = "github:kamadorueda/alejandra/3.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
+
     nil.url = "github:oxalica/nil";
   };
 
@@ -46,9 +49,10 @@
         # https://github.com/NixOS/nixpkgs/issues/215945
         packages = with pkgs; [node2nix nodejs pnpm steampipe zx];
 
-        nativeBuildInputs = with pkgs; [
-          playwright-driver.browsers
-        ];
+        # nativeBuildInputs = with pkgs; [
+        #   playwright-driver.browsers
+        # ];
+        # export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
 
         # This project depends on @jackdbd/eleventy-plugin-text-to-speech, which
         # depends on jsdom, which depends on canvas.
@@ -62,8 +66,6 @@
           echo "- npm $(npm --version)"
           echo "- $(steampipe --version)"
           echo "- zx $(zx --version)"
-
-          # export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
 
           # secrets exposed as environment variables
           export CLOUDINARY=$(cat /run/secrets/cloudinary);
@@ -106,7 +108,7 @@
 
         # It seems it's not mandatory to set this environment variable
         # https://discourse.nixos.org/t/running-playwright-tests/25655/11
-        PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = true;
+        # PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = true;
       };
     });
   };
