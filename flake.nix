@@ -44,7 +44,11 @@
         # steampipe seems not to work on NixOS. A possible workaround is to run
         # it in a docker container.
         # https://github.com/NixOS/nixpkgs/issues/215945
-        packages = with pkgs; [node2nix nodejs steampipe zx];
+        packages = with pkgs; [node2nix nodejs pnpm steampipe zx];
+
+        nativeBuildInputs = with pkgs; [
+          playwright-driver.browsers
+        ];
 
         # This project depends on @jackdbd/eleventy-plugin-text-to-speech, which
         # depends on jsdom, which depends on canvas.
@@ -58,11 +62,22 @@
           echo "- npm $(npm --version)"
           echo "- $(steampipe --version)"
           echo "- zx $(zx --version)"
+
+          # export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
+
+          # secrets exposed as environment variables
           export CLOUDINARY=$(cat /run/secrets/cloudinary);
           export REDDIT=$(cat /run/secrets/reddit/trusted_client);
           export STRIPE_TEST=$(cat /run/secrets/stripe/personal/test);
           export TELEGRAM=$(cat /run/secrets/telegram/personal_bot);
           export WEBMENTION_IO_TOKEN=$(cat /run/secrets/webmentions_io_token);
+
+          # On non-NixOS hosts we don't have secrets in /run/secrets, so we have
+          # to use this somewhat hacky workaround to read files untracked by git (see .gitignore)
+          export CLOUDINARY=$(cat ./secrets/cloudinary.json)
+          export STRIPE_LIVE=$(cat ./secrets/stripe-live.json)
+          export TELEGRAM=$(cat ./secrets/telegram.json)
+          export WEBMENTION_IO_TOKEN=$(cat ./secrets/webmention-io-token.txt)
         '';
 
         ARTICLE_SLUG = "test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu";
@@ -88,6 +103,10 @@
         # ALWAYS set NODE_ENV to production
         # https://youtu.be/HMM7GJC5E2o?si=RaVgw65WMOXDpHT2
         NODE_ENV = "production";
+
+        # It seems it's not mandatory to set this environment variable
+        # https://discourse.nixos.org/t/running-playwright-tests/25655/11
+        PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = true;
       };
     });
   };

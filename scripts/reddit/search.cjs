@@ -1,8 +1,8 @@
 const PrettyError = require('pretty-error')
 const snoowrap = require('snoowrap')
 const yargs = require('yargs')
-const { EMOJI, jsonSecret } = require('../utils.cjs')
-const { sendOutput, userAgent } = require('./utils.cjs')
+const { EMOJI, jsonSecret, sendOutput } = require('../utils.cjs')
+const { userAgent } = require('./utils.cjs')
 
 const pe = new PrettyError()
 
@@ -80,7 +80,10 @@ const searchOnReddit = async () => {
     })
     .help('help').argv
 
-  const { username, password, client_id, client_secret } = jsonSecret('reddit')
+  const { username, password, client_id, client_secret } = jsonSecret({
+    name: 'REDDIT',
+    filepath: '/run/secrets/reddit/trusted_client'
+  })
 
   const user_agent = userAgent({
     app_id: APP_ID,

@@ -3,13 +3,8 @@ const path = require('node:path')
 const PrettyError = require('pretty-error')
 const snoowrap = require('snoowrap')
 const yargs = require('yargs')
-const { jsonSecret } = require('../utils.cjs')
-const {
-  sendOutput,
-  slugify,
-  renderTelegramMessage,
-  userAgent
-} = require('./utils.cjs')
+const { jsonSecret, sendOutput } = require('../utils.cjs')
+const { slugify, renderTelegramMessage, userAgent } = require('./utils.cjs')
 
 const pe = new PrettyError()
 
@@ -52,7 +47,10 @@ const submitRedditPost = async () => {
     })
     .help('help').argv
 
-  const { username, password, client_id, client_secret } = jsonSecret('reddit')
+  const { username, password, client_id, client_secret } = jsonSecret({
+    name: 'REDDIT',
+    filepath: '/run/secrets/reddit/trusted_client'
+  })
 
   const user_agent = userAgent({
     app_id: APP_ID,

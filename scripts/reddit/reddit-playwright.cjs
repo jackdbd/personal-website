@@ -1,24 +1,16 @@
 const fs = require('node:fs')
-const os = require('node:os')
 const path = require('node:path')
 const axios = require('axios')
 const FormData = require('form-data')
 const { chromium } = require('playwright')
 const snoowrap = require('snoowrap')
-const { sendOutput, userAgent } = require('./utils.cjs')
+const { jsonSecret, waitMs } = require('../utils.cjs')
+const { userAgent } = require('./utils.cjs')
 
 const splits = __filename.split('/')
 const app_id = splits[splits.length - 1]
 
-const waitMs = (ms) => {
-  let timeout // NodeJS.Timeout
-  return new Promise((resolve) => {
-    timeout = setTimeout(() => {
-      clearTimeout(timeout)
-      resolve({ message: `timeout ${timeout} of ${ms}ms resolved` })
-    }, ms)
-  })
-}
+// TODO: decide what to do with this script. Fininsh implementing it or delete it.
 
 /**
  * Usage:
@@ -28,16 +20,10 @@ const main = async () => {
   //   const args = process.argv.slice(2)
   const subreddit = 'test'
 
-  let secret = ''
-  if (process.env.GITHUB_SHA) {
-    if (!process.env.REDDIT) {
-      throw new Error(`environment variable REDDIT not set`)
-    }
-    secret = process.env.REDDIT
-  } else {
-    secret = fs.readFileSync(path.join('secrets', 'reddit.json')).toString()
-  }
-  const { username, password, client_id, client_secret } = JSON.parse(secret)
+  const { username, password, client_id, client_secret } = jsonSecret({
+    name: 'REDDIT',
+    filepath: '/run/secrets/reddit/trusted_client'
+  })
 
   const user_agent = userAgent({ app_id, username, version: '0.1.0' })
 

@@ -2,7 +2,8 @@ const fs = require('node:fs')
 const path = require('node:path')
 const snoowrap = require('snoowrap')
 const yargs = require('yargs')
-const { EMOJI, jsonSecret, sendOutput, userAgent } = require('./utils.cjs')
+const { EMOJI, jsonSecret, sendOutput } = require('../utils.cjs')
+const { userAgent } = require('./utils.cjs')
 
 const splits = __filename.split('/')
 const APP_ID = splits[splits.length - 1]
@@ -36,7 +37,10 @@ const submitRedditPost = async () => {
     .help('help')
     .default(DEFAULT).argv
 
-  const { username, password, client_id, client_secret } = jsonSecret('reddit')
+  const { username, password, client_id, client_secret } = jsonSecret({
+    name: 'REDDIT',
+    filepath: '/run/secrets/reddit/trusted_client'
+  })
 
   const user_agent = userAgent({
     app_id: APP_ID,

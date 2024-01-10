@@ -97,6 +97,7 @@ You can also run this script from a GitHub workflow:
 ```sh
 gh workflow run "Reddit freelancing"
 ```
+
 ### r/ForHire
 
 Things to keep in mind when posting on [r/ForHire](https://www.reddit.com/r/ForHire/):

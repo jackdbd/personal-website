@@ -1,7 +1,7 @@
 const fs = require('node:fs')
 const path = require('node:path')
 const { chromium } = require('playwright')
-const { EMOJI, waitMs, sendOutput } = require('../utils.cjs')
+const { EMOJI, jsonSecret, sendOutput, waitMs } = require('../utils.cjs')
 const { latestPost } = require('../hacker-news.cjs')
 
 const splits = __filename.split('/')
@@ -52,17 +52,10 @@ const postAdOnHackerNews = async ({ browser, hn_item_id }) => {
     ad = fs.readFileSync(filepath).toString()
   }
 
-  let hn_json = ''
-  if (process.env.GITHUB_SHA) {
-    if (!process.env.HACKER_NEWS) {
-      throw new Error(`environment variable HACKER_NEWS not set`)
-    }
-    hn_json = process.env.HACKER_NEWS
-  } else {
-    const filepath = path.join('secrets', 'hacker-news.json')
-    hn_json = fs.readFileSync(filepath).toString()
-  }
-  const { username, password } = JSON.parse(hn_json)
+  const { username, password } = jsonSecret({
+    name: 'HACKER_NEWS',
+    filepath: '/run/secrets/hacker-news/credentials'
+  })
 
   const page = await browser.newPage()
   const hn_url = `https://news.ycombinator.com/item?id=${hn_item_id}`
