@@ -434,19 +434,20 @@ export default function (eleventyConfig) {
         cssSelectors: ['.text-to-speech'],
         synthesis: cloudTTSMale,
         hosting: cloudStorage
-      },
-      {
-        regex: new RegExp(
-          'posts\\/test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu\\/.*\\.html$'
-        ),
-        cssSelectors: ['article h2'],
-        // xPathExpressions: [
-        //   '//p[starts-with(., "Keep in mind")]',
-        //   '//p[contains(., "You can output profiling data")]'
-        // ],
-        synthesis: cloudTTSFemale,
-        hosting: cloudStorage
       }
+      // BUG in @jackdbd/eleventy-text-to-speech: Trying to create 2 audio players creates 4 players instead.
+      // {
+      //   regex: new RegExp(
+      //     'posts\\/test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu\\/.*\\.html$'
+      //   ),
+      //   cssSelectors: ['article h2'],
+      //   // xPathExpressions: [
+      //   //   '//p[starts-with(., "Keep in mind")]',
+      //   //   '//p[contains(., "You can output profiling data")]'
+      //   // ],
+      //   synthesis: cloudTTSFemale,
+      //   hosting: cloudStorage
+      // }
       // This works, but the styling (CSS) sucks.
       // {
       //   regex: new RegExp(
