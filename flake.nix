@@ -79,8 +79,9 @@
 
         ARTICLE_SLUG = "test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu";
         # DEBUG = "Eleventy:UserConfig";
-        DEBUG = "11ty-plugin-cloudinary:*,-11ty-plugin-cloudinary:transforms";
-        # DEBUG = "eleventy-plugin-text-to-speech/*,-eleventy-plugin-text-to-speech/transforms";
+        DEBUG = "11ty-plugin:TTS:*";
+        # DEBUG = "11ty-plugin:TTS:dom";
+        # DEBUG = "11ty-plugin-cloudinary:*,-11ty-plugin-cloudinary:transforms";
         DOMAIN = "giacomodebidda.com";
         ELEVENTY_ENV = "development";
         GOOGLE_APPLICATION_CREDENTIALS = "/run/secrets/prj-kitchen-sink/sa-storage-uploader";
