@@ -79,7 +79,7 @@
     "@jackdbd/eleventy-plugin-content-security-policy": "^2.0.0",
     "@jackdbd/eleventy-plugin-ensure-env-vars": "^1.0.0",
     "@jackdbd/eleventy-plugin-telegram": "^1.1.1",
-    "@jackdbd/eleventy-plugin-text-to-speech": "2.0.2-canary.1",
+    "@jackdbd/eleventy-plugin-text-to-speech": "3.0.0-canary.2",
     "autoprefixer": "^10.4.16",
     "clean-css": "^5.3.3",
     "cloudinary": "^1.41.1",

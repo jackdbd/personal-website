@@ -14,7 +14,6 @@ import { ensureEnvVarsPlugin } from '@jackdbd/eleventy-plugin-ensure-env-vars'
 import { telegramPlugin } from '@jackdbd/eleventy-plugin-telegram'
 import { textToSpeechPlugin } from '@jackdbd/eleventy-plugin-text-to-speech'
 import { defClient as defCloudStorage } from '@jackdbd/eleventy-plugin-text-to-speech/hosting/cloud-storage'
-import { defClient as defFilesystem } from '@jackdbd/eleventy-plugin-text-to-speech/hosting/fs'
 import { defClient as defCloudTextToSpeech } from '@jackdbd/eleventy-plugin-text-to-speech/synthesis/gcp-text-to-speech'
 import brokenLinksPlugin from 'eleventy-plugin-broken-links'
 import embedTwitter from 'eleventy-plugin-embed-twitter'
@@ -422,11 +421,6 @@ export default function (eleventyConfig) {
     keyFilename
   })
 
-  // const filesystem = defFilesystem({
-  //   assetBasepath: join('_site', 'assets', 'audio'),
-  //   hrefBase: 'https://www.giacomodebidda.com/audio'
-  // })
-
   eleventyConfig.addPlugin(textToSpeechPlugin, {
     rules: [
       {
@@ -435,19 +429,6 @@ export default function (eleventyConfig) {
         synthesis: cloudTTSMale,
         hosting: cloudStorage
       }
-      // BUG in @jackdbd/eleventy-text-to-speech: Trying to create 2 audio players creates 4 players instead.
-      // {
-      //   regex: new RegExp(
-      //     'posts\\/test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu\\/.*\\.html$'
-      //   ),
-      //   cssSelectors: ['article h2'],
-      //   // xPathExpressions: [
-      //   //   '//p[starts-with(., "Keep in mind")]',
-      //   //   '//p[contains(., "You can output profiling data")]'
-      //   // ],
-      //   synthesis: cloudTTSFemale,
-      //   hosting: cloudStorage
-      // }
       // This works, but the styling (CSS) sucks.
       // {
       //   regex: new RegExp(
@@ -458,19 +439,6 @@ export default function (eleventyConfig) {
       //   hosting: cloudStorage
       // }
     ]
-    // audioHost: {
-    //   bucketName: 'bkt-eleventy-plugin-text-to-speech-audio-files',
-    //   keyFilename
-    // },
-    // keyFilename,
-    // rules: [
-    //   {
-    //     regex: new RegExp('about\\/.*\\.html$'),
-    //     cssSelectors: ['.text-to-speech']
-    //   }
-    // ],
-    // // https://cloud.google.com/text-to-speech/docs/voices
-    // voice: 'en-US-Wavenet-I'
   })
 
   // --- 11ty data cascade -------------------------------------------------- //

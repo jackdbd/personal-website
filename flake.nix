@@ -79,8 +79,8 @@
 
         ARTICLE_SLUG = "test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu";
         # DEBUG = "Eleventy:UserConfig";
-        DEBUG = "11ty-plugin:TTS:*";
-        # DEBUG = "11ty-plugin:TTS:dom";
+        DEBUG = "Eleventy:EleventyErrorHandler";
+        # DEBUG = "11ty-plugin:TTS:*";
         # DEBUG = "11ty-plugin-cloudinary:*,-11ty-plugin-cloudinary:transforms";
         DOMAIN = "giacomodebidda.com";
         ELEVENTY_ENV = "development";
