@@ -8,12 +8,7 @@ import { minify } from 'html-minifier-terser'
 const shouldMinify = (outputPath) => {
   let boolean = false
 
-  if (
-    outputPath &&
-    process.env.ELEVENTY_ENV === 'production' &&
-    outputPath.endsWith('.html') &&
-    process.env.ELEVENTY_ENV === 'production'
-  ) {
+  if (outputPath && outputPath.endsWith('.html')) {
     if (
       outputPath.includes(
         'some-page-that-for-whatever-reason-you-dont-want-to-minify'
