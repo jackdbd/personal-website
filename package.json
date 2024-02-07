@@ -16,10 +16,9 @@
   ],
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "npm run build:11ty && npm run build:css && npm run build:search-index",
+    "build": "npm run build:11ty && npm run build:css",
     "build:11ty": "npx @11ty/eleventy --config ./config/eleventy.mjs",
     "build:css": "postcss ./config/input.css --output _site/assets/css/style.css --config ./config --env production --verbose",
-    "build:search-index": "npx pagefind --site _site/",
     "postbuild": "ls --size --human-readable _site/ | head -n 1",
     "clean": "find _site/* -not -name 'README.md' -delete",
     "predev": "npm run clean",

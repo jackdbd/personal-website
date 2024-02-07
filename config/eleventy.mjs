@@ -251,7 +251,9 @@ export default function (eleventyConfig) {
     // required by Cloudflare Web Analytics
     'https://static.cloudflareinsights.com/beacon.min.js',
     // required by my Preact components
-    'https://unpkg.com/htm/preact/standalone.module.js'
+    'https://unpkg.com/htm/preact/standalone.module.js',
+    // pagefind-ui.js
+    'sha256-K8ITDHA9dtdAedwtkjos9BCZYSdFMrGkfxc9Ge+GJWI='
   ]
 
   const styleSrcElem = ['self', 'unsafe-inline']
@@ -374,7 +376,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(emoji)
   eleventyConfig.addPlugin(helmet)
   eleventyConfig.addPlugin(navigation)
-  // if (process.env.ELEVENTY_RUN_MODE !== 'build') {}
   eleventyConfig.addPlugin(pagefindPlugin, { verbose: true })
   eleventyConfig.addPlugin(readingTime)
   eleventyConfig.addPlugin(rss)
