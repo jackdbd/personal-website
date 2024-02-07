@@ -77,7 +77,7 @@
     "@11ty/is-land": "^4.0.0",
     "@google-cloud/text-to-speech": "^5.0.2",
     "@google-cloud/storage": "^7.7.0",
-    "@jackdbd/eleventy-plugin-content-security-policy": "^2.1.1",
+    "@jackdbd/eleventy-plugin-content-security-policy": "^2.1.2",
     "@jackdbd/eleventy-plugin-ensure-env-vars": "^1.1.1",
     "@jackdbd/eleventy-plugin-telegram": "^2.1.0",
     "@jackdbd/eleventy-plugin-text-to-speech": "3.1.0",
