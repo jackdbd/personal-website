@@ -253,7 +253,15 @@ export default function (eleventyConfig) {
     // required by my Preact components
     'https://unpkg.com/htm/preact/standalone.module.js',
     // pagefind-ui.js
-    'sha256-K8ITDHA9dtdAedwtkjos9BCZYSdFMrGkfxc9Ge+GJWI='
+    'sha256-K8ITDHA9dtdAedwtkjos9BCZYSdFMrGkfxc9Ge+GJWI=',
+    // To compile, instantiate and execute the WebAssembly module used by Pagefind
+    // (or any WebAssembly module for that matter), we need either 'unsafe-eval'
+    // or 'wasm-unsafe-eval' in the CSP.
+    // https://pagefind.app/docs/hosting/#content-security-policy-csp
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#unsafe_webassembly_execution
+    // https://caniuse.com/?search=wasm-unsafe-eval
+    // https://github.com/WebAssembly/content-security-policy/blob/main/proposals/CSP.md#the-wasm-unsafe-eval-source-directive
+    'wasm-unsafe-eval'
   ]
 
   const styleSrcElem = ['self', 'unsafe-inline']
