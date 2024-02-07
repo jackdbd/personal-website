@@ -24,7 +24,7 @@
   } @ inputs: let
     overlays = [
       (final: prev: {
-        nodejs = prev.nodejs_20;
+        nodejs = prev.nodejs_21;
       })
     ];
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
@@ -46,7 +46,7 @@
         # steampipe seems not to work on NixOS. A possible workaround is to run
         # it in a docker container.
         # https://github.com/NixOS/nixpkgs/issues/215945
-        packages = with pkgs; [node2nix nodejs steampipe zx];
+        packages = with pkgs; [nodejs steampipe zx];
 
         # This project depends on @jackdbd/eleventy-plugin-text-to-speech, which
         # depends on jsdom, which depends on canvas.
@@ -59,6 +59,8 @@
           echo "- $(chromium --version)"
           echo "- Node.js $(node --version)"
           echo "- npm $(npm --version)"
+          echo "- playwright $(npx playwright --version)"
+          echo "- playwright-start $(npx playwright-start --version)"
           echo "- $(steampipe --version)"
           echo "- zx $(zx --version)"
 
@@ -71,19 +73,18 @@
 
           # On non-NixOS hosts we don't have secrets in /run/secrets, so we have
           # to use this somewhat hacky workaround to read files untracked by git (see .gitignore)
-          export CLOUDINARY=$(cat ./secrets/cloudinary.json)
+          # export CLOUDINARY=$(cat ./secrets/cloudinary.json)
           export STRIPE_LIVE=$(cat ./secrets/stripe-live.json)
-          export TELEGRAM=$(cat ./secrets/telegram.json)
-          export WEBMENTION_IO_TOKEN=$(cat ./secrets/webmention-io-token.txt)
+          # export TELEGRAM=$(cat ./secrets/telegram.json)
+          # export WEBMENTION_IO_TOKEN=$(cat ./secrets/webmention-io-token.txt)
         '';
 
         ARTICLE_SLUG = "test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu";
         # DEBUG = "Eleventy:UserConfig";
-        DEBUG = "Eleventy:EleventyErrorHandler";
-        # DEBUG = "11ty-plugin:TTS:*";
+        # DEBUG = "Eleventy:EleventyErrorHandler";
+        DEBUG = "Eleventy:EleventyErrorHandler,11ty-plugin:*,-11ty-plugin:TTS:inject-audio-tags-into-html";
         # DEBUG = "11ty-plugin-cloudinary:*,-11ty-plugin-cloudinary:transforms";
         DOMAIN = "giacomodebidda.com";
-        ELEVENTY_ENV = "development";
         GOOGLE_APPLICATION_CREDENTIALS = "/run/secrets/prj-kitchen-sink/sa-storage-uploader";
 
         # Requiring the libuuid package is not enough. We must append to

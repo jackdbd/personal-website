@@ -44,7 +44,7 @@ This project uses a [nix dev shell](https://fasterthanli.me/series/building-a-ru
 Install all dependencies from npm.js (by passing `--include dev` we can be sure that we are installing `devDependencies` even when `NODE_ENV` is set to `production`):
 
 ```sh
-npm install --include dev --include prod
+npm install --include dev
 ```
 
 If you don't use nix, install [zx](https://github.com/google/zx) globally.
@@ -126,9 +126,13 @@ A few GitHub workflows can be triggered by an `workflow_dispatch` event, so you 
 
 ```sh
 gh workflows run "Hacker News links to Telegram"
+```
 
+```sh
 gh workflows run "LinkedIn links to Telegram"
+```
 
+```sh
 gh workflows run "Reddit links to Telegram"
 ```
 

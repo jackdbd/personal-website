@@ -56,7 +56,7 @@ const buildServiceWorker = async ({ precachePaths }) => {
     entryPoints: [entryPoint],
     outdir,
     logLevel: 'debug',
-    minify: process.env.ELEVENTY_ENV === 'development' ? false : true,
+    minify: true,
     platform: 'browser',
     // https://esbuild.github.io/api/#sourcemap
     sourcemap: 'linked',

@@ -35,7 +35,6 @@ jobs:
           CLOUDINARY: ${{ secrets.CLOUDINARY }}
           DEBUG: Eleventy:ErrorHandler,eleventy-plugin-text-to-speech/*,-eleventy-plugin-text-to-speech/transforms
           DOMAIN: ${{ secrets.DOMAIN }}
-          ELEVENTY_ENV: production
           GCP_CREDENTIALS_JSON: ${{ secrets.GCP_CREDENTIALS_JSON }}
           NODE_ENV: production
           STRIPE_LIVE: ${{ secrets.STRIPE_LIVE }}

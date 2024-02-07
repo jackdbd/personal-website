@@ -21,8 +21,11 @@ title: Blog
   <main class="wrapper">
     <div class="flow region">
       <h1>{{ title }}</h1>
-      {% set posts = collections.post %}
-      {% include "components/post-list.njk" %}
+      <div class="flow">
+        <div id="search"></div>
+        {% set posts = collections.post %}
+        {% include "components/post-list.njk" %}
+      </div>
     </div>
   </main>
 
@@ -30,11 +33,19 @@ title: Blog
 
 </div>
 
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({ element: "#search", showSubResults: true });
+  });
+</script>
+
 {% endblock content %}
 
 {# inlined CSS assets (critical CSS) #}
+<link data-helmet href="/pagefind/pagefind-ui.css" rel="stylesheet">
 
 {# inlined JS assets (critical JS) #}
+<script data-helmet src="/pagefind/pagefind-ui.js"></script>
 
 {# external CSS assets #}
 <link data-helmet rel="stylesheet" href="/assets/css/components.css">

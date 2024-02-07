@@ -9,7 +9,7 @@ import navigation from '@11ty/eleventy-navigation'
 import rss from '@11ty/eleventy-plugin-rss'
 import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight'
 import webcPlugin from '@11ty/eleventy-plugin-webc'
-import cspPlugin from '@jackdbd/eleventy-plugin-content-security-policy'
+import { contentSecurityPolicyPlugin } from '@jackdbd/eleventy-plugin-content-security-policy'
 import { ensureEnvVarsPlugin } from '@jackdbd/eleventy-plugin-ensure-env-vars'
 import { telegramPlugin } from '@jackdbd/eleventy-plugin-telegram'
 import { textToSpeechPlugin } from '@jackdbd/eleventy-plugin-text-to-speech'
@@ -29,6 +29,7 @@ import shortcodes from '../11ty/shortcodes.mjs'
 import { callout, table } from '../11ty/paired-shortcodes.mjs'
 import { htmlmin } from '../11ty/transforms.mjs'
 import cloudinaryPlugin from '../plugins/11ty/cloudinary/index.cjs'
+import { pagefindPlugin } from '../plugins/11ty/pagefind/index.mjs'
 import stripePlugin from '../plugins/11ty/stripe/index.cjs'
 import webmentionsPlugin from '../plugins/11ty/webmentions/index.cjs'
 import { buildServiceWorker } from '../src/build-sw.cjs'
@@ -64,7 +65,14 @@ export default function (eleventyConfig) {
   )
 
   eleventyConfig.addPlugin(ensureEnvVarsPlugin, {
-    envVars: ['CLOUDINARY', 'DEBUG', 'ELEVENTY_ENV', 'NODE_ENV']
+    envVars: [
+      'CLOUDINARY',
+      'DEBUG',
+      'ELEVENTY_ROOT',
+      'ELEVENTY_SOURCE',
+      'ELEVENTY_RUN_MODE',
+      'NODE_ENV'
+    ]
   })
 
   eleventyConfig.on('eleventy.after', async () => {
@@ -133,15 +141,24 @@ export default function (eleventyConfig) {
     // process.env.GOOGLE_APPLICATION_CREDENTIALS = keyFilename
   }
 
-  // https://developers.cloudflare.com/pages/platform/build-configuration/#environment-variables
-  // https://www.11ty.dev/docs/environment-vars/
   const environment = {
+    // environment variables set by Cloudflare Pages
+    // https://developers.cloudflare.com/pages/platform/build-configuration/#environment-variables
     CF_PAGES: process.env.CF_PAGES,
     CF_PAGES_BRANCH: process.env.CF_PAGES_BRANCH,
     CF_PAGES_COMMIT_SHA: process.env.CF_PAGES_COMMIT_SHA,
     CF_PAGES_URL: process.env.CF_PAGES_URL,
+
+    CLOUDINARY: process.env.CLOUDINARY,
     DEBUG: process.env.DEBUG,
-    ELEVENTY_ENV: process.env.ELEVENTY_ENV,
+
+    // environment variables set by Eleventy
+    // https://www.11ty.dev/docs/environment-vars/#eleventy-supplied
+    ELEVENTY_ROOT: process.env.ELEVENTY_ROOT,
+    ELEVENTY_RUN_MODE: process.env.ELEVENTY_RUN_MODE,
+    ELEVENTY_SERVERLESS: process.env.ELEVENTY_SERVERLESS,
+    ELEVENTY_SOURCE: process.env.ELEVENTY_SOURCE,
+
     GOOGLE_APPLICATION_CREDENTIALS: process.env.GOOGLE_APPLICATION_CREDENTIALS,
     NODE_ENV: process.env.NODE_ENV,
     SA_JSON_KEY: process.env.SA_JSON_KEY
@@ -239,8 +256,8 @@ export default function (eleventyConfig) {
 
   const styleSrcElem = ['self', 'unsafe-inline']
 
-  eleventyConfig.addPlugin(cspPlugin, {
-    allowDeprecatedDirectives: true,
+  eleventyConfig.addPlugin(contentSecurityPolicyPlugin, {
+    allowDeprecatedDirectives: false,
     directives: {
       'base-uri': ['self'],
 
@@ -357,6 +374,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(emoji)
   eleventyConfig.addPlugin(helmet)
   eleventyConfig.addPlugin(navigation)
+  // if (process.env.ELEVENTY_RUN_MODE !== 'build') {}
+  eleventyConfig.addPlugin(pagefindPlugin, { verbose: true })
   eleventyConfig.addPlugin(readingTime)
   eleventyConfig.addPlugin(rss)
   eleventyConfig.addPlugin(syntaxHighlight)
