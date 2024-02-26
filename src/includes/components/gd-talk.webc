@@ -1,0 +1,48 @@
+<script webc:type="js" webc:is="template" webc:root :id="uid">
+  function dateToString (date) {
+    const d = new Date(date)
+    const year = d.getUTCFullYear();
+    const month = ('0' + (d.getUTCMonth() + 1)).slice(-2)
+    const day = ('0' + d.getUTCDate()).slice(-2)
+    return `${year}/${month}/${day}`
+  }
+
+  function languageToFlag(language) {
+    switch(language.toLowerCase()) {
+      case 'english':
+        return '🇬🇧'
+      case 'italian':
+        return '🇮🇹'
+      default:
+        return language
+    }
+  }
+
+  function render() {
+    // const data = this['$data']
+    // console.log(`data cascade available to <gd-talk>`, data)
+    const attrs = this.webc.attributes
+    // console.log(`attributes available to <gd-talk>`, attrs)
+
+    const date_str = dateToString(attrs.date)
+    const lang = languageToFlag(attrs.language)
+    
+    return `
+    <div class="stack stack-space:s">
+      <h3 @text="title"></h3>
+      <i>Given in <span>${lang}</span> @ <a :href="host_href" @text="host_id"></a> on <span>${date_str}</span> | <a :href="href" rel="external noopener noreferrer" target="_blank">Link</a></i>
+      <p @text="description"></p>
+    </div>
+`
+  }
+  render()
+</script>
+
+<style webc:scoped>
+  /* inline elements would not get the margins from the .stack layout. So either
+  we wrap them in a block/inline-block element (e.g. a div), or change their
+  display property to inline-block */
+  :host em, :host i, :host small {
+    display: inline-block;
+  }
+</style>

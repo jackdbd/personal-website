@@ -21,6 +21,7 @@
     "build:css": "postcss ./config/input.css --output _site/assets/css/style.css --config ./config --env production --verbose",
     "postbuild": "ls --size --human-readable _site/ | head -n 1",
     "clean": "find _site/* -not -name 'README.md' -delete",
+    "debug": "NODE_OPTIONS='--inspect-brk=127.0.0.1:9229' npx @11ty/eleventy --config ./config/eleventy.mjs",
     "predev": "npm run clean",
     "dev": "run-p dev:*",
     "dev:11ty": "eleventy --config ./config/eleventy.mjs --serve --port 8080",

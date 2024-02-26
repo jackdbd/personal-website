@@ -1,0 +1,28 @@
+<script webc:type="js" webc:is="template" webc:root :id="uid" aria-label="list of talks">
+  function render() {
+    const data = this['$data']
+    // console.log(`WebC component <gd-talks> got this data`, data)
+    const { talks } = this['$data']
+
+    const items = talks.map(talk => {
+      const { date, host_id, host_href, href, language } = talk
+      
+      return `
+      <li>
+        <gd-talk 
+          @date="${talk.date}"
+          @description="${talk.description}"
+          @host_href="${talk.host_href}"
+          @host_id="${talk.host_id}"
+          @href="${talk.href}"
+          @language="${talk.language}"
+          @title="${talk.title}"
+        >
+        </gd-talk>
+      </li>`
+    })
+
+    return `<ul class="stack">${items.join('')}</ul>`
+  }
+  render()
+</script>

@@ -45,7 +45,11 @@ The text is automatically synthesized into speech using [@jackdbd/eleventy-plugi
 
       <p>Here are a few talks I gave at conferences and Meetups.</p>
 
-      {% include "components/talk-list.njk" %}
+      <div>
+      {% renderTemplate "webc", { talks: collections.talks } %}
+        <gd-talks></gd-talks>
+      {% endrenderTemplate %}
+      </div>
 
       {% callout "info" %}
       I keep track of all of my talks in [this GitHub repo](https://github.com/jackdbd/talks), where you can find links to the relevant material for each talk.

@@ -1,9 +1,10 @@
 import fs from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import makeDebug from 'debug'
+import { globby } from 'globby'
 import markdownIt from 'markdown-it'
 import markdownItAnchor from 'markdown-it-anchor'
-import { globby } from 'globby'
 import { EleventyRenderPlugin } from '@11ty/eleventy'
 import navigation from '@11ty/eleventy-navigation'
 import rss from '@11ty/eleventy-plugin-rss'
@@ -33,6 +34,8 @@ import { pagefindPlugin } from '../plugins/11ty/pagefind/index.mjs'
 import stripePlugin from '../plugins/11ty/stripe/index.cjs'
 import webmentionsPlugin from '../plugins/11ty/webmentions/index.cjs'
 import { buildServiceWorker } from '../src/build-sw.cjs'
+
+const debug = makeDebug(`11ty-config:eleventy.mjs`)
 
 const __filename = fileURLToPath(import.meta.url)
 const REPO_ROOT = join(__filename, '..', '..')
@@ -500,25 +503,32 @@ export default function (eleventyConfig) {
   // https://www.11ty.dev/docs/shortcodes/
   Object.keys(shortcodes).forEach((name) => {
     eleventyConfig.addShortcode(name, shortcodes[name])
+    debug(`added 11ty shortcode ${name}`)
   })
   eleventyConfig.addPairedShortcode('callout', callout)
+  debug(`added 11ty paired shortcode callout`)
   eleventyConfig.addPairedShortcode('table', table)
+  debug(`added 11ty paired shortcode table`)
 
   // https://www.11ty.dev/docs/config/#transforms
   eleventyConfig.addTransform('htmlmin', htmlmin)
+  debug(`added 11ty filter htmlmin`)
 
   // https://www.11ty.dev/docs/filters/
   Object.keys(filters).forEach((name) => {
     if (name === 'jsmin') {
       eleventyConfig.addAsyncFilter(name, filters[name])
+      debug(`added 11ty async filter ${name}`)
     } else {
       eleventyConfig.addFilter(name, filters[name])
+      debug(`added 11ty filter ${name}`)
     }
   })
 
   // https://www.11ty.dev/docs/collections/
   Object.keys(collections).forEach((name) => {
     eleventyConfig.addCollection(name, collections[name])
+    debug(`added 11ty collection ${name}`)
   })
 
   // console.log('11ty user-defined collections', eleventyConfig.collections)

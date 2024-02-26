@@ -3,9 +3,12 @@
  * https://www.11ty.dev/docs/filters/
  */
 import CleanCSS from 'clean-css'
+import makeDebug from 'debug'
 import { DateTime } from 'luxon'
 import slugifyFn from 'slugify'
 import { minify } from 'terser'
+
+const debug = makeDebug(`11ty-config:filters`)
 
 /**
  * Minifies CSS
@@ -53,6 +56,13 @@ export const limit = (array, n) => {
 
 export const log = (value) => {
   console.log('=== LOG ===', value)
+  debug(`=== LOG === %O`, value)
+}
+
+export const tap = (value) => {
+  console.log('=== TAP ===', value)
+  debug(`=== TAP === %O`, value)
+  return value
 }
 
 // Date formatting (machine readable)
@@ -81,5 +91,6 @@ export default {
   log,
   machineDate,
   machineDateJS,
-  slugify
+  slugify,
+  tap
 }
