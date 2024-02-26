@@ -1,0 +1,30 @@
+---
+permalink: "{{ metadata.feeds.talks.href }}"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/assets/xsl/feed-talks.xsl" type="text/xsl"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ metadata.url }}">
+  {# https://validator.w3.org/feed/docs/atom.html#requiredFeedElements #}
+  <id>{{ permalink }}</id>
+  <title>{{ metadata.author.name }}'s talks</title>
+  <subtitle>Talks I gave at conferences, Meetups, etc</subtitle>
+  {# In an Atom feed, the <updated> tag is required. Since talks is not an 11ty collection, I use the post collection to come up with a date. Maybe I should edit talks.json and add a last_updated field there. #}
+  <updated>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <author>
+    <name>{{ metadata.author.name }}</name>
+    <email>{{ metadata.author.email }}</email>
+    <uri>{{ metadata.url }}</uri>
+  </author>
+  <link href="{{ permalink }}" rel="self"/>
+
+  {%- for talk in talks | reverse %}
+  <entry>
+    <id>{{ talk.href }}</id>
+    <link href="{{ talk.href }}"/>
+    <title>{{ talk.title }}</title>
+    <summary>{{ talk.description }}</summary>
+  </entry>
+  {%- endfor %}
+</feed>

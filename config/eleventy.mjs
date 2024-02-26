@@ -487,6 +487,7 @@ export default function (eleventyConfig) {
     'src/includes/assets/fonts': 'assets/fonts',
     'src/includes/assets/img': 'assets/img',
     'src/includes/assets/js': 'assets/js',
+    'src/includes/assets/xsl': 'assets/xsl',
     'src/includes/preact-components': 'assets/js/preact-components',
     'src/includes/assets/pgp-key.txt': 'assets/pgp-key.txt',
     'src/includes/assets/security.txt': '.well-known/security.txt',
@@ -519,6 +520,8 @@ export default function (eleventyConfig) {
   Object.keys(collections).forEach((name) => {
     eleventyConfig.addCollection(name, collections[name])
   })
+
+  // console.log('11ty user-defined collections', eleventyConfig.collections)
 
   // --- markdown-it (markdown parser) configuration ------------------------ //
 

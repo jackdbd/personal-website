@@ -1,0 +1,34 @@
+---
+permalink: "{{ metadata.feeds.posts.href }}"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/assets/xsl/feed-posts.xsl" type="text/xsl"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ metadata.url }}">
+  <id>{{ permalink }}</id>
+  <title>{{ metadata.author.name }}'s blog posts</title>
+  <subtitle>Things I have written about</subtitle>
+  <updated>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <author>
+    <name>{{ metadata.author.name }}</name>
+    <email>{{ metadata.author.email }}</email>
+    <uri>{{ metadata.url }}</uri>
+  </author>
+  <link href="{{ permalink }}" rel="self"/>
+
+  {%- for post in collections.post | reverse %}
+  {%- set absolutePostUrl = post.url | absoluteUrl(metadata.url) %}
+  <entry>
+    <id>{{ absolutePostUrl }}</id>
+    <link href="{{ absolutePostUrl }}"/>
+    <title>{{ post.data.title }}</title>
+    <published>{{ post.date | dateToRfc3339 }}</published>
+    <updated>{{ post.date | dateToRfc3339 }}</updated>
+    <summary>{{ post.data.description }}</summary>
+    <content type="html" xml:lang="{{ metadata.lang }}">
+      {{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}
+    </content>
+  </entry>
+  {%- endfor %}
+</feed>
