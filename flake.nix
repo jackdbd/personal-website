@@ -73,10 +73,7 @@
 
           # On non-NixOS hosts we don't have secrets in /run/secrets, so we have
           # to use this somewhat hacky workaround to read files untracked by git (see .gitignore)
-          # export CLOUDINARY=$(cat ./secrets/cloudinary.json)
           export STRIPE_LIVE=$(cat ./secrets/stripe-live.json)
-          # export TELEGRAM=$(cat ./secrets/telegram.json)
-          # export WEBMENTION_IO_TOKEN=$(cat ./secrets/webmention-io-token.txt)
         '';
 
         ARTICLE_SLUG = "test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu";

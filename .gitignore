@@ -25,6 +25,8 @@ hint-report/
 .cache/
 # cache for webmentions fetched from webmention.io
 .cache-webmentions/
+# Responses from the Cloudinary API are stored in .cache-cloudinary and tracked
+# in git. They don't take a lot of space since I am using git LFS for them.
 
 # tmp files for wrangler (Cloudflare CLI)
 .wrangler/
