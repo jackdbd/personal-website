@@ -201,11 +201,11 @@ const main = async () => {
   // The _headers file for Cloudflare Pages is a bit tricky
   // https://developers.cloudflare.com/pages/configuration/headers/
   // attach headers to every resource
-  //   const sources = ['/*']
-  // attach headers to the home page and ALL posts
-  //   const sources = ['/', '/posts/*']
+  // const sources = ['/*']
+  // attach headers to the home page, the 404 page and ALL posts
+  const sources = ['/', '/404', '/posts/*']
   // attach header to the home page, the 404 page and a specific post
-  const sources = ['/', '/404', '/posts/playwright-on-nixos/']
+  // const sources = ['/', '/404', '/posts/playwright-on-nixos/']
 
   const { error, value: pp } = permissionsPolicy({
     features: {
