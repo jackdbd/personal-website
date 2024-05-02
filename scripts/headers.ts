@@ -245,6 +245,34 @@ const main = async () => {
       headerValue: csp,
       filepath,
       sources
+    },
+    {
+      headerKey: 'Accept-CH',
+      headerValue:
+        'Save-Data,DPR,Width,Sec-CH-Prefers-Reduced-Data,Sec-CH-DPR,Sec-CH-Width',
+      filepath,
+      sources
+    },
+    // Prevent any *.pages.dev deployment from being indexed by search engines
+    // https://developers.cloudflare.com/pages/platform/headers/
+    // prevent-your-pagesdev-deployments-showing-in-search-results
+    {
+      headerKey: 'X-Robots-Tag',
+      headerValue: 'noindex',
+      filepath,
+      sources: ['https://:project.pages.dev/*']
+    },
+    {
+      headerKey: 'Cache-Control',
+      headerValue: 'no-store, max-age=0',
+      filepath,
+      sources: ['sw.js']
+    },
+    {
+      headerKey: 'Content-Type',
+      headerValue: 'application/javascript; charset=utf-8',
+      filepath,
+      sources: ['sw.js']
     }
   ]
 
