@@ -116,8 +116,14 @@ const main = async () => {
       'https://s3-us-west-2.amazonaws.com/ca3db/pbs.twimg.com/',
       // webmention.io hosts here the avatar of webmention.rocks
       'https://s3-us-west-2.amazonaws.com/ca3db/webmention.rocks/',
-      // SVG inlined by the pagefind-ui search widget
-      `data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.7549 11.255H11.9649L11.6849 10.985C12.6649 9.845 13.2549 8.365 13.2549 6.755C13.2549 3.165 10.3449 0.255005 6.75488 0.255005C3.16488 0.255005 0.254883 3.165 0.254883 6.755C0.254883 10.345 3.16488 13.255 6.75488 13.255C8.36488 13.255 9.84488 12.665 10.9849 11.685L11.2549 11.965V12.755L16.2549 17.745L17.7449 16.255L12.7549 11.255ZM6.75488 11.255C4.26488 11.255 2.25488 9.245 2.25488 6.755C2.25488 4.26501 4.26488 2.255 6.75488 2.255C9.24488 2.255 11.2549 4.26501 11.2549 6.755C11.2549 9.245 9.24488 11.255 6.75488 11.255Z' fill='%23000000'/%3E%3C/svg%3E%0A`
+      // Down below there is the exact data URI of the SVG inlined by the
+      // pagefind-ui search widget. The problem is that it's extremely long, and
+      // Cloudflare Pages imposes a limit of 2000 character to the length of each
+      // header declared in the _headers file.
+      // `data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.7549 11.255H11.9649L11.6849 10.985C12.6649 9.845 13.2549 8.365 13.2549 6.755C13.2549 3.165 10.3449 0.255005 6.75488 0.255005C3.16488 0.255005 0.254883 3.165 0.254883 6.755C0.254883 10.345 3.16488 13.255 6.75488 13.255C8.36488 13.255 9.84488 12.665 10.9849 11.685L11.2549 11.965V12.755L16.2549 17.745L17.7449 16.255L12.7549 11.255ZM6.75488 11.255C4.26488 11.255 2.25488 9.245 2.25488 6.755C2.25488 4.26501 4.26488 2.255 6.75488 2.255C9.24488 2.255 11.2549 4.26501 11.2549 6.755C11.2549 9.245 9.24488 11.255 6.75488 11.255Z' fill='%23000000'/%3E%3C/svg%3E%0A`
+      // This is obviously less safe, but it takes a lot less space in the header.
+      // https://stackoverflow.com/questions/18447970/content-security-policy-data-not-working-for-base64-images-in-chrome-28
+      'data:'
     ],
 
     'manifest-src': ['self'],
@@ -223,8 +229,15 @@ const main = async () => {
 
   const patches = [
     {
-      headerKey: 'Reporting-Endpoints',
-      headerValue: reportingEndpoints,
+      headerKey: 'Accept-CH',
+      headerValue:
+        'Save-Data,DPR,Width,Sec-CH-Prefers-Reduced-Data,Sec-CH-DPR,Sec-CH-Width',
+      filepath,
+      sources
+    },
+    {
+      headerKey: 'Content-Security-Policy',
+      headerValue: csp,
       filepath,
       sources
     },
@@ -241,39 +254,41 @@ const main = async () => {
       sources
     },
     {
-      headerKey: 'Content-Security-Policy',
-      headerValue: csp,
+      headerKey: 'Reporting-Endpoints',
+      headerValue: reportingEndpoints,
       filepath,
       sources
     },
     {
-      headerKey: 'Accept-CH',
-      headerValue:
-        'Save-Data,DPR,Width,Sec-CH-Prefers-Reduced-Data,Sec-CH-DPR,Sec-CH-Width',
+      headerKey: 'Strict-Transport-Security',
+      headerValue: 'max-age=31536000; includeSubDomains; preload',
       filepath,
       sources
     },
+    // TODO: this messes up the content of _headers. Not sure why...
     // Prevent any *.pages.dev deployment from being indexed by search engines
     // https://developers.cloudflare.com/pages/platform/headers/
     // prevent-your-pagesdev-deployments-showing-in-search-results
-    {
-      headerKey: 'X-Robots-Tag',
-      headerValue: 'noindex',
-      filepath,
-      sources: ['https://:project.pages.dev/*']
-    },
+    // {
+    //   headerKey: 'X-Robots-Tag',
+    //   headerValue: 'noindex',
+    //   filepath,
+    //   sources: ['https://:project.pages.dev/*']
+    // },
     {
       headerKey: 'Cache-Control',
       headerValue: 'no-store, max-age=0',
       filepath,
-      sources: ['sw.js']
+      sources: ['/sw.js']
     },
     {
       headerKey: 'Content-Type',
       headerValue: 'application/javascript; charset=utf-8',
       filepath,
-      sources: ['sw.js']
+      sources: ['/sw.js']
     }
+    // TODO: serve the OpenPGP public key as plain text (Content-Type: text/plain; charset=utf-8)
+    // https://www.giacomodebidda.com/assets/pgp-key.txt
   ]
 
   consume(patchConsumer(patches))
