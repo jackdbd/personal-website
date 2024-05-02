@@ -39,7 +39,6 @@ const debug = makeDebug(`11ty-config:eleventy.mjs`)
 const __filename = fileURLToPath(import.meta.url)
 const REPO_ROOT = join(__filename, '..', '..')
 const OUTPUT_DIR = join(REPO_ROOT, '_site')
-// const ASSETS_DIR = join(REPO_ROOT, 'assets')
 
 // shamelessly stolen from:
 // https://github.com/maxboeck/mxb/blob/db6ca7743f46cf67367a93c8de404cbcb50b98d1/utils/markdown.js
