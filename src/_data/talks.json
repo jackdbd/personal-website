@@ -1,5 +1,14 @@
 [
   {
+    "title": "HTTP headers for web security",
+    "date": "2024-04-15T18:00:00.000Z",
+    "description": "A presentation on the most important HTTP response headers for web security. I gave this talk at pisa.dev.",
+    "host_id": "pisa.dev",
+    "host_href": "https://pisa.dev/",
+    "href": "https://github.com/jackdbd/http-response-headers-for-web-security/",
+    "language": "Italian"
+  },
+  {
     "title": "Cloud Tasks: best practices and lessons learned",
     "date": "2023-10-31T12:00:00.000Z",
     "description": "In this talk I described how Cloud Tasks works, highlighted its differences with Cloud Pub/Sub, and suggested a few guidelines to adopt when creating tasks and monitoring queues. I gave this talk at DevFest GDG Cloud Milano 2023.",
