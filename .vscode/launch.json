@@ -11,6 +11,13 @@
         "uriFormat": "%s",
         "action": "debugWithChrome"
       }
+    },
+    {
+      "name": "Debug script security-txt",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/security-txt.mjs",
+      "env": { "FOO": "bar" }
     }
   ]
 }
