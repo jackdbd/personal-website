@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url'
 import defDebug from 'debug'
 import { cspHeader } from '@jackdbd/content-security-policy'
 import { updateHeaders } from '@jackdbd/hosting-utils'
-import { featurePolicy, permissionsPolicy } from '@jackdbd/permissions-policy'
+import { permissionsPolicy } from '@jackdbd/permissions-policy'
 
 export const __filename = fileURLToPath(import.meta.url)
 const SCRIPT_NAME = path.basename(__filename, '.ts')
@@ -12,14 +12,14 @@ const debug = defDebug(`script:${SCRIPT_NAME}`)
 const REPO_ROOT = path.join(__filename, '..', '..')
 const SITE_ROOT = path.join(REPO_ROOT, '_site')
 
-interface UpdatePatch {
-  filepath: string
-  headerKey: string
-  headerValue: string
-  sources: string[]
-}
+// interface UpdatePatch {
+//   filepath: string
+//   headerKey: string
+//   headerValue: string
+//   sources: string[]
+// }
 
-async function* patchConsumer(patches: UpdatePatch[]) {
+async function* patchConsumer(patches) {
   while (patches.length) {
     const patch = patches[0]
 
@@ -34,8 +34,8 @@ async function* patchConsumer(patches: UpdatePatch[]) {
   }
 }
 
-// consume the generator
-const consume = async (agen: AsyncGenerator) => {
+// consume the async generator
+const consume = async (agen) => {
   for await (const result of agen) {
   }
 }
@@ -221,7 +221,7 @@ const main = async () => {
     return
   }
 
-  const patches: UpdatePatch[] = [
+  const patches = [
     {
       headerKey: 'Reporting-Endpoints',
       headerValue: reportingEndpoints,
