@@ -6,7 +6,7 @@ const PrettyError = require('pretty-error')
 const yargs = require('yargs')
 const { EMOJI, sendOutput } = require('../utils.cjs')
 
-const debug = debuglog('gh-workflow:hn-job-links')
+const debug = debuglog('hn:job-links')
 
 const pe = new PrettyError()
 
@@ -40,7 +40,9 @@ const searchJobsOnHackerNews = async () => {
     argv['steampipe-query']
   )
 
+  debug(`use SQL query found at ${filepath}`)
   const sql = fs.readFileSync(filepath).toString()
+  debug(`execute this SQL query with steampipe:\n${sql}`)
   const buf = execSync(`steampipe query "${sql}" --output json`)
 
   return {

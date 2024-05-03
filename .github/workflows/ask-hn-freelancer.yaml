@@ -65,6 +65,7 @@ jobs:
       - name: Post my ad on HN using Playwright
         env:
           HACKER_NEWS: ${{ secrets.HACKER_NEWS }}
+          NODE_DEBUG: hn:*,scripts:*
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "RESULT_STRING<<$delimiter" >> $GITHUB_ENV

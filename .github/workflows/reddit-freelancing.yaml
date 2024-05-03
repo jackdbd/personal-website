@@ -29,7 +29,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "TELEGRAM_MESSAGE_FORHIRE<<$delimiter" >> $GITHUB_ENV
-          node scripts/reddit/post-ad-freelancing.cjs --subreddit forhire >> $GITHUB_ENV
+          node scripts/reddit/post-ad-freelancing.mjs --subreddit forhire >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram (r/forhire)
@@ -47,7 +47,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "TELEGRAM_MESSAGE_JOBBIT<<$delimiter" >> $GITHUB_ENV
-          node scripts/reddit/post-ad-freelancing.cjs --subreddit jobbit >> $GITHUB_ENV
+          node scripts/reddit/post-ad-freelancing.mjs --subreddit jobbit >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram (r/jobbit)

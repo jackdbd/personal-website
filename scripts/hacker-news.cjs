@@ -1,6 +1,6 @@
 const { debuglog } = require('node:util')
 
-const debug = debuglog('hacker-news')
+const debug = debuglog('hn:utils')
 
 const latestPost = async () => {
   let date = new Date().toLocaleDateString('en-US', {
@@ -20,18 +20,18 @@ const latestPost = async () => {
   const item_ids = obj.submitted
 
   const title = `Ask HN: Freelancer? Seeking freelancer? (${date})`
-  // console.log(`Search submissions by ${username} titled "${title}"`)
+  debug(`Search submissions by ${username} titled "${title}"`)
 
   let results = await Promise.allSettled(
     item_ids.map(async (item_id) => {
       const url = `https://hacker-news.firebaseio.com/v0/item/${item_id}.json?print=pretty`
       const res = await fetch(url)
       const obj = await res.json()
-      debug(`item ID ${item_id} %O`, obj)
       if (obj.title === title) {
+        debug(`FOUND "${obj.title}"`)
         return { item_id, title: obj.title, text: obj.text }
       } else {
-        // TODO: when does this happen? Why?
+        debug(`discard "${obj.title}"`)
         return undefined
       }
     })

@@ -1,13 +1,18 @@
-const fs = require('node:fs')
-const path = require('node:path')
-const PrettyError = require('pretty-error')
-const snoowrap = require('snoowrap')
-const yargs = require('yargs')
-const { jsonSecret, sendOutput } = require('../utils.cjs')
-const { slugify, renderTelegramMessage, userAgent } = require('./utils.cjs')
+import fs from 'node:fs'
+import path from 'node:path'
+import { debuglog } from 'node:util'
+import { fileURLToPath } from 'node:url'
+import PrettyError from 'pretty-error'
+import snoowrap from 'snoowrap'
+import yargs from 'yargs'
+import { jsonSecret, sendOutput } from '../utilz.mjs'
+import { slugify, renderTelegramMessage, userAgent } from './utils.mjs'
 
 const pe = new PrettyError()
 
+const debug = debuglog('reddit:post-ad-freelancing')
+
+const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
 const APP_ID = splits[splits.length - 1]
 const APP_VERSION = '0.1.0'
@@ -58,6 +63,7 @@ const submitRedditPost = async () => {
     version: APP_VERSION
   })
 
+  debug(`initialize snoowrap with user agent ${user_agent}`)
   const r = new snoowrap({
     userAgent: user_agent,
     clientId: client_id,
@@ -69,13 +75,14 @@ const submitRedditPost = async () => {
   const subreddit = argv.subreddit
 
   const filepath = path.join('assets', 'ads', 'reddit-freelancing.md')
+  debug(`read ad from ${filepath}`)
   let text = fs.readFileSync(filepath).toString()
   text = text.replace('RATE_MARKDOWN_PLACEHOLDER', argv['rate-md'])
   text = text.replace('CTA_MARKDOWN_PLACEHOLDER', argv['cta-md'])
 
   const flairs = await r.getSubreddit(subreddit).getLinkFlairTemplates()
   // const flairs = await r.getSubreddit(subreddit).getUserFlairTemplates()
-  console.log(`flairs available in r/${subreddit}`, flairs)
+  debug(`flairs available in r/${subreddit}: ${flairs.join(', ')}`)
 
   // title of the submission. up to 300 characters long
   let title
@@ -104,6 +111,7 @@ const submitRedditPost = async () => {
 
   const slug = slugify(title)
 
+  debug(`will try posting "${title}" to r/${subreddit} (slug: ${slug})`)
   // throw new Error(`Aborted: ${title}`)
 
   // https://not-an-aardvark.github.io/snoowrap/Subreddit.html#selectMyFlair__anchor
@@ -114,7 +122,7 @@ const submitRedditPost = async () => {
     .submitSelfpost({ text, title })
 
   // const sub = await r.getSubreddit(subreddit).submitSelfpost(post)
-  console.log(`Ad submitted on r/${subreddit}: ${title}`)
+  debug(`Ad submitted on r/${subreddit}: ${title}`)
 
   return {
     name: sub.name,

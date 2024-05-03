@@ -1,6 +1,11 @@
-const os = require('node:os')
+import os from 'node:os'
+import { debuglog } from 'node:util'
+import snoowrap from 'snoowrap'
+import { jsonSecret } from '../utilz.mjs'
 
-const slugify = (title) => {
+const debug = debuglog('reddit:utils')
+
+export const slugify = (title) => {
   return title
     .replaceAll('[', '')
     .replaceAll(']', '')
@@ -9,7 +14,7 @@ const slugify = (title) => {
     .toLowerCase()
 }
 
-const renderTelegramMessage = (d) => {
+export const renderTelegramMessage = (d) => {
   let s = `<b>${EMOJI.Robot} Advertisement posted on r/${d.subreddit}</b>`
   s = s.concat('\n\n')
   s = s.concat(`<a href="${d.url}">submission ${d.name}</a>`)
@@ -35,12 +40,27 @@ const renderTelegramMessage = (d) => {
  *
  * https://github.com/reddit-archive/reddit/wiki/API
  */
-const userAgent = ({ app_id, username, version = '0.1.0' }) => {
+export const userAgent = ({ app_id, username, version = '0.1.0' }) => {
   return `${os.platform()}:${app_id}:v${version} (by /u/${username})`
 }
 
-module.exports = {
-  renderTelegramMessage,
-  slugify,
-  userAgent
+export const defSnoowrap = ({
+  app_id = 'unknown app ID',
+  app_version = 'unknown app version'
+}) => {
+  const { username, password, client_id, client_secret } = jsonSecret({
+    name: 'REDDIT',
+    filepath: '/run/secrets/reddit/trusted_client'
+  })
+
+  const user_agent = userAgent({ app_id, username, version: app_version })
+
+  debug(`initialize snoowrap with user agent ${user_agent}`)
+  return new snoowrap({
+    userAgent: user_agent,
+    clientId: client_id,
+    clientSecret: client_secret,
+    username,
+    password
+  })
 }

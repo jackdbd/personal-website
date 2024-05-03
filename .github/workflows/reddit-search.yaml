@@ -25,11 +25,12 @@ jobs:
 
       - name: 🤖 Search Reddit
         env:
+          NODE_DEBUG: reddit:*,scripts:*
           REDDIT: ${{ secrets.REDDIT }}
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "TELEGRAM_MESSAGE<<$delimiter" >> $GITHUB_ENV
-          node scripts/reddit/search.cjs >> $GITHUB_ENV
+          node scripts/reddit/search.mjs >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram

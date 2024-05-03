@@ -1,21 +1,26 @@
-const PrettyError = require('pretty-error')
-const snoowrap = require('snoowrap')
-const yargs = require('yargs')
-const { EMOJI, jsonSecret, sendOutput } = require('../utils.cjs')
-const { userAgent } = require('./utils.cjs')
+import { fileURLToPath } from 'node:url'
+import { debuglog } from 'node:util'
+import PrettyError from 'pretty-error'
+import snoowrap from 'snoowrap'
+import yargs from 'yargs'
+import { EMOJI, sendOutput } from '../utilz.mjs'
+import { defSnoowrap } from './utils.mjs'
 
 const pe = new PrettyError()
 
+const debug = debuglog('reddit:search')
+
+const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
-const APP_ID = splits[splits.length - 1]
-const APP_VERSION = '0.1.0'
+const app_id = splits[splits.length - 1]
+const app_version = '0.1.0'
 
 const KEYWORDS = [
   'performance audit',
   'site speed',
   'slow website',
   'web performance',
-  'website performance',
+  // 'website performance',
   'website speed'
 ]
 
@@ -80,24 +85,7 @@ const searchOnReddit = async () => {
     })
     .help('help').argv
 
-  const { username, password, client_id, client_secret } = jsonSecret({
-    name: 'REDDIT',
-    filepath: '/run/secrets/reddit/trusted_client'
-  })
-
-  const user_agent = userAgent({
-    app_id: APP_ID,
-    username,
-    version: APP_VERSION
-  })
-
-  const r = new snoowrap({
-    userAgent: user_agent,
-    clientId: client_id,
-    clientSecret: client_secret,
-    username,
-    password
-  })
+  const r = defSnoowrap({ app_id, app_version })
 
   let query = ''
   if (argv.query) {
@@ -131,7 +119,13 @@ const searchOnReddit = async () => {
     }
   })
   // console.log(subs)
-  return { description: argv.description, query, submissions: subs, user_agent }
+  return {
+    description: argv.description,
+    query,
+    submissions: subs,
+    app_id,
+    app_version
+  }
 }
 
 const renderTelegramMessage = (d) => {
@@ -140,21 +134,21 @@ const renderTelegramMessage = (d) => {
   })
   let s = `<b>${EMOJI.Robot} Reddit search</b>`
 
-  s = s.concat('\n\n')
-  s = s.concat(`<b>Description</b>`)
-  s = s.concat('\n')
+  s = `${s}\n\n<b>Description</b>\n`
   s = s.concat(`<pre>${d.description}</pre>`)
 
-  s = s.concat('\n\n')
-  s = s.concat(links.join('\n\n'))
+  s = `${s}\n\n<b>Results</b>\n`
+  if (links.length === 0) {
+    s = `${s}The query returned no results.`
+  } else {
+    s = s.concat(links.join('\n\n'))
+  }
 
-  s = s.concat('\n\n')
-  s = s.concat(`<b>Query</b>`)
-  s = s.concat('\n')
+  s = `${s}\n\n<b>Query</b>\n`
   s = s.concat(`<pre><code>${d.query}</code></pre>`)
 
   s = s.concat('\n\n')
-  s = s.concat(`<i>User-Agent: ${d.user_agent}</i>`)
+  s = s.concat(`<i>Message sent by: ${app_id} (vers. ${app_version})</i>`)
   s = s.concat('\n')
   return s
 }

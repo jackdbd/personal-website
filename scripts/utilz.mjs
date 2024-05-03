@@ -1,11 +1,10 @@
-const fs = require('node:fs')
-const path = require('node:path')
-const { debuglog } = require('node:util')
+import fs from 'node:fs'
+import { debuglog } from 'node:util'
 
 const debug = debuglog('scripts:utils')
 
 // https://emojipedia.org/
-const EMOJI = {
+export const EMOJI = {
   ChartDecreasing: '📉',
   Coin: '🪙',
   CreditCard: '💳',
@@ -28,7 +27,7 @@ const EMOJI = {
   Warning: '⚠️'
 }
 
-const waitMs = (ms) => {
+export const waitMs = (ms) => {
   let timeout // NodeJS.Timeout
   return new Promise((resolve) => {
     timeout = setTimeout(() => {
@@ -38,7 +37,7 @@ const waitMs = (ms) => {
   })
 }
 
-const jsonSecret = ({ name, filepath }) => {
+export const jsonSecret = ({ name, filepath }) => {
   if (process.env.CF_PAGES || process.env.GITHUB_SHA) {
     if (!name) {
       throw new Error(`secret name not set`)
@@ -58,7 +57,7 @@ const jsonSecret = ({ name, filepath }) => {
   return JSON.parse(fs.readFileSync(filepath).toString())
 }
 
-const sendOutput = async (text) => {
+export const sendOutput = async (text) => {
   const { chat_id, token } = jsonSecret({
     name: 'TELEGRAM',
     filepath: '/run/secrets/telegram/personal_bot'
@@ -72,7 +71,8 @@ const sendOutput = async (text) => {
     text
   }
 
-  debug('body for Telegram sendMessage %O', data)
+  debug(`send message to Telegram chat ID ${chat_id}`)
+  // debug('body for Telegram sendMessage %O', data)
 
   const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: 'POST',
@@ -84,7 +84,6 @@ const sendOutput = async (text) => {
 
   console.log(`[Telegram BOT API] response status ${res.status}`)
   const res_body = await res.json()
-  console.log(`[Telegram BOT API] response body`, res_body)
+  let username = res_body.result.from.username
+  console.log(`[Telegram BOT API] response sent from ${username}`)
 }
-
-module.exports = { EMOJI, jsonSecret, sendOutput, waitMs }

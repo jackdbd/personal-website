@@ -30,11 +30,12 @@ jobs:
 
       - name: 🤖 Post on Reddit r/slavelabour
         env:
+          NODE_DEBUG: reddit:*,scripts:*
           REDDIT: ${{ secrets.REDDIT }}
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "TELEGRAM_MESSAGE<<$delimiter" >> $GITHUB_ENV
-          node scripts/reddit/post-ad-website-audit.cjs --cta-md '[ORDER NOW](https://buy.stripe.com/test_eVaeXRasmdiOdtCg0V?prefilled_promo_code=REDDITSLAVELABOUR80)' >> $GITHUB_ENV
+          node scripts/reddit/post-ad-website-audit.mjs --cta-md '[ORDER NOW](https://buy.stripe.com/test_eVaeXRasmdiOdtCg0V?prefilled_promo_code=REDDITSLAVELABOUR80)' >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram

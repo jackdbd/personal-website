@@ -1,10 +1,15 @@
-const fs = require('node:fs')
-const path = require('node:path')
-const snoowrap = require('snoowrap')
-const yargs = require('yargs')
-const { jsonSecret, sendOutput } = require('../utils.cjs')
-const { slugify, renderTelegramMessage, userAgent } = require('./utils.cjs')
+import fs from 'node:fs'
+import path from 'node:path'
+import { debuglog } from 'node:util'
+import { fileURLToPath } from 'node:url'
+import snoowrap from 'snoowrap'
+import yargs from 'yargs'
+import { jsonSecret, sendOutput } from '../utilz.mjs'
+import { slugify, renderTelegramMessage, userAgent } from './utils.mjs'
 
+const debug = debuglog('reddit:post-ad-website-audit')
+
+const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
 const APP_ID = splits[splits.length - 1]
 const APP_VERSION = '0.1.0'
@@ -53,6 +58,7 @@ const submitRedditPost = async () => {
     version: APP_VERSION
   })
 
+  debug(`initialize snoowrap with user agent ${user_agent}`)
   const r = new snoowrap({
     userAgent: user_agent,
     clientId: client_id,
@@ -68,12 +74,16 @@ const submitRedditPost = async () => {
   const slug = slugify(title)
 
   const filepath = path.join('assets', 'ads', 'reddit-website-audit.md')
+  debug(`read ad from ${filepath}`)
   let text = fs.readFileSync(filepath).toString()
   text = text.replace('CTA_PLACEHOLDER', argv['cta-md'])
 
   // in order to post to r/slavelabour, we need the appropriate flair
   // const flairs = await r.getSubreddit(subreddit).getLinkFlairTemplates()
   // const flair_template = await r.getSubreddit(subreddit).getUserFlair(username)
+
+  debug(`will try posting "${title}" to r/${subreddit} (slug: ${slug})`)
+  // throw new Error(`Aborted: ${title}`)
 
   let sub
   if (subreddit === 'test') {

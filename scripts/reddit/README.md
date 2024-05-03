@@ -12,7 +12,7 @@ As far as I know, search queries are always [case insensitive](https://www.reddi
 Example: find remote React jobs posted in r/jobbit or r/reactjs this week.
 
 ```sh
-node scripts/reddit/search.cjs \
+node scripts/reddit/search.mjs \
   --description 'Remote React jobs posted in r/jobbit or r/reactjs this week' \
   --query '(title:"[hiring]" OR flair:Hiring) AND (selftext:"remote" AND selftext:"react") AND (subreddit:jobbit OR subreddit:reactjs)' \
   -t 'week'
@@ -21,7 +21,7 @@ node scripts/reddit/search.cjs \
 Example: find jobs mentioning "GCP" in various subreddits this month.
 
 ```sh
-node scripts/reddit/search.cjs \
+node scripts/reddit/search.mjs \
   -d 'Jobs mentioning "GCP" in various subreddits this month' \
   -q '(selftext:"GCP") AND (subreddit:b2bforhire OR subreddit:r/forhire OR subreddit:freelance OR subreddit:indiebiz OR subreddit:jobbit OR subreddit:r/slavelabor) AND NOT (title:"[For Hire]" OR title:"[Hire Me]")' \
   -t 'month'
@@ -34,7 +34,7 @@ Search a list of subreddits for posts containing any of the specified keywords, 
 Example: find posts about [LLMs](https://en.wikipedia.org/wiki/Large_language_model) and [vector databases](https://www.pinecone.io/learn/vector-database/) posted this week.
 
 ```sh
-node scripts/reddit/search.cjs \
+node scripts/reddit/search.mjs \
   --subreddits 'learnmachinelearning,machinelearning,openassistant' \
   --keywords 'bard,chatgpt,chroma,embedding' \
   --time 'week'
@@ -43,7 +43,7 @@ node scripts/reddit/search.cjs \
 Example: discover interesting middlewares and plugins for CloudFlare Workers and CloudFlare Pages Functions posted this month.
 
 ```sh
-node scripts/reddit/search.cjs \
+node scripts/reddit/search.mjs \
   -d 'Middlewares and plugins for CloudFlare Workers and CloudFlare Pages Functions posted this month' \
   -k 'middleware,plugin,worker' \
   -s 'CloudFlare,JAMstack' \
@@ -53,7 +53,7 @@ node scripts/reddit/search.cjs \
 Example (WIP): find leads for website audits.
 
 ```sh
-node scripts/reddit/search.cjs \
+node scripts/reddit/search.mjs \
   -d 'Find out whether someone is complaining about having a slow website' \
   -k 'audit,web performance,slow website' \
   -s 'advancedentrepreneur,eCommerce,SaaS,smallbusiness' \
@@ -63,7 +63,7 @@ node scripts/reddit/search.cjs \
 Example: find out if anyone has ever talked about Elysia or Hono on any programming subreddit.
 
 ```sh
-node scripts/reddit/search.cjs \
+node scripts/reddit/search.mjs \
   -k 'elysia,hono' \
   -s 'bunjs,CloudFlare,DevTo,frontend,JAMstack,javascript,node,programming,reactjs,WebDev,Web_Performance' \
   -t 'all'
@@ -82,14 +82,14 @@ gh workflow run "Reddit search"
 🧪 Post the ad [reddit-freelancing.md](../../assets/ads/reddit-freelancing.md) to [r/test](https://www.reddit.com/r/test/):
 
 ```sh
-node scripts/reddit/post-ad-freelancing.cjs --subreddit test
+node scripts/reddit/post-ad-freelancing.mjs --subreddit test
 ```
 
 ⚠️ Post the ad [reddit-freelancing.md](../../assets/ads/reddit-website-audit.md) to various subreddits:
 
 ```sh
-node scripts/reddit/post-ad-freelancing.cjs --subreddit forhire
-node scripts/reddit/post-ad-freelancing.cjs --subreddit jobbit
+node scripts/reddit/post-ad-freelancing.mjs --subreddit forhire
+node scripts/reddit/post-ad-freelancing.mjs --subreddit jobbit
 ```
 
 You can also run this script from a GitHub workflow:
@@ -129,7 +129,7 @@ See also: [rules of r/slavelabour](https://www.reddit.com/r/slavelabour/wiki/rul
 🧪 Post the ad [reddit-website-audit.md](../../assets/ads/reddit-website-audit.md) to [r/test](https://www.reddit.com/r/test/):
 
 ```sh
-node scripts/reddit/post-ad-website-audit.cjs \
+node scripts/reddit/post-ad-website-audit.mjs \
   --cta-md '[ORDER NOW](https://buy.stripe.com/6oE6oM6di9YA5eE005?prefilled_promo_code=REDDITSLAVELABOUR80)' \
   --test
 ```
@@ -137,7 +137,7 @@ node scripts/reddit/post-ad-website-audit.cjs \
 ⚠️ Post the ad [reddit-website-audit.md](../../assets/ads/reddit-website-audit.md) to [r/slavelabour](https://www.reddit.com/r/slavelabour/):
 
 ```sh
-node scripts/reddit/post-ad-website-audit.cjs \
+node scripts/reddit/post-ad-website-audit.mjs \
   --cta-md '[ORDER NOW](https://buy.stripe.com/6oE6oM6di9YA5eE005?prefilled_promo_code=REDDITSLAVELABOUR80)'
 ```
 
@@ -158,7 +158,7 @@ Things to keep in mind when posting on [r/smallbusiness](https://www.reddit.com/
 🧪 Post the ad [reddit-smallbusiness.md](../../assets/ads/reddit-smallbusiness.md) on [r/test](https://www.reddit.com/r/test/):
 
 ```sh
-node scripts/reddit/post-ad-smallbusiness.cjs \
+node scripts/reddit/post-ad-smallbusiness.mjs \
   --cta-md '[ORDER NOW TO GET 50% OFF](https://buy.stripe.com/6oE6oM6di9YA5eE005?prefilled_promo_code=REDDITSMALLBUSINESS50)' \
   --test
 ```
@@ -166,6 +166,6 @@ node scripts/reddit/post-ad-smallbusiness.cjs \
 ⚠️ Post the ad [reddit-smallbusiness.md](../../assets/ads/reddit-website-audit.md) to [r/smallbusiness](https://www.reddit.com/r/smallbusiness/):
 
 ```sh
-node scripts/reddit/post-ad-smallbusiness.cjs \
+node scripts/reddit/post-ad-smallbusiness.mjs \
   --cta-md '[ORDER NOW TO GET 50% OFF](https://buy.stripe.com/6oE6oM6di9YA5eE005?prefilled_promo_code=REDDITSMALLBUSINESS50)'
 ```

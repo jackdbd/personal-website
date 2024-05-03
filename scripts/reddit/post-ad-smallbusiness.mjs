@@ -1,10 +1,15 @@
-const fs = require('node:fs')
-const path = require('node:path')
-const snoowrap = require('snoowrap')
-const yargs = require('yargs')
-const { EMOJI, jsonSecret, sendOutput } = require('../utils.cjs')
-const { userAgent } = require('./utils.cjs')
+import fs from 'node:fs'
+import path from 'node:path'
+import { debuglog } from 'node:util'
+import { fileURLToPath } from 'node:url'
+import snoowrap from 'snoowrap'
+import yargs from 'yargs'
+import { EMOJI, jsonSecret, sendOutput } from '../utilz.mjs'
+import { userAgent } from './utils.mjs'
 
+const debug = debuglog('reddit:post-ad-smallbusiness')
+
+const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
 const APP_ID = splits[splits.length - 1]
 const APP_VERSION = '0.1.0'
@@ -48,6 +53,7 @@ const submitRedditPost = async () => {
     version: APP_VERSION
   })
 
+  debug(`initialize snoowrap with user agent ${user_agent}`)
   const r = new snoowrap({
     userAgent: user_agent,
     clientId: client_id,

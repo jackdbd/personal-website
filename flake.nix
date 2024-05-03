@@ -95,7 +95,7 @@
         # It's weird, since jsdom declares canvas as an OPTIONAL peerDependency
         # https://github.com/jsdom/jsdom/blob/main/package.json
 
-        NODE_DEBUG = "gh-workflow:*,scripts:*";
+        NODE_DEBUG = "hn:*,reddit:*,scripts:*";
         # ALWAYS set NODE_ENV to production
         # https://youtu.be/HMM7GJC5E2o?si=RaVgw65WMOXDpHT2
         NODE_ENV = "production";
