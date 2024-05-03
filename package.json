@@ -16,10 +16,11 @@
   ],
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "npm run build:11ty && npm run build:css && npm run build:headers",
+    "build": "npm run build:11ty && npm run build:css && npm run build:headers && npm run build:sw",
     "build:11ty": "npx @11ty/eleventy --config ./config/eleventy.mjs",
     "build:css": "postcss ./config/input.css --output _site/assets/css/style.css --config ./config --env production --verbose",
     "build:headers": "DEBUG='csp:hash,csp:source-values,hosting-utils:*,script:*' node scripts/headers.mjs",
+    "build:sw": "DEBUG='script:*' node scripts/build-sw.mjs",
     "postbuild": "ls --size --human-readable _site/ | head -n 1",
     "clean": "find _site/* -not -name 'README.md' -delete",
     "debug": "NODE_OPTIONS='--inspect-brk=127.0.0.1:9229' npx @11ty/eleventy --config ./config/eleventy.mjs",

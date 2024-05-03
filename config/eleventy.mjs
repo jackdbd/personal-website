@@ -2,7 +2,6 @@ import fs from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import makeDebug from 'debug'
-import { globby } from 'globby'
 import markdownIt from 'markdown-it'
 import markdownItAnchor from 'markdown-it-anchor'
 import { EleventyRenderPlugin } from '@11ty/eleventy'
@@ -32,7 +31,6 @@ import cloudinaryPlugin from '../plugins/11ty/cloudinary/index.cjs'
 import { pagefindPlugin } from '../plugins/11ty/pagefind/index.mjs'
 import stripePlugin from '../plugins/11ty/stripe/index.cjs'
 import webmentionsPlugin from '../plugins/11ty/webmentions/index.cjs'
-import { buildServiceWorker } from '../src/build-sw.cjs'
 
 const debug = makeDebug(`11ty-config:eleventy.mjs`)
 
@@ -54,8 +52,6 @@ const headingAnchorSlugify = (s) => {
 }
 
 export default function (eleventyConfig) {
-  let popularHtmlPages = []
-
   // https://www.11ty.dev/docs/data-global-custom/
   // https://benmyers.dev/blog/eleventy-data-cascade/
   const contactFormSubmissionUrl = 'https://formspree.io/f/mrgdevqb'
@@ -76,51 +72,11 @@ export default function (eleventyConfig) {
     ]
   })
 
-  eleventyConfig.on('eleventy.after', async () => {
-    const defaultHtmlPagesToPrecache = [
-      join(OUTPUT_DIR, '404.html'),
-      join(OUTPUT_DIR, 'index.html'),
-      join(OUTPUT_DIR, 'about', 'index.html'),
-      join(OUTPUT_DIR, 'blog', 'index.html'),
-      join(OUTPUT_DIR, 'contact', 'index.html'),
-      join(OUTPUT_DIR, 'projects', 'index.html')
-    ]
-
-    // I still don't know whether precaching the RSS feed (the one for my
-    // website is ~1MB) and the sitemap (the one for my website is ~16KB)
-    // is a good idea or not. Probably not...
-
-    // precache SOME html pages, but not too many
-
-    // precache CSS hosted on this origin.
-    // CSS files are tipically quite small, so the browser can precache them
-    // pretty quickly when installing the service worker.
-
-    // precache JS hosted on this origin.
-
-    // precache fonts hosted on this origin. Maybe...
-
-    // precache SOME images hosted on this origin.
-
-    const patterns = [
-      // `${OUTPUT_DIR}/assets/**/*.css`,
-      // `${OUTPUT_DIR}/assets/**/*.js`,
-      `${OUTPUT_DIR}/assets/**/*.{ico,svg}`,
-      `${OUTPUT_DIR}/assets/**/*.{woff,woff2}`
-    ]
-    const assetPaths = await globby(patterns)
-
-    await buildServiceWorker({
-      precachePaths: [
-        ...assetPaths,
-        // I think precaching the manifest.webmanifest is required to make the
-        // website usable offline.
-        join(OUTPUT_DIR, 'manifest.webmanifest'),
-        ...defaultHtmlPagesToPrecache,
-        ...popularHtmlPages
-      ]
-    })
-  })
+  // TIP: think twice before writing code inside a `eleventy.after` event
+  // handler. If you need code here, most likely you are better off writing a
+  // standalone script which works with any static site, not just with the ones
+  // built with Eleventy.
+  // eleventyConfig.on('eleventy.after', async () => {})
 
   let keyFilename
   // on GitHub Actions and on Cloudflare Pages, I set GCP_CREDENTIALS_JSON as a JSON string.
