@@ -1,9 +1,15 @@
+import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import defDebug from 'debug'
 import { cspHeader } from '@jackdbd/content-security-policy'
 import { updateHeaders } from '@jackdbd/hosting-utils'
-import { permissionsPolicy } from '@jackdbd/permissions-policy'
+import { featurePolicy, permissionsPolicy } from '@jackdbd/permissions-policy'
+
+// TODO: detaching headers is currently not supported by the updateHeaders
+// function, because that function uses netlify-headers-parser, which does
+// support detaching headers.
+// https://developers.cloudflare.com/pages/configuration/headers/#detach-a-header
 
 export const __filename = fileURLToPath(import.meta.url)
 const SCRIPT_NAME = path.basename(__filename, '.ts')
@@ -36,12 +42,64 @@ async function* patchConsumer(patches) {
 
 // consume the async generator
 const consume = async (agen) => {
+  // what should I do if an iteration throws? Handle the exception here?
   for await (const result of agen) {
   }
 }
 
 const main = async () => {
-  // const args = process.argv.slice(2)
+  const filepath = path.join(SITE_ROOT, '_headers')
+  if (!fs.existsSync(filepath)) {
+    fs.writeFileSync(filepath, '', 'utf8')
+    debug(`created ${filepath}`)
+  }
+
+  const accept_ch = [
+    'DPR',
+    'Save-Data',
+    'Sec-CH-DPR',
+    'Sec-CH-Prefers-Reduced-Data',
+    'Sec-CH-Width',
+    'Width'
+  ].join(',')
+
+  const default_reporting_endpoint_url =
+    'https://giacomodebidda.uriports.com/reports'
+
+  // Reporting API v0: NEL + Report-To + report-uri directive
+  const report_to_group = 'default'
+  // Network Error Logging
+  // https://www.uriports.com/blog/network-error-logging/
+  const nel = JSON.stringify({
+    report_to: report_to_group,
+    max_age: 31536000, // 1 year
+    // max_age: 2592000, // 30 days
+    include_subdomains: true,
+    failure_fraction: 0.5
+  })
+
+  const report_to = JSON.stringify({
+    group: report_to_group,
+    max_age: 31536000,
+    endpoints: [{ url: default_reporting_endpoint_url }],
+    include_subdomains: true
+  })
+
+  // Reporting API v1: Reporting-Endpoints + report-to directive
+  const reporting_endpoints = {
+    default: `"${default_reporting_endpoint_url}"`,
+    'permissions-policy': `"https://giacomodebidda.uriports.com/reports"`
+  }
+
+  debug(`reports and policy violations will be sent to these endpoints %O`, {
+    reporting_endpoints
+  })
+
+  const reportingEndpoints = Object.entries(reporting_endpoints)
+    .map(([key, value]) => {
+      return `${key}=${value}`
+    })
+    .join(', ')
 
   const domain = 'www.giacomodebidda.com'
   const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`
@@ -133,7 +191,7 @@ const main = async () => {
 
     'object-src': ['none'],
 
-    // allow to report to the group called "default". See Report-To header.
+    // Reporting API v1: report-to directive
     'report-to': ['default'],
 
     // TODO: If I use require-trusted-types-for, I also need to configure
@@ -143,9 +201,9 @@ const main = async () => {
     // https://javascript.tutorialink.com/this-document-requires-trustedscripturl-assignment/
     // 'require-trusted-types-for': ['script'],
 
-    // report-uri is deprecated in favor of report-to, but Firefox still does
-    // not support report-to (it only supports report-uri).
-    'report-uri': ['https://giacomodebidda.report-uri.com/r/d/csp/enforce'],
+    // Reporting API v0: report-uri is deprecated in favor of report-to, but
+    // Firefox still does not support report-to (it only supports report-uri).
+    'report-uri': [default_reporting_endpoint_url],
 
     // Firefox and Safari on iOS do not support script-src-elem, so we need a
     // fallback to script-src.
@@ -180,25 +238,7 @@ const main = async () => {
   )
   console.log(csp)
 
-  const reporting_endpoints = {
-    default: `"https://giacomodebidda.uriports.com/reports"`,
-    csp: `"https://giacomodebidda.uriports.com/reports"`,
-    'permissions-policy': `"https://giacomodebidda.uriports.com/reports"`
-  }
-
-  debug(`reports and policy violations will be sent to these endpoints %O`, {
-    reporting_endpoints
-  })
-
-  const reportingEndpoints = Object.entries(reporting_endpoints)
-    .map(([key, value]) => {
-      return `${key}=${value}`
-    })
-    .join(', ')
-
-  const filepath = path.join(SITE_ROOT, '_headers')
-
-  // The _headers file for Cloudflare Pages is a bit tricky
+  // The _headers file for Cloudflare Pages is a bit tricky to configure
   // https://developers.cloudflare.com/pages/configuration/headers/
   // attach headers to every resource
   // const sources = ['/*']
@@ -207,7 +247,26 @@ const main = async () => {
   // attach header to the home page, the 404 page and a specific post
   // const sources = ['/', '/404', '/posts/playwright-on-nixos/']
 
-  const { error, value: pp } = permissionsPolicy({
+  const { error: fp_error, value: fp_value } = featurePolicy({
+    features: {
+      accelerometer: [],
+      camera: [],
+      // 'ch-width': ['self', 'https://res.cloudinary.com'],
+      // 'ch-dpr': ['self', 'https://res.cloudinary.com'],
+      geolocation: [],
+      gyroscope: [],
+      magnetometer: [],
+      microphone: [],
+      payment: [],
+      usb: []
+    }
+  })
+  if (fp_error) {
+    console.error(fp_error)
+    return
+  }
+
+  const { error: pp_error, value: pp_value } = permissionsPolicy({
     features: {
       accelerometer: [],
       camera: [],
@@ -222,16 +281,23 @@ const main = async () => {
     },
     reportingEndpoint: 'permissions-policy' // or 'default'
   })
-  if (error) {
-    console.error(error)
+  if (pp_error) {
+    console.error(pp_error)
     return
   }
 
   const patches = [
+    // Example with a placeholder
+    // https://developers.cloudflare.com/pages/configuration/headers/#placeholders
+    // {
+    //   headerKey: 'X-Blog-Post',
+    //   headerValue: 'You are reading ":title"',
+    //   filepath,
+    //   sources: ['/posts/:title']
+    // },
     {
       headerKey: 'Accept-CH',
-      headerValue:
-        'Save-Data,DPR,Width,Sec-CH-Prefers-Reduced-Data,Sec-CH-DPR,Sec-CH-Width',
+      headerValue: accept_ch,
       filepath,
       sources
     },
@@ -241,15 +307,27 @@ const main = async () => {
       filepath,
       sources
     },
-    // {
-    //   headerKey: 'Feature-Policy',
-    //   headerValue: fp,
-    //   filepath,
-    //   sources
-    // },
+    {
+      headerKey: 'Feature-Policy',
+      headerValue: fp_value,
+      filepath,
+      sources
+    },
+    {
+      headerKey: 'NEL',
+      headerValue: nel,
+      filepath,
+      sources
+    },
     {
       headerKey: 'Permissions-Policy',
-      headerValue: pp,
+      headerValue: pp_value,
+      filepath,
+      sources
+    },
+    {
+      headerKey: 'Report-To',
+      headerValue: report_to,
       filepath,
       sources
     },
@@ -262,6 +340,24 @@ const main = async () => {
     {
       headerKey: 'Strict-Transport-Security',
       headerValue: 'max-age=31536000; includeSubDomains; preload',
+      filepath,
+      sources
+    },
+    {
+      headerKey: 'X-Content-Type-Options',
+      headerValue: 'nosniff',
+      filepath,
+      sources
+    },
+    {
+      headerKey: 'X-Frame-Options',
+      headerValue: 'SAMEORIGIN',
+      filepath,
+      sources
+    },
+    {
+      headerKey: 'X-XSS-Protection',
+      headerValue: '1; mode=block',
       filepath,
       sources
     },
