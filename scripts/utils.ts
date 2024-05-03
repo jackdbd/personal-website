@@ -2,9 +2,14 @@ import { debuglog } from 'node:util'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { isOnCloudBuild, isOnGithub } from '@jackdbd/checks/environment'
 
 const debug = debuglog('utils')
+
+const __filename = fileURLToPath(import.meta.url)
+export const REPO_ROOT = path.join(__filename, '..', '..')
+export const SECRETS_ROOT = path.join(REPO_ROOT, 'secrets')
 
 export const jsonSecret = (name: string, env = process.env) => {
   // replaceAll available in Node.js 15 and later

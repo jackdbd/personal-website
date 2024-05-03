@@ -2,16 +2,13 @@
   description = "A Nix-flake-based Node.js development environment";
 
   inputs = {
-    # nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-
+    # https://github.com/NixOS/nixpkgs/branches
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     alejandra = {
       url = "github:kamadorueda/alejandra/3.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
-
     nil.url = "github:oxalica/nil";
   };
 
@@ -24,7 +21,7 @@
   } @ inputs: let
     overlays = [
       (final: prev: {
-        nodejs = prev.nodejs_21;
+        nodejs = prev.nodejs_22;
       })
     ];
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
@@ -73,16 +70,13 @@
 
           # On non-NixOS hosts we don't have secrets in /run/secrets, so we have
           # to use this somewhat hacky workaround to read files untracked by git (see .gitignore)
-          # export CLOUDINARY=$(cat ./secrets/cloudinary.json)
           export STRIPE_LIVE=$(cat ./secrets/stripe-live.json)
-          # export TELEGRAM=$(cat ./secrets/telegram.json)
-          # export WEBMENTION_IO_TOKEN=$(cat ./secrets/webmention-io-token.txt)
         '';
 
         ARTICLE_SLUG = "test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu";
         # DEBUG = "Eleventy:UserConfig";
         # DEBUG = "Eleventy:EleventyErrorHandler";
-        DEBUG = "Eleventy:EleventyErrorHandler,11ty-config:*,11ty-plugin:*,-11ty-plugin:TTS:inject-audio-tags-into-html";
+        DEBUG = "script:*,Eleventy:EleventyErrorHandler,11ty-config:*,11ty-plugin:*,-11ty-plugin:TTS:inject-audio-tags-into-html";
         # DEBUG = "11ty-plugin-cloudinary:*,-11ty-plugin-cloudinary:transforms";
         DOMAIN = "giacomodebidda.com";
         GOOGLE_APPLICATION_CREDENTIALS = "/run/secrets/prj-kitchen-sink/sa-storage-uploader";

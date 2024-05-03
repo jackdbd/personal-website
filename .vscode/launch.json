@@ -6,11 +6,19 @@
       "type": "node-terminal",
       "request": "launch",
       "command": "npm run dev:11ty",
+      "cwd": "${workspaceRoot}",
       "serverReadyAction": {
         "pattern": "started server on .+, url: (https?://.+)",
         "uriFormat": "%s",
         "action": "debugWithChrome"
       }
+    },
+    {
+      "name": "Debug script security-txt",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/security-txt.mjs",
+      "env": { "FOO": "bar" }
     }
   ]
 }
