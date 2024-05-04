@@ -12,8 +12,7 @@ import { featurePolicy, permissionsPolicy } from '@jackdbd/permissions-policy'
 // https://developers.cloudflare.com/pages/configuration/headers/#detach-a-header
 
 export const __filename = fileURLToPath(import.meta.url)
-const SCRIPT_NAME = path.basename(__filename, '.ts')
-const debug = defDebug(`script:${SCRIPT_NAME}`)
+const debug = defDebug(`script:headers`)
 
 const REPO_ROOT = path.join(__filename, '..', '..')
 const SITE_ROOT = path.join(REPO_ROOT, '_site')

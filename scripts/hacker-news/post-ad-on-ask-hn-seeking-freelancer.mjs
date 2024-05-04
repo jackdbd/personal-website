@@ -1,12 +1,14 @@
-const fs = require('node:fs')
-const path = require('node:path')
-const { debuglog } = require('node:util')
-const { chromium } = require('playwright')
-const { EMOJI, jsonSecret, sendOutput, waitMs } = require('../utils.cjs')
-const { latestPost } = require('../hacker-news.cjs')
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { debuglog } from 'node:util'
+import { chromium } from 'playwright'
+import { EMOJI, jsonSecret, sendOutput, waitMs } from '../utils.mjs'
+import { latestPost } from '../hacker-news.cjs'
 
 const debug = debuglog('hn:post-ad')
 
+const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
 const APP_ID = splits[splits.length - 1]
 
@@ -63,7 +65,7 @@ const postAdOnHackerNews = async ({ browser, hn_item_id }) => {
     filepath: '/run/secrets/hacker-news/credentials'
   })
 
-  // throw new Error(`=== STOP ===`)
+  // throw new Error(`Aborted: post ad on Hacker News`)
 
   debug(`launch Playwright`)
   const page = await browser.newPage()
@@ -117,14 +119,14 @@ const postAdOnHackerNews = async ({ browser, hn_item_id }) => {
  * This script is meant to be used in a GitHub worklow, but can also be run locally.
  *
  * Usage:
- * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs
- * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs <hn_item_id>
+ * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.mjs
+ * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.mjs <hn_item_id>
  *
  * Example:
  * post ad in this month's Ask HN story
- * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs
+ * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.mjs
  * post ad in the Ask HN story of March 2023
- * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.cjs 34983766
+ * node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.mjs 34983766
  *
  * See also:
  * https://news.ycombinator.com/submitted?id=whoishiring

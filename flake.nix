@@ -78,8 +78,8 @@
 
         ARTICLE_SLUG = "test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu";
         # DEBUG = "Eleventy:UserConfig";
-        # DEBUG = "Eleventy:EleventyErrorHandler";
-        DEBUG = "script:*,Eleventy:EleventyErrorHandler,11ty-config:*,11ty-plugin:*,-11ty-plugin:TTS:inject-audio-tags-into-html";
+        DEBUG = "11ty-plugin:*,Eleventy:EleventyErrorHandler";
+        # DEBUG = "script:*,Eleventy:EleventyErrorHandler,11ty-config:*,11ty-plugin:*,-11ty-plugin:TTS:inject-audio-tags-into-html";
         # DEBUG = "11ty-plugin-cloudinary:*,-11ty-plugin-cloudinary:transforms";
         DOMAIN = "giacomodebidda.com";
         GOOGLE_APPLICATION_CREDENTIALS = "/run/secrets/prj-kitchen-sink/sa-storage-uploader";

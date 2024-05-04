@@ -8,6 +8,11 @@ on:
     workflows:
       - 'Ask HN Freelancer? Seeking Freelancer? (by whoishiring)'
       - 'CI'
+      - 'Cloudflare Pages deploy hook'
+      - 'Hacker News links to Telegram'
+      - 'Reddit freelancing'
+      - 'Reddit search'
+      - 'Stripe Promotion Codes'
       - 'WebPageTest audit'
     types: [completed]
 

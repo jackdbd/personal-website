@@ -5,7 +5,12 @@ import { fileURLToPath } from 'node:url'
 import PrettyError from 'pretty-error'
 import snoowrap from 'snoowrap'
 import yargs from 'yargs'
-import { jsonSecret, sendOutput } from '../utilz.mjs'
+import {
+  defRenderTelegramErrorMessage,
+  EMOJI,
+  jsonSecret,
+  sendOutput
+} from '../utils.mjs'
 import { slugify, renderTelegramMessage, userAgent } from './utils.mjs'
 
 const pe = new PrettyError()
@@ -14,8 +19,8 @@ const debug = debuglog('reddit:post-ad-freelancing')
 
 const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
-const APP_ID = splits[splits.length - 1]
-const APP_VERSION = '0.1.0'
+const app_id = splits[splits.length - 1]
+const app_version = '0.1.0'
 
 const me = JSON.parse(fs.readFileSync(path.join('assets', 'me.json')))
 
@@ -24,6 +29,11 @@ const DEFAULT = {
   'rate-md': `**Rate:** ${me['hourly-rate-in-usd']} USD/hour. Open to flat-rate pricing for well-scoped projects.`,
   subreddit: 'test'
 }
+
+const renderTelegramErrorMessage = defRenderTelegramErrorMessage({
+  header: `<b>${EMOJI.Robot} Post ad freelacing on Reddit</b>`,
+  footer: `<i>Sent by ${app_id} (vers. ${app_version})</i>`
+})
 
 /**
  * Script that posts an ad on a single subreddit.
@@ -58,9 +68,9 @@ const submitRedditPost = async () => {
   })
 
   const user_agent = userAgent({
-    app_id: APP_ID,
+    app_id,
     username,
-    version: APP_VERSION
+    version: app_version
   })
 
   debug(`initialize snoowrap with user agent ${user_agent}`)
@@ -139,6 +149,4 @@ const submitRedditPost = async () => {
 submitRedditPost()
   .then(renderTelegramMessage)
   .then(sendOutput)
-  .catch((err) => {
-    console.log(pe.render(err))
-  })
+  .catch((err) => renderTelegramErrorMessage(err).then(sendOutput))

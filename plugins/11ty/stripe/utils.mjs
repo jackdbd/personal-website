@@ -1,12 +1,13 @@
-const makeDebug = require('debug')
+import defDebug from 'debug'
+import { DEBUG_PREFIX } from './constants.mjs'
 
-const debug = makeDebug('eleventy-plugin-stripe:utils')
+const debug = defDebug(`${DEBUG_PREFIX}:utils`)
 
 /**
  * https://stripe.com/docs/api/payment_links/payment_links/list
  * https://stripe.com/docs/api/payment_links/line_items?lang=node
  */
-const paymentLinksByPriceLookupKey = async ({
+export const paymentLinksByPriceLookupKey = async ({
   stripe,
   is_test,
   lookup_key
@@ -49,5 +50,3 @@ const paymentLinksByPriceLookupKey = async ({
 
   return plinks
 }
-
-module.exports = { paymentLinksByPriceLookupKey }

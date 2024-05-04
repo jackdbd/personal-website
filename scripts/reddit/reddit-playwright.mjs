@@ -1,11 +1,8 @@
-const fs = require('node:fs')
-const path = require('node:path')
-// const axios = require('axios')
+import fs from 'node:fs'
+import path from 'node:path'
 // const FormData = require('form-data')
-const { chromium } = require('playwright-core')
+import { chromium } from 'playwright-core'
 // const snoowrap = require('snoowrap')
-// const { jsonSecret, waitMs } = require('../utils.cjs')
-// const { userAgent } = require('./utils.cjs')
 
 // const splits = __filename.split('/')
 // const app_id = splits[splits.length - 1]
@@ -14,7 +11,7 @@ const { chromium } = require('playwright-core')
 
 /**
  * Usage:
- * node scripts/reddit/reddit-playwright.cjs
+ * node scripts/reddit/reddit-playwright.mjs
  */
 const main = async () => {
   //   const args = process.argv.slice(2)
@@ -57,9 +54,15 @@ const main = async () => {
 
   // const sub = submissions[0]
 
+  // https://giacomodebidda.com/posts/playwright-on-nixos/
+  // When running on:
+  // - GitHub Actions => use the chromium revision bundled with Playwright.
+  // - my NixOS laptop => use the chromium revision installed with Home Manager.
   const browser = await chromium.launch({
     devtools: process.env.GITHUB_SHA ? false : true,
-    executablePath: '/home/jack/.nix-profile/bin/chromium',
+    executablePath: process.env.GITHUB_SHA
+      ? undefined
+      : '/etc/profiles/per-user/jack/bin/chromium',
     headless: process.env.GITHUB_SHA ? true : false
   })
 

@@ -1,26 +1,27 @@
-const makeDebug = require('debug')
-const sanitizeHTML = require('sanitize-html')
+import defDebug from 'debug'
+import sanitizeHTML from 'sanitize-html'
+import { DEBUG_PREFIX } from './constants.mjs'
 
-const debug = makeDebug('eleventy-plugin-webmentions:utils')
+const debug = defDebug(`${DEBUG_PREFIX}:utils`)
 
 // in a webmention, the field 'wm-property' can be one of these values:
 // https://github.com/snarfed/granary/blob/c6b11da5c1d6cd2ca04738287cc85a8bf9f4eb56/granary/microformats2.py#L554
 
 // https://indieweb.org/like
-const isLike = (entry) => entry['wm-property'] === 'like-of'
+export const isLike = (entry) => entry['wm-property'] === 'like-of'
 
 // https://indieweb.org/reply
-const isReply = (entry) =>
+export const isReply = (entry) =>
   entry['wm-property'] === 'in-reply-to' ||
   entry['wm-property'] === 'mention-of'
 
 // https://indieweb.org/repost
-const isRepost = (entry) => entry['wm-property'] === 'repost-of'
+export const isRepost = (entry) => entry['wm-property'] === 'repost-of'
 
 /**
  * Sorts in chronological order (oldest to most recent)
  */
-const chronologicalOrder = (a, b) => {
+export const chronologicalOrder = (a, b) => {
   const delta_ms =
     new Date(a.published || a['wm-received']).getTime() -
     new Date(b.published || b['wm-received']).getTime()
@@ -30,14 +31,14 @@ const chronologicalOrder = (a, b) => {
 /**
  * Sorts in reverse chronological order (most recent to oldest)
  */
-const reverseChronologicalOrder = (a, b) => {
+export const reverseChronologicalOrder = (a, b) => {
   const delta_ms =
     new Date(b.published || b['wm-received']).getTime() -
     new Date(a.published || a['wm-received']).getTime()
   return delta_ms
 }
 
-const makeSanitize = (options) => {
+export const defSanitize = (options) => {
   debug(`options for sanitize-html %O`, options)
 
   // const fallback_content = 'this webmention has no content'
@@ -64,8 +65,8 @@ const makeSanitize = (options) => {
 
 // TODO: (optionally) validate each webmention against a zod schema
 
-const makeResponseToWebmentions = ({ blacklisted, sanitizeOptions }) => {
-  const sanitize = makeSanitize(sanitizeOptions)
+export const defResponseToWebmentions = ({ blacklisted, sanitizeOptions }) => {
+  const sanitize = defSanitize(sanitizeOptions)
 
   return function responseToWebmentions(response) {
     const entries = response.children.filter((entry) => {
@@ -98,7 +99,7 @@ const makeResponseToWebmentions = ({ blacklisted, sanitizeOptions }) => {
   }
 }
 
-const sanitizeWebmentionAuthor = (author = {}) => {
+export const sanitizeWebmentionAuthor = (author = {}) => {
   const name = author.name || 'Anonymous'
 
   const photo =
@@ -109,7 +110,7 @@ const sanitizeWebmentionAuthor = (author = {}) => {
   return { ...author, name, photo, url }
 }
 
-const isTwitterUrl = (s) => {
+export const isTwitterUrl = (s) => {
   const url = new URL(s)
   console.log(`isTwitterUrl`, {
     host: url.host,
@@ -118,16 +119,4 @@ const isTwitterUrl = (s) => {
   })
   const re = /^https:\/\/twitter\.com\/.*\/status\/\d+/
   return s.match(re) ? true : false
-}
-
-module.exports = {
-  isLike,
-  isReply,
-  isRepost,
-  isTwitterUrl,
-  makeSanitize,
-  chronologicalOrder,
-  reverseChronologicalOrder,
-  makeResponseToWebmentions,
-  sanitizeWebmentionAuthor
 }

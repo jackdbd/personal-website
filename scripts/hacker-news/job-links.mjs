@@ -1,15 +1,17 @@
-const { execSync } = require('node:child_process')
-const fs = require('node:fs')
-const path = require('node:path')
-const { debuglog } = require('node:util')
-const PrettyError = require('pretty-error')
-const yargs = require('yargs')
-const { EMOJI, sendOutput } = require('../utils.cjs')
+import { execSync } from 'node:child_process'
+import fs from 'node:fs'
+import path from 'node:path'
+import { debuglog } from 'node:util'
+import { fileURLToPath } from 'node:url'
+import PrettyError from 'pretty-error'
+import yargs from 'yargs'
+import { EMOJI, sendOutput } from '../utils.mjs'
 
 const debug = debuglog('hn:job-links')
 
 const pe = new PrettyError()
 
+const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
 const APP_ID = splits[splits.length - 1]
 

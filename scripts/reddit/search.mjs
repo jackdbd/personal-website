@@ -1,12 +1,8 @@
 import { fileURLToPath } from 'node:url'
 import { debuglog } from 'node:util'
-import PrettyError from 'pretty-error'
-import snoowrap from 'snoowrap'
 import yargs from 'yargs'
-import { EMOJI, sendOutput } from '../utilz.mjs'
+import { defRenderTelegramErrorMessage, EMOJI, sendOutput } from '../utils.mjs'
 import { defSnoowrap } from './utils.mjs'
-
-const pe = new PrettyError()
 
 const debug = debuglog('reddit:search')
 
@@ -14,6 +10,11 @@ const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
 const app_id = splits[splits.length - 1]
 const app_version = '0.1.0'
+
+const renderTelegramErrorMessage = defRenderTelegramErrorMessage({
+  header: `<b>${EMOJI.Robot} Search Reddit</b>`,
+  footer: `<i>Sent by ${app_id} (vers. ${app_version})</i>`
+})
 
 const KEYWORDS = [
   'performance audit',
@@ -107,9 +108,12 @@ const searchOnReddit = async () => {
     )
   }
 
+  // throw new Error(`Aborted: Reddit search`)
+
   // https://www.reddit.com/dev/api/#GET_search
   // https://not-an-aardvark.github.io/snoowrap/Subreddit.html
   const submissions = await r.search({ query, time: argv.time })
+  debug(`${submissions.length} submissions matching this query\n${query}`)
 
   const subs = submissions.map((d) => {
     return {
@@ -156,6 +160,4 @@ const renderTelegramMessage = (d) => {
 searchOnReddit()
   .then(renderTelegramMessage)
   .then(sendOutput)
-  .catch((err) => {
-    console.log(pe.render(err))
-  })
+  .catch((err) => renderTelegramErrorMessage(err).then(sendOutput))

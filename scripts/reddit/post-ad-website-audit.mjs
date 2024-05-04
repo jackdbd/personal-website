@@ -4,20 +4,30 @@ import { debuglog } from 'node:util'
 import { fileURLToPath } from 'node:url'
 import snoowrap from 'snoowrap'
 import yargs from 'yargs'
-import { jsonSecret, sendOutput } from '../utilz.mjs'
+import {
+  defRenderTelegramErrorMessage,
+  EMOJI,
+  jsonSecret,
+  sendOutput
+} from '../utils.mjs'
 import { slugify, renderTelegramMessage, userAgent } from './utils.mjs'
 
 const debug = debuglog('reddit:post-ad-website-audit')
 
 const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
-const APP_ID = splits[splits.length - 1]
-const APP_VERSION = '0.1.0'
+const app_id = splits[splits.length - 1]
+const app_version = '0.1.0'
 
 const DEFAULT = {
   ad: 'reddit-website-audit.md',
   test: false
 }
+
+const renderTelegramErrorMessage = defRenderTelegramErrorMessage({
+  header: `<b>${EMOJI.Robot} Post ad website audit on Reddit</b>`,
+  footer: `<i>Sent by ${app_id} (vers. ${app_version})</i>`
+})
 
 /**
  * Post my website audit ad to r/slavelabour or r/test.
@@ -53,9 +63,9 @@ const submitRedditPost = async () => {
   })
 
   const user_agent = userAgent({
-    app_id: APP_ID,
+    app_id,
     username,
-    version: APP_VERSION
+    version: app_version
   })
 
   debug(`initialize snoowrap with user agent ${user_agent}`)
@@ -118,6 +128,4 @@ const submitRedditPost = async () => {
 submitRedditPost()
   .then(renderTelegramMessage)
   .then(sendOutput)
-  .catch((err) => {
-    console.error(err.message)
-  })
+  .catch((err) => renderTelegramErrorMessage(err).then(sendOutput))

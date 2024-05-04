@@ -1,7 +1,7 @@
 import fs from 'node:fs'
-import { join } from 'node:path'
+import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import makeDebug from 'debug'
+import defDebug from 'debug'
 import markdownIt from 'markdown-it'
 import markdownItAnchor from 'markdown-it-anchor'
 import { EleventyRenderPlugin } from '@11ty/eleventy'
@@ -29,14 +29,14 @@ import { callout, table } from '../11ty/paired-shortcodes.mjs'
 import { htmlmin } from '../11ty/transforms.mjs'
 import cloudinaryPlugin from '../plugins/11ty/cloudinary/index.cjs'
 import { pagefindPlugin } from '../plugins/11ty/pagefind/index.mjs'
-import stripePlugin from '../plugins/11ty/stripe/index.cjs'
-import webmentionsPlugin from '../plugins/11ty/webmentions/index.cjs'
+import { stripePlugin } from '../plugins/11ty/stripe/index.mjs'
+import { webmentionsPlugin } from '../plugins/11ty/webmentions/index.mjs'
 
-const debug = makeDebug(`11ty-config:eleventy.mjs`)
+const debug = defDebug(`11ty-config:eleventy.mjs`)
 
 const __filename = fileURLToPath(import.meta.url)
-const REPO_ROOT = join(__filename, '..', '..')
-const OUTPUT_DIR = join(REPO_ROOT, '_site')
+const REPO_ROOT = path.join(__filename, '..', '..')
+const OUTPUT_DIR = path.join(REPO_ROOT, '_site')
 
 // shamelessly stolen from:
 // https://github.com/maxboeck/mxb/blob/db6ca7743f46cf67367a93c8de404cbcb50b98d1/utils/markdown.js
@@ -94,7 +94,7 @@ export default function (eleventyConfig) {
     // on my NixOS laptop, I have a secret stored on the filesystem
     keyFilename = undefined
     // on my non-NixOS laptop, I keep the JSON key in the secrets/ directory
-    // keyFilename = join(REPO_ROOT, 'secrets', 'sa-storage-uploader.json')
+    // keyFilename = path.join(REPO_ROOT, 'secrets', 'sa-storage-uploader.json')
     // process.env.GOOGLE_APPLICATION_CREDENTIALS = keyFilename
   }
 
@@ -173,7 +173,7 @@ export default function (eleventyConfig) {
     stripe_json_string = process.env.STRIPE_LIVE
   } else {
     stripe_json_string = fs.readFileSync(
-      join(REPO_ROOT, 'secrets', 'stripe-live.json'),
+      path.join(REPO_ROOT, 'secrets', 'stripe-live.json'),
       { encoding: 'utf8' }
     )
   }

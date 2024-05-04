@@ -1,7 +1,7 @@
 import os from 'node:os'
 import { debuglog } from 'node:util'
 import snoowrap from 'snoowrap'
-import { jsonSecret } from '../utilz.mjs'
+import { jsonSecret } from '../utils.mjs'
 
 const debug = debuglog('reddit:utils')
 

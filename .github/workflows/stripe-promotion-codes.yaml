@@ -1,4 +1,4 @@
-name: 'Promo Codes'
+name: 'Stripe Promotion Codes'
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
     - cron:  '45 13 * * 4'
   workflow_dispatch:
     # You can trigger this workflow manually using the GitHub CLI:
-    # gh workflow run "Promo Codes"
+    # gh workflow run "Stripe Promotion Codes"
 
 jobs:
   deploy:

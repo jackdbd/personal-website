@@ -1,4 +1,4 @@
-name: 'Deploy site via Cloudflare Pages deploy hook'
+name: 'Cloudflare Pages deploy hook'
 
 on:
   schedule:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
     # You can trigger this workflow manually using the GitHub CLI:
-    # gh workflow run "Deploy site via Cloudflare Pages deploy hook" --ref branch-name
+    # gh workflow run "Cloudflare Pages deploy hook" --ref branch-name
 
 jobs:
   deploy:

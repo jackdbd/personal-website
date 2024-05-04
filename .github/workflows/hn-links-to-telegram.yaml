@@ -44,7 +44,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "TELEGRAM_MESSAGE<<$delimiter" >> $GITHUB_ENV
-          node scripts/hacker-news/job-links.cjs -d 'Jobs from YC-backed startups on HN this week' -q 'hacker-news-jobs-YC.sql' >> $GITHUB_ENV
+          node scripts/hacker-news/job-links.mjs -d 'Jobs from YC-backed startups on HN this week' -q 'hacker-news-jobs-YC.sql' >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Send Hacker News link to Telegram

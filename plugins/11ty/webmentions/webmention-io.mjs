@@ -1,8 +1,11 @@
-const EleventyFetch = require('@11ty/eleventy-fetch')
-const makeDebug = require('debug')
-const { makeResponseToWebmentions } = require('./utils.cjs')
+import EleventyFetch from '@11ty/eleventy-fetch'
+import defDebug from 'debug'
+import { DEBUG_PREFIX } from './constants.mjs'
+import { defResponseToWebmentions } from './utils.mjs'
 
-const debug = makeDebug('eleventy-plugin-webmentions:webmention.io')
+const debug = defDebug(`${DEBUG_PREFIX}:webmention.io`)
+
+// TODO: export individual functions to better test them / compose them
 
 /**
  * Creates an API client that fetches webmentions from webmention.io and caches
@@ -16,7 +19,7 @@ const debug = makeDebug('eleventy-plugin-webmentions:webmention.io')
  *
  * @see https://github.com/aaronpk/webmention.io
  */
-const makeClient = ({
+export const defClient = ({
   blacklisted,
   cacheDirectory,
   cacheDuration,
@@ -28,7 +31,7 @@ const makeClient = ({
   const format = 'jf2'
   const endpoint = `https://webmention.io/api/mentions.${format}`
 
-  const responseToWebmentions = makeResponseToWebmentions({
+  const responseToWebmentions = defResponseToWebmentions({
     blacklisted,
     sanitizeOptions
   })
@@ -101,5 +104,3 @@ const makeClient = ({
 
   return { webmentionsSentToDomain, webmentionsSentToUrl }
 }
-
-module.exports = { makeClient }

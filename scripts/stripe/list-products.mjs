@@ -1,7 +1,7 @@
 import Stripe from 'stripe'
 import yargs from 'yargs'
 import { STRIPE_CONFIG } from './constants.mjs'
-import { jsonSecret } from '../utils.cjs'
+import { jsonSecret } from '../utils.mjs'
 
 const DEFAULT = {
   'stripe-environment': 'test'

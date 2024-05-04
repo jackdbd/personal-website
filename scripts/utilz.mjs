@@ -87,3 +87,20 @@ export const sendOutput = async (text) => {
   let username = res_body.result.from.username
   console.log(`[Telegram BOT API] response sent from ${username}`)
 }
+
+export const defRenderTelegramErrorMessage = (
+  config = { header: 'Header', footer: 'Footer' }
+) => {
+  debug(`define renderTelegramErrorMessage using this config %O`, config)
+  const { header, footer } = config
+
+  return (err) => {
+    debug(`render Telegram error message`)
+    let s = header
+
+    s = `${s}\n\n<b>${err.name || 'Error'}</b>`
+    s = `${s}\n<pre>${err.message}</pre>`
+
+    return `${s}\n\n${footer}\n`
+  }
+}
