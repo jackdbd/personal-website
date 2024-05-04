@@ -64,8 +64,9 @@ jobs:
       # https://github.com/microsoft/playwright-github-action#-use-the-playwright-cli
       - name: Post my ad on HN using Playwright
         env:
+          DEBUG: hn:*,script:*
           HACKER_NEWS: ${{ secrets.HACKER_NEWS }}
-          NODE_DEBUG: hn:*,scripts:*
+          NODE_DEBUG: hn:*,script:*
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "RESULT_STRING<<$delimiter" >> $GITHUB_ENV

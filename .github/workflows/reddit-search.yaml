@@ -25,7 +25,8 @@ jobs:
 
       - name: 🤖 Search Reddit
         env:
-          NODE_DEBUG: reddit:*,scripts:*
+          DEBUG: reddit:*,script:*
+          NODE_DEBUG: reddit:*,script:*
           REDDIT: ${{ secrets.REDDIT }}
         run: |
           delimiter=$(openssl rand -hex 8)

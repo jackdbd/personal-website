@@ -18,12 +18,28 @@ See these scripts to [search and post on Hacker News](./hacker-news/README.md).
 Build the `_headers` file.
 
 ```sh
-DEBUG=script:headers node scripts/headers.mjs
+node scripts/headers.mjs
+```
+
+## OpenPGP keys
+
+Export the OpenPGP public/private keys in ASCII armor format.
+
+```sh
+npx tsm scripts/export-openpgp-keys.ts
 ```
 
 ## Reddit
 
 See these script to [search and post on various subreddits](./reddit/README.md).
+
+## `security.txt`
+
+Regenerate the `security.txt` file.
+
+```sh
+node ./scripts/security-txt.mjs
+```
 
 ## Service Worker
 

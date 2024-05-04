@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import { debuglog } from 'node:util'
 
-const debug = debuglog('scripts:utils')
+const debug = debuglog('script:utils')
 
 // https://emojipedia.org/
 export const EMOJI = {

@@ -8,6 +8,6 @@ A responsible disclosure policy helps protect the project and its users from sec
 
 You can report any security-related issue by sending an email to `security@giacomodebidda.com`.
 
-You can encrypt your messages using the PGP public key hosted at https://www.giacomodebidda.com/assets/pgp-key.txt
+You can encrypt your messages using the OpenPGP public key hosted at [https://www.giacomodebidda.com/assets/pgp-key.txt](https://www.giacomodebidda.com/assets/pgp-key.txt).
 
-This security policy is subject to the expiration date indicated in the `security.txt` file hosted at https://www.giacomodebidda.com/.well-known/security.txt
+This security policy is subject to the expiration date indicated in the `security.txt` file hosted at [https://www.giacomodebidda.com/.well-known/security.txt](https://www.giacomodebidda.com/.well-known/security.txt).

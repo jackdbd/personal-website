@@ -38,7 +38,7 @@ const exportPrivateKey = () => {
 
 const main = async () => {
   exportPublicKey()
-  // exportPrivateKey()
+  exportPrivateKey()
 }
 
 await main()

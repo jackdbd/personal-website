@@ -2,7 +2,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 const { debuglog } = require('node:util')
 
-const debug = debuglog('scripts:utils')
+const debug = debuglog('script:utils')
 
 // https://emojipedia.org/
 const EMOJI = {

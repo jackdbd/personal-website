@@ -78,7 +78,7 @@
 
         ARTICLE_SLUG = "test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu";
         # DEBUG = "Eleventy:UserConfig";
-        DEBUG = "11ty-plugin:*,Eleventy:EleventyErrorHandler";
+        DEBUG = "11ty-plugin:*,Eleventy:EleventyErrorHandler,script:*";
         # DEBUG = "script:*,Eleventy:EleventyErrorHandler,11ty-config:*,11ty-plugin:*,-11ty-plugin:TTS:inject-audio-tags-into-html";
         # DEBUG = "11ty-plugin-cloudinary:*,-11ty-plugin-cloudinary:transforms";
         DOMAIN = "giacomodebidda.com";
@@ -95,7 +95,7 @@
         # It's weird, since jsdom declares canvas as an OPTIONAL peerDependency
         # https://github.com/jsdom/jsdom/blob/main/package.json
 
-        NODE_DEBUG = "hn:*,reddit:*,scripts:*";
+        NODE_DEBUG = "hn:*,reddit:*,script:*";
         # ALWAYS set NODE_ENV to production
         # https://youtu.be/HMM7GJC5E2o?si=RaVgw65WMOXDpHT2
         NODE_ENV = "production";

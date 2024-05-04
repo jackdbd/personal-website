@@ -11,7 +11,7 @@ Look for jobs on Hacker News using the [Steampipe hackernews plugin](https://hub
 Example 1:
 
 ```sh
-NODE_DEBUG=hn:*,scripts:* node scripts/hacker-news/job-links.mjs \
+node scripts/hacker-news/job-links.mjs \
   -d 'Jobs from YC-backed startups posted on HN this week' \
   -q 'hacker-news-jobs-YC.sql'
 ```
@@ -36,7 +36,7 @@ Retrieve the item ID of the Hacker News story `Ask HN: Freelancer? Seeking Freel
 
 ```sh
 # posted this month (there might not be one yet)
-NODE_DEBUG=hn:*,scripts:* node scripts/hacker-news/whoishiring-item-id.cjs
+node scripts/hacker-news/whoishiring-item-id.cjs
 # posted in June 2023
 node scripts/hacker-news/whoishiring-item-id.cjs 'June 2023'
 ```
@@ -50,7 +50,7 @@ Post [this ad](../../assets/ads/ask-hn-freelancer.txt) on `ASK HN: Freelancer? S
 You can run the script locally:
 
 ```sh
-NODE_DEBUG=hn:*,scripts:* node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.mjs
+node scripts/hacker-news/post-ad-on-ask-hn-seeking-freelancer.mjs
 ```
 
 Or you can trigger [this GitHub workflow](../../.github/workflows/ask-hn-freelancer.yaml) manually using the GitHub CLI:
