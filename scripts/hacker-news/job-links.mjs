@@ -1,24 +1,27 @@
 import { execSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
-import { debuglog } from 'node:util'
 import { fileURLToPath } from 'node:url'
-import PrettyError from 'pretty-error'
+import defDebug from 'debug'
 import yargs from 'yargs'
-import { EMOJI, sendOutput } from '../utils.mjs'
+import { defRenderTelegramErrorMessage, EMOJI, sendOutput } from '../utils.mjs'
 
-const debug = debuglog('hn:job-links')
-
-const pe = new PrettyError()
+const debug = defDebug('hn:job-links')
 
 const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
-const APP_ID = splits[splits.length - 1]
+const app_id = splits[splits.length - 1]
+const app_version = '0.1.0'
 
 const DEFAULT = {
   DESCRIPTION: 'Query description not provided',
   QUERY: 'hacker-news-jobs-YC.sql'
 }
+
+const renderTelegramErrorMessage = defRenderTelegramErrorMessage({
+  header: `<b>${EMOJI.Robot} Hacker News job links</b>`,
+  footer: `<i>Sent by ${app_id} (vers. ${app_version})</i>`
+})
 
 const searchJobsOnHackerNews = async () => {
   const argv = yargs(process.argv.slice(2))
@@ -48,7 +51,7 @@ const searchJobsOnHackerNews = async () => {
   const buf = execSync(`steampipe query "${sql}" --output json`)
 
   return {
-    app_id: APP_ID,
+    app_id,
     description: argv.description,
     links: JSON.parse(buf.toString())
   }
@@ -84,5 +87,5 @@ searchJobsOnHackerNews()
   .then(renderTelegramMessage)
   .then(sendOutput)
   .catch((err) => {
-    console.log(pe.render(err))
+    sendOutput(renderTelegramErrorMessage(err)).then(console.log)
   })

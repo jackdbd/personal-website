@@ -1,16 +1,27 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { debuglog } from 'node:util'
+import defDebug from 'debug'
 import { chromium } from 'playwright'
-import { EMOJI, jsonSecret, sendOutput, waitMs } from '../utils.mjs'
-import { latestPost } from '../hacker-news.cjs'
+import {
+  defRenderTelegramErrorMessage,
+  EMOJI,
+  jsonSecret,
+  sendOutput,
+  waitMs
+} from '../utils.mjs'
+import { latestItemByUsername } from './utils.mjs'
 
-const debug = debuglog('hn:post-ad')
+const debug = defDebug('hn:post-ad')
 
 const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
-const APP_ID = splits[splits.length - 1]
+const app_id = splits[splits.length - 1]
+
+const renderTelegramErrorMessage = defRenderTelegramErrorMessage({
+  header: `<b>${EMOJI.Robot} ASK HN: Freelancer? Seeking Freelancer?</b>`,
+  footer: `<i>Sent by ${app_id} (vers. ${app_version})</i>`
+})
 
 const renderTelegramSuccessMessage = (d) => {
   let s = `<b>${EMOJI.Robot} ASK HN: Freelancer? Seeking Freelancer?</b>`
@@ -23,25 +34,10 @@ const renderTelegramSuccessMessage = (d) => {
   s = s.concat(`<pre>${d.ad}</pre>`)
 
   s = s.concat('\n\n')
-  s = s.concat(`<i>Sent by ${APP_ID}</i>`)
+  s = s.concat(`<i>Sent by ${app_id}</i>`)
 
   // we need to add a newline character, otherwise the GitHub workflow will fail
   // with this error: "Matching delimiter not found"
-  return s.concat('\n')
-}
-
-const renderTelegramErrorMessage = (err) => {
-  let s = `<b>${EMOJI.Robot} ASK HN: Freelancer? Seeking Freelancer?</b>`
-
-  s = s.concat('\n\n')
-  const title = err.name || 'Error'
-  s = s.concat(`<b>${title}</b>`)
-  s = s.concat('\n')
-  s = s.concat(`<pre>${err.message}</pre>`)
-
-  s = s.concat('\n\n')
-  s = s.concat(`<i>Sent by ${APP_ID}</i>`)
-
   return s.concat('\n')
 }
 
@@ -154,8 +150,8 @@ const main = async () => {
 
   let hn_item_id = undefined
   if (args.length === 0) {
-    const result = await latestPost()
-    hn_item_id = result.item_id
+    const item = await latestItemByUsername()
+    hn_item_id = item.id
   } else if (args.length === 1) {
     hn_item_id = args[0]
   } else {

@@ -1,6 +1,6 @@
-import { debuglog } from 'node:util'
+import defDebug from 'debug'
 
-const debug = debuglog('hn:utils')
+const debug = defDebug('hn:utils')
 
 export const userSubmissions = async (username) => {
   const api_endpoint = `https://hacker-news.firebaseio.com/v0`

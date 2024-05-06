@@ -1,10 +1,10 @@
 import { fileURLToPath } from 'node:url'
-import { debuglog } from 'node:util'
+import defDebug from 'debug'
 import yargs from 'yargs'
 import { defRenderTelegramErrorMessage, EMOJI, sendOutput } from '../utils.mjs'
 import { defSnoowrap } from './utils.mjs'
 
-const debug = debuglog('reddit:search')
+const debug = defDebug('reddit:search')
 
 const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
@@ -160,4 +160,6 @@ const renderTelegramMessage = (d) => {
 searchOnReddit()
   .then(renderTelegramMessage)
   .then(sendOutput)
-  .catch((err) => renderTelegramErrorMessage(err).then(sendOutput))
+  .catch((err) => {
+    sendOutput(renderTelegramErrorMessage(err)).then(console.log)
+  })

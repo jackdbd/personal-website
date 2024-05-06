@@ -1,9 +1,9 @@
 import os from 'node:os'
-import { debuglog } from 'node:util'
+import defDebug from 'debug'
 import snoowrap from 'snoowrap'
 import { jsonSecret } from '../utils.mjs'
 
-const debug = debuglog('reddit:utils')
+const debug = defDebug('reddit:utils')
 
 export const slugify = (title) => {
   return title

@@ -1,17 +1,29 @@
-import { debuglog } from 'node:util'
+import defDebug from 'debug'
 import PrettyError from 'pretty-error'
 import Stripe from 'stripe'
 
 import yargs from 'yargs'
-import { jsonSecret, sendOutput, userAgent } from '../utils.js'
+import {
+  defRenderTelegramErrorMessage,
+  EMOJI,
+  jsonSecret,
+  sendOutput,
+  userAgent
+} from '../utils.js'
 import { STRIPE_CONFIG } from './constants.js'
 import { createOrUpdatePromotionCode, expiresInDays } from './utils.js'
 
-const debug = debuglog('renew-promotion-codes')
+const debug = defDebug('stripe:renew-promotion-codes')
 const pe = new PrettyError()
 
 const splits = new URL(import.meta.url).pathname.split('/')
 const app_id = splits[splits.length - 1]
+const app_version = '0.1.0'
+
+const renderTelegramErrorMessage = defRenderTelegramErrorMessage({
+  header: `<b>${EMOJI.Robot} Stripe renew Promotion Codes</b>`,
+  footer: `<i>Sent by ${app_id} (vers. ${app_version})</i>`
+})
 
 interface Argv {
   'expires-in-days': number
@@ -168,5 +180,5 @@ main()
   .then(renderTelegramMessage)
   .then(sendOutput)
   .catch((err) => {
-    console.log(pe.render(err))
+    sendOutput(renderTelegramErrorMessage(err)).then(console.log)
   })

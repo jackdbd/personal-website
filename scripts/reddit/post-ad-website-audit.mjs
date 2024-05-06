@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { debuglog } from 'node:util'
+import defDebug from 'debug'
 import { fileURLToPath } from 'node:url'
 import snoowrap from 'snoowrap'
 import yargs from 'yargs'
@@ -12,7 +12,7 @@ import {
 } from '../utils.mjs'
 import { slugify, renderTelegramMessage, userAgent } from './utils.mjs'
 
-const debug = debuglog('reddit:post-ad-website-audit')
+const debug = defDebug('reddit:post-ad-website-audit')
 
 const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
@@ -128,4 +128,6 @@ const submitRedditPost = async () => {
 submitRedditPost()
   .then(renderTelegramMessage)
   .then(sendOutput)
-  .catch((err) => renderTelegramErrorMessage(err).then(sendOutput))
+  .catch((err) => {
+    sendOutput(renderTelegramErrorMessage(err)).then(console.log)
+  })
