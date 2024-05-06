@@ -28,6 +28,7 @@ jobs:
           DEBUG: reddit:*,script:*
           NODE_DEBUG: reddit:*,script:*
           REDDIT: ${{ secrets.REDDIT }}
+          TELEGRAM: ${{ secrets.TELEGRAM }}
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "TELEGRAM_MESSAGE<<$delimiter" >> $GITHUB_ENV
