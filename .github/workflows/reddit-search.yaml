@@ -8,8 +8,8 @@ on:
     # gh workflow run "Reddit search" --ref branch-name
 
 jobs:
-  post-on-reddit-and-notify-telegram:
-    name: Post on Reddit and notify Telegram
+  search-reddit-and-notify-telegram:
+    name: Search Reddit and notify Telegram
     runs-on: ubuntu-latest
     
     steps:

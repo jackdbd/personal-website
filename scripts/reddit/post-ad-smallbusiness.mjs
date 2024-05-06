@@ -157,5 +157,5 @@ submitRedditPost()
   .then(renderTelegramMessage)
   .then(sendOutput)
   .catch((err) => {
-    sendOutput(renderTelegramErrorMessage(err)).then(console.log)
+    sendOutput(renderTelegramErrorMessage(err))
   })

@@ -1,7 +1,7 @@
 import fs from 'node:fs'
-import { debuglog } from 'node:util'
+import defDebug from 'debug'
 
-const debug = debuglog('script:utils')
+const debug = defDebug('script:utils')
 
 // https://emojipedia.org/
 export const EMOJI = {
@@ -82,10 +82,10 @@ export const sendOutput = async (text) => {
     }
   })
 
-  console.log(`[Telegram BOT API] response status ${res.status}`)
+  debug(`[Telegram BOT API] response status ${res.status}`)
   const res_body = await res.json()
   let username = res_body.result.from.username
-  console.log(`[Telegram BOT API] response sent from ${username}`)
+  debug(`[Telegram BOT API] response sent from ${username}`)
 }
 
 export const defRenderTelegramErrorMessage = (
