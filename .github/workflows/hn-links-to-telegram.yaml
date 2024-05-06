@@ -28,16 +28,14 @@ jobs:
 
       - name: Setup Steampipe and its plugins
         # https://github.com/marketplace/actions/setup-steampipe
-        uses: francois2metz/setup-steampipe@v1
+        uses: turbot/steampipe-action-setup@v1
         with:
-          steampipe-version: 'latest'
+          steampipe-version: latest
           # https://hub.steampipe.io/plugins/turbot/hackernews#configuration
           plugin-connections: |
-            {
-              connection "hackernews" {
-                plugin = "hackernews"
-                max_items = 5000
-              }
+            connection "hackernews" {
+              plugin = "hackernews"
+              max_items = 5000
             }
 
       - name: Hacker News links

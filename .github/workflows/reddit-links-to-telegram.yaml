@@ -26,30 +26,30 @@ jobs:
 
       - name: Setup Steampipe and its plugins
         # https://github.com/marketplace/actions/setup-steampipe
-        uses: francois2metz/setup-steampipe@v1
+        uses: turbot/steampipe-action-setup@v1
+    
         with:
-          steampipe-version: 'latest'
+          steampipe-version: latest
           # https://hub.steampipe.io/plugins/turbot/hackernews#configuration
           # https://hub.steampipe.io/plugins/turbot/reddit#configuration
           plugin-connections: |
-            {
-              connection "hackernews" {
-                plugin = "hackernews"
-                max_items = 5000
-              }
-              connection "reddit" {
-                plugin = "reddit"
-                client_id = "${{ fromJSON(secrets.REDDIT).client_id }}",
-                client_secret = "${{ fromJSON(secrets.REDDIT).client_secret }}",
-                username = "${{ fromJSON(secrets.REDDIT).username }}",
-                password = "${{ fromJSON(secrets.REDDIT).password }}"
-              }
+            connection "hackernews" {
+              plugin = "hackernews"
+              max_items = 5000
+            }
+
+            connection "reddit" {
+              plugin = "reddit"
+              client_id = "${{ fromJSON(secrets.REDDIT).client_id }}"
+              client_secret = "${{ fromJSON(secrets.REDDIT).client_secret }}"
+              username = "${{ fromJSON(secrets.REDDIT).username }}"
+              password = "${{ fromJSON(secrets.REDDIT).password }}"
             }
 
       - name: Query Reddit for React jobs
         run: |
           delimiter=$(openssl rand -hex 8)
-          echo "REDDIT_JSON<<$delimiter" >> $GITHUB_ENV
+          echo "REDDIT_RESULTS_AS_JSON<<$delimiter" >> $GITHUB_ENV
           steampipe query assets/steampipe-queries/react-jobs-on-jobbit-subreddit.sql --output json >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
@@ -57,7 +57,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "REACT_JOBS_LINKS<<$delimiter" >> $GITHUB_ENV
-          node scripts/reddit-array-to-telegram-links.cjs >> $GITHUB_ENV
+          node scripts/reddit-array-to-telegram-links.mjs >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Send React jobs to Telegram

@@ -1,4 +1,4 @@
-const sendEmail = async ({ api_key, email, message, name }) => {
+export const sendEmail = async ({ api_key, email, message, name }) => {
   const strings = [
     `New contact form submission from <b>${name}</b> (${email})`,
     message
@@ -7,7 +7,7 @@ const sendEmail = async ({ api_key, email, message, name }) => {
   throw new Error(`sending email is not supported at the moment`)
 }
 
-const sendMessageToTelegramChat = async ({
+export const sendMessageToTelegramChat = async ({
   chat_id,
   email,
   message,
@@ -35,5 +35,3 @@ const sendMessageToTelegramChat = async ({
     }
   })
 }
-
-module.exports = { sendEmail, sendMessageToTelegramChat }

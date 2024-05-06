@@ -1,5 +1,5 @@
-const { sendEmail, sendMessageToTelegramChat } = require('../notifications.js')
-const { ensureEnvVarsAreSet } = require('../utils.js')
+import { sendEmail, sendMessageToTelegramChat } from '../notifications.mjs'
+import { ensureEnvVarsAreSet } from '../utils.mjs'
 
 // https://developers.cloudflare.com/pages/platform/functions/
 export async function onRequestPost(context) {
