@@ -2,6 +2,10 @@
 
 Scripts that I use to search and post stuff on Hacker News.
 
+> :warning: **Steampipe on NixOS**
+>
+> Some scripts use Steampipe and a [Steampipe](https://github.com/turbot/steampipe) plugin to run a query. As explained in [this issue](https://github.com/NixOS/nixpkgs/issues/215945), using Steampipe is a bit of a mess. The easiest way is to run it in Docker.
+
 ## Search
 
 ### Search jobs on HN
@@ -12,14 +16,16 @@ Example 1:
 
 ```sh
 node scripts/hacker-news/job-links.mjs \
-  -d 'Jobs from YC-backed startups posted on HN this week' \
-  -q 'hacker-news-jobs-YC.sql'
+  -t "Hacker News Jobs" \
+  -d 'Jobs posted on <a href="https://news.ycombinator.com/jobs">Hacker News Jobs</a> this week.' \
+  -q 'hacker-news-jobs-this-week.sql'
 ```
 
 Example 2:
 
 ```sh
 node scripts/hacker-news/job-links.mjs \
+  -t "Hacker News Jobs" \
   -d 'Jobs posted on HN in the last 2 weeks' \
   -q 'hacker-news-jobs.sql'
 ```
@@ -36,9 +42,9 @@ Retrieve the item ID of the Hacker News story `Ask HN: Freelancer? Seeking Freel
 
 ```sh
 # posted this month (there might not be one yet)
-node scripts/hacker-news/whoishiring-item-id.cjs
+node scripts/hacker-news/whoishiring-item-id.mjs
 # posted in June 2023
-node scripts/hacker-news/whoishiring-item-id.cjs 'June 2023'
+node scripts/hacker-news/whoishiring-item-id.mjs 'June 2023'
 ```
 
 ## Post

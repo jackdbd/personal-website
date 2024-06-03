@@ -104,3 +104,16 @@ export const defRenderTelegramErrorMessage = (
     return `${s}\n\n${footer}\n`
   }
 }
+
+// Running the Steampipe binary on NixOS is a bit of a mess, so on NixOS we run
+// it in a Docker container as a workaround.
+// https://github.com/NixOS/nixpkgs/issues/215945
+export const steampipe =
+  process.env.HOME === '/home/jack'
+    ? [
+        `docker run --rm`,
+        `--mount $"type=bind,source=/home/jack/steampipe/config,target=/home/steampipe/.steampipe/config"`,
+        `--name steampipe`,
+        `turbot/steampipe:latest`
+      ].join(' ')
+    : 'steampipe'

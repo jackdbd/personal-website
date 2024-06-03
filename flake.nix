@@ -49,7 +49,7 @@
         # depends on jsdom, which depends on canvas.
         # On Linux, canvas requires the shared object file libuuid.so, and we
         # must explicitly require the package libuuid otherwise the build fails.
-        buildInputs = [pkgs.libuuid];
+        # buildInputs = [pkgs.libuuid];
 
         shellHook = ''
           echo "🌐 personal website dev shell"
@@ -88,7 +88,7 @@
         # LD_LIBRARY_PATH the path to that package, so the linker can find
         # libuuid.so. On NixOS the path to libuuid.so is not added to the linker,
         # so we must add it manually.
-        LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [pkgs.libuuid];
+        # LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [pkgs.libuuid];
         # See also:
         # https://discourse.nixos.org/t/node-libuuid-so-1-not-found/34864
         # https://github.com/Automattic/node-canvas/issues/1893#issuecomment-1096988007

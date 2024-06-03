@@ -4,7 +4,7 @@ on:
   schedule:
     # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
     # https://crontab.guru/
-    - cron:  '45 15 5 * *'
+    - cron: '45 15 5 * *' # UTC time
   workflow_dispatch:
     # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
     # You can trigger this workflow manually using the GitHub CLI:

@@ -4,7 +4,7 @@ on:
   schedule:
     # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
     # https://crontab.guru/
-    - cron:  '55 10 * * 1'
+    - cron: '55 10 * * 1' # UTC time
   workflow_dispatch:
     # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
     # You can trigger this workflow manually using the GitHub CLI:
@@ -45,7 +45,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "TELEGRAM_MESSAGE<<$delimiter" >> $GITHUB_ENV
-          node scripts/hacker-news/job-links.mjs -d 'Jobs from YC-backed startups on HN this week' -q 'hacker-news-jobs-YC.sql' >> $GITHUB_ENV
+          node scripts/hacker-news/job-links.mjs -t "Hacker News Jobs" -d 'Jobs posted on <a href="https://news.ycombinator.com/jobs">Hacker News Jobs</a> this week.' -q 'hacker-news-jobs-this-week.sql' >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Send Hacker News link to Telegram

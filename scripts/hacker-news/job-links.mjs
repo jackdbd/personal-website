@@ -4,7 +4,12 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import defDebug from 'debug'
 import yargs from 'yargs'
-import { defRenderTelegramErrorMessage, EMOJI, sendOutput } from '../utils.mjs'
+import {
+  defRenderTelegramErrorMessage,
+  EMOJI,
+  sendOutput,
+  steampipe
+} from '../utils.mjs'
 
 const debug = defDebug('hn:job-links')
 
@@ -15,7 +20,8 @@ const app_version = '0.1.0'
 
 const DEFAULT = {
   DESCRIPTION: 'Query description not provided',
-  QUERY: 'hacker-news-jobs-YC.sql'
+  QUERY: 'hacker-news-jobs-this-week.sql',
+  TITLE: 'Hacker News Jobs'
 }
 
 const renderTelegramErrorMessage = defRenderTelegramErrorMessage({
@@ -29,13 +35,18 @@ const searchJobsOnHackerNews = async () => {
     .option('description', {
       alias: 'd',
       default: DEFAULT.DESCRIPTION,
-      describe: 'human-friendly description of the provided query'
+      describe: 'description of the provided query'
     })
     .option('steampipe-query', {
       alias: 'q',
-      choices: ['hacker-news-jobs.sql', 'hacker-news-jobs-YC.sql'],
+      choices: ['hacker-news-jobs.sql', 'hacker-news-jobs-this-week.sql'],
       default: DEFAULT.QUERY,
       describe: 'steampipe query to use to search stories on Hacker News'
+    })
+    .option('title', {
+      alias: 't',
+      default: DEFAULT.TITLE,
+      describe: 'title of the provided query'
     })
     .help('help').argv
 
@@ -48,12 +59,17 @@ const searchJobsOnHackerNews = async () => {
   debug(`use SQL query found at ${filepath}`)
   const sql = fs.readFileSync(filepath).toString()
   debug(`execute this SQL query with steampipe:\n${sql}`)
-  const buf = execSync(`steampipe query "${sql}" --output json`)
+
+  const buf = execSync(`${steampipe} query "${sql}" --output json`)
+  // const buf = execSync(
+  //   `${steampipe} query "select title from hackernews_job;"`
+  // )
 
   return {
     app_id,
     description: argv.description,
-    links: JSON.parse(buf.toString())
+    links: JSON.parse(buf.toString()),
+    title: argv.title
   }
 }
 
@@ -62,15 +78,16 @@ const anchor = (d, i) => {
 }
 
 const renderTelegramMessage = (d) => {
-  let s = `<b>${EMOJI.Robot} Hacker News jobs</b>`
+  let s = `<b>${EMOJI.Robot} ${d.title}</b>`
 
   s = s.concat('\n\n')
   s = s.concat('<b>Description</b>')
   s = s.concat('\n')
   s = s.concat(d.description)
+  // console.log('=== d.links.rows ===', d.links.rows)
 
   s = s.concat('\n\n')
-  const entries = d.links.map(anchor)
+  const entries = d.links.rows.map(anchor)
   s = s.concat('<b>Job links</b>')
   s = s.concat('\n')
   s = s.concat(entries.join('\n\n'))
