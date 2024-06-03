@@ -3,7 +3,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import defDebug from 'debug'
-import { isOnCloudBuild, isOnGithub } from '@jackdbd/checks/environment'
+import { isOnGithub } from '@jackdbd/checks/environment'
 
 const debug = defDebug('script:utils')
 
@@ -52,22 +52,31 @@ export const EMOJI = {
   Warning: '⚠️'
 }
 
-export const jsonSecret = (name: string, env = process.env) => {
-  // replaceAll available in Node.js 15 and later
-  // https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V15.md#v8-86---35415
-  const env_var_name = (name as any).replaceAll('-', '_').toUpperCase()
+interface SecretConfig {
+  name: string
+  filepath: string
+}
 
-  let json: string
-  if (isOnGithub(env)) {
-    json = env[env_var_name]!
-  } else if (isOnCloudBuild(env)) {
-    json = env[env_var_name]!
-  } else {
-    const filepath = path.join('secrets', `${name}.json`)
-    json = fs.readFileSync(filepath).toString()
+export const jsonSecret = ({ name, filepath }: SecretConfig) => {
+  if (process.env.CF_PAGES || process.env.GITHUB_SHA) {
+    if (!name) {
+      throw new Error(`secret name not set`)
+    }
+    // replaceAll available in Node.js 15 and later
+    // https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V15.md#v8-86---35415
+    const env_var_name = (name as any).replaceAll('-', '_').toUpperCase()
+    if (!process.env[env_var_name]) {
+      throw new Error(`environment variable ${env_var_name} not set`)
+    }
+    debug(`read JSON secret from environment variable ${env_var_name}`)
+    return JSON.parse(process.env[env_var_name]!)
   }
 
-  return JSON.parse(json)
+  if (!filepath) {
+    throw new Error(`secret filepath not set`)
+  }
+  debug(`read JSON secret from ${filepath}`)
+  return JSON.parse(fs.readFileSync(filepath).toString())
 }
 
 export const txtSecret = (name: string, env = process.env) => {
@@ -88,11 +97,10 @@ export const sendOutput = async (text: string) => {
     // send output to stdout, so we can redirect it to GITHUB_ENV in the GitHub action
     console.log(text)
   } else {
-    const json_string = fs
-      .readFileSync(path.join('secrets', 'telegram.json'))
-      .toString()
-
-    const { chat_id, token } = JSON.parse(json_string)
+    const { chat_id, token } = jsonSecret({
+      name: 'TELEGRAM',
+      filepath: '/run/secrets/telegram/personal_bot'
+    })
 
     const data = {
       chat_id,

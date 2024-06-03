@@ -1,5 +1,32 @@
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import defDebug from 'debug'
 import type Stripe from 'stripe'
 import { PAYMENT_METHOD_VALID_CARD_NO_SCA_REQUEST_BODY } from './constants.js'
+import { jsonSecret } from '../utils.mjs'
+
+const __filename = fileURLToPath(import.meta.url)
+const REPO_ROOT = path.join(__filename, '..', '..', '..')
+
+const debug = defDebug('stripe:utils')
+
+export const apiKey = (stripe_env: 'live' | 'test') => {
+  debug(`retrieve API key for Stripe ${stripe_env} environment`)
+  let secret = { api_key: '' }
+  if (stripe_env === 'live') {
+    secret = jsonSecret({
+      name: `STRIPE_LIVE`,
+      filepath: path.join(REPO_ROOT, 'secrets', 'stripe-live.json')
+      // filepath: `/run/secrets/stripe/personal/${stripe_env}`
+    })
+  } else {
+    secret = jsonSecret({
+      name: `STRIPE_TEST`,
+      filepath: `/run/secrets/stripe/personal/test`
+    })
+  }
+  return secret.api_key
+}
 
 export const nowAndFutureUTC = (n: number) => {
   const now = new Date().toISOString()

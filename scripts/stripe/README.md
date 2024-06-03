@@ -27,9 +27,8 @@ npx tsm scripts/stripe/create-products.ts -e live
 List all active products:
 
 ```sh
-node scripts/stripe/list-products.mjs -e test
-
-node scripts/stripe/list-products.mjs -e live
+npx tsm scripts/stripe/list-products.ts -e test
+npx tsm scripts/stripe/list-products.ts -e live
 ```
 
 ## Prices
@@ -49,7 +48,7 @@ npx tsm scripts/stripe/create-prices.ts -e live
 List all active prices (`-e` can be `live` or `test`):
 
 ```sh
-node scripts/stripe/list-prices.mjs -e test
+npx tsm scripts/stripe/list-prices.ts -e test
 ```
 
 ## Coupons
@@ -63,7 +62,7 @@ npx tsm scripts/stripe/create-coupons.ts -e test --cleanup
 List all coupons and promotion codes (`-e` can be `live` or `test`):
 
 ```sh
-node scripts/stripe/list-coupons-and-promotion-codes.mjs -e test
+npx tsm scripts/stripe/list-coupons-and-promotion-codes.ts -e test
 ```
 
 ## Promotion Codes
@@ -74,10 +73,16 @@ Create or update all promotion codes in the Stripe **TEST** account:
 npx tsm scripts/stripe/renew-promotion-codes.ts -e test
 ```
 
+You can trigger [this GitHub workflow](../../.github/workflows/stripe-promotion-codes.yaml) manually using the GitHub CLI:
+
+```sh
+gh workflow run "Stripe Promotion Codes"
+```
+
 List all coupons and promotion codes (`-e` can be `live` or `test`):
 
 ```sh
-node scripts/stripe/list-coupons-and-promotion-codes.mjs -e test
+npx tsm scripts/stripe/list-coupons-and-promotion-codes.ts -e test
 ```
 
 Deactivate all promotion codes:

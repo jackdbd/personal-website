@@ -78,7 +78,7 @@
 
         ARTICLE_SLUG = "test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu";
         # DEBUG = "Eleventy:UserConfig";
-        DEBUG = "11ty-plugin:*,Eleventy:EleventyErrorHandler,script:*";
+        DEBUG = "11ty-plugin:*,Eleventy:EleventyErrorHandler,reddit:*,script:*,stripe:*";
         # DEBUG = "script:*,Eleventy:EleventyErrorHandler,11ty-config:*,11ty-plugin:*,-11ty-plugin:TTS:inject-audio-tags-into-html";
         # DEBUG = "11ty-plugin-cloudinary:*,-11ty-plugin-cloudinary:transforms";
         DOMAIN = "giacomodebidda.com";

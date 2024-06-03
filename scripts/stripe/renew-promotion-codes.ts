@@ -1,27 +1,18 @@
 import defDebug from 'debug'
-import PrettyError from 'pretty-error'
 import Stripe from 'stripe'
-
 import yargs from 'yargs'
-import {
-  defRenderTelegramErrorMessage,
-  EMOJI,
-  jsonSecret,
-  sendOutput,
-  userAgent
-} from '../utils.js'
+import { defRenderTelegramErrorMessage, EMOJI, sendOutput } from '../utils.js'
 import { STRIPE_CONFIG } from './constants.js'
-import { createOrUpdatePromotionCode, expiresInDays } from './utils.js'
+import { apiKey, createOrUpdatePromotionCode, expiresInDays } from './utils.js'
 
 const debug = defDebug('stripe:renew-promotion-codes')
-const pe = new PrettyError()
 
 const splits = new URL(import.meta.url).pathname.split('/')
 const app_id = splits[splits.length - 1]
 const app_version = '0.1.0'
 
 const renderTelegramErrorMessage = defRenderTelegramErrorMessage({
-  header: `<b>${EMOJI.Robot} Stripe renew Promotion Codes</b>`,
+  header: `<b>${EMOJI.Robot} Renew Stripe Coupons & Promotion Codes</b>`,
   footer: `<i>Sent by ${app_id} (vers. ${app_version})</i>`
 })
 
@@ -66,32 +57,26 @@ interface Result {
 }
 
 const renderTelegramMessage = (results: Result[]) => {
-  let s = ``
-  if (results.length > 0) {
-    s = `<b>Stripe environment: ${results[0].stripe_env}</b>`
-  } else {
-    s = `<b>No Stripe promotion codes to update</b>`
-  }
-  s = s.concat('\n\n')
+  let s = `<b>${EMOJI.Robot} Renew Stripe Coupons & Promotion Codes</b>`
 
-  const strings = results.map((d) => {
+  s = `${s}\n\n${results.length} <a href="https://docs.stripe.com/api/promotion_codes">promotion codes</a> were renovated in the Stripe <code>${results[0].stripe_env}</code> environment.`
+
+  const strings = results.map((d, i) => {
     if (d.promo_code) {
-      return `<a href="${d.promo_code.url}">${d.promo_code.name}</a>`
+      return `${i + 1}. <a href="${d.promo_code.url}">${d.promo_code.name}</a>`
     } else {
       return `Errors: ${d.errors?.map((err) => err.message)}`
     }
   })
-  s = s.concat(strings.join('\n\n'))
-  s = s.concat('\n\n')
+  s = `${s}\n\n${strings.join('\n\n')}`
 
-  s = s.concat(`<code><i>User-Agent: ${userAgent({ app_id })}</i></code>`)
-
+  s = `${s}\n\n<i>Message sent by: ${app_id} (vers. ${app_version})</i>`
   // we need to add a newline character, otherwise the GitHub workflow will fail
   // with this error: "Matching delimiter not found"
-  return s.concat('\n')
+  return `${s}\n`
 }
 
-const main = async () => {
+const renewCouponsAndPromotionCodes = async () => {
   const argv = yargs(process.argv.slice(2))
     .usage('Renew Stripe promotion codes.\nUsage: npx tsm scripts/stripe/$0')
     .option('expires-in-days', {
@@ -126,10 +111,11 @@ const main = async () => {
   const expires_in_days = argv['expires-in-days']
   const ignore_coupons = argv['ignore-coupons']
   const max_redemptions = argv['max-redemptions']
+
   const stripe_env = argv['stripe-environment']
-  const { api_key } = jsonSecret(`stripe-${stripe_env}`)
+  const api_key = apiKey(stripe_env)
+  debug(`instantiate client for Stripe ${stripe_env.toUpperCase()}`)
   const stripe = new Stripe(api_key, STRIPE_CONFIG)
-  debug(`operating on Stripe ${stripe_env.toUpperCase()}`)
 
   const expires_at = expiresInDays(expires_in_days)
 
@@ -176,7 +162,7 @@ const main = async () => {
   return results
 }
 
-main()
+renewCouponsAndPromotionCodes()
   .then(renderTelegramMessage)
   .then(sendOutput)
   .catch((err) => {

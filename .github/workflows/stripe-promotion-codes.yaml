@@ -3,13 +3,13 @@ name: 'Stripe Promotion Codes'
 on:
   schedule:
     # https://crontab.guru/
-    - cron:  '45 13 * * 4'
+    - cron: '45 13 * * 4' # UTC time
   workflow_dispatch:
     # You can trigger this workflow manually using the GitHub CLI:
     # gh workflow run "Stripe Promotion Codes"
 
 jobs:
-  deploy:
+  renew-stripe-promo-codes-and-notify-telegram:
     runs-on: ubuntu-latest
     steps:
       - name: 🛎️ Checkout repo
@@ -20,27 +20,44 @@ jobs:
         with:
           node-version: current
 
-      - name: ⬇️ Install production dependencies
-        run: npm install --omit=dev
+      - run: npm ci
 
       - name: Renew Stripe promotion codes
         env:
+          DEBUG: script:*,stripe:*
           STRIPE_LIVE: ${{ secrets.STRIPE_LIVE }}
           STRIPE_TEST: ${{ secrets.STRIPE_TEST }}
         run: |
           delimiter=$(openssl rand -hex 8)
-          echo "RESULT_STRING<<$delimiter" >> $GITHUB_ENV
+          echo "TELEGRAM_MESSAGE<<$delimiter" >> $GITHUB_ENV
           npx tsm scripts/stripe/renew-promotion-codes.ts -e live >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
-      - name: 💬 Notify Telegram of my ad
+      - name: 💬 Notify Telegram of Promotion Codes
         uses: appleboy/telegram-action@v0.1.1
         with:
           to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
           token: ${{ fromJSON(secrets.TELEGRAM).token }}
           format: html
           disable_web_page_preview: true
-          message: |
-            <b>🤖 Stripe promotion codes renewed</b>
+          message: ${{ env.TELEGRAM_MESSAGE }}
+  
+      - name: List Stripe Coupons
+        env:
+          DEBUG: script:*,stripe:*
+          STRIPE_LIVE: ${{ secrets.STRIPE_LIVE }}
+          STRIPE_TEST: ${{ secrets.STRIPE_TEST }}
+        run: |
+          delimiter=$(openssl rand -hex 8)
+          echo "TELEGRAM_MESSAGE<<$delimiter" >> $GITHUB_ENV
+          npx tsm scripts/stripe/list-coupons-and-promotion-codes.ts -e live >> $GITHUB_ENV
+          echo "$delimiter" >> $GITHUB_ENV
 
-            ${{ env.RESULT_STRING }}
+      - name: 💬 Notify Telegram of Coupons
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
+          token: ${{ fromJSON(secrets.TELEGRAM).token }}
+          format: html
+          disable_web_page_preview: true
+          message: ${{ env.TELEGRAM_MESSAGE }}
