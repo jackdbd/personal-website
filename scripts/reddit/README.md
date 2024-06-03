@@ -9,7 +9,9 @@ As far as I know, search queries are always [case insensitive](https://www.reddi
 
 ## Search Reddit for jobs
 
-Example: find remote React jobs posted in r/jobbit or r/reactjs this week.
+### React jobs
+
+Find remote React jobs posted in [r/jobbit](https://www.reddit.com/r/jobbit/) or [r/reactjs](https://www.reddit.com/r/reactjs/) this week.
 
 ```sh
 node scripts/reddit/search.mjs \
@@ -18,12 +20,26 @@ node scripts/reddit/search.mjs \
   -t 'week'
 ```
 
-Example: find jobs mentioning "GCP" in various subreddits this month.
+### GCP jobs
+
+Find jobs mentioning "GCP" in various subreddits this month.
 
 ```sh
 node scripts/reddit/search.mjs \
   -d 'Jobs mentioning "GCP" in various subreddits this month' \
   -q '(selftext:"GCP") AND (subreddit:b2bforhire OR subreddit:r/forhire OR subreddit:freelance OR subreddit:indiebiz OR subreddit:jobbit OR subreddit:r/slavelabor) AND NOT (title:"[For Hire]" OR title:"[Hire Me]")' \
+  -t 'month'
+```
+
+### Lead generation for website audits
+
+Find out whether someone is complaining about having a slow website this month.
+
+```sh
+node scripts/reddit/search.mjs \
+  -d 'Find out whether someone is complaining about having a slow website' \
+  -k 'audit,slow website, web performance' \
+  -s 'advancedentrepreneur,eCommerce,SaaS,smallbusiness' \
   -t 'month'
 ```
 
@@ -50,16 +66,6 @@ node scripts/reddit/search.mjs \
   -t 'month'
 ```
 
-Example (WIP): find leads for website audits.
-
-```sh
-node scripts/reddit/search.mjs \
-  -d 'Find out whether someone is complaining about having a slow website' \
-  -k 'audit,web performance,slow website' \
-  -s 'advancedentrepreneur,eCommerce,SaaS,smallbusiness' \
-  -t 'month'
-```
-
 Example: find out if anyone has ever talked about Elysia or Hono on any programming subreddit.
 
 ```sh
@@ -69,7 +75,9 @@ node scripts/reddit/search.mjs \
   -t 'all'
 ```
 
-Note: the [Steampipe Reddit plugin](https://hub.steampipe.io/plugins/turbot/reddit) seems **not** to allow searches across all Reddit. That's why I'm using [snoowrap](https://github.com/not-an-aardvark/snoowrap) for this script.
+> :warning: **Don't use Steampipe for this query**
+>
+> The [Steampipe Reddit plugin](https://hub.steampipe.io/plugins/turbot/reddit) seems **not** to allow searches across **all** Reddit. That's why I'm using [snoowrap](https://github.com/not-an-aardvark/snoowrap) for this query.
 
 You can also run this script from a GitHub workflow. For example, using the [GitHub CLI](https://cli.github.com/):
 

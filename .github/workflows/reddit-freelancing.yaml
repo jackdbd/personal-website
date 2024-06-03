@@ -2,7 +2,7 @@ name: 'Reddit freelancing'
 
 on:
   # schedule:
-  #   - cron:  '45 23 * * 1'
+  #   - cron: '45 23 * * 1' # UTC time
   workflow_dispatch:
     # You can trigger this workflow manually using the GitHub CLI:
     # gh workflow run "Reddit freelancing" --ref branch-name

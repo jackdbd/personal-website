@@ -2,7 +2,7 @@ name: 'r/slavelabour Website Audit'
 
 on:
   # schedule:
-  #   - cron:  '45 15 * * 2'
+  #   - cron: '45 15 * * 2' # UTC time
   workflow_dispatch:
     # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
     # You can trigger this workflow manually using the GitHub CLI:

@@ -49,7 +49,7 @@ const SUBREDDITS = [
 ]
 
 const DEFAULT = {
-  DESCRIPTION: 'Query description not provided',
+  DESCRIPTION: `Search any of these keywords in ${SUBREDDITS.length} subreddits: ${KEYWORDS.join(', ')}`,
   KEYWORDS,
   SUBREDDITS,
   TIME: 'week'
@@ -91,8 +91,11 @@ const searchOnReddit = async () => {
   let query = ''
   if (argv.query) {
     query = argv.query
+    debug(`query provided: ${query}`)
   } else {
+    debug(`query not provided, using keywords`)
     const keywords = argv.keywords.split(',')
+    debug(`keywords provided: ${keywords}`)
     const s = keywords
       .map((k) => `selftext:"${k}" OR title:"${k}"`)
       .join(' OR ')
@@ -138,8 +141,8 @@ const renderTelegramMessage = (d) => {
   })
   let s = `<b>${EMOJI.Robot} Reddit search</b>`
 
-  s = `${s}\n\n<b>Description</b>\n`
-  s = s.concat(`<pre>${d.description}</pre>`)
+  s = `${s}\n\n<b>Description</b>`
+  s = `${s}\n${d.description}`
 
   s = `${s}\n\n<b>Results</b>\n`
   if (links.length === 0) {
