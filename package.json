@@ -141,6 +141,7 @@
     "himalaya": "^1.1.0",
     "hint": "^7.1.11",
     "lighthouse": "^12.0.0",
+    "linkedin-api-client": "^0.3.0",
     "openpgp": "^5.11.1",
     "playwright": "^1.43.1",
     "playwright-start": "^1.1.0",
