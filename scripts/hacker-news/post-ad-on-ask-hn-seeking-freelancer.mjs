@@ -17,6 +17,7 @@ const debug = defDebug('hn:post-ad')
 const __filename = fileURLToPath(import.meta.url)
 const splits = __filename.split('/')
 const app_id = splits[splits.length - 1]
+const app_version = '0.1.0'
 
 const renderTelegramErrorMessage = defRenderTelegramErrorMessage({
   header: `<b>${EMOJI.Robot} ASK HN: Freelancer? Seeking Freelancer?</b>`,
@@ -135,7 +136,7 @@ const main = async () => {
   text = text.concat('\n\n')
   text = text.concat('If you see this, something went wrong and must be fixed')
   text = text.concat('\n\n')
-  text = text.concat(`<i>Sent by ${APP_ID}</i>`)
+  text = text.concat(`<i>Sent by ${app_id}</i>`)
 
   // https://giacomodebidda.com/posts/playwright-on-nixos/
   // When running on:
@@ -159,7 +160,7 @@ const main = async () => {
       [
         `INCORRECT NUMBER OF ARGUMENTS\n`,
         `USAGE:`,
-        `node post-ad-on-hn-freelancer.cjs OR node post-ad-on-hn-freelancer.cjs <hn_item_id>`
+        `node post-ad-on-ask-hn-seeking-freelancer.mjs OR node post-ad-on-ask-hn-seeking-freelancer.mjs <hn_item_id>`
       ].join('\n')
     )
   }

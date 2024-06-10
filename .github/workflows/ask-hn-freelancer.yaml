@@ -28,7 +28,7 @@ jobs:
         run: |
           delimiter=$(openssl rand -hex 8)
           echo "HN_JSON<<$delimiter" >> $GITHUB_ENV
-          node scripts/hacker-news/whoishiring-item-id.cjs >> $GITHUB_ENV
+          node scripts/hacker-news/whoishiring-item-id.mjs >> $GITHUB_ENV
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram
