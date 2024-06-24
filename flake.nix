@@ -72,8 +72,8 @@
           # to use this somewhat hacky workaround to read files untracked by git (see .gitignore)
           export STRIPE_LIVE=$(cat ./secrets/stripe-live.json)
 
-          echo "installing dependencies"
-          npm install --include dev
+          # echo "installing dependencies"
+          # npm install --include dev
         '';
 
         ARTICLE_SLUG = "test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu";
