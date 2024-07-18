@@ -141,7 +141,7 @@ See [SECURITY.md](./SECURITY.md).
 
 ### Production dependencies
 
-This project has **51** `dependencies`.
+This project has **53** `dependencies`.
 
 | Package | Version |
 |---|---|
@@ -160,6 +160,7 @@ This project has **51** `dependencies`.
 | [@jackdbd/eleventy-plugin-text-to-speech](https://www.npmjs.com/package/@jackdbd/eleventy-plugin-text-to-speech) | `3.1.0` |
 | [@jackdbd/hosting-utils](https://www.npmjs.com/package/@jackdbd/hosting-utils) | `^1.0.0` |
 | [@jackdbd/permissions-policy](https://www.npmjs.com/package/@jackdbd/permissions-policy) | `^1.0.0` |
+| [@thi.ng/transclude](https://www.npmjs.com/package/@thi.ng/transclude) | `^0.1.89` |
 | [autoprefixer](https://www.npmjs.com/package/autoprefixer) | `^10.4.19` |
 | [clean-css](https://www.npmjs.com/package/clean-css) | `^5.3.3` |
 | [cloudinary](https://www.npmjs.com/package/cloudinary) | `^2.2.0` |
@@ -190,6 +191,7 @@ This project has **51** `dependencies`.
 | [stripe](https://www.npmjs.com/package/stripe) | `^15.5.0` |
 | [tailwindcss](https://www.npmjs.com/package/tailwindcss) | `^3.4.3` |
 | [terser](https://www.npmjs.com/package/terser) | `^5.31.0` |
+| [tsm](https://www.npmjs.com/package/tsm) | `^2.3.0` |
 | [workbox-build](https://www.npmjs.com/package/workbox-build) | `^7.1.0` |
 | [workbox-core](https://www.npmjs.com/package/workbox-core) | `^7.1.0` |
 | [workbox-expiration](https://www.npmjs.com/package/workbox-expiration) | `^7.1.0` |
@@ -199,7 +201,7 @@ This project has **51** `dependencies`.
 
 ### Development dependencies
 
-This project has **22** `devDependencies`: [@hint/hint-performance-budget](https://www.npmjs.com/package/@hint/hint-performance-budget), [@jackdbd/checks](https://www.npmjs.com/package/@jackdbd/checks), [@thi.ng/transclude](https://www.npmjs.com/package/@thi.ng/transclude), [@types/yargs](https://www.npmjs.com/package/@types/yargs), [form-data](https://www.npmjs.com/package/form-data), [himalaya](https://www.npmjs.com/package/himalaya), [hint](https://www.npmjs.com/package/hint), [lighthouse](https://www.npmjs.com/package/lighthouse), [openpgp](https://www.npmjs.com/package/openpgp), [playwright](https://www.npmjs.com/package/playwright), [playwright-start](https://www.npmjs.com/package/playwright-start), [prettier](https://www.npmjs.com/package/prettier), [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss), [pretty-error](https://www.npmjs.com/package/pretty-error), [serve](https://www.npmjs.com/package/serve), [snoowrap](https://www.npmjs.com/package/snoowrap), [taze](https://www.npmjs.com/package/taze), [tsm](https://www.npmjs.com/package/tsm), [typescript](https://www.npmjs.com/package/typescript), [uuid](https://www.npmjs.com/package/uuid), [wrangler](https://www.npmjs.com/package/wrangler), [yargs](https://www.npmjs.com/package/yargs).
+This project has **21** `devDependencies`: [@hint/hint-performance-budget](https://www.npmjs.com/package/@hint/hint-performance-budget), [@jackdbd/checks](https://www.npmjs.com/package/@jackdbd/checks), [@types/yargs](https://www.npmjs.com/package/@types/yargs), [form-data](https://www.npmjs.com/package/form-data), [himalaya](https://www.npmjs.com/package/himalaya), [hint](https://www.npmjs.com/package/hint), [lighthouse](https://www.npmjs.com/package/lighthouse), [linkedin-api-client](https://www.npmjs.com/package/linkedin-api-client), [openpgp](https://www.npmjs.com/package/openpgp), [playwright](https://www.npmjs.com/package/playwright), [playwright-start](https://www.npmjs.com/package/playwright-start), [prettier](https://www.npmjs.com/package/prettier), [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss), [pretty-error](https://www.npmjs.com/package/pretty-error), [serve](https://www.npmjs.com/package/serve), [snoowrap](https://www.npmjs.com/package/snoowrap), [taze](https://www.npmjs.com/package/taze), [typescript](https://www.npmjs.com/package/typescript), [uuid](https://www.npmjs.com/package/uuid), [wrangler](https://www.npmjs.com/package/wrangler), [yargs](https://www.npmjs.com/package/yargs).
 
 ## Troubleshooting
 
