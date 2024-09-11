@@ -56,8 +56,9 @@
           echo "- $(chromium --version)"
           echo "- Node.js $(node --version)"
           echo "- npm $(npm --version)"
-          echo "- playwright $(npx playwright --version)"
-          echo "- playwright-start $(npx playwright-start --version)"
+          # I am commenting these lines out, otherwise nix asks me to install playwright every time.
+          # echo "- playwright $(npx playwright --version)"
+          # echo "- playwright-start $(npx playwright-start --version)"
           echo "- $(steampipe --version)"
           echo "- zx $(zx --version)"
 

@@ -144,7 +144,7 @@
     "lighthouse": "^12.0.0",
     "linkedin-api-client": "^0.3.0",
     "openpgp": "^5.11.1",
-    "playwright": "^1.43.1",
+    "playwright": "^1.47.0",
     "playwright-start": "^1.1.0",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
