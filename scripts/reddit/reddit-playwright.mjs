@@ -1,13 +1,13 @@
-import fs from 'node:fs'
-import path from 'node:path'
+import fs from "node:fs";
+import path from "node:path";
 // const FormData = require('form-data')
-import { chromium } from 'playwright-core'
+import { chromium } from "playwright-core";
 // const snoowrap = require('snoowrap')
 
 // const splits = __filename.split('/')
 // const app_id = splits[splits.length - 1]
 
-// TODO: decide what to do with this script. Fininsh implementing it or delete it.
+// TODO: decide what to do with this script. Finish implementing it or delete it.
 
 /**
  * Usage:
@@ -62,11 +62,11 @@ const main = async () => {
     devtools: process.env.GITHUB_SHA ? false : true,
     executablePath: process.env.GITHUB_SHA
       ? undefined
-      : '/etc/profiles/per-user/jack/bin/chromium',
-    headless: process.env.GITHUB_SHA ? true : false
-  })
+      : process.env.CHROMIUM_PATH,
+    headless: process.env.GITHUB_SHA ? true : false,
+  });
 
-  const ctx = await browser.newContext()
+  const ctx = await browser.newContext();
 
   // const eu_cookie = encodeURIComponent(
   //   JSON.stringify({ opted: true, nonessential: false })
@@ -82,8 +82,8 @@ const main = async () => {
   //   }
   // ])
 
-  const page = await ctx.newPage()
-  await page.goto('https://www.reddit.com/r/NixOS/')
+  const page = await ctx.newPage();
+  await page.goto("https://www.reddit.com/r/NixOS/");
 
   // await page.goto(sub.url)
 
@@ -102,7 +102,7 @@ const main = async () => {
   // const image_path = `reddit-submission-${sub.id}.png`
   // await page.screenshot({ path: image_path })
 
-  await browser.close()
+  await browser.close();
 
   // const { chat_id, token } = jsonSecret({
   //   name: 'TELEGRAM',
@@ -139,9 +139,9 @@ const main = async () => {
   //   })
 
   // return res.data
-}
+};
 
-main()
+main();
 // .then(console.log)
 // .catch((err) => {
 //   console.error(`=== ERROR ===`, err)

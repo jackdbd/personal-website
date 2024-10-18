@@ -1,76 +1,75 @@
-import fs from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import defDebug from 'debug'
-import markdownIt from 'markdown-it'
-import markdownItAnchor from 'markdown-it-anchor'
-import { EleventyRenderPlugin } from '@11ty/eleventy'
-import navigation from '@11ty/eleventy-navigation'
-import rss from '@11ty/eleventy-plugin-rss'
-import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight'
-import webcPlugin from '@11ty/eleventy-plugin-webc'
-import { ensureEnvVarsPlugin } from '@jackdbd/eleventy-plugin-ensure-env-vars'
-import { telegramPlugin } from '@jackdbd/eleventy-plugin-telegram'
-import { textToSpeechPlugin } from '@jackdbd/eleventy-plugin-text-to-speech'
-import { defClient as defCloudStorage } from '@jackdbd/eleventy-plugin-text-to-speech/hosting/cloud-storage'
-import { defClient as defCloudTextToSpeech } from '@jackdbd/eleventy-plugin-text-to-speech/synthesis/gcp-text-to-speech'
-// import brokenLinksPlugin from 'eleventy-plugin-broken-links'
-import embedTwitter from 'eleventy-plugin-embed-twitter'
-import embedVimeo from 'eleventy-plugin-vimeo-embed'
-import embedYouTube from 'eleventy-plugin-youtube-embed'
-import emoji from 'eleventy-plugin-emoji'
-import helmet from 'eleventy-plugin-helmet'
-import readingTime from 'eleventy-plugin-reading-time'
-import toc from 'eleventy-plugin-nesting-toc'
-import collections from '../11ty/collections.mjs'
-import filters from '../11ty/filters.mjs'
-import shortcodes from '../11ty/shortcodes.mjs'
-import { callout, table } from '../11ty/paired-shortcodes.mjs'
-import { htmlmin } from '../11ty/transforms.mjs'
-import cloudinaryPlugin from '../plugins/11ty/cloudinary/index.cjs'
-import { pagefindPlugin } from '../plugins/11ty/pagefind/index.mjs'
-import { stripePlugin } from '../plugins/11ty/stripe/index.mjs'
-import { webmentionsPlugin } from '../plugins/11ty/webmentions/index.mjs'
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import defDebug from "debug";
+import markdownIt from "markdown-it";
+import markdownItAnchor from "markdown-it-anchor";
+import { EleventyRenderPlugin } from "@11ty/eleventy";
+import navigation from "@11ty/eleventy-navigation";
+import rss from "@11ty/eleventy-plugin-rss";
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import webcPlugin from "@11ty/eleventy-plugin-webc";
+import { ensureEnvVarsPlugin } from "@jackdbd/eleventy-plugin-ensure-env-vars";
+import { telegramPlugin } from "@jackdbd/eleventy-plugin-telegram";
+import { textToSpeechPlugin } from "@jackdbd/eleventy-plugin-text-to-speech";
+import { defClient as defCloudStorage } from "@jackdbd/eleventy-plugin-text-to-speech/hosting/cloud-storage";
+import { defClient as defCloudTextToSpeech } from "@jackdbd/eleventy-plugin-text-to-speech/synthesis/gcp-text-to-speech";
+import embedTwitter from "eleventy-plugin-embed-twitter";
+import embedVimeo from "eleventy-plugin-vimeo-embed";
+import embedYouTube from "eleventy-plugin-youtube-embed";
+import emoji from "eleventy-plugin-emoji";
+import helmet from "eleventy-plugin-helmet";
+import readingTime from "eleventy-plugin-reading-time";
+import toc from "eleventy-plugin-nesting-toc";
+import collections from "../11ty/collections.mjs";
+import filters from "../11ty/filters.mjs";
+import shortcodes from "../11ty/shortcodes.mjs";
+import { callout, table } from "../11ty/paired-shortcodes.mjs";
+import { htmlmin } from "../11ty/transforms.mjs";
+import cloudinaryPlugin from "../plugins/11ty/cloudinary/index.cjs";
+import { pagefindPlugin } from "../plugins/11ty/pagefind/index.mjs";
+import { stripePlugin } from "../plugins/11ty/stripe/index.mjs";
+import { webmentionsPlugin } from "../plugins/11ty/webmentions/index.mjs";
 
-const debug = defDebug(`11ty-config:eleventy.mjs`)
+const debug = defDebug(`11ty-config:eleventy.mjs`);
 
-const __filename = fileURLToPath(import.meta.url)
-const REPO_ROOT = path.join(__filename, '..', '..')
-const OUTPUT_DIR = path.join(REPO_ROOT, '_site')
+const __filename = fileURLToPath(import.meta.url);
+const REPO_ROOT = path.join(__filename, "..", "..");
+const OUTPUT_DIR = path.join(REPO_ROOT, "_site");
 
 // shamelessly stolen from:
 // https://github.com/maxboeck/mxb/blob/db6ca7743f46cf67367a93c8de404cbcb50b98d1/utils/markdown.js
 const headingAnchorSlugify = (s) => {
   return encodeURIComponent(
-    'h-' +
+    "h-" +
       String(s)
         .trim()
         .toLowerCase()
-        .replace(/[.,\/#!$%\^&\*;:{}=_`~()]/g, '')
-        .replace(/\s+/g, '-')
-  )
-}
+        .replace(/[.,\/#!$%\^&\*;:{}=_`~()]/g, "")
+        .replace(/\s+/g, "-"),
+  );
+};
 
 export default function (eleventyConfig) {
   // https://www.11ty.dev/docs/data-global-custom/
   // https://benmyers.dev/blog/eleventy-data-cascade/
-  const contactFormSubmissionUrl = 'https://formspree.io/f/mrgdevqb'
+  const contactFormSubmissionUrl = "https://formspree.io/f/mrgdevqb";
 
   eleventyConfig.addGlobalData(
-    'contactFormSubmissionUrl',
-    contactFormSubmissionUrl
-  )
+    "contactFormSubmissionUrl",
+    contactFormSubmissionUrl,
+  );
 
   eleventyConfig.addPlugin(ensureEnvVarsPlugin, {
     envVars: [
-      'CLOUDINARY',
-      'DEBUG',
-      'ELEVENTY_ROOT',
-      'ELEVENTY_SOURCE',
-      'ELEVENTY_RUN_MODE',
-      'NODE_ENV'
-    ]
-  })
+      "CLOUDINARY",
+      "DEBUG",
+      "ELEVENTY_ROOT",
+      "ELEVENTY_SOURCE",
+      "ELEVENTY_RUN_MODE",
+      "NODE_ENV",
+    ],
+  });
 
   // TIP: think twice before writing code inside a `eleventy.after` event
   // handler. If you need code here, most likely you are better off writing a
@@ -78,21 +77,21 @@ export default function (eleventyConfig) {
   // built with Eleventy.
   // eleventyConfig.on('eleventy.after', async () => {})
 
-  let keyFilename
+  let keyFilename;
   // on GitHub Actions and on Cloudflare Pages, I set GCP_CREDENTIALS_JSON as a JSON string.
   if (process.env.GCP_CREDENTIALS_JSON) {
-    keyFilename = 'credentials.json'
-    fs.writeFileSync(keyFilename, process.env.GCP_CREDENTIALS_JSON)
+    keyFilename = "credentials.json";
+    fs.writeFileSync(keyFilename, process.env.GCP_CREDENTIALS_JSON);
 
     // I also have to set GOOGLE_APPLICATION_CREDENTIALS as a filepath because
     // when the eleventy-text-to-speech-plugin is registered without passing
     // `keyFilename`, it uses the environment variable
     // GOOGLE_APPLICATION_CREDENTIALS. That plugin expects
     // GOOGLE_APPLICATION_CREDENTIALS to be a filepath (as it should always be).
-    process.env.GOOGLE_APPLICATION_CREDENTIALS = keyFilename
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = keyFilename;
   } else {
     // on my NixOS laptop, I have a secret stored on the filesystem
-    keyFilename = undefined
+    keyFilename = undefined;
     // on my non-NixOS laptop, I keep the JSON key in the secrets/ directory
     // keyFilename = path.join(REPO_ROOT, 'secrets', 'sa-storage-uploader.json')
     // process.env.GOOGLE_APPLICATION_CREDENTIALS = keyFilename
@@ -118,14 +117,14 @@ export default function (eleventyConfig) {
 
     GOOGLE_APPLICATION_CREDENTIALS: process.env.GOOGLE_APPLICATION_CREDENTIALS,
     NODE_ENV: process.env.NODE_ENV,
-    SA_JSON_KEY: process.env.SA_JSON_KEY
-  }
+    SA_JSON_KEY: process.env.SA_JSON_KEY,
+  };
   // console.log('environment', environment)
 
   // --- 11ty plugins ------------------------------------------------------- //
 
   // https://www.11ty.dev/docs/plugins/render/#installation
-  eleventyConfig.addPlugin(EleventyRenderPlugin)
+  eleventyConfig.addPlugin(EleventyRenderPlugin);
 
   // https://github.com/bradleyburgess/eleventy-plugin-broken-links
   // eleventyConfig.addPlugin(brokenLinksPlugin, {
@@ -168,89 +167,89 @@ export default function (eleventyConfig) {
   //   loggingLevel: 1
   // })
 
-  let stripe_json_string
+  let stripe_json_string;
   if (process.env.STRIPE_LIVE) {
-    stripe_json_string = process.env.STRIPE_LIVE
+    stripe_json_string = process.env.STRIPE_LIVE;
   } else {
     stripe_json_string = fs.readFileSync(
-      path.join(REPO_ROOT, 'secrets', 'stripe-live.json'),
-      { encoding: 'utf8' }
-    )
+      path.join(REPO_ROOT, "secrets", "stripe-live.json"),
+      { encoding: "utf8" },
+    );
   }
-  const stripe = JSON.parse(stripe_json_string)
+  const stripe = JSON.parse(stripe_json_string);
 
   eleventyConfig.addPlugin(stripePlugin, {
     apiKey: stripe.api_key,
     stripeConfig: {
       // https://stripe.com/docs/api/versioning
-      apiVersion: '2022-11-15',
+      apiVersion: "2022-11-15",
       maxNetworkRetries: 3, // (default is 0)
-      timeout: 10000 // ms (default is 80000)
-    }
-  })
+      timeout: 10000, // ms (default is 80000)
+    },
+  });
 
-  const domain = 'www.giacomodebidda.com'
-  const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`
+  const domain = "www.giacomodebidda.com";
+  const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`;
 
   eleventyConfig.addPlugin(webmentionsPlugin, {
     blacklisted: [
-      { id: 1598904, reason: 'it was a webmention I sent for testing' }
+      { id: 1598904, reason: "it was a webmention I sent for testing" },
     ],
     domain,
-    token: process.env.WEBMENTION_IO_TOKEN
-  })
+    token: process.env.WEBMENTION_IO_TOKEN,
+  });
 
   // https://github.com/gfscott/eleventy-plugin-embed-twitter#configure
-  eleventyConfig.addPlugin(embedTwitter, { align: 'center', doNotTrack: true })
-  eleventyConfig.addPlugin(embedVimeo, { dnt: true })
-  eleventyConfig.addPlugin(embedYouTube, { lazy: true, noCookie: true })
+  eleventyConfig.addPlugin(embedTwitter, { align: "center", doNotTrack: true });
+  eleventyConfig.addPlugin(embedVimeo, { dnt: true });
+  eleventyConfig.addPlugin(embedYouTube, { lazy: true, noCookie: true });
 
-  const cloudinary = JSON.parse(process.env.CLOUDINARY)
+  const cloudinary = JSON.parse(process.env.CLOUDINARY);
 
   eleventyConfig.addPlugin(cloudinaryPlugin, {
     apiKey: cloudinary.api_key,
     apiSecret: cloudinary.api_secret,
-    cacheDuration: '30d',
+    cacheDuration: "30d",
     // cacheVerbose: true,
-    cloudName: cloudinary.cloud_name
-  })
+    cloudName: cloudinary.cloud_name,
+  });
 
-  eleventyConfig.addPlugin(emoji)
-  eleventyConfig.addPlugin(helmet)
-  eleventyConfig.addPlugin(navigation)
-  eleventyConfig.addPlugin(pagefindPlugin, { verbose: true })
-  eleventyConfig.addPlugin(readingTime)
-  eleventyConfig.addPlugin(rss)
-  eleventyConfig.addPlugin(syntaxHighlight)
+  eleventyConfig.addPlugin(emoji);
+  eleventyConfig.addPlugin(helmet);
+  eleventyConfig.addPlugin(navigation);
+  eleventyConfig.addPlugin(pagefindPlugin, { verbose: true });
+  eleventyConfig.addPlugin(readingTime);
+  eleventyConfig.addPlugin(rss);
+  eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(toc, {
-    tags: ['h2', 'h3'],
-    wrapperClass: 'toc-nav'
-  })
+    tags: ["h2", "h3"],
+    wrapperClass: "toc-nav",
+  });
 
   eleventyConfig.addPlugin(webcPlugin, {
     // https://www.11ty.dev/docs/languages/webc/#global-no-import-components
     components: [
-      'src/includes/components/**/*.webc',
-      'plugins/11ty/stripe/components/**/*.webc',
-      'npm:@11ty/is-land/*.webc',
-      'npm:@11ty/eleventy-plugin-syntaxhighlight/*.webc'
-    ]
-  })
+      "src/includes/components/**/*.webc",
+      "plugins/11ty/stripe/components/**/*.webc",
+      "npm:@11ty/is-land/*.webc",
+      "npm:@11ty/eleventy-plugin-syntaxhighlight/*.webc",
+    ],
+  });
 
   // On my NixOS laptop, on GitHub Actions and on Cloudflare Pages I use a
   // JSON secret for Telegram chat ID and bot token, and I expose that secret
   // as an environment variable.
-  const telegram = JSON.parse(process.env.TELEGRAM)
+  const telegram = JSON.parse(process.env.TELEGRAM);
 
   if (process.env.CF_PAGES) {
     eleventyConfig.addPlugin(telegramPlugin, {
       chatId: telegram.chat_id,
       token: telegram.token,
       textBeforeBuild:
-        '⏱️ 11ty <b>started</b> building <b>personal website</b> on Cloudflare',
+        "⏱️ 11ty <b>started</b> building <b>personal website</b> on Cloudflare",
       textAfterBuild:
-        '🏁 11ty <b>finished</b> building <b>personal website</b> on Cloudflare'
-    })
+        "🏁 11ty <b>finished</b> building <b>personal website</b> on Cloudflare",
+    });
   }
 
   if (process.env.GITHUB_SHA) {
@@ -258,39 +257,39 @@ export default function (eleventyConfig) {
       chatId: telegram.chat_id,
       token: telegram.token,
       textBeforeBuild:
-        '⏱️ 11ty <b>started</b> building <b>personal website</b> on GitHub',
+        "⏱️ 11ty <b>started</b> building <b>personal website</b> on GitHub",
       textAfterBuild:
-        '🏁 11ty <b>finished</b> building <b>personal website</b> on GitHub'
-    })
+        "🏁 11ty <b>finished</b> building <b>personal website</b> on GitHub",
+    });
   }
 
   const cloudTTSFemale = defCloudTextToSpeech({
-    audioEncoding: 'OGG_OPUS',
+    audioEncoding: "OGG_OPUS",
     keyFilename,
     // https://cloud.google.com/text-to-speech/docs/voices
     // voiceName: 'en-US-Wavenet-I'
-    voiceName: 'en-GB-Wavenet-C'
-  })
+    voiceName: "en-GB-Wavenet-C",
+  });
 
   const cloudTTSMale = defCloudTextToSpeech({
-    audioEncoding: 'OGG_OPUS',
+    audioEncoding: "OGG_OPUS",
     keyFilename,
-    voiceName: 'en-US-Wavenet-I'
-  })
+    voiceName: "en-US-Wavenet-I",
+  });
 
   const cloudStorage = defCloudStorage({
-    bucketName: 'bkt-eleventy-plugin-text-to-speech-audio-files',
-    keyFilename
-  })
+    bucketName: "bkt-eleventy-plugin-text-to-speech-audio-files",
+    keyFilename,
+  });
 
   eleventyConfig.addPlugin(textToSpeechPlugin, {
     rules: [
       {
-        regex: new RegExp('about\\/.*\\.html$'),
-        cssSelectors: ['.text-to-speech'],
+        regex: new RegExp("about\\/.*\\.html$"),
+        cssSelectors: [".text-to-speech"],
         synthesis: cloudTTSMale,
-        hosting: cloudStorage
-      }
+        hosting: cloudStorage,
+      },
       // This works, but the styling (CSS) sucks.
       // {
       //   regex: new RegExp(
@@ -300,65 +299,65 @@ export default function (eleventyConfig) {
       //   synthesis: cloudTTSMale,
       //   hosting: cloudStorage
       // }
-    ]
-  })
+    ],
+  });
 
   // --- 11ty data cascade -------------------------------------------------- //
   // https://www.11ty.dev/docs/data-cascade/
 
   // Merge data instead of overriding
   // https://www.11ty.dev/docs/data-deep-merge/
-  eleventyConfig.setDataDeepMerge(true)
+  eleventyConfig.setDataDeepMerge(true);
 
   // --- 11ty passthrough file copy ----------------------------------------- //
   // https://www.11ty.dev/docs/copy/
 
   // Static assets
   eleventyConfig.addPassthroughCopy({
-    'src/includes/assets/css': 'assets/css',
-    'src/includes/assets/fonts': 'assets/fonts',
-    'src/includes/assets/img': 'assets/img',
-    'src/includes/assets/js': 'assets/js',
-    'src/includes/assets/xsl': 'assets/xsl',
-    'src/includes/preact-components': 'assets/js/preact-components',
-    'src/includes/assets/pgp-key.txt': 'assets/pgp-key.txt',
-    'src/includes/assets/security.txt': '.well-known/security.txt',
-    'node_modules/@11ty/is-land/is-land.js': 'assets/js/is-land.js',
-    'node_modules/@11ty/is-land/is-land-autoinit.js':
-      'assets/js/is-land-autoinit.js',
-    'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js'
-  })
+    "src/includes/assets/css": "assets/css",
+    "src/includes/assets/fonts": "assets/fonts",
+    "src/includes/assets/img": "assets/img",
+    "src/includes/assets/js": "assets/js",
+    "src/includes/assets/xsl": "assets/xsl",
+    "src/includes/preact-components": "assets/js/preact-components",
+    "src/includes/assets/pgp-key.txt": "assets/pgp-key.txt",
+    "src/includes/assets/security.txt": ".well-known/security.txt",
+    "node_modules/@11ty/is-land/is-land.js": "assets/js/is-land.js",
+    "node_modules/@11ty/is-land/is-land-autoinit.js":
+      "assets/js/is-land-autoinit.js",
+    "node_modules/instant.page/instantpage.js": "assets/js/instantpage.js",
+  });
 
   // https://www.11ty.dev/docs/shortcodes/
   Object.keys(shortcodes).forEach((name) => {
-    eleventyConfig.addShortcode(name, shortcodes[name])
-    debug(`added 11ty shortcode ${name}`)
-  })
-  eleventyConfig.addPairedShortcode('callout', callout)
-  debug(`added 11ty paired shortcode callout`)
-  eleventyConfig.addPairedShortcode('table', table)
-  debug(`added 11ty paired shortcode table`)
+    eleventyConfig.addShortcode(name, shortcodes[name]);
+    debug(`added 11ty shortcode ${name}`);
+  });
+  eleventyConfig.addPairedShortcode("callout", callout);
+  debug(`added 11ty paired shortcode callout`);
+  eleventyConfig.addPairedShortcode("table", table);
+  debug(`added 11ty paired shortcode table`);
 
   // https://www.11ty.dev/docs/config/#transforms
-  eleventyConfig.addTransform('htmlmin', htmlmin)
-  debug(`added 11ty filter htmlmin`)
+  eleventyConfig.addTransform("htmlmin", htmlmin);
+  debug(`added 11ty filter htmlmin`);
 
   // https://www.11ty.dev/docs/filters/
   Object.keys(filters).forEach((name) => {
-    if (name === 'jsmin') {
-      eleventyConfig.addAsyncFilter(name, filters[name])
-      debug(`added 11ty async filter ${name}`)
+    if (name === "jsmin") {
+      eleventyConfig.addAsyncFilter(name, filters[name]);
+      debug(`added 11ty async filter ${name}`);
     } else {
-      eleventyConfig.addFilter(name, filters[name])
-      debug(`added 11ty filter ${name}`)
+      eleventyConfig.addFilter(name, filters[name]);
+      debug(`added 11ty filter ${name}`);
     }
-  })
+  });
 
   // https://www.11ty.dev/docs/collections/
   Object.keys(collections).forEach((name) => {
-    eleventyConfig.addCollection(name, collections[name])
-    debug(`added 11ty collection ${name}`)
-  })
+    eleventyConfig.addCollection(name, collections[name]);
+    debug(`added 11ty collection ${name}`);
+  });
 
   // console.log('11ty user-defined collections', eleventyConfig.collections)
 
@@ -371,8 +370,8 @@ export default function (eleventyConfig) {
     breaks: true,
     html: true,
     linkify: true,
-    typographer: true
-  })
+    typographer: true,
+  });
 
   // https://github.com/valeriangalliat/markdown-it-anchor
   md.use(markdownItAnchor, {
@@ -380,16 +379,16 @@ export default function (eleventyConfig) {
     // https://github.com/valeriangalliat/markdown-it-anchor#link-inside-header
     permalink: markdownItAnchor.permalink.linkInsideHeader({
       symbol: `<span aria-hidden="true">#</span>`,
-      placement: 'before'
+      placement: "before",
     }),
     // permalink: true,
     permalinkBefore: true,
-    permalinkClass: 'heading-anchor',
-    permalinkSymbol: '#',
-    permalinkAttrs: () => ({ 'aria-hidden': true }),
-    slugify: headingAnchorSlugify
-  })
-  eleventyConfig.setLibrary('md', md)
+    permalinkClass: "heading-anchor",
+    permalinkSymbol: "#",
+    permalinkAttrs: () => ({ "aria-hidden": true }),
+    slugify: headingAnchorSlugify,
+  });
+  eleventyConfig.setLibrary("md", md);
 
   // --- Eleventy dev server configuration ---------------------------------- //
 
@@ -397,20 +396,20 @@ export default function (eleventyConfig) {
   eleventyConfig.setServerOptions({
     liveReload: true,
     domDiff: true,
-    port: 8080
-  })
+    port: 8080,
+  });
 
   // https://www.11ty.dev/docs/config/#configuration-options
   return {
     dir: {
-      data: '_data',
-      includes: 'includes',
-      input: 'src',
-      layouts: 'layouts',
-      output: OUTPUT_DIR
+      data: "_data",
+      includes: "includes",
+      input: "src",
+      layouts: "layouts",
+      output: OUTPUT_DIR,
     },
-    htmlTemplateEngine: 'njk',
-    markdownTemplateEngine: 'njk',
-    pathPrefix: '/'
-  }
+    htmlTemplateEngine: "njk",
+    markdownTemplateEngine: "njk",
+    pathPrefix: "/",
+  };
 }
