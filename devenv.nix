@@ -63,6 +63,8 @@
 
   packages = with pkgs; [
     git
+    git-lfs
+    git-filter-repo
     nodejs
     steampipe
     wrangler
@@ -96,12 +98,27 @@
 
   scripts = {
     dependencies.exec = "npm install --include dev";
+
+    largest-blobs.exec = ''
+      git filter-repo --analyze --force
+      cat .git/filter-repo/analysis/blob-shas-and-paths.txt | head -n 7
+    '';
+
+    repo-size.exec = ''
+      git gc
+      git count-objects --human-readable --verbose
+    '';
+
     readme.exec = "npx tsm scripts/readme.ts";
+
     serve.exec = "npx serve _site/ -p 3000";
+
     versions.exec = ''
       echo "=== Versions ==="
       chromium --version
       git --version
+      git-lfs --version
+      echo "git filter-repo version $(git filter-repo --version)"
       echo "Node.js $(node --version)"
       steampipe --version
       wrangler --version
