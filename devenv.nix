@@ -65,6 +65,7 @@
     git
     git-lfs
     git-filter-repo
+    git-subrepo # alternative to git-submodule and git-subtree
     nodejs
     steampipe
     wrangler
@@ -119,6 +120,7 @@
       git --version
       git-lfs --version
       echo "git filter-repo version $(git filter-repo --version)"
+      echo "git-subrepo version $(git-subrepo --version)"
       echo "Node.js $(node --version)"
       steampipe --version
       wrangler --version
