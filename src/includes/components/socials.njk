@@ -1,7 +1,9 @@
 <ul class="cluster" data-align="{{ align }}">
+  <li><a href="{{ metadata.feeds.articles.href }}">Articles feed</a></li>
+  <li><a href="{{ metadata.feeds.notes.href }}">Notes feed</a></li>
   <li><a href="{{ metadata.feeds.posts.href }}">Posts feed</a></li>
   <li><a href="{{ metadata.feeds.talks.href }}">Talks feed</a></li>
-  {% for entry in metadata.socials %}
+  {% for entry in socials %}
   <li>
     <a href="{{ entry.url | url }}" rel="noopener noreferrer" target="_blank">{{ entry.name }}</a>
   </li>

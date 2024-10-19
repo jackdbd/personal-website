@@ -5,4 +5,4 @@ category: code
 visibility: public
 ---
 
-I think that keeping the content we publish online divorced from any presentation layer is a great idea.
+I agree that keeping the content we publish online separated from any presentation layer is a great idea.

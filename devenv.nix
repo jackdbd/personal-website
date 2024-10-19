@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   enterShell = ''
-    versions
+    # git-subrepo pull content
+    git-subrepo status
   '';
 
   env = {
@@ -9,7 +10,7 @@
     CLOUDINARY = builtins.readFile /run/secrets/cloudinary;
 
     # DEBUG = "Eleventy:UserConfig";
-    DEBUG = "11ty-plugin:*,Eleventy:EleventyErrorHandler,linkedin:*,reddit:*,script:*,stripe:*";
+    DEBUG = "11ty:data:*,11ty-plugin:*,Eleventy:EleventyErrorHandler,linkedin:*,reddit:*,script:*,stripe:*";
     # DEBUG = "script:*,Eleventy:EleventyErrorHandler,11ty-config:*,11ty-plugin:*,-11ty-plugin:TTS:inject-audio-tags-into-html";
     # DEBUG = "11ty-plugin-cloudinary:*,-11ty-plugin-cloudinary:transforms";
 
@@ -75,12 +76,13 @@
   pre-commit.hooks = {
     actionlint.enable = true;
     alejandra.enable = true;
-    check-added-large-files.enable = true;
+
+    # check-added-large-files.enable = true;
     check-json.enable = true;
-    check-vcs-permalinks.enable = true;
+    # check-vcs-permalinks.enable = true;
     # cspell.enable = true;
     deadnix.enable = true;
-    eslint.enable = true;
+    # eslint.enable = true; # TODO: create config file, then enable
     gptcommit.enable = true;
     html-tidy.enable = true;
     # hunspell.enable = true;
@@ -88,32 +90,48 @@
     # markdownlint.enable = true;
     # mdl.enable = true;
     # mkdocs-linkcheck.enable = true;
-    prettier.enable = true;
+    prettier = {
+      enable = true;
+      settings = {
+        bracket-same-line = true;
+        no-semi = true;
+        single-quote = true;
+        trailing-comma = "none";
+      };
+    };
     # pretty-format-json.enable = true;
+
     shellcheck.enable = true;
     statix.enable = true;
-    typos.enable = true;
+    typos = {
+      enable = true;
+      excludes = [
+        "content/articles/2024-10-17-lorem-ipsum.md"
+        "src/_data/talks.11tydata.json"
+        "src/includes/assets/pgp-key.txt"
+        "src/includes/assets/security.txt"
+      ];
+    };
     # yamlfmt.enable = true;
     # yamllint.enable = true;
   };
 
   scripts = {
     dependencies.exec = "npm install --include dev";
-
     largest-blobs.exec = ''
       git filter-repo --analyze --force
       cat .git/filter-repo/analysis/blob-shas-and-paths.txt | head -n 7
     '';
-
+    pull-content.exec = ''
+      git-subrepo pull content
+      git-subrepo status
+    '';
     repo-size.exec = ''
       git gc
       git count-objects --human-readable --verbose
     '';
-
     readme.exec = "npx tsm scripts/readme.ts";
-
     serve.exec = "npx serve _site/ -p 3000";
-
     versions.exec = ''
       echo "=== Versions ==="
       chromium --version

@@ -3,9 +3,9 @@
  * https://www.11ty.dev/docs/collections/
  * https://photogabble.co.uk/tutorials/how-to-programmatically-add-tags-to-posts-in-11ty/
  */
-import makeDebug from 'debug'
+import defDebug from 'debug'
 
-const debug = makeDebug(`11ty-config:collections`)
+const debug = defDebug(`11ty-config:collections`)
 
 const isUserDefinedTag = (tag) => {
   switch (tag) {
@@ -47,33 +47,27 @@ export const userDefinedTagList = (collection) => {
   return [...tagSet]
 }
 
-const likes = (collection) => {
-  const templates = collection.getFilteredByGlob('./src/_likes/*.md')
-  debug(`${templates.length} likes`)
-  return templates
-}
-
-const notes = (collection) => {
-  const templates = collection.getFilteredByGlob('./src/_notes/*.md')
-  debug(`${templates.length} notes`)
+const favorites = (collection) => {
+  const templates = collection.getFilteredByTag('like')
+  debug(`${templates.length} template/s tagged with 'like'`)
   return templates
 }
 
 const reposts = (collection) => {
-  const templates = collection.getFilteredByGlob('./src/_reposts/*.md')
-  debug(`${templates.length} reposts`)
+  const templates = collection.getFilteredByTag('repost')
+  debug(`${templates.length} template/s tagged with 'repost'`)
   return templates
 }
 
 const talks = (collection) => {
-  const data_cascade = collection.getAll()[0].data
-  debug(`${data_cascade.talks.length} talks`)
-  return data_cascade.talks
+  const templates = collection.getAll()
+  const data_cascade = templates[0].data
+  debug(`${data_cascade['talks'].length} talks`)
+  return data_cascade['talks']
 }
 
 export default {
-  likes,
-  notes,
+  favorites,
   reposts,
   talks,
   userDefinedTagList

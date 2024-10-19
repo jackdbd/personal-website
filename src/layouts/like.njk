@@ -1,0 +1,14 @@
+---
+layout: page.njk
+---
+{%- block content %}
+<article>
+  {#- {{ ogp | log }} #}
+  {{ content | safe }}
+  <p>Category: {{ category }}</p>
+  <p>Like of: <a href="{{ likeOf }}">{{ likeOf }}</a></p>
+  <p>Liked on: <time datetime="{{ date }}">{{ date }}</time></p>
+</article>
+
+<p>See <a href="/likes">all likes</a>.</p>
+{% endblock content -%}
