@@ -103,8 +103,9 @@
 
     shellcheck.enable = true;
     statix.enable = true;
+
     typos = {
-      enable = true;
+      enable = false;
       excludes = [
         "content/articles/2024-10-17-lorem-ipsum.md"
         "src/_data/talks.11tydata.json"

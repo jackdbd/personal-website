@@ -1,6 +1,5 @@
 ---
-title: Playwright on NixOS
-date: "2024-02-07T21:30:00.000Z"
+date: '2024-02-07T21:30:00.000Z'
 description: How to run Playwright e2e tests on NixOS.
 ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1707340475/shared-libraries-playwright_ujlh1x.png
@@ -11,6 +10,7 @@ tags:
   - NixOS
   - Playwright
   - tests
+title: Playwright on NixOS
 ---
 
 I have been using NixOS for a few months now, and while it's awesome to have an immutable configuration for my laptop, it's not always easy to setup a development environment with all the necessary dependencies.
@@ -27,20 +27,20 @@ In this post I will show you how to get [Playwright](https://playwright.dev/) to
 Let's take this simple script `index.cjs` as an example.
 
 ```js
-const { chromium } = require("playwright");
+const { chromium } = require('playwright')
 
 const main = async () => {
   const browser = await chromium.launch({
-    headless: false,
-  });
+    headless: false
+  })
 
-  const ctx = await browser.newContext();
-  const page = await ctx.newPage();
-  await page.goto("https://www.reddit.com/r/NixOS/");
-  await browser.close();
-};
+  const ctx = await browser.newContext()
+  const page = await ctx.newPage()
+  await page.goto('https://www.reddit.com/r/NixOS/')
+  await browser.close()
+}
 
-main();
+main()
 ```
 
 If we try to execute the script with `node index.cjs`, we encounter an exception. It’s Playwright telling us that a bunch of shared objects are missing. To be more precise, when we are on any Linux distro it’s the [`validateLinuxDependencies`](https://github.com/microsoft/playwright/blob/19a4f15eb67fd82a0b78b12dd94e3564504f83f9/packages/playwright-core/src/server/registry/dependencies.ts#L188C23-L188C48) that throws this exception. Playwright gathers all the missing dependencies, creates an error message, and wraps it in this nicely-formatted double border box.
@@ -162,22 +162,22 @@ We get: `not a dynamic executable`.
 Now that we have decided to **not** use the chromium revision bundled with Playwright, we can update the `index.cjs` script:
 
 ```js
-const { chromium } = require("playwright-core");
+const { chromium } = require('playwright-core')
 
 const main = async () => {
   const browser = await chromium.launch({
     // tip: use `which chromium` to figure out where the chromium binary is
-    executablePath: "/home/jack/.nix-profile/bin/chromium",
-    headless: false,
-  });
+    executablePath: '/home/jack/.nix-profile/bin/chromium',
+    headless: false
+  })
 
-  const ctx = await browser.newContext();
-  const page = await ctx.newPage();
-  await page.goto("https://www.reddit.com/r/NixOS/");
-  await browser.close();
-};
+  const ctx = await browser.newContext()
+  const page = await ctx.newPage()
+  await page.goto('https://www.reddit.com/r/NixOS/')
+  await browser.close()
+}
 
-main();
+main()
 ```
 
 {% callout "info" %}
