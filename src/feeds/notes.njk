@@ -18,6 +18,7 @@ eleventyExcludeFromCollections: true
   <link href="{{ permalink }}" rel="self"/>
 
   {%- for note in collections.note | reverse %}
+  {# {{ note | log }} #}
   {%- set absolute_url = note.url | absoluteUrl(metadata.url) %}
   <entry>
     <id>{{ absolute_url }}</id>
@@ -27,7 +28,7 @@ eleventyExcludeFromCollections: true
     <updated>{{ note.date | dateToRfc3339 }}</updated>
     <summary>{{ note.content }}</summary>
     <content type="html" xml:lang="{{ metadata.lang }}">
-      {{ note.templateContent | htmlToAbsoluteUrls(absolute_url) }}
+      {{ note.content }}
     </content>
   </entry>
   {%- endfor %}

@@ -13,6 +13,8 @@ const author = {
 
 const build_started = new Date().toISOString()
 
+const content_origin = 'https://content.giacomodebidda.com'
+
 const description = "Giacomo Debidda's personal website and blog"
 
 const feeds = {
@@ -47,6 +49,7 @@ const url = 'https://www.giacomodebidda.com'
 const data = {
   author,
   build_started,
+  content_origin,
   description,
   feeds,
   lang,

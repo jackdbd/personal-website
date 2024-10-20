@@ -10,7 +10,7 @@
     CLOUDINARY = builtins.readFile /run/secrets/cloudinary;
 
     # DEBUG = "Eleventy:UserConfig";
-    DEBUG = "11ty:data:*,11ty-plugin:*,Eleventy:EleventyErrorHandler,linkedin:*,reddit:*,script:*,stripe:*";
+    DEBUG = "11ty:data:*,11ty-plugin:*,-11ty-plugin:TTS:inject-audio-tags-into-html,Eleventy:EleventyErrorHandler,linkedin:*,reddit:*,script:*,stripe:*";
     # DEBUG = "script:*,Eleventy:EleventyErrorHandler,11ty-config:*,11ty-plugin:*,-11ty-plugin:TTS:inject-audio-tags-into-html";
     # DEBUG = "11ty-plugin-cloudinary:*,-11ty-plugin-cloudinary:transforms";
 

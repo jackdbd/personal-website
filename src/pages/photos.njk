@@ -1,0 +1,31 @@
+---
+description: Giacomo Debidda's photos
+eleventyNavigation:
+  key: Photos
+  order: 6
+layout: page.njk
+permalink: "photos/index.html"
+section: photos
+title: Photos
+---
+{%- block pagecontent %}
+<ul>
+  {%- for photo in collections.photo %}
+    {# TODO: if photo is an array, render a multi-photo #}
+    {# https://indieweb.org/multi-photo #}
+    {# {{ photo | log }} #}
+    {% set rfc3339 = photo.date | dateToRfc3339 %}
+    {% set yyyy_mm_dd = photo.date | machineDateJS %}
+    <li>
+      <span>
+        <time datetime="{{ rfc3339 }}">
+          <strong>{{ yyyy_mm_dd }}</strong>
+        </time>
+        &nbsp;
+        <a href="{{ photo.url | url }}">{{ photo.fileSlug }}</a>
+      </span>
+    </li>
+  {% endfor -%}
+</ul>
+<p><a href="/">Home</a></p>
+{% endblock pagecontent -%}

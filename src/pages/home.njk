@@ -19,8 +19,8 @@ title: Hi there!
       <p>I'm Giacomo Debidda, also known as <a href="https://twitter.com/jackdbd" rel="noopener noreferrer" target="_blank">@jackdbd</a> on the Internet.</p>
       <h2>Recent articles</h2>
       {% set n = 3 %}
-      {% set posts = collections.post | reverse | limit(n) | reverse %}
-      {% include "components/post-list.njk" %}
+      {% set articles = collections.article | reverse | limit(n) | reverse %}
+      {% include "components/article-list.njk" %}
     </div>
   </main>
 

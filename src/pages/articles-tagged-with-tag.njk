@@ -8,14 +8,14 @@ pagination:
   data: collections
   filter:
     - all
+    - article
     - nav
-    - post
     - userDefinedTagList
   size: 1
 permalink: /tags/{{ tag }}/
 ---
 {% block pagecontent %}
-{% set posts = collections[ tag ] %}
-{% include "components/post-list.njk" %}
+{% set articles = collections[ tag ] %}
+{% include "components/article-list.njk" %}
 <p class="">See <a href="{{ '/tags/' | url }}">all tags</a>.</p>
 {% endblock pagecontent %}

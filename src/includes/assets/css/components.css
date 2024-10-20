@@ -155,6 +155,38 @@ video::cue {
   }
 }
 
+/* .article-list ------------------------------------------------------------ */
+
+.article-list {
+  --flow-space: var(--scale-space-l);
+}
+
+.article-list h2 a {
+  color: var(--color-headings);
+  text-decoration: none;
+}
+
+.article-list h2:focus-within {
+  outline: 0.25rem dashed var(--color-accent);
+}
+
+.article-list h2 a:focus {
+  outline: none;
+}
+
+.article-list h2 a:hover {
+  text-decoration: underline;
+}
+
+.article-list li {
+  --flow-space: var(--scale-space-m);
+  position: relative;
+}
+
+.article-list li > * {
+  --flow-space: var(--scale-space-3xs);
+}
+
 /* .callout ----------------------------------------------------------------- */
 
 .callout {
@@ -305,38 +337,6 @@ video::cue {
 .pill:focus {
   border-color: var(--color-text);
   outline: none;
-}
-
-/* .post-list --------------------------------------------------------------- */
-
-.post-list {
-  --flow-space: var(--scale-space-l);
-}
-
-.post-list h2 a {
-  color: var(--color-headings);
-  text-decoration: none;
-}
-
-.post-list h2:focus-within {
-  outline: 0.25rem dashed var(--color-accent);
-}
-
-.post-list h2 a:focus {
-  outline: none;
-}
-
-.post-list h2 a:hover {
-  text-decoration: underline;
-}
-
-.post-list li {
-  --flow-space: var(--scale-space-m);
-  position: relative;
-}
-
-.post-list li > * {
-  --flow-space: var(--scale-space-3xs);
 }
 
 /* .prose ------------------------------------------------------------------- */

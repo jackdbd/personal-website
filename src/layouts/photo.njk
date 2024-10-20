@@ -3,7 +3,9 @@ layout: page.njk
 ---
 {%- block content %}
 <article>
-  {{ photo | log }}
+  {# photo is an array #}
+  {# {{ photo | log }} #}
+  {# <pre>{{ photo | dump | safe }}</pre> #}
   {% if category %}
     <pre>{{ category | dump | safe }}</pre>
   {% endif %}
@@ -11,7 +13,7 @@ layout: page.njk
     <pre>{{ location | dump | safe }}</pre>
   {% endif %}
   <figure class="h-entry">
-    <img class="u-photo" src="{{ photo.url }}" alt="{{ photo.alt }}">
+    <img class="u-photo" src="{{ metadata.content_origin }}/{{ photo[0].url }}" alt="{{ photo[0].alt }}">
     <figcaption>
       <p class="p-content">{{ content | safe }}</p>
       <p>Published on <time class="dt-published" datetime="{{ date }}">{{ date }}</time> by <a href="/" class="u-author">me</a>.

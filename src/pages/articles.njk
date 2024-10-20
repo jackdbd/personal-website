@@ -1,14 +1,14 @@
 ---
 description: Giacomo Debidda's blog
 eleventyNavigation:
-  key: Blog
+  key: Articles
   order: 0
 layout: bare-minimum.njk
 ogp:
-  title: Blog
-permalink: /blog/index.html
-section: blog
-title: Blog
+  title: Articles
+permalink: /articles/index.html
+section: articles
+title: Articles
 ---
 {% block content %}
 
@@ -23,8 +23,8 @@ title: Blog
       <h1>{{ title }}</h1>
       <div class="flow">
         <div id="search"></div>
-        {% set posts = collections.post %}
-        {% include "components/post-list.njk" %}
+        {% set articles = collections.article %}
+        {% include "components/article-list.njk" %}
       </div>
     </div>
   </main>

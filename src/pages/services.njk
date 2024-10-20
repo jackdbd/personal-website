@@ -2,7 +2,7 @@
 description: Giacomo Debidda's services
 eleventyNavigation:
   key: Services
-  order: 1
+  order: 2
 layout: page.njk
 ogp:
   title: Services page
@@ -14,7 +14,7 @@ title: Services
 
 <p>Here are a few things I can help you with.</p>
 
-<ul class="flow post-list">
+<ul class="flow article-list">
   {% for service in collections.service | sort(attribute="data.title") %}
 
   <li class="flow">

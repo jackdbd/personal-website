@@ -9,11 +9,11 @@ const debug = defDebug(`11ty-config:collections`)
 
 const isUserDefinedTag = (tag) => {
   switch (tag) {
-    // this list should match the `filter` list in pages/posts-tagged-with-tag.njk
+    // this list should match the `filter` list in pages/articles-tagged-with-tag.njk
     case 'all':
+    case 'article':
+    case 'articles':
     case 'nav':
-    case 'post':
-    case 'posts':
       return false
     default:
       return true

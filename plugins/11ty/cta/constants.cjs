@@ -12,8 +12,7 @@ const DEFAULT_CTA = '<div class="cta"><p>Call to Action</p></div>'
 // const DEFAULT_XPATH_EXPRESSIONS = ['//article[1]']
 const DEFAULT_XPATH_EXPRESSIONS = []
 
-const DEFAULT_REGEX = new RegExp('^.*\\/posts\\/.*\\/.*\\.html$')
-// const DEFAULT_REGEX = /^.*\/posts\/.*\/.*\.html$/
+const DEFAULT_REGEX = new RegExp('^.*\\/articles\\/.*\\/.*\\.html$')
 
 const DEFAULT = {
   rules: [

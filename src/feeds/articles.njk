@@ -9,7 +9,7 @@ eleventyExcludeFromCollections: true
   <id>{{ permalink }}</id>
   <title>{{ metadata.author.name }}'s articles</title>
   <subtitle>My articles</subtitle>
-  <updated>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <updated>{{ collections.article | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
   <author>
     <name>{{ metadata.author.name }}</name>
     <email>{{ metadata.author.email }}</email>
@@ -17,7 +17,7 @@ eleventyExcludeFromCollections: true
   </author>
   <link href="{{ permalink }}" rel="self"/>
 
-  {%- for article in collections.post | reverse %}
+  {%- for article in collections.article | reverse %}
   {%- set absolute_url = article.url | absoluteUrl(metadata.url) %}
   <entry>
     <id>{{ absolute_url }}</id>
