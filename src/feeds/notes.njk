@@ -3,7 +3,7 @@ permalink: "{{ metadata.feeds.notes.href }}"
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet href="/assets/xsl/feed-talks.xsl" type="text/xsl"?>
+<?xml-stylesheet href="/assets/xsl/feed-notes.xsl" type="text/xsl"?>
 
 <feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ metadata.url }}">
   <id>{{ permalink }}</id>
@@ -22,7 +22,6 @@ eleventyExcludeFromCollections: true
   <entry>
     <id>{{ absolute_url }}</id>
     <link href="{{ absolute_url }}"/>
-    {# <title>{{ note.data.title }}</title> #}
     <title>{{ note.page.fileSlug }}</title>
     <published>{{ note.date | dateToRfc3339 }}</published>
     <updated>{{ note.date | dateToRfc3339 }}</updated>

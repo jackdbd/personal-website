@@ -3,13 +3,13 @@ permalink: "{{ metadata.feeds.articles.href }}"
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet href="/assets/xsl/feed-posts.xsl" type="text/xsl"?>
+<?xml-stylesheet href="/assets/xsl/feed-articles.xsl" type="text/xsl"?>
 
 <feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ metadata.url }}">
   <id>{{ permalink }}</id>
   <title>{{ metadata.author.name }}'s articles</title>
   <subtitle>My articles</subtitle>
-  <updated>{{ collections.article | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <updated>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
   <author>
     <name>{{ metadata.author.name }}</name>
     <email>{{ metadata.author.email }}</email>
@@ -17,18 +17,17 @@ eleventyExcludeFromCollections: true
   </author>
   <link href="{{ permalink }}" rel="self"/>
 
-  {%- for article in collections.article | reverse %}
+  {%- for article in collections.post | reverse %}
   {%- set absolute_url = article.url | absoluteUrl(metadata.url) %}
   <entry>
     <id>{{ absolute_url }}</id>
     <link href="{{ absolute_url }}"/>
-    {# <title>{{ article.data.title }}</title> #}
-    <title>{{ article.page.fileSlug }}</title>
+    <title>{{ article.data.title }}</title>
     <published>{{ article.date | dateToRfc3339 }}</published>
     <updated>{{ article.date | dateToRfc3339 }}</updated>
     <summary>{{ article.data.description }}</summary>
     <content type="html" xml:lang="{{ metadata.lang }}">
-      {{ article.content | htmlToAbsoluteUrls(absolute_url) }}
+      {{ article.templateContent | htmlToAbsoluteUrls(absolute_url) }}
     </content>
   </entry>
   {%- endfor %}
