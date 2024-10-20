@@ -10,7 +10,7 @@
     CLOUDINARY = builtins.readFile /run/secrets/cloudinary;
 
     # DEBUG = "Eleventy:UserConfig";
-    DEBUG = "11ty:data:*,11ty-plugin:*,-11ty-plugin:TTS:inject-audio-tags-into-html,Eleventy:EleventyErrorHandler,linkedin:*,reddit:*,script:*,stripe:*";
+    DEBUG = "11ty:data:*,11ty-plugin:*,-11ty-plugin:stripe:utils,-11ty-plugin:TTS:inject-audio-tags-into-html,Eleventy:EleventyErrorHandler,linkedin:*,reddit:*,script:*,stripe:*";
     # DEBUG = "script:*,Eleventy:EleventyErrorHandler,11ty-config:*,11ty-plugin:*,-11ty-plugin:TTS:inject-audio-tags-into-html";
     # DEBUG = "11ty-plugin-cloudinary:*,-11ty-plugin-cloudinary:transforms";
 
@@ -82,24 +82,11 @@
     # check-vcs-permalinks.enable = true;
     # cspell.enable = true;
     deadnix.enable = true;
-    # eslint.enable = true; # TODO: create config file, then enable
+    # eslint.enable = true; # TODO: how to I configure it?
     gptcommit.enable = true;
     # html-tidy.enable = true;
-    # hunspell.enable = true;
-    # lychee.enable = true;
-    markdownlint.enable = false;
-    mdl.enable = false;
-    # mkdocs-linkcheck.enable = true;
-    # prettier = {
-    #   enable = true;
-    #   settings = {
-    #     bracket-same-line = true;
-    #     no-semi = true;
-    #     single-quote = true;
-    #     trailing-comma = "none";
-    #   };
-    # };
-    # pretty-format-json.enable = true;
+
+    # markdownlint.enable = true;
 
     statix.enable = true;
 
