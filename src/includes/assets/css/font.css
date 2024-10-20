@@ -7,7 +7,8 @@
   font-display: swap;
   font-style: normal;
   font-weight: 400;
-  src: url('/assets/fonts/merriweather-v22-latin-regular.woff2') format('woff2'),
+  src:
+    url('/assets/fonts/merriweather-v22-latin-regular.woff2') format('woff2'),
     url('/assets/fonts/merriweather-v22-latin-regular.woff') format('woff');
 }
 
@@ -16,7 +17,8 @@
   font-display: swap;
   font-style: italic;
   font-weight: 400;
-  src: url('/assets/fonts/merriweather-v22-latin-italic.woff2') format('woff2'),
+  src:
+    url('/assets/fonts/merriweather-v22-latin-italic.woff2') format('woff2'),
     url('/assets/fonts/merriweather-v22-latin-italic.woff') format('woff');
 }
 
@@ -25,7 +27,8 @@
   font-display: swap;
   font-style: normal;
   font-weight: 700;
-  src: url('/assets/fonts/merriweather-v22-latin-700.woff2') format('woff2'),
+  src:
+    url('/assets/fonts/merriweather-v22-latin-700.woff2') format('woff2'),
     url('/assets/fonts/merriweather-v22-latin-700.woff') format('woff');
 }
 
@@ -34,8 +37,8 @@
   font-display: swap;
   font-style: italic;
   font-weight: 700;
-  src: url('/assets/fonts/merriweather-v22-latin-700italic.woff2')
-      format('woff2'),
+  src:
+    url('/assets/fonts/merriweather-v22-latin-700italic.woff2') format('woff2'),
     url('/assets/fonts/merriweather-v22-latin-700italic.woff') format('woff');
 }
 

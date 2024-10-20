@@ -1,0 +1,20 @@
+{
+  "name": "giacomodebidda-content",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Content for my website",
+  "author": {
+    "name": "Giacomo Debidda",
+    "url": "https://giacomodebidda.com/"
+  },
+  "scripts": {
+    "articles": "markserv articles",
+    "notes": "markserv notes",
+    "serve": "markserv ."
+  },
+  "dependencies": {
+    "markserv": "^1.17.4"
+  },
+  "devDependencies": {}
+}

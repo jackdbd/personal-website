@@ -189,7 +189,7 @@ title: Style Guide
           {% set humanDate = "14 Mar 2021" %}
           {% set machineDate = "2021-03-14 20:00" %}
           {% set readingTime = "123 min" %}
-          {% include "components/post-info.njk" %}
+          {% include "components/article-info.njk" %}
         </div>
       </li>
     </ul>
@@ -202,8 +202,8 @@ title: Style Guide
         <p>Some explanation</p>
         <div class="{{ vanillaContainer }}">
           {% set n = 3 %}
-          {% set posts = collections.post | reverse | limit(n) | reverse %}
-          {% include "components/post-list.njk" %}
+          {% set articles = collections.article | reverse | limit(n) | reverse %}
+          {% include "components/article-list.njk" %}
         </div>
       </li>
     </ul>
@@ -215,7 +215,7 @@ title: Style Guide
       <li class="styleguide__example">
         <p>Some explanation</p>
         <div class="{{ vanillaContainer }}">
-          {% include "components/post-footer.njk" %}
+          {% include "components/article-footer.njk" %}
         </div>
       </li>
     </ul>

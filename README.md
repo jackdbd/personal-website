@@ -58,15 +58,15 @@ Clone the repo:
 git clone git@github.com:jackdbd/personal-website.git
 ```
 
-This project should work on Node.js >=22.0.0.
+This project should work on Node.js >=20.0.0.
 
-> :information_source: **What's that `flake.nix`?**
+> :information_source: **What's that `devenv.nix`?**
 >
-> This project uses a [nix dev shell](https://fasterthanli.me/series/building-a-rust-service-with-nix/part-10) to define a virtual environment with all the necessary dependencies. Thanks to Nix and [this `.envrc` file](.envrc), you can activate this environment simply by entering the root directory of this repository (and waiting a few seconds).
+> This project uses [devenv](https://devenv.sh/) to create and manage a developer environment that has all the necessary dependencies. Thanks to [devenv's automatic shell activation](https://devenv.sh/automatic-shell-activation/), this environment is activated automatically when you enter the root directory of this repository (you will just have to wait a few seconds).
 >
->If you don't use Nix, you can safely ignore the `flake.nix` file in the repository root.
+> If you don't use Nix, you can safely ignore the `devenv.nix` file in the repository root.
 >
->In alternative to the Nix dev shell provided by this repository, you could use a Node.js version manager like [nvm](https://github.com/nvm-sh/nvm), [asdf](https://github.com/asdf-vm/asdf), or [volta](https://github.com/volta-cli/volta).
+> In alternative to the Nix dev shell provided by this repository, you could use a Node.js version manager like [nvm](https://github.com/nvm-sh/nvm), [asdf](https://github.com/asdf-vm/asdf), or [volta](https://github.com/volta-cli/volta).
 
 If you want to run scrips/tests that rely on [Playwright](https://playwright.dev/), you will also need to install/update the browsers it uses:
 
@@ -141,67 +141,66 @@ See [SECURITY.md](./SECURITY.md).
 
 ### Production dependencies
 
-This project has **53** `dependencies`.
+This project has **52** `dependencies`.
 
-| Package | Version |
-|---|---|
-| [@11ty/eleventy](https://www.npmjs.com/package/@11ty/eleventy) | `3.0.0-alpha.6` |
-| [@11ty/eleventy-fetch](https://www.npmjs.com/package/@11ty/eleventy-fetch) | `^4.0.1` |
-| [@11ty/eleventy-navigation](https://www.npmjs.com/package/@11ty/eleventy-navigation) | `^0.3.5` |
-| [@11ty/eleventy-plugin-rss](https://www.npmjs.com/package/@11ty/eleventy-plugin-rss) | `^1.2.0` |
-| [@11ty/eleventy-plugin-syntaxhighlight](https://www.npmjs.com/package/@11ty/eleventy-plugin-syntaxhighlight) | `^5.0.0` |
-| [@11ty/eleventy-plugin-webc](https://www.npmjs.com/package/@11ty/eleventy-plugin-webc) | `^0.11.2` |
-| [@11ty/is-land](https://www.npmjs.com/package/@11ty/is-land) | `^4.0.0` |
-| [@google-cloud/storage](https://www.npmjs.com/package/@google-cloud/storage) | `^7.10.2` |
-| [@google-cloud/text-to-speech](https://www.npmjs.com/package/@google-cloud/text-to-speech) | `^5.2.0` |
-| [@jackdbd/content-security-policy](https://www.npmjs.com/package/@jackdbd/content-security-policy) | `^3.0.0` |
-| [@jackdbd/eleventy-plugin-ensure-env-vars](https://www.npmjs.com/package/@jackdbd/eleventy-plugin-ensure-env-vars) | `^1.2.0` |
-| [@jackdbd/eleventy-plugin-telegram](https://www.npmjs.com/package/@jackdbd/eleventy-plugin-telegram) | `^2.2.0` |
-| [@jackdbd/eleventy-plugin-text-to-speech](https://www.npmjs.com/package/@jackdbd/eleventy-plugin-text-to-speech) | `3.1.0` |
-| [@jackdbd/hosting-utils](https://www.npmjs.com/package/@jackdbd/hosting-utils) | `^1.0.0` |
-| [@jackdbd/permissions-policy](https://www.npmjs.com/package/@jackdbd/permissions-policy) | `^1.0.0` |
-| [@thi.ng/transclude](https://www.npmjs.com/package/@thi.ng/transclude) | `^0.1.89` |
-| [autoprefixer](https://www.npmjs.com/package/autoprefixer) | `^10.4.19` |
-| [clean-css](https://www.npmjs.com/package/clean-css) | `^5.3.3` |
-| [cloudinary](https://www.npmjs.com/package/cloudinary) | `^2.2.0` |
-| [cssnano](https://www.npmjs.com/package/cssnano) | `^6.1.2` |
-| [debug](https://www.npmjs.com/package/debug) | `^4.3.4` |
-| [eleventy-plugin-broken-links](https://www.npmjs.com/package/eleventy-plugin-broken-links) | `^2.2.1` |
-| [eleventy-plugin-embed-cloudinary](https://www.npmjs.com/package/eleventy-plugin-embed-cloudinary) | `^1.0.2` |
-| [eleventy-plugin-embed-twitter](https://www.npmjs.com/package/eleventy-plugin-embed-twitter) | `^1.4.0` |
-| [eleventy-plugin-emoji](https://www.npmjs.com/package/eleventy-plugin-emoji) | `^1.1.0` |
-| [eleventy-plugin-helmet](https://www.npmjs.com/package/eleventy-plugin-helmet) | `^0.2.2` |
-| [eleventy-plugin-nesting-toc](https://www.npmjs.com/package/eleventy-plugin-nesting-toc) | `^1.3.0` |
-| [eleventy-plugin-reading-time](https://www.npmjs.com/package/eleventy-plugin-reading-time) | `^0.0.1` |
-| [eleventy-plugin-vimeo-embed](https://www.npmjs.com/package/eleventy-plugin-vimeo-embed) | `^1.3.8` |
-| [eleventy-plugin-youtube-embed](https://www.npmjs.com/package/eleventy-plugin-youtube-embed) | `^1.10.2` |
-| [esbuild](https://www.npmjs.com/package/esbuild) | `^0.20.2` |
-| [globby](https://www.npmjs.com/package/globby) | `^14.0.1` |
-| [html-minifier-terser](https://www.npmjs.com/package/html-minifier-terser) | `^7.2.0` |
-| [instant.page](https://www.npmjs.com/package/instant.page) | `^5.2.0` |
-| [luxon](https://www.npmjs.com/package/luxon) | `^3.4.4` |
-| [markdown-it](https://www.npmjs.com/package/markdown-it) | `^14.1.0` |
-| [markdown-it-anchor](https://www.npmjs.com/package/markdown-it-anchor) | `^8.6.7` |
-| [npm-run-all](https://www.npmjs.com/package/npm-run-all) | `^4.1.5` |
-| [pagefind](https://www.npmjs.com/package/pagefind) | `^1.1.0` |
-| [postcss](https://www.npmjs.com/package/postcss) | `^8.4.38` |
-| [postcss-cli](https://www.npmjs.com/package/postcss-cli) | `^11.0.0` |
-| [sanitize-html](https://www.npmjs.com/package/sanitize-html) | `^2.13.0` |
-| [slugify](https://www.npmjs.com/package/slugify) | `^1.6.6` |
-| [stripe](https://www.npmjs.com/package/stripe) | `^15.5.0` |
-| [tailwindcss](https://www.npmjs.com/package/tailwindcss) | `^3.4.3` |
-| [terser](https://www.npmjs.com/package/terser) | `^5.31.0` |
-| [tsm](https://www.npmjs.com/package/tsm) | `^2.3.0` |
-| [workbox-build](https://www.npmjs.com/package/workbox-build) | `^7.1.0` |
-| [workbox-core](https://www.npmjs.com/package/workbox-core) | `^7.1.0` |
-| [workbox-expiration](https://www.npmjs.com/package/workbox-expiration) | `^7.1.0` |
-| [workbox-precaching](https://www.npmjs.com/package/workbox-precaching) | `^7.1.0` |
-| [workbox-routing](https://www.npmjs.com/package/workbox-routing) | `^7.1.0` |
-| [zod](https://www.npmjs.com/package/zod) | `^3.23.5` |
+| Package                                                                                                            | Version    |
+| ------------------------------------------------------------------------------------------------------------------ | ---------- |
+| [@11ty/eleventy](https://www.npmjs.com/package/@11ty/eleventy)                                                     | `^3.0.0`   |
+| [@11ty/eleventy-fetch](https://www.npmjs.com/package/@11ty/eleventy-fetch)                                         | `^4.0.1`   |
+| [@11ty/eleventy-navigation](https://www.npmjs.com/package/@11ty/eleventy-navigation)                               | `^0.3.5`   |
+| [@11ty/eleventy-plugin-rss](https://www.npmjs.com/package/@11ty/eleventy-plugin-rss)                               | `^2.0.2`   |
+| [@11ty/eleventy-plugin-syntaxhighlight](https://www.npmjs.com/package/@11ty/eleventy-plugin-syntaxhighlight)       | `^5.0.0`   |
+| [@11ty/eleventy-plugin-webc](https://www.npmjs.com/package/@11ty/eleventy-plugin-webc)                             | `^0.11.2`  |
+| [@11ty/is-land](https://www.npmjs.com/package/@11ty/is-land)                                                       | `^4.0.0`   |
+| [@google-cloud/storage](https://www.npmjs.com/package/@google-cloud/storage)                                       | `^7.13.0`  |
+| [@google-cloud/text-to-speech](https://www.npmjs.com/package/@google-cloud/text-to-speech)                         | `^5.5.0`   |
+| [@jackdbd/content-security-policy](https://www.npmjs.com/package/@jackdbd/content-security-policy)                 | `^3.0.0`   |
+| [@jackdbd/eleventy-plugin-ensure-env-vars](https://www.npmjs.com/package/@jackdbd/eleventy-plugin-ensure-env-vars) | `^1.2.0`   |
+| [@jackdbd/eleventy-plugin-telegram](https://www.npmjs.com/package/@jackdbd/eleventy-plugin-telegram)               | `^2.2.0`   |
+| [@jackdbd/eleventy-plugin-text-to-speech](https://www.npmjs.com/package/@jackdbd/eleventy-plugin-text-to-speech)   | `^3.2.0`   |
+| [@jackdbd/hosting-utils](https://www.npmjs.com/package/@jackdbd/hosting-utils)                                     | `^1.0.0`   |
+| [@jackdbd/permissions-policy](https://www.npmjs.com/package/@jackdbd/permissions-policy)                           | `^1.0.0`   |
+| [@thi.ng/transclude](https://www.npmjs.com/package/@thi.ng/transclude)                                             | `^0.1.108` |
+| [autoprefixer](https://www.npmjs.com/package/autoprefixer)                                                         | `^10.4.20` |
+| [clean-css](https://www.npmjs.com/package/clean-css)                                                               | `^5.3.3`   |
+| [cloudinary](https://www.npmjs.com/package/cloudinary)                                                             | `^2.5.1`   |
+| [cssnano](https://www.npmjs.com/package/cssnano)                                                                   | `^7.0.6`   |
+| [debug](https://www.npmjs.com/package/debug)                                                                       | `^4.3.7`   |
+| [eleventy-plugin-embed-cloudinary](https://www.npmjs.com/package/eleventy-plugin-embed-cloudinary)                 | `^1.0.2`   |
+| [eleventy-plugin-embed-twitter](https://www.npmjs.com/package/eleventy-plugin-embed-twitter)                       | `^1.4.1`   |
+| [eleventy-plugin-emoji](https://www.npmjs.com/package/eleventy-plugin-emoji)                                       | `^1.1.0`   |
+| [eleventy-plugin-helmet](https://www.npmjs.com/package/eleventy-plugin-helmet)                                     | `^0.2.2`   |
+| [eleventy-plugin-nesting-toc](https://www.npmjs.com/package/eleventy-plugin-nesting-toc)                           | `^1.3.0`   |
+| [eleventy-plugin-reading-time](https://www.npmjs.com/package/eleventy-plugin-reading-time)                         | `^0.0.1`   |
+| [eleventy-plugin-vimeo-embed](https://www.npmjs.com/package/eleventy-plugin-vimeo-embed)                           | `^1.3.8`   |
+| [eleventy-plugin-youtube-embed](https://www.npmjs.com/package/eleventy-plugin-youtube-embed)                       | `^1.11.0`  |
+| [esbuild](https://www.npmjs.com/package/esbuild)                                                                   | `^0.24.0`  |
+| [globby](https://www.npmjs.com/package/globby)                                                                     | `^14.0.2`  |
+| [html-minifier-terser](https://www.npmjs.com/package/html-minifier-terser)                                         | `^7.2.0`   |
+| [instant.page](https://www.npmjs.com/package/instant.page)                                                         | `^5.2.0`   |
+| [luxon](https://www.npmjs.com/package/luxon)                                                                       | `^3.5.0`   |
+| [markdown-it](https://www.npmjs.com/package/markdown-it)                                                           | `^14.1.0`  |
+| [markdown-it-anchor](https://www.npmjs.com/package/markdown-it-anchor)                                             | `^9.2.0`   |
+| [npm-run-all](https://www.npmjs.com/package/npm-run-all)                                                           | `^4.1.5`   |
+| [pagefind](https://www.npmjs.com/package/pagefind)                                                                 | `^1.1.1`   |
+| [postcss](https://www.npmjs.com/package/postcss)                                                                   | `^8.4.47`  |
+| [postcss-cli](https://www.npmjs.com/package/postcss-cli)                                                           | `^11.0.0`  |
+| [sanitize-html](https://www.npmjs.com/package/sanitize-html)                                                       | `^2.13.1`  |
+| [slugify](https://www.npmjs.com/package/slugify)                                                                   | `^1.6.6`   |
+| [stripe](https://www.npmjs.com/package/stripe)                                                                     | `^17.2.1`  |
+| [tailwindcss](https://www.npmjs.com/package/tailwindcss)                                                           | `^3.4.14`  |
+| [terser](https://www.npmjs.com/package/terser)                                                                     | `^5.36.0`  |
+| [tsm](https://www.npmjs.com/package/tsm)                                                                           | `^2.3.0`   |
+| [workbox-build](https://www.npmjs.com/package/workbox-build)                                                       | `^7.1.1`   |
+| [workbox-core](https://www.npmjs.com/package/workbox-core)                                                         | `^7.1.0`   |
+| [workbox-expiration](https://www.npmjs.com/package/workbox-expiration)                                             | `^7.1.0`   |
+| [workbox-precaching](https://www.npmjs.com/package/workbox-precaching)                                             | `^7.1.0`   |
+| [workbox-routing](https://www.npmjs.com/package/workbox-routing)                                                   | `^7.1.0`   |
+| [zod](https://www.npmjs.com/package/zod)                                                                           | `^3.23.8`  |
 
 ### Development dependencies
 
-This project has **21** `devDependencies`: [@hint/hint-performance-budget](https://www.npmjs.com/package/@hint/hint-performance-budget), [@jackdbd/checks](https://www.npmjs.com/package/@jackdbd/checks), [@types/yargs](https://www.npmjs.com/package/@types/yargs), [form-data](https://www.npmjs.com/package/form-data), [himalaya](https://www.npmjs.com/package/himalaya), [hint](https://www.npmjs.com/package/hint), [lighthouse](https://www.npmjs.com/package/lighthouse), [linkedin-api-client](https://www.npmjs.com/package/linkedin-api-client), [openpgp](https://www.npmjs.com/package/openpgp), [playwright](https://www.npmjs.com/package/playwright), [playwright-start](https://www.npmjs.com/package/playwright-start), [prettier](https://www.npmjs.com/package/prettier), [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss), [pretty-error](https://www.npmjs.com/package/pretty-error), [serve](https://www.npmjs.com/package/serve), [snoowrap](https://www.npmjs.com/package/snoowrap), [taze](https://www.npmjs.com/package/taze), [typescript](https://www.npmjs.com/package/typescript), [uuid](https://www.npmjs.com/package/uuid), [wrangler](https://www.npmjs.com/package/wrangler), [yargs](https://www.npmjs.com/package/yargs).
+This project has **19** `devDependencies`: [@hint/hint-performance-budget](https://www.npmjs.com/package/@hint/hint-performance-budget), [@jackdbd/checks](https://www.npmjs.com/package/@jackdbd/checks), [@types/yargs](https://www.npmjs.com/package/@types/yargs), [form-data](https://www.npmjs.com/package/form-data), [himalaya](https://www.npmjs.com/package/himalaya), [hint](https://www.npmjs.com/package/hint), [lighthouse](https://www.npmjs.com/package/lighthouse), [linkedin-api-client](https://www.npmjs.com/package/linkedin-api-client), [openpgp](https://www.npmjs.com/package/openpgp), [playwright-chromium](https://www.npmjs.com/package/playwright-chromium), [playwright-start](https://www.npmjs.com/package/playwright-start), [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss), [pretty-error](https://www.npmjs.com/package/pretty-error), [serve](https://www.npmjs.com/package/serve), [snoowrap](https://www.npmjs.com/package/snoowrap), [taze](https://www.npmjs.com/package/taze), [typescript](https://www.npmjs.com/package/typescript), [uuid](https://www.npmjs.com/package/uuid), [yargs](https://www.npmjs.com/package/yargs).
 
 ## Troubleshooting
 

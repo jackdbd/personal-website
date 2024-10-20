@@ -1,5 +1,10 @@
 {
-  // https://github.com/prettier/prettier-vscode#prettierconfigpath
-  "prettier.configPath": "config/prettier.cjs",
+  "files.exclude": {
+    ".cache-cloudinary/": true,
+    ".cache-webmentions/": true,
+    ".devenv/": true,
+    ".direnv/": true
+  },
+  "prettier.configPath": "content/prettier.config.js",
   "prettier.requireConfig": true
 }

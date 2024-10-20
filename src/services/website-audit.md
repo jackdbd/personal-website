@@ -7,6 +7,7 @@ tags:
   - web performance
   - WebPageTest
 ---
+
 I can audit your website and write a report about my findings.
 
 The report will include recommendations and actionable advice on ⚡ **performance**, 🛡️ **security** and 🌐 **SEO**.
@@ -23,7 +24,7 @@ I just need your email address and the URL of the website you want me to audit.
   {% endrenderTemplate %}
 </div>
 
-🤔 *Still not sure?* Here is an [article I have recently written](https://www.giacomodebidda.com/posts/performance-audit-of-an-italian-news-website/) about web performance.
+🤔 _Still not sure?_ Here is an [article I have recently written](https://www.giacomodebidda.com/articles/performance-audit-of-an-italian-news-website/) about web performance.
 
 <div>
   {% renderTemplate "webc" %}

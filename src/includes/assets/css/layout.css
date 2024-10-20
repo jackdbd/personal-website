@@ -28,12 +28,12 @@
   margin: var(--cluster-spacing);
 }
 
-.cluster[data-align='start'] {
+.cluster[data-align="start"] {
   justify-content: flex-start;
   margin-left: 0;
 }
 
-.cluster[data-align='end'] {
+.cluster[data-align="end"] {
   justify-content: flex-end;
   margin-right: 0;
 }
@@ -66,7 +66,7 @@
  *
  * How many characters per line?
  * Some studies say that the optimal line length for body text is 50–60
- * characters per line, including spaces. Oher sources suggest that up to 75
+ * characters per line, including spaces. Other sources suggest that up to 75
  * characters is acceptable.
  * https://baymard.com/blog/line-length-readability
  * This website suggests 50-75 characters per line on desktop, and 30-50

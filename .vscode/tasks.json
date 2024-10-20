@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "prebuild",
+      "type": "shell",
+      "command": "node ${workspaceFolder}/scripts/prebuild.mjs",
+      "problemMatcher": []
+    }
+  ]
+}

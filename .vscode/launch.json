@@ -2,11 +2,15 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug 11ty website build",
+      "name": "Debug dev:11ty",
       "type": "node-terminal",
       "request": "launch",
       "command": "npm run dev:11ty",
       "cwd": "${workspaceRoot}",
+      "env": {
+        "DEBUG": "11ty:data:*,script:prebuild,Eleventy:EleventyErrorHandler"
+      },
+      "preLaunchTask": "prebuild",
       "serverReadyAction": {
         "pattern": "started server on .+, url: (https?://.+)",
         "uriFormat": "%s",
@@ -14,7 +18,7 @@
       }
     },
     {
-      "name": "Debug script security-txt",
+      "name": "Debug security-txt.mjs",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/scripts/security-txt.mjs",

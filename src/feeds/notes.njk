@@ -1,0 +1,35 @@
+---
+permalink: "{{ metadata.feeds.notes.href }}"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/assets/xsl/feed-notes.xsl" type="text/xsl"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ metadata.url }}">
+  <id>{{ permalink }}</id>
+  <title>{{ metadata.author.name }}'s notes</title>
+  <subtitle>My notes</subtitle>
+  <updated>{{ collections.note | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <author>
+    <name>{{ metadata.author.name }}</name>
+    <email>{{ metadata.author.email }}</email>
+    <uri>{{ metadata.url }}</uri>
+  </author>
+  <link href="{{ permalink }}" rel="self"/>
+
+  {%- for note in collections.note | reverse %}
+  {# {{ note | log }} #}
+  {%- set absolute_url = note.url | absoluteUrl(metadata.url) %}
+  <entry>
+    <id>{{ absolute_url }}</id>
+    <link href="{{ absolute_url }}"/>
+    <title>{{ note.page.fileSlug }}</title>
+    <published>{{ note.date | dateToRfc3339 }}</published>
+    <updated>{{ note.date | dateToRfc3339 }}</updated>
+    <summary>{{ note.content }}</summary>
+    <content type="html" xml:lang="{{ metadata.lang }}">
+      {{ note.content }}
+    </content>
+  </entry>
+  {%- endfor %}
+</feed>

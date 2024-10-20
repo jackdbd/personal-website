@@ -1,0 +1,29 @@
+---
+description: Giacomo Debidda's likes
+eleventyNavigation:
+  key: Likes
+  order: 4
+layout: page.njk
+permalink: "likes/index.html"
+section: likes
+title: Likes
+---
+{%- block pagecontent %}
+<ul>
+  {%- for like in collections.like %}
+    {# {{ like | log }} #}
+    {% set rfc3339 = like.date | dateToRfc3339 %}
+    {% set yyyy_mm_dd = like.date | machineDateJS %}
+    <li>
+      <span>
+        <time datetime="{{ rfc3339 }}">
+          <strong>{{ yyyy_mm_dd }}</strong>
+        </time>
+        &nbsp;
+        <a href="{{ like.url | url }}">{{ like.fileSlug }}</a>
+      </span>
+    </li>
+  {% endfor -%}
+</ul>
+<p><a href="/">Home</a></p>
+{% endblock pagecontent -%}

@@ -119,9 +119,11 @@ const main = async () => {
     path.join(SITE_ROOT, '404.html'),
     path.join(SITE_ROOT, 'index.html'),
     path.join(SITE_ROOT, 'about', 'index.html'),
-    path.join(SITE_ROOT, 'blog', 'index.html'),
+    path.join(SITE_ROOT, 'articles', 'index.html'),
     path.join(SITE_ROOT, 'contact', 'index.html'),
-    path.join(SITE_ROOT, 'projects', 'index.html')
+    path.join(SITE_ROOT, 'notes', 'index.html'),
+    path.join(SITE_ROOT, 'projects', 'index.html'),
+    path.join(SITE_ROOT, 'services', 'index.html')
   ]
 
   const popularHtmlPages = []

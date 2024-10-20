@@ -1,0 +1,14 @@
+---
+layout: page.njk
+---
+{%- block content %}
+<article>
+  {{ content | safe }}
+  {% if location %}
+    <pre>{{ location | dump | safe }}</pre>
+  {% endif %}
+  <p>Created on: <time datetime="{{ date }}">{{ date }}</time></p>
+</article>
+
+<p>See <a href="/notes">all notes</a>.</p>
+{% endblock content -%}

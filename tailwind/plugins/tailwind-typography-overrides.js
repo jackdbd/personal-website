@@ -52,7 +52,7 @@ const typography = (theme) => {
         // the markup.
         // https://github.com/tailwindlabs/tailwindcss/discussions/2119
         // https://github.com/sgrowe/tailwind-pseudo-elements
-        '.post-list > li::before': {
+        '.article-list > li::before': {
           content: '""'
         }
       }
