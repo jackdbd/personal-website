@@ -5,6 +5,6 @@
     ".devenv/": true,
     ".direnv/": true
   },
-  "prettier.configPath": "config/prettier.js",
+  "prettier.configPath": "content/prettier.config.js",
   "prettier.requireConfig": true
 }

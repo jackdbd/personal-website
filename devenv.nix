@@ -84,24 +84,23 @@
     deadnix.enable = true;
     # eslint.enable = true; # TODO: create config file, then enable
     gptcommit.enable = true;
-    html-tidy.enable = true;
+    # html-tidy.enable = true;
     # hunspell.enable = true;
     # lychee.enable = true;
-    # markdownlint.enable = true;
-    # mdl.enable = true;
+    markdownlint.enable = false;
+    mdl.enable = false;
     # mkdocs-linkcheck.enable = true;
-    prettier = {
-      enable = true;
-      settings = {
-        bracket-same-line = true;
-        no-semi = true;
-        single-quote = true;
-        trailing-comma = "none";
-      };
-    };
+    # prettier = {
+    #   enable = true;
+    #   settings = {
+    #     bracket-same-line = true;
+    #     no-semi = true;
+    #     single-quote = true;
+    #     trailing-comma = "none";
+    #   };
+    # };
     # pretty-format-json.enable = true;
 
-    shellcheck.enable = true;
     statix.enable = true;
 
     typos = {
