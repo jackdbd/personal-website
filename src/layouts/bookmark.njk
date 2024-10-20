@@ -1,0 +1,13 @@
+---
+layout: page.njk
+---
+{%- block content %}
+<article>
+  {{ content | safe }}
+  <p>Category: {{ category }}</p>
+  <p>Bookmark of: <a href="{{ bookmarkOf }}">{{ bookmarkOf }}</a></p>
+  <p>Bookmarked on: <time datetime="{{ date }}">{{ date }}</time></p>
+</article>
+
+<p>See <a href="/bookmarks">all bookmarks</a>.</p>
+{% endblock content -%}

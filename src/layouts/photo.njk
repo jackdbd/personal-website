@@ -1,0 +1,23 @@
+---
+layout: page.njk
+---
+{%- block content %}
+<article>
+  {{ photo | log }}
+  {% if category %}
+    <pre>{{ category | dump | safe }}</pre>
+  {% endif %}
+  {% if location %}
+    <pre>{{ location | dump | safe }}</pre>
+  {% endif %}
+  <figure class="h-entry">
+    <img class="u-photo" src="{{ photo.url }}" alt="{{ photo.alt }}">
+    <figcaption>
+      <p class="p-content">{{ content | safe }}</p>
+      <p>Published on <time class="dt-published" datetime="{{ date }}">{{ date }}</time> by <a href="/" class="u-author">me</a>.
+    </figcaption>
+  </figure>
+</article>
+
+<p>See <a href="/photos">all photos</a>.</p>
+{% endblock content -%}
