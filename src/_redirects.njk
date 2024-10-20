@@ -34,7 +34,7 @@ permalink: /_redirects
 {{ movedPermanently }}
 {%- endfor -%}
 {%- for slug in slugs -%}
-{%- set oldPath = ["/posts", slug] | join -%}
+{%- set oldPath = ["/posts/", slug] | join -%}
 {%- set newPath = ["/articles/", slug] | join -%}
 {%- set movedPermanently = [oldPath, " ", newPath, " ", 301] | join -%}
 {# {{ movedPermanently | log }} #}
