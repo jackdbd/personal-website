@@ -31,7 +31,7 @@ jobs:
         run: echo "$GITHUB_EVENT"
       - name: 💬 Notify Telegram of workflow run FAILURE
         # https://github.com/appleboy/telegram-action
-        uses: appleboy/telegram-action@v0.1.1
+        uses: appleboy/telegram-action@v1
         # This is a container action, so it must run on Linux (it would fail if
         # `runs-on` is either `windows-latest` or `macOS-latest`)
         # https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action#introduction
@@ -56,7 +56,7 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: 💬 Notify Telegram of workflow run SUCCESS
-        uses: appleboy/telegram-action@v0.1.1
+        uses: appleboy/telegram-action@v1
         with:
           to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
           token: ${{ fromJSON(secrets.TELEGRAM).token }}

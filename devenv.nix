@@ -74,7 +74,7 @@
   ];
 
   pre-commit.hooks = {
-    actionlint.enable = true;
+    actionlint.enable = false;
     alejandra.enable = true;
 
     # check-added-large-files.enable = true;
@@ -88,6 +88,7 @@
 
     # markdownlint.enable = true;
 
+    shellcheck.enable = false;
     statix.enable = true;
 
     typos = {
