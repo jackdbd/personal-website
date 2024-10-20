@@ -24,10 +24,6 @@ const feeds = {
     href: '/feeds/notes.xml',
     title: "Giacomo Debidda's notes"
   },
-  posts: {
-    href: '/feeds/posts.xml',
-    title: "Giacomo Debidda's blog posts"
-  },
   talks: {
     href: '/feeds/talks.xml',
     title: "Giacomo Debidda's talks"
