@@ -123,7 +123,7 @@
       cat .git/filter-repo/analysis/blob-shas-and-paths.txt | head -n 7
     '';
     pull-content.exec = ''
-      git-subrepo pull content
+      git-subrepo pull content --force
       git-subrepo status
     '';
     repo-size.exec = ''
