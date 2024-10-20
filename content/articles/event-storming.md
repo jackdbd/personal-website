@@ -1,12 +1,11 @@
 ---
-date: '2020-09-11T12:00:00.000Z'
+date: "2020-09-11T12:00:00.000Z"
 tags:
   - methodology
   - microservices
   - domain-driven design
 title: Event Storming, simplified
 ---
-
 The first time I've heard about Event Storming was when I watched the excellent talk [Designing event-first microservices](https://www.infoq.com/presentations/microservices-events-first-design/) by Jonas Bonér, creator of the [Akka](https://github.com/akka/akka) project.
 
 Event Storming is a workshop-based method that you can employ when designing a new system or product. You run this workshop before developing any feature. You gather engineers, domain experts and decision makers, and you make them write post-it notes where they write **domain events**.
@@ -45,7 +44,7 @@ I don't think that these components are really necessary though. Or at least the
 
 **External System**. I think we should consider third-party service providers as just another actor. In fact, in a microservice architecture there should be no difference between a service implemented internally in our company and a service from a third-party provider: both services are opaque to us and we can communicate with them only via their public APIs.
 
-**Business Process**. Again, a business process _processes commands_, so I think it's fair to view it as just another actor.
+**Business Process**. Again, a business process *processes commands*, so I think it's fair to view it as just another actor.
 
 **User**. Sure, it can be valuable to identify users of our system. But users execute commands, so they are just a particular kind of actors.
 

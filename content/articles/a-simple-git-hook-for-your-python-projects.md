@@ -1,5 +1,5 @@
 ---
-date: '2017-09-10T21:30:03.284Z'
+date: "2017-09-10T21:30:03.284Z"
 tags:
   - git
 title: A simple git hook for your Python projects

@@ -1,5 +1,5 @@
 ---
-date: '2018-09-01T08:00:03.284Z'
+date: "2018-09-01T08:00:03.284Z"
 tags:
   - pandas
   - Python
@@ -14,7 +14,7 @@ The biggest Excel file was ~7MB and contained a single worksheet with ~100k line
 
 The solution was to read the file in chunks. The `pd.read_excel` function doesn't have a cursor like `pd.read_sql`, so I had to implement this logic manually. Here is what I did:
 
-```python
+``` python
 import os
 import pandas as pd
 

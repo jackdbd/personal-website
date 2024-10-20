@@ -1,5 +1,5 @@
 ---
-date: '2017-10-13T19:30:03.284Z'
+date: "2017-10-13T19:30:03.284Z"
 tags:
   - D3.js
   - ES6
@@ -63,7 +63,7 @@ const d3 = Object.assign(
     format,
     scaleLinear,
     legendColor,
-    lineChunked
+    lineChunked,
   },
   request
 )

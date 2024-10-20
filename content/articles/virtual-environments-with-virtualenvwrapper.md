@@ -1,5 +1,5 @@
 ---
-date: '2016-12-11'
+date: "2016-12-11"
 tags:
   - Python
   - virtual environment
@@ -42,8 +42,8 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 Thanks to [this answer on askubuntu](https://askubuntu.com/a/121075) I found out that this difference is due to the different access modality:
 
-- on your local machine you are accessing the console in interactive, non-login mode, and the `~/.bashrc` file will be sourced;
-- on a remote server (e.g. a DigitalOcean droplet) via SSH you are accessing the console in interactive, login mode, and the `~/.bash_profile` file will be sourced.
+* on your local machine you are accessing the console in interactive, non-login mode, and the `~/.bashrc` file will be sourced;
+* on a remote server (e.g. a DigitalOcean droplet) via SSH you are accessing the console in interactive, login mode, and the `~/.bash_profile` file will be sourced.
 
 If you want to know more about these bash files, see [here](https://stackoverflow.com/questions/415403/whats-the-difference-between-bashrc-bash-profile-and-environment).
 

@@ -1,5 +1,5 @@
 ---
-date: '2017-07-28T23:12:03.284Z'
+date: "2017-07-28T23:12:03.284Z"
 tags:
   - Python
   - virtual environment
@@ -168,7 +168,8 @@ Now that all dependencies are locked, let's have a look at the `Pipfile.lock` fi
 {
   "_meta": {
     "hash": {
-      "sha256": "a770116c27db7e68723c431e7a00bc50e32d6ae6c719998e01a332da646757b6"
+      "sha256":
+        "a770116c27db7e68723c431e7a00bc50e32d6ae6c719998e01a332da646757b6"
     },
     "requires": {},
     "sources": [

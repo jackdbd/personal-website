@@ -1,5 +1,5 @@
 ---
-date: '2017-03-13'
+date: "2017-03-13"
 tags:
   - Python
   - tests
@@ -77,9 +77,9 @@ It takes less than 2 minutes to read the [documentation](https://ddt.readthedocs
 
 The main reason why I like DDT is that it's very easy to use: just decorate a test class with the `@ddt` decorator, and every test case you want with one of the decorators provided by this module. Here are the decorators available:
 
-- `@data`: contains as many arguments as the values you want to feed to the test. This values can be numbers, strings, tuples, etc. In the case of tuples, a cool feature is that you can `@unpack` them.
-- `@file_data`: loads the test data from a JSON or YAML file.
-- `@idata`: generates a new data sample from a generator function you defined somewhere in the code. (At this moment this decorator is not mentioned in the documentation).
+* `@data`: contains as many arguments as the values you want to feed to the test. This values can be numbers, strings, tuples, etc. In the case of tuples, a cool feature is that you can `@unpack` them.
+* `@file_data`: loads the test data from a JSON or YAML file.
+* `@idata`: generates a new data sample from a generator function you defined somewhere in the code. (At this moment this decorator is not mentioned in the documentation).
 
 Here is an example with a generator function and `@idata`:
 

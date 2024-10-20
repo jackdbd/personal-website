@@ -1,5 +1,5 @@
 ---
-date: '2017-03-13'
+date: "2017-03-13"
 tags:
   - design patterns
   - Python

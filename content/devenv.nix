@@ -8,6 +8,7 @@
   env = {};
 
   languages = {
+    javascript.enable = true;
     nix.enable = true;
   };
 
@@ -31,6 +32,16 @@
 
     # This is certainly useful, but there so many linting errors in my files...
     # markdownlint.enable = true;
+
+    prettier = {
+      enable = true;
+      settings = {
+        bracket-same-line = true;
+        no-semi = true;
+        single-quote = true;
+        trailing-comma = "none";
+      };
+    };
 
     statix.enable = true;
 

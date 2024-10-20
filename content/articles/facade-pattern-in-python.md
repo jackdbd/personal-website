@@ -1,5 +1,5 @@
 ---
-date: '2016-11-26T21:12:03.284Z'
+date: "2016-11-26T21:12:03.284Z"
 tags:
   - design patterns
   - Python

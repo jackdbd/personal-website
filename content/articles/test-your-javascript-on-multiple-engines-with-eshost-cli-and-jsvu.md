@@ -1,5 +1,5 @@
 ---
-date: '2021-05-07T17:00:03.284Z'
+date: "2021-05-07T17:00:03.284Z"
 description: Testing your code on multiple JavaScript engines can be an effective way to understand how to write more performant libraries and applications.
 tags:
   - CLI
@@ -7,8 +7,7 @@ tags:
   - tests
 title: Test your JavaScript on multiple engines with eshost-cli and jsvu
 ---
-
-JavaScript engines are complex software components that optimize and run your JavaScript. Testing your code on multiple engines can be an effective way to understand how to write more performant libraries and applications. This is true no matter whether you are developing for the browser, Node.js, Deno, or for any other JavaScript runtime.
+JavaScript engines are complex software components that optimize and run your JavaScript. Testing your code on multiple engines can be an effective way to understand how to write more performant libraries and applications. This is true no matter whether you are developing  for the browser, Node.js, Deno, or for any other JavaScript runtime.
 
 ## Install JS engines with jsvu
 
@@ -153,8 +152,8 @@ Write the JavaScript you want to test...
 
 ```js
 // test.js
-const x = 42
-console.log(`The answer is ${x}`)
+const x = 42;
+console.log(`The answer is ${x}`);
 ```
 
 ...then run eshost-cli to evaluate it:

@@ -1,9 +1,9 @@
 ---
-date: '2017-04-15'
+date: "2017-04-15"
 tags:
   - design patterns
   - Python
-title: 'MVC pattern in Python: Dataset'
+title: "MVC pattern in Python: Dataset"
 ---
 
 This is the **third** article of a series of blog posts related to the MVC pattern. In the first article we saw how to divide business logic, presentation layer and user interaction into three components: Model, View and Controller. Last time we replaced the Model without touching a single line of code neither in the View, nor in the Controller.

@@ -1,5 +1,5 @@
 ---
-date: '2024-02-07T21:30:00.000Z'
+date: "2024-02-07T21:30:00.000Z"
 description: How to run Playwright e2e tests on NixOS.
 ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1707340475/shared-libraries-playwright_ujlh1x.png
@@ -12,7 +12,6 @@ tags:
   - tests
 title: Playwright on NixOS
 ---
-
 I have been using NixOS for a few months now, and while it's awesome to have an immutable configuration for my laptop, it's not always easy to setup a development environment with all the necessary dependencies.
 
 In this post I will show you how to get [Playwright](https://playwright.dev/) to work in a Node.js project.
@@ -238,6 +237,6 @@ use flake
 There is no need to set `PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = true` in this case, since there are no dynamic dependencies to check (because the chromium binary we specified in `executablePath` is a static executable).
 {% endcallout %}
 
-I have to admit I haven’t quite figure out how to work with Node.js projects in a _purely nix way_, so for now I create nix shells which are **impure** and require to install npm dependencies by manually typing `npm install` the first time.
+I have to admit I haven’t quite figure out how to work with Node.js projects in a *purely nix way*, so for now I create nix shells which are **impure** and require to install npm dependencies by manually typing `npm install` the first time.
 
-_Originally [posted in the NixOS forum](https://discourse.nixos.org/t/running-playwright-tests/25655/12)._
+*Originally [posted in the NixOS forum](https://discourse.nixos.org/t/running-playwright-tests/25655/12).*

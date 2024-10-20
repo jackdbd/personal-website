@@ -1,5 +1,5 @@
 ---
-date: '2017-03-13'
+date: "2017-03-13"
 tags:
   - postgreSQL
 title: First steps with PostgreSQL
@@ -29,15 +29,15 @@ pip install psycopg2
 
 Here are some useful commands when using the `psql` shell:
 
-- **\du** list all roles (namely the users) and their privileges;
-- **\l** list all databases, their owners and access privileges;
-- **\c [DB NAME]** connect to the **[DB NAME]** database with the user currently logged in;
-- **\d** list all the tables of the database you are currently connected to;
-- **\d [TABLE NAME]** show the schema of the table **[TABLE NAME]**, of the database you are currently connected to;
-- **\h** help on SQL commands;
-- **\?** help on psql commands;
-- **\conninfo** show some information about the current database connection (db name and user name);
-- **\q** exit the psql shell.
+* **\du** list all roles (namely the users) and their privileges;
+* **\l** list all databases, their owners and access privileges;
+* **\c [DB NAME]** connect to the **[DB NAME]** database with the user currently logged in;
+* **\d** list all the tables of the database you are currently connected to;
+* **\d [TABLE NAME]** show the schema of the table **[TABLE NAME]**, of the database you are currently connected to;
+* **\h** help on SQL commands;
+* **\?** help on psql commands;
+* **\conninfo** show some information about the current database connection (db name and user name);
+* **\q** exit the psql shell.
 
 ## Create a new user (aka role)
 
@@ -146,6 +146,6 @@ DROP USER test_user;
 
 Here are some additional resources:
 
-- [psql](https://www.postgresguide.com/utilities/psql/)
-- [How to secure PostgreSQL on a Ubuntu VPS](https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps)
-- [backup and restore postgreSQL databases with Barman](https://www.digitalocean.com/community/tutorials/how-to-back-up-restore-and-migrate-postgresql-databases-with-barman-on-centos-7)
+* [psql](https://www.postgresguide.com/utilities/psql/)
+* [How to secure PostgreSQL on a Ubuntu VPS](https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps)
+* [backup and restore postgreSQL databases with Barman](https://www.digitalocean.com/community/tutorials/how-to-back-up-restore-and-migrate-postgresql-databases-with-barman-on-centos-7)

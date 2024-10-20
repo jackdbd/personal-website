@@ -1,5 +1,5 @@
 ---
-date: '2017-08-07T20:12:03.284Z'
+date: "2017-08-07T20:12:03.284Z"
 tags:
   - invoke
   - Python
@@ -221,8 +221,8 @@ And replace `VS_CODE_SETTINGS_HERE` with something like this:
 
 ```json
 {
-  "editor.rulers": [80, 100],
-  "python.pythonPath": "{venv_path}"
+    "editor.rulers": [80, 100],
+    "python.pythonPath": "{venv_path}"
 }
 ```
 

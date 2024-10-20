@@ -1,9 +1,9 @@
 ---
-date: '2017-04-02'
+date: "2017-04-02"
 tags:
   - design patterns
   - Python
-title: 'MVC pattern in Python: Introduction and BasicModel'
+title: "MVC pattern in Python: Introduction and BasicModel"
 ---
 
 If you have ever worked with Graphical User Interfaces or web frameworks (e.g. Django), chances are that you heard about the _Model-View-Controller_ pattern.
@@ -32,9 +32,9 @@ Table of contents
 <a><h2>Introduction</h2></a>
 The three components of the MVC pattern are **decoupled** and they are responsible for different things:
 
-- the **Model** manages the data and defines rules and behaviors. It represents the [business logic](WIKIPEDIA) of the application. The data can be stored in the Model itself or in a database (only the Model has access to the database).
-- the **View** presents the data to the user. A View can be any kind of output representation: a HTML page, a chart, a table, or even a simple text output. A View should never call its own methods; only a Controller should do it.
-- the **Controller** accepts user's inputs and delegates data representation to a View and data handling to a Model.
+* the **Model** manages the data and defines rules and behaviors. It represents the [business logic](WIKIPEDIA) of the application. The data can be stored in the Model itself or in a database (only the Model has access to the database).
+* the **View** presents the data to the user. A View can be any kind of output representation: a HTML page, a chart, a table, or even a simple text output. A View should never call its own methods; only a Controller should do it.
+* the **Controller** accepts user's inputs and delegates data representation to a View and data handling to a Model.
 
 Since Model, View and Controller are **decoupled**, each one of the three can be extended, modified and replaced without having to rewrite the other two.
 
@@ -64,9 +64,9 @@ my_items = [
 
 The list of items can be changed any time you perform one of the following operations:
 
-- **create** new items
-- **update** existing items
-- **delete** existing items
+* **create** new items
+* **update** existing items
+* **delete** existing items
 
 The **read** operation does not modify anything in the list of items.
 

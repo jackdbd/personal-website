@@ -1,5 +1,5 @@
 ---
-date: '2017-01-27'
+date: "2017-01-27"
 tags:
   - design patterns
   - inversion of control
@@ -155,5 +155,5 @@ You need the code? Grab it [here](https://github.com/jackdbd/design-patterns)!
 
 Here are some additional resources you might find useful:
 
-- [Template Method on Sourcemaking.com](https://sourcemaking.com/design_patterns/template_method)
-- [Martin Fowler's article on Inversion of Control](https://martinfowler.com/bliki/InversionOfControl.html)
+* [Template Method on Sourcemaking.com](https://sourcemaking.com/design_patterns/template_method)
+* [Martin Fowler's article on Inversion of Control](https://martinfowler.com/bliki/InversionOfControl.html)

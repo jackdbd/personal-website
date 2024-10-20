@@ -1,5 +1,5 @@
 ---
-date: '2023-08-16T13:05:00.000Z'
+date: "2023-08-16T13:05:00.000Z"
 description: This is a website audit of the webpage www.vino.com. The audit contains info about security, SEO, web performance.
 ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1692005417/vino-com-http-304-missing-immutable_prst47.png
@@ -16,7 +16,6 @@ tags:
   - WebPageTest
 title: Auditing an eCommerce website
 ---
-
 Slow websites leave money on the table. A slow eCommerce might face a higher customer acquisition cost and a lower average order value than a fast eCommerce.
 
 In 2016, [AliExpress reduced load time by 36% and saw a 10.5% increase in orders and a 27% increase in conversion for new customers](https://wpostats.com/2016/12/27/aliexpress-load-time.html).
@@ -149,7 +148,7 @@ Two of the most popular pieces of legislation in this matter are the [GDPR (Gene
 
 Violating these laws can result in hefty fines. In case of the GDPR, financial penalties can reach up to 4% of the annual turnover of the non-compliant business.
 
-The GDPR requires a website to obtain explicit consent **before** collecting personal data or setting _identifiers_ (cookies, keys in localStorage, etc) that could be used to profile the users.
+The GDPR requires a website to obtain explicit consent **before** collecting personal data or setting *identifiers* (cookies, keys in localStorage, etc) that could be used to profile the users.
 
 {% callout "info" %}
 [Recital 30 EU GDPR](https://www.privacy-regulation.eu/en/recital-30-GDPR.htm): Natural persons may be associated with online identifiers provided by their devices, applications, tools and protocols, such as internet protocol addresses, cookie identifiers or other identifiers such as radio frequency identification tags. This may leave traces which, in particular when combined with unique identifiers and other information received by the servers, may be used to create profiles of the natural persons and identify them.
@@ -237,11 +236,11 @@ https://res.cloudinary.com/jackdbd/image/upload/v1690642252/vino-com-product-pag
 
 When we want to know how fast a website is, we can either **simulate** a few website visits, or analyze historical data of **real** visits.
 
-A simulation can be very close to reality. For example, we can [install the WebPageTest Mobile Agent on a real device](https://docs.webpagetest.org/private-instances/mobile-devices/) (e.g. a Moto G4) and visit the website using a real browser. But even in this case, it's just _one_ visit. Users can have weird combinations of browser, device, viewport size and network connectivity. Simulating all of them is not feasible.
+A simulation can be very close to reality. For example, we can [install the WebPageTest Mobile Agent on a real device](https://docs.webpagetest.org/private-instances/mobile-devices/) (e.g. a Moto G4) and visit the website using a real browser. But even in this case, it's just *one* visit. Users can have weird combinations of browser, device, viewport size and network connectivity. Simulating all of them is not feasible.
 
 Do we have more luck with historical data? Yes, we do. If a user visits a website using Chrome, the browser records the most important metrics she experiences during her visit, and sends them to the [Chrome User Experience Report (CrUX)](https://developers.google.com/web/tools/chrome-user-experience-report).
 
-It's impossible to obtain the entire _population_ of real visits to a website. But thanks to CrUX we have access to a reasonably large _sample_ of them.
+It's impossible to obtain the entire *population* of real visits to a website. But thanks to CrUX we have access to a reasonably large *sample* of them.
 
 {% callout "info" %}
 [Most desktop and mobile users browse the internet using Chrome](https://caniuse.com/usage-table), maybe save for mobile users in the US, where [the market leader seems to be Safari](https://gs.statcounter.com/browser-market-share/mobile/united-states-of-america).
@@ -284,7 +283,7 @@ Knowing which countries and devices the traffic comes from is key. It suggests u
 
 I agree with Barry that Core Web Vitals are really important, but there is another metric that is absolutely crucial for web performance: Time To First Byte (TTFB).
 
-The thing is, we can't really _optimize for_ TTFB, because TTFB is the sum of the many things:
+The thing is, we can't really *optimize for* TTFB, because TTFB is the sum of the many things:
 
 - HTTP redirects
 - Service worker's startup time
@@ -316,7 +315,7 @@ Had CrUX reported a poor TTFB for the website, I would have suggested using the 
 
 #### FCP
 
-The first thing a user sees after having requested a web page, is a blank screen. Until the browser renders _something_ on the page, the user doesn't know if the page is really loading, if there are connection issues, or simply if the website is broken. There are basically two interpretations about this _something_, hence two very similar metrics: **Start Render** and **First Contentful Paint (FCP)**.
+The first thing a user sees after having requested a web page, is a blank screen. Until the browser renders *something* on the page, the user doesn't know if the page is really loading, if there are connection issues, or simply if the website is broken. There are basically two interpretations about this *something*, hence two very similar metrics: **Start Render** and **First Contentful Paint (FCP)**.
 
 There are some differences in what Start Render and FCP consider **DOM content**, but the important thing is that they basically mark the end of the blank screen.
 
@@ -550,11 +549,11 @@ Only after the browser has seen the `alt-svc` header and fetched a few resources
 
 https://res.cloudinary.com/jackdbd/image/upload/v1691163842/vino-com-main-http3_l5qjq2.png
 
-The first time the browser tries to establish a HTTP/3 connection, it performs a technique called [connection racing](https://www.smashingmagazine.com/2021/09/http3-practical-deployment-options-part3/#alt-svc), and in Chrome DevTools we see this (the tooltip says _won a race..._):
+The first time the browser tries to establish a HTTP/3 connection, it performs a technique called [connection racing](https://www.smashingmagazine.com/2021/09/http3-practical-deployment-options-part3/#alt-svc), and in Chrome DevTools we see this (the tooltip says *won a race...*):
 
 https://res.cloudinary.com/jackdbd/image/upload/v1691146778/vino-com-chrome-http3-connection-racing_pytbj4.png
 
-After the browser has managed to connect to the server using HTTP/3, this race should no longer be necessary. In fact, in Chrome DevTools we see this (the tooltip says _without racing..._):
+After the browser has managed to connect to the server using HTTP/3, this race should no longer be necessary. In fact, in Chrome DevTools we see this (the tooltip says *without racing...*):
 
 https://res.cloudinary.com/jackdbd/image/upload/v1691157779/vino-com-http3-without-connection-racing_n4snlb.png
 
@@ -689,8 +688,7 @@ Second, most of the images on the home page are background images, meaning they 
 <div>
   <a href="selezione/serena-1881">
     <div>
-      <div
-        style="background-image: url(https://resources.vino.com/data/slideshowItemImmagine/slideshowItemImmagine-6583.jpg);"></div>
+      <div style="background-image: url(https://resources.vino.com/data/slideshowItemImmagine/slideshowItemImmagine-6583.jpg);"></div>
       <div>Serena 1881</div>
     </div>
   </a>
@@ -868,14 +866,8 @@ This tells the browser that it can fallback to a generic sans-serif [system font
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
-    src:
-      local('Montserrat Bold'),
-      local('Montserrat-Bold'),
-      url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_dJE3gnD_vx3rCs.woff2)
-        format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-      U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
-      U+2212, U+2215, U+FEFF, U+FFFD;
+    src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_dJE3gnD_vx3rCs.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     font-display: swap;
   }
   /* other font-face rules not shown here... */

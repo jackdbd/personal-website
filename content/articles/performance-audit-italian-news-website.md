@@ -1,5 +1,5 @@
 ---
-date: '2023-02-27T13:30:00.000Z'
+date: "2023-02-27T13:30:00.000Z"
 description: This is a web performance audit of the web page iltirreno.it/versilia. The audit considers both field data (extracted from the CrUX dataset) and lab data (collected from several WebPageTest test results).
 ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1677003678/iltirreno-js-execution_f0p2af.png
@@ -12,7 +12,6 @@ tags:
   - WebPageTest
 title: Performance audit of an Italian news website
 ---
-
 News websites have a lot of text, images and other media, and they often rely on many third party scripts for ads and analytics. This huge amount of assets means that the number of HTTP requests on these websites can be quite high. The browser might take a while to process all of these requests and execute JavaScript, and performance can suffer.
 
 Users spend less time consuming content on a slow website. This can have a negative impact on revenue, in particular for news websites. Google's DoubleClick reports that publishers whose mobile sites load in 5 seconds earn up to [2x more mobile ad revenue](https://wpostats.com/2016/09/15/double-click-revenue.html) than sites loading in 19 seconds.
@@ -116,61 +115,61 @@ Il Tirreno and La Nuova Sardegna are published by the [same editorial group](htt
 The majority of the traffic to these news websites comes from phones using a 4G connection. Desktop traffic is only 10-15%. Tablet traffic is negligible.
 
 {% table "Traffic over time (% of users)", "	" %}
-yyyymmdd Domain Phone Desktop Tablet 3G 4G
-20230101 iltirreno.it 88.56 8.57 2.84 4.9 95.07
-20230101 lanazione.it 87.2 9.87 2.9 4.78 95.19
-20230101 lanuovasardegna.it 87.31 9.34 3.35 4.81 95.19
-20221201 iltirreno.it 85.36 11.38 3.2 4.74 95.2
-20221201 lanazione.it 88.57 8.54 2.85 4.91 95.05
-20221201 lanuovasardegna.it 86.46 9.9 3.64 5.0 95.0
-20221101 iltirreno.it 79.84 16.24 3.93 4.2 95.81
-20221101 lanazione.it 85.49 11.6 2.85 4.66 95.28
-20221101 lanuovasardegna.it 87.09 9.66 3.23 5.17 94.81
+yyyymmdd	Domain	Phone	Desktop	Tablet	3G	4G
+20230101	iltirreno.it	88.56	8.57	2.84	4.9	95.07
+20230101	lanazione.it	87.2	9.87	2.9	4.78	95.19
+20230101	lanuovasardegna.it	87.31	9.34	3.35	4.81	95.19
+20221201	iltirreno.it	85.36	11.38	3.2	4.74	95.2
+20221201	lanazione.it	88.57	8.54	2.85	4.91	95.05
+20221201	lanuovasardegna.it	86.46	9.9	3.64	5.0	95.0
+20221101	iltirreno.it	79.84	16.24	3.93	4.2	95.81
+20221101	lanazione.it	85.49	11.6	2.85	4.66	95.28
+20221101	lanuovasardegna.it	87.09	9.66	3.23	5.17	94.81
 {% endtable %}
 
 iltirreno.it and lanuovasardegna.it have a similar TTFB. These newspapers are published by the [same publisher](https://www.grupposae.it/), so I guessed their websites have a similar codebase and maybe share the same infrastructure. The TTFB of lanazione.it is 2-3 better than the other two.
 
 {% table "TTFB over time (% of users; 75th percentile in ms)", "	" %}
-yyyymmdd Domain TTFB good TTFB avg TTFB bad TTFB p75
-20230101 iltirreno.it 57.24 26.72 16.0 1300
-20230101 lanazione.it 87.27 9.49 3.21 400
-20230101 lanuovasardegna.it 57.18 29.72 13.0 1200
-20221201 iltirreno.it 50.89 30.13 18.92 1500
-20221201 lanazione.it 88.22 8.79 2.98 400
-20221201 lanuovasardegna.it 54.88 30.27 14.73 1300
-20221101 iltirreno.it 45.59 33.34 21.04 1600
-20221101 lanazione.it 85.35 10.57 4.05 500
-20221101 lanuovasardegna.it 54.92 31.03 13.99 1200
+yyyymmdd	Domain	TTFB good	TTFB avg	TTFB bad	TTFB p75
+20230101	iltirreno.it	57.24	26.72	16.0	1300
+20230101	lanazione.it	87.27	9.49	3.21	400
+20230101	lanuovasardegna.it	57.18	29.72	13.0	1200
+20221201	iltirreno.it	50.89	30.13	18.92	1500
+20221201	lanazione.it	88.22	8.79	2.98	400
+20221201	lanuovasardegna.it	54.88	30.27	14.73	1300
+20221101	iltirreno.it	45.59	33.34	21.04	1600
+20221101	lanazione.it	85.35	10.57	4.05	500
+20221101	lanuovasardegna.it	54.92	31.03	13.99	1200
 {% endtable %}
 
 The load event shows less variation across the three newspapers. It is quite high, probably because of ads and other third party scripts.
 
 {% table "load event over time (% of users; 75th percentile in ms)", "	" %}
-yyyymmdd Domain load good load avg load bad load
-20230101 iltirreno.it 8.71 40.55 50.7 10400
-20230101 lanazione.it 13.08 32.53 54.38 12900
-20230101 lanuovasardegna.it 8.93 36.53 54.49 11400
-20221201 iltirreno.it 9.16 43.33 47.47 9500
-20221201 lanazione.it 14.87 34.37 50.78 12200
-20221201 lanuovasardegna.it 9.14 38.91 51.9 10900
-20221101 iltirreno.it 10.92 46.62 42.42 8700
-20221101 lanazione.it 19.34 34.34 46.33 11300
-20221101 lanuovasardegna.it 9.3 40.9 49.81 10300
+yyyymmdd	Domain	load good	load avg	load bad	load
+20230101	iltirreno.it	8.71	40.55	50.7	10400
+20230101	lanazione.it	13.08	32.53	54.38	12900
+20230101	lanuovasardegna.it	8.93	36.53	54.49	11400
+20221201	iltirreno.it	9.16	43.33	47.47	9500
+20221201	lanazione.it	14.87	34.37	50.78	12200
+20221201	lanuovasardegna.it	9.14	38.91	51.9	10900
+20221101	iltirreno.it	10.92	46.62	42.42	8700
+20221101	lanazione.it	19.34	34.34	46.33	11300
+20221101	lanuovasardegna.it	9.3	40.9	49.81	10300
 {% endtable %}
 
 Cumulative Layout Shift sits at around 70% for everyone. This means there aren't too many layout shifts in any of these websites.
 
 {% table "CLS over time (% of users)", "	" %}
-yyyymmdd Domain CLS good CLS avg CLS bad
-20230101 iltirreno.it 72.18 16.48 11.34
-20230101 lanazione.it 73.04 18.08 8.89
-20230101 lanuovasardegna.it 70.39 16.62 12.96
-20221201 iltirreno.it 73.17 15.98 10.85
-20221201 lanazione.it 70.66 19.42 9.93
-20221201 lanuovasardegna.it 67.22 18.63 14.17
-20221101 iltirreno.it 73.05 17.67 9.28
-20221101 lanazione.it 70.21 18.45 11.31
-20221101 lanuovasardegna.it 68.24 17.36 14.42
+yyyymmdd	Domain	CLS good	CLS avg	CLS bad
+20230101	iltirreno.it	72.18	16.48	11.34
+20230101	lanazione.it	73.04	18.08	8.89
+20230101	lanuovasardegna.it	70.39	16.62	12.96
+20221201	iltirreno.it	73.17	15.98	10.85
+20221201	lanazione.it	70.66	19.42	9.93
+20221201	lanuovasardegna.it	67.22	18.63	14.17
+20221101	iltirreno.it	73.05	17.67	9.28
+20221101	lanazione.it	70.21	18.45	11.31
+20221101	lanuovasardegna.it	68.24	17.36	14.42
 {% endtable %}
 
 {% bigQueryQueryLink "https://console.cloud.google.com/bigquery?sq=1051247446620:3e373ceeeeba47888f45305c2cc84555" %}
@@ -428,6 +427,7 @@ If we have a look at the **Elements** panel in Chrome DevTools we notice a lot o
   <style data-emotion="css kqgxn0" data-s="">
     <!-- CSS rulesets -->
   </style>
+
 </head>
 ```
 
@@ -444,21 +444,20 @@ The Next.js JS code chunks have `_next/static/chunks` in their URL. We can see t
 iltirreno.it doesn't ship source maps in its production build, so the only JavaScript code we can look at in the **Sources** panel in Chrome DevTools is something like this:
 
 ```js
-;(self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
-  [129],
-  {
-    21924: function (t, e, r) {
-      'use strict'
-      var o = r(40210),
-        n = r(55559),
-        i = n(o('String.prototype.indexOf'))
-      t.exports = function (t, e) {
-        var r = o(t, !!e)
-        return 'function' === typeof r && i(t, '.prototype.') > -1 ? n(r) : r
-      }
+(self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([[129], {
+
+  21924: function(t, e, r) {
+    "use strict";
+    var o = r(40210)
+      , n = r(55559)
+      , i = n(o("String.prototype.indexOf"));
+    t.exports = function(t, e) {
+      var r = o(t, !!e);
+      return "function" === typeof r && i(t, ".prototype.") > -1 ? n(r) : r
     }
   }
-])
+
+}]);
 ```
 
 If JavaScript source maps were available, we could also visualize the code with tools such as [Webpack Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) or [Bundle Buddy](https://bundle-buddy.com/), or even inspect performance traces that show us [the actual JS function names](https://developer.chrome.com/blog/new-in-devtools-109/#performance).
@@ -576,12 +575,11 @@ The reason it doesn't happen on this web page is that the font is [preloaded](ht
 
 ```html
 <head>
-  <link
-    rel="preload"
-    href="/fonts/Utopia/Utopia-Regular.otf"
-    as="font"
-    type="font/otf"
-    crossorigin="anonymous" />
+
+  <link rel="preload"
+        href="/fonts/Utopia/Utopia-Regular.otf"
+        as="font" type="font/otf" crossorigin="anonymous" />
+
 </head>
 ```
 
@@ -624,10 +622,10 @@ Let's review the definition of Flash Of Invisible Text (FOIT) [according to Goog
 
 I had a look at the HTML in the Chrome DevTools **Elements** panel. There I found out that **IL TIRRENO** was in fact an SVG, not a text. SVG is not a web font, so I don't think this case qualifies as FOIT.
 
-As for the subtitle starting with _Corinne, Marzia, Priscilla..._, I think it could be one of these cases:
+As for the subtitle starting with *Corinne, Marzia, Priscilla...*, I think it could be one of these cases:
 
 1. The subtitle is present in the initial, server-side rendered HTML. This means this **is** a FOIT, since the text is there but nothing is rendered.
-1. The subtitle is not present in the initial HTML, and is added to the page after client-side hydration. This means this **is not** a FOIT, since in this test any one of the JS chunks gets executed after all fonts have finished downloading (see waterfall below, JS execution in pink).
+1. The subtitle is not present in the initial HTML, and is added to the page after client-side hydration. This means this **is not** a FOIT, since in this test any one of the JS chunks gets executed after all  fonts have finished downloading (see waterfall below, JS execution in pink).
 
 https://res.cloudinary.com/jackdbd/image/upload/v1677003678/iltirreno-js-execution_f0p2af.png
 
@@ -655,16 +653,15 @@ Most of the images on iltirreno.it are JPEG and are included in the page with `<
   data-nimg="responsive"
   style="SOME-INLINE-STYLES"
   sizes="100vw"
-  srcset="
-    https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab  640w,
-    https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab  750w,
-    https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab  828w,
-    https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 1080w,
-    https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 1200w,
-    https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 1920w,
-    https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 2048w,
-    https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 3840w
-  " />
+  srcset="https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 640w,
+          https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 750w,
+          https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 828w,
+          https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 1080w,
+          https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 1200w,
+          https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 1920w,
+          https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 2048w,
+          https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab 3840w"
+>
 ```
 
 We can notice a few things about this `<img>` tag:
@@ -675,7 +672,7 @@ We can notice a few things about this `<img>` tag:
 - There is no `loading="lazy"`. This means the browser loads this image eagerly. This is [fine for images that are in the viewport](https://web.dev/browser-level-image-lazy-loading/#avoid-lazy-loading-images-that-are-in-the-first-visible-viewport), but images below the viewport could be lazily loaded. See [here for today's browser support for loading="lazy"](https://caniuse.com/?search=loading%3Dlazy).
 - There is a `srcset` attribute, but the URL specified for each viewport width (e.g. 750w, 3840w) is the same (yep, double check those query strings). Also, no media queries are specified in the `sizes` attribute. This means [resolution switching](https://cloudfour.com/thinks/responsive-images-the-simple-way/#the-sizes-attribute) is actually **not** done: the browser will always load the same image, regardless of the viewport width.
 
-Most images on this web page are JPEG and are served by a [Strapi](https://github.com/strapi/strapi) server hosted at [api-sites-prd.saegroup.abinsula.com](https://api-sites-prd.saegroup.abinsula.com/). We know this because if we have a look at the Chrome DevTools **Network** panel (or at [REDbot](https://redbot.org/?uri=https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg)), we see that the HTTP request for [this image](https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&h=720&w=1280&$p$f$h$w=999f9ab) returns this custom header:
+Most images on this web page are JPEG and are served by a [Strapi](https://github.com/strapi/strapi) server hosted at [api-sites-prd.saegroup.abinsula.com](https://api-sites-prd.saegroup.abinsula.com/). We know this because if we have a look at the Chrome DevTools **Network** panel (or at [REDbot](https://redbot.org/?uri=https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg)), we see that the HTTP request for [this image](https://api-sites-prd.saegroup.abinsula.com/api/media/image/contentid/policy:1.100245629:1676969458/TR.jpg?f=detail_558&amp;h=720&amp;w=1280&amp;$p$f$h$w=999f9ab) returns this custom header:
 
 ```txt
 x-powered-by: Strapi <strapi.io>
@@ -779,25 +776,23 @@ let local_storage_keys = [
   'ope_uid'
 ]
 
-let local_storage_entries = local_storage_keys.map((key) => {
+let local_storage_entries = local_storage_keys.map(key => {
   return { key, value: localStorage.getItem(key) }
 })
 
-let local_storage_snippets = local_storage_entries
-  .map((e) => {
-    if (e.value) {
-      return `localStorage.setItem('${e.key}', '${e.value}');`
-    } else {
-      return ''
-    }
-  })
-  .filter((s) => s !== '')
+let local_storage_snippets = local_storage_entries.map(e => {
+  if (e.value) {
+    return `localStorage.setItem('${e.key}', '${e.value}');`
+  } else {
+    return ''
+  }
+}).filter(s => s !== '')
 
-let cookies = document.cookie.split('; ').filter((s) => {
+let cookies = document.cookie.split('; ').filter(s => {
   return s.startsWith('_iub_cs') || s.startsWith('euconsent-v2')
 })
 
-let cookie_snippets = cookies.map((cookie) => {
+let cookie_snippets = cookies.map(cookie => {
   return `document.cookie = '${cookie};';`
 })
 
@@ -811,9 +806,7 @@ console.group('bypass consent banner')
 console.log(`Instructions:`)
 console.log(`1. go to WebPageTest https://www.webpagetest.org/`)
 console.log(`2. enter ${document.URL} as the Website URL to test`)
-console.log(
-  `3. go to Advanced > Inject Script, then paste the generated JS script (it's already copied to the clipboard)`
-)
+console.log(`3. go to Advanced > Inject Script, then paste the generated JS script (it's already copied to the clipboard)`)
 console.groupEnd('bypass consent banner')
 ```
 
@@ -851,7 +844,7 @@ Why is that?
 It's because only **after consent** is **freely given** the website can execute those third party scripts that process the user's personal data. In fact, in the [European Data Protection Board (EDPB) Guidelines 05/2020 on consent under Regulation 2016/679](https://edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_202005_consent_en.pdf) we can read the following:
 
 > […] consent must always be obtained before the controller starts processing personal data
-> for which consent is needed.
+for which consent is needed.
 
 A WebPageTest Waterfall View with 140 requests would be long to include, but there is another one which is equally effective in showcasing this fact: the **Connection View**.
 
@@ -1035,24 +1028,30 @@ We can also add a [dns-prefetch hint](https://developer.mozilla.org/en-US/docs/W
 In [Performance Proxy](https://perfproxy.com/), we enter this in the text box that says `Top of <head>`:
 
 ```html
-<link
-  rel="preconnect"
-  href="https://api-sites-prd.saegroup.abinsula.com"
-  crossorigin />
+<link rel="preconnect"
+      href="https://api-sites-prd.saegroup.abinsula.com"
+      crossorigin>
 
-<link rel="dns-prefetch" href="https://api-sites-prd.saegroup.abinsula.com" />
+<link rel="dns-prefetch"
+      href="https://api-sites-prd.saegroup.abinsula.com">
 ```
 
 We could also add a few other resource hints for Google Tag Manager:
 
 ```html
-<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+<link rel="preconnect"
+      href="https://www.googletagmanager.com"
+      crossorigin>
 
-<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+<link rel="dns-prefetch"
+      href="https://www.googletagmanager.com">
 
-<link rel="preconnect" href="https://www.googletagservices.com" crossorigin />
+<link rel="preconnect"
+      href="https://www.googletagservices.com"
+      crossorigin>
 
-<link rel="dns-prefetch" href="https://www.googletagservices.com" />
+<link rel="dns-prefetch"
+      href="https://www.googletagservices.com">
 ```
 
 ### Adding timestamps using the User Timing API
@@ -1075,7 +1074,11 @@ This code at the bottom of `<head>`:
 </script>
 
 <script>
-  performance.measure('head-processing', 'head-begin', 'head-end')
+  performance.measure(
+    'head-processing',
+    'head-begin',
+    'head-end'
+  )
 </script>
 ```
 
@@ -1095,7 +1098,11 @@ And this at the bottom of `<body>`:
 </script>
 
 <script>
-  performance.measure('body-processing', 'body-begin', 'body-end')
+  performance.measure(
+    'body-processing',
+    'body-begin',
+    'body-end'
+  )
 </script>
 ```
 
@@ -1107,7 +1114,7 @@ https://res.cloudinary.com/jackdbd/image/upload/v1677338989/iltirreno-waterfall-
 
 Overall, the main issue of [www.iltirreno.it/versilia](https://www.iltirreno.it/versilia) is represented by the many third party scripts on the page. They are the most detrimental to page performance, **even before** accepting the consent banner (thus adding a few more third party scripts to load and execute).
 
-To improve the situation we could put all third party scripts in Google Tag Manager (GTM) and load them using a [Window Loaded trigger](https://support.google.com/tagmanager/answer/7679319).
+To improve the situation we could put all third party scripts in Google Tag Manager (GTM) and load them using a [Window Loaded trigger](https://support.google.com/tagmanager/answer/7679319). 
 In alternative, we could execute them in a web worker. For example using [partytown](https://partytown.builder.io/) (there is already an integration for Next.js). This would translate into less work to do for the main thread.
 But even before that, we could perform a cost-benefit analysis about each third party script used in the page and ask ourselved these questions: How much does it cost in term of performance? How much revenue does it generate for the website?
 
@@ -1124,4 +1131,4 @@ There are several other things we could try:
 - Use Woff2 for web fonts.
 - Avoid inlining all the CSS in the `<head>`. Maybe keep inlining some critical CSS.
 
-_Thanks to [Tim Kadlec](https://twitter.com/tkadlec) and [Tim Vereecke](https://twitter.com/TimVereecke) for suggestions on how to interpret a few WebPageTest test results_.
+*Thanks to [Tim Kadlec](https://twitter.com/tkadlec) and [Tim Vereecke](https://twitter.com/TimVereecke) for suggestions on how to interpret a few WebPageTest test results*.

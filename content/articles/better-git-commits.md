@@ -1,5 +1,5 @@
 ---
-date: '2016-12-04'
+date: "2016-12-04"
 tags:
   - git
 title: Better Git commits
@@ -52,7 +52,7 @@ If you are curious why you can't find these settings in the text you just pasted
 
 Here are some additional resources on writing great commit messages:
 
-- [5 useful tips for a better commit message](https://thoughtbot.com/blog/5-useful-tips-for-a-better-commit-message)
-- [A note about git commit messages](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
-- [Git best practices](https://sethrobertson.github.io/GitBestPractices/)
-- [Git commit](https://cbea.ms/git-commit/)
+* [5 useful tips for a better commit message](https://thoughtbot.com/blog/5-useful-tips-for-a-better-commit-message)
+* [A note about git commit messages](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
+* [Git best practices](https://sethrobertson.github.io/GitBestPractices/)
+* [Git commit](https://cbea.ms/git-commit/)

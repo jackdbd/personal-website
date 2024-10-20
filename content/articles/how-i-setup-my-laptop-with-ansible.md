@@ -1,12 +1,11 @@
 ---
-date: '2020-09-18T12:00:00.000Z'
+date: "2020-09-18T12:00:00.000Z"
 description: Here is how I (re)configure my laptop with Ansible
 tags:
   - Ansible
   - DevOps
 title: How I setup my laptop with Ansible
 ---
-
 I've recently started using Ansible to configure my laptop. Having a development machine setup with a couple of command is pretty great, but there are still some manual steps I need to take care in the process.
 
 Here is what I do every time I (re)configure my laptop.
@@ -158,7 +157,7 @@ All other software I need is configured in my Ansible playbook, that I run with 
 ansible-playbook playbook.yml -K
 ```
 
-_Note_: I use [Nerd Fonts](https://www.nerdfonts.com/) to install custom fonts on my machine. At the moment I'm cloning the entire repo, which is probably way too many fonts I will ever need. Since cloning the entire repo takes a long time, you might want to skip it if you are in a hurry. You can do it with `--skip-tags`.
+*Note*: I use [Nerd Fonts](https://www.nerdfonts.com/) to install custom fonts on my machine. At the moment I'm cloning the entire repo, which is probably way too many fonts I will ever need. Since cloning the entire repo takes a long time, you might want to skip it if you are in a hurry. You can do it with `--skip-tags`.
 
 ```shell
 ansible-playbook playbook.yml -K --skip-tags "fonts"

@@ -1,5 +1,5 @@
 ---
-date: '2017-10-14T08:30:03.284Z'
+date: "2017-10-14T08:30:03.284Z"
 tags:
   - Python
   - tests
@@ -258,7 +258,7 @@ Can you really afford to reject `nan` as an input value for `add_numbers`? Maybe
 
 ## References
 
-- [What is Property Based Testing?](https://hypothesis.works/articles/what-is-property-based-testing/)
-- [Getting started with Hypothesis](https://hypothesis.works/articles/getting-started-with-hypothesis/)
-- [Anatomy of a Hypothesis Based Test](https://hypothesis.works/articles/anatomy-of-a-test/)
-- [Evolving toward property-based testing with Hypothesis](https://hypothesis.works/articles/incremental-property-based-testing/)
+* [What is Property Based Testing?](https://hypothesis.works/articles/what-is-property-based-testing/)
+* [Getting started with Hypothesis](https://hypothesis.works/articles/getting-started-with-hypothesis/)
+* [Anatomy of a Hypothesis Based Test](https://hypothesis.works/articles/anatomy-of-a-test/)
+* [Evolving toward property-based testing with Hypothesis](https://hypothesis.works/articles/incremental-property-based-testing/)

@@ -1,5 +1,5 @@
 ---
-date: '2017-01-21'
+date: "2017-01-21"
 tags:
   - design patterns
   - Python
@@ -190,5 +190,5 @@ random_implementation = random.choice([ImplementationA(), ImplementationB()])
 
 These articles really helped me to understand the Bridge pattern:
 
-- [Bridge](https://sourcemaking.com/design_patterns/bridge)
-- [Design Patterns Simplified: The Bridge Pattern](https://simpleprogrammer.com/2015/06/08/design-patterns-simplified-the-bridge-pattern/)
+* [Bridge](https://sourcemaking.com/design_patterns/bridge)
+* [Design Patterns Simplified: The Bridge Pattern](https://simpleprogrammer.com/2015/06/08/design-patterns-simplified-the-bridge-pattern/)

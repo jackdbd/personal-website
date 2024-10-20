@@ -11,7 +11,7 @@ location:
   latitude: 28.0383
   longitude: -16.5333
 photo:
-  - url: media/photos/2024/10/17/el-medano-tenerife-2023.jpg
+  - url: media/photos/2024/10/18/el-medano-tenerife-2023.jpg
     alt: View of El Médano in Tenerife. A few kitesurfers are in the water. A few other ones are on the beach, preparing their kites.
 updated: 2024-10-17T23:09:06.210+02:00
 visibility: public

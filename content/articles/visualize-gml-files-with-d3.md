@@ -1,5 +1,5 @@
 ---
-date: '2017-01-12'
+date: "2017-01-12"
 tags:
   - D3.js
   - GML
@@ -118,6 +118,6 @@ _D. Lusseau, K. Schneider, O. J. Boisseau, P. Haase, E. Slooten, and S. M. Dawso
 
 Additional information on the network can be found in:
 
-- _D. Lusseau, The emergent properties of a dolphin social network, Proc. R. Soc. London B (suppl.) 270, S186-S188 (2003)._
+* _D. Lusseau, The emergent properties of a dolphin social network, Proc. R. Soc. London B (suppl.) 270, S186-S188 (2003)._
 
-- _D. Lusseau, [Evidence for social role in a dolphin social network](https://arxiv.org/abs/q-bio.PE/0607048), Preprint q-bio/0607048_
+* _D. Lusseau, [Evidence for social role in a dolphin social network](https://arxiv.org/abs/q-bio.PE/0607048), Preprint q-bio/0607048_

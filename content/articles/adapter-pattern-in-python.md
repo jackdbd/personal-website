@@ -1,5 +1,5 @@
 ---
-date: '2016-11-26T09:12:03.284Z'
+date: "2016-11-26T09:12:03.284Z"
 tags:
   - design patterns
   - Python
@@ -177,8 +177,8 @@ smarthone_with_eu_adapter.charge(USSocket.output_voltage)
 
 There are two [strong reasons](https://stackoverflow.com/questions/5467005/adapter-pattern-class-adapter-vs-object-adapter) to prefer the Object Adapter over the Class Adapter:
 
-- loose coupling
-- multiple inheritance is tricky
+* loose coupling
+* multiple inheritance is tricky
 
 With the Object Adapter you have [loose coupling](https://en.wikipedia.org/wiki/Loose_coupling), so the Client is not required to know anything about the Supplier. The Smartphone doesn't care where it gets its 5 volts. As long as it gets them, it will charge.
 

@@ -1,5 +1,5 @@
 ---
-date: '2017-07-20T16:30:03.284Z'
+date: "2017-07-20T16:30:03.284Z"
 tags:
   - git
 title: My personal Git Memo
@@ -7,18 +7,18 @@ title: My personal Git Memo
 
 Here is an unordered list of git commands, configurations, tricks, articles, gotchas that I don't want to forget.
 
-- Find out all commit hashes of the git submodules your branch is pointing at
-- Find commit by message string
-- Show all commits from an author, in a specified date range
-- Fix `.git/index.lock` error
-- Permanently remove a file from a repo
-- Show branch name in Linux terminal
-- Compare a file across 2 branches
-- List all commits for a specific file
-- Configure git aliases
-- Commit only part of a file
-- Git hooks
-- Discard changes to git submodules
+* Find out all commit hashes of the git submodules your branch is pointing at
+* Find commit by message string
+* Show all commits from an author, in a specified date range
+* Fix `.git/index.lock` error
+* Permanently remove a file from a repo
+* Show branch name in Linux terminal
+* Compare a file across 2 branches
+* List all commits for a specific file
+* Configure git aliases
+* Commit only part of a file
+* Git hooks
+* Discard changes to git submodules
 
 ---
 
@@ -193,9 +193,9 @@ I am not an expert on hooks in Git, but I found this really [nice article about 
 
 I think the most useful hooks are
 
-- pre-push
-- prepare-commit-msg
-- post-commit
+* pre-push
+* prepare-commit-msg
+* post-commit
 
 It would be nice to have a pre-merge hook, so we could prevent a feature branch from merging into master if certain conditions are not met (e.g. your tests fail). Since a pre-merge hook is not available, you'll have to [write it]((https://stackoverflow.com/questions/19102714/how-would-i-write-a-pre-merge-hook-in-git).
 

@@ -1,5 +1,5 @@
 ---
-date: '2022-02-04T10:30:00.000Z'
+date: "2022-02-04T10:30:00.000Z"
 description: Dive is a CLI tool that can be used to inspect container images and understand how the layers contribute to size of the container image.
 tags:
   - buildpack
@@ -8,7 +8,6 @@ tags:
   - pack
 title: Inspect container images with dive
 ---
-
 Container images can be created using `docker build` with a `Dockerfile`, or with other tools such as [jib](https://github.com/GoogleContainerTools/jib) or [pack](https://github.com/buildpacks/pack). Regardless of which tool was used to create the container image, you can use [dive](https://github.com/wagoodman/dive) to inspect all layers that make up the final image.
 
 ## Container image and container image layer
@@ -143,7 +142,7 @@ pack build my_nodejs_app:latest \
   --builder gcr.io/buildpacks/builder:v1
 ```
 
-_Note_: `dist/` contains `bundle.js` and `package.json`
+*Note*: `dist/` contains `bundle.js` and `package.json`
 
 Using dive we can see that the container image layer corresponding to the Node.js runtime is called `google.nodejs.runtime`. It's roughly 101 MB in size and contains the `node` binary (75 MB) and two symlinks for npm and npx.
 

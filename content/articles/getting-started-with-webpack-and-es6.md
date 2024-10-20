@@ -1,5 +1,5 @@
 ---
-date: '2017-05-12'
+date: "2017-05-12"
 tags:
   - ES6
   - Webpack
@@ -85,11 +85,9 @@ Create an `index.html` file in your `dist` folder. As you can see, the `bundle.j
 ```html
 <html>
   <head>
-    <meta charset="utf-8" />
+    <meta charset='utf-8'>
     <title>Getting started with Webpack and ES6</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway"
-      rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
   </head>
   <body>
     <h1>Getting started with Webpack and ES6</h1>
@@ -214,7 +212,7 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
 
   module: {
@@ -227,17 +225,17 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['es2015']
-          }
-        }
+            presets: ['es2015'],
+          },
+        },
       },
       // rule for .css files
       {
         test: /\.css$/,
         include: [path.join(__dirname, 'src')],
-        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
-      }
-    ]
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      },
+    ],
   },
 
   devtool: 'source-map',
@@ -246,8 +244,8 @@ module.exports = {
     host: 'localhost',
     port: 8080,
     contentBase: path.join(__dirname, 'dist'),
-    inline: true // live reloading
-  }
+    inline: true, // live reloading
+  },
 }
 ```
 

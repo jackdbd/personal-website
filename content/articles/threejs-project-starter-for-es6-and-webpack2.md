@@ -1,5 +1,5 @@
 ---
-date: '2017-04-30'
+date: "2017-04-30"
 tags:
   - Babel
   - ES6
@@ -64,7 +64,7 @@ You can find some really nice tutorials about shaders and Custom Materials in Th
 
 For some more advanced stuff on shaders see these websites:
 
-- [Shadertoy](https://www.shadertoy.com/)
-- [GLSL Sandbox](https://glslsandbox.com/)
-- [The Book of Shaders](https://thebookofshaders.com/)
-- [Kick.js shader editor](https://www.kickjs.org/example/shader_editor/shader_editor.html)
+* [Shadertoy](https://www.shadertoy.com/)
+* [GLSL Sandbox](https://glslsandbox.com/)
+* [The Book of Shaders](https://thebookofshaders.com/)
+* [Kick.js shader editor](https://www.kickjs.org/example/shader_editor/shader_editor.html)

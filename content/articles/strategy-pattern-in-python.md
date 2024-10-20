@@ -1,5 +1,5 @@
 ---
-date: '2017-01-28'
+date: "2017-01-28"
 tags:
   - design patterns
   - inversion of control
@@ -13,8 +13,8 @@ All implemented behaviors are either classes, methods, or functions, and they ar
 
 Strategy follows two important principles:
 
-- Open/closed principle: software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.
-- Inversion of Control principle: custom-written portions of a program (e.g. a method in a subclass) receive the flow of control from a generic framework (e.g. a base class).
+* Open/closed principle: software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.
+* Inversion of Control principle: custom-written portions of a program (e.g. a method in a subclass) receive the flow of control from a generic framework (e.g. a base class).
 
 Following these two principles is extremely useful when you want to design a common interface (the _Closed_ part of the Open/Closed principle), but allow for changes in the implementation details (the _Open_ part of the Open/Closed principle). Every time you want to program a new implementation, you pass it to the common interface without altering anything in the interface code, and you plug the client code to the interface. This way the client code is _loosely coupled_, namely it is coupled only with an abstraction (i.e. the common interface), not with the concrete implementations (i.e. the various strategies).
 

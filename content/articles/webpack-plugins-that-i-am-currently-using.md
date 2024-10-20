@@ -1,5 +1,5 @@
 ---
-date: '2017-05-11'
+date: "2017-05-11"
 tags:
   - Webpack
 title: Webpack plugins that I am currently using
@@ -20,12 +20,12 @@ One of the best features of Webpack is its huge ecosystem of plugins. While load
 
 Here I am going to list all plugins that I am currently using and include a sample configuration for each one of them.
 
-- clean-webpack-plugin
-- copy-webpack-plugin
-- extract-text-webpack-plugin
-- favicons-webpack-plugin
-- html-webpack-plugin
-- Other plugins
+* clean-webpack-plugin
+* copy-webpack-plugin
+* extract-text-webpack-plugin
+* favicons-webpack-plugin
+* html-webpack-plugin
+* Other plugins
 
 ## clean-webpack-plugin
 
@@ -34,7 +34,7 @@ Here I am going to list all plugins that I am currently using and include a samp
 ```javascript
 plugins = [
   // more plugins
-  new CleanWebpackPlugin(['dist'], { root: __dirname, verbose: true })
+  new CleanWebpackPlugin(['dist'], { root: __dirname, verbose: true }),
   // more plugins
 ]
 ```
@@ -50,11 +50,11 @@ plugins = [
     [
       {
         from: path.join(__dirname, 'src', 'data'),
-        to: path.join(__dirname, 'dist', 'data')
-      }
+        to: path.join(__dirname, 'dist', 'data'),
+      },
     ],
     { debug: 'warning' }
-  )
+  ),
   // more plugins
 ]
 ```
@@ -96,7 +96,7 @@ plugins = [
 ```javascript
 plugins = [
   // more plugins
-  new FaviconsWebpackPlugin(path.join(__dirname, 'src', 'images', 'logo.png'))
+  new FaviconsWebpackPlugin(path.join(__dirname, 'src', 'images', 'logo.png')),
   // more plugins
 ]
 ```
@@ -116,8 +116,8 @@ plugins = [
   new HtmlWebpackPlugin({
     template: path.join(__dirname, 'src', 'templates', 'index.html'),
     filename: 'index.html',
-    hash: true
-  })
+    hash: true,
+  }),
   // more plugins
 ]
 ```

@@ -1,5 +1,5 @@
 ---
-date: '2020-09-10T12:00:00.000Z'
+date: "2020-09-10T12:00:00.000Z"
 description: The expression problem is about adding new capabilities to existing code without modifying it. In this article we discuss a few approaches to solve the expression problem.
 ogp:
   # 320x180 image from Youtube video, generated here: https://y-image.net/
@@ -12,14 +12,13 @@ tags:
   - polymorphism
 title: 3 ways to solve the expression problem
 ---
-
 The expression problem—also known as the extensibility problem—is about adding new capabilities to existing code without modifying it.
 
 The term was coined by Philip Wadler at Bell Labs in the late 90s. As he put it:
 
 > The goal is to define a datatype by cases, where one can add new cases to the datatype and new functions over the datatype, without recompiling existing code, and while retaining static type safety (e.g., no casts).
 
-Given that we might use a dynamic language instead of a language that require a compilation step to introduce new functionality, I suggest we view the _existing code_ Wadler talks about, as code that comes from a library we don't have access to and we can't modify directly. Let's image we can't read the source code of the original library and we can only use its public API.
+Given that we might use a dynamic language instead of a language that require a compilation step to introduce new functionality, I suggest we view the *existing code* Wadler talks about, as code that comes from a library we don't have access to and we can't modify directly. Let's image we can't read the source code of the original library and we can only use its public API.
 
 To recap, here is what we want to achieve:
 
@@ -144,7 +143,7 @@ Stacktrace:
  [1] top-level scope at none:0
 ```
 
-_On a sidenote, I think that Julia error messages are pretty great, maybe on par with [Elm](https://elm-lang.org/) ones._
+*On a sidenote, I think that Julia error messages are pretty great, maybe on par with [Elm](https://elm-lang.org/) ones.*
 
 We would really like to call `f` with an integer as its second argument. So what do we do? Well, in Julia we can simply define a new version of the function `f`:
 

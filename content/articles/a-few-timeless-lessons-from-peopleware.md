@@ -1,5 +1,5 @@
 ---
-date: '2017-08-29T21:12:03.284Z'
+date: "2017-08-29T21:12:03.284Z"
 tags:
   - book reviews
 title: A few timeless lessons from Peopleware
@@ -17,9 +17,9 @@ The book was published in 1987 but it's still a must read today for a very simpl
 
 The entire book aims to replace the _manager-as-strategist_ view with the folling simple – yet surprisingly hard to achieve – formula:
 
-- get the right people
-- make them happy so they don't want to leave
-- turn them loose
+* get the right people
+* make them happy so they don't want to leave
+* turn them loose
 
 People don't change that much, so if they are not right for a job from the start, they will likely never be. DeMarco and Lister stress this fact because when it comes to hiring, rules of common sense are often suspended. They illustrate this by depicting a scenario where a hiring manager needs to hire a juggler:
 
@@ -80,9 +80,9 @@ A manager might jeopardize product quality by setting unreachable deadlines. He 
 
 The authors are pretty critical of methodologies. They say that methodologies aim to achieve a _convergence_ of methods, which by itself would be a good thing. There are better ways to achieve convergence of methods though:
 
-- training: people do what they know how to do. If you give them all a common core of methods, they will tend to use those methods.
-- tools: if you agree on a set of workflows, designs, software libraries, etc, people will tend to stick to them.
-- peer review: active peer review mechanisms facilitate training and standardization of tools, so the promote convergence.
+* training: people do what they know how to do. If you give them all a common core of methods, they will tend to use those methods.
+* tools: if you agree on a set of workflows, designs, software libraries, etc, people will tend to stick to them.
+* peer review: active peer review mechanisms facilitate training and standardization of tools, so the promote convergence.
 
 ## Meetings
 

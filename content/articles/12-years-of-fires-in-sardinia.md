@@ -1,5 +1,5 @@
 ---
-date: '2018-08-22T19:00:03.284Z'
+date: "2018-08-22T19:00:03.284Z"
 ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1599200654/sardinia-fires_yakjue.png
   imageAlt: A map of 12 years of fires in Sardinia. Each fire is represented as a circle of various size and color.
@@ -9,7 +9,6 @@ tags:
   - Python
 title: 12 Years of Fires in Sardinia
 ---
-
 This summer I was looking for some data visualization challenges and I came across [this cool project](https://mauromelis.gitlab.io/sardinia-on-fire/) by Mauro Melis. Mauro created it for a contest organized by [Open Data Sardegna](https://contest.formez.it/), and the jury found it so cool that he won the first prize in the data visualization category.
 
 It's basically a [scrollytelling](https://flowingdata.com/tag/scrollytelling/) visualization, a type of visualization popularized - among others - by [The New York Times](https://www.nytimes.com/interactive/2016/12/07/world/asia/rodrigo-duterte-philippines-drugs-killings.html) and the guys at [The Pudding](https://pudding.cool/).
@@ -90,8 +89,8 @@ The resulting CSV file was obviously much smaller.
 
 I decided to use the following [visual encoding](https://www.qlik.com/blog/visual-encoding) for the points (well, circles):
 
-- color correlates with number of fires (yellow = less fires; purple = more fires)
-- size correlates with area (in hectares).
+* color correlates with number of fires (yellow = less fires; purple = more fires)
+* size correlates with area (in hectares).
 
 ## Success!
 
@@ -111,9 +110,9 @@ Other projects where I had to do much more data wrangling had been completely ig
 
 Lessons learned:
 
-- Nobody cares about how much you struggled with data wrangling (but you still have to do it).
-- Always include a GIF in a README (well, I already knew that...)
-- Sardinian cities keep their Italian name in English
+* Nobody cares about how much you struggled with data wrangling (but you still have to do it).
+* Always include a GIF in a README (well, I already knew that...)
+* Sardinian cities keep their Italian name in English
 
 ## Code
 

@@ -1,5 +1,5 @@
 ---
-date: '2016-12-04'
+date: "2016-12-04"
 tags:
   - git
 title: Squashing Git commits
@@ -98,6 +98,6 @@ I must admit I've never tried this approach. It looks overly complicated and use
 
 ## References
 
-- [To squash or not to squash](https://jamescooke.info/git-to-squash-or-not-to-squash.html)
-- [Squashing with rebase, 1](https://ariejan.net/2011/07/05/git-squash-your-latests-commits-into-one/)
-- [Squashing with rebase, 2](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History).
+* [To squash or not to squash](https://jamescooke.info/git-to-squash-or-not-to-squash.html)
+* [Squashing with rebase, 1](https://ariejan.net/2011/07/05/git-squash-your-latests-commits-into-one/)
+* [Squashing with rebase, 2](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History).

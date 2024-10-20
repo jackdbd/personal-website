@@ -1,12 +1,11 @@
 ---
-date: '2020-09-12T12:00:00.000Z'
+date: "2020-09-12T12:00:00.000Z"
 description: Polymorphism is a generic concept that means providing many implementations while retaining a single interface. Clojure multimethods allow us to use multiple dynamic dispatch.
 tags:
   - Clojure
   - polymorphism
 title: Flexible runtime polymorphism with Clojure multimethods
 ---
-
 Polymorphism is a generic concept that means providing many implementations while retaining a single interface.
 
 There are many kinds of polymorphism in computer science. There is static polymorphism, where the implementation is chosen at compile time, and then there is with dynamic polymorphism, where it is chosen at run time.
@@ -16,7 +15,7 @@ The mechanism used by dynamic polymorphism to select the function/method to invo
 
 ## Single dispatch
 
-Many languages can dispatch on the _type_ of the _first_ argument.
+Many languages can dispatch on the *type* of the *first* argument.
 
 Take for example this Python class:
 
@@ -27,7 +26,7 @@ class Animal:
         return "foo"
 ```
 
-We can create a subclass like this one, and _override_ the `sound` method:
+We can create a subclass like this one, and *override* the `sound` method:
 
 ```python
 class Cat(Animal):
@@ -44,7 +43,7 @@ cat.sound()
 "meow"
 ```
 
-This is _runtime subtype-based polymorphism_ in action: the behavior—what the `sound` method is supposed to do—is chosen dynamically based on the runtime type of the object. When we call `cat.sound()`, the `sound` method receives the instance of `Cat` it is bound to. This one argument (i.e. `self`) is used to select which implementation of `sound` to run.
+This is *runtime subtype-based polymorphism* in action: the behavior—what the `sound` method is supposed to do—is chosen dynamically based on the runtime type of the object. When we call `cat.sound()`, the `sound` method receives the instance of `Cat` it is bound to. This one argument (i.e. `self`) is used to select which implementation of `sound` to run.
 To put it in other terms, there can be many implementations of `sound`, but when we call `cat.sound()` it's the `sound` method in the `Cat` class the one who gets called.
 
 Many other programming languages support this single dispatch mechanism. On the other hand, only a few ones have a multiple dispatch mechanism.
@@ -93,7 +92,7 @@ Here are the steps involved in the few lines of code written above.
 1. We call the `draw` multimethod.
 2. `draw` is a [MultiFn](https://github.com/clojure/clojure/blob/master/src/jvm/clojure/lang/MultiFn.java), so it can have several implementations. In order to decide which implementation to call, it asks the `:shape` dispatch function to come with a dispatch value that will determine the chosen implementation.
 3. The `:shape` dispatch function (remember, keywords behave as functions in Clojure/ClojureScript) extracts the value associated with the `:shape` key from the data structure we passed: `:triangle`. That's the dispatch value.
-4. We previously _installed_ (it's the term used by `defmethod`) a method associated with the dispatch value `:triangle`, so `draw` calls that method.
+4. We previously *installed* (it's the term used by `defmethod`) a method associated with the dispatch value `:triangle`, so `draw` calls that method.
 
 What if the dispatch function returns a dispatch value for which we didn't provide an implementation?
 

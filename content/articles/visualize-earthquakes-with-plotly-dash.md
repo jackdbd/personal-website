@@ -1,11 +1,10 @@
 ---
-date: '2017-08-31T22:12:03.284Z'
+date: "2017-08-31T22:12:03.284Z"
 tags:
   - Dash
   - Python
 title: Visualize Earthquakes with Plotly Dash
 ---
-
 Three years ago I followed a few data science courses offered by the Johns Hopkins University on Coursera. Today these courses should be available among the ones in the [Data Science specialization](https://www.coursera.org/specializations/jhu-data-science#courses). All programming assignments were – and still are – in R. At the end of one course we had to create a small web application with [Shiny](https://shiny.rstudio.com/) and deploy it on [shinyapps](https://www.shinyapps.io/). At the time I wasn't that comfortable in writing Javascript and CSS, so having to worry only about R code was quite a relief. I still have the [web app that I wrote](https://github.com/jackdbd/ShinyEarthquakes).
 
 Some time ago I had the idea of rewriting the entire thing in Python, so I started looking for a Python equivalent of Shiny. I stumbled upon [Spyre](https://github.com/adamhajari/spyre), [Pyxley](https://github.com/stitchfix/pyxley) and [Superset](https://github.com/apache/incubator-superset)). I immediately discarded Superset. It looked amazing, but I wanted something for a very small application, not an enterprise-ready business intelligence tool. Spyre didn't convince me, and I tried but struggled with Pyxley.

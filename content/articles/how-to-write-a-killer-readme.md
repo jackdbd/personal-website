@@ -1,5 +1,5 @@
 ---
-date: '2017-07-29T19:12:03.284Z'
+date: "2017-07-29T19:12:03.284Z"
 tags:
   - documentation
 title: How to write a killer README
@@ -17,10 +17,10 @@ I think that most articles miss the point that for different project _types_ you
 
 I can think about the following project types:
 
-- library or tool
-- project starter or project clone
-- cookbook repository
-- list of articles or resources on a topic
+* library or tool
+* project starter or project clone
+* cookbook repository
+* list of articles or resources on a topic
 
 I will try to describe, including some examples for each category, how a good README looks like.
 
@@ -88,11 +88,11 @@ The README for a project starter is very similar to the one of a library.
 
 When I find a project starter I look for these things:
 
-- Screenshots / GIF / Live demo: I want to see the project in action. Don't underestimate even a simple screenshot! It's a great driver for motivation. I know that if I take the time to install this project I will get a fully functional project.
-- Installation / Quickstart: the documentation here must be concise. I don't like to spend hours just to decide if I want to try it out or not.
-- Features: does it have everything I want? Is there anything else that I can replace or remove? How can I do it?
-- References: I want to know why the project starter is structured this way. It would probably be too long to write that in the README, but you can add a list of articles that I can read (e.g. maybe you decided to follow [the twelve factors](https://12factor.net/)).
-- FAQs: if the project is big enough, I think it makes sense to add a section for the most common questions a developer might have about the project.
+* Screenshots / GIF / Live demo: I want to see the project in action. Don't underestimate even a simple screenshot! It's a great driver for motivation. I know that if I take the time to install this project I will get a fully functional project.
+* Installation / Quickstart: the documentation here must be concise. I don't like to spend hours just to decide if I want to try it out or not.
+* Features: does it have everything I want? Is there anything else that I can replace or remove? How can I do it?
+* References: I want to know why the project starter is structured this way. It would probably be too long to write that in the README, but you can add a list of articles that I can read (e.g. maybe you decided to follow [the twelve factors](https://12factor.net/)).
+* FAQs: if the project is big enough, I think it makes sense to add a section for the most common questions a developer might have about the project.
 
 A good example of a project starter is [Cookiecutter Django](https://github.com/pydanny/cookiecutter-django), even if it lacks a screenshot of the web app. I also like [Cookiecutter Flask](https://github.com/sloria/cookiecutter-flask), which is a lot less verbose and shows a nice screenshot of the project.
 
@@ -108,11 +108,11 @@ Another good example is [Machine Learning From Scratch](https://github.com/erikl
 
 The most important things in a cookbook repository are:
 
-- Table of Contents: if the list of recipes is rather long and can be subdivided into smaller topics, create sections (e.g. Supervised Learning, Unsupervised Learning).
-- Reproducibility: I should be able to run the scripts without any issue. The dependencies are clearly stated and there is a section to explain how to run them. If a script relies on external data, there is a link to the original dataset.
-- Recipes are task-specific.
-- Recipes are not too big.
-- References: there are links to articles/resources to delve deeper into a specific topic (e.g. a script about how to use [lxml](https://lxml.de/) to perform web scraping on a particular website could have a short README with a list of articles about lxml and a screenshot of the target website).
+* Table of Contents: if the list of recipes is rather long and can be subdivided into smaller topics, create sections (e.g. Supervised Learning, Unsupervised Learning).
+* Reproducibility: I should be able to run the scripts without any issue. The dependencies are clearly stated and there is a section to explain how to run them. If a script relies on external data, there is a link to the original dataset.
+* Recipes are task-specific.
+* Recipes are not too big.
+* References: there are links to articles/resources to delve deeper into a specific topic (e.g. a script about how to use [lxml](https://lxml.de/) to perform web scraping on a particular website could have a short README with a list of articles about lxml and a screenshot of the target website).
 
 Keep in mind that on GitHub you can define a README in each directory, so you can include the necessary information where it is more relevant.
 
@@ -136,9 +136,9 @@ Sometimes a repository is just a curated list of resources: a list of links and 
 
 In this kind of repository, the README _is_ the repository, and most of what is valid for the other types of repositories is just not applicable. However, here is what I would like to find:
 
-- Table of Content: especially if a topic is broad enough, there should be several well-defined sections. This is a must for this kind of project. Don't write a single, unordered list of hundreds of articles. Use sections.
-- How to contribute: if you want to gather all the good resources about a subject, make it easy for people interested in the subject to add the links to the articles that they found interesting.
-- A basic code of conduct: if the project is very popular, probably it's a good idea to have one.
+* Table of Content: especially if a topic is broad enough, there should be several well-defined sections. This is a must for this kind of project. Don't write a single, unordered list of hundreds of articles. Use sections.
+* How to contribute: if you want to gather all the good resources about a subject, make it easy for people interested in the subject to add the links to the articles that they found interesting.
+* A basic code of conduct: if the project is very popular, probably it's a good idea to have one.
 
 A great example of a curated list of resources is [Awesome Node.js](https://github.com/sindresorhus/awesome-nodejs).
 Other examples are [awesome-journalism](https://github.com/eyeseast/awesome-journalism), [awesome-python](https://github.com/vinta/awesome-python), [HowToBeAProgrammer](https://github.com/braydie/HowToBeAProgrammer), [project-guidelines](https://github.com/wearehive/project-guidelines), and of course [Awesome README](https://github.com/matiassingers/awesome-readme).
@@ -147,8 +147,8 @@ Other examples are [awesome-journalism](https://github.com/eyeseast/awesome-jour
 
 I wrote this article after reading several articles on how to write a great README. Here are the ones that you _have to_ read:
 
-- [The Art of README](https://github.com/noffle/art-of-readme)
-- [README driven development](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html)
-- [How to write a README that rocks](https://m.dotdev.co/how-to-write-a-readme-that-rocks-bc29f279611a)
-- [How To Get Thousands of Stars on Your Github Project](https://blog.cwrichardkim.com/how-to-get-hundreds-of-stars-on-your-github-project-345b065e20a2)
-- [Top ten reasons why I won't use your open source project](https://changelog.com/posts/top-ten-reasons-why-i-wont-use-your-open-source-project)
+* [The Art of README](https://github.com/noffle/art-of-readme)
+* [README driven development](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html)
+* [How to write a README that rocks](https://m.dotdev.co/how-to-write-a-readme-that-rocks-bc29f279611a)
+* [How To Get Thousands of Stars on Your Github Project](https://blog.cwrichardkim.com/how-to-get-hundreds-of-stars-on-your-github-project-345b065e20a2)
+* [Top ten reasons why I won't use your open source project](https://changelog.com/posts/top-ten-reasons-why-i-wont-use-your-open-source-project)

@@ -1,9 +1,9 @@
 ---
-date: '2019-03-20'
+date: "2019-03-20"
 ogp:
   image: https://res.cloudinary.com/jackdbd/image/upload/v1599302017/byobu-screenshot_sbkhm6.png
   imageAlt: A screenshot of my Linux terminal when using Byobu.
-  video: 'https://youtu.be/NawuGmcvKus'
+  video: "https://youtu.be/NawuGmcvKus"
 tags:
   - CLI
 title: Easy terminal multiplexing with Byobu
@@ -39,10 +39,10 @@ I am sure I will keep using Byobu and maybe configure some custom keybindings in
 
 - `Shift + F1`: show all Byobu's keybindings (press `q` to exit).
 - `Shift + F2`: split the current panel vertically.
-- `Ctrl + F2`: split the current panel horizontally. _Note_ Xubuntu's Window Manager has already a keybinding for this key combination: `Move to Workspace 2`. Since I don't use workspaces, I disabled the keybinding in Window Manager.
+- `Ctrl + F2`: split the current panel horizontally. *Note* Xubuntu's Window Manager has already a keybinding for this key combination: `Move to Workspace 2`. Since I don't use workspaces, I disabled the keybinding in Window Manager.
 - `Shift + arrow (LEFT/RIGHT/UP/DOWN)`: switch between panels.
 - `Shift + Alt + arrow (LEFT/RIGHT/UP/DOWN)`: resize panel.
-- `F7`: enter _scrollback_ mode. You can navigate past output using _vi-like_ commands, like see [here](https://help.ubuntu.com/lts/serverguide/byobu.html). Exit with `Enter`.
+- `F7`: enter *scrollback* mode. You can navigate past output using *vi-like* commands, like see [here](https://help.ubuntu.com/lts/serverguide/byobu.html). Exit with `Enter`.
 - `Alt + PageUp/PageDown`: scroll back/forward.
 
 When you type `exit`, Byobu closes the current panel and resizes all other panels in the terminal window.
