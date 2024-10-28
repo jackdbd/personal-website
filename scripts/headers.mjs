@@ -319,6 +319,12 @@ const main = async () => {
       sources
     },
     {
+      headerKey: 'Content-Type',
+      headerValue: 'application/json',
+      filepath,
+      sources: ['/.well-known/oauth-authorization-server']
+    },
+    {
       headerKey: 'NEL',
       headerValue: nel,
       filepath,
