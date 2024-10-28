@@ -11,14 +11,13 @@
 
   <link rel="canonical" href="{{ absolutePageUrl }}">
 
-  {# <link rel="authorization_endpoint" href="https://indieauth.com/auth"> #}
-  {# <link rel="token_endpoint" href="https://tokens.indieauth.com/token"> #}  
-  {# <link rel="authorization_endpoint" href="http://localhost:5000/auth"> #}
-  {# <link rel="token_endpoint" href="http://localhost:5000/auth/token"> #}
-  {# <link rel="micropub" href="http://localhost:5000/micropub"> #}
-  <link rel="authorization_endpoint" href="https://indiekit.giacomodebidda.com/auth">
-  <link rel="token_endpoint" href="https://indiekit.giacomodebidda.com/auth/token">
-  <link rel="micropub" href="https://indiekit.giacomodebidda.com/micropub">
+  {# IndieAuth discover: new method (indieauth-metadata + JSON file in .well-known directory) #}
+  <link rel="indieauth-metadata" href="https://giacomodebidda.com/.well-known/oauth-authorization-server">
+  {# IndieAuth discover: old method (authorization_endpoint and token_endpoint) #}
+  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
+  <link rel="token_endpoint" href="https://micropub.fly.dev/token">
+
+  <link rel="micropub" href="https://micropub.fly.dev/micropub">
 
   {# TODO: how to get the base URL? The website base URL is dynamic, because the
   website could be running locally (e.g. with eleventy --serve),
@@ -121,7 +120,7 @@
   <link rel="pingback" href="https://webmention.io/giacomodebidda.com/xmlrpc" />
 
   {# RSS Feed #}
-  <link rel="alternate" type="application/rss+xml" href="{{ metadata.feeds.posts.href }}" title="{{ metadata.feeds.posts.title }}">
+  <link rel="alternate" type="application/rss+xml" href="{{ metadata.feeds.articles.href }}" title="{{ metadata.feeds.articles.title }}">
 
   {# External JS: use async or defer #}
   <script defer type="module" src="/assets/js/is-land.js"></script>

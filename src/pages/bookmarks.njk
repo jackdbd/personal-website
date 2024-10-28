@@ -1,0 +1,29 @@
+---
+description: Giacomo Debidda's bookmarks
+eleventyNavigation:
+  key: Bookmarks
+  order: 5
+layout: page.njk
+permalink: "bookmarks/index.html"
+section: bookmarks
+title: Bookmarks
+---
+{%- block pagecontent %}
+<ul>
+  {%- for bookmark in collections.bookmark %}
+    {# {{ bookmark | log }} #}
+    {% set rfc3339 = bookmark.date | dateToRfc3339 %}
+    {% set yyyy_mm_dd = bookmark.date | machineDateJS %}
+    <li>
+      <span>
+        <time datetime="{{ rfc3339 }}">
+          <strong>{{ yyyy_mm_dd }}</strong>
+        </time>
+        &nbsp;
+        <a href="{{ bookmark.url | url }}">{{ bookmark.fileSlug }}</a>
+      </span>
+    </li>
+  {% endfor -%}
+</ul>
+<p><a href="/">Home</a></p>
+{% endblock pagecontent -%}

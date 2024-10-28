@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:jackdbd/giacomodebidda-content.git
+	branch = main
+	commit = df9aad4163efadc2ee6470a8e1b98def2539b51c
+	parent = 17734b12d244cf516ae3afd724efad156f9d9709
+	method = merge
+	cmdver = 0.4.6

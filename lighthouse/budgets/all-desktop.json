@@ -45,7 +45,7 @@
     ]
   },
   {
-    "path": "/blog$",
+    "path": "/articles$",
     "resourceCounts": [
       {
         "resourceType": "third-party",
@@ -90,7 +90,7 @@
     ]
   },
   {
-    "path": "/posts/*",
+    "path": "/articles/*",
     "resourceCounts": [
       {
         "resourceType": "third-party",

@@ -1,8 +1,0 @@
-{
-  "layout": "post.njk",
-  "ogp": {
-    "type": "article"
-  },
-  "permalink": "posts/{{ title | slugify }}/index.html",
-  "tags": ["post"]
-}

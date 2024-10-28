@@ -34,7 +34,7 @@ jobs:
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram of Promotion Codes
-        uses: appleboy/telegram-action@v0.1.1
+        uses: appleboy/telegram-action@v1.0.0
         with:
           to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
           token: ${{ fromJSON(secrets.TELEGRAM).token }}
@@ -54,7 +54,7 @@ jobs:
           echo "$delimiter" >> $GITHUB_ENV
 
       - name: 💬 Notify Telegram of Coupons
-        uses: appleboy/telegram-action@v0.1.1
+        uses: appleboy/telegram-action@v1.0.0
         with:
           to: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
           token: ${{ fromJSON(secrets.TELEGRAM).token }}

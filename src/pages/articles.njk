@@ -1,0 +1,55 @@
+---
+description: Giacomo Debidda's blog
+eleventyNavigation:
+  key: Articles
+  order: 0
+layout: bare-minimum.njk
+ogp:
+  title: Articles
+permalink: /articles/index.html
+section: articles
+title: Articles
+---
+{% block content %}
+
+<div id="wrapper-for-sticky-footer">
+
+  {% include "components/header.njk" %}
+
+  <is-land on:visible autoinit="preact" import="/assets/js/preact-components/back-to-top.js"></is-land>
+
+  <main class="wrapper">
+    <div class="flow region">
+      <h1>{{ title }}</h1>
+      <div class="flow">
+        <div id="search"></div>
+        {% set articles = collections.article %}
+        {% include "components/article-list.njk" %}
+      </div>
+    </div>
+  </main>
+
+  {% include "components/footer.njk" %}
+
+</div>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({ element: "#search", showSubResults: true });
+  });
+</script>
+
+{% endblock content %}
+
+{# inlined CSS assets (critical CSS) #}
+<link data-helmet href="/pagefind/pagefind-ui.css" rel="stylesheet">
+
+{# inlined JS assets (critical JS) #}
+<script data-helmet src="/pagefind/pagefind-ui.js"></script>
+
+{# external CSS assets #}
+<link data-helmet rel="stylesheet" href="/assets/css/components.css">
+<link data-helmet rel="stylesheet" href="/assets/css/utilities.css">
+
+{# external JS assets #}
+<script data-helmet async src="/assets/js/sw-registration.js"></script>

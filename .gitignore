@@ -5,13 +5,6 @@ _site/*
 # dependencies
 node_modules/
 
-# environment variables
-.envrc
-
-# secrets
-secrets/*
-!secrets/README.md
-
 # Lighthouse and Lighthouse CI web performance reports
 lighthouse/reports/*
 !lighthouse/reports/README.md
@@ -30,3 +23,11 @@ hint-report/
 
 # tmp files for wrangler (Cloudflare CLI)
 .wrangler/
+
+# Devenv
+.devenv*
+devenv.local.nix
+
+.direnv
+
+.pre-commit-config.yaml

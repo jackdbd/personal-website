@@ -1,0 +1,34 @@
+---
+description: Giacomo Debidda's notes
+eleventyNavigation:
+  key: Notes
+  order: 3
+layout: page.njk
+permalink: "notes/index.html"
+section: notes
+title: Notes
+---
+{%- block pagecontent %}
+<ul>
+  {%- for note in collections.note %}
+    {# {{ note | log }} #}
+    {% set rfc3339 = note.date | dateToRfc3339 %}
+    {% set yyyy_mm_dd = note.date | machineDateJS %}
+    <li>
+      <span>
+        <time datetime="{{ rfc3339 }}">
+          <strong>{{ yyyy_mm_dd }}</strong>
+        </time>
+        &nbsp;
+        <a href="{{ note.url | url }}">{{ note.fileSlug }}</a>
+      </span>
+    </li>
+  {% endfor -%}
+</ul>
+<p><a href="/">Home</a></p>
+{% endblock pagecontent -%}
+
+{# pagination:
+  data: "notes.11tydata"
+  size: 10
+  alias: notes #}

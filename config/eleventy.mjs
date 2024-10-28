@@ -14,7 +14,6 @@ import { telegramPlugin } from '@jackdbd/eleventy-plugin-telegram'
 import { textToSpeechPlugin } from '@jackdbd/eleventy-plugin-text-to-speech'
 import { defClient as defCloudStorage } from '@jackdbd/eleventy-plugin-text-to-speech/hosting/cloud-storage'
 import { defClient as defCloudTextToSpeech } from '@jackdbd/eleventy-plugin-text-to-speech/synthesis/gcp-text-to-speech'
-// import brokenLinksPlugin from 'eleventy-plugin-broken-links'
 import embedTwitter from 'eleventy-plugin-embed-twitter'
 import embedVimeo from 'eleventy-plugin-vimeo-embed'
 import embedYouTube from 'eleventy-plugin-youtube-embed'
@@ -189,8 +188,9 @@ export default function (eleventyConfig) {
     }
   })
 
-  const domain = 'www.giacomodebidda.com'
-  const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`
+  const domain = 'giacomodebidda.com'
+  // const domain = 'www.giacomodebidda.com'
+  // const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`
 
   eleventyConfig.addPlugin(webmentionsPlugin, {
     blacklisted: [
@@ -216,12 +216,19 @@ export default function (eleventyConfig) {
   })
 
   eleventyConfig.addPlugin(emoji)
+
   eleventyConfig.addPlugin(helmet)
+
   eleventyConfig.addPlugin(navigation)
+
   eleventyConfig.addPlugin(pagefindPlugin, { verbose: true })
+
   eleventyConfig.addPlugin(readingTime)
+
   eleventyConfig.addPlugin(rss)
+
   eleventyConfig.addPlugin(syntaxHighlight)
+
   eleventyConfig.addPlugin(toc, {
     tags: ['h2', 'h3'],
     wrapperClass: 'toc-nav'
@@ -322,6 +329,8 @@ export default function (eleventyConfig) {
     'src/includes/assets/xsl': 'assets/xsl',
     'src/includes/preact-components': 'assets/js/preact-components',
     'src/includes/assets/pgp-key.txt': 'assets/pgp-key.txt',
+    'src/includes/assets/oauth-authorization-server.json':
+      '.well-known/oauth-authorization-server',
     'src/includes/assets/security.txt': '.well-known/security.txt',
     'node_modules/@11ty/is-land/is-land.js': 'assets/js/is-land.js',
     'node_modules/@11ty/is-land/is-land-autoinit.js':
@@ -405,12 +414,13 @@ export default function (eleventyConfig) {
     dir: {
       data: '_data',
       includes: 'includes',
-      input: 'src',
+      input: 'tmp',
       layouts: 'layouts',
       output: OUTPUT_DIR
     },
     htmlTemplateEngine: 'njk',
     markdownTemplateEngine: 'njk',
-    pathPrefix: '/'
+    pathPrefix: '/',
+    templateFormats: ['json', 'md', 'njk']
   }
 }

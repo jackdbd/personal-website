@@ -100,7 +100,7 @@ const main = async () => {
     })
     .join(', ')
 
-  const domain = 'www.giacomodebidda.com'
+  const domain = 'giacomodebidda.com'
   const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`
   const contactFormSubmissionUrl = 'https://formspree.io/f/mrgdevqb'
 
@@ -241,10 +241,10 @@ const main = async () => {
   // https://developers.cloudflare.com/pages/configuration/headers/
   // attach headers to every resource
   // const sources = ['/*']
-  // attach headers to the home page, the 404 page and ALL posts
-  const sources = ['/', '/404', '/posts/*']
-  // attach header to the home page, the 404 page and a specific post
-  // const sources = ['/', '/404', '/posts/playwright-on-nixos/']
+  // attach headers to the home page, the 404 page and ALL articles
+  const sources = ['/', '/404', '/articles/*']
+  // attach header to the home page, the 404 page and a specific article
+  // const sources = ['/', '/404', '/articles/playwright-on-nixos/']
 
   const { error: fp_error, value: fp_value } = featurePolicy({
     features: {
@@ -289,10 +289,10 @@ const main = async () => {
     // Example with a placeholder
     // https://developers.cloudflare.com/pages/configuration/headers/#placeholders
     // {
-    //   headerKey: 'X-Blog-Post',
+    //   headerKey: 'X-Article',
     //   headerValue: 'You are reading ":title"',
     //   filepath,
-    //   sources: ['/posts/:title']
+    //   sources: ['/articles/:title']
     // },
     {
       headerKey: 'Accept-CH',
@@ -309,6 +309,12 @@ const main = async () => {
     {
       headerKey: 'Feature-Policy',
       headerValue: fp_value,
+      filepath,
+      sources
+    },
+    {
+      headerKey: 'Link',
+      headerValue: `<https://${domain}/.well-known/oauth-authorization-server>; rel="indieauth-metadata"`,
       filepath,
       sources
     },

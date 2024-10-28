@@ -1,0 +1,24 @@
+<ul class="flow article-list">
+  {% for article in articles | reverse %}
+
+  <li class="flow">
+    <h2>
+      <a href="{{ article.url | url }}" data-pagefind-ignore>
+        {% if article.data.title %}
+        {{ article.data.title }}
+        {% else %}
+        Untitled article
+        {% endif %}
+      </a>
+    </h2>
+
+    {% if article.data.date %}
+      {% set humanDate = article.data.date | humanDate %}
+      {% set machineDate = article.data.date | machineDate %}
+      {% set readingTime = article | readingTime %}
+      {% include "components/article-info.njk" %}
+    {% endif %}
+  </li>
+
+  {% endfor %}
+</ul>

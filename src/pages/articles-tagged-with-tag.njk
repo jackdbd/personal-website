@@ -1,0 +1,21 @@
+---
+eleventyComputed:
+  title: Pages filed under “{{ tag }}”
+layout: page.njk
+pagination:
+  addAllPagesToCollections: true
+  alias: tag
+  data: collections
+  filter:
+    - all
+    - article
+    - nav
+    - userDefinedTagList
+  size: 1
+permalink: /tags/{{ tag }}/
+---
+{% block pagecontent %}
+{% set articles = collections[ tag ] %}
+{% include "components/article-list.njk" %}
+<p class="">See <a href="{{ '/tags/' | url }}">all tags</a>.</p>
+{% endblock pagecontent %}

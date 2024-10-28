@@ -44,7 +44,7 @@ git clone git@github.com:jackdbd/personal-website.git
 
 {{engines.node}}
 
-{{flake.nix}}
+{{devenv.nix}}
 
 If you want to run scrips/tests that rely on [Playwright](https://playwright.dev/), you will also need to install/update the browsers it uses:
 

@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 🌐 Trigger build on Cloudflare Pages
+        # https://github.com/marketplace/actions/http-request-action
         uses: fjogeleit/http-request-action@v1
         with:
           url: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}
