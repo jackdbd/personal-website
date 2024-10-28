@@ -188,8 +188,9 @@ export default function (eleventyConfig) {
     }
   })
 
-  const domain = 'www.giacomodebidda.com'
-  const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`
+  const domain = 'giacomodebidda.com'
+  // const domain = 'www.giacomodebidda.com'
+  // const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`
 
   eleventyConfig.addPlugin(webmentionsPlugin, {
     blacklisted: [
@@ -215,12 +216,19 @@ export default function (eleventyConfig) {
   })
 
   eleventyConfig.addPlugin(emoji)
+
   eleventyConfig.addPlugin(helmet)
+
   eleventyConfig.addPlugin(navigation)
+
   eleventyConfig.addPlugin(pagefindPlugin, { verbose: true })
+
   eleventyConfig.addPlugin(readingTime)
+
   eleventyConfig.addPlugin(rss)
+
   eleventyConfig.addPlugin(syntaxHighlight)
+
   eleventyConfig.addPlugin(toc, {
     tags: ['h2', 'h3'],
     wrapperClass: 'toc-nav'
@@ -321,6 +329,8 @@ export default function (eleventyConfig) {
     'src/includes/assets/xsl': 'assets/xsl',
     'src/includes/preact-components': 'assets/js/preact-components',
     'src/includes/assets/pgp-key.txt': 'assets/pgp-key.txt',
+    'src/includes/assets/oauth-authorization-server.json':
+      '.well-known/oauth-authorization-server',
     'src/includes/assets/security.txt': '.well-known/security.txt',
     'node_modules/@11ty/is-land/is-land.js': 'assets/js/is-land.js',
     'node_modules/@11ty/is-land/is-land-autoinit.js':

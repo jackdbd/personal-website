@@ -100,7 +100,7 @@ const main = async () => {
     })
     .join(', ')
 
-  const domain = 'www.giacomodebidda.com'
+  const domain = 'giacomodebidda.com'
   const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`
   const contactFormSubmissionUrl = 'https://formspree.io/f/mrgdevqb'
 
@@ -309,6 +309,12 @@ const main = async () => {
     {
       headerKey: 'Feature-Policy',
       headerValue: fp_value,
+      filepath,
+      sources
+    },
+    {
+      headerKey: 'Link',
+      headerValue: `<https://${domain}/.well-known/oauth-authorization-server>; rel="indieauth-metadata"`,
       filepath,
       sources
     },

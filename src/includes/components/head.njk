@@ -11,9 +11,13 @@
 
   <link rel="canonical" href="{{ absolutePageUrl }}">
 
-  <link rel="authorization_endpoint" href="https://giacomodebidda-indiekit.fly.dev/auth">
-  <link rel="token_endpoint" href="https://giacomodebidda-indiekit.fly.dev/auth/token">
-  <link rel="micropub" href="https://giacomodebidda-indiekit.fly.dev/micropub">
+  {# IndieAuth discover: new method (indieauth-metadata + JSON file in .well-known directory) #}
+  <link rel="indieauth-metadata" href="https://giacomodebidda.com/.well-known/oauth-authorization-server">
+  {# IndieAuth discover: old method (authorization_endpoint and token_endpoint) #}
+  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
+  <link rel="token_endpoint" href="https://micropub.fly.dev/token">
+
+  <link rel="micropub" href="https://micropub.fly.dev/micropub">
 
   {# TODO: how to get the base URL? The website base URL is dynamic, because the
   website could be running locally (e.g. with eleventy --serve),

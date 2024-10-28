@@ -1,0 +1,18 @@
+{
+  "authorization_endpoint": "https://indieauth.com/auth",
+  "code_challenge_methods_supported": ["S256"],
+  "introspection_endpoint": "https://micropub.fly.dev/introspect",
+  "issuer": "https://giacomodebidda.com/",
+  "revocation_endpoint": "https://micropub.fly.dev/revocation",
+  "scopes_supported": [
+    "email",
+    "profile",
+    "create",
+    "draft",
+    "update",
+    "delete",
+    "media"
+  ],
+  "token_endpoint": "https://micropub.fly.dev/token",
+  "userinfo_endpoint": "https://micropub.fly.dev/userinfo"
+}
