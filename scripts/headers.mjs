@@ -314,7 +314,7 @@ const main = async () => {
     },
     {
       headerKey: 'Link',
-      headerValue: `<https://${domain}/.well-known/oauth-authorization-server>; rel="indieauth-metadata"`,
+      headerValue: `<https://${domain}/.well-known/oauth-authorization-server>; rel="indieauth-metadata", <https://micropub.fly.dev/micropub>; rel="micropub"`,
       filepath,
       sources
     },
