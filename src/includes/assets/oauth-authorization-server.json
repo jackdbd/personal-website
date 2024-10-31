@@ -1,5 +1,6 @@
 {
-  "authorization_endpoint": "https://indieauth.com/auth",
+  "authorization_endpoint": "https://indielogin.com/auth",
+  "authorization_response_iss_parameter_supported": true,
   "code_challenge_methods_supported": ["S256"],
   "introspection_endpoint": "https://micropub.fly.dev/introspect",
   "issuer": "https://giacomodebidda.com/",
@@ -13,6 +14,7 @@
     "delete",
     "media"
   ],
+  "service_documentation": "https://indieauth.spec.indieweb.org/",
   "token_endpoint": "https://micropub.fly.dev/token",
   "userinfo_endpoint": "https://micropub.fly.dev/userinfo"
 }

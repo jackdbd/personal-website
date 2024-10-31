@@ -11,12 +11,13 @@
 
   <link rel="canonical" href="{{ absolutePageUrl }}">
 
-  {# IndieAuth discover: new method (indieauth-metadata + JSON file in .well-known directory) #}
+  {# IndieAuth discovery: new method (indieauth-metadata + JSON file in .well-known directory) #}
   <link rel="indieauth-metadata" href="https://giacomodebidda.com/.well-known/oauth-authorization-server">
-  {# IndieAuth discover: old method (authorization_endpoint and token_endpoint) #}
-  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
+  {# IndieAuth discovery: old method (authorization_endpoint and token_endpoint) #}
+  <link rel="authorization_endpoint" href="https://indielogin.com/auth">
   <link rel="token_endpoint" href="https://micropub.fly.dev/token">
 
+  {# Micropub discovery: old method (micropub endpoint here). The new method uses the Link header #}
   <link rel="micropub" href="https://micropub.fly.dev/micropub">
 
   {# TODO: how to get the base URL? The website base URL is dynamic, because the
@@ -109,8 +110,9 @@
   <link rel="me" href="https://github.com/jackdbd">
   {# I'm afraid I'll get a lot of spam by leaving my email here #}
   <link rel="me" href="mailto:{{ metadata.author.email }}">
-  {# IndieLogin.com and IndieAuth.com also support authentication via a PGP key #}
+  {# IndieAuth.com supports authentication via a OpenPGP key. IndieLogin.com seems to no longer support it. #}
   {# https://indieauth.com/pgp #}
+  {# https://indielogin.com/setup #}
   <link rel="pgpkey" href="/assets/pgp-key.txt">
 
   {# verification for Mastodon #}
