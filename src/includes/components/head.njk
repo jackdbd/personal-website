@@ -14,11 +14,11 @@
   {# IndieAuth discovery: new method (indieauth-metadata + JSON file in .well-known directory) #}
   <link rel="indieauth-metadata" href="https://giacomodebidda.com/.well-known/oauth-authorization-server">
   {# IndieAuth discovery: old method (authorization_endpoint and token_endpoint) #}
-  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
-  <link rel="token_endpoint" href="https://micropub.fly.dev/token">
+  <link rel="authorization_endpoint" href="https://giacomodebidda-indiekit.fly.dev/auth">
+  <link rel="token_endpoint" href="https://giacomodebidda-indiekit.fly.dev/auth/token">
 
   {# Micropub discovery: old method (micropub endpoint here). The new method uses the Link header #}
-  <link rel="micropub" href="https://micropub.fly.dev/micropub">
+  <link rel="micropub" href="https://giacomodebidda-indiekit.fly.dev/micropub">
 
   {# TODO: how to get the base URL? The website base URL is dynamic, because the
   website could be running locally (e.g. with eleventy --serve),
