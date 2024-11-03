@@ -15,13 +15,14 @@ section: post
 
       <h1 class="p-name">{{ title }}</h1>
       
-      <div class="cluster" data-align='start'>
+      <div class="cluster" data-align="start">
         {% set humanDate = date | humanDate %}
         {% set machineDate = date | machineDate %}
         {% set readingTime = content | readingTime %}
         <time class="dt-published" datetime="{{ machineDate }}">
           <strong>{{ humanDate }}</strong>
         </time>
+        <a rel="author" class="p-author h-card" href="https://giacomodebidda.com/">Giacomo Debidda</a>
         {% if tags %}
           {% set align = "start" %}
           {% include "components/tags.njk" %}

@@ -7,9 +7,9 @@
   <meta name="generator" content="{{ eleventy.generator }}">
 
   <title>{{ title or metadata.title }}</title>
-  {% set absolutePageUrl %}{{ page.url | url | absoluteUrl(metadata.url) }}{% endset %}
+  {% set canonical_url %}{{ page.url | url | absoluteUrl(metadata.url) }}{% endset %}
 
-  <link rel="canonical" href="{{ absolutePageUrl }}">
+  <link rel="canonical" href="{{ canonical_url }}">
 
   {# IndieAuth discovery: new method (indieauth-metadata + JSON file in .well-known directory) #}
   <link rel="indieauth-metadata" href="https://giacomodebidda.com/.well-known/oauth-authorization-server">
@@ -42,7 +42,7 @@
   <meta property="og:type" content="{{ ogp.type or metadata.ogp.type }}">
   <meta property="og:image" content="{{ ogp.image or metadata.profilePic }}">
   <meta property="og:image:alt" content="{{ ogp.imageAlt or metadata.description }}">
-  <meta property="og:url" content="{{ absolutePageUrl }}">
+  <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:description" content="{{ description or metadata.description }}">
   <meta property="og:locale" content="en_US">
   {% if ogp.video %}
