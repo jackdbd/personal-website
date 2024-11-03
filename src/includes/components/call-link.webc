@@ -1,4 +1,4 @@
-<span :id="uid" webc:root :id="uid">
+<span :id="uid" webc:root>
   <a :href="href" target="_blank" rel="external noopener noreferrer">
     <span @text="text"></span>
   </a>

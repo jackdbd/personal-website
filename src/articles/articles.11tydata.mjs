@@ -2,7 +2,7 @@ import defDebug from 'debug'
 
 const debug = defDebug('11ty:data:articles')
 
-const layout = 'post.njk' // rename 'article.njk' when done migrating to articles
+const layout = 'article.njk'
 debug(`render each article with layout ${layout}`)
 
 export default {

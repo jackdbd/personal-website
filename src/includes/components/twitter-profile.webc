@@ -1,4 +1,4 @@
-<span :id="uid" webc:root :id="uid" aria-label="My Twitter profile">
+<span :id="uid" webc:root aria-label="My Twitter profile">
   <a href="https://twitter.com/jackdbd" target="_blank" rel="external noopener noreferrer">
     Twitter
   </a>

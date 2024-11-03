@@ -11,15 +11,15 @@ section: post
   <is-land on:visible autoinit="preact" import="/assets/js/preact-components/back-to-top.js"></is-land>
 
   <main class="wrapper">
-    <article class="prose flow region">
+    <article class="prose flow region h-entry">
 
-      <h1>{{ title }}</h1>
+      <h1 class="p-name">{{ title }}</h1>
       
       <div class="cluster" data-align='start'>
         {% set humanDate = date | humanDate %}
         {% set machineDate = date | machineDate %}
         {% set readingTime = content | readingTime %}
-        <time datetime="{{ machineDate }}">
+        <time class="dt-published" datetime="{{ machineDate }}">
           <strong>{{ humanDate }}</strong>
         </time>
         {% if tags %}
@@ -32,7 +32,9 @@ section: post
 
       {% include "components/toc.njk" %}
 
-      {{ content | safe }}
+      <div class="flow e-content">
+        {{ content | safe }}
+      </div>
 
       <hr>
 

@@ -16,7 +16,7 @@ title: Hi there!
   <main class="wrapper">
     <div class="flow region">
       <h1>{{ title }}</h1>
-      <p>I'm Giacomo Debidda, also known as <a href="https://twitter.com/jackdbd" rel="noopener noreferrer" target="_blank">@jackdbd</a> on the Internet.</p>
+      <p class="h-card">I'm <span class="p-name">Giacomo Debidda</span>, a <span class="p-job-title" value="full-stack software developer">full-stack software developer</span> from <span class="p-country-name" value="Italy">Italy</span>.</p>
       <h2>Recent articles</h2>
       {% set n = 3 %}
       {% set articles = collections.article | reverse | limit(n) | reverse %}
