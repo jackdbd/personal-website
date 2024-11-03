@@ -2,13 +2,24 @@
 layout: page.njk
 ---
 {%- block content %}
-<article>
-  {{ content | safe }}
+
+<article class="prose flow region h-entry">
+
+  <div class="flow e-content">{{ content | safe }}</div>
+
   {% if location %}
     <pre>{{ location | dump | safe }}</pre>
   {% endif %}
-  <p>Created on: <time datetime="{{ date }}">{{ date }}</time></p>
+
+  <p>Published on: <time class="dt-published" datetime="{{ date }}">{{ date }}</time></p>
+
+  {% if tags %}
+    {% set align = "end" %}
+    {% include "components/tags.njk" %}
+  {% endif %}
+
 </article>
 
 <p>See <a href="/notes">all notes</a>.</p>
+
 {% endblock content -%}
