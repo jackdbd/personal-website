@@ -3,25 +3,37 @@ eleventyExcludeFromCollections: true
 excludeFromSitemap: true
 permalink: /_redirects
 ---
-{# https://mozilla.github.io/nunjucks/templating.html#whitespace-control #}
-{# my old blog had all articles at / dir. Then at /posts/. Now they're at /articles/ #}
+{#- https://mozilla.github.io/nunjucks/templating.html#whitespace-control -#}
+{#- My old blog had all articles at /. Then at /posts/. Now they're at /articles/ -#}
 {%- set slugs = [
+  'a-few-timeless-lessons-from-peopleware',
   'a-simple-git-hook-for-your-python-projects',
   'adapter-pattern-in-python',
+  'auditing-an-ecommerce-website',
   'better-git-commits',
   'bridge-pattern-in-python',
+  'event-storming',
+  'expression-problem',
   'facade-pattern-in-python',
   'factory-method-and-abstract-factory-in-python',
+  'flexible-runtime-polymorphism-with-clojure-multimethods',
+  'generate-and-view-har-files',
+  'how-i-setup-my-laptop-with-ansible',
   'how-to-import-d3-plugins-with-webpack',
+  'how-to-write-a-killer-readme',
+  'inspect-container-images-with-dive',
   'my-personal-git-memo',
   'mvc-pattern-in-python-dataset',
   'mvc-pattern-in-python-introduction-and-basicmodel',
   'mvc-pattern-in-python-sqlite',
+  'performance-audit-italian-news-website',
+  'playwright-on-nixos',
   'reactive-dashboards-with-plotly-dash',
   'reading-large-excel-files-with-pandas',
   'squashing-git-commits',
   'strategy-pattern-in-python',
   'template-method-pattern-in-python',
+  'test-your-javascript-on-multiple-engines-with-eshost-cli-and-jsvu',
   'threejs-project-starter-for-es6-and-webpack-2',
   'visualize-earthquakes-with-plotly-dash'
 ]
@@ -40,6 +52,5 @@ permalink: /_redirects
 {# {{ movedPermanently | log }} #}
 {{ movedPermanently }}
 {%- endfor -%}
-
-{# universal catch all for every URL that didn't match anything. Not sure I need it #}
-{# * /404 404 #}
+{#- Universal catch all for every URL that didn't match anything. Not sure I need it. -#}
+{#- * /404 404 -#}
