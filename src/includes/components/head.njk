@@ -14,7 +14,7 @@
   {# IndieAuth discovery: new method (indieauth-metadata + JSON file in .well-known directory) #}
   <link rel="indieauth-metadata" href="https://giacomodebidda.com/.well-known/oauth-authorization-server">
   {# IndieAuth discovery: old method (authorization_endpoint and token_endpoint) #}
-  <link rel="authorization_endpoint" href="https://indielogin.com/auth">
+  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
   <link rel="token_endpoint" href="https://micropub.fly.dev/token">
 
   {# Micropub discovery: old method (micropub endpoint here). The new method uses the Link header #}
@@ -101,10 +101,6 @@
   {# <link rel="preload" href="/assets/fonts/merriweather-v22-latin-700italic.woff2" as="font" type="font/woff2" crossorigin> #}
   {# I am using a monospace font only in blog posts, so I'll preload it only for those page types. #}
 
-  {# Link to my github profile, so webmentions.io can authenticate me using IndieLogin.com #}
-  {# Note: IndieAuth no longer supports Twitter as identity provider #}
-  {# https://indielogin.com/setup #}
-  {# https://indielogin.com/api #}
   {# These are invisible links. Keep in mind that visible links are preferred
   over invisible data, see antipattern:invisible metadata for why. #}
   {# https://indieweb.org/antipatterns#invisible_metadata #}
