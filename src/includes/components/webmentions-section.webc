@@ -1,149 +1,151 @@
 <script webc:type="js" webc:is="template" webc:root :id="uid" aria-label="list of webmentions">
 
   async function renderItems() {
-    const domain = 'www.giacomodebidda.com'
+    // const domain = 'www.giacomodebidda.com'
+    const domain = 'giacomodebidda.com'
     const webmention_endpoint = `https://webmention.io/${domain}/webmention`
     const relative_path = this['$data'].page.url
     const webmention_target_url = new URL(relative_path, `https://${domain}`)
       
     // console.log(`=== this['$data'] ===`, this['$data'])
-      const webmentions = await this.helpers.webmentionsSentToRelativePath(relative_path)
+    const webmentions = await this.helpers.webmentionsSentToRelativePath(relative_path)
+    console.log(`=== webmentions send to ${relative_path} ===`, webmentions)
 
-      const { likes, replies, reposts } = webmentions
+    const { likes, replies, reposts } = webmentions
 
-      let h3_likes = ''
-      if (likes.length === 0) {
-        h3_likes = `<h3>No Likes</h3>`
-      } else if (likes.length === 1) {
-        h3_likes = `<h3>1 Likes</h3>`
-      } else {
-        h3_likes = `<h3>${likes.length} Likes</h3>`
-      }
+    let h3_likes = ''
+    if (likes.length === 0) {
+      h3_likes = `<h3>No Likes</h3>`
+    } else if (likes.length === 1) {
+      h3_likes = `<h3>1 Likes</h3>`
+    } else {
+      h3_likes = `<h3>${likes.length} Likes</h3>`
+    }
 
-      let h3_reposts = ''
-      if (reposts.length === 0) {
-        h3_reposts = `<h3>No Reposts</h3>`
-      } else if (reposts.length === 1) {
-        h3_reposts = `<h3>1 Repost</h3>`
-      } else {
-        h3_reposts = `<h3>${reposts.length} Reposts</h3>`
-      }
+    let h3_reposts = ''
+    if (reposts.length === 0) {
+      h3_reposts = `<h3>No Reposts</h3>`
+    } else if (reposts.length === 1) {
+      h3_reposts = `<h3>1 Repost</h3>`
+    } else {
+      h3_reposts = `<h3>${reposts.length} Reposts</h3>`
+    }
 
-      let h3_replies = ''
-      if (replies.length === 0) {
-        h3_replies = `<h3>No Replies</h3>`
-      } else if (replies.length === 1) {
-        h3_replies = `<h3>1 Reply</h3>`
-      } else {
-        h3_replies = `<h3>${replies.length} Replies</h3>`
-      }
+    let h3_replies = ''
+    if (replies.length === 0) {
+      h3_replies = `<h3>No Replies</h3>`
+    } else if (replies.length === 1) {
+      h3_replies = `<h3>1 Reply</h3>`
+    } else {
+      h3_replies = `<h3>${replies.length} Replies</h3>`
+    }
 
-      const li_reposts = reposts.map((wm, i) => {
-        // console.log(`=== reposts[${i}] ===`, wm)
+    const li_reposts = reposts.map((wm, i) => {
+      // console.log(`=== reposts[${i}] ===`, wm)
 
-        const date = new Date(wm.published || wm['wm-received'])
-        const published = this.helpers.humanDateJS(date)
+      const date = new Date(wm.published || wm['wm-received'])
+      const published = this.helpers.humanDateJS(date)
 
-        const author = this.helpers.sanitizeWebmentionAuthor(wm.author)
-        const imgAlt = `${author.name}'s avatar`
-        const href = wm.url
+      const author = this.helpers.sanitizeWebmentionAuthor(wm.author)
+      const imgAlt = `${author.name}'s avatar`
+      const href = wm.url
 
-        return `
-        <li>
-          <webmention-repost src="${author.photo}" alt="${imgAlt}" href="${href}"></webmention-repost>
-        </li>`
-        })
+      return `
+      <li>
+        <webmention-repost src="${author.photo}" alt="${imgAlt}" href="${href}"></webmention-repost>
+      </li>`
+    })
 
-      const li_replies = replies.map((wm, i) => {
-        // console.log(`=== replies[${i}] ===`, wm)
+    const li_replies = replies.map((wm, i) => {
+      // console.log(`=== replies[${i}] ===`, wm)
 
-        const date = new Date(wm.published || wm['wm-received'])
-        const published = this.helpers.humanDateJS(date)
+      const date = new Date(wm.published || wm['wm-received'])
+      const published = this.helpers.humanDateJS(date)
 
-        const author = this.helpers.sanitizeWebmentionAuthor(wm.author)
-        const imgAlt = `${author.name}'s avatar`
+      const author = this.helpers.sanitizeWebmentionAuthor(wm.author)
+      const imgAlt = `${author.name}'s avatar`
 
-        const { hostname } = new URL(wm.url)
+      const { hostname } = new URL(wm.url)
 
-        // a webmention of type mention-of apparently can have no content at all.
-        // I am not sure whether all webmentions of type mention-of have no content.
-        if (!wm.content) {
-          return `
-        <li>
-          <webmention-entry>
-            <webmention-author src="${author.photo}" alt="${imgAlt}" href="${author.url}" @name="${author.name}">
-              <span slot="author-action">mentioned this page <a href="${wm.url}" target="_blank" rel="external noopener noreferrer">on ${hostname}</a> on <time datetime="${date}">${published}</time>.</span>
-            </webmention-author>
-          </webmention-entry>
-        </li>`
-        }
-
-        // const replyHtml = wm.content.html ? `<blockquote>${wm.content.html}</blockquote>` : ''
-        const reply = wm.content.html ? `<p><em>${wm.content.html}</em></p>` : wm.content.text
-        // const reply = wm.content.html ? `<em>${wm.content.html}</em>` : ''
-
+      // a webmention of type mention-of apparently can have no content at all.
+      // I am not sure whether all webmentions of type mention-of have no content.
+      if (!wm.content) {
         return `
       <li>
         <webmention-entry>
           <webmention-author src="${author.photo}" alt="${imgAlt}" href="${author.url}" @name="${author.name}">
             <span slot="author-action">mentioned this page <a href="${wm.url}" target="_blank" rel="external noopener noreferrer">on ${hostname}</a> on <time datetime="${date}">${published}</time>.</span>
           </webmention-author>
-          ${reply}
         </webmention-entry>
       </li>`
-      })
-
-      const li_likes = likes.map((wm, i) => {
-        // console.log(`=== likes[${i}] ===`, wm)
-
-        const date = new Date(wm.published || wm['wm-received'])
-        const published = this.helpers.humanDateJS(date)
-
-        const author = this.helpers.sanitizeWebmentionAuthor(wm.author)
-        const imgAlt = `${author.name}'s avatar`
-
-        return `
-        <li>
-          <webmention-like src="${author.photo}" alt="${imgAlt}" href="${author.url}"></webmention-like>
-        </li>`
-
-      })
-
-      const ul_class = 'flex -space-x-4 stack-space:s'
-
-      let webmentions_html = ''
-      if (li_reposts.length === 0 && li_replies.length === 0 && li_likes.length === 0) {
-        webmentions_html = `<p>No webmentions to show.</p>`
       }
 
-      if (li_replies.length > 0) {
-        const ol_replies = `<ol class="stack stack-space:s">${li_replies.join('')}</ol>`
-        webmentions_html = webmentions_html.concat(`${h3_replies}${ol_replies}`)
-      }
-      
-      if (li_reposts.length > 0) {
-        const ul_reposts = `<ul class="${ul_class}">${li_reposts.join('')}</ul>`
-        webmentions_html = webmentions_html.concat(`${h3_reposts}${ul_reposts}`)
-      }
-
-      if (li_likes.length > 0) {
-        const ul_likes = `<ul class="${ul_class}">${li_likes.join('')}</ul>`
-        webmentions_html = webmentions_html.concat(`${h3_likes}${ul_likes}`)
-      }
+      // const replyHtml = wm.content.html ? `<blockquote>${wm.content.html}</blockquote>` : ''
+      const reply = wm.content.html ? `<p><em>${wm.content.html}</em></p>` : wm.content.text
+      // const reply = wm.content.html ? `<em>${wm.content.html}</em>` : ''
 
       return `
-      <section class="flow region">
-        <h2>Webmentions</h2>
-        <div class="stack">
-          <webmention-form 
-            endpoint="${webmention_endpoint}"
-            target-url="${webmention_target_url.href}"
-            @instructions="Did you mention this blog post on your website? Let me know the URL of <b>your article</b> using the form below.">
-          </webmention-form>
-          <p><em>Webmentions collected by <a href="https://brid.gy" target="_blank" rel="external noopener noreferrer">Bridgy</a></em>.</p>
-          ${webmentions_html}
-        </div>
-      </section>`
+    <li>
+      <webmention-entry>
+        <webmention-author src="${author.photo}" alt="${imgAlt}" href="${author.url}" @name="${author.name}">
+          <span slot="author-action">mentioned this page <a href="${wm.url}" target="_blank" rel="external noopener noreferrer">on ${hostname}</a> on <time datetime="${date}">${published}</time>.</span>
+        </webmention-author>
+        ${reply}
+      </webmention-entry>
+    </li>`
+    })
+
+    const li_likes = likes.map((wm, i) => {
+      // console.log(`=== likes[${i}] ===`, wm)
+
+      const date = new Date(wm.published || wm['wm-received'])
+      const published = this.helpers.humanDateJS(date)
+
+      const author = this.helpers.sanitizeWebmentionAuthor(wm.author)
+      const imgAlt = `${author.name}'s avatar`
+
+      return `
+      <li>
+        <webmention-like src="${author.photo}" alt="${imgAlt}" href="${author.url}"></webmention-like>
+      </li>`
+
+    })
+
+    const ul_class = 'flex -space-x-4 stack-space:s'
+
+    let webmentions_html = ''
+    if (li_reposts.length === 0 && li_replies.length === 0 && li_likes.length === 0) {
+      webmentions_html = `<p>No webmentions to show.</p>`
+    }
+
+    if (li_replies.length > 0) {
+      const ol_replies = `<ol class="stack stack-space:s">${li_replies.join('')}</ol>`
+      webmentions_html = webmentions_html.concat(`${h3_replies}${ol_replies}`)
+    }
+    
+    if (li_reposts.length > 0) {
+      const ul_reposts = `<ul class="${ul_class}">${li_reposts.join('')}</ul>`
+      webmentions_html = webmentions_html.concat(`${h3_reposts}${ul_reposts}`)
+    }
+
+    if (li_likes.length > 0) {
+      const ul_likes = `<ul class="${ul_class}">${li_likes.join('')}</ul>`
+      webmentions_html = webmentions_html.concat(`${h3_likes}${ul_likes}`)
+    }
+
+    return `
+    <section class="flow region">
+      <h2>Webmentions</h2>
+      <div class="stack">
+        <webmention-form 
+          endpoint="${webmention_endpoint}"
+          target-url="${webmention_target_url.href}"
+          @instructions="Did you mention this blog post on your website? Let me know the URL of <b>your article</b> using the form below.">
+        </webmention-form>
+        <p><em>Webmentions collected by <a href="https://brid.gy" target="_blank" rel="external noopener noreferrer">Bridgy</a></em>.</p>
+        ${webmentions_html}
+      </div>
+    </section>`
     }
 
   renderItems();

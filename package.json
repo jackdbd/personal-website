@@ -63,6 +63,7 @@
     "scripts:plausible": "./scripts/plausible.mjs",
     "scripts:report-security-issue": "node ./scripts/report-security-issue.mjs",
     "scripts:security-txt": "node ./scripts/security-txt.mjs",
+    "serve": "serve _site/ -p 3000",
     "test": "echo TODO write some e2e test with playwright",
     "webhint:blog": "hint $DOMAIN/blog/",
     "webhint:home": "hint $DOMAIN/",

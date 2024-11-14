@@ -188,7 +188,7 @@ export default function (eleventyConfig) {
     }
   })
 
-  const domain = 'giacomodebidda.com'
+  // const domain = 'giacomodebidda.com'
   // const domain = 'www.giacomodebidda.com'
   // const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`
 
@@ -196,7 +196,7 @@ export default function (eleventyConfig) {
     blacklisted: [
       { id: 1598904, reason: 'it was a webmention I sent for testing' }
     ],
-    domain,
+    domain: 'www.giacomodebidda.com',
     token: process.env.WEBMENTION_IO_TOKEN
   })
 
