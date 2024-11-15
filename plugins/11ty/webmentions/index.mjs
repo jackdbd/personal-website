@@ -49,6 +49,9 @@ export const webmentionsPlugin = (eleventyConfig, options) => {
   })
   debug(`added global data webmentionsSentToDomain`)
 
+  eleventyConfig.addFilter('getDomain', () => domain)
+  debug(`added filter getDomain`)
+
   eleventyConfig.addFilter('isTwitterUrl', isTwitterUrl)
   debug(`added filter isTwitterUrl`)
 

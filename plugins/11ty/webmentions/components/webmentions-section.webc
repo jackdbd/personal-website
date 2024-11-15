@@ -1,15 +1,13 @@
 <script webc:type="js" webc:is="template" webc:root :id="uid" aria-label="list of webmentions">
 
   async function renderItems() {
-    // const domain = 'www.giacomodebidda.com'
-    const domain = 'giacomodebidda.com'
-    const webmention_endpoint = `https://webmention.io/${domain}/webmention`
-    const relative_path = this['$data'].page.url
-    const webmention_target_url = new URL(relative_path, `https://${domain}`)
-      
+    // console.log(`=== WebC attributes ===`, this.webc.attributes)
     // console.log(`=== this['$data'] ===`, this['$data'])
+    // console.log(`=== this.helpers ===`, this.helpers)
+
+    const relative_path = this['$data'].page.url
     const webmentions = await this.helpers.webmentionsSentToRelativePath(relative_path)
-    console.log(`=== webmentions send to ${relative_path} ===`, webmentions)
+    // console.log(`=== webmentions sent to ${relative_path} ===`, webmentions)
 
     const { likes, replies, reposts } = webmentions
 
@@ -17,7 +15,7 @@
     if (likes.length === 0) {
       h3_likes = `<h3>No Likes</h3>`
     } else if (likes.length === 1) {
-      h3_likes = `<h3>1 Likes</h3>`
+      h3_likes = `<h3>1 Like</h3>`
     } else {
       h3_likes = `<h3>${likes.length} Likes</h3>`
     }
@@ -132,6 +130,11 @@
       const ul_likes = `<ul class="${ul_class}">${li_likes.join('')}</ul>`
       webmentions_html = webmentions_html.concat(`${h3_likes}${ul_likes}`)
     }
+
+    // const domain = this.webc.attributes.domain
+    const domain = this.helpers.getDomain()
+    const webmention_endpoint = `https://webmention.io/${domain}/webmention`
+    const webmention_target_url = new URL(relative_path, `https://${domain}`)
 
     return `
     <section class="flow region">

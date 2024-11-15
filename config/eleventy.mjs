@@ -188,10 +188,6 @@ export default function (eleventyConfig) {
     }
   })
 
-  // const domain = 'giacomodebidda.com'
-  // const domain = 'www.giacomodebidda.com'
-  // const sendWebmentionFormSubmissionUrl = `https://webmention.io/${domain}/webmention`
-
   eleventyConfig.addPlugin(webmentionsPlugin, {
     blacklisted: [
       { id: 1598904, reason: 'it was a webmention I sent for testing' }
@@ -239,6 +235,7 @@ export default function (eleventyConfig) {
     components: [
       'src/includes/components/**/*.webc',
       'plugins/11ty/stripe/components/**/*.webc',
+      'plugins/11ty/webmentions/components/**/*.webc',
       'npm:@11ty/is-land/*.webc',
       'npm:@11ty/eleventy-plugin-syntaxhighlight/*.webc'
     ]

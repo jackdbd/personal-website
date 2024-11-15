@@ -5,6 +5,7 @@ const config = {
   content: [
     './assets/**/*.{html,njk}',
     './11ty/paired-shortcodes.js',
+    './plugins/11ty/webmentions/components/**/*.webc',
     './src/includes/components/**/*.{njk,webc}',
     './src/layouts/**/*.njk',
     './src/pages/**/*.{html,njk}'
