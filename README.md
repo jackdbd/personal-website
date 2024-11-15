@@ -141,7 +141,7 @@ See [SECURITY.md](./SECURITY.md).
 
 ### Production dependencies
 
-This project has **52** `dependencies`.
+This project has **53** `dependencies`.
 
 | Package | Version |
 |---|---|
@@ -186,6 +186,7 @@ This project has **52** `dependencies`.
 | [postcss](https://www.npmjs.com/package/postcss) | `^8.4.47` |
 | [postcss-cli](https://www.npmjs.com/package/postcss-cli) | `^11.0.0` |
 | [sanitize-html](https://www.npmjs.com/package/sanitize-html) | `^2.13.1` |
+| [seia](https://www.npmjs.com/package/seia) | `^0.2.2` |
 | [slugify](https://www.npmjs.com/package/slugify) | `^1.6.6` |
 | [stripe](https://www.npmjs.com/package/stripe) | `^17.2.1` |
 | [tailwindcss](https://www.npmjs.com/package/tailwindcss) | `^3.4.14` |

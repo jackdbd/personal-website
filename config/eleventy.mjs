@@ -335,7 +335,9 @@ export default function (eleventyConfig) {
     'node_modules/@11ty/is-land/is-land.js': 'assets/js/is-land.js',
     'node_modules/@11ty/is-land/is-land-autoinit.js':
       'assets/js/is-land-autoinit.js',
-    'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js'
+    'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js',
+    'node_modules/seia/dist/seia.js': 'assets/js/seia.js',
+    'node_modules/seia/dist/styles': 'assets/css/seia/styles'
   })
 
   // https://www.11ty.dev/docs/shortcodes/

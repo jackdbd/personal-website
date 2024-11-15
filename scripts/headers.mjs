@@ -133,8 +133,9 @@ const main = async () => {
     'connect-src': [
       'self',
       'cloudflareinsights.com',
+      `https://webmention.io/${domain}/webmention`,
       'res.cloudinary.com',
-      `https://webmention.io/${domain}/webmention`
+      'webmention.io'
     ],
 
     'default-src': ['none'],

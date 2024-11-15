@@ -50,6 +50,8 @@ section: post
     <call-to-action></call-to-action>
     {% endrenderTemplate %}
 
+    <s-e-i-a css=".h-cite{padding:1rem};"></s-e-i-a>
+
     {% renderTemplate "webc" %}
     <webmentions-section></webmentions-section>
     {% endrenderTemplate %}
@@ -76,3 +78,4 @@ section: post
 
 {# external JS assets #}
 <script data-helmet async src="/assets/js/sw-registration.js"></script>
+<script data-helmet async src="/assets/js/seia.js" type="module"></script>
