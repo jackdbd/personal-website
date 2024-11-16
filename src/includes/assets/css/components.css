@@ -196,6 +196,7 @@ video::cue {
 }
 
 .callout__content {
+  line-break: anywhere;
   padding: var(--scale-space-xs);
 }
 
