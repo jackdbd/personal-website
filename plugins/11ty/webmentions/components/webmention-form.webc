@@ -4,14 +4,18 @@
     <input id="webmention-target-url" type="hidden" name="target" :value="targetUrl">
     <p @html="instructions"></p>
     <!-- this MUST have 'source' as its name -->
-    <input id="webmention-source-url" type="text" name="source" placeholder="https://your-website.com/your-article">
+    <input id="webmention-source-url" type="text" name="source" placeholder="https://your-website.com/your-page">
     <button name="submit" type="submit">Send Webmention</button>
   </form>
-  <p>Upon form submission, your <a href="https://indieweb.org/Webmention" target="_blank" rel="external noopener noreferrer">webmention</a> will be sent to <a :href="endpoint" @text="endpoint" target="_blank" rel="external noopener noreferrer"></a>.</p>
+  <p>Upon form submission, your <a href="https://indieweb.org/Webmention" target="_blank" rel="external noopener noreferrer">webmention</a> will be sent to <a class="webmention-endpoint" :href="endpoint" @text="endpoint" target="_blank" rel="external noopener noreferrer"></a>.</p>
   <ul id="webmentions-queue"></ul>
 </div>
 
 <style webc:scoped>
+  :host a.webmention-endpoint {
+    line-break: anywhere;
+  }
+
   :host p.error {
     color: var(--color-accent);
   }
@@ -56,7 +60,9 @@ window.customElements.define("webmention-form", class extends HTMLElement {
       })
 
       const res = await response.json()
-      // console.log("response from Webmention.io", res)
+      // console.log(`=== WebC attributes ===`, this.webc.attributes)
+      // console.log(`=== this['$data'] ===`, this['$data'])
+      // console.log("response from webmention endpoint", res)
 
       const li = document.createElement("li")
       if (res.error) {
