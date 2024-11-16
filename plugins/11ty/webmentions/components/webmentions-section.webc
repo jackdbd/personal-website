@@ -4,12 +4,14 @@
     // console.log(`=== WebC attributes ===`, this.webc.attributes)
     // console.log(`=== this['$data'] ===`, this['$data'])
     // console.log(`=== this.helpers ===`, this.helpers)
+    // const { eleventy, page } = this['$data']
 
-    const relative_path = this['$data'].page.url
-    const webmentions = await this.helpers.webmentionsSentToRelativePath(relative_path)
-    // console.log(`=== webmentions sent to ${relative_path} ===`, webmentions)
-
-    const { likes, replies, reposts } = webmentions
+    // const relative_path = page.url
+    // const webmentions = await this.helpers.webmentionsSentToRelativePath(relative_path)
+    
+    const { likes, replies, reposts } = this.webc.attributes
+    const webmention_endpoint = this.webc.attributes.webmentionEndpoint
+    const webmention_target_url = this.webc.attributes.webmentionTargetUrl
 
     let h3_likes = ''
     if (likes.length === 0) {
@@ -131,11 +133,6 @@
       webmentions_html = webmentions_html.concat(`${h3_likes}${ul_likes}`)
     }
 
-    // const domain = this.webc.attributes.domain
-    const domain = this.helpers.getDomain()
-    const webmention_endpoint = `https://webmention.io/${domain}/webmention`
-    const webmention_target_url = new URL(relative_path, `https://${domain}`)
-
     return `
     <section class="flow region">
       <h2>Webmentions</h2>
@@ -143,9 +140,9 @@
         <webmention-form 
           endpoint="${webmention_endpoint}"
           target-url="${webmention_target_url.href}"
-          @instructions="Did you mention this blog post on your website? Let me know the URL of <b>your article</b> using the form below.">
+          @instructions="Did you mention this page on your website? Let me know the URL of <b>your page</b> using the form below.">
         </webmention-form>
-        <p><em>Webmentions collected by <a href="https://brid.gy" target="_blank" rel="external noopener noreferrer">Bridgy</a></em>.</p>
+        <p>Webmentions from <a href="https://indieweb.org/silo" target="_blank" rel="external noopener noreferrer">silos</a> collected by <a href="https://brid.gy" target="_blank" rel="external noopener noreferrer">Bridgy</a>.</p>
         ${webmentions_html}
       </div>
     </section>`

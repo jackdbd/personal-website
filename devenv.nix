@@ -16,6 +16,8 @@
 
     DOMAIN = "giacomodebidda.com";
 
+    GO_JAMMING = builtins.readFile /run/secrets/go-jamming;
+
     GOOGLE_APPLICATION_CREDENTIALS = "/run/secrets/prj-kitchen-sink/sa-storage-uploader";
 
     GPTCOMMIT__OPENAI__API_KEY = builtins.readFile "/run/secrets/openai/personal_api_key";

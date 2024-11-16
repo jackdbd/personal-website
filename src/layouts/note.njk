@@ -20,6 +20,32 @@ layout: page.njk
 
 </article>
 
+{% set likes = webmentionsReceivedAtURL | getWebmentionsByTypes(['like-of']) %}
+{% set replies = webmentionsReceivedAtURL | getWebmentionsByTypes(['mention-of', 'in-reply-to', 'reply']) %}
+{% set reposts = webmentionsReceivedAtURL | getWebmentionsByTypes(['repost-of']) %}
+
+{# Global data #}
+{# {{ webmentions | log }} #}
+
+{# Computed Data #}
+{# {{ webmentionsReceivedAtURL | log }} #}
+{# {{ webmentionTargetURL | log }} #}
+
+{% renderTemplate "webc", {
+  likes: likes,
+  replies: replies,
+  reposts: reposts,
+  webmention_endpoint: webmentions.webmention_endpoint,
+  webmention_target_url: webmentionTargetURL } %}
+<webmentions-section
+  :@likes="likes"
+  :@replies="replies"
+  :@reposts="reposts"
+  :@webmention-endpoint="webmention_endpoint"
+  :@webmention-target-url="webmention_target_url">
+</webmentions-section>
+{% endrenderTemplate %}
+
 <p>See <a href="/notes">all notes</a>.</p>
 
 {% endblock content -%}

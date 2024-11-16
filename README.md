@@ -152,6 +152,7 @@ This project has **53** `dependencies`.
 | [@11ty/eleventy-plugin-syntaxhighlight](https://www.npmjs.com/package/@11ty/eleventy-plugin-syntaxhighlight) | `^5.0.0` |
 | [@11ty/eleventy-plugin-webc](https://www.npmjs.com/package/@11ty/eleventy-plugin-webc) | `^0.11.2` |
 | [@11ty/is-land](https://www.npmjs.com/package/@11ty/is-land) | `^4.0.0` |
+| [@chrisburnell/eleventy-cache-webmentions](https://www.npmjs.com/package/@chrisburnell/eleventy-cache-webmentions) | `^2.1.8` |
 | [@google-cloud/storage](https://www.npmjs.com/package/@google-cloud/storage) | `^7.13.0` |
 | [@google-cloud/text-to-speech](https://www.npmjs.com/package/@google-cloud/text-to-speech) | `^5.5.0` |
 | [@jackdbd/content-security-policy](https://www.npmjs.com/package/@jackdbd/content-security-policy) | `^3.0.0` |
@@ -186,7 +187,6 @@ This project has **53** `dependencies`.
 | [postcss](https://www.npmjs.com/package/postcss) | `^8.4.47` |
 | [postcss-cli](https://www.npmjs.com/package/postcss-cli) | `^11.0.0` |
 | [sanitize-html](https://www.npmjs.com/package/sanitize-html) | `^2.13.1` |
-| [seia](https://www.npmjs.com/package/seia) | `^0.2.2` |
 | [slugify](https://www.npmjs.com/package/slugify) | `^1.6.6` |
 | [stripe](https://www.npmjs.com/package/stripe) | `^17.2.1` |
 | [tailwindcss](https://www.npmjs.com/package/tailwindcss) | `^3.4.14` |

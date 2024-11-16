@@ -50,10 +50,30 @@ section: post
     <call-to-action></call-to-action>
     {% endrenderTemplate %}
 
-    <s-e-i-a css=".h-cite{padding:1rem};"></s-e-i-a>
+    {% set likes = webmentionsReceivedAtURL | getWebmentionsByTypes(['like-of']) %}
+    {% set replies = webmentionsReceivedAtURL | getWebmentionsByTypes(['mention-of', 'in-reply-to', 'reply']) %}
+    {% set reposts = webmentionsReceivedAtURL | getWebmentionsByTypes(['repost-of']) %}
 
-    {% renderTemplate "webc" %}
-    <webmentions-section></webmentions-section>
+    {# Global data #}
+    {# {{ webmentions | log }} #}
+
+    {# Computed Data #}
+    {# {{ webmentionsReceivedAtURL | log }} #}
+    {# {{ webmentionTargetURL | log }} #}
+
+    {% renderTemplate "webc", {
+      likes: likes,
+      replies: replies,
+      reposts: reposts,
+      webmention_endpoint: webmentions.webmention_endpoint,
+      webmention_target_url: webmentionTargetURL } %}
+    <webmentions-section
+      :@likes="likes"
+      :@replies="replies"
+      :@reposts="reposts"
+      :@webmention-endpoint="webmention_endpoint"
+      :@webmention-target-url="webmention_target_url">
+    </webmentions-section>
     {% endrenderTemplate %}
 
   </main>
@@ -78,4 +98,3 @@ section: post
 
 {# external JS assets #}
 <script data-helmet async src="/assets/js/sw-registration.js"></script>
-<script data-helmet async src="/assets/js/seia.js" type="module"></script>

@@ -102,8 +102,14 @@ export const defResponseToWebmentions = ({ blacklisted, sanitizeOptions }) => {
 export const sanitizeWebmentionAuthor = (author = {}) => {
   const name = author.name || 'Anonymous'
 
-  const photo =
-    author.photo || 'https://bulma.io/images/placeholders/128x128.png'
+  let photo
+  if (author.photo) {
+    photo = author.photo
+  } else if (author.picture) {
+    photo = `https://webmentions.giacomodebidda.com${author.picture}`
+  } else {
+    photo = 'https://bulma.io/images/placeholders/128x128.png'
+  }
 
   const url = author.url || undefined
 

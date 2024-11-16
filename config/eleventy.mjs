@@ -9,6 +9,7 @@ import navigation from '@11ty/eleventy-navigation'
 import rss from '@11ty/eleventy-plugin-rss'
 import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight'
 import webcPlugin from '@11ty/eleventy-plugin-webc'
+import pluginWebmentions from '@chrisburnell/eleventy-cache-webmentions'
 import { ensureEnvVarsPlugin } from '@jackdbd/eleventy-plugin-ensure-env-vars'
 import { telegramPlugin } from '@jackdbd/eleventy-plugin-telegram'
 import { textToSpeechPlugin } from '@jackdbd/eleventy-plugin-text-to-speech'
@@ -30,6 +31,7 @@ import cloudinaryPlugin from '../plugins/11ty/cloudinary/index.cjs'
 import { pagefindPlugin } from '../plugins/11ty/pagefind/index.mjs'
 import { stripePlugin } from '../plugins/11ty/stripe/index.mjs'
 import { webmentionsPlugin } from '../plugins/11ty/webmentions/index.mjs'
+import wm_data from '../src/_data/webmentions.mjs'
 
 const debug = defDebug(`11ty-config:eleventy.mjs`)
 
@@ -196,6 +198,14 @@ export default function (eleventyConfig) {
     token: process.env.WEBMENTION_IO_TOKEN
   })
 
+  // https://github.com/chrisburnell/eleventy-cache-webmentions?tab=readme-ov-file#installation
+  eleventyConfig.addPlugin(pluginWebmentions, {
+    domain: `https://${wm_data.webmentions_domain}`,
+    feed: wm_data.webmentions_feed,
+    key: wm_data.webmentions_key,
+    directory: wm_data.webmentions_directory
+  })
+
   // https://github.com/gfscott/eleventy-plugin-embed-twitter#configure
   eleventyConfig.addPlugin(embedTwitter, { align: 'center', doNotTrack: true })
   eleventyConfig.addPlugin(embedVimeo, { dnt: true })
@@ -332,9 +342,7 @@ export default function (eleventyConfig) {
     'node_modules/@11ty/is-land/is-land.js': 'assets/js/is-land.js',
     'node_modules/@11ty/is-land/is-land-autoinit.js':
       'assets/js/is-land-autoinit.js',
-    'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js',
-    'node_modules/seia/dist/seia.js': 'assets/js/seia.js',
-    'node_modules/seia/dist/styles': 'assets/css/seia/styles'
+    'node_modules/instant.page/instantpage.js': 'assets/js/instantpage.js'
   })
 
   // https://www.11ty.dev/docs/shortcodes/

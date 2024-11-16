@@ -16,6 +16,8 @@ hint-report/
 # default cache directory of @11ty/eleventy-fetch
 # https://www.11ty.dev/docs/plugins/cache/
 .cache/
+# cache for webmentions fetched from go-jamming
+.cache-go-jamming/
 # cache for webmentions fetched from webmention.io
 .cache-webmentions/
 # Responses from the Cloudinary API are stored in .cache-cloudinary and tracked

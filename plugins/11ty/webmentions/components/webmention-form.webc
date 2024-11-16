@@ -7,15 +7,11 @@
     <input id="webmention-source-url" type="text" name="source" placeholder="https://your-website.com/your-article">
     <button name="submit" type="submit">Send Webmention</button>
   </form>
-  <small>Upon form submission, your <a href="https://indieweb.org/Webmention" target="_blank" rel="external noopener noreferrer">webmention</a> will be sent to <a href="https://webmention.io" target="_blank" rel="external noopener noreferrer">Webmention.io</a>.</small>
+  <p>Upon form submission, your <a href="https://indieweb.org/Webmention" target="_blank" rel="external noopener noreferrer">webmention</a> will be sent to <a :href="endpoint" @text="endpoint" target="_blank" rel="external noopener noreferrer"></a>.</p>
   <ul id="webmentions-queue"></ul>
 </div>
 
 <style webc:scoped>
-  :host p {
-    font-style: italic;
-  }
-
   :host p.error {
     color: var(--color-accent);
   }
