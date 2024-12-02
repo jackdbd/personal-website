@@ -23,7 +23,6 @@ const remove = [
   path.join(DEST_DIR, 'likes', 'README.md'),
   path.join(DEST_DIR, 'media', 'README.md'),
   path.join(DEST_DIR, 'notes', 'README.md'),
-  path.join(DEST_DIR, 'photos', 'README.md'),
   path.join(DEST_DIR, '.envrc'),
   path.join(DEST_DIR, '.gitattributes'),
   path.join(DEST_DIR, '.gitignore'),
