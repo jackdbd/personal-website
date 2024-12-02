@@ -10,6 +10,7 @@ on:
       - 'CI'
       - 'Cloudflare Pages deploy hook'
       - 'Hacker News links to Telegram'
+      - 'Pull Content'
       - 'Reddit freelancing'
       - 'Reddit search'
       - 'Stripe Promotion Codes'
