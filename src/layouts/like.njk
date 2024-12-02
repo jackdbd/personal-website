@@ -2,13 +2,44 @@
 layout: page.njk
 ---
 {%- block content %}
-<article>
-  {#- {{ ogp | log }} #}
-  {{ content | safe }}
-  <p>Category: {{ category }}</p>
-  <p>Like of: <a href="{{ likeOf }}">{{ likeOf }}</a></p>
+
+<article class="prose flow region h-entry">
+
+  {% if content %}
+    <div class="flow p-content">{{ content | safe }}</div>
+  {% endif %}
+  
+  <p>Like of: <a href="{{ likeOf }}" target="_blank" rel="external noopener noreferrer">{{ likeOf }}</a></p>
+
   <p>Liked on: <time datetime="{{ date }}">{{ date }}</time></p>
+
+  <p>Published on: <time class="dt-published" datetime="{{ date }}">{{ date }}</time></p>
+
+  {% if mpSyndicateTo and mpSyndicateTo | length > 0 %}
+    <p>mp-syndicate-to</p>
+    <ul>
+      {%- for uid in mpSyndicateTo %}
+        <li><a href="{{ uid }}">{{ uid }}</a></li>
+      {% endfor -%}
+    </ul>
+  {% endif %}
+
+  {% if syndication and syndication | length > 0 %}
+    <p>syndication</p>
+    <ul>
+      {%- for href in syndication %}
+        <li><a href="{{ href }}">{{ href }}</a></li>
+      {% endfor -%}
+    </ul>
+  {% endif %}
+
+  {% if tags and tags | length > 0 %}
+    {% set align = "end" %}
+    {% include "components/tags.njk" %}
+  {% endif %}
+
 </article>
 
 <p>See <a href="/likes">all likes</a>.</p>
+
 {% endblock content -%}

@@ -3,6 +3,7 @@ import {
   getWebmentions
 } from '@chrisburnell/eleventy-cache-webmentions'
 import defDebug from 'debug'
+import { arrayFy } from '../../11ty/filters.mjs'
 import wm_data from '../_data/webmentions.mjs'
 
 const debug = defDebug('11ty:data:notes')
@@ -12,6 +13,15 @@ debug(`render each note with layout ${layout}`)
 
 export default {
   eleventyComputed: {
+    mpSyndicateTo: (data) => {
+      return arrayFy(data['mp-syndicate-to'])
+    },
+    syndication: (data) => {
+      return arrayFy(data['syndication'])
+    },
+    tags: (data) => {
+      return [...data.tags, ...arrayFy(data['category'])]
+    },
     webmentionTargetURL: (data) => {
       const domain = wm_data.webmentions_domain
       const relative_path = data.page.url

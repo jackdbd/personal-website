@@ -1,7 +1,6 @@
 // https://github.com/GoogleChrome/workbox/blob/v6/packages/workbox-cacheable-response/package.json
 
 const cacheDidUpdate = async (stuff) => {
-  console.log('🚀 ~ cacheDidUpdate ~ stuff', stuff)
   // No return expected
   // Note: `newResponse.bodyUsed` is `true` when this is called,
   // meaning the body has already been read. If you need access to
@@ -10,7 +9,6 @@ const cacheDidUpdate = async (stuff) => {
 }
 
 const cacheKeyWillBeUsed = async (stuff) => {
-  console.log('🚀 ~ cacheKeyWillBeUsed ~ stuff', stuff)
   const { request } = stuff
   // `request` is the `Request` object that would otherwise be used as the cache key.
   // `mode` is either 'read' or 'write'.
@@ -20,7 +18,6 @@ const cacheKeyWillBeUsed = async (stuff) => {
 }
 
 const fetchDidSucceed = async (stuff) => {
-  console.log('🚀 ~ fetchDidSucceed: ~ stuff', stuff)
   const { response } = stuff
 
   // Return `response` to use the network response as-is,
@@ -28,9 +25,7 @@ const fetchDidSucceed = async (stuff) => {
   return response
 }
 
-const requestWillFetch = async (stuff) => {
-  console.log('🚀 ~ requestWillFetch: ~ stuff', stuff)
-}
+const requestWillFetch = async (stuff) => {}
 
 // https://github.com/tpiros/cloudinary-workbox-plugin
 // https://developer.chrome.com/docs/workbox/reference/workbox-core/#type-WorkboxPlugin

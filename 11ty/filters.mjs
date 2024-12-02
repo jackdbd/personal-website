@@ -82,7 +82,20 @@ export const slugify = (str) => {
   })
 }
 
+export const arrayFy = (value) => {
+  const xs = []
+  if (value) {
+    if (Array.isArray(value)) {
+      xs.push(...value)
+    } else {
+      xs.push(value)
+    }
+  }
+  return xs
+}
+
 export default {
+  arrayFy,
   cssmin,
   humanDate,
   humanDateJS,

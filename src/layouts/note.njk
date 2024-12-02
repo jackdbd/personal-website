@@ -11,9 +11,50 @@ layout: page.njk
     <pre>{{ location | dump | safe }}</pre>
   {% endif %}
 
+  {# photo can be: a single URL, an object with alt+value, or an array of those things #}
+  {# {% if photo %}
+    <p>TODO: add photo component</p>
+  {% endif %} #}
+
+  {# video can be: a single URL, an array of URLs #}
+  {# {% if video %}
+    <p>TODO: add video component</p>
+  {% endif %} #}
+
+  {# audio can be: a single URL, an array of URLs #}
+  {# {% if audio %}
+    <figure class="h-entry">
+      <audio controls src="https://content.giacomodebidda.com/media/example_700KB.mp3"></audio>
+      <a href="https://content.giacomodebidda.com/media/example_700KB.mp3"
+        >Download audio</a
+      >
+      <figcaption>
+        <p class="p-content">A test audio file.</p>
+      </figcaption>
+    </figure>
+  {% endif %} #}
+
   <p>Published on: <time class="dt-published" datetime="{{ date }}">{{ date }}</time></p>
 
-  {% if tags %}
+  {% if mpSyndicateTo and mpSyndicateTo | length > 0 %}
+    <p>mp-syndicate-to</p>
+    <ul>
+      {%- for uid in mpSyndicateTo %}
+        <li><a href="{{ uid }}">{{ uid }}</a></li>
+      {% endfor -%}
+    </ul>
+  {% endif %}
+
+  {% if syndication and syndication | length > 0 %}
+    <p>syndication</p>
+    <ul>
+      {%- for href in syndication %}
+        <li><a href="{{ href }}">{{ href }}</a></li>
+      {% endfor -%}
+    </ul>
+  {% endif %}
+
+  {% if tags and tags | length > 0 %}
     {% set align = "end" %}
     {% include "components/tags.njk" %}
   {% endif %}
