@@ -33,5 +33,12 @@ jobs:
           # git add .
           # git commit -m "Update content subrepo"
           # git push origin HEAD
-          # git-subrepo pull content --force
+          echo "subrepo status BEFORE pulling content"
+          git-subrepo status
+          git-subrepo pull content --force
+          # verify that the content has been pulled
+          ls -1 content/bookmarks/
+          ls -1 content/likes/
+          ls -1 content/notes/
+          echo "subrepo status AFTER pulling content"
           git-subrepo status
