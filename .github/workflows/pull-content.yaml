@@ -18,8 +18,8 @@ jobs:
 
       - name: 🖥️ Set up Git
         run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "actions@github.com"
+          git config user.name "Giacomo Debidda"
+          git config user.email "giacomo@giacomodebidda.com"
 
       - name: Install git-subrepo
         run: |
