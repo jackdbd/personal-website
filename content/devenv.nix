@@ -5,7 +5,10 @@
     versions
   '';
 
-  env = {};
+  env = {
+    TELEGRAM = builtins.readFile /run/secrets/telegram/jackdbd_github_bot;
+    TOKEN_FOR_DISPATCH_PULL_CONTENT_EVENT = builtins.readFile /run/secrets/github-tokens/crud_contents_api;
+  };
 
   languages = {
     javascript.enable = true;

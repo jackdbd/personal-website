@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dispatch-pull-content-event:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dispatch pull-content event
+        # https://github.com/marketplace/actions/repository-dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          repository: jackdbd/personal-website
+          event-type: pull-content
+          token: ${{ secrets.TOKEN_FOR_DISPATCH_PULL_CONTENT_EVENT }}
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'

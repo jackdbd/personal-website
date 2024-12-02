@@ -1,48 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Test page for giacomodebidda.com media assets endpoint.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image test page</title>
-  <link rel="stylesheet" href="https://unpkg.com/mvp.css">
-  <style type="text/css">
-  /* MVP.css config overrides */
-  :root {
-      --color-link: rebeccapurple;
-  }
-  </style>
-</head>
-<body>
-  <main>
-    <section>
-      <header>
-        <h1>All images on this page are hosted on <code>content.giacomodebidda.com</code></h1>
-      </header>
-      <figure class="h-entry">
-        <img class="u-photo" src="https://content.giacomodebidda.com/media/photos/2024/10/18/el-medano-tenerife-2023.jpg"
-         alt="View of El Médano in Tenerife. A few kitesurfers are in the water. A few other ones are on the beach, preparing their kites."
-         width="640" height="480">
-        <figcaption>
-          <p class="p-content">Kitesurfing and <a href="https://en.wikipedia.org/wiki/Wing_foiling">wing foiling</a> in El Médano, Tenerife.</p>
-          <p>Published on <time class="dt-published">2024-10-18</time> by <a href="/" class="u-author">me</a>.
-        </figcaption>
-      </figure>
-      <hr>
-      <figure class="h-entry"> 
-        <img class="u-photo" src="https://content.giacomodebidda.com/media/photos/2024/10/18/2024-09-13-11-14-13-380.jpg"
-        alt="My motorbike packed with bags."
-        width="640" height="480">
-        <figcaption>
-          <p class="p-content">My motorbike packed with bags for a coast to coast trip.</p>
-          <p>Published on <time class="dt-published">2024-10-18</time> by <a href="/" class="u-author">me</a>.
-        </figcaption>
-      </figure>
-    </section>
-  </main>
-  <footer>
-    <hr>
-    <p>CSS with <a href="https://andybrewer.github.io/mvp/">MVP.css</a></p>
-  </footer>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Test page for giacomodebidda.com media assets endpoint." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image test page</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
+    <style type="text/css">
+      /* MVP.css config overrides */
+      :root {
+        --color-link: rebeccapurple;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <header>
+          <h1>
+            All media (audio, photo, video) on this page are hosted on
+            <code>content.giacomodebidda.com</code>
+          </h1>
+        </header>
+
+        <figure class="h-entry">
+          <img
+            class="u-photo"
+            src="https://content.giacomodebidda.com/media/1733141150812.jpg"
+            alt="My surfskates."
+            width="640"
+            height="480" />
+          <figcaption>
+            <p class="p-content">My two surfskates.</p>
+            <p>
+              Published on <time class="dt-published">2024-12-02</time> by
+              <a href="/" class="u-author">me</a>.
+            </p>
+          </figcaption>
+        </figure>
+
+        <hr />
+
+        <figure class="h-entry">
+          <audio
+            controls
+            src="https://content.giacomodebidda.com/media/example_700KB.mp3"></audio>
+          <a href="https://content.giacomodebidda.com/media/example_700KB.mp3"
+            >Download audio</a
+          >
+          <figcaption>
+            <p class="p-content">A test audio file.</p>
+            <p>
+              Published on <time class="dt-published">2024-12-02</time> by
+              <a href="/" class="u-author">me</a>.
+            </p>
+          </figcaption>
+        </figure>
+
+        <hr />
+
+        <figure class="h-entry">
+          <video width="320" height="240" autoplay controls loop muted>
+            <source
+              src="https://content.giacomodebidda.com/media/1733141150910.mp4"
+              type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <figcaption>
+            <p class="p-content">A test video file.</p>
+            <p>
+              Published on <time class="dt-published">2024-12-02</time> by
+              <a href="/" class="u-author">me</a>.
+            </p>
+          </figcaption>
+        </figure>
+      </section>
+    </main>
+    <footer>
+      <hr />
+      <p>CSS with <a href="https://andybrewer.github.io/mvp/">MVP.css</a></p>
+    </footer>
+  </body>
 </html>
