@@ -16,11 +16,11 @@ jobs:
       - name: 🛎️ Checkout repo
         uses: actions/checkout@v4
 
-      - name: 🖥️ Configure Git with HTTPS authentication
+      - name: 🖥️ Configure Git
         env:
           GIT_ASKPASS: /bin/echo
-          GIT_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          # GIT_PASSWORD: ${{ secrets.TOKEN_FOR_PULL_CONTENT_EVENT }}
+          # GIT_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          GIT_PASSWORD: ${{ secrets.TOKEN_FOR_PULL_CONTENT_EVENT }}
         run: |
           git config user.name "Giacomo Debidda"
           git config user.email "giacomo@giacomodebidda.com"
@@ -34,10 +34,7 @@ jobs:
           # verify the installation
           echo "git subrepo version $(git subrepo --version)"
 
-      - name: ⬇️ Pull content using git-subrepo
-        env:
-          GIT_ASKPASS: /bin/echo
-          GIT_PASSWORD: ${{ secrets.TOKEN_FOR_PULL_CONTENT_EVENT }}
+      - name: ⬇️ Pull content using git-subrepo and commit
         run: |
           echo "subrepo status BEFORE pulling content"
           git subrepo status
@@ -49,8 +46,5 @@ jobs:
           echo "subrepo status AFTER pulling content"
           git subrepo status
 
-      # - name: Push Changes
-      #   run: |
-      #     git add .
-      #     git commit -m "Updated content subrepo"
-      #     git push
+      - name: Push to remote
+        run: git push
