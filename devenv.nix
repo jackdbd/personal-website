@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   enterShell = ''
-    # git-subrepo pull content
-    git-subrepo status
+    # git subrepo pull content
+    git subrepo status
   '';
 
   env = {
@@ -115,8 +115,8 @@
       cat .git/filter-repo/analysis/blob-shas-and-paths.txt | head -n 7
     '';
     pull-content.exec = ''
-      git-subrepo pull content --force
-      git-subrepo status
+      git subrepo pull content --force
+      git subrepo status
     '';
     repo-size.exec = ''
       git gc
@@ -130,7 +130,7 @@
       git --version
       git-lfs --version
       echo "git filter-repo version $(git filter-repo --version)"
-      echo "git-subrepo version $(git-subrepo --version)"
+      echo "git subrepo version $(git subrepo --version)"
       echo "Node.js $(node --version)"
       steampipe --version
       wrangler --version
