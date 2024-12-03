@@ -41,8 +41,6 @@
 
     TELEGRAM = builtins.readFile /run/secrets/telegram/personal_bot;
 
-    TOKEN_FOR_PULL_CONTENT_EVENT = builtins.readFile /run/secrets/github-tokens/crud_contents_api;
-
     WEBMENTION_IO_TOKEN = builtins.readFile /run/secrets/webmentions_io_token;
 
     # On NixOS, the Chromium version bundled with Playwright does not work
