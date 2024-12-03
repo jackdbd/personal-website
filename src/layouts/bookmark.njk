@@ -3,34 +3,27 @@ layout: page.njk
 ---
 {%- block content %}
 
-<article class="prose flow region h-entry">
+<article class="flow h-entry prose region stack">
+
+  <p>I bookmarked this on <time class="dt-published" datetime="{{ date | dateToRfc3339 }}">{{ date | machineDateJS }}</time>:</p>
+
+  <p>
+    <a class="break-all" href="{{ bookmarkOf }}" target="_blank" rel="external noopener noreferrer">{{ bookmarkOf }}</a>
+  </p>
 
   {% if content %}
-    <div class="flow p-content">{{ content | safe }}</div>
+    <p class="p-content">{{ content | safe }}</p>
   {% endif %}
   
-  <p>Bookmark of: <a href="{{ bookmarkOf }}" target="_blank" rel="external noopener noreferrer">{{ bookmarkOf }}</a></p>
-
-  <p>Bookmarked on: <time datetime="{{ date }}">{{ date }}</time></p>
-
-  <p>Published on: <time class="dt-published" datetime="{{ date }}">{{ date }}</time></p>
-
-  {% if mpSyndicateTo and mpSyndicateTo | length > 0 %}
-    <p>mp-syndicate-to</p>
-    <ul>
-      {%- for uid in mpSyndicateTo %}
-        <li><a href="{{ uid }}">{{ uid }}</a></li>
+  {% if syndication | length > 0 %}
+    <p>Syndicated also to: 
+      {%- for x in syndication %}
+      <a href="{{ x.href }}" target="_blank" rel="external noopener noreferrer">
+        {{ x.text }}
+      </a>
+      {% if not loop.last %}, {% endif %}
       {% endfor -%}
-    </ul>
-  {% endif %}
-
-  {% if syndication and syndication | length > 0 %}
-    <p>syndication</p>
-    <ul>
-      {%- for href in syndication %}
-        <li><a href="{{ href }}">{{ href }}</a></li>
-      {% endfor -%}
-    </ul>
+    .</p>
   {% endif %}
 
   {% if tags and tags | length > 0 %}

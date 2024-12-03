@@ -25,7 +25,9 @@ const makeAddTagsToTagSet = (tagSet, predicate) => {
   return (template) => {
     const d = template.data
     if (d.tags) {
-      const tags = d.tags.filter(predicate)
+      // const tags = d.tags.filter(predicate)
+      // Should I lowercase each tag to avoid duplicates?
+      const tags = d.tags.filter(predicate).map((s) => s.toLowerCase())
       debug(
         `${d.page.url} has ${tags.length} tags matching predicate: %o`,
         tags
@@ -43,12 +45,13 @@ const makeAddTagsToTagSet = (tagSet, predicate) => {
 export const userDefinedTagList = (collection) => {
   const tagSet = new Set()
   const addTagsToTagSet = makeAddTagsToTagSet(tagSet, isUserDefinedTag)
-  collection.getAll().forEach(addTagsToTagSet)
+  collection.getAll().forEach(addTagsToTagSet) // mutates tagSet
   return [...tagSet]
 }
 
 const favorites = (collection) => {
-  const templates = collection.getFilteredByTag('like')
+  // https://www.11ty.dev/docs/collections/#sorting
+  const templates = collection.getFilteredByTag('like').reverse()
   debug(`${templates.length} template/s tagged with 'like'`)
   return templates
 }

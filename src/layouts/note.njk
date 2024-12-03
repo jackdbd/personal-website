@@ -3,12 +3,22 @@ layout: page.njk
 ---
 {%- block content %}
 
-<article class="prose flow region h-entry">
+<article class="prose flow region h-entry stack">
 
-  <div class="flow e-content">{{ content | safe }}</div>
+  <p class="p-content">{{ content | safe }}</p>
 
   {% if location %}
-    <pre>{{ location | dump | safe }}</pre>
+    <pre>{{ location | dump(2) | safe }}</pre>
+    {# https://microformats.org/wiki/h-geo #}
+    <p class="h-geo">
+      {% if location.latitude %}
+        Latitude: <data class="p-latitude" value="{{ location.latitude }}">{{ location.latitude }}</data>
+      {% endif %}
+      &nbsp;
+      {% if location.longitude %}
+        Longitude: <data class="p-longitude" value="{{ location.longitude }}">{{ location.longitude }}</data>
+      {% endif %}
+    </p>
   {% endif %}
 
   {# photo can be: a single URL, an object with alt+value, or an array of those things #}
@@ -34,24 +44,29 @@ layout: page.njk
     </figure>
   {% endif %} #}
 
-  <p>Published on: <time class="dt-published" datetime="{{ date }}">{{ date }}</time></p>
+  <p>Published on: <time class="dt-published" datetime="{{ date | dateToRfc3339 }}">{{ date | machineDateJS }}</time></p>
 
-  {% if mpSyndicateTo and mpSyndicateTo | length > 0 %}
-    <p>mp-syndicate-to</p>
-    <ul>
-      {%- for uid in mpSyndicateTo %}
-        <li><a href="{{ uid }}">{{ uid }}</a></li>
+  {# I don't want to show where I will syndicate this note. I just need to keep mp-syndicate-to in the frontmatter to let my Micropub server know that it has to syndicate this note. #}
+  {# {% if mpSyndicateTo | length > 0 %}
+    <p>Will syndicate this also to:
+      {%- for x in mpSyndicateTo %}
+      <a href="{{ x.href }}" target="_blank" rel="external noopener noreferrer">
+        {{ x.text }}
+      </a>
+      {% if not loop.last %}, {% endif %}
       {% endfor -%}
-    </ul>
-  {% endif %}
+    .</p>
+  {% endif %} #}
 
-  {% if syndication and syndication | length > 0 %}
-    <p>syndication</p>
-    <ul>
-      {%- for href in syndication %}
-        <li><a href="{{ href }}">{{ href }}</a></li>
+  {% if syndication | length > 0 %}
+    <p>Syndicated also to: 
+      {%- for x in syndication %}
+      <a href="{{ x.href }}" target="_blank" rel="external noopener noreferrer">
+        {{ x.text }}
+      </a>
+      {% if not loop.last %}, {% endif %}
       {% endfor -%}
-    </ul>
+    .</p>
   {% endif %}
 
   {% if tags and tags | length > 0 %}

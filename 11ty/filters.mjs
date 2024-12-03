@@ -1,6 +1,12 @@
 /**
- * 11ty filters
+ * Eleventy filters
  * https://www.11ty.dev/docs/filters/
+ *
+ * Eleventy provides a number of built-in Nunjucks filters.
+ * https://www.11ty.dev/docs/plugins/rss/#supplies-the-following-nunjucks-filters
+ *
+ * Nunjucks filters
+ * https://mozilla.github.io/nunjucks/templating.html#filters
  */
 import CleanCSS from 'clean-css'
 import makeDebug from 'debug'
@@ -94,16 +100,47 @@ export const arrayFy = (value) => {
   return xs
 }
 
+export const isFosstodonUrl = (str) => {
+  const regex = /https:\/\/fosstodon\.org\/@jackdbd\/[0-9]+/
+  return str.match(regex)
+}
+
+export const isIndieNewsUrl = (str) => {
+  const regex = /https:\/\/news\.indieweb\.org.+/
+  return str.match(regex)
+}
+
+export const isTelegramUrl = (str) => {
+  const regex = /https:\/\/t\.me\/\+.+/
+  return str.match(regex)
+}
+
+export const urlToHrefAndText = (url) => {
+  if (isFosstodonUrl(url)) {
+    return { href: url, text: 'Fosstodon' }
+  } else if (isIndieNewsUrl(url)) {
+    return { href: url, text: 'IndieNews' }
+  } else if (isTelegramUrl(url)) {
+    return { href: url, text: 'Telegram' }
+  } else {
+    return { href: url, text: url }
+  }
+}
+
 export default {
   arrayFy,
   cssmin,
   humanDate,
   humanDateJS,
+  isFosstodonUrl,
+  isIndieNewsUrl,
+  isTelegramUrl,
   jsmin,
   limit,
   log,
   machineDate,
   machineDateJS,
   slugify,
-  tap
+  tap,
+  urlToHrefAndText
 }

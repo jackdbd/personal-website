@@ -10,7 +10,7 @@ title: Notes
 ---
 {%- block pagecontent %}
 <ul>
-  {%- for note in collections.note %}
+  {%- for note in collections.note | reverse %}
     {# {{ note | log }} #}
     {% set rfc3339 = note.date | dateToRfc3339 %}
     {% set yyyy_mm_dd = note.date | machineDateJS %}
@@ -25,7 +25,9 @@ title: Notes
     </li>
   {% endfor -%}
 </ul>
+
 <p><a href="/">Home</a></p>
+
 {% endblock pagecontent -%}
 
 {# pagination:

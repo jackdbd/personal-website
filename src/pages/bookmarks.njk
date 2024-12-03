@@ -10,20 +10,20 @@ title: Bookmarks
 ---
 {%- block pagecontent %}
 <ul>
-  {%- for bookmark in collections.bookmark %}
+  {%- for bookmark in collections.bookmark | reverse %}
     {# {{ bookmark | log }} #}
     {% set rfc3339 = bookmark.date | dateToRfc3339 %}
     {% set yyyy_mm_dd = bookmark.date | machineDateJS %}
     <li>
       <span>
-        <time datetime="{{ rfc3339 }}">
-          <strong>{{ yyyy_mm_dd }}</strong>
-        </time>
+        <time datetime="{{ rfc3339 }}"><strong>{{ yyyy_mm_dd }}</strong></time>
         &nbsp;
         <a href="{{ bookmark.url | url }}">{{ bookmark.fileSlug }}</a>
       </span>
     </li>
   {% endfor -%}
 </ul>
+
 <p><a href="/">Home</a></p>
+
 {% endblock pagecontent -%}

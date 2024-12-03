@@ -9,21 +9,45 @@ section: likes
 title: Likes
 ---
 {%- block pagecontent %}
-<ul>
-  {%- for like in collections.like %}
+<ul class="stack">
+  {%- for like in collections.like | reverse %}
     {# {{ like | log }} #}
     {% set rfc3339 = like.date | dateToRfc3339 %}
     {% set yyyy_mm_dd = like.date | machineDateJS %}
     <li>
-      <span>
-        <time datetime="{{ rfc3339 }}">
-          <strong>{{ yyyy_mm_dd }}</strong>
-        </time>
+      <p>
+        <time datetime="{{ rfc3339 }}"><strong>{{ yyyy_mm_dd }}</strong></time>
         &nbsp;
-        <a href="{{ like.url | url }}">{{ like.fileSlug }}</a>
-      </span>
+
+        {# Option 1: external link to the page I liked #}
+        <a class="break-all" href="{{ like.data.likeOf }}" target="_blank" rel="external noopener noreferrer">{{ like.data.likeOf }}</a>
+
+        {# Option 2: internal link to a page where I render the like #}        
+        {# <a href="{{ like.url | url }}">{{ like.fileSlug }}</a> #}
+        
+        {% if like.data.mpSyndicateTo | length > 0 %}
+          <p>Will syndicate to:
+            {%- for x in like.data.mpSyndicateTo %}
+              <a class="break-all" href="{{ x.href }}" target="_blank" rel="external noopener noreferrer">{{ x.text }}</a>
+              {% if not loop.last %}, {% endif %}
+            {% endfor -%}
+          .</p>
+        {% endif %}
+
+        {% if like.data.syndication | length > 0 %}
+        <p>Syndicated also to:
+            {%- for x in like.data.syndication %}
+              <a class="break-all" href="{{ x.href }}" target="_blank" rel="external noopener noreferrer">{{ x.text }}</a>
+              {% if not loop.last %}, {% endif %}
+            {% endfor -%}
+          .</p>
+        {% endif %}
+
+      </p>
     </li>
   {% endfor -%}
 </ul>
+
 <p><a href="/">Home</a></p>
+
 {% endblock pagecontent -%}

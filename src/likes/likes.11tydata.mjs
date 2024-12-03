@@ -1,5 +1,5 @@
 import defDebug from 'debug'
-import { arrayFy } from '../../11ty/filters.mjs'
+import { arrayFy, urlToHrefAndText } from '../../11ty/filters.mjs'
 
 const debug = defDebug('11ty:data:likes')
 
@@ -13,13 +13,17 @@ export default {
       return data['like-of']
     },
     mpSyndicateTo: (data) => {
-      return arrayFy(data['mp-syndicate-to'])
+      const urls = arrayFy(data['mp-syndicate-to'])
+      return urls.map(urlToHrefAndText)
     },
     syndication: (data) => {
-      return arrayFy(data['syndication'])
+      const urls = arrayFy(data['syndication'])
+      return urls.map(urlToHrefAndText)
     },
     tags: (data) => {
-      return [...data.tags, ...arrayFy(data['category'])]
+      return [...data.tags, ...arrayFy(data['category'])].map((s) =>
+        s.toLowerCase()
+      )
     }
   },
   layout,

@@ -108,6 +108,7 @@
 
   scripts = {
     dependencies.exec = "npm install --include dev";
+    dev.exec = "npm run dev";
     largest-blobs.exec = ''
       git filter-repo --analyze --force
       cat .git/filter-repo/analysis/blob-shas-and-paths.txt | head -n 7

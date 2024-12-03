@@ -3,34 +3,27 @@ layout: page.njk
 ---
 {%- block content %}
 
-<article class="prose flow region h-entry">
+<article class="flow h-entry prose region stack">
+  
+  <p>I liked this on <time class="dt-published" datetime="{{ date | dateToRfc3339 }}">{{ date | machineDateJS }}</time>:</p>
+
+  <p>
+    <a class="break-all" href="{{ likeOf }}" target="_blank" rel="external noopener noreferrer">{{ likeOf }}</a>
+  </p>
 
   {% if content %}
-    <div class="flow p-content">{{ content | safe }}</div>
-  {% endif %}
-  
-  <p>Like of: <a href="{{ likeOf }}" target="_blank" rel="external noopener noreferrer">{{ likeOf }}</a></p>
-
-  <p>Liked on: <time datetime="{{ date }}">{{ date }}</time></p>
-
-  <p>Published on: <time class="dt-published" datetime="{{ date }}">{{ date }}</time></p>
-
-  {% if mpSyndicateTo and mpSyndicateTo | length > 0 %}
-    <p>mp-syndicate-to</p>
-    <ul>
-      {%- for uid in mpSyndicateTo %}
-        <li><a href="{{ uid }}">{{ uid }}</a></li>
-      {% endfor -%}
-    </ul>
+    <p class="p-content">{{ content | safe }}</p>
   {% endif %}
 
-  {% if syndication and syndication | length > 0 %}
-    <p>syndication</p>
-    <ul>
-      {%- for href in syndication %}
-        <li><a href="{{ href }}">{{ href }}</a></li>
+  {% if syndication | length > 0 %}
+    <p>Syndicated also to: 
+      {%- for x in syndication %}
+      <a href="{{ x.href }}" target="_blank" rel="external noopener noreferrer">
+        {{ x.text }}
+      </a>
+      {% if not loop.last %}, {% endif %}
       {% endfor -%}
-    </ul>
+    .</p>
   {% endif %}
 
   {% if tags and tags | length > 0 %}
