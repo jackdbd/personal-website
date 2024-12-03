@@ -4,7 +4,7 @@
 ; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:jackdbd/giacomodebidda-content.git
+	remote = https://github.com/jackdbd/giacomodebidda-content.git
 	branch = main
 	commit = 0714b529749bc3e9673e9a7a8e9b4fb5f370395d
 	parent = 1eaeb968b3019320e30cdd8c5ad2c74effca989d
