@@ -29,13 +29,12 @@ jobs:
         env:
           GIT_ASKPASS: /bin/echo
           GIT_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          # GIT_PASSWORD: ${{ secrets.TOKEN_FOR_PULL_CONTENT_EVENT }}
         run: |
           git config user.name "Giacomo Debidda"
           git config user.email "giacomo@giacomodebidda.com"
           git config --global credential.helper store
           echo "https://$GITHUB_ACTOR:$GIT_PASSWORD@github.com" > ~/.git-credentials
-          git config subrepo.content.url https://github.com/jackdbd/giacomodebidda-content.git
+          # git config subrepo.content.url https://github.com/jackdbd/giacomodebidda-content.git
 
       - name: ⬇️ Pull content using git-subrepo and commit
         env:
