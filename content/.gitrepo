@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/jackdbd/giacomodebidda-content.git
 	branch = main
-	commit = 0714b529749bc3e9673e9a7a8e9b4fb5f370395d
-	parent = 1eaeb968b3019320e30cdd8c5ad2c74effca989d
+	commit = 3df991fddaab42cb5f39201511450fa84bed7846
+	parent = 17a49b9f62d5cfc83d42465c2be03d5f8de2ac54
 	method = merge
 	cmdver = 0.4.6
