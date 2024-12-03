@@ -17,21 +17,6 @@ const content_origin = 'https://content.giacomodebidda.com'
 
 const description = "Giacomo Debidda's personal website and blog"
 
-const feeds = {
-  articles: {
-    href: '/feeds/articles.xml',
-    title: "Giacomo Debidda's articles"
-  },
-  notes: {
-    href: '/feeds/notes.xml',
-    title: "Giacomo Debidda's notes"
-  },
-  talks: {
-    href: '/feeds/talks.xml',
-    title: "Giacomo Debidda's talks"
-  }
-}
-
 const lang = 'en'
 
 const ogp = {
@@ -51,7 +36,6 @@ const data = {
   build_started,
   content_origin,
   description,
-  feeds,
   lang,
   ogp,
   profilePic,

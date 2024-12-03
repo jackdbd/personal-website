@@ -1,0 +1,37 @@
+---
+permalink: "{{ feed.bookmarks.href }}"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+{# <?xml-stylesheet href="/assets/xsl/feed-bookmarks.xsl" type="text/xsl"?> #}
+
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ metadata.url }}">
+  <id>{{ permalink }}</id>
+  <title>{{ metadata.author.name }}'s bookmarks</title>
+  <subtitle>My bookmarks</subtitle>
+  
+  <updated>
+    {{ collections.bookmarks | getNewestCollectionItemDate | dateToRfc3339 }}
+  </updated>
+
+  <author>
+    <name>{{ metadata.author.name }}</name>
+    <email>{{ metadata.author.email }}</email>
+    <uri>{{ metadata.url }}</uri>
+  </author>
+
+  <link href="{{ permalink }}" rel="self"/>
+
+  {%- for bookmark in collections.bookmark | reverse %}
+    {%- set absolute_url = bookmark.url | absoluteUrl(metadata.url) %}
+    <entry>
+      <id>{{ absolute_url }}</id>
+      <link href="{{ absolute_url }}"/>
+      <title>{{ bookmark.page.fileSlug }}</title>
+      <published>{{ bookmark.date | dateToRfc3339 }}</published>
+      <content type="html" xml:lang="{{ metadata.lang }}">
+        {{ bookmark.data.bookmarkOf }}
+      </content>
+    </entry>
+  {%- endfor %}
+</feed>
