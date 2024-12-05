@@ -2,9 +2,8 @@
 name: Revoke Refresh Tokens
 like-of: https://auth0.com/docs/secure/tokens/refresh-tokens/revoke-refresh-tokens
 category:
-  - authentication
-  - oauth
-  - security
+  - test
+  - indiepass
 published: 2024-12-02T15:32:00+0100
 post-status: published
 mp-syndicate-to:
