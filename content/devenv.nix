@@ -7,7 +7,7 @@
 
   env = {
     TELEGRAM = builtins.readFile /run/secrets/telegram/jackdbd_github_bot;
-    TOKEN_FOR_DISPATCH_PULL_CONTENT_EVENT = builtins.readFile /run/secrets/github-tokens/crud_contents_api;
+    TOKEN_FOR_DISPATCH_PULL_CONTENT_EVENT = builtins.readFile /run/secrets/github-tokens/dispatch_to_personal_website;
   };
 
   languages = {
