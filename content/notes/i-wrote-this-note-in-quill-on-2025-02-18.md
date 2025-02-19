@@ -4,9 +4,35 @@ category:
   - test
   - personal
   - quill
-mp-syndicate-to: https://t.me/+rQSrJsu5RtgzNjM0
-date: 2025-02-18T15:21:40+00:00
+mp-syndicate-to:
+  - h
+  - t
+  - p
+  - s
+  - ":"
+  - /
+  - .
+  - m
+  - e
+  - +
+  - r
+  - Q
+  - S
+  - J
+  - u
+  - "5"
+  - R
+  - g
+  - z
+  - N
+  - j
+  - M
+  - "0"
+date: 2025-02-18T15:21:40.000Z
 visibility: public
+syndication:
+  - https://t.me/+rQSrJsu5RtgzNjM0
+updated: 2025-02-19T01:02:29+01:00
 ---
 
-I wrote this note in Quill on 2025-02-18
+<p>I wrote this note in Quill on 2025-02-18</p>
