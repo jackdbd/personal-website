@@ -5,57 +5,11 @@ category:
   - personal
   - quill
 mp-syndicate-to:
-  - h
-  - t
-  - p
-  - s
-  - ":"
-  - /
-  - .
-  - m
-  - e
-  - +
-  - r
-  - Q
-  - S
-  - J
-  - u
-  - "5"
-  - R
-  - g
-  - z
-  - N
-  - j
-  - M
-  - "0"
+  - https://t.me/+rQSrJsu5RtgzNjM0
 date: 2025-02-18T15:21:40.000Z
 visibility: public
-syndication:
-  - h
-  - t
-  - p
-  - s
-  - ":"
-  - /
-  - .
-  - m
-  - e
-  - +
-  - r
-  - Q
-  - S
-  - J
-  - u
-  - "5"
-  - R
-  - g
-  - z
-  - N
-  - j
-  - M
-  - "0"
-  - https://t.me/+rQSrJsu5RtgzNjM0
-updated: 2025-02-19T01:15:08+01:00
+syndication: []
+updated: 2025-02-19T01:18:11+01:00
 ---
 
 <p>I wrote this note in Quill on 2025-02-18</p>
